@@ -1,0 +1,2 @@
+# The deterministic executor uses only the Python standard library.
+# Install the external bb CLI separately; see GETTING_STARTED.md.

@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Connect your account</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="dot"></span>
+        <span>Browserbase Live View</span>
+      </div>
+      <span class="topbar-note">Secure login &middot; saved Context</span>
+    </header>
+
+    <main class="wrap">
+      <!-- Intro / start -->
+      <section id="intro" class="card intro">
+        <h1>Connect your account</h1>
+        <p>
+          A browser session opens below. Sign in to your account just as you normally
+          would, including any two-factor step. Only the resulting login is saved into a
+          reusable Context. Your password is never seen or stored.
+        </p>
+        <button id="start" class="btn">Open secure browser</button>
+      </section>
+
+      <!-- Live View -->
+      <section id="viewer" class="card viewer hidden">
+        <div class="viewer-head">
+          <div class="viewer-title">
+            <span id="status-dot" class="status-dot live"></span>
+            <span id="status-text">Live session</span>
+          </div>
+          <button id="done" class="btn btn-small">I&rsquo;ve finished logging in</button>
+        </div>
+        <div id="instructions" class="instructions hidden">
+          <p class="instructions-title">Connecting your <span id="platform-name"></span> account</p>
+          <ol id="instructions-steps"></ol>
+        </div>
+        <div class="frame-slot">
+          <div id="loading" class="loading">
+            <span class="spinner"></span>
+            <span>Starting a secure browser&hellip;</span>
+          </div>
+          <iframe
+            id="liveview"
+            class="hidden"
+            title="Secure login"
+            sandbox="allow-same-origin allow-scripts allow-forms"
+            allow="clipboard-read; clipboard-write"
+          ></iframe>
+        </div>
+        <p class="hint">
+          Sign in above, then choose <strong>I&rsquo;ve finished logging in</strong>. We&rsquo;ll
+          save the connection and close the session.
+        </p>
+      </section>
+
+      <!-- Termination state (customer-facing) -->
+      <section id="done-state" class="card ended hidden">
+        <div class="ended-check" aria-hidden="true">&check;</div>
+        <p class="ended-label">You&rsquo;re all set</p>
+        <p class="ended-msg">
+          Your account is securely connected and your data is being migrated for you.
+        </p>
+        <p class="ended-sub">
+          You signed in yourself, so your password is never seen or stored. Only a secure session is
+          used to import your data.
+        </p>
+        <p class="ended-foot">You can safely close this window.</p>
+      </section>
+
+      <!-- Error state -->
+      <section id="error-state" class="card error hidden">
+        <p class="ended-label">Something went wrong</p>
+        <p id="error-msg" class="ended-msg"></p>
+        <button id="retry" class="btn btn-small">Try again</button>
+      </section>
+    </main>
+
+    <script src="/app.js"></script>
+  </body>
+</html>

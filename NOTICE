@@ -1,0 +1,11 @@
+Browserbase Cookbook
+Copyright (c) 2026 Browserbase, Inc.
+
+This repository consolidates examples originally developed in Browserbase's
+templates, playbook, and integrations repositories. Exact source revisions and
+file-level provenance are recorded in SOURCE_MANIFEST.json and docs/sources.md.
+
+Code under integrations/ retains the MIT license distributed with the original
+Browserbase integrations repository at integrations/LICENSE. Third-party
+dependencies and bundled assets remain subject to their own license terms and
+notices.

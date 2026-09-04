@@ -1,0 +1,17 @@
+node_modules
+.pnpm-store
+dist
+build
+.next
+.nuxt
+.cache
+coverage
+*.min.js
+*.min.css
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.DS_Store
+.env
+.env.local
+

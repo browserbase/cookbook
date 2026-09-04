@@ -1,0 +1,66 @@
+# California EDD Employer Services Online — Account Enrollment (Phase 1)
+
+## Goal
+
+Walk the **Employer Services Online (ESO) enrollment** flow at `eddservices.edd.ca.gov`. Create a new account with the values below. STOP when EDD shows the "Check your email" / "An activation email has been sent" screen — the outer orchestrator will fetch the link from AgentMail and navigate to it in this same session.
+
+This is the **employer** portal (business / payroll-tax admins). It is NOT the unemployment-claimant flow. No real benefits records are created.
+
+The browser is a **fresh Browserbase session** attached via `--cdp` (see system prompt). You will start at the EDD login page.
+
+## Inputs
+
+Use these values exactly. They are interpolated from `.env` + this run's random IDs at run time:
+
+- Email: `$AGENT_EMAIL` — a programmatically created inbox at `agentmail.to`
+- Username (CHOOSE THIS EXACT VALUE — do not invent another): `$TEST_USERNAME`
+- Password: `BbDemo2026!` (satisfies EDD: 8-12 chars, upper+lower+digit+special `!`/`$`/`@`)
+- First name: `$TEST_FIRST_NAME`
+- Last name: `$TEST_LAST_NAME`
+- 4-digit PIN (in lieu of last 4 of SSN): `1234`
+- Phone: `$TEST_PHONE` (must be `xxx-xxx-xxxx` with dashes)
+
+## CRITICAL GUARDRAILS
+
+The "Submit" button on the **Enrollment Summary** page is the email-verification trigger — it does NOT file taxes or claims. **You SHOULD click it**, then stop at the "Check your email" screen that follows.
+
+Do NOT click any button labeled `File`, `Pay`, `Place Order`, or any verb indicating money/tax-filing action. Do NOT submit a perjury attestation.
+
+## URL
+
+Start at: `https://eddservices.mfa.edd.ca.gov/authsvc/mtfim/sps/authsvc?PolicyId=urn:ibm:security:authentication:asf:onpremldap&identity_source_id=627ea49f-d5e8-4997-9e4d-e403f9aa07b8&themeId=default`
+
+## Workflow
+
+1. Open the start URL. Confirm you land on "Employer Services Online Login" (has `#enroll-button` at the bottom).
+2. Click `#enroll-button` → lands on Enrollment form at `eddservices.edd.ca.gov/acctservices/AccountManagement/AccountServlet`.
+3. Fill the form (see strategy.md Phase 1 fast-path for CSS selectors).
+4. Click **Next** → lands on Security Questions page.
+5. Set 4 unique security questions + answers (see strategy.md Phase 1.5).
+6. Click **Continue** → lands on Enrollment Summary page (title "Enrollment Summary").
+7. Click **Submit** on the Enrollment Summary. This triggers the activation email.
+8. **STOP** when you see "Check your email" / "We've sent" / "Verify your email" / "An email has been sent to".
+
+## Error handling
+
+- **"Email already exists"** at form-submit time: AgentMail may have recycled the address. STOP immediately with `reason: address_already_registered` — the orchestrator can rotate the inbox and retry. Do NOT try to log in.
+- **"Username already in use"**: STOP with `reason: username_taken`. The orchestrator will randomize and retry.
+- **Akamai "Access Denied"**: STOP with `reason: bot_challenge`.
+
+## Output
+
+Single JSON code block as your FINAL message:
+
+```json
+{
+  "success": true,
+  "phase": "1",
+  "stopped_at_step": "<e.g. 'Email verification — Check your inbox'>",
+  "stopped_at_url": "<current url>",
+  "reason": "awaiting_email_verification | address_already_registered | username_taken | bot_challenge | error",
+  "fields_completed": ["..."],
+  "agent_email": "$AGENT_EMAIL",
+  "username_registered": "$TEST_USERNAME",
+  "notes": "<optional>"
+}
+```

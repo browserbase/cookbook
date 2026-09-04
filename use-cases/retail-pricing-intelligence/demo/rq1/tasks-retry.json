@@ -1,0 +1,31 @@
+{
+  "resultSchema": {
+    "type": "object",
+    "properties": {
+      "retailer": { "type": "string" },
+      "payment_methods_advertised": { "type": "array", "items": { "type": "string" } },
+      "ebt_snap_messaging": { "type": "string" },
+      "hsa_fsa_messaging": { "type": "string" },
+      "otc_messaging": { "type": "string" },
+      "use_benefits_prompts": { "type": "string" },
+      "eligibility_indicators": { "type": "string" },
+      "benefit_tracker": { "type": "string" },
+      "payment_promotions": { "type": "array", "items": { "type": "string" } },
+      "wallet_express_prompts": { "type": "string" },
+      "savings_surfaced_by_method": { "type": "string" },
+      "discovery_effort": { "type": "string" },
+      "notable_quotes": { "type": "array", "items": { "type": "string" } }
+    },
+    "required": ["retailer"]
+  },
+  "tasks": [
+    {
+      "label": "amazon",
+      "task": "You are a payments-UX researcher studying Amazon.com. Do NOT log in, do NOT check out, do NOT buy anything. Study how Amazon communicates PAYMENT and BENEFIT options to shoppers BEFORE checkout. Visit the homepage, search a grocery item ('milk') and a health/OTC item ('allergy relief' or 'FSA eligible'), open 1-2 product detail pages, and view the cart. Capture: every payment method advertised anywhere (footer 'Amazon payment products', help, PDP, cart) — cards, Amazon Pay, Apple/Google Pay, PayPal, Affirm/BNPL, EBT/SNAP on Amazon Fresh, HSA/FSA (Amazon has an FSA/HSA store), OTC, gift cards, 'Shop with Points'; how EBT/SNAP, HSA/FSA, and OTC eligibility are badged or filtered (look for an 'FSA/HSA eligible' badge/store and 'SNAP EBT eligible' labels); any benefit tracker; payment-linked promotions; wallet/express prompts; and how hard it is to know eligibility/savings before checkout. Quote exact on-page text where possible. IMPORTANT: when finished, return your result via the done tool as a FLAT JSON object matching the schema. Keep each string field to 1-3 concise sentences. Use the string 'none observed' for anything not seen. Do NOT nest objects and do NOT exceed the schema fields."
+    },
+    {
+      "label": "instacart",
+      "task": "You are a payments-UX researcher studying Instacart.com. Do NOT log in, do NOT check out, do NOT buy anything (a login wall blocks checkout — stay before it). Study how Instacart communicates PAYMENT and BENEFIT options BEFORE checkout. Visit the homepage, open a retailer storefront (e.g., /store/costco/storefront), search 'milk' and a health item ('vitamins'), open product pages, open the cart drawer, and also read the public help/landing pages: instacart.com/paypal, instacart.com/p/venmo, instacart.com/lp/klarna, instacart.com/help/article/ebt-snap-payments, and the FSA/HSA help. Capture: every payment method advertised — cards, Apple/Google Pay, PayPal, Venmo, Cash App, Klarna BNPL, EBT/SNAP, HSA/FSA, OTC Network card, Instacart gift cards, Instacart Card Network/points; how EBT/SNAP eligibility is surfaced (SNAP-eligible filter/badges); how HSA/FSA and OTC are surfaced; any 'use your benefits' prompts and benefit tracker; cart economics messaging (delivery/service fees, $0-fee thresholds, order minimum); payment-linked promotions; and effort to learn eligibility before checkout. Quote exact on-page text where possible. IMPORTANT: when finished, return your result via the done tool as a FLAT JSON object matching the schema. Keep each string field to 1-3 concise sentences. Use 'none observed' for anything not seen. Do NOT nest objects and do NOT exceed the schema fields."
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+{
+  "name": "sample_org-competitor-monitor",
+  "private": true,
+  "type": "module",
+  "description": "Browserbase + Stagehand v3 demo: capture full competitor PDP payloads (Shopee/Temu/Shein/AliExpress) across LatAm at scale, proving anti-bot bypass via a staged 1->10->100->1000 ladder with block-rate gating.",
+  "scripts": {
+    "start": "tsx src/stagedRun.ts",
+    "one": "tsx src/fetchPdp.ts",
+    "bootstrap": "tsx src/context/bootstrap.ts",
+    "bootstrap-shopee": "tsx src/context/bootstrap.ts shopee BR",
+    "bootstrap-temu": "tsx src/context/bootstrap.ts temu BR",
+    "deep-dive": "tsx src/deepDive.ts",
+    "gallery": "tsx src/gallery.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run typecheck"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.1",
+    "@browserbasehq/stagehand": "4.0.2",
+    "dotenv": "17.4.2",
+    "p-limit": "7.3.2",
+    "playwright-core": "1.63.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

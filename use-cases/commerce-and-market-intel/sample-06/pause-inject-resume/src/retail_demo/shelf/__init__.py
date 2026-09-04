@@ -1,0 +1,1 @@
+"""Synthetic Retailer shelf."""

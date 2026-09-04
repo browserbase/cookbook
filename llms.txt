@@ -1,0 +1,32 @@
+# Browserbase cookbook
+
+> A consolidated collection of Browserbase templates, integration examples, private customer workflows, and legacy scripts. Select by task and inspect the recipe before adapting it.
+
+## Agent entrypoint
+
+- [Browserbase cookbook skill](skills/browserbase-cookbook/SKILL.md): Task routing and source-selection rules.
+- [Agent installation](docs/agents.md): Local setup for Codex, Claude Code, and Cursor.
+
+## Browse
+
+- [Recipe catalog](docs/catalog.md): All recipes, with language and access labels.
+- [Getting started](docs/topics/getting-started.md)
+- [Authentication](docs/topics/authentication.md)
+- [Browser features](docs/topics/browser-features.md)
+- [Downloads and documents](docs/topics/downloads-and-documents.md)
+- [Extraction and research](docs/topics/extraction-and-research.md)
+- [Forms and transactions](docs/topics/forms-and-transactions.md)
+- [Agents and human handoff](docs/topics/agents-and-human-handoff.md)
+- [Integrations and orchestration](docs/topics/integrations-and-orchestration.md)
+- [Testing and observability](docs/topics/testing-and-observability.md)
+- [Commerce and travel](docs/topics/commerce-and-travel.md)
+- [Business operations](docs/topics/business-operations.md)
+
+## Maintenance
+
+- [Catalog data](catalog.json): Source metadata and setup commands.
+- [Source manifest](SOURCE_MANIFEST.json): Pinned origins and per-file import accounting.
+- [Verification](docs/verification.md): Checks and execution limits.
+- [Contributing](CONTRIBUTING.md): Add or refresh a recipe.
+
+Paths are relative to the cookbook root. Private use cases require authorized access. Source inspection is not runtime verification.

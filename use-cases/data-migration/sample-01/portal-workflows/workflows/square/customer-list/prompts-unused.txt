@@ -1,0 +1,10 @@
+Navigate to this Square customer directory page (already authenticated):
+https://app.squareup.com/dashboard/customers/directory/d04e7a2f-ba74-49fd-beda-f77b5197076d
+
+
+
+Export all customers as a CSV using this priority order:
+
+1. **Use the built-in Export button** — Click the "Import / Export" button in the top-right, select "Export customers", and confirm. Square will process the export asynchronously.
+   - After triggering the export, **re-open the Import/Export dialog** — when the export is ready, Square shows a "A CSV file containing your customers is ready for download" message with a **Download** button inside that same dialog. Click Download.
+   - Once the browser download has been initiated, you are done. The file will be retrieved via the Browserbase Session Downloads API externally — do not attempt to capture the URL or save the file yourself.

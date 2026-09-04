@@ -1,0 +1,25 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const vm=require('node:vm');
+const {stripTypeScriptTypes}=require('node:module');
+const test=require('node:test');
+const {parse}=require(process.env.COOKBOOK_CSV_PARSE_MODULE||'csv-parse/sync');
+const source=fs.readFileSync(path.join(__dirname,'../license-records.ts'),'utf8').replace(/^import .*;\s*$/gm,'').replace(/^export /gm,'');
+const context=vm.createContext({parse,URL});vm.runInContext(stripTypeScriptTypes(source),context);
+const read=context.parseLicenseRecords;
+const header='Site,FirstName,LastName,LicenseNumber';
+const row='https://fixture.invalid,Ada,Example,00123';
+test('terminal newline and whitespace-only records do not become work',()=>{assert.equal(read(`${header}\n${row}\n\n  \n,,,\n`).length,1);});
+test('quoted commas, escaped quotes, multiline values and CRLF parse correctly',()=>{const result=read(`\ufeff${header},Notes\r\nhttps://fixture.invalid,"Ada, A.","Example ""Jr""",00123,"first\r\nsecond"\r\n`)[0];assert.equal(result.FirstName,'Ada, A.');assert.equal(result.LastName,'Example "Jr"');assert.equal(result.LicenseNumber,'00123');assert.equal(result.Notes,'first\r\nsecond');});
+test('header-only input produces no work',()=>{assert.equal(read(header+'\n').length,0);});
+for(const value of ['', '\n  \n', 'Site,FirstName\nhttps://fixture.invalid,Ada', `${header},Site\n${row},https://fixture.invalid`,`${header},__proto__\n${row},x`,`${header},\n${row},x`]) test(`invalid header rejected: ${JSON.stringify(value)}`,()=>{assert.throws(()=>read(value),/header/);});
+for(const target of ['javascript:alert(1)','file:///tmp/fixture','/relative','https:/fixture.invalid','https://user:password@fixture.invalid','https://fixture.invalid/a b','not-a-url','https://fixture.invalid\\evil']) test(`invalid target rejected before work: ${target}`,()=>{assert.throws(()=>read(`${header}\n${target},Ada,Example,00123`),/line 2.*Site/);});
+for(const value of ['https://fixture.invalid,,Example,00123','https://fixture.invalid,Ada,,00123','https://fixture.invalid,Ada,Example,']) test('required lookup value cannot be empty',()=>{assert.throws(()=>read(`${header}\n${value}`),/line 2.*required/);});
+test('invalid later record rejects the entire batch with its physical line number',()=>{assert.throws(()=>read(`${header}\n${row}\n\nhttps://fixture.invalid,Ada,Example\n`),/line 4.*expected 4 fields/);});
+test('malformed quoting identifies line without including payload',()=>{assert.throws(()=>read(`${header}\n"SYNTHETIC_PRIVATE_VALUE,Ada,Example,1`),error=>/line 2/.test(error.message)&&!error.message.includes('SYNTHETIC_PRIVATE_VALUE'));});
+test('captcha selector fields must be paired',()=>{assert.throws(()=>read(`${header},CaptchaImage,CaptchaInput\n${row},img,`),/line 2.*both CaptchaImage/);assert.equal(read(`${header},CaptchaImage,CaptchaInput\n${row},img,input`)[0].CaptchaInput,'input');});
+async function runEntry(csv){const calls=[];const entry=fs.readFileSync(process.env.COOKBOOK_R170_BASELINE||path.join(__dirname,'../index.ts'),'utf8');const suffix=entry.slice(entry.indexOf('const testCases ='));const c=vm.createContext({parseLicenseRecords:read,fs:{readFileSync(file){assert.equal(file,'test_cases.csv');return csv;}},async CreateSession(){calls.push('create');return{id:'synthetic'};},async run(){calls.push('run');}});let error;try{await vm.runInContext(stripTypeScriptTypes(`(async()=>{${suffix}\n})()`),c);}catch(e){error=e;}return{calls,error};}
+test('actual entrypoint allocates once for one newline-terminated record',async()=>{const result=await runEntry(`${header}\n${row}\n`);assert.equal(result.error,undefined);assert.deepEqual(result.calls,['create','run']);});
+test('actual entrypoint allocates nothing when a later record is invalid',async()=>{const result=await runEntry(`${header}\n${row}\nhttps://fixture.invalid,,,\n`);assert.match(result.error.message,/line 3/);assert.deepEqual(result.calls,[]);});
+test('actual entrypoint allocates nothing for an empty data set',async()=>{const result=await runEntry(header+'\n');assert.equal(result.error,undefined);assert.deepEqual(result.calls,[]);});

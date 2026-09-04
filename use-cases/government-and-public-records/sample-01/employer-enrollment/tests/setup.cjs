@@ -1,0 +1,10 @@
+const {test}=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),os=require('node:os'),vm=require('node:vm');
+const {stripTypeScriptTypes}=require('node:module');
+const source=stripTypeScriptTypes(fs.readFileSync(path.join(__dirname,'../src/setup.ts'),'utf8'));
+const c={...fs,path};vm.runInNewContext(source.slice(source.indexOf('export function')).replace('export function','function'),c);
+const files=['task-phase1.md.template','task-phase2.md.template','task-phase3.md.template','strategy.md'];
+const names=['BROWSERBASE_API_KEY','BROWSERBASE_PROJECT_ID','AGENTMAIL_API_KEY','ANTHROPIC_API_KEY','TEST_FIRST_NAME','TEST_LAST_NAME','TEST_BUSINESS_NAME','TEST_EIN','TEST_PHONE','TEST_ADDRESS_LINE1','TEST_CITY','TEST_STATE','TEST_ZIP'];
+function fixture(t){const root=fs.mkdtempSync(path.join(os.tmpdir(),'cookbook-edd-setup-'));t.after(()=>fs.rmSync(root,{recursive:true,force:true}));const dir=path.join(root,'autobrowse/tasks/synthetic');fs.mkdirSync(dir,{recursive:true});for(const f of files)fs.writeFileSync(path.join(dir,f),'synthetic');return {root,dir,env:Object.fromEntries(names.map(n=>[n,'synthetic-secret-value']))}}
+test('all required names validate; returned profile excludes provider credentials',t=>{const {root,env}=fixture(t);const profile=c.preflightInputs(root,'synthetic',env);assert.equal(Object.keys(profile).length,9);assert.ok(Object.keys(profile).every(k=>k.startsWith('TEST_')));});
+test('each missing or blank variable fails with name only',t=>{const {root,env}=fixture(t);for(const name of names)for(const missing of [undefined,'','  '])assert.throws(()=>c.preflightInputs(root,'synthetic',{...env,[name]:missing}),error=>error.message.includes(name)&&!error.message.includes('synthetic-secret-value'));});
+for(const name of files)test(`missing ${name} rejected before allocation`,t=>{const {root,dir,env}=fixture(t);fs.unlinkSync(path.join(dir,name));assert.throws(()=>c.preflightInputs(root,'synthetic',env),/Required task file is unavailable/);});

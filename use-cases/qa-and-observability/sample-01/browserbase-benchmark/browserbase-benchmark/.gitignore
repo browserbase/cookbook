@@ -1,0 +1,44 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+*.js.map
+
+# Environment / secrets
+.env
+
+# Benchmark output
+results/
+report.html
+
+# Terraform state
+infra/.terraform/
+infra/.terraform.lock.hcl
+infra/terraform.tfstate
+infra/terraform.tfstate.backup
+
+# macOS
+.DS_Store
+**/.DS_Store
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Claude Code — local settings are machine-specific
+.claude/settings.local.json
+
+# Claude Code — skill eval workspace (dev artifact, not framework code)
+.claude/skills/benchmark-framework-workspace/
+
+# Playwright browser cache (when installed locally outside of Render)
+browsers/
+
+# Misc
+nohup.out
+
+# Per-invocation Terraform state and recovery files
+.benchmark-runs/

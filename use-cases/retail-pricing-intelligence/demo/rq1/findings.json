@@ -1,0 +1,208 @@
+{
+  "phase": "RQ1 \u2014 Payment Discovery (pre-checkout)",
+  "generatedAt": "2026-07-20",
+  "retailers": [
+    {
+      "retailer": "costco",
+      "status": "COMPLETED",
+      "replayUrl": "https://www.browserbase.com/sessions/ef3c819f-c0b1-43a7-bc79-8f6430bcc71a",
+      "findings": {
+        "payment_methods_advertised": [
+          "All Visa Cards (online-payment-methods page)",
+          "The Costco Anywhere Visa\u00ae Card by Citi (co-brand card, cash-back promo in cart + footer 'Credit Card' link)",
+          "MasterCard (online only per official page; warehouses are Visa-only)",
+          "Most PIN-based Debit/ATM Cards",
+          "Costco Shop Cards (gift cards)",
+          "Visa Click to Pay ('Visa' checkout option, linked to Visa FAQs)",
+          "Affirm (BNPL) for online or in-warehouse orders of $400+, dedicated brand page",
+          "Costco Wallet (Costco's own digital wallet storing one saved payment method + Shop Cards, requires verified membership)",
+          "FSA/HSA cards and Medicare Advantage OTC Prepaid Benefits cards (OTC Network, S3, Sunny, NationsBenefits) \u2014 promoted as accepted 'at every register' in-warehouse/pharmacy, not shown as an online checkout option",
+          "EBT/SNAP \u2014 accepted in-person at all Costco warehouses per customer service; NOT part of the Costco.com core checkout flow (possible exception via separate Instacart-powered Same-Day site per third-party sources, unconfirmed directly)",
+          "Apple Pay \u2014 formerly accepted online but removed as of ~May 2025, absent from current official payment list",
+          "Google Pay / PayPal \u2014 not found anywhere on Costco.com"
+        ],
+        "savings_surfaced_by_method": "Not proactively surfaced by tender at the point of shopping. Membership/online pricing nuances are disclosed only via a small info-icon tooltip on the PDP ('Online item price shown. Separate shipping or 2-Day Delivery Fee may apply at checkout. Warehouse availability & pricing varies.') and via secondary customer-service pages (non-member 5% surcharge, Costco Anywhere Visa cash-back tiers only visible once an item is already in the cart). No side-by-side 'lowest cost by payment method' comparison exists anywhere in the flow.",
+        "payment_promotions": [
+          "Costco Anywhere Visa by Citi cash back shown in cart: 'EARN 2% CASH BACK REWARDS at Costco warehouses or at Costco.com... 5% on gas at Costco and 4% on other eligible gas and EV charging... 5% and 4% earn is on a combined $7,000 spend per year, then 1% thereafter... 3% on restaurants and eligible travel, including Costco Travel... 1% on everything else... See if You're Prequalified with no impact to your credit score.'",
+          "Affirm promo: 'Enjoy 2% off your APR' when paying over time via Affirm for orders $400+; plans of 3/6/12/18/24/36 months at 10-36% APR",
+          "Costco Same-Day (Instacart) Executive-member promo: '$10 monthly credit \u2014 For Executive members ($150 min spend)'",
+          "Item-level promos seen (not payment-specific): 'Buy 5 Get $30 OFF', 'After $6 OFF' on Zipfizz"
+        ],
+        "wallet_express_prompts": "None observed pre-checkout. The cart page shows only a standard green 'Checkout' button plus the Costco Anywhere Visa cross-sell card; no Apple Pay/Google Pay/PayPal/Shop Pay express buttons appear on PDP or cart. Costco's own 'Costco Wallet' exists as a saved-payment/Shop Card wallet but is not surfaced as an express button pre-checkout in this session (requires sign-in/verified membership).",
+        "retailer": "Costco.com (Costco Wholesale)",
+        "notable_quotes": [
+          "What payment methods are now accepted at Costco.com? All Visa Cards / The Costco Anywhere Visa\u00ae Card by Citi / MasterCard / Most PIN-based Debit/ATM Cards / Costco Shop Cards / Visa",
+          "EARN 2% CASH BACK REWARDS at Costco warehouses or at Costco.com with the Costco Anywhere Visa\u00ae Card by Citi",
+          "Split large purchases into smaller payments \u2014 Enjoy 2% off your APR \u2014 When you pay over time with Affirm for online or in-warehouse orders of $400 or more.",
+          "Pay in 3, 6, 12, 18, 24 and 36 months. Rates are between 10-36% APR.",
+          "Costco now accepts Medicare Advantage OTC Benefits, FSA and HSA cards at every register.",
+          "We are excited to announce that Costco now accepts all major FSA, HSA, and Medicare Advantage Prepaid Benefits Cards at every register, not just in the pharmacy.",
+          "Don't let your funds go to waste! Shop with us to stretch your FSA, HSA, and Medicare Advantage Prepaid Benefits Cards before they expire.",
+          "All our warehouse locations accept EBT cards.",
+          "Costco Wallet is Costco's digital wallet where you can easily store one saved payment method and Costco Shop Cards to use at checkout for your online and in-warehouse purchases.",
+          "Same-Day requires a Costco membership",
+          "$10 monthly credit \u2014 For Executive members ($150 min spend)",
+          "Online item price shown. Separate shipping or 2-Day Delivery Fee may apply at checkout. Warehouse availability & pricing varies.",
+          "FSA Eligible (product badge, appears on PDP and search cards)",
+          "Members Only / Sign In for Details (product badge/price gate on search results)"
+        ],
+        "benefit_tracker": "none observed \u2014 no EBT balance, FSA/HSA balance, or gift-card balance tracker is shown pre-checkout anywhere in the homepage/search/PDP/cart flow without logging in (a Costco Shop Card balance checker exists via a separate footer link, but it is a lookup tool, not an integrated pre-checkout balance display).",
+        "benefit_messaging": {
+          "otc": "Medicare Advantage OTC Prepaid Benefits cards promoted on the same rx.costco.com FSA/HSA partner page, listing participating networks OTC Network, S3, Sunny, and NationsBenefits, again framed as usable 'at every register' in-warehouse.",
+          "hsa_fsa": "Surfaced via the Pharmacy partner page (rx.costco.com/partners/fsa-hsa: 'FSA, HSA & Medicare Advantage Flex Benefits Cards' \u2014 'Costco now accepts Medicare Advantage OTC Benefits, FSA and HSA cards at every register') and via an 'FSA Eligible' badge on qualifying search results/PDPs reachable by keyword search 'fsa eligible' \u2014 but not a standard filter and not mentioned on ordinary grocery/health searches or in the cart.",
+          "ebt_snap": "Mentioned only on a separate Customer Service FAQ ('Are food stamps accepted in Costco Warehouses?' \u2192 'All our warehouse locations accept EBT cards.') \u2014 framed as in-person/warehouse-only; no EBT badge, filter, or checkout option appears anywhere in the Costco.com search/PDP/cart flow I traversed.",
+          "use_your_benefits_prompts": "The Pharmacy FSA/HSA page includes a call-to-action link 'Shop FSA Eligible Items' leading to a costco.com keyword search, and copy urging 'Don't let your funds go to waste! Shop with us to stretch your FSA, HSA, and Medicare Advantage Prepaid Benefits Cards before they expire' and 'Visit your local Costco Pharmacy today and make the most of your FSA, HSA, and Medicare Advantage Prepaid Benefits Cards. Shop smart and save big!' \u2014 these prompts live only on the standalone Pharmacy partner page, not on mainstream search/PDP/cart screens."
+        },
+        "key_screens_observed": [
+          "Homepage (costco.com) \u2014 standard nav with Grocery/Same Day/Optical/Pharmacy/Membership links; footer has 'Credit Card' (Costco Anywhere Visa) and 'Costco Shop Card Balance' links but no explicit payment-methods summary",
+          "Search results for 'milk' \u2014 only logistics badges (2-Day Delivery, Warehouse Only, Buy in Warehouse); no benefit/payment badges",
+          "Search results for 'vitamins' \u2014 'Members Only' and 'Online Only' badges, 'Sign In for Details' price gating on some items",
+          "Search results for 'fsa eligible' (keyword) \u2014 ~222-305 items tagged with an 'FSA Eligible' badge across multiple departments",
+          "PDP: Kirkland Signature Organic Whole Milk \u2014 Online Price tooltip explains shipping/delivery fee variance; no payment/benefit badges; Add to Cart flow",
+          "PDP: FEELGOOD Berberine Phytosome (vitamin) \u2014 price gated behind scroll/sign-in nuance, no FSA badge (not tagged eligible)",
+          "PDP: Kirkland Signature Aller-Tec, 365 Tablets \u2014 prominent 'FSA Eligible' badge above title and in Specifications tab",
+          "Cart (1 item, milk) \u2014 Costco Anywhere Visa 2% cash-back promo module, Subtotal/Shipping/2-Day Delivery Fee/Estimated Total, single 'Checkout' button, no wallet/express buttons, no EBT/FSA mention",
+          "Costco Payment Methods page (online-payment-methods.html) \u2014 canonical list of accepted online payment methods",
+          "Affirm Brand Showcase page \u2014 full BNPL terms and how-to",
+          "rx.costco.com Pharmacy FSA/HSA partner page \u2014 OTC/FSA/HSA card acceptance messaging framed as in-warehouse",
+          "Costco Same-Day (Instacart) landing page \u2014 membership-required gating and Executive-member promo",
+          "Customer Service FAQs \u2014 non-member 5% surcharge policy; EBT accepted in warehouses only; Costco Wallet FAQ describing the retailer's digital wallet"
+        ],
+        "discovery_effort": "Moderate-to-high. Card payment methods and the Affirm/Citi-card promotions are easy to find (footer link, dedicated brand pages, cart cross-sell). But EBT/SNAP and HSA/FSA/OTC eligibility require a shopper to already know to visit a separate customer-service FAQ or the Pharmacy microsite, or to search the exact phrase 'fsa eligible' \u2014 none of this is surfaced through standard category browsing, filters, or the cart. Membership-gating economics (5% non-member surcharge, 'Members Only'/'Sign In for Details' pricing lock) are likewise disclosed only via secondary FAQ pages, not inline at the point of shopping.",
+        "eligibility_indicators": {
+          "description": "Grocery search results show only logistics badges (2-Day Delivery, Delivery Available, Buy in Warehouse, Warehouse Only) with no benefit badges. Health search results show 'Members Only' and 'Online Only' badges plus item promos, but no FSA/HSA badge unless searching the literal phrase 'fsa eligible'. When found (via costco.com/s?keyword=fsa%20eligible, ~222-305 items), items carry a blue 'FSA Eligible' badge on both search cards and PDPs (confirmed on 'Kirkland Signature Aller-Tec, 365 Tablets', which shows 'FSA Eligible' above the title and again as an 'FSA Eligible' tab in Specifications). There is no dedicated filter checkbox for FSA/HSA/EBT/OTC in the search filter sidebar (only Category, Delivery Location, My Warehouse, Price, Member Reviews, Brand, Form, Lifestage, Body Area), so a shopper does not know eligibility before checkout unless they already know to search for it or land on the Pharmacy partner page."
+        }
+      }
+    },
+    {
+      "retailer": "shopify_allbirds",
+      "status": "COMPLETED",
+      "replayUrl": "https://www.browserbase.com/sessions/fa536bba-5ca6-4200-8c68-6f9bbf64db38",
+      "findings": {
+        "wallet_express_prompts": "Cart drawer shows 4 express buttons side-by-side: Amazon Pay (yellow), G Pay (black), PayPal (blue/yellow), Shop Pay (purple), below the 'Checkout+ | $112.98' CTA. The full checkout page repeats an 'Express checkout' region above the contact form with 'Shop', an Apple Pay slot (unrendered here), 'Amazon Pay', and 'Google Pay', separated from the manual form by an 'OR' divider.",
+        "savings_surfaced_by_method": "None. No page proactively surfaces which tender is cheapest/fastest; the only proactive info is generic 'Pay in full or in installments' next to Shop Pay with no computed dollar figures disclosed pre-authentication.",
+        "notable_quotes": [
+          "\"You've earned free shipping!\"",
+          "\"Checkout+ | $112.98\" / \"Checkout without free returns\"",
+          "\"Shop Pay \u2022 Pay in full or in installments\"",
+          "\"Credit card, Discover, Diners Club, Elo, JCB, and UnionPay\" (radio aria-label, shown as Visa/Card Network/Amex + '+5')",
+          "\"Save my information for a faster checkout \u2014 By paying, you agree to create a Shop account subject to Shop's Terms and Privacy Policy\" / \"Not now\"",
+          "\"Amazon Pay - Use your Amazon account\"",
+          "\"Afterpay is a service that allows you to make purchases now and pay for them in four payments made every 2 weeks without any interest.\"",
+          "\"How do I use Afterpay? \u2026 you will be able to choose Afterpay on the payment method page.\" (per /pages/afterpay, not actually observed at checkout)"
+        ],
+        "benefit_messaging": {
+          "otc": "none observed",
+          "hsa_fsa": "none observed",
+          "ebt_snap": "none observed",
+          "use_your_benefits_prompts": "none observed \u2014 no benefit-tender prompts of any kind appear anywhere in the funnel"
+        },
+        "eligibility_indicators": "Not applicable \u2014 Allbirds sells apparel/footwear, not FSA/HSA/SNAP-eligible goods, so no eligibility badges, filters, or benefit-tender indicators exist on search, PDP, or cart. This absence itself is the notable finding, contrasting DTC Shopify fashion retail with benefit-accepting grocery/pharmacy retailers.",
+        "payment_methods_advertised": [
+          "Credit/debit card (Visa, Card Network, Amex shown; '+5' expandable badge covers Discover, Diners Club, Elo, JCB, UnionPay per aria-label)",
+          "Shop Pay (express button + payment radio: 'Pay in full or in installments')",
+          "PayPal (express button in cart drawer; standard payment radio at full checkout)",
+          "Amazon Pay (express button in cart drawer and checkout)",
+          "Google Pay / 'G Pay' (express button in cart drawer and checkout)",
+          "Apple Pay (empty/unrendered express slot present in checkout DOM; not visually confirmed in this non-Safari browser)",
+          "Gift card (redemption field in Order Summary at checkout)",
+          "Afterpay (advertised on a standalone /pages/afterpay FAQ page but NOT present as a selectable option in the actual test checkout \u2014 advertised/actual mismatch)"
+        ],
+        "key_screens_observed": [
+          "Home (allbirds.com) \u2014 no payment/BNPL messaging in header, hero, or footer; only a $100 free-shipping threshold banner",
+          "PDP (Men's Wool Runner, Natural White, $110, size 9) \u2014 no installment/BNPL widget or payment badges near price or Add-to-Cart",
+          "Cart drawer (via cart icon / '/cart' redirect) \u2014 'Checkout+' free-returns upsell ($2.98) plus 4 express payment buttons: Amazon Pay, G Pay, PayPal, Shop Pay",
+          "Full Shopify-hosted checkout (checkouts/cn/...) \u2014 Express checkout row (Shop, Apple Pay slot, Amazon Pay, Google Pay); Payment section with 3 radios (Credit card w/ 8 networks, Shop Pay, PayPal); gift-card field; Shop-account 'save my info' opt-out prompt; stopped here without entering real payment details",
+          "Afterpay FAQ static page (/pages/afterpay) \u2014 advertises Afterpay BNPL but not linked from nav/checkout and not actually offered in the tested checkout"
+        ],
+        "benefit_tracker": "none observed",
+        "retailer": "Allbirds (allbirds.com) \u2014 used as representative Shopify/Shop Pay merchant",
+        "discovery_effort": "High. Home page, footer, and PDP carry zero payment-method badges, card-network icons, or BNPL/installment copy (confirmed via text search for 'installment', 'as low as', 'Afterpay', 'Affirm', 'Klarna' on the PDP \u2014 all absent). The footer Help menu lists only 'FAQ/Contact Us' and 'Returns/Exchanges', no payments page link. A shopper only discovers accepted tenders by opening the cart drawer (reveals 4 express buttons) or entering the real hosted checkout (reveals card/Shop Pay/PayPal detail plus Apple/Amazon/Google Pay slots). A separate Afterpay FAQ page exists at a non-linked URL and even then its promised option did not appear in the live checkout, so full payment-option discovery effectively requires completing most of checkout.",
+        "payment_promotions": [
+          "Shop Pay: 'Pay in full or in installments' (no specific $/mo figure shown pre-auth)",
+          "Afterpay FAQ page (not reachable from checkout in this session): 'Afterpay is a service that allows you to make purchases now and pay for them in four payments made every 2 weeks without any interest.'",
+          "No card-specific cashback, no PayPal-specific offer, no membership-pricing-by-tender found anywhere"
+        ]
+      }
+    },
+    {
+      "retailer": "amazon",
+      "status": "COMPLETED",
+      "replayUrl": "https://www.browserbase.com/sessions/34ee9402-b9b9-47ea-ae72-2fe8be360770",
+      "findings": {
+        "otc_messaging": "OTC medicines like Zyrtec allergy relief are folded into the same FSA/HSA eligibility system rather than given a separate 'OTC' badge \u2014 they appear under the 'Health AI'/'Medical Care' nav tabs and are tagged 'FSA or HSA eligible' in both search results and the buy box.",
+        "benefit_tracker": "none observed \u2014 no running FSA/HSA or EBT balance/spend tracker exists; the only similar element is the cart's Amazon Visa promo box showing 'Savings remaining: $31.40', which tracks a credit-card signup offer, not a health or SNAP benefit account.",
+        "payment_promotions": [
+          "PDP banner: 'Thank you for being an Amazon customer. Get $50 off: Pay $0.00 $18.60 upon approval for Amazon Visa.'",
+          "Cart promo box: '$50 instant gift card \u2014 Get $50 off instantly upon approval for Amazon Visa' with breakdown 'Current subtotal: $18.60 / Gift Card savings: -$50.00 / Cost after savings: $0.00 / Savings remaining: $31.40'",
+          "Amazon credit-card landing page: 'Get a $150 Amazon Gift Card instantly on approval with an eligible Prime membership' (Prime Visa)"
+        ],
+        "savings_surfaced_by_method": "Only card-linked promotions (Amazon Visa) show a precise dollar amount pre-checkout, e.g. the cart's 'Gift Card savings: -$50.00 / Cost after savings: $0.00'; EBT/SNAP and FSA/HSA are marked eligible but no computed savings or benefit-account deduction amount is shown anywhere before checkout.",
+        "retailer": "Amazon.com",
+        "ebt_snap_messaging": "The SNAP-eligible Groceries hub (amazon.com/snap-ebt) reads 'Explore ways to shop and save with EBT' with bullets 'Shop fresh produce and pantry stable groceries with SNAP EBT', 'Get 50% off a Grocery delivery subscription', 'Get 50% off a Prime membership with active EBT card', and 'Shop eligible items with Cash EBT in select states', plus a button 'Add your EBT card'; individual products there carry a small 'SNAP EBT eligible' text label under the price.",
+        "notable_quotes": [
+          "Explore ways to shop and save with EBT",
+          "Shop eligible items with Cash EBT in select states",
+          "FSA or HSA eligible item. On Amazon, these items can be purchased with most FSAs (Flexible Spending Accounts) and HSAs (Health Savings Accounts). If you have a card, you can add it in checkout.",
+          "1000s of eligible products, delivered to your door / No separate FSA or HSA order required",
+          "Thank you for being an Amazon customer. Get $50 off: Pay $0.00 $18.60 upon approval for Amazon Visa.",
+          "Current subtotal: $18.60 / Gift Card savings: -$50.00 / Cost after savings: $0.00 / Savings remaining: $31.40",
+          "Accepted across Amazon's checkouts. Redeem your points across Amazon.com and other Amazon checkouts. (Shop with Points)"
+        ],
+        "eligibility_indicators": "Eligibility is shown as small text labels rather than prominent badges: 'FSA or HSA eligible' appears under the price in search results and in the PDP buy box (with a 'Details' link), and 'SNAP EBT eligible' appears under the price on the SNAP-eligible groceries hub; search also offers a left-sidebar filter checkbox 'FSA or HSA Eligible' to pre-filter results.",
+        "wallet_express_prompts": "none observed for Amazon Pay, Apple Pay, Google Pay, or PayPal as express-checkout wallets on amazon.com itself; the only express-style nudge seen was the recurring Amazon Visa instant-gift-card banner shown right after 'Add to Cart' and again in the cart.",
+        "discovery_effort": "Moderate: SNAP/EBT and FSA/HSA eligibility are discoverable through dedicated storefronts linked from grocery/health navigation and via a search filter, and flagged with small text labels plus a 'Details' popup on PDPs, but no dollar amount of savings for EBT or FSA/HSA is ever shown pre-checkout \u2014 only eligibility (yes/no) is surfaced.",
+        "hsa_fsa_messaging": "A dedicated 'FSA | HSA Store' promises '1000s of eligible products, delivered to your door', 'Low prices on everyday health essentials', 'No separate FSA or HSA order required', with a button 'Add FSA or HSA card'; on PDPs a 'FSA or HSA eligible \u00b7 Details' link opens a popup stating 'On Amazon, these items can be purchased with most FSAs (Flexible Spending Accounts) and HSAs (Health Savings Accounts). If you have a card, you can add it in checkout. You can also purchase these items using a different payment method and choose to be reimbursed from your benefit administrator later.'",
+        "use_benefits_prompts": "Prompts consistently defer actual card entry to checkout: FSA/HSA popup says 'If you have a card, you can add it in checkout'; the EBT hub and FSA/HSA store both show 'Add your EBT card' / 'Add FSA or HSA card' buttons rather than accepting the card earlier in the shopping flow.",
+        "payment_methods_advertised": [
+          "Amazon Visa / Amazon Store Card / Amazon Secured Card / Amazon Business Card (footer 'Amazon Payment Products')",
+          "Amazon Gift Cards",
+          "Amazon.com Balance / 'Reload Your Balance' (stored balance, i.e. Amazon Pay balance)",
+          "Shop with Points (rewards points redemption at checkout)",
+          "Credit Card Marketplace (card comparison hub)",
+          "EBT/SNAP cards (SNAP-eligible Groceries hub, Amazon Fresh)",
+          "FSA/HSA cards (dedicated FSA|HSA Store)"
+        ]
+      }
+    },
+    {
+      "retailer": "instacart",
+      "status": "COMPLETED",
+      "replayUrl": "https://www.browserbase.com/sessions/bb999294-8558-4f38-9506-9b0686cf0905",
+      "findings": {
+        "benefit_tracker": "No visible running balance/benefit tracker widget was found pre-checkout in the areas explored (storefront, search, product pages, cart drawer); the closest artifact is the 'Saved benefits' toggle referenced in the FSA/HSA help article, but no dollar-balance tracker UI was observed (none observed).",
+        "hsa_fsa_messaging": "Landing page instacart.com/p/fsa-hsa reads: 'Order your FSA/HSA eligible items on Instacart... Order FSA/HSA-eligible items right to your door. You can add non-eligible items to your cart too.' The Help Center 'Shopping with FSA and HSA' article instructs users to toggle an 'Apply FSA/HSA benefit' switch under a 'Saved benefits' section in payment settings/checkout.",
+        "ebt_snap_messaging": "Help article instacart.com/help/article/ebt-snap-payments explains EBT SNAP can be added as a payment method, but 'you must also add a credit or debit card to your Instacart account to use your EBT card' since the card covers fees, bottle deposits, taxes, tips, and non-EBT items; it also links to a SNAP eligibility screener ('Check your SNAP eligibility') and a guide to finding EBT-eligible items.",
+        "retailer": "Costco storefront on Instacart (instacart.com/store/costco/storefront), cross-checked against instacart.com homepage, PayPal/Venmo/Klarna landing pages, and EBT-SNAP/FSA-HSA/OTC help articles",
+        "otc_messaging": "Help Center article 'Shopping with your OTC Network card' states: 'Eligible health plan customers can use their OTC Network benefit to buy eligible items on Instacart,' and the FSA/HSA article clarifies 'You can't place an order using both an FSA/HSA card and an OTC Network card/EBT SNAP' in the same order.",
+        "eligibility_indicators": "Search results pages expose a 'SNAP Eligible' filter chip (confirmed via URL param filters=[\"ebt\",\"usa_snap_eligible\",\"SNAP Eligible\",\"payment_methods\"] on a milk search at Costco); store cards on homepage/browse pages display an 'Accepts EBT' badge; the EBT SNAP help article links to a dedicated 'Find EBT-eligible items' help section explaining SNAP eligibility rules (no hot prepared foods, no alcohol) rather than showing a per-product badge in the Costco storefront itself.",
+        "wallet_express_prompts": "No Apple Pay / Google Pay / express-wallet prompts were observed on the homepage, storefront, product pages, or cart drawer during this session (none observed); these may only appear at the actual checkout step which is blocked by the login wall.",
+        "payment_promotions": [
+          "Klarna: 'New Instacart customers get $25 off your first order with code 25KLARNA' and 'no interest or fees when you pay on time' (4 installments)",
+          "Venmo: 'Get $5 off $15+* \u2014 Enjoy $5 off your Halloween candy order of $15+* when you pay with Venmo' (minimum purchase $10 to use Venmo per FAQ)",
+          "Signup/new-customer modal: '$0 delivery fee on your first 3 orders' with '$10 order minimum. Service fees and terms apply.'",
+          "Instacart Card Network: 5% cash back on qualifying Instacart purchases (first $6,000/year), 2% at restaurants/gas/select streaming, 1% on other purchases",
+          "In-cart item promos tied to spend thresholds, e.g. 'Spend $25, save $2' on OLLY vitamins with a 'See eligible items' link clarifying which SKUs qualify"
+        ],
+        "payment_methods_advertised": [
+          "Credit or debit card",
+          "PayPal ('Instacart accepts PayPal for all orders on Instacart.com or the Instacart app')",
+          "Venmo ('Pay with Venmo on Instacart')",
+          "Klarna buy-now-pay-later ('Pay for it later with Klarna... spreads the cost of your Instacart order into 4 payments')",
+          "EBT SNAP (listed as a payment method option alongside PayPal/cards)",
+          "FSA/HSA card ('Shopping with FSA and HSA')",
+          "OTC Network card ('Eligible health plan customers can use their OTC Network benefit to buy eligible items on Instacart')",
+          "Instacart gift cards ('Pay with a gift card' / 'Purchase a gift card' / 'Redeem a gift card')",
+          "Instacart Card Network (co-branded Chase credit card, 5% cash back on Instacart purchases)",
+          "Instacart Card Network Pay with Points",
+          "'Fresh Funds' stored credit product",
+          "Apple Pay/Google Pay not directly confirmed on-page in this session (none observed explicitly, though real checkout wallets were not reachable due to login wall)"
+        ],
+        "savings_surfaced_by_method": "Cart banner dynamically showed 'Add $4.96 to get $0 delivery fee' tied to a spend threshold; a '$10 Min. to checkout' order-minimum notice appeared in the cart drawer; the general fees help article states delivery fees start at $3.99 for orders $35+, pickup orders have no service fee, and long-distance fees may apply for routes 15+ minutes or with tolls.",
+        "discovery_effort": "Learning payment/benefit eligibility pre-checkout requires moderate effort: EBT/SNAP eligibility is discoverable via a search filter chip and a 'Accepts EBT' store badge, but FSA/HSA and OTC eligibility are not surfaced with on-product badges in the Costco storefront and instead require reading separate Help Center articles (Shopping with FSA and HSA; Shopping with your OTC Network card) or landing pages (instacart.com/p/fsa-hsa) rather than being obvious in the shopping flow itself.",
+        "use_benefits_prompts": "The FSA/HSA help article describes a 'Saved benefits' area in account/payment settings with an 'Apply FSA/HSA benefit' toggle shoppers switch on before/at checkout; no real-time 'use your benefits' banner was observed on the Costco storefront, search results, or product pages visited (none observed on those specific pages).",
+        "use_benefits_prompts_2": "n/a"
+      }
+    }
+  ]
+}

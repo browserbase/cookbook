@@ -1,0 +1,20 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]
+  - package-ecosystem: npm
+    directory: /examples
+    schedule:
+      interval: monthly
+    groups:
+      examples-npm:
+        patterns: ["*"]
+  - package-ecosystem: gomod
+    directory: /examples/go/hackernews
+    schedule:
+      interval: monthly

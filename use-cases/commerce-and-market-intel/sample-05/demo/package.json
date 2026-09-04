@@ -1,0 +1,23 @@
+{
+  "name": "cookbook-sample_org-demo",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "tsx main.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/form.test.mjs"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.0",
+    "playwright-core": "1.62.1",
+    "dotenv": "17.4.2"
+  },
+  "devDependencies": {
+    "tsx": "4.23.13",
+    "typescript": "7.0.2",
+    "@types/node": "26.4.0"
+  }
+}

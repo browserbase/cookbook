@@ -1,0 +1,32 @@
+services:
+  - type: web
+    name: bb-benchmark
+    runtime: node
+    region: oregon        # AWS us-west (same region as Browserbase default)
+    plan: pro             # 2 vCPU / 4 GB — standard (2 GB) may OOM with Chromium co-located
+    buildCommand: PLAYWRIGHT_BROWSERS_PATH=./browsers npm install && npm run build && PLAYWRIGHT_BROWSERS_PATH=./browsers npx playwright install chromium
+    startCommand: PLAYWRIGHT_BROWSERS_PATH=./browsers node dist/server.js
+    healthCheckPath: /health
+    envVars:
+      - key: NODE_VERSION
+        value: "24.19.0"
+      - key: BENCHMARK_ACCESS_TOKEN
+        sync: false
+      - key: BENCHMARK_PUBLIC_ORIGIN
+        sync: false
+      - key: BROWSERBASE_API_KEY
+        sync: false
+      - key: BROWSERBASE_PROJECT_ID
+        sync: false
+      - key: GOOGLE_API_KEY
+        sync: false
+      - key: AWS_REGION
+        value: us-west-2
+      # - key: BENCHMARK_SITES
+      #   value: https://chatgpt.com,https://espn.com,https://amazon.com,https://sample_org.com
+      - key: BENCHMARK_RUNS
+        value: "5"
+      - key: SESSIONS_PER_DAY
+        value: "500"
+      - key: AVG_SESSION_MINUTES
+        value: "3"

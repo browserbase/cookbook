@@ -1,0 +1,14 @@
+{
+  "name": "book-reservation",
+  "config": {
+    "sessionConfig": {
+      "browserSettings": {
+        "advancedStealth": true,
+        "blockAds": true,
+        "solveCaptchas": true
+      },
+      "timeout": 300
+    },
+    "parametersSchema": {}
+  }
+}

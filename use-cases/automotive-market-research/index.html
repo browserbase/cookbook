@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="demo-control-token" content="__DEMO_CONTROL_TOKEN__" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Purchase Contracts · Procurement Agent Demo</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="demo-header">
+    <div class="brand"><img class="brand-mark" src="assets/browserbase-logo.png" alt="" /><span>Browserbase</span></div>
+    <div class="demo-title"><span class="live-dot"></span> Sample Organization Procurement Automation <span class="demo-badge">DEMO DATA</span></div>
+    <div class="header-actions"><button class="ghost" id="resetButton">Reset demo</button><button class="agent-toggle" id="agentToggle">Agent panel <span>⌘K</span></button></div>
+  </header>
+
+  <main class="workspace">
+    <section class="sap-shell" id="sapShell">
+      <nav class="sap-nav">
+        <button class="back" id="backButton">‹</button>
+        <div class="sap-logo">SAP</div>
+        <div class="app-name">Purchase Contracts <span>⌄</span></div>
+        <div class="nav-spacer"></div>
+        <span class="nav-icon bell">♧<b>3</b></span><span class="nav-icon">◇</span><span class="nav-icon">◆</span><span class="nav-icon">♨</span><span class="avatar">JS</span>
+      </nav>
+      <div id="sapContent"></div>
+    </section>
+
+    <aside class="agent-panel closed" id="agentPanel">
+      <div class="agent-head">
+        <div><span class="agent-kicker">PROCUREMENT AGENT</span><h2>Live market index update</h2></div>
+        <button class="panel-close" id="panelClose">×</button>
+      </div>
+      <a class="file-card" href="https://fred.stlouisfed.org/series/MCOILWTICO" target="_blank" rel="noreferrer">
+        <div class="file-icon">↗</div>
+        <div><strong>WTI Crude Oil Price · FRED</strong><small>Live public EIA monthly series</small></div>
+        <span class="check">✓</span>
+      </a>
+      <div class="instruction">
+        Fetch the latest WTI observations, apply the contract's 50% LTA pass-through, and update Energy surcharge on <strong>PC-2026-03782</strong>. Stop before submission.
+      </div>
+      <div class="guardrail"><span>●</span><div><strong>Human approval required</strong><small>The agent can prepare changes, but cannot submit them.</small></div></div>
+      <button class="run-button" id="runButton"><span>▶</span> Run Browserbase Agent</button>
+      <a class="session-link hidden" id="sessionLink" href="#" target="_blank" rel="noreferrer"><span class="live-dot"></span> Watch live Browserbase session ↗</a>
+      <div class="run-status hidden" id="runStatus">
+        <div class="status-top"><span id="statusLabel">Running</span><span id="statusTimer">00:00</span></div>
+        <div class="progress"><i id="progressBar"></i></div>
+        <ol class="steps" id="steps"></ol>
+      </div>
+      <div class="review-card hidden" id="reviewCard">
+        <div class="review-title"><span class="success-icon">✓</span><div><strong>Change prepared</strong><small>Live source and SAP result verified</small></div></div>
+        <div class="impact"><span>Projected annual impact</span><strong id="impactValue">Calculated live</strong></div>
+        <button class="review-button" id="reviewButton">Review prepared changes</button>
+      </div>
+      <div class="audit-foot"><span>◉</span> Session recording and action log enabled</div>
+    </aside>
+  </main>
+
+  <div class="modal-layer hidden" id="modalLayer"></div>
+  <div class="toast hidden" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>

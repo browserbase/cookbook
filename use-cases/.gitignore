@@ -1,0 +1,6 @@
+demo_videos/
+.env
+**/venv/
+**/node_modules/
+*.zip
+*.mp4

@@ -1,0 +1,30 @@
+{
+  "name": "sample_org-tax-portal-demo",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "server": "tsx server.ts",
+    "automate": "tsx automate.ts",
+    "automate:local": "tsx automate-local.ts",
+    "setup-gmail": "tsx setup-gmail-context.ts",
+    "dev": "tsx watch server.ts"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "@browserbasehq/sdk": "2.19.1",
+    "playwright-core": "1.63.0",
+    "express": "5.2.1",
+    "resend": "6.26.0",
+    "zod": "4.4.3",
+    "dotenv": "17.4.2"
+  },
+  "devDependencies": {
+    "@types/express": "5.0.6",
+    "@types/node": "26.4.1",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

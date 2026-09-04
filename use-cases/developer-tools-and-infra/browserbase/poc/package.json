@@ -1,0 +1,36 @@
+{
+  "name": "@browserbasehq/bbpoc",
+  "version": "0.1.0",
+  "description": "Turn a 1-week Browserbase verified/advanced-stealth trial into a 1-day, self-serve smoke test. Edit one file, run one command, get a leadership-ready scorecard.",
+  "type": "module",
+  "bin": {
+    "bbpoc": "bin/bbpoc.mjs"
+  },
+  "scripts": {
+    "bbpoc": "node --import tsx src/cli.ts",
+    "init": "node --import tsx src/cli.ts init",
+    "smoke": "node --import tsx src/cli.ts smoke",
+    "run": "node --import tsx src/cli.ts run",
+    "report": "node --import tsx src/cli.ts report",
+    "test": "tsc --noEmit && node --test tests/*.test.cjs",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.0",
+    "@browserbasehq/stagehand": "4.0.2",
+    "commander": "15.0.0",
+    "picocolors": "1.1.1",
+    "yaml": "2.9.0",
+    "zod": "4.5.4",
+    "ai": "7.0.87",
+    "@ai-sdk/openai": "4.0.53"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.0",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  }
+}

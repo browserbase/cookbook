@@ -1,0 +1,50 @@
+{
+  "demo": "Instacart item-price extraction via Browserbase (advanced stealth + residential proxies)",
+  "run_date": "2026-07-07",
+  "browserbase_session_id": "6891cf24-6b16-4985-beba-801c028a50c3",
+  "session_replay": "https://www.browserbase.com/sessions/6891cf24-6b16-4985-beba-801c028a50c3",
+  "geo": { "delivery_zip_inferred_from_proxy": "77089", "market": "Houston, TX" },
+  "query": "milk",
+  "retailers": {
+    "costco": {
+      "source": "https://www.instacart.com/store/costco/s?k=milk",
+      "items": [
+        { "name": "Kirkland Signature Whole Milk, 1 gal", "price": 3.60, "badge": "Best seller", "availability": "Many in stock" },
+        { "name": "Kirkland Signature 2% Reduced Fat Milk, 1 gal", "price": 3.60, "rating_count": 401, "availability": "Many in stock" },
+        { "name": "Kirkland Signature Organic A2 Whole Milk, Half Gallon, 3-count", "price": 16.16, "badge": "Best seller", "availability": "Many in stock" },
+        { "name": "Kirkland Signature Ultra Filtered 2% Lactose Free Milk, 64 fl oz, 3-count", "price": 14.92, "availability": "Many in stock" },
+        { "name": "Kirkland Signature Organic 2% Milk, 1/2 gal, 4-count", "price": 19.52 },
+        { "name": "Horizon Organic Whole Milk, 8 oz, 18-Count", "price": 24.25, "rating_count": 38, "availability": "Many in stock" },
+        { "name": "Malk Organic Unsweetened Almond Milk, 48 oz, 2-count", "price": 11.18, "original_price": 15.18, "promo": "$4 off (26%)", "availability": "Many in stock" }
+      ]
+    },
+    "aldi": {
+      "source": "https://www.instacart.com/store/aldi/s?k=milk",
+      "items": [
+        { "name": "Friendly Farms Whole Milk, 1 gal", "price": 3.19, "badge": "Best seller", "availability": "Many in stock" },
+        { "name": "Friendly Farms 2% Milk, 1 gal", "price": 3.19, "badge": "Best seller", "availability": "Many in stock" },
+        { "name": "Friendly Farms Whole Milk, 0.5 gal", "price": 1.95, "availability": "Many in stock" },
+        { "name": "Simply Nature Organic Whole Milk, 64 fl oz", "price": 3.95, "availability": "Many in stock" },
+        { "name": "Friendly Farms 2% Lactose Free Milk, 64 fl oz", "price": 2.99, "availability": "Many in stock" },
+        { "name": "Friendly Farms Skim Milk, 0.5 gal", "price": 1.95, "availability": "Many in stock" }
+      ]
+    },
+    "retailer": {
+      "source": "https://www.instacart.com/store/retailer/s?k=milk",
+      "note": "Retailer's own storefront on Instacart — 'No markups' badge shown",
+      "items": [
+        { "name": "Great Value Whole Vitamin D Milk, 1 gal", "price": 3.72, "badge": "Best seller", "availability": "Many in stock" },
+        { "name": "Great Value 2% Reduced Fat Milk, 128 oz", "price": 3.76, "badge": "Best seller", "availability": "Many in stock" },
+        { "name": "Great Value Vitamin D Whole Milk, 0.5 gal", "price": 2.20, "availability": "Many in stock" },
+        { "name": "Crystal Creamery Milk, Whole, 1 gal", "price": 5.57, "availability": "Many in stock" },
+        { "name": "fairlife Whole Ultra-Filtered Milk, Lactose Free, 52 fl oz", "price": 5.32, "rating_count": 1530, "availability": "Many in stock" },
+        { "name": "Lactaid Whole Milk, 96 fl oz", "price": 6.38, "rating_count": 18, "availability": "Many in stock" }
+      ]
+    }
+  },
+  "headline_comparison_whole_milk_1gal": {
+    "aldi_friendly_farms": 3.19,
+    "costco_kirkland": 3.60,
+    "retailer_great_value": 3.72
+  }
+}

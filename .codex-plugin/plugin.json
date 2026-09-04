@@ -1,0 +1,12 @@
+{
+  "name": "browserbase-cookbook",
+  "version": "0.1.0",
+  "description": "Find and adapt Browserbase examples with one task-routing skill.",
+  "author": { "name": "Browserbase" },
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Browserbase Cookbook",
+    "shortDescription": "Find the right browser automation example.",
+    "category": "Developer Tools"
+  }
+}

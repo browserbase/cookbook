@@ -1,0 +1,9 @@
+Describe the extraction task for the agent here. The agent reads this verbatim as its instruction,
+so be specific.
+
+- What data to collect, and for which records.
+- How far to go (e.g. "page through every result, don't stop at page one").
+- When to stop.
+
+The starting page is set by "startUrl" in workflow.json. The session is already authenticated via the
+saved Vagaro context. You also have a `browserEval` tool to run JavaScript in the page when needed.

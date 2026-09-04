@@ -1,0 +1,11 @@
+node_modules/
+.env
+.env.ap_platform
+downloads/
+*.pdf
+# large reference specs fetched at build time
+ap_platform-openapi.json
+ap_platform-llms-api.txt
+
+# Private reviewed metadata; keep other named review records outside this repo.
+reviewed-bill.json

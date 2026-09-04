@@ -1,0 +1,22 @@
+{
+  "name": "forms-validation-lab",
+  "app": "app",
+  "install": "bun install --frozen-lockfile",
+  "serve": "bun run dev --host 127.0.0.1 --port {port}",
+  "validate": [
+    "bun run build"
+  ],
+  "fixerContext": [
+    "src/routes/",
+    "src/app/pages/",
+    "src/app/",
+    "src/components/app-layout",
+    "src/",
+    "src/components/ui/"
+  ],
+  "hosted": {
+    "a11y-label": "https://btc-forms-validation-lab.example.invalid/a11y-label",
+    "validation-email": "https://btc-forms-validation-lab.example.invalid/validation-email",
+    "validation-password": "https://btc-forms-validation-lab.example.invalid/validation-password"
+  }
+}

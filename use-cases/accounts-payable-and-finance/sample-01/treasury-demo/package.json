@@ -1,0 +1,29 @@
+{
+  "name": "sample_org-treasury-demo",
+  "version": "1.0.0",
+  "description": "Sample Organization Treasury Automation Demo \u2014 Automate bank statement download and upload using Browserbase + Stagehand",
+  "type": "module",
+  "scripts": {
+    "serve": "tsx serve.ts",
+    "demo": "tsx index.ts",
+    "start": "concurrently \"npm run serve\" \"sleep 2 && npm run demo\"",
+    "dev": "tsx watch index.ts",
+    "test": "node --test tests/*.test.cjs"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.1",
+    "@browserbasehq/stagehand": "4.0.2",
+    "dotenv": "17.4.2",
+    "zod": "4.4.3",
+    "playwright-core": "1.63.0"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "concurrently": "10.0.5",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

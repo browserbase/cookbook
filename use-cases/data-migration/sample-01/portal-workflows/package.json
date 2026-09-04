@@ -1,0 +1,39 @@
+{
+  "name": "sample_org-square-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Browserbase + Stagehand agent demo: log into Square once, then run data-migration extractions at volume by editing prompts.",
+  "scripts": {
+    "customer-login": "tsx scripts/customer-login.ts",
+    "customer-login:square": "tsx scripts/customer-login.ts square",
+    "customer-login:vagaro": "tsx scripts/customer-login.ts vagaro",
+    "square/customer-list": "tsx scripts/run-workflow.ts square/customer-list",
+    "square/customer-notes": "tsx scripts/run-workflow.ts square/customer-notes",
+    "square/appointments-list": "tsx scripts/run-workflow.ts square/appointments-list",
+    "square/services-list": "tsx scripts/run-workflow.ts square/services-list",
+    "square/team-members": "tsx scripts/run-workflow.ts square/team-members",
+    "vagaro/customer-list": "tsx scripts/run-workflow.ts vagaro/customer-list",
+    "vagaro/customer-notes": "tsx scripts/run-workflow.ts vagaro/customer-notes",
+    "check-context": "tsx scripts/check-context.ts",
+    "stats": "tsx scripts/stats.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run typecheck && node --test tests/*.test.cjs"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.1",
+    "@browserbasehq/stagehand": "4.0.2",
+    "dotenv": "17.4.2",
+    "zod": "4.4.3",
+    "ai": "7.0.93",
+    "@ai-sdk/openai": "4.0.59"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

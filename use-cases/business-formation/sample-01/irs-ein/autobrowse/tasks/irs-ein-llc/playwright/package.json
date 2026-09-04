@@ -1,0 +1,21 @@
+{
+  "name": "irs-ein-llc-playwright",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx irs-ein-llc.ts",
+    "test": "tsc --noEmit",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "playwright": "1.63.0",
+    "zod": "4.5.4",
+    "dotenv": "17.4.2"
+  },
+  "devDependencies": {
+    "tsx": "4.23.13",
+    "typescript": "7.0.2",
+    "@types/node": "26.4.1"
+  }
+}

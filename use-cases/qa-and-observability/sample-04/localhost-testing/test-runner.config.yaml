@@ -1,0 +1,17 @@
+name: acme-staging
+include:
+  - "**/*.test.yaml"
+  - "**/*.module.yaml"
+gitMainBranch: main
+fileFormat: v2
+ai:
+  useMemory: true
+  failureRecovery: true
+  agentConfig:
+    locator: v3
+    assertion: v3
+    visual-assertion: v3
+    text-extraction: v3
+    failure-recovery: v2
+browser:
+  remoteBrowser: true

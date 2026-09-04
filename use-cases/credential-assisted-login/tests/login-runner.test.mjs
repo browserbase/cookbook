@@ -1,0 +1,14 @@
+import test from 'node:test';import assert from 'node:assert/strict';import fs from 'node:fs';import path from 'node:path';import {fileURLToPath} from 'node:url';import vm from 'node:vm';
+const raw=fs.readFileSync(process.env.RUNNER_SOURCE_PATH || new URL('../control.mjs',import.meta.url),'utf8');
+const source=raw.slice(0,raw.indexOf('const server = http.createServer')).replace(/^import .*;$/gm,'').replaceAll('import.meta.url',JSON.stringify(new URL('../control.mjs',import.meta.url).href));
+async function run(failure){const events=[];let authReads=0;const page={goto:async()=>{if(failure==='navigate')throw Error('navigate failed');},evaluate:async fn=>fn.name==='authenticatedDemoPage'?(authReads++,failure!=='auth'):failure==='fields'?0:5,click:async()=>{events.push('submit');if(failure==='submit')throw Error('submit failed');}};
+ const ctx={pages:()=>[page],cookies:async()=>failure==='key'?[]:[{name:'__rpass_session_pubkey__',value:'synthetic'}],addCookies:async()=>{}};
+ const browser={contexts:()=>[ctx],close:async()=>{events.push('disconnect');if(failure==='disconnect')throw Error('close failed');}};
+ const scope=vm.createContext({Buffer,path,fileURLToPath,fs:{createReadStream:()=>({})},process:{env:{}},console:{log(){},error(){}},setTimeout:fn=>{fn();return 1;},
+ Browserbase:class{extensions={create:async()=>({id:'synthetic-extension'})};sessions={create:async()=>{events.push('create');return {id:'synthetic-session',connectUrl:'synthetic'};},update:async(id,params)=>{events.push('release');assert.equal(id,'synthetic-session');assert.equal(params.status,'REQUEST_RELEASE');if(failure==='release')throw Error('release failed');}};},chromium:{connectOverCDP:async()=>{if(failure==='connect')throw Error('connect failed');return browser;}},
+ stubPost:async(_base,route)=>route==='/token'?{status:failure==='token'?401:200,json:{token:'synthetic'}}:{status:failure==='lease'?403:200,json:{wrappedKey:'YQ==',iv:'Yg==',ciphertext:'Yw=='}},
+ });
+ vm.runInContext(source+'\npostJson=stubPost;zipDir=async()=>{};getLiveViewUrl=async()=>null;globalThis.run=runFlow;globalThis.snapshot=()=>state;',scope);
+ await scope.run();return {state:scope.snapshot(),events,authReads};}
+for(const failure of ['key','fields','submit','auth','navigate','connect','lease','token','disconnect','release'])test(`${failure} failure cannot report done`,async()=>{const f=await run(failure);assert.equal(f.state.done,false);assert.ok(f.state.error);assert.equal(f.state.running,false);if(failure!=='token')assert.equal(f.events.at(-1),'release');if(['key','fields','lease'].includes(failure))assert.ok(!f.events.includes('submit'));});
+test('success requires observed authentication and both cleanup attempts',async()=>{const f=await run();assert.equal(f.state.done,true);assert.equal(f.state.authenticated,true);assert.equal(f.state.error,null);assert.ok(f.authReads>0);assert.deepEqual(f.events,['create','submit','disconnect','release']);});

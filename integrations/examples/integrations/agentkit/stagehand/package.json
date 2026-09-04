@@ -1,0 +1,23 @@
+{
+  "name": "simple-search-stagehand",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --experimental-vm-modules --test tests/*.test.cjs"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.1",
+    "@browserbasehq/stagehand": "4.0.2",
+    "@inngest/agent-kit": "0.13.2",
+    "dotenv": "16.6.1",
+    "inngest": "4.20.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.9.1",
+    "typescript": "7.0.2",
+    "tsx": "^4.23.1"
+  }
+}

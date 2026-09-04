@@ -1,0 +1,38 @@
+{
+  "name": "hacker-news-intelligence-demo",
+  "version": "1.0.0",
+  "description": "Enterprise-ready Browserbase demo for Hacker News content intelligence and automation",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/main.js",
+    "dev": "tsx src/main.ts",
+    "test": "tsx src/test.ts",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "dotenv": "17.4.2",
+    "chalk": "6.0.0",
+    "ora": "9.4.1",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "typescript": "7.0.2",
+    "tsx": "4.23.13"
+  },
+  "keywords": [
+    "browserbase",
+    "stagehand",
+    "automation",
+    "web-scraping",
+    "news-aggregation",
+    "ai-automation"
+  ],
+  "author": "Browserbase",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22"
+  }
+}

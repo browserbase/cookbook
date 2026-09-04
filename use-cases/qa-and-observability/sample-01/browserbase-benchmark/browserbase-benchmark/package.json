@@ -1,0 +1,31 @@
+{
+  "name": "browserbase-benchmark",
+  "version": "1.0.0",
+  "description": "Standalone benchmark: Browserbase vs self-hosted Chromium for AI agent automation",
+  "type": "module",
+  "scripts": {
+    "build": "npx tsc",
+    "benchmark": "node --env-file=.env dist/runner.js",
+    "benchmark:local": "node --env-file=.env dist/runner.js --local-only",
+    "benchmark:browser": "node --env-file=.env dist/runner.js --browser-only",
+    "report": "node --env-file=.env dist/report.js",
+    "report:all": "node --env-file=.env dist/report.js --all",
+    "server": "node --env-file=.env dist/server.js",
+    "run:ec2": "bash scripts/run.sh",
+    "run:render": "bash scripts/run.sh --render",
+    "run:render:browser": "bash scripts/run.sh --render --browser-only",
+    "test": "npm run build && node --test tests/*.test.cjs"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "@anthropic-ai/sdk": "0.124.0",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "@types/node": "26.4.1"
+  },
+  "engines": {
+    "node": "^24.19.0"
+  }
+}

@@ -1,0 +1,739 @@
+{
+  "schemaVersion": 1,
+  "pathPattern": "<use-case>/<company>/<demo>",
+  "generatedFrom": "codex/use-case-taxonomy",
+  "useCases": [
+    {
+      "id": "accounts-payable-and-finance",
+      "label": "Accounts Payable And Finance",
+      "description": "Bills, payments, treasury, AP, tax bills, receipts, and finance operations."
+    },
+    {
+      "id": "business-formation",
+      "label": "Business Formation",
+      "description": "LLC formation, EIN, state filing, and business-registration workflows."
+    },
+    {
+      "id": "commerce-and-market-intel",
+      "label": "Commerce And Market Intel",
+      "description": "Marketplace, product, pricing, PDP, and competitor-monitoring demos."
+    },
+    {
+      "id": "content-and-research",
+      "label": "Content And Research",
+      "description": "Search, fetch, company news, web research, and intelligence-gathering workflows."
+    },
+    {
+      "id": "data-migration",
+      "label": "Data Migration",
+      "description": "Portal exports and migration workflows where authenticated data is moved out of source systems."
+    },
+    {
+      "id": "developer-tools-and-infra",
+      "label": "Developer Tools And Infra",
+      "description": "Reusable Browserbase, Stagehand, workflow, recording, and infrastructure references."
+    },
+    {
+      "id": "government-and-public-records",
+      "label": "Government And Public Records",
+      "description": "Government portals, courts, tax records, public records, and agency workflows."
+    },
+    {
+      "id": "healthcare-and-insurance",
+      "label": "Healthcare And Insurance",
+      "description": "Healthcare, provider, payer, insurance, and adjacent operational demos."
+    },
+    {
+      "id": "kyc-and-verification",
+      "label": "KYC And Verification",
+      "description": "KYC, KYB, AML, identity, company verification, and compliance workflows."
+    },
+    {
+      "id": "qa-and-observability",
+      "label": "QA And Observability",
+      "description": "Testing, tracing, debugging, browser observability, benchmarks, and QA agents."
+    },
+    {
+      "id": "sales-support-and-ops",
+      "label": "Sales Support And Ops",
+      "description": "CRM, support, sales operations, customer operations, and general workflow demos."
+    },
+    {
+      "id": "travel-and-hospitality",
+      "label": "Travel And Hospitality",
+      "description": "Travel booking, reservations, hospitality, and related pricing or booking workflows."
+    }
+  ],
+  "demos": [
+    {
+      "useCase": "accounts-payable-and-finance",
+      "company": "browserbase",
+      "demo": "bill-hitl",
+      "path": "accounts-payable-and-finance/browserbase/bill-hitl",
+      "title": "Human-in-the-loop demo: Stagehand agent pauses for human captcha/verification, then resumes",
+      "packageName": "hitl-demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "accounts-payable-and-finance",
+      "company": "browserbase",
+      "demo": "billpay",
+      "path": "accounts-payable-and-finance/browserbase/billpay",
+      "title": "Demonstrates automated payment flows using Stagehand and Browserbase, including Stripe invoice payments and online food ordering checkout.",
+      "packageName": "stripe-payment-automation",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "accounts-payable-and-finance",
+      "company": "sample-01",
+      "demo": "treasury-demo",
+      "path": "accounts-payable-and-finance/sample-01/treasury-demo",
+      "title": "Treasury Demo",
+      "packageName": "treasury-demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "accounts-payable-and-finance",
+      "company": "sample-02",
+      "demo": "tax-bill-ap",
+      "path": "accounts-payable-and-finance/sample-02/tax-bill-ap",
+      "title": "Tax Bill Ap",
+      "packageName": "tax-bill-ap",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "accounts-payable-and-finance",
+      "company": "sample-03",
+      "demo": "bill-automation",
+      "path": "accounts-payable-and-finance/sample-03/bill-automation",
+      "title": "Bill Automation",
+      "packageName": "bill-automation",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "accounts-payable-and-finance",
+      "company": "sample-04",
+      "demo": "1099-misc",
+      "path": "accounts-payable-and-finance/sample-04/1099-misc",
+      "title": "1099 Misc",
+      "packageName": "1099-misc",
+      "hasReadme": false,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "accounts-payable-and-finance",
+      "company": "sample-05",
+      "demo": "demo",
+      "path": "accounts-payable-and-finance/sample-05/demo",
+      "title": "Demo",
+      "packageName": null,
+      "hasReadme": false,
+      "hasPackageJson": false
+    },
+    {
+      "useCase": "accounts-payable-and-finance",
+      "company": "sample-06",
+      "demo": "demo",
+      "path": "accounts-payable-and-finance/sample-06/demo",
+      "title": "Demo",
+      "packageName": null,
+      "hasReadme": false,
+      "hasPackageJson": false
+    },
+    {
+      "useCase": "accounts-payable-and-finance",
+      "company": "sample-06",
+      "demo": "usps-postmark",
+      "path": "accounts-payable-and-finance/sample-06/usps-postmark",
+      "title": "Usps Postmark",
+      "packageName": "usps-postmark",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "business-formation",
+      "company": "sample-01",
+      "demo": "bizfile-payment-handoff",
+      "path": "business-formation/sample-01/bizfile-payment-handoff",
+      "title": "Bizfile Payment Handoff",
+      "packageName": null,
+      "hasReadme": true,
+      "hasPackageJson": false
+    },
+    {
+      "useCase": "business-formation",
+      "company": "sample-01",
+      "demo": "ca-llc-formation",
+      "path": "business-formation/sample-01/ca-llc-formation",
+      "title": "Ca Llc Formation",
+      "packageName": "ca-llc-formation",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "business-formation",
+      "company": "sample-01",
+      "demo": "irs-ein",
+      "path": "business-formation/sample-01/irs-ein",
+      "title": "Irs Ein",
+      "packageName": null,
+      "hasReadme": true,
+      "hasPackageJson": false
+    },
+    {
+      "useCase": "commerce-and-market-intel",
+      "company": "sample-01",
+      "demo": "supplier-product-search",
+      "path": "commerce-and-market-intel/sample-01/supplier-product-search",
+      "title": "Supplier Product Search",
+      "packageName": "supplier-product-search",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "commerce-and-market-intel",
+      "company": "sample-02",
+      "demo": "product-data",
+      "path": "commerce-and-market-intel/sample-02/product-data",
+      "title": "Product Data",
+      "packageName": "product-data",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "commerce-and-market-intel",
+      "company": "sample-03",
+      "demo": "competitor-monitor",
+      "path": "commerce-and-market-intel/sample-03/competitor-monitor",
+      "title": "Competitor Monitor",
+      "packageName": "competitor-monitor",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "commerce-and-market-intel",
+      "company": "sample-04",
+      "demo": "localized-pdp",
+      "path": "commerce-and-market-intel/sample-04/localized-pdp",
+      "title": "Localized Pdp",
+      "packageName": null,
+      "hasReadme": true,
+      "hasPackageJson": false
+    },
+    {
+      "useCase": "commerce-and-market-intel",
+      "company": "sample-05",
+      "demo": "demo",
+      "path": "commerce-and-market-intel/sample-05/demo",
+      "title": "Demo",
+      "packageName": null,
+      "hasReadme": false,
+      "hasPackageJson": false
+    },
+    {
+      "useCase": "commerce-and-market-intel",
+      "company": "sample-06",
+      "demo": "pause-inject-resume",
+      "path": "commerce-and-market-intel/sample-06/pause-inject-resume",
+      "title": "Pause Inject Resume",
+      "packageName": null,
+      "hasReadme": true,
+      "hasPackageJson": false
+    },
+    {
+      "useCase": "content-and-research",
+      "company": "browserbase",
+      "demo": "company-news-function",
+      "path": "content-and-research/browserbase/company-news-function",
+      "title": "Browserbase Function that searches Google for company news and provides AI-generated summaries with top news links",
+      "packageName": "company-news-finder-function",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "content-and-research",
+      "company": "browserbase",
+      "demo": "search-demo",
+      "path": "content-and-research/browserbase/search-demo",
+      "title": "Hey! This is a project built with [Stagehand](https://github.com/browserbase/stagehand).",
+      "packageName": "search",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "content-and-research",
+      "company": "sample-01",
+      "demo": "intelligence-demo",
+      "path": "content-and-research/sample-01/intelligence-demo",
+      "title": "Intelligence Demo",
+      "packageName": "intelligence-demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "content-and-research",
+      "company": "sample-02",
+      "demo": "search-and-fetch",
+      "path": "content-and-research/sample-02/search-and-fetch",
+      "title": "Search And Fetch",
+      "packageName": "search-and-fetch",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "data-migration",
+      "company": "sample-01",
+      "demo": "browserbase-functions",
+      "path": "data-migration/sample-01/browserbase-functions",
+      "title": "Browserbase Functions",
+      "packageName": "browserbase-functions",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "data-migration",
+      "company": "sample-01",
+      "demo": "liveview-login-starter",
+      "path": "data-migration/sample-01/liveview-login-starter",
+      "title": "Liveview Login Starter",
+      "packageName": "liveview-login-starter",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "data-migration",
+      "company": "sample-01",
+      "demo": "portal-workflows",
+      "path": "data-migration/sample-01/portal-workflows",
+      "title": "Portal Workflows",
+      "packageName": "portal-workflows",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "developer-tools-and-infra",
+      "company": "browserbase",
+      "demo": "browser-workflow",
+      "path": "developer-tools-and-infra/browserbase/browser-workflow",
+      "title": "**Turn a broad goal into a deterministic orchestration program whose leaves are fully-agentic",
+      "packageName": null,
+      "hasReadme": true,
+      "hasPackageJson": false
+    },
+    {
+      "useCase": "developer-tools-and-infra",
+      "company": "browserbase",
+      "demo": "example",
+      "path": "developer-tools-and-infra/browserbase/example",
+      "title": "Example",
+      "packageName": null,
+      "hasReadme": false,
+      "hasPackageJson": false
+    },
+    {
+      "useCase": "developer-tools-and-infra",
+      "company": "browserbase",
+      "demo": "fs-tunnel",
+      "path": "developer-tools-and-infra/browserbase/fs-tunnel",
+      "title": "Expose a local directory (read-only, auth-gated) to a Browserbase cloud browser session",
+      "packageName": "bb-fs-tunnel",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "developer-tools-and-infra",
+      "company": "browserbase",
+      "demo": "poc",
+      "path": "developer-tools-and-infra/browserbase/poc",
+      "title": "Turn a 1-week Browserbase verified/advanced-stealth trial into a 1-day, self-serve smoke test. Edit one file, run one command, get a leadership-ready scorecard.",
+      "packageName": "@browserbasehq/bbpoc",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "developer-tools-and-infra",
+      "company": "stagehand",
+      "demo": "caching-demo",
+      "path": "developer-tools-and-infra/stagehand/caching-demo",
+      "title": "Demo showcasing Stagehand caching with variables for privacy-preserving performance optimization",
+      "packageName": "stagehand-caching-demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "developer-tools-and-infra",
+      "company": "stagehand",
+      "demo": "v4-demo-kit",
+      "path": "developer-tools-and-infra/stagehand/v4-demo-kit",
+      "title": "Stagehand v4 demo kit for agent tools, mixed control, reusable scripts, and protected execution",
+      "packageName": "stagehand-v4-demo-kit",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "developer-tools-and-infra",
+      "company": "sample-01",
+      "demo": "workflow-recorder",
+      "path": "developer-tools-and-infra/sample-01/workflow-recorder",
+      "title": "Workflow Recorder",
+      "packageName": "workflow-recorder",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "government-and-public-records",
+      "company": "sample-01",
+      "demo": "employer-enrollment",
+      "path": "government-and-public-records/sample-01/employer-enrollment",
+      "title": "Employer Enrollment",
+      "packageName": "employer-enrollment",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "government-and-public-records",
+      "company": "sample-02",
+      "demo": "browserbase-demo",
+      "path": "government-and-public-records/sample-02/browserbase-demo",
+      "title": "Browserbase Demo",
+      "packageName": "browserbase-demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "government-and-public-records",
+      "company": "sample-03",
+      "demo": "tax-portal",
+      "path": "government-and-public-records/sample-03/tax-portal",
+      "title": "Tax Portal",
+      "packageName": "tax-portal",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "government-and-public-records",
+      "company": "sample-04",
+      "demo": "context-test",
+      "path": "government-and-public-records/sample-04/context-test",
+      "title": "Context Test",
+      "packageName": "context-test",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "healthcare-and-insurance",
+      "company": "sample-01",
+      "demo": "demo",
+      "path": "healthcare-and-insurance/sample-01/demo",
+      "title": "Demo",
+      "packageName": "demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "healthcare-and-insurance",
+      "company": "sample-02",
+      "demo": "demo",
+      "path": "healthcare-and-insurance/sample-02/demo",
+      "title": "Demo",
+      "packageName": "demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "healthcare-and-insurance",
+      "company": "sample-03",
+      "demo": "demo",
+      "path": "healthcare-and-insurance/sample-03/demo",
+      "title": "Demo",
+      "packageName": "demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "kyc-and-verification",
+      "company": "sample-01",
+      "demo": "kyc-aml",
+      "path": "kyc-and-verification/sample-01/kyc-aml",
+      "title": "Kyc Aml",
+      "packageName": "kyc-aml",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "kyc-and-verification",
+      "company": "sample-02",
+      "demo": "demo",
+      "path": "kyc-and-verification/sample-02/demo",
+      "title": "Demo",
+      "packageName": "demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "kyc-and-verification",
+      "company": "sample-03",
+      "demo": "company-intel",
+      "path": "kyc-and-verification/sample-03/company-intel",
+      "title": "Company Intel",
+      "packageName": "company-intel",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "kyc-and-verification",
+      "company": "sample-03",
+      "demo": "demo",
+      "path": "kyc-and-verification/sample-03/demo",
+      "title": "Demo",
+      "packageName": "demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "kyc-and-verification",
+      "company": "sample-03",
+      "demo": "linkedin-validator",
+      "path": "kyc-and-verification/sample-03/linkedin-validator",
+      "title": "Linkedin Validator",
+      "packageName": "linkedin-validator",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "kyc-and-verification",
+      "company": "sample-04",
+      "demo": "kyb-parallel",
+      "path": "kyc-and-verification/sample-04/kyb-parallel",
+      "title": "Kyb Parallel",
+      "packageName": "kyb-parallel",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "qa-and-observability",
+      "company": "sample-01",
+      "demo": "browserbase-benchmark",
+      "path": "qa-and-observability/sample-01/browserbase-benchmark",
+      "title": "Browserbase Benchmark",
+      "packageName": null,
+      "hasReadme": false,
+      "hasPackageJson": false
+    },
+    {
+      "useCase": "qa-and-observability",
+      "company": "browserbase",
+      "demo": "qa",
+      "path": "qa-and-observability/browserbase/qa",
+      "title": "Stagehand agent QA testing demo",
+      "packageName": "agent-qa-demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "qa-and-observability",
+      "company": "browserbase",
+      "demo": "qa-agent-demo",
+      "path": "qa-and-observability/browserbase/qa-agent-demo",
+      "title": "A demo showing how to build an AI-powered QA agent using [Browserbase](https://browserbase.com) and [Stagehand](https://stagehand.dev), with the [Vercel AI SDK](https://ai-sdk.dev) for tool orchestration.",
+      "packageName": null,
+      "hasReadme": true,
+      "hasPackageJson": false
+    },
+    {
+      "useCase": "qa-and-observability",
+      "company": "browserbase",
+      "demo": "ui-debug-bench",
+      "path": "qa-and-observability/browserbase/ui-debug-bench",
+      "title": "Evals for fixing web apps from browser evidence \u2014 probe-driven debugging benchmark",
+      "packageName": "ui-debug-bench",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "qa-and-observability",
+      "company": "browserbase",
+      "demo": "web-perf-vitals",
+      "path": "qa-and-observability/browserbase/web-perf-vitals",
+      "title": "Measure real web performance metrics (LCP, FCP, TTFB, CLS) using Stagehand Agent custom tools \u2014 without AI thinking time polluting the results",
+      "packageName": "web-perf-vitals-demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "qa-and-observability",
+      "company": "sample-02",
+      "demo": "login-coverage-diagnostic",
+      "path": "qa-and-observability/sample-02/login-coverage-diagnostic",
+      "title": "Login Coverage Diagnostic",
+      "packageName": "login-coverage-diagnostic",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "qa-and-observability",
+      "company": "sample-03",
+      "demo": "browser-trace",
+      "path": "qa-and-observability/sample-03/browser-trace",
+      "title": "Browser Trace",
+      "packageName": "browser-trace",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "qa-and-observability",
+      "company": "sample-04",
+      "demo": "localhost-testing",
+      "path": "qa-and-observability/sample-04/localhost-testing",
+      "title": "Localhost Testing",
+      "packageName": null,
+      "hasReadme": true,
+      "hasPackageJson": false
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "company": "sample-01",
+      "demo": "demo",
+      "path": "sales-support-and-ops/sample-01/demo",
+      "title": "Demo",
+      "packageName": "demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "company": "browserbase",
+      "demo": "support",
+      "path": "sales-support-and-ops/browserbase/support",
+      "title": "Hey! This is a project built with [Stagehand](https://github.com/browserbase/stagehand).",
+      "packageName": "example",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "company": "sample-02",
+      "demo": "demo",
+      "path": "sales-support-and-ops/sample-02/demo",
+      "title": "Demo",
+      "packageName": "demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "company": "sample-03",
+      "demo": "demo",
+      "path": "sales-support-and-ops/sample-03/demo",
+      "title": "Demo",
+      "packageName": "demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "company": "sample-04",
+      "demo": "demo",
+      "path": "sales-support-and-ops/sample-04/demo",
+      "title": "Demo",
+      "packageName": "demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "company": "sample-05",
+      "demo": "browserbase-demo",
+      "path": "sales-support-and-ops/sample-05/browserbase-demo",
+      "title": "Browserbase Demo",
+      "packageName": "browserbase-demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "company": "sample-06",
+      "demo": "demo",
+      "path": "sales-support-and-ops/sample-06/demo",
+      "title": "Demo",
+      "packageName": null,
+      "hasReadme": false,
+      "hasPackageJson": false
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "company": "sample-07",
+      "demo": "demo",
+      "path": "sales-support-and-ops/sample-07/demo",
+      "title": "Demo",
+      "packageName": "demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "company": "sample-08",
+      "demo": "demo",
+      "path": "sales-support-and-ops/sample-08/demo",
+      "title": "Demo",
+      "packageName": "demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "company": "sample-09",
+      "demo": "demo",
+      "path": "sales-support-and-ops/sample-09/demo",
+      "title": "Demo",
+      "packageName": "demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "company": "sample-10",
+      "demo": "demo",
+      "path": "sales-support-and-ops/sample-10/demo",
+      "title": "Demo",
+      "packageName": "demo",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "travel-and-hospitality",
+      "company": "sample-01",
+      "demo": "opentable-reservations",
+      "path": "travel-and-hospitality/sample-01/opentable-reservations",
+      "title": "Opentable Reservations",
+      "packageName": null,
+      "hasReadme": true,
+      "hasPackageJson": false
+    },
+    {
+      "useCase": "travel-and-hospitality",
+      "company": "sample-02",
+      "demo": "flight-pricing-benchmark",
+      "path": "travel-and-hospitality/sample-02/flight-pricing-benchmark",
+      "title": "Flight Pricing Benchmark",
+      "packageName": "flight-pricing-benchmark",
+      "hasReadme": true,
+      "hasPackageJson": true
+    },
+    {
+      "useCase": "travel-and-hospitality",
+      "company": "sample-03",
+      "demo": "flight-booking",
+      "path": "travel-and-hospitality/sample-03/flight-booking",
+      "title": "Flight Booking",
+      "packageName": "flight-booking",
+      "hasReadme": true,
+      "hasPackageJson": true
+    }
+  ]
+}

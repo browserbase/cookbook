@@ -1,0 +1,21 @@
+{
+  "name": "ca-edd-enroll-playwright",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx ca-edd-enroll.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run typecheck"
+  },
+  "dependencies": {
+    "agentmail": "0.5.23",
+    "playwright": "1.63.0",
+    "dotenv": "17.4.2"
+  },
+  "devDependencies": {
+    "tsx": "4.23.13",
+    "typescript": "7.0.2",
+    "@types/node": "26.4.1"
+  }
+}

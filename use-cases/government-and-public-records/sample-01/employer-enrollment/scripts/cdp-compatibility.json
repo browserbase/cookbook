@@ -1,0 +1,10 @@
+{
+  "evaluatorSha256": "8163f62bf5b2aa1adf05bf481259c9e06e6b581aac2b1e972cd5280c2a0faf31",
+  "browseVersion": "0.9.6",
+  "browseFiles": {
+    "bin/run.js": "f75b0fb36c0e80e058e418eda1023ab5b00e92e8962e6b0d9df3c6b49687132a",
+    "dist/lib/driver/daemon/client.js": "f850c35b8b2995ef1215647adfadf1f623b8943ffaf8d7273d7bd3ba2332b6fd",
+    "dist/lib/driver/flags.js": "40bfa586666056b7e04f6b1d53b13540d88765e355c9ee30bf2b585c587f4b52",
+    "dist/lib/driver/mode.js": "4d2a93bbaeafc0c8e414bc819273743e10fcbf989f88a1ade58617332798d980"
+  }
+}

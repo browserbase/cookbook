@@ -1,0 +1,48 @@
+name: Recipe bug
+description: Report a reproducible problem in an existing cookbook recipe.
+title: "[Bug]: "
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: Do not include API keys, cookies, session URLs, or customer data.
+  - type: input
+    id: recipe
+    attributes:
+      label: Recipe path or catalog ID
+      placeholder: examples/typescript/getting-started-with-browserbase
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What happened?
+      description: Include expected and actual behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Reproduction steps
+      placeholder: Include the exact redacted commands you ran.
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Operating system, runtime, and package-manager versions.
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Redacted logs
+      render: shell
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Sensitive data
+      options:
+        - label: I removed credentials, cookies, session URLs, and customer data.
+          required: true

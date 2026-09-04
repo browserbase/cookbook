@@ -1,0 +1,35 @@
+{
+  "name": "sample_org-linkedin-validator",
+  "version": "1.0.0",
+  "description": "LinkedIn profile validator for Sample Organization - validates person data against live LinkedIn profiles using Browserbase + Stagehand",
+  "type": "commonjs",
+  "scripts": {
+    "validate": "npx tsx linkedin-validator.ts",
+    "login": "npx tsx login-session.ts",
+    "test": "tsc --noEmit && node --test tests/*.test.cjs"
+  },
+  "keywords": [
+    "linkedin",
+    "validation",
+    "enrichment",
+    "browserbase",
+    "stagehand",
+    "sample_org"
+  ],
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "@types/node": "26.4.1",
+    "dotenv": "17.4.2",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2",
+    "zod": "4.4.3",
+    "playwright-core": "1.63.0"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "@types/node": "26.4.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

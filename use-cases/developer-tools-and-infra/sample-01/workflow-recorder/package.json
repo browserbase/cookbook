@@ -1,0 +1,33 @@
+{
+  "name": "sample_org",
+  "version": "0.1.0",
+  "type": "module",
+  "private": true,
+  "license": "MIT",
+  "description": "Record a human walkthrough of a Browserbase browser workflow and emit a reusable, parameterized Stagehand TypeScript script.",
+  "bin": {
+    "sample_org": "scripts/cli.mjs"
+  },
+  "scripts": {
+    "start": "node scripts/cli.mjs",
+    "record": "node scripts/cli.mjs record",
+    "export": "node scripts/cli.mjs export",
+    "test": "node --check scripts/cli.mjs && node --check scripts/cdp.mjs && node --check scripts/detect-parameters.mjs && node --check scripts/emit-script.mjs && node --check scripts/record-bb.mjs && node --check scripts/transform-recording.mjs && node --check scripts/recorder.js"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "files": [
+    "scripts/",
+    "README.md",
+    "LICENSE"
+  ],
+  "dependencies": {
+    "ws": "8.21.3",
+    "@browserbasehq/stagehand": "4.0.2",
+    "zod": "4.5.4"
+  },
+  "optionalDependencies": {
+    "@anthropic-ai/sdk": "0.124.0"
+  }
+}

@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Browserbase support
+    url: https://www.browserbase.com/contact
+    about: Get help with accounts, billing, quota, or the Browserbase service.
+  - name: Security report
+    url: https://www.browserbase.com/security
+    about: Report vulnerabilities or exposed credentials privately.

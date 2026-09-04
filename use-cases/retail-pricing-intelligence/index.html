@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Browserbase — Retailer Pricing Intelligence on Instacart</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --brand: #F03603;
+    --black: #100D0D;
+    --gray: #6b6969;
+    --gray-dark: #514F4F;
+    --border: #e5e3e3;
+    --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+
+  @page { size: 13.333in 7.5in; margin: 0; }
+
+  body {
+    font-family: Inter, -apple-system, sans-serif;
+    color: var(--black);
+    background: #fff;
+  }
+
+  .page {
+    width: 13.333in;
+    height: 7.5in;
+    page-break-after: always;
+    position: relative;
+    padding: 0.55in 0.75in;
+    background: #fff;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: avoid; }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--gray-dark);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+  .eyebrow::before {
+    content: "";
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: var(--brand);
+  }
+
+  h1 {
+    font-size: 42px;
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    max-width: 5.6in;
+    margin-bottom: 16px;
+  }
+
+  .lede {
+    font-size: 15px;
+    line-height: 1.55;
+    color: var(--gray);
+    max-width: 4.6in;
+    margin-bottom: 26px;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--black);
+    border: 1px solid var(--border);
+    background: #fbfafa;
+    padding: 6px 12px;
+    white-space: nowrap;
+  }
+
+  .pageno {
+    position: absolute;
+    right: 0.75in;
+    bottom: 0.35in;
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    color: #a5a3a3;
+  }
+
+  /* ---- page 1 ---- */
+  .steps {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+  }
+  .step {
+    padding: 26px 28px 30px;
+    border-right: 1px solid var(--border);
+  }
+  .step:last-child { border-right: none; }
+  .step-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    color: var(--gray-dark);
+    margin-bottom: 22px;
+  }
+  .step h3 {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .step p {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--gray);
+    margin-bottom: 18px;
+    min-height: 48px;
+  }
+  .tags { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .dim-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: var(--gray-dark);
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .dims { display: flex; gap: 10px; flex-wrap: wrap; max-width: 9.5in; }
+  .dims .tag { padding: 9px 16px; font-size: 12.5px; }
+
+  /* ---- page 2 ---- */
+  .grid2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid var(--border);
+  }
+  .cell {
+    padding: 26px 28px 28px;
+    border-right: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+  }
+  .cell:nth-child(2n) { border-right: none; }
+  .cell:nth-child(3), .cell:nth-child(4) { border-bottom: none; }
+  .cell-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    color: var(--gray-dark);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .cell h3 {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 10px;
+  }
+  .cell p {
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--gray);
+    margin-bottom: 16px;
+  }
+
+  /* ---- page 3 ---- */
+  .cases { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 8.2in; }
+  .case {
+    border: 1px solid var(--border);
+    border-top: 3px solid #cfe3f2;
+    padding: 26px 28px 28px;
+  }
+  .case-company {
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 0.16em;
+    color: var(--gray-dark);
+    margin-bottom: 14px;
+  }
+  .case h3 {
+    font-size: 21px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px;
+  }
+  .case p {
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--gray);
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 16px;
+  }
+  .case .feat-label {
+    font-family: var(--mono);
+    font-size: 10.5px;
+    letter-spacing: 0.16em;
+    color: var(--gray-dark);
+    margin-bottom: 12px;
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<section class="page">
+  <div class="eyebrow">Pricing Competitive Intelligence · For Retailer</div>
+  <h1>From Instacart's shelves to your pricing engine.</h1>
+  <p class="lede">Same flow, pointed at Instacart. The output: a zip-accurate, item-level price feed where every price traces back to the storefront page it came from — built in three steps.</p>
+
+  <div class="steps">
+    <div class="step">
+      <div class="step-label">01 — Analyze</div>
+      <h3>Reach Instacart's storefronts</h3>
+      <p>Browserbase opens Instacart the way a shopper does: set a delivery zip, pick a retailer storefront, browse search and category pages — past the bot protection that blocks most crawlers.</p>
+      <div class="tags"><span class="tag">Stealth</span><span class="tag">Geo proxies</span></div>
+    </div>
+    <div class="step">
+      <div class="step-label">02 — Extract</div>
+      <h3>Pull structured item pricing</h3>
+      <p>Stagehand's extract pulls the same fields from every product tile and detail page — item, size, shelf price, unit price, promo, availability — against a schema your team defines.</p>
+      <div class="tags"><span class="tag">Stagehand extract</span></div>
+    </div>
+    <div class="step">
+      <div class="step-label">03 — Normalize</div>
+      <h3>Feed your pricing engine</h3>
+      <p>Match items to your own catalog and roll every retailer × zip × item observation into one price feed your pricing intelligence consumes — re-run on a schedule.</p>
+      <div class="tags"><span class="tag">Functions</span></div>
+    </div>
+  </div>
+
+  <div class="dim-label">Example Fields Per Item</div>
+  <div class="dims">
+    <span class="tag">Shelf price</span>
+    <span class="tag">Unit price</span>
+    <span class="tag">Promotions &amp; coupons</span>
+    <span class="tag">Availability</span>
+    <span class="tag">Retailer storefront</span>
+    <span class="tag">Zip-level variation</span>
+    <span class="tag">Delivery &amp; service fees</span>
+    <span class="tag">Size &amp; pack count</span>
+  </div>
+
+  <div class="pageno">01 / 03</div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page">
+  <div class="eyebrow">Why It Holds Up</div>
+  <h1>Complete coverage. Repeatable. Traceable.</h1>
+  <p class="lede">A price feed is only as good as the storefronts it can actually reach — and only useful if you can trust it, defend it, and refresh it.</p>
+
+  <div class="grid2">
+    <div class="cell">
+      <div class="cell-label">Reach Every Target</div>
+      <h3>A storefront that blocks most crawlers, opened</h3>
+      <p>Instacart sits behind aggressive bot protection and blocks datacenter traffic. Proper agent identity and secure browsing create a trustworthy, reliable agent with full coverage — and storefront state persists across runs.</p>
+      <div class="tags"><span class="tag">Stealth</span><span class="tag">Identity</span><span class="tag">Contexts</span></div>
+    </div>
+    <div class="cell">
+      <div class="cell-label">See The Right Price</div>
+      <h3>Zip-accurate by design</h3>
+      <p>Instacart prices are set per retailer and vary by delivery location. Geo-targeted proxies plus a real delivery zip render what a shopper in each market actually pays — so you compare like for like, market by market.</p>
+      <div class="tags"><span class="tag">Geo proxies</span></div>
+    </div>
+    <div class="cell">
+      <div class="cell-label">Trust Every Price</div>
+      <h3>Provenance built in</h3>
+      <p>Every extraction is recorded and replayable. When someone questions a price in the feed, you can show the exact storefront page and session it came from.</p>
+      <div class="tags"><span class="tag">Session recording</span><span class="tag">Observability</span></div>
+    </div>
+    <div class="cell">
+      <div class="cell-label">Keep It Current</div>
+      <h3>A standing price signal, not a snapshot</h3>
+      <p>Grocery prices move daily. Deploy the extractor as a function, fan it out across items and zips on real concurrent browsers, and re-run it on a schedule your pricing engine consumes.</p>
+      <div class="tags"><span class="tag">Functions</span><span class="tag">Concurrent sessions</span></div>
+    </div>
+  </div>
+
+  <div class="pageno">02 / 03</div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page">
+  <div class="eyebrow">Already In Production</div>
+  <h1>Teams that run similar processes on Browserbase.</h1>
+
+  <div class="cases" style="margin-top: 34px;">
+    <div class="case">
+      <div class="case-company">Amazon</div>
+      <h3>Competitive PDP intelligence</h3>
+      <p>Amazon runs competitive analysis across rival retail sites, comparing product detail pages on Target, Wayfair, and others to sharpen how its own pages perform. Same shape as a price feed: analyze competitor storefronts, extract structured item data, compare.</p>
+      <div class="feat-label">Browserbase Features</div>
+      <div class="tags"><span class="tag">Stagehand extract</span><span class="tag">Geo proxies</span><span class="tag">Stealth</span><span class="tag">Functions</span></div>
+    </div>
+    <div class="case">
+      <div class="case-company">Shopify</div>
+      <h3>Synthetic shoppers at scale</h3>
+      <p>Shopify spins up thousands of AI agents that shop like real people, searching, browsing, adding to cart, and checking out, to stress-test conversion and the agentic-commerce experience across merchant storefronts. Every run is a fresh, uncached session, which is why it needs real, isolated browsers at high concurrency.</p>
+      <div class="feat-label">Browserbase Features</div>
+      <div class="tags"><span class="tag">Concurrent sessions</span><span class="tag">Isolated runtime</span><span class="tag">Stagehand</span><span class="tag">Stealth</span></div>
+    </div>
+  </div>
+
+  <div class="pageno">03 / 03</div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "bb-fs-tunnel",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Expose a local directory (read-only, auth-gated) to a Browserbase cloud browser session",
+  "scripts": {
+    "start": "node launch-fs.mjs",
+    "attach": "node attach.mjs"
+  },
+  "dependencies": {
+    "playwright-core": "1.62.1"
+  }
+}

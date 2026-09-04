@@ -1,0 +1,24 @@
+{
+  "name": "company-news-finder-function",
+  "version": "1.0.0",
+  "description": "Browserbase Function that searches Google for company news and provides AI-generated summaries with top news links",
+  "main": "index.ts",
+  "scripts": {
+    "deploy": "npx @browserbasehq/sdk-functions publish index.ts"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk-functions": "1.0.1",
+    "@browserbasehq/stagehand": "4.0.2",
+    "playwright-core": "1.63.0",
+    "zod": "4.4.3",
+    "ai": "7.0.93",
+    "@ai-sdk/openai": "4.0.59"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

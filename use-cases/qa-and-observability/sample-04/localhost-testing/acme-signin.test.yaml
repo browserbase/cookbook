@@ -1,0 +1,40 @@
+fileType: momentic/test/v2
+version: "1.0.0"
+id: acme-staging-signin-flow
+name: Acme Staging sign-in (on Browserbase)
+url: http://127.0.0.1:3000
+steps:
+  - javascript:
+      code: |
+        return (async () => {
+          const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+          const $ = (s) => document.querySelector(s);
+          const typeInto = async (sel, text) => {
+            const el = $(sel);
+            el.focus();
+            for (const ch of text) {
+              el.value += ch;
+              el.dispatchEvent(new Event('input', { bubbles: true }));
+              await sleep(70);
+            }
+          };
+          await sleep(2500);                     // hold on the empty login form
+          await typeInto('#email', 'qa@momentic.ai');
+          await sleep(800);
+          await typeInto('#password', 'test123');
+          await sleep(800);
+          $('#login-button').click();
+          const visible = (el) => el && el.getClientRects().length > 0
+            && getComputedStyle(el).visibility === 'visible';
+          const deadline = Date.now() + 5000;
+          while (!visible($('#dashboard-card')) && Date.now() < deadline) {
+            await sleep(50);
+          }
+          if (!visible($('#dashboard-card')) || visible($('#login-card'))
+            || $('#dashboard-title').textContent.trim() !== 'Welcome, QA Agent'
+            || $('#who').textContent !== 'Signed in as qa@momentic.ai') {
+            throw new Error('Expected a visible signed-in dashboard and hidden login form');
+          }
+        })();
+      environment: BROWSER
+  - checkPageContains: Welcome, QA Agent

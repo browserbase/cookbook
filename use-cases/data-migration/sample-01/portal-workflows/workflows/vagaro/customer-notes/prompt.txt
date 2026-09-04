@@ -1,0 +1,47 @@
+You are in the Vagaro business dashboard Customers area, already authenticated via the saved Vagaro
+context.
+
+Goal: extract EVERY customer note in this account into a downloaded file. There is no global notes
+view — the `notes/retrieve` API is scoped to ONE customer by an encrypted `consumerId` REQUEST HEADER.
+You do NOT write the extraction loop yourself. Your ONLY job is to capture the two real API requests,
+then call the `extractAllNotes` tool, which deterministically pulls all customers, replays the notes
+API per customer, dedupes, and downloads the file. Do NOT print tokens/cookies in your final answer.
+
+## Step 1 — capture BOTH real requests (one Notes-tab click)
+Use the `browserEval` tool to install interceptors that stash the two requests on `window`:
+```js
+window.__cReq = null; window.__nReq = null;
+const mk = (url, opt) => { const h={}; const hi=opt.headers||{}; if (hi.forEach) hi.forEach((v,k)=>h[k]=v); else Object.assign(h,hi); return { url:String(url), method: opt.method || "GET", headers:h, body: opt.body || null }; };
+const F = window.fetch;
+window.fetch = function(...a){ const url=String((a[0]&&a[0].url)||a[0]); const opt=a[1]||{};
+  if (/customers\/retrieve/i.test(url) && !window.__cReq) window.__cReq = mk(url, opt);
+  if (/notes\/retrieve/i.test(url)     && !window.__nReq) window.__nReq = mk(url, opt);
+  return F.apply(this, a); };
+const X = window.XMLHttpRequest;
+window.XMLHttpRequest = function(){ const x=new X(); let u="",m="GET",h={},b=null;
+  const o=x.open;x.open=function(mm,uu){m=mm;u=uu;return o.apply(x,arguments);};
+  const sh=x.setRequestHeader;x.setRequestHeader=function(k,v){h[k]=v;return sh.apply(x,arguments);};
+  const s=x.send;x.send=function(bb){b=bb;
+    if(/customers\/retrieve/i.test(u)&&!window.__cReq)window.__cReq={url:u,method:m,headers:h,body:b};
+    if(/notes\/retrieve/i.test(u)&&!window.__nReq)window.__nReq={url:u,method:m,headers:h,body:b};
+    return s.apply(x,arguments);};
+  return x; };
+'installed';
+```
+The ONE request you MUST capture is `notes/retrieve`:
+- Open ANY ONE customer's **Notes** tab exactly once — that fires `notes/retrieve`.
+- `customers/retrieve` fires on page load and is captured too if the interceptor was already in place,
+  but do NOT worry if you miss it — the tool reconstructs it from the notes request automatically.
+
+Then poll with `browserEval` (`return { nReq: !!window.__nReq }`) until `nReq` is true. CRITICAL: do NOT
+reload or navigate after installing the interceptor and capturing — reloading WIPES the captured
+requests and the interceptor. If you reloaded, just open a customer's Notes tab again to re-capture.
+
+## Step 2 — call the tool
+Call `extractAllNotes` with `{ "confirm": true }`. It does everything else deterministically: pulls
+every customer, replays notes per customer, dedupes by note id, and triggers the download. Wait for it
+to return.
+
+When it returns, report its summary: total customers, customers answered, unique notes downloaded,
+phone-filled count, and the 2-record sample. If it reports unanswered customers, say how many. Do NOT
+include tokens/cookies. Work autonomously; do not ask follow-up questions.

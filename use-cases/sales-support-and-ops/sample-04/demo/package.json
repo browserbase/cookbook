@@ -1,0 +1,30 @@
+{
+  "name": "work_app-onboarding-testing-demo",
+  "version": "1.0.0",
+  "description": "Work App onboarding testing demo",
+  "type": "module",
+  "main": "dist/src/server.js",
+  "scripts": {
+    "dev": "tsx src/server.ts",
+    "build": "node scripts/build.mjs",
+    "start": "node dist/src/server.js"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "@browserbasehq/sdk": "2.19.1",
+    "express": "5.2.1",
+    "dotenv": "17.4.2",
+    "zod": "4.4.3",
+    "boxen": "8.0.1",
+    "chalk": "6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "@types/express": "5.0.6",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": "^24.19.0"
+  }
+}

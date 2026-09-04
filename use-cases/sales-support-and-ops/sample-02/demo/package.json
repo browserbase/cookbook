@@ -1,0 +1,22 @@
+{
+  "name": "sample_org-mortgage-scraper",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Mortgage rates scraper using Stagehand",
+  "main": "mortgage-rates.js",
+  "scripts": {
+    "start": "node --env-file=.env mortgage-rates.js",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "@types/node": "26.4.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "name": "airline_portal-flight-booking-demo",
+  "version": "1.0.0",
+  "description": "Browserbase automation demo for Airline portal.com flight booking with comprehensive flight data extraction",
+  "main": "src/main.ts",
+  "scripts": {
+    "start": "tsx src/main.ts",
+    "dev": "tsx watch src/main.ts",
+    "build": "tsc",
+    "test": "tsx src/test-connection.ts"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2",
+    "dotenv": "17.4.2",
+    "zod": "4.4.3",
+    "ai": "7.0.93",
+    "@ai-sdk/openai": "4.0.59"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "typescript": "7.0.2"
+  },
+  "keywords": [
+    "browserbase",
+    "stagehand",
+    "airline_portal",
+    "flight-booking",
+    "automation",
+    "travel-automation"
+  ],
+  "engines": {
+    "node": ">=22"
+  }
+}

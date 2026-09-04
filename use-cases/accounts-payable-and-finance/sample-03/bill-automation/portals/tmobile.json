@@ -1,0 +1,123 @@
+{
+  "id": "tmobile",
+  "name": "T-Mobile",
+  "loginUrl": "https://account.t-mobile.com/signin/v2/",
+  "notes": "T-Mobile uses a 3-step login: (1) phone/email, (2) choose auth method, (3) password. After login, MFA is required via SMS code. The billing dashboard is at https://www.t-mobile.com/account/dashboard after auth.",
+  "billPullSteps": [
+    {
+      "description": "Navigate to T-Mobile sign-in page",
+      "action": "navigate",
+      "instruction": "https://account.t-mobile.com/signin/v2/"
+    },
+    {
+      "description": "Wait for login page to load",
+      "action": "wait",
+      "waitMs": 3000
+    },
+    {
+      "description": "Enter phone number or email (Step 1 of login)",
+      "action": "act",
+      "instruction": "Type \"{{username}}\" into the Email or phone number input field"
+    },
+    {
+      "description": "Click Next to proceed to auth method selection",
+      "action": "act",
+      "instruction": "Click the Next button"
+    },
+    {
+      "description": "Wait for auth method page to load",
+      "action": "wait",
+      "waitMs": 3000
+    },
+    {
+      "description": "Choose password login (Step 2 of login)",
+      "action": "act",
+      "instruction": "Click the 'Log in with password' link or button to use password authentication instead of Face ID/Fingerprint"
+    },
+    {
+      "description": "Wait for password form to load",
+      "action": "wait",
+      "waitMs": 2000
+    },
+    {
+      "description": "Enter password (Step 3 of login)",
+      "action": "act",
+      "instruction": "Type \"{{password}}\" into the Password input field"
+    },
+    {
+      "description": "Click Log in to submit credentials",
+      "action": "act",
+      "instruction": "Click the 'Log in' button to complete login"
+    },
+    {
+      "description": "Wait for MFA or dashboard to load",
+      "action": "wait",
+      "waitMs": 5000
+    },
+    {
+      "description": "If MFA method selection is shown, select SMS and continue",
+      "action": "act",
+      "instruction": "If a 'How should we verify your account?' page is shown with radio buttons, select 'Text a code' option if not already selected, then click the 'Continue' button"
+    },
+    {
+      "description": "Wait for SMS code entry page",
+      "action": "wait",
+      "waitMs": 3000
+    },
+    {
+      "description": "Check for the MFA code entry prompt after requesting SMS",
+      "action": "observe",
+      "instruction": "Look for the 6-digit verification code input or a message confirming that a code was sent"
+    },
+    {
+      "description": "Enter MFA verification code (provided via API)",
+      "action": "act",
+      "instruction": "Type \"{{mfa_code}}\" into the 6-digit code input field"
+    },
+    {
+      "description": "Submit MFA code",
+      "action": "act",
+      "instruction": "Click the 'Continue' button to verify the code"
+    },
+    {
+      "description": "Wait for account dashboard to load after MFA",
+      "action": "wait",
+      "waitMs": 5000
+    },
+    {
+      "description": "Navigate to billing page",
+      "action": "act",
+      "instruction": "Navigate to the billing section. Click on 'Bill' or 'Billing' in the account navigation menu, or look for a link that shows the current balance or bill amount"
+    },
+    {
+      "description": "Wait for billing page to load",
+      "action": "wait",
+      "waitMs": 3000
+    },
+    {
+      "description": "Extract balance and due date from billing page",
+      "action": "extract",
+      "instruction": "Extract the current bill balance amount as a number (in dollars) and the payment due date as a string. Look for 'Amount due', 'Balance', 'Total', 'Current bill', or similar labels with the associated due date.",
+      "schema": {
+        "balance": "number",
+        "due_date": "string"
+      },
+      "isFinalResult": true
+    }
+  ],
+  "mfaDetection": {
+    "observeInstruction": "Look for 'Let\\'s confirm it\\'s you', verification code input, 'We sent a code', '6-digit code' input, or any security verification prompt",
+    "indicators": [
+      "Let's confirm it's you",
+      "6-digit code",
+      "verification code",
+      "We sent a code",
+      "Text a code",
+      "verify your account",
+      "confirm it's you",
+      "enter the code",
+      "Send new code",
+      "See verification options"
+    ]
+  }
+}

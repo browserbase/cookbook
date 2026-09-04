@@ -1,0 +1,134 @@
+name: Verify cookbook
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check generated catalog
+        run: python3 scripts/catalog.py check
+      - name: Verify repository structure and provenance
+        run: python3 scripts/verify.py
+      - name: Run repository tests
+        run: python3 -B -m unittest discover -s tests
+      - name: Verify private publication boundary
+        run: python3 scripts/publication_boundary.py
+
+  public-artifact:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Build history-free public artifact
+        run: |
+          artifact="$RUNNER_TEMP/browserbase-cookbook-public"
+          python3 scripts/publication_boundary.py --export "$artifact" --require-public
+          python3 scripts/publication_boundary.py --root "$artifact" --require-public
+          echo "PUBLIC_ARTIFACT=$artifact" >> "$GITHUB_ENV"
+      - name: Reject broken local Markdown links
+        run: |
+          python3 - <<'PY'
+          import os
+          import re
+          from pathlib import Path
+          from urllib.parse import unquote
+
+          root = Path(os.environ["PUBLIC_ARTIFACT"])
+          failures = []
+          link_pattern = re.compile(r"(?<!!)\[[^]]*\]\(([^)]+)\)")
+          for document in root.rglob("*.md"):
+              text = document.read_text(encoding="utf-8")
+              for raw in link_pattern.findall(text):
+                  target = raw.strip().split(maxsplit=1)[0].strip("<>")
+                  if not target or target.startswith(("#", "http://", "https://", "mailto:")):
+                      continue
+                  path = unquote(target.split("#", 1)[0])
+                  if path and not (document.parent / path).resolve().exists():
+                      failures.append(f"{document.relative_to(root)} -> {target}")
+          if failures:
+              raise SystemExit("Broken local Markdown links:\n" + "\n".join(failures))
+          print("Public artifact local Markdown links are valid")
+          PY
+      - name: Verify public artifact catalog and tests
+        working-directory: ${{ env.PUBLIC_ARTIFACT }}
+        run: |
+          python3 scripts/catalog.py check
+          python3 scripts/verify.py
+          python3 -B -m unittest discover -s tests
+      - name: Scan public artifact for secrets
+        run: |
+          docker run --rm \
+            -v "$PUBLIC_ARTIFACT:/repo:ro" \
+            zricethezav/gitleaks:v8.24.3 \
+            detect --source=/repo --no-git --redact --verbose --config=/repo/.gitleaks.toml
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: browserbase-cookbook-public
+          path: ${{ env.PUBLIC_ARTIFACT }}
+          if-no-files-found: error
+          retention-days: 7
+
+  representative-recipes:
+    name: ${{ matrix.name }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Python clean install and import
+            runtime: python
+            directory: examples/python/getting-started-with-browserbase
+            command: uv sync && uv run python -c 'import browserbase, dotenv, playwright'
+          - name: TypeScript clean install and typecheck
+            runtime: node
+            directory: examples/typescript/getting-started-with-browserbase
+            command: npm install --ignore-scripts --package-lock=false && npm run typecheck
+          - name: Go dependency and compile check
+            runtime: go
+            directory: examples/go/hackernews
+            command: go test ./...
+          - name: Playbook 1Password typecheck
+            runtime: node
+            directory: playbook/guides/1password/node
+            command: npm install --ignore-scripts --package-lock=false && npm run typecheck
+          - name: Temporal integration tests and typecheck
+            runtime: node
+            directory: integrations/examples/integrations/temporal
+            command: npm ci --ignore-scripts && npm test && npm run typecheck
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        if: matrix.runtime == 'python'
+        with:
+          python-version: "3.13"
+      - uses: astral-sh/setup-uv@v6
+        if: matrix.runtime == 'python'
+      - uses: actions/setup-node@v4
+        if: matrix.runtime == 'node'
+        with:
+          node-version: "24.19.0"
+      - uses: actions/setup-go@v5
+        if: matrix.runtime == 'go'
+        with:
+          go-version-file: ${{ matrix.directory }}/go.mod
+          cache-dependency-path: ${{ matrix.directory }}/go.sum
+      - name: Enforce npm package release-age policy
+        if: matrix.runtime == 'node'
+        run: npm config set min-release-age 7
+      - name: Run representative check
+        working-directory: ${{ matrix.directory }}
+        run: ${{ matrix.command }}

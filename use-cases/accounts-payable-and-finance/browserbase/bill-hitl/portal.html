@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AccuPay — Vendor Payment Portal</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f5f5f7;
+      color: #1d1d1f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    header {
+      width: 100%;
+      background: #1a1a2e;
+      color: white;
+      padding: 16px 32px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    header .logo {
+      font-size: 20px;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+    header .logo span { color: #6c63ff; }
+    header .subtitle {
+      font-size: 13px;
+      color: #999;
+      margin-left: auto;
+    }
+    .container {
+      max-width: 480px;
+      width: 100%;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+    }
+    h2 {
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+    .step-subtitle {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 24px;
+    }
+    .form-group {
+      margin-bottom: 18px;
+    }
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    input[type="text"] {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      transition: border-color 0.2s;
+      outline: none;
+    }
+    input[type="text"]:focus {
+      border-color: #6c63ff;
+    }
+    .row {
+      display: flex;
+      gap: 14px;
+    }
+    .row .form-group { flex: 1; }
+    button {
+      width: 100%;
+      padding: 14px;
+      background: #6c63ff;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+      margin-top: 8px;
+    }
+    button:hover { background: #5a52d5; }
+    button:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+    }
+
+    /* Step 2: Verification */
+    .verification-box {
+      background: #fff8e1;
+      border: 1.5px solid #ffcc02;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    .verification-box .shield { font-size: 32px; margin-bottom: 8px; }
+    .verification-box p { font-size: 14px; color: #666; margin-bottom: 12px; }
+    .security-code {
+      font-size: 36px;
+      font-weight: 800;
+      letter-spacing: 8px;
+      color: #1a1a2e;
+      font-family: 'Courier New', monospace;
+      background: #f0f0f0;
+      padding: 12px 24px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+    #verification-input {
+      text-align: center;
+      font-size: 24px;
+      letter-spacing: 6px;
+      font-weight: 700;
+    }
+    .error-msg {
+      color: #e53935;
+      font-size: 13px;
+      margin-top: 8px;
+      display: none;
+    }
+
+    /* Step 3: Confirmation */
+    .success-icon {
+      width: 64px;
+      height: 64px;
+      background: #4caf50;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 32px;
+      color: white;
+    }
+    .confirmation-details {
+      background: #f5f5f7;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 20px;
+    }
+    .confirmation-details .row-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 14px;
+    }
+    .confirmation-details .row-item:last-child { border-bottom: none; }
+    .confirmation-details .row-item .label { color: #888; }
+    .confirmation-details .row-item .value { font-weight: 600; }
+    .conf-number {
+      font-size: 20px;
+      font-weight: 700;
+      color: #4caf50;
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .step { display: none; }
+    .step.active { display: block; }
+
+    .progress {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    .progress .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #ddd;
+    }
+    .progress .dot.active { background: #6c63ff; }
+    .progress .dot.done { background: #4caf50; }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="logo">Accu<span>Pay</span></div>
+    <div class="subtitle">Vendor Payment Portal</div>
+  </header>
+
+  <div class="container">
+    <div class="card">
+      <!-- Progress indicator -->
+      <div class="progress">
+        <div class="dot active" id="dot-1"></div>
+        <div class="dot" id="dot-2"></div>
+        <div class="dot" id="dot-3"></div>
+        <div class="dot" id="dot-4"></div>
+      </div>
+
+      <!-- STEP 1: Payment Form -->
+      <div class="step active" id="step-1">
+        <h2>Make a Payment</h2>
+        <p class="step-subtitle">Enter your invoice and card details below</p>
+
+        <form id="payment-form" onsubmit="goToStep2(event)">
+          <div class="form-group">
+            <label for="invoice-number">Invoice Number</label>
+            <input type="text" id="invoice-number" name="invoice-number" placeholder="INV-2025-0042" required>
+          </div>
+
+          <div class="form-group">
+            <label for="card-number">Card Number</label>
+            <input type="text" id="card-number" name="card-number" placeholder="4242 4242 4242 1234" required>
+          </div>
+
+          <div class="row">
+            <div class="form-group">
+              <label for="expiry">Expiry</label>
+              <input type="text" id="expiry" name="expiry" placeholder="12/26" required>
+            </div>
+            <div class="form-group">
+              <label for="cvv">CVV</label>
+              <input type="text" id="cvv" name="cvv" placeholder="123" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="amount">Payment Amount ($)</label>
+            <input type="text" id="amount" name="amount" placeholder="1,250.00" required>
+          </div>
+
+          <button type="submit" id="submit-payment">Submit Payment</button>
+        </form>
+      </div>
+
+      <!-- STEP 2: Verification Challenge -->
+      <div class="step" id="step-2">
+        <h2>Security Verification</h2>
+        <p class="step-subtitle">Please enter the code shown below to verify your identity</p>
+
+        <div class="verification-box">
+          <div class="shield">🛡️</div>
+          <p>Enter this security code to continue</p>
+          <div class="security-code" id="security-code"></div>
+        </div>
+
+        <div class="form-group">
+          <label for="verification-input">Enter Code</label>
+          <input type="text" id="verification-input" name="verification-input" placeholder="000000" maxlength="6">
+          <div class="error-msg" id="verify-error">Incorrect code. Please try again.</div>
+        </div>
+
+        <button onclick="verifyCode()" id="verify-button">Verify & Complete Payment</button>
+      </div>
+
+      <!-- STEP 3: Confirmation -->
+      <div class="step" id="step-3">
+        <div id="confirmation">
+          <div class="success-icon">✓</div>
+          <h2 style="text-align:center;">Payment Successful</h2>
+          <p class="step-subtitle" style="text-align:center;">Your payment has been processed</p>
+
+          <div class="conf-number" id="conf-number"></div>
+
+          <div class="confirmation-details">
+            <div class="row-item">
+              <span class="label">Invoice</span>
+              <span class="value" id="conf-invoice"></span>
+            </div>
+            <div class="row-item">
+              <span class="label">Card</span>
+              <span class="value" id="conf-card"></span>
+            </div>
+            <div class="row-item">
+              <span class="label">Amount</span>
+              <span class="value" id="conf-amount"></span>
+            </div>
+            <div class="row-item">
+              <span class="label">Date</span>
+              <span class="value" id="conf-date"></span>
+            </div>
+            <div class="row-item">
+              <span class="label">Status</span>
+              <span class="value" style="color: #4caf50;">Approved</span>
+            </div>
+          </div>
+
+          <!-- Post-payment actions form (agent acts on this AFTER human-in-the-loop) -->
+          <div style="margin-top: 28px; padding-top: 24px; border-top: 1.5px solid #e0e0e0;">
+            <h3 style="font-size: 16px; margin-bottom: 4px;">Record this payment</h3>
+            <p class="step-subtitle" style="margin-bottom: 16px;">Add details for your accounting system before closing</p>
+
+            <div class="form-group">
+              <label for="gl-code">GL Account Code</label>
+              <input type="text" id="gl-code" name="gl-code" placeholder="e.g. 6200-MKTG">
+            </div>
+
+            <div class="form-group">
+              <label for="memo">Memo / Description</label>
+              <input type="text" id="memo" name="memo" placeholder="What was this payment for?">
+            </div>
+
+            <button onclick="saveRecord()" id="save-record-btn">Save to Accounting Records</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- STEP 4: Final Success -->
+      <div class="step" id="step-4">
+        <div id="final-success">
+          <div class="success-icon">🎉</div>
+          <h2 style="text-align:center;">All Done</h2>
+          <p class="step-subtitle" style="text-align:center;">Payment recorded in accounting system</p>
+
+          <div class="confirmation-details">
+            <div class="row-item">
+              <span class="label">Confirmation</span>
+              <span class="value" id="final-conf"></span>
+            </div>
+            <div class="row-item">
+              <span class="label">GL Code</span>
+              <span class="value" id="final-gl"></span>
+            </div>
+            <div class="row-item">
+              <span class="label">Memo</span>
+              <span class="value" id="final-memo"></span>
+            </div>
+            <div class="row-item">
+              <span class="label">Record ID</span>
+              <span class="value" id="final-record-id"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let generatedCode = '';
+    let paymentData = {};
+
+    function generateCode() {
+      return Math.floor(100000 + Math.random() * 900000).toString();
+    }
+
+    function generateConfNumber() {
+      const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+      let result = 'PAY-';
+      for (let i = 0; i < 8; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      return result;
+    }
+
+    function goToStep2(e) {
+      e.preventDefault();
+
+      // Save payment data
+      paymentData = {
+        invoice: document.getElementById('invoice-number').value,
+        cardNumber: document.getElementById('card-number').value,
+        expiry: document.getElementById('expiry').value,
+        cvv: document.getElementById('cvv').value,
+        amount: document.getElementById('amount').value,
+      };
+
+      // Generate security code
+      generatedCode = generateCode();
+      document.getElementById('security-code').textContent = generatedCode;
+
+      // Switch steps
+      document.getElementById('step-1').classList.remove('active');
+      document.getElementById('step-2').classList.add('active');
+      document.getElementById('dot-1').classList.remove('active');
+      document.getElementById('dot-1').classList.add('done');
+      document.getElementById('dot-2').classList.add('active');
+    }
+
+    function verifyCode() {
+      const input = document.getElementById('verification-input').value.trim();
+      const errorEl = document.getElementById('verify-error');
+
+      if (input === generatedCode) {
+        errorEl.style.display = 'none';
+
+        // Generate confirmation
+        const confNumber = generateConfNumber();
+        const maskedCard = '•••• •••• •••• ' + paymentData.cardNumber.replace(/\s/g, '').slice(-4);
+        const now = new Date();
+
+        document.getElementById('conf-number').textContent = confNumber;
+        document.getElementById('conf-invoice').textContent = paymentData.invoice;
+        document.getElementById('conf-card').textContent = maskedCard;
+        document.getElementById('conf-amount').textContent = '$' + paymentData.amount;
+        document.getElementById('conf-date').textContent = now.toLocaleDateString('en-US', {
+          year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit'
+        });
+
+        // Switch to confirmation
+        document.getElementById('step-2').classList.remove('active');
+        document.getElementById('step-3').classList.add('active');
+        document.getElementById('dot-2').classList.remove('active');
+        document.getElementById('dot-2').classList.add('done');
+        document.getElementById('dot-3').classList.add('active');
+        document.getElementById('dot-3').classList.add('done');
+      } else {
+        errorEl.style.display = 'block';
+      }
+    }
+
+    function generateRecordId() {
+      return 'REC-' + Math.floor(10000 + Math.random() * 90000);
+    }
+
+    function saveRecord() {
+      const glCode = document.getElementById('gl-code').value.trim();
+      const memo = document.getElementById('memo').value.trim();
+
+      if (!glCode || !memo) return; // Require both fields
+
+      // Carry over confirmation, populate final view
+      document.getElementById('final-conf').textContent = document.getElementById('conf-number').textContent;
+      document.getElementById('final-gl').textContent = glCode;
+      document.getElementById('final-memo').textContent = memo;
+      document.getElementById('final-record-id').textContent = generateRecordId();
+
+      // Switch to step 4
+      document.getElementById('step-3').classList.remove('active');
+      document.getElementById('step-4').classList.add('active');
+      document.getElementById('dot-4').classList.add('done');
+    }
+
+    // Allow Enter key on verification input
+    document.getElementById('verification-input').addEventListener('keypress', function(e) {
+      if (e.key === 'Enter') verifyCode();
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+.env
+.env.local
+node_modules/
+autobrowse/traces/
+autobrowse/reports/
+autobrowse/tasks/*/playwright/node_modules/
+autobrowse/tasks/*/playwright/run.log
+autobrowse/tasks/*/playwright/review-submit.png
+*.log
+.DS_Store

@@ -1,0 +1,19 @@
+{
+  "name": "sample_org-liveview-starter",
+  "version": "1.0.0",
+  "description": "Minimal example of Browserbase's secure login -> saved Context flow, hosted as an embedded Live View iframe.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "test": "node --check server.js && node --check lib/browserbase.js && node --check public/app.js && node --test tests/*.test.cjs"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.1",
+    "dotenv": "17.4.2",
+    "express": "5.2.1",
+    "playwright-core": "1.63.0"
+  }
+}

@@ -1,0 +1,105 @@
+You are on the Vagaro business dashboard customer report (Reports → Customers → Customers), already
+authenticated via the saved Vagaro context.
+
+Goal: extract EVERY customer in this account (however many there are) by replaying the report's
+backing JSON API. Do NOT scroll the grid or click through pages — that's slow and unreliable. Use the
+`browserEval` tool.
+
+The grid is powered by a POST request whose URL path ends in `/merchants/reports/getcustomers`. It
+returns full customer records as JSON, paginated by PageIndex/PageSize, with a "TotalRecords" field on
+every record (the account's total customer count). The host/region segment of the URL and all auth
+values differ per account, so do NOT hardcode them — capture a real request first, then replay it.
+Do NOT send cookies/credentials; auth is the captured request headers plus the ClientId/ClientSecret
+in the request body.
+
+## Step 1 — capture a live getcustomers request (URL + headers + tokens)
+Run this with browserEval to install an interceptor:
+```js
+window.__cap = null;
+const X = window.XMLHttpRequest;
+window.XMLHttpRequest = function(){
+  const x = new X(); let u='', hdrs={};
+  const o = x.open; x.open = function(m, uu){ u = uu; return o.apply(x, arguments); };
+  const sh = x.setRequestHeader; x.setRequestHeader = function(h, v){ hdrs[h] = v; return sh.apply(x, arguments); };
+  const s = x.send; x.send = function(b){
+    if (/getcustomers/i.test(String(u))) x.addEventListener('load', () => { window.__cap = { url: u, headers: hdrs, body: b }; });
+    return s.apply(x, arguments);
+  };
+  return x;
+};
+'installed';
+```
+Then trigger one report fetch so the interceptor captures it: click the "Run Report" button (top
+right of the filters) or change the Sort order. Poll `window.__cap` (re-run a small browserEval that
+returns `!!window.__cap`) until it is set. Everything you replay comes from this captured request — the
+endpoint URL, the headers, and the body tokens — so it works for any account/region.
+
+## Step 2 — replay every page
+Once window.__cap is set, run ONE browserEval that paginates through all records:
+```js
+const cap = window.__cap;
+const base = JSON.parse(cap.body);
+const byId = new Map();           // dedupe by UserID as we go — pages can overlap
+let page = 1, total = Infinity, emptyRetries = 0;
+const MAX_PAGES = 300;            // hard safety cap so a bad response can't loop forever
+while (byId.size < total && page <= MAX_PAGES) {
+  const body = JSON.stringify({ ...base, PageIndex: page, PageSize: 200 });
+  let arr = [];
+  try {
+    const r = await fetch(cap.url, { method: 'POST', headers: { ...cap.headers, 'Content-Type': 'application/json' }, body });
+    const j = await r.json();
+    arr = (function find(o){ for (const k in o){ if (Array.isArray(o[k]) && o[k].length) return o[k]; if (o[k] && typeof o[k]==='object'){ const f = find(o[k]); if (f) return f; } } return []; })(j);
+  } catch (e) { arr = []; }
+  if (!arr.length) {
+    // A transient empty/errored page must NOT end pagination early — retry the same page once.
+    if (emptyRetries < 1) { emptyRetries++; await new Promise(res => setTimeout(res, 800)); continue; }
+    break; // retried and still empty → genuinely no more rows
+  }
+  emptyRetries = 0;
+  total = arr[0].TotalRecords ?? total;
+  for (const c of arr) byId.set(String(c.UserID), c);
+  page++;
+}
+window.__all = [...byId.values()];
+return { collected: window.__all.length, total, pages: page - 1 };
+```
+Confirm `collected` reaches `total` (the TotalRecords for this account). If not, fix and retry before
+finishing.
+
+## Step 3 — map the records and DOWNLOAD them as a file
+IMPORTANT: do NOT try to return all the customers as your text answer or structured output — there can
+be thousands and they will be truncated. Instead, build the mapped list in the page and trigger a file
+download. The download is retrieved automatically (Browserbase Session Downloads). Run this browserEval:
+```js
+const all = window.__all || [];
+const j = (v) => (v == null ? "" : String(v));
+const mapped = all.map(c => ({
+  id: j(c.UserID),
+  name: (j(c.FirstName) + " " + j(c.LastName)).trim(),
+  email: j(c.EmailAddress),
+  mobile: j(c.CellPhone),
+  dayPhone: j(c.DayPhone),
+  nightPhone: j(c.NightPhone),
+  address: [c.StreetAddress, c.City, c.State, c.Zip].map(j).filter(Boolean).join(", "),
+  birthday: j(c.strBirthDate),
+  gender: j(c.Gender),
+  customerSince: j(c.strCustomerSince),
+  lastVisit: j(c.strLastVisited),
+  membership: j(c.MembershipName),
+  referredBy: j(c.ReferredBy),
+  tags: j(c.GeneralTag),
+}));
+// dedupe by id
+const seen = new Set(); const out = mapped.filter(c => !seen.has(c.id) && seen.add(c.id));
+const blob = new Blob([JSON.stringify(out, null, 2)], { type: "application/json" });
+const a = document.createElement("a");
+a.href = URL.createObjectURL(blob);
+a.download = "vagaro_customers.json";
+document.body.appendChild(a);
+a.click();
+return out.length;
+```
+You are done once the download has been triggered (the returned count should equal TotalRecords — the
+full directory). The file is retrieved externally — do not try to capture or save it yourself.
+
+Work autonomously; do not ask follow-up questions.

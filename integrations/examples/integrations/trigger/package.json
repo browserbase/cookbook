@@ -1,0 +1,38 @@
+{
+  "name": "react-pdf",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "dev:web": "next dev",
+    "dev:tasks": "npx trigger.dev@4.5.16 dev"
+  },
+  "dependencies": {
+    "@aws-sdk/client-s3": "3.1127.0",
+    "@react-email/components": "1.0.12",
+    "@react-pdf/renderer": "4.9.0",
+    "@trigger.dev/sdk": "4.5.16",
+    "next": "16.3.4",
+    "openai": "7.10.0",
+    "puppeteer": "25.10.0",
+    "puppeteer-core": "24.43.1",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "react-email": "^4.0.16",
+    "resend": "6.26.0",
+    "@react-email/render": "2.1.0"
+  },
+  "devDependencies": {
+    "@trigger.dev/build": "4.5.16",
+    "@types/node": "^20",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "eslint": "^9.39.0",
+    "eslint-config-next": "16.3.4",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "7.0.2"
+  }
+}

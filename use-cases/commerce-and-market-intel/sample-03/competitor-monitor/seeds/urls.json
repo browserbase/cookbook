@@ -1,0 +1,1598 @@
+[
+  {
+    "competitor": "shopee",
+    "country": "BR",
+    "url": "https://shopee.com.br/Kit-3-Lava-Roupas-L%C3%ADquido-Baby-Soft-Total-Max-3L-Verde-i.534023108.22597600131",
+    "note": "Real PDP from SAMPLE_ORG's example — matches get_pc_shoee.json (captured via SSR; get_pc is anti-scrape locked)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005012081908686.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005011836249688.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005007934241695.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005011746619668.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005010074086225.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005006994485859.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005012270481878.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005011651444704.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005010624917415.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005011742917440.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005010631780339.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005009021299431.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005011533264749.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005010475319403.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005007085353746.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005009566975914.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005012304161917.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005011995307301.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005011585565479.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005008113654176.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005010313730656.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005011803160742.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005010292608633.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005007546331498.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005012136604016.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005010778438154.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005009209110302.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005011672421018.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005010358938285.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005011922669615.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005006734346372.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005010758608738.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005010516228366.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005011539235105.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005007410585706.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005012180465110.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005011721535926.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005008217113432.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005012268159850.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005010702720442.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005009878144490.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005004322061345.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005007417750777.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005009102461768.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005009095550226.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005012412864785.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005007212578208.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005009179847477.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005010664877689.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005005037921254.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005007345080714.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005010706679652.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005008228655705.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://www.aliexpress.com/item/2025%2Bcal%25C3%25A7as%2Bcom%2Blogotipo%2Bimpresso%2Bmoda%2Bmasculina%2Bcal%25C3%25A7as%2Besportivas%2Bcom%2Bcord%25C3%25A3o%2Bcal%25C3%25A7as%2Bde%2Bjogging%2Bcal%25C3%25A7as%2Bcasuais%2Bcal%25C3%25A7as%2Blargas%2Bmoletom%2Batacado/1005010573801397.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005007582372096.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005008077610176.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005008342954964.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005007519127054.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005010311293349.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "BR",
+    "url": "https://pt.aliexpress.com/item/1005006671882126.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005012270481878.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005009426567468.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005007934241695.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005010265714020.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005008107955477.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005012061204388.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005010337678868.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005009097721002.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005012401111461.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005008816300710.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005012030683310.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005009638584312.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005010685791630.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005012289770996.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005011913422165.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005010512748039.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005010225001907.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005012308924220.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005009378023586.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005009021299431.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005012288400592.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005012330515050.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005012362475414.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005011672421018.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "aliexpress",
+    "country": "MX",
+    "url": "https://es.aliexpress.com/item/1005012388612003.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/Livesso-2-Pairs-Vintage-Oval-Metal-Frame-Eyeglasses-Unisex-Fashion-Decorative-Glasses-For-Street-Photography-Commuting-Daily-Wear-p-474126393.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/4pcs-Unisex-Leopard-Print-Fashion-Glasses-Square-Plastic-Frame-Casual-Daily-Wear-Matching-Street-Beach-Party-Hiking-High-Quality-Gift-Set-p-190602003.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/2-Pairs-Retro-Small-Rectangle-Metal-Frame-Eyeglasses-Fashionable-Unisex-Eyeglasses-For-Daily-Commute-Beach-Travel-Street-Photography-Personalized-p-361674656.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/3pcs-Women-s-Dual-Bridge-Square-Rivets-Fashion-Eyeglasses-Set-Orange-Black-Yellow-For-Summer-Beach-Vacation-Outdoor-Travel-p-31106410.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/1-2-Pairs-Geometric-Oval-Y2K-Metal-Frame-Glasses-Unisex-Retro-For-Daily-Commute-Beach-Vacation-Casual-Styling-p-87512006.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/5pcs-Set-Edged-Square-Frameless-Eyeglasses-Large-Frame-For-Outdoor-Travel-And-Photoshoot-For-Summer-Beach-Vacation-Outdoor-Travel-p-61456007.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/2-Pairs-Women-s-Oval-Frame-Fashion-Eyeglasses-Classic-Style-Suitable-For-Daily-Life-And-Summer-Travel-p-12410985.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/2pcs-4pcs-Casual-Rectangular-Women-Glasses-Sets-Minimalist-Design-For-Daily-Beach-Travel-p-67002972.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/3pcs-Set-Summer-Fashion-Eyeglasses-Combo-Retro-Oval-Metal-Frame-Decorative-Glasses-Unisex-Street-Photography-Daily-Commute-Accessory-p-435820686.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/3pcs-Set-Women-s-Multicolor-Cat-Eye-Fashion-Glasses-Made-Of-High-Quality-PC-Material-Y2K-Style-Travel-Holiday-Accessory-Seasonal-Selection-Fashionable-Glasses-Suitable-For-Party-Outfits-Summer-Back-To-School-Beach-Party-Street-Style-Selfie-Vacation-p-444718975.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/4-Pairs-Bohemian-Style-Versatile-Elegant-Women-s-Glasses-Suitable-For-Street-Style-Tropical-Beach-Vacation-Outdoor-Leisure-And-Various-Face-Shapes-p-383553574.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/2-Pairs-Summer-Unisex-Fashionable-Rimless-Metal-Frame-Round-Rectangular-Eyeglasses-Casual-Commute-Beach-Street-Style-Eyewear-p-450470109.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/3pcs-2pcs-1pc-Fashion-Eyeglasses-Transparent-Lenses-Unisex-Black-Pink-And-Clear-Frames-Eye-Protection-Stylish-p-101340016.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/6pcs-Rivets-Decor-Round-Frame-Polygonal-Design-Fashion-Eyeglasses-For-Women-For-Summer-Beach-Vacation-Outdoor-Travel-p-59676982.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/1pc-2pcs-Retro-Oval-Metal-Glasses-Solid-Color-For-Daily-Driving-Beach-Hiking-Party-Festival-Fits-All-Faces-Stylish-High-Quality-Gift-p-175162591.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/5pcs-Retro-Rectangular-Small-Frame-Women-s-Eyeglasses-Fashionable-Cute-Solid-Color-Casual-Eyeglasses-Suitable-For-All-Seasons-p-338108967.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/8-Pairs-Women-s-Square-Frame-Glasses-Futuristic-Street-Fashion-Style-Suitable-For-Outdoor-Activities-Dates-Parties-With-Friends-Beach-Accessories-p-372755502.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/1-2-Pair-Oval-Fashion-Glasses-Small-Frame-Retro-Style-Versatile-Street-Style-Suitable-For-Daily-Wear-Vacation-Use-Beach-Accessory-Women-s-Fashion-Glasses-Perfect-Match-For-Spring-Summer-Outfits-Suitable-For-Business-Casual-Occasions-Can-Be-Given-As-A-Gift-Leopard-Print-p-455223419.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/3pcs-Elegant-Lively-Geometric-Full-Frame-Fashion-Glasses-Set-Suitable-For-Women-Summer-Beach-Party-Hiking-Driving-Holiday-Gift-Women-s-Beach-Accessories-Glasses-Basic-Outfits-Business-Casual-Summer-Beach-Vacation-Outdoor-Activities-Travel-Gift-p-418403989.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/6pcs-Unisex-Retro-Square-Large-Frame-Glasses-High-Quality-Plastic-For-Daily-Street-Gift-For-Christmas-New-Year-Valentine-s-Thanksgiving-p-375288087.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/Tropiscape-2pcs-Vintage-Oval-Metal-Frame-Eyeglasses-Summer-Fashion-Unisex-For-Streetwear-Commute-Photoshoot-Cottagecore-Style-p-386471639.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/9pcs-Leopard-Print-Multicolor-Geometric-Full-Frame-Classic-Glasses-Set-For-Women-For-Carnival-Outdoor-Activities-Fashion-Back-To-School-p-377165549.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/1-Set-Of-2-Unframed-Rectangular-And-Oval-Eyeglasses-Vintage-Oval-Metal-Frame-Decorative-Glasses-Unisex-Suitable-For-Street-Photography-Commuting-Decoration-p-450698265.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/2-Pairs-Metal-Geometric-Pattern-Eyeglasses-For-Women-Suitable-For-Tropical-Beach-Vacation-Shopping-Outdoor-Leisure-Activities-Street-Photography-And-Other-Occasions-p-98646634.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/2pcs-1pc-Retro-Oval-Full-Rim-Glasses-Vintage-Clear-Lens-Eyeglasses-For-Women-Non-Prescription-Eyewear-For-Casual-Office-Daily-Wear-p-442101180.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/2pcs-Women-s-Metal-Frame-Oval-Fashionable-Glasses-Unisex-Solid-Color-Retro-Everyday-Commute-And-Street-Style-Accessory-p-309958020.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/3pcs-Retro-Plastic-Geometric-Pattern-Women-s-Glasses-Ideal-For-Holiday-Gifts-Outdoor-Summer-Beach-Vacation-Travel-Versatile-Occasions-p-13226773.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/2-Pairs-Vintage-Oval-Metal-Frame-Eyeglasses-Unisex-Fashion-Decorative-Glasses-For-Street-Photography-Commuting-Daily-Wear-p-320431237.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/2pcs-1pc-Fashion-Summer-Glasses-Retro-Polygon-Metal-Frame-Unisex-Suitable-For-Street-Photography-Travel-And-Daily-Wear-p-461733493.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "MX",
+    "url": "https://www.shein.com.mx/3pcs-2pcs-Women-s-Retro-Large-Frame-Transparent-Lens-Glasses-Round-Large-Frame-Vintage-Style-Decorative-Transparent-Glasses-Unisex-Fashion-Accessory-p-328607690.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/TOKVUE-Men-s-Street-Style-INS-Side-Embroidered-Pants-Suitable-For-Music-Festivals-Nightclubs-Boyfriend-Husband-Gifts-Anniversary-Black-Casual-Sweatpants-p-213862158.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/Manfinity-EMRG-Men-s-Solid-Color-Drawstring-Waist-Pocket-Casual-Loose-Fit-Sweatpants-Gray-Autumn-Oversized-Work-Baggy-Wide-Leg-Joggers-Track-Pants-Pro-Club-Jogging-p-190526205.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/HUEFORM-Men-s-Light-Grey-Autumn-Casual-Solid-Color-Drawstring-Premium-Sports-Sweatpants-Loose-Straight-Leg-Dress-Pants-Old-Money-Style-For-Daily-Leisure-p-314583884.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/SLATEMANN-Men-s-Letter-Print-Drawstring-Waist-Loose-Fit-Casual-Sweatpants-Sweatpants-Grey-Stacked-Sweat-Pants-p-268567154.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/PAVTROS-Men-s-Distressed-Loose-Fit-Casual-Pants-Dark-Style-Goth-Graphic-Sweatpants-For-Rave-Emo-2000s-Style-p-69414109.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/PAVTROS-Men-s-LA-Embroidered-Light-Grey-Baggy-Sweatpants-Autumn-Streetwear-For-Graduation-Back-To-School-Elastic-Letter-Print-Pants-Gift-For-Boyfriend-p-221057250.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/PAVTROS-Men-s-Casual-Color-Block-Drawstring-Waist-Jogger-Pants-With-Zipper-Hem-For-Rave-p-324959632.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/PAVTROS-Manfinity-Streetrush-Men-s-Light-Pink-Autumn-Streetwear-City-Break-Spider-Web-Heart-3D-Embroidery-Straight-Loose-Long-Sweatpants-Oversized-Graphic-p-92166201.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/1-Pair-Men-s-Loose-Fit-Casual-Sweatpants-Minimalist-Solid-Color-Wide-Leg-Design-Drawstring-Waist-Large-Pockets-Suitable-For-Daily-Wear-Walking-Work-Outings-An-Excellent-Father-s-Day-Gift-For-Dad-p-294235172.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/Men-s-Outdoor-Hiking-Pants-Multi-Pocket-Drawstring-Cargo-Pants-Suitable-For-Travel-Hiking-Fitness-Activities-p-424464499.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/Men-s-Breathable-Thin-Linen-Loose-Casual-Sports-Pants-Suitable-For-Beach-Spring-Summer-p-63593183.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/Men-s-Lightning-Rose-Print-Straight-Sweatpants-Suitable-For-All-Seasons-Loose-Fit-Sweatpants-Streetwear-Casual-Sporty-Style-Emo-2000s-Style-p-107764994.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/Men-Side-Stripe-Drawstring-Waist-Jogger-Sweatpants-p-24633501.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/Solid-Color-Straight-Leg-Sweatpants-All-Season-Wear-Loose-Fit-Sweatpants-Unisex-Street-Casual-Style-And-Comfortable-Sports-Sweatpants-Lightweight-And-Breathable-Fitness-Outfit-Out-And-About-Commuting-p-129610029.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/Men-s-Lightweight-Solid-Color-Casual-Knit-Pants-Suitable-For-Sports-And-Leisure-Wear-In-Summer-p-438536122.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/1pc-Men-s-Casual-Sports-Pants-Loose-Straight-Leg-Cut-With-Good-Drape-Suitable-For-Indoor-And-Outdoor-Activities-Also-Can-Be-Gifted-To-Couples-Made-Of-100-Polyester-With-Drawstring-Waistband-For-Adjustable-Fit-Available-In-Multiple-Colors-p-159961837.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/SUMWON-Athleisure-Jogger-Sweatpants-With-Color-Block-Design-Comfortable-Winter-Sports-Training-Pants-With-Drawstring-Elastic-Waist-Urban-Streetwear-p-62968493.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/PAVTROS-Manfinity-Streetrush-Men-s-Streetwear-White-Autumn-Sweatpants-Retro-Floral-Embroidery-Full-Print-Design-Track-Pants-For-Work-Outdoor-Music-Festivals-p-250167429.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/PAVTROS-Men-s-Off-White-Distressed-Double-Layer-Raw-Edge-Arched-Structure-Loose-Wide-Leg-Sports-Pants-Autumn-Streetwear-Work-Elastic-Waist-Knitted-Joggers-p-225073008.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/PAVTROS-White-And-Red-Autumn-Streetwear-Gym-Young-Street-Style-Wide-Leg-Pants-With-Double-Zipper-Waist-Side-Panels-Baggy-Graphic-Reflective-Edge-Strips-p-375916601.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/SUMWON-Casual-Flared-Fit-Sweatpants-With-Side-Stripes-And-Script-Embroidery-Drawstring-Waist-Fleece-Lined-Winter-Comfort-Pants-For-Daily-Loungewear-Plain-p-317314933.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/Men-s-Drawstring-Elastic-Waist-Loose-Straight-Leg-Casual-Sweatpants-Suitable-For-Daily-Casual-Wear-Weekend-Outings-Hangouts-With-Friends-Traveling-And-Other-Relaxed-Social-Activities-An-Excellent-Gift-For-Boyfriends-Or-Husbands-p-359581401.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/HUEFORM-Men-s-Drawstring-Waist-Spliced-Side-Seam-Sweatpants-p-26112287.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/AXEPEAK-Casual-Outdoor-Loose-Drawstring-Waist-Men-Sweatpants-p-173814109.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/PAVTROS-Young-Street-Style-Ribbon-Print-2-In-1-Fashionable-7-8-Pants-Wide-Leg-p-443381387.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/ROMWE-MEN-Goth-Spring-Casual-Graphic-Men-S-Loose-Fit-Straight-Leg-Sweatpants-With-Dark-Floral-Pattern-Comfortable-Sports-Pants-p-137279194.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/STYNVO-Men-s-Casual-Sports-Letter-Embroidery-Drawstring-Waist-Sweatpants-Elastic-Graphic-Print-Grey-Baggy-Manfinity-p-351484680.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/Manfinity-EMRG-Men-s-Street-Sporty-Academy-Style-INS-High-Street-Hip-Hop-Oversized-Letter-Chicago-Graphic-Sweatpants-p-72777944.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/PAVTROS-Men-s-Elastic-Drawstring-Waist-Solid-Color-Street-Style-Summer-Grey-Sweatpants-Joggers-p-82704593.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "CO",
+    "url": "https://www.shein.com.co/PAVTROS-Men-s-Solid-Color-Casual-Sweatpants-p-246554051.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Sweetra-Waist-Cinched-Minimalist-Flare-Sleeve-Bodycon-Cinched-Waist-Dress-p-195897622.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Comfortable-Dress-Women-s-Dune-Dress-Light-Fresh-Mother-s-Day-p-87564167.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-Elenzya-Elenzya-White-And-Blue-Floral-Summer-Boho-Holiday-Vacation-Dress-Sleeveless-Round-Neck-Waist-Cinching-A-Line-Vintage-Printed-Short-Dress-For-Parties-p-451765965.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Midi-Tailored-Dress-With-Side-Tie-Elegant-Evangelical-Fashion-p-484747191.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Short-Bodycon-Dress-Spring-Summer-Off-The-Shoulder-Romantic-Elegant-p-144962426.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-Sweetro-Summer-New-Elegant-Commuter-3-In-1-Design-A-Line-Waist-Cinching-Dress-Slimming-Black-Midi-Dress-Suitable-For-Spring-Summer-Dates-Or-Casual-Dining-p-482920962.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Short-Dress-In-Premium-Suedine-Fabric-Boat-Neck-Long-Sleeves-Simple-Fitted-A-Line-Silhouette-Solid-Color-Elegant-Autumn-Winter-Fashion-p-412573954.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Spring-Summer-French-Elegant-Commuter-Minimalist-Faux-Linen-Color-Block-Spaghetti-Strap-A-Line-Mini-Dress-p-419252928.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Elegant-Women-s-Tulle-Set-Flowing-Sleeves-Shaping-Short-Skirt-In-Spandex-Party-Evening-Look-p-475676949.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Geometric-Color-Block-Print-V-Neck-Button-One-Piece-Sleeve-Knee-Length-Bodycon-Dress-Elegant-Summer-p-70281274.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Franclia-Women-s-Elegant-Floral-Print-Trim-Camisole-Dress-Summer-p-446465445.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Qadelle-Women-s-Round-Neck-Polka-Dot-Sleeveless-Waist-Fit-A-Line-Short-Dress-p-476286148.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Floral-Short-Dress-With-Wide-Straps-Front-Tie-Square-Neckline-Fitted-Waist-Flared-Style-Summer-Casual-p-427249966.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Short-Dress-Striped-Viscose-Linen-Fabric-Thin-Crossed-Straps-And-Gathered-Detail-At-The-Bust-For-Weddings-p-461550507.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Resyla-Women-s-Elegant-Floral-Butterfly-Print-Sleeveless-Dress-Summer-p-443083175.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Amore-Women-s-Summer-Tropical-Parrot-Printed-Strap-Dress-With-Square-Neck-And-Waist-A-Line-Pattern-Refreshing-Short-Skirt-For-Beach-Vacation-Travel-Check-In-Vacation-Travel-Daily-Shopping-Light-Party-Music-Festival-Dressing-Romantic-Dating-Summer-Dress-Festival-Dresses-Elegant-Dresses-For-Party-Wedding-Guest-Dress-For-Women-Beach-Dress-Casual-Dresses-For-Women-Vacation-Outfits-Women-Ceremony-Dress-p-413873568.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Midi-Tailored-Dress-With-Side-Tie-Elegant-Evangelical-Fashion-p-464691454.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SpongeBob-SquarePants-SHEIN-Women-s-Letter-Cartoon-Print-Halter-Neck-Short-Dress-p-490226417.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Short-Dress-In-Faux-Leather-With-Rhinestones-p-435742973.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Short-Dress-Set-Poncho-Long-Sleeves-In-Soft-And-Casual-Wool-Fabric-Perfect-For-You-To-Look-Amazing-This-Winter-p-488854464.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Sweetra-Women-s-Stand-Collar-Cinched-Waist-Minimalist-Flare-Sleeve-Bodycon-Midi-Dress-p-280205758.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/CAJUNI-Women-s-Floral-Print-Short-Dress-Boho-Vacation-Sundress-Square-Neck-Puff-Sleeves-Resort-Dresses-For-Women-p-56920701.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-Essnce-Valentine-s-Day-Women-s-Solid-Round-Neck-Ribbed-Long-Sleeve-Mini-Dress-Burgundy-Autumn-Elegant-Tea-Party-New-Years-Party-Outfit-Dresses-For-Winter-p-49265202.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Short-Dress-With-One-Shoulder-Puff-Sleeves-Fitted-Autumn-Winter-p-480135449.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Short-Bodycon-Party-Dress-p-466276067.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/GlowEve-Women-s-Elegant-Pleated-Waist-Solid-Color-Square-Neck-Short-Dress-Summer-p-450622781.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Elegant-Commute-Date-Jacquard-Slip-Dress-Spring-Summer-p-416029390.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Dress-With-Pearls-Elegant-Party-Dress-Knot-Detail-Backless-Bare-Back-Ruched-Evening-Dress-p-408137873.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/NEW-IDEA-Women-s-Yellow-Halter-Summer-Dress-Front-Single-Row-Buttons-Open-Back-A-Line-Short-Dress-For-Date-Night-Out-Beach-Vacation-Outfits-p-471183076.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Qadelle-French-Elegant-Sleeveless-Dress-Red-Bow-Decor-Sleeveless-Mini-Dress-Suitable-For-Daily-Outing-Date-Holiday-p-442279733.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Qadelle-Women-s-Elegant-Pink-Summer-Textured-Square-Neck-Sleeveless-A-Line-Dress-Pearl-Bow-Pattern-Birthday-Party-Dress-Graduation-Vacation-Outfit-p-447309532.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Sweetra-Y2K-Sexy-Lace-Asymmetric-Shoulder-Asymmetrical-Hem-Dress-p-301032522.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Faunlyn-Casual-Minimalist-Women-s-Floral-V-Neck-Woven-Short-Dress-Suitable-For-Spring-Summer-Boho-Clothes-Women-Chic-Dress-Casual-p-91460230.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Rafferiza-White-And-Blue-Floral-Summer-Elegant-Date-Women-s-Square-Neck-Ditsy-Floral-Ruffle-Waist-A-Line-Dress-Fashion-Cute-Picnic-Tea-Party-Casual-Mini-Dress-p-401867011.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-LUNE-Women-s-Casual-Polka-Dot-Summer-Vacation-Commute-Daily-Basic-Fashion-Outing-Long-Sleeve-Tiered-Short-Dress-p-490567022.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/EMERY-ROSE-Casual-Fall-Commuter-Solid-Color-Lantern-Sleeve-Long-Sleeve-Dress-p-166004934.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-Franclia-White-And-Blue-Floral-Summer-Modest-Holiday-Picnic-Holiday-Women-s-Shoulder-Tie-Strap-Backless-Midi-Dress-Boho-Ruched-Bust-Sleeveless-Cami-Outfit-p-61082160.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Sylviya-Casual-Vintage-Floral-Print-V-Neck-Short-Dress-For-Women-Suitable-For-Spring-Summer-Spring-p-332176270.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/RosyDaze-1pc-Women-Solid-Color-Patchwork-Long-Sleeve-Casual-Short-Dress-Fall-Cloth-For-Women-p-44264560.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Sweetra-New-Casual-Solid-Color-Textured-Tie-Up-Suspender-High-Waist-Puff-Skirt-Suitable-For-Spring-Summer-Everyday-Wear-p-348644425.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Zivah-2026-Spring-Summer-New-Music-Festival-Easter-St-Patrick-s-Day-Valentine-s-Day-Date-Western-Nomadic-Birthday-Party-Graduation-College-Style-Student-Daily-Wear-Basic-Versatile-Casual-Vacation-Cruise-Travel-Beach-Sunbathing-Viral-Hit-Streetwear-Wedding-Guest-Boho-Commute-Brunch-Airport-Party-Holiday-Outing-Office-Wear-Round-Neck-Sleeveless-Short-A-Line-Lace-Patchwork-Satin-Mustard-Yellow-Mini-Dress-p-482171503.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/CAJUNI-Women-s-Off-White-Summer-Boho-Holiday-Tea-Party-Yellow-Floral-Watercolor-Lily-Print-Loose-Fit-Smocked-Square-Neck-Flare-Sleeve-Short-Resort-Dress-p-292186107.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Vacation-Halter-Floral-Print-Layered-Ruffle-Hem-Dress-Elegant-Summer-p-434515070.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-A-Line-Style-Dress-Premium-Tailored-Fabric-Various-Colors-Elegant-And-Modern-With-Pockets-p-465385073.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Short-Fitted-Dress-With-Long-Sleeves-High-Neck-Draped-Detail-And-Sexy-Tie-Detail-For-Women-p-423928071.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Long-Sleeved-Dress-Unique-Sleeveless-Elegant-Short-Sophisticated-Chic-Distressed-Stylish-Evening-Look-Winter-Fashion-Blogger-S-o-Jo-o-Saint-John-s-Day-p-487107283.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Zivah-Women-s-Solid-Color-Pleated-Casual-Party-Short-Dress-p-483026418.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Elegant-Black-Strapless-Dress-Suitable-For-Spring-Summer-Party-Vacation-Night-Out-p-53997207.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Virginia-3-Piece-Dress-Set-Short-Gringa-Style-For-New-Year-s-Eve-Parties-Christmas-One-Shoulder-Patterned-Asymmetrical-Evening-Party-Wedding-Birthday-Party-Street-Travel-Beach-Summer-p-429706993.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Gringa-Style-Short-Dress-With-Zero-Side-Sleeves-And-High-Neck-p-132086477.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Franclia-Elegant-Brown-Halter-Neck-Mini-Bodycon-Dress-For-Women-Summer-Shades-Of-Brown-Ruffled-Fit-Waist-Night-Out-Dress-Business-Casual-Party-Attire-p-448159922.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Short-Mini-Midi-Ribbed-Blogger-Dress-p-258503478.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Petite-Women-s-Elegant-Vintage-Slip-Dress-With-Textured-Satin-Lace-Patchwork-Design-Spring-Summer-White-p-469300649.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-Franclia-Contrast-Color-Spaghetti-Strap-Ruched-Strap-Dress-Black-And-White-Color-Block-Bubble-Hem-Slim-Fit-Short-Style-Y2K-Style-Summer-Sleeveless-V-Neck-Dress-Suitable-For-Party-And-Nightclub-Outfits-p-462686529.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-Franclia-Women-s-Elegant-Solid-Color-Lace-Trim-Shoulder-Strap-Dress-Sexy-Pleated-Low-Neckline-And-Waist-Design-Summer-Dress-Summer-Apparel-Holiday-Gown-Elegant-Party-Dress-Women-s-Guest-Dress-Graduation-Gown-Elegant-Dress-Casual-Dress-Women-s-Formal-Dress-Women-s-Office-Wear-Black-Dress-p-457995926.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/ROMWE-Kawaii-Plaid-Overall-Dress-School-p-11615926.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Qadelle-Ladies-Weave-Casual-Vacation-Party-Autumn-Dresses-For-Christmas-p-245466166.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SOLERSUN-Women-s-Summer-Green-Fashion-Sexy-Casual-Elegant-Daily-Outfits-New-Style-Ruched-Deep-V-Neck-Halter-Neck-Sleeveless-Short-Dress-Knitted-Fabric-Ruched-Bodycon-Mini-Dress-For-Summer-Hawaii-Tea-Party-Dress-Bohemian-Style-Beach-Dress-Women-Concert-Outfit-Women-Going-Out-Tropical-Vacation-Date-Night-Women-Outfit-Bodycon-Dresses-For-Ladies-Ruched-Dress-For-Women-Party-Dress-For-Women-Birthday-Outfits-For-Women-p-490374625.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Elegant-Backless-Sleeveless-Short-Camisole-Dress-Non-Stretch-Woven-Fabric-Mini-Dress-Suitable-For-Summer-Parties-And-Sexy-Outfits-p-442462570.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Franclia-Elegant-White-Summer-Square-Neck-Sleeveless-Dress-With-Ruffles-Perfect-For-Bar-Party-Wedding-Guest-Graduation-Office-Wear-Stylish-Double-Layered-Vest-p-462256973.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Short-Green-Brazil-World-Cup-Dress-Casual-Fan-Outfit-2026-p-408380116.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Selianne-Women-s-Casual-Summer-Holiday-Plain-Low-Cut-Waist-Cinched-Dress-Mini-Short-Women-Outfit-p-437571671.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Teardrop-Neckline-Sheath-Dress-With-Slit-Elegance-That-Makes-A-Statement-p-407288499.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/LOTSLUV-Women-s-Spring-Summer-Vacation-V-Neck-Frill-Trim-Flutter-Sleeve-Cinched-Waist-Three-Layer-Tiered-Cake-Dress-With-Tie-Waistband-Vacation-Style-Patchwork-Placement-Print-p-492034538.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-Frenchy-V-Neck-Cap-Sleeve-A-Line-Button-Floral-Print-Vintage-Bohemian-Style-Dress-Suitable-For-Outings-Beach-Vacations-Chic-Casual-Dresses-For-Women-p-453357518.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Sweetra-Women-Elegant-Commute-Asymmetrical-Collar-Solid-Color-Short-Dress-p-120666033.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Lapel-Plunge-Collar-Draped-Rolled-Hem-Dress-p-410424015.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Sylviya-Casual-Floral-Pattern-Women-s-Sleeveless-Knit-Mini-Dress-Summer-Suitable-For-Going-Out-Chic-Dress-Vacation-p-94154140.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-PariChic-Women-s-Seductive-Halter-Neck-Dark-Brown-Pleated-Multi-Layered-Ruffle-Short-Dress-Elegant-Chiffon-Fitted-Waist-Party-Night-Summer-Vacation-Dress-p-450454822.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Summer-Red-And-White-Plaid-Halter-Neck-V-Neck-Tie-Waist-Short-Skirt-Sleeveless-Backless-A-Line-Dress-French-Vintage-Commute-Vacation-Party-Date-Dress-p-466051021.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Floral-Print-Tie-Shoulder-Cami-Dress-Elegant-Summer-p-390366664.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Short-Printed-Dress-With-Adjustable-Straps-And-Elastic-Waistband-p-459957288.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Eloum-a-Women-s-Asymmetric-Collar-Button-Textured-Fabric-Ruffle-Hem-A-Line-Mini-Dress-Casual-Summer-Holiday-p-428453827.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-Frenchy-Sleeveless-Cami-Dress-Summer-Casual-Blue-p-28052032.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Easowa-Beige-Summer-Casual-Brunch-Women-s-Mini-Dress-Round-Neck-Metal-Ring-Decor-Sleeveless-Striped-A-Line-Loose-Elegant-Vintage-Boho-Vacation-Clothes-p-393821130.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Aalyst-Women-s-Polka-Dot-Sheer-Vacation-Dress-p-477649024.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Kit-2-Women-s-Dresses-Short-Tight-Zero-Sleeve-One-Sleeve-Party-Dress-Show-Paty-p-226245680.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Simple-Casual-Elegant-Woolen-Fabric-Evening-Office-Home-Garden-Street-p-65294909.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Qadelle-Women-s-Color-Block-Puff-Hem-Knit-Dress-With-Waist-Cinching-Elegant-Fit-And-Flare-Silhouette-Suitable-For-Wedding-Ceremonies-p-462371647.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Long-Dress-Halter-Neck-High-Neck-Open-Back-Elegant-Party-Summer-Premium-p-449772894.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Faunlyn-Women-s-Vacation-Casual-Geometric-Print-Short-Dress-Bohemian-Clothes-Dresses-For-Women-Summer-p-77906054.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Easowa-Wood-Ear-Trim-Gathered-Ruched-Umbrella-Skirt-Sun-Dress-Baby-Doll-Dress-Spaghetti-Strap-Square-Neck-Dress-100-Pure-Cotton-Traceable-Cotton-Comfortable-Fabric-Casual-Relaxed-Elegant-Commuter-Old-Money-Style-Vacation-Spring-Summer-Women-s-Short-Dress-p-489732434.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-Clasi-Floral-Print-Flounce-Sleeve-Dress-Without-Belt-p-25809425.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Eryvara-Women-s-Elegant-Solid-Color-A-Line-Dress-Summer-p-131913272.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-PariChic-Women-s-Elegant-Lace-Trim-Asymmetric-Hem-Backless-Halter-Mini-Dress-Summer-p-407965603.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-Franclia-Women-s-Coffee-Brown-Seductive-Satin-Halter-Neck-Dress-Pleated-Waist-Summer-Party-Night-Elegant-Birthday-Outfit-Festival-Bridesmaid-Holiday-Wear-p-463717991.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Long-Printed-Premium-Luxury-Elegant-Casual-Party-Dress-With-Ruffled-Fabric-Perfect-For-Weddings-Home-Baby-Showers-And-Dates-p-445614650.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Mistrie-Burgundy-Strapless-Ruched-Bodycon-Mini-Dress-With-Asymmetric-Ruffle-Hem-Wine-Red-Party-Dress-Night-Out-Clubwear-Sexy-Date-Night-Dress-p-473569622.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Elenzga-Elegant-Navy-And-White-Arrow-Print-Halter-Tie-Waist-Flared-Short-Dress-Summer-Holiday-Vacation-Style-High-Quality-Graceful-Design-For-Party-Formal-p-374872006.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/AIJ-Amarilo-Women-s-Tropical-Rainforest-Print-Tassel-Hem-Casual-Dress-Suitable-For-Daily-Commute-And-Vacation-Wear-New-Spring-Summer-Floral-Print-Dress-Elegant-p-104050981.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Duna-Short-Women-s-Dress-With-Elastex-On-The-Back-Evangelical-Fashion-p-218330916.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Elenzga-Women-s-Elegant-Black-And-White-Summer-Casual-School-Back-To-School-Mini-Dress-Embroidered-Horse-Pattern-Collared-V-Neck-Short-Sleeve-Fitted-Dresses-p-435741579.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Warm-Winter-Dress-With-Long-Sleeves-High-Neck-And-Midi-Length-p-470532955.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/C-volie-Summer-Sexy-Polka-Dot-Print-Backless-Dress-p-486630635.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/CAJUNI-Women-s-Boho-Tropical-Black-Beige-Print-V-Neck-Sleeveless-Backless-Mini-Dress-Beach-Vacation-Casual-Summer-Sundress-p-51654087.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Short-Dress-With-Bare-Back-Simple-Elegant-Beach-Fashion-p-170066228.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Breezaya-Women-s-Ditsy-Floral-Ruched-Bust-Tie-Front-Crop-Cami-Mini-Dress-p-39131598.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Long-Sleeved-Dress-With-Elegant-Belt-And-Double-Hem-In-Marrant-Fabric-Dress-With-Ruffles-Perfect-For-S-o-Jo-o-Saint-John-s-Day-And-Winter-p-458988557.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-MOD-Tween-Girls-Elegant-Black-White-Color-Block-2-In-1-Dress-Lantern-Long-Sleeve-Turndown-Collar-Autumn-Outfits-For-Back-To-School-Graduation-Fall-Dresses-p-38453169.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Versatile-Polka-Dot-Sleeveless-Top-Fashion-Elegant-Casual-Front-Short-Back-Long-Bow-Collar-Blouse-p-465993672.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-MOD-Women-s-Army-Green-Solid-Color-Sleeveless-Dress-With-Ruffled-Hem-And-Decorative-Band-p-28578740.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Plus-Size-Dress-High-Neck-Long-Sleeves-Short-Comfortable-Elegant-Sensual-p-435232184.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Elegant-Long-Sleeved-Dress-Short-Sophisticated-Casual-Chic-Distressed-Fitted-Fabric-Elegant-Neckline-Evening-Look-Winter-Gold-Accessory-Fashion-Blogger-S-o-Jo-o-June-Festivals-p-471743450.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/LanaWest-Women-s-Summer-Vintage-Style-Navy-Blue-Red-Plaid-Shirt-Collar-Short-Sleeve-Tie-Waist-Single-Breasted-Ruffle-Hem-Casual-Dress-p-463093655.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-LUNE-Women-s-Casual-Rhombus-Print-Short-Dress-Autumn-Casual-p-297920125.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Elio-Closet-Women-s-Elegant-Off-Shoulder-Sexy-Deep-V-Tie-Waist-A-Line-Mini-Dress-Yellow-Graceful-Ladies-Short-Dress-Suitable-For-Summer-Outings-Beach-Vacation-Festivals-Graduation-Ceremonies-Parties-Wedding-Guest-Attire-p-431135214.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Short-Fitted-Dress-With-Open-Back-Adjustable-Neckline-Deep-V-Neck-Suplex-Fabric-p-463008188.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Casual-Solid-Color-Waist-Cinched-Long-Sleeve-Short-Dress-Elegant-Spring-p-144148226.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Sweetra-Sleeveless-Yellow-Layered-Cake-Hem-Cute-Mini-Dress-p-100340941.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/SHEIN-Priv-Allover-Print-One-Shoulder-Batwing-Sleeve-Dress-p-16868303.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Elegant-Fashion-Fitted-Versatile-PU-Leather-Sleeveless-Dress-Spring-Party-Black-p-356678509.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/DVSLOE-Women-s-Elegant-Y2K-Summer-Leopard-Print-7-Ball-Graphic-Strapless-Bodycon-Mini-Dress-Brown-Black-Casual-Streetwear-Ruched-Party-Dress-Suitable-For-Holiday-Vacations-Party-Gatherings-Street-Outings-Daily-Commuting-Dinner-Dates-Summer-Outfits-For-Women-Going-Out-Dresses-For-Women-Leopard-Print-Dresses-Summer-Dresses-For-Women-p-460912402.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Strapless-Leather-Dress-Short-Tight-Sexy-Fashion-Stylish-Elegant-Modern-p-82539229.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Medorina-Women-s-Elegant-Commuter-Color-Block-Trim-Fitted-Mid-Length-Dress-p-169379549.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Franclia-New-Arrival-Elegant-Printed-V-Neck-Tie-Waist-Dress-p-457905697.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Midi-Tailored-Dress-With-Side-Tie-Elegant-Evangelical-Fashion-p-467422122.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Women-s-Short-Floral-Crepe-Dress-With-Adjustable-Straps-And-Gathered-Neckline-Lightweight-Comfortable-Flared-Summer-Fashion-p-462634246.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/HoloChill-Women-s-Young-Influencer-Casual-Elegant-Style-Solid-Color-Sleeveless-Spaghetti-Strap-Short-Loose-Dress-Women-s-Casual-Sleeveless-Backless-A-Line-Short-Dress-Woven-Fabric-Elegant-Flared-Hem-Summer-Strappy-Dress-Summer-Casual-2026-New-Sleeveless-Dress-Women-s-Summer-Dress-Holiday-Dress-Elegant-Party-Dress-Women-s-Beach-Dress-Women-s-Elegant-Dress-Women-s-Beach-Vacation-Outfit-Women-s-Casual-Dress-p-471880340.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/EMERY-ROSE-Women-s-Floral-Print-Cutout-V-Neck-Ruffled-Hem-Long-Sleeve-Mini-Dress-Summer-Dresses-For-Women-Casual-Holiday-Outfits-Ountry-Concert-Outfit-Country-p-42870811.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  },
+  {
+    "competitor": "shein",
+    "country": "BR",
+    "url": "https://br.shein.com/Sweetra-Women-Summer-Burgundy-Gold-Winter-70s-Retro-Party-Dress-Backless-Chain-Decor-Plunging-Neckline-Ruched-Mini-Spaghetti-Strap-Bodycon-Dress-p-452080476.html",
+    "note": "discovered via Process 1 deep-dive (P1→P2 wiring)"
+  }
+]

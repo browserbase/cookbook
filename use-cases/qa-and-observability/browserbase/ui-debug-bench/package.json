@@ -1,0 +1,26 @@
+{
+  "name": "ui-debug-bench",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Evals for fixing web apps from browser evidence \u2014 probe-driven debugging benchmark",
+  "scripts": {
+    "eval": "tsx src/cli.ts",
+    "check": "tsc --noEmit",
+    "test": "tsc --noEmit && node --test tests/*.test.cjs",
+    "report": "tsx src/cli.ts --report-only"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "0.124.0",
+    "@browserbasehq/stagehand": "4.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "browse": "0.9.6",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

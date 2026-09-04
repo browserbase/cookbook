@@ -1,0 +1,40 @@
+{
+  "study": "Guest-only checkout friction teardown — grocery/marketplace competitors",
+  "run_date": "2026-07-09",
+  "method": "Browserbase advanced-stealth + residential-proxy sessions, market pinned to Atlanta GA (proxy resolves to metro level, not exact zip), driven live via browse CLI by parallel agents. No accounts, no orders placed.",
+  "headline_finding": "NONE of the four competitors offer true guest checkout. Every one forces account creation before the payment step is reachable. This means (a) forced-account is the dominant new-user friction metric, and (b) payment-method matrices for these sites require authenticated sessions — the logged-in phase.",
+  "forced_account_ranking_worst_to_least": [
+    {"retailer": "Kroger", "wall": "add-to-cart", "note": "Hardest — tiles read 'Sign In to Add'; /cart redirects to login. Guest cannot even build a cart or see a subtotal.", "steps_from_cart": 0},
+    {"retailer": "Amazon", "wall": "checkout button", "note": "Can build cart + see subtotal as guest; 'Proceed to checkout' redirects to /ap/signin in one click. No guest option.", "steps_from_cart": 1},
+    {"retailer": "Instacart", "wall": "open-cart / checkout", "note": "Can build a persistent cart; login modal fires on 'View Cart'. Itemized fees gated behind login.", "steps_from_cart": 1},
+    {"retailer": "Target", "wall": "cart", "note": "Only CTA is 'Sign in to check out'; unrecognized email escalates to forced 'Create an account' (first/last name + passkey/password). Also $35 shipping minimum.", "steps_from_cart": 2}
+  ],
+  "payment_methods_matrix": {
+    "note": "Guest sessions could only fully observe Instacart (via public help pages). Amazon/Target/Kroger payment methods sit behind the account wall and need the logged-in phase to verify directly; values below marked 'auth-gated' were not observable as a guest.",
+    "instacart": {"credit_debit": true, "apple_pay": true, "google_pay": true, "paypal": true, "venmo": true, "cash_app": true, "bnpl": "Klarna (no Afterpay)", "ebt_snap": true, "hsa_fsa": true, "gift_card": true, "own_wallet": "Instacart Card Network (Pay with Points), OTC Network card", "rejected": "cash, store gift cards, international"},
+    "amazon": "auth-gated (footer references Amazon Visa/Store Card/Secured/Business + Shop with Points; historically Affirm BNPL, EBT/SNAP on Fresh, HSA/FSA, no Apple/Google Pay/PayPal — verify logged-in)",
+    "target": "auth-gated (historically all cards, Target Wallet, Apple/Google/Samsung Pay, PayPal, Affirm/Afterpay/Klarna/Sezzle/Zip, HSA/FSA; EBT in-store only — verify logged-in)",
+    "kroger": "auth-gated (historically cards, Kroger Pay, PayPal, EBT/SNAP online; no Apple/Google Pay online; HSA/FSA pharmacy-only — verify logged-in)"
+  },
+  "ebt_signal_pre_auth": {
+    "note": "EBT/SNAP eligibility is surfaced on product tiles BEFORE login on the grocery sites — a capturable payments signal even guest-only.",
+    "target": "All milk tiles tagged 'SNAP EBT eligible'",
+    "kroger": "Milk tiles carry 'SNAP EBT' labels + inline digital coupons",
+    "instacart": "SNAP-Eligible filter chip; Costco warehouse items not individually flagged",
+    "amazon": "Not shown on the non-grocery items sampled"
+  },
+  "prices_sampled_whole_milk_1gal": {
+    "kroger_2pct": "$2.79",
+    "target_good_and_gather_vitd": "$2.99",
+    "instacart_costco_kirkland": "$3.83",
+    "note": "Different markets/pack sizes; illustrative only, not a like-for-like price comparison"
+  },
+  "market_geo_caveat": "Browserbase geo proxies pin to metro level, not exact zip. Target resolved to Jacksonville FL 32224; Amazon 30318, Kroger ~30306, Instacart 30039 (Atlanta metro). For a published benchmark, either accept metro-level or set the delivery address explicitly in the logged-in phase.",
+  "implication_for_next_phase": "Logged-in phase is REQUIRED to complete the payment-methods matrix and the field-count/steps-to-purchase metrics for Amazon, Target, Kroger — all three wall the payment screen behind an account. Instacart's methods are already documented. The forced-account ranking above is a finished, publishable friction finding on its own.",
+  "sessions": {
+    "target": "https://www.browserbase.com/sessions/2d44f527-57ea-4011-91fd-9c667b886437",
+    "amazon": "https://www.browserbase.com/sessions/f30b91f5-d566-45b0-a351-91f51787dd6c",
+    "kroger": "https://www.browserbase.com/sessions/35df0318-4722-4161-a7e7-8112cad17cb6",
+    "instacart": "https://www.browserbase.com/sessions/c99e7b68-933c-4f62-8675-541682fd78e8"
+  }
+}

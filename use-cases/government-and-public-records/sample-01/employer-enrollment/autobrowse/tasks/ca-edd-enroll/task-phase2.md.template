@@ -1,0 +1,55 @@
+# California EDD Employer Services Online — Phase 2 (post-activation login)
+
+## Goal
+
+The orchestrator has already clicked the activation link from the AgentMail inbox. You start this run on EDD's **"Enrollment Verification"** page with body text **"Email Confirmed — Go to Employer Services Online and select your service to log in."** Your job: log in with the credentials registered in Phase 1, reach a post-authentication state (dashboard / service selection), and STOP. Do not click into any sub-service that triggers a transactional flow.
+
+This is NOT a fresh enrollment. The account already exists. Do NOT click any `#enroll-button` or fill `#txtUserID`/`#txtPassword`/etc. — those are the NEW-account form fields you used in Phase 1.
+
+## Credentials (from Phase 1)
+
+- Username: `$TEST_USERNAME`
+- Password: `BbDemo2026!`
+- Security-question answers (if challenged): Movie→Avatar, Food→Pizza, Animal→Dog, Character→Superman
+
+## CRITICAL GUARDRAILS
+
+You are now an authenticated employer. Do not click into any service that files taxes, submits claims, pays anything, or transmits data to EDD. Specifically don't click into "e-Services for Business", "eWOTC", or "SIDES E-Response" — those open transactional surfaces. Reaching the **service selection / dashboard** screen is the success endpoint.
+
+## Workflow
+
+1. Confirm starting state. Call `browse get title --cdp '...'` — should be "Enrollment Verification". Call `browse get text "main" --cdp '...'` — should contain "Email Confirmed". If neither matches, emit `reason: error` with `notes` describing what you see.
+2. Reach the MFA login page. **"Employer Services Online" is a LINK, not a button** (run-020 finding). Two options:
+   - Snapshot, find the link ref labeled "Employer Services Online", and click that ref.
+   - If that lands on the ESO Home index page (`eddservices.edd.ca.gov/index.html`) instead of the login form, click any service link from the snapshot (e.g. a ref under "e-Services for Business"). That triggers an SSO redirect through MFA, which lands you on the "Employer Services Online Login" page at `eddservices.mfa.edd.ca.gov/...`.
+   - `browse open ...` direct nav to the MFA URL does NOT work reliably here — must trigger via a click.
+3. On the login page (title "Employer Services Online Login"), fill the credentials and click **`#login-button`** (the blue "Log in" button, NOT the gray `#enroll-button`):
+   - `browse fill "#user-name-input" "$TEST_USERNAME" --cdp '...'`
+   - `browse fill "#password-input" "BbDemo2026!" --cdp '...'`
+   - `browse click "#login-button" --cdp '...'`
+4. Wait for the post-login state. Possible outcomes:
+   - **Email OTP entry page** (title "One-Time Password Submission" or body text "Enter the verification code you received at &lt;agent-email&gt;" with a code input field): the system auto-sent an email OTP to your AgentMail inbox. **Emit `reason: awaiting_email_otp` and STOP.** The orchestrator will fetch the code and continue with Phase 3.
+   - **MFA factor selection / enrollment prompt** (asks you to choose/register a 2nd factor like SMS or TOTP — no code field yet): emit `reason: mfa_enrollment_required` (or `sms_gate` if SMS-only). Demo halts here gracefully.
+   - **Dashboard / service-selection page** (title contains "Employer Services Online" or "Select" or "My Profile", with multiple service links and no OTP prompt): SUCCESS. Take a snapshot, screenshot, capture URL+title.
+   - **Security questions challenge**: answer using the 4 Q/A pairs from Phase 1. Then re-evaluate the next page.
+   - **Login error** (wrong creds): emit `reason: error` with `notes: "CSIAH0303E or similar — credentials don't match registered account"`.
+   - **Akamai "Access Denied"**: emit `reason: bot_challenge`.
+
+## Output
+
+Single JSON code block as your FINAL message:
+
+```json
+{
+  "success": true,
+  "phase": "2",
+  "stopped_at_step": "<e.g. 'Email OTP entry'>",
+  "stopped_at_url": "<current url>",
+  "reason": "awaiting_email_otp | dashboard_reached | mfa_enrollment_required | sms_gate | bot_challenge | error",
+  "post_login_observations": ["..."],
+  "username_used": "$TEST_USERNAME",
+  "notes": "<optional>"
+}
+```
+
+Success conditions: `reason: awaiting_email_otp` (handoff to orchestrator for Phase 3) OR `reason: dashboard_reached` (demo finish line).

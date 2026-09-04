@@ -1,0 +1,56 @@
+@import "tailwindcss";
+
+:root {
+  --workspace_app-bg: #ffffff;
+  --workspace_app-bg-secondary: #f7f6f3;
+  --workspace_app-text: #37352f;
+  --workspace_app-text-secondary: #787774;
+  --workspace_app-border: #e3e2de;
+  --workspace_app-hover: #efefef;
+  --workspace_app-blue: #2383e2;
+  --workspace_app-blue-bg: #e8f0fe;
+  --workspace_app-sidebar: #fbfbfa;
+}
+
+body {
+  font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif;
+  color: var(--workspace_app-text);
+  background: var(--workspace_app-bg);
+}
+
+/* Workspace App-style scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #d3d1cb;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Typing animation */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.cursor-blink::after {
+  content: '|';
+  animation: blink 1s infinite;
+  color: var(--workspace_app-blue);
+}
+
+/* Pulse for live indicator */
+@keyframes pulse-dot {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+.pulse-dot {
+  animation: pulse-dot 1.5s ease-in-out infinite;
+}

@@ -1,0 +1,38 @@
+[project]
+name = "cerebras-docs-checker"
+version = "0.1.0"
+description = "AI-powered documentation checker using Cerebras LLMs, Stagehand, and Browserbase"
+readme = "README.md"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "httpx",
+    "openai",
+    "browserbase==1.18.1",
+    "playwright==1.62.0",
+    "pydantic",
+    "python-dotenv",
+    "deepagents==0.7.5",
+    "langchain-mcp-adapters==0.3.2",
+    "langchain-openai==1.4.3",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0.0",
+    "black>=23.0.0",
+    "ruff>=0.1.0",
+]
+
+[tool.uv]
+package = false
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311']
+
+[tool.ruff]
+line-length = 100
+target-version = "py39"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]

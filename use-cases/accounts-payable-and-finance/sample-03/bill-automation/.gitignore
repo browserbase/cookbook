@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+screenshots/
+.chrome-profile/
+.bb-session.json
+*.log

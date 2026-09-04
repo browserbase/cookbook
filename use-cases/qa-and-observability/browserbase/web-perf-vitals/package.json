@@ -1,0 +1,26 @@
+{
+  "name": "web-perf-vitals-demo",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Measure real web performance metrics (LCP, FCP, TTFB, CLS) using Stagehand Agent custom tools — without AI thinking time polluting the results",
+  "scripts": {
+    "demo": "tsx src/perf-vitals-agent.ts",
+    "demo:local": "STAGEHAND_ENV=LOCAL tsx src/perf-vitals-agent.ts",
+    "demo:bb": "STAGEHAND_ENV=BROWSERBASE tsx src/perf-vitals-agent.ts"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "ai": "7.0.87",
+    "dotenv": "17.4.2",
+    "zod": "4.5.4",
+    "@ai-sdk/openai": "4.0.53"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.0",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "name": "county-court-browserbase-demo",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "tsx src/main.ts",
+    "assess": "tsx src/main.ts",
+    "build": "tsc --noEmit",
+    "test": "tsc --noEmit && node --test tests/*.test.cjs"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "dotenv": "17.4.2",
+    "zod": "4.4.3",
+    "@browserbasehq/sdk": "2.19.1"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

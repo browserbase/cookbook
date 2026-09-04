@@ -1,0 +1,25 @@
+{
+  "name": "cookbook-browserbase-examples",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "adv_stealth_ex": "tsx adv_stealth_ex.ts",
+    "dewa": "tsx dewa.ts",
+    "one_healthcare": "tsx one_healthcare.ts",
+    "ramp": "tsx ramp.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.0",
+    "playwright-core": "1.62.1",
+    "dotenv": "17.4.2"
+  },
+  "devDependencies": {
+    "tsx": "4.23.13",
+    "typescript": "7.0.2",
+    "@types/node": "26.4.0"
+  }
+}

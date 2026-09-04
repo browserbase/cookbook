@@ -1,0 +1,25 @@
+You are on the Square customer directory (already authenticated):
+https://app.squareup.com/dashboard/customers/directory
+
+Goal: extract EVERY customer by reading the directory directly. Do NOT use the "Import / Export"
+button — interface with the page like a person would.
+
+The customers are in a table with columns such as Name, Email, and Phone. The table is long and only
+renders the rows currently in view — rows unload as you scroll — so work through it incrementally:
+
+1. If the page shows a total customer count, note it as your completeness target.
+2. Starting at the top, record every visible row: name, email, phone, and a marketing-consent flag.
+   Use an empty string for any field that's blank.
+   - marketingConsent: if the directory exposes an email/SMS subscription or marketing-reachable
+     indicator for the row, capture true/false; if no such column is shown, leave it "".
+3. Scroll down by about one screenful, record any newly revealed rows, and keep one running list.
+   Do NOT re-add a customer you already captured (dedupe by name + email).
+4. Repeat scroll → record until you reach the bottom and no new customers appear (or your list size
+   matches the total from step 1).
+5. Do not stop early — this list may be very large.
+
+NOTE: marketing consent is often NOT a directory column — the reliable source is the customer API /
+export (which carries subscription status). Capturing it here is best-effort; if the scrape can't see
+it, that's expected and we'll wire the proper source in a follow-up.
+
+Return the complete, de-duplicated list of customers. Work autonomously; do not ask follow-up questions.

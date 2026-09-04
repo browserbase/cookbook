@@ -1,0 +1,20 @@
+[build-system]
+requires = ["hatchling>=1.24"]
+build-backend = "hatchling.build"
+
+[project]
+name = "retailer-stagehand-v4-demo"
+version = "1.0.0"
+description = "Stagehand v4 + Claude Agent SDK: pause browser automation, call an internal API, inject the result, resume the same session."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "stagehand==4.0.2",
+  "claude-agent-sdk>=0.2.136",
+]
+
+[project.scripts]
+demo = "retail_demo.__main__:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/retail_demo"]

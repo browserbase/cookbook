@@ -1,0 +1,17 @@
+{
+  "manifest_version": 3,
+  "name": "Sample Organization RPass Agent (delegated key)",
+  "version": "1.0",
+  "description": "Demo recipient keypair and credential unwrapping for a local trusted-server simulation. Synthetic credentials only.",
+  "content_scripts": [
+    {
+      "matches": [
+        "https://the-internet.herokuapp.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
+      "run_at": "document_idle"
+    }
+  ]
+}

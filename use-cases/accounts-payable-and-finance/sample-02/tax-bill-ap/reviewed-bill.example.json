@@ -1,0 +1,27 @@
+{
+  "document": { "sha256": "REPLACE_WITH_SHA256_OF_REVIEWED_PDF" },
+  "review": {
+    "reviewer": "REPLACE_WITH_REVIEWER_NAME",
+    "reviewedAt": "REPLACE_WITH_UTC_ISO_TIMESTAMP",
+    "confirmedFieldsMatchDocument": false
+  },
+  "bill": {
+    "vendorName": "Example County Treasurer",
+    "vendorAddress": {
+      "address_line_1": "123 Example Road",
+      "city": "Example City",
+      "state": "CA",
+      "postal_code": "01234",
+      "country": "US"
+    },
+    "vendorEmail": "treasurer@example.com",
+    "invoiceNumber": "0000123",
+    "amount": "123.45",
+    "currency": "USD",
+    "issuedAt": "2026-08-01",
+    "dueAt": "2026-12-01",
+    "propertyAddress": "456 Example Avenue",
+    "parcelId": "000-123-456",
+    "taxPeriod": "2026 synthetic annual installment"
+  }
+}

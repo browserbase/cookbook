@@ -1,0 +1,27 @@
+Navigate to this Square customer directory page (already authenticated):
+https://app.squareup.com/dashboard/customers/directory
+Your goal is to export customer notes by triggering Square's export API.
+## Step 1: Capture the raw network traffic
+Before clicking anything, inject a fetch interceptor to capture full request/response bytes:
+```js
+window._cap = [];
+const _origFetch = window.fetch;
+window.fetch = async (...args) => {
+  const res = await _origFetch(...args);
+  const clone = res.clone();
+  clone.arrayBuffer().then(buf => window._cap.push({ url: args[0], options: args[1], body: new Uint8Array(buf) }));
+  return res;
+};
+```
+Then click "Import / Export" → "Export notes" → keep "All customers" → click Export. Wait for the dialog to close.
+## Step 2: Extract the Export ID
+Inspect `window._cap` for the `CreateExport` call. Decode the protobuf response bytes to extract the export ID string (a length-delimited field containing an alphanumeric ID).
+## Step 3: Poll ExportStatus until complete
+Poll the `ExportStatus` endpoint every 5 seconds using the captured request as a template. Decode each response and check for status field = 4 (complete) or status = 3. The response bytes will be short (6-8 bytes) while processing.
+## Step 4: Trigger the download
+Once status = 4, navigate directly to:
+```
+https://app.squareup.com/dashboard/exports/{exportId}/download
+```
+**Important:** This URL triggers an automatic browser file download. The page may show a spinner or a "not found" error visually — this is normal and does NOT mean the download failed. The file downloads silently in the background. Treat a successful HTTP navigation to this URL (no network error) as confirmation that the download was triggered successfully.
+Report the export ID and confirm the download URL used.

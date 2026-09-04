@@ -1,0 +1,21 @@
+{
+  "name": "browserbase-1password-guide",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "playwright": "tsx playwright.ts",
+    "stagehand": "tsx stagehand.ts"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.1",
+    "@browserbasehq/stagehand": "4.0.2",
+    "playwright-core": "1.63.0",
+    "dotenv": "16.6.1"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "typescript": "7.0.2",
+    "tsx": "^4.23.1"
+  }
+}

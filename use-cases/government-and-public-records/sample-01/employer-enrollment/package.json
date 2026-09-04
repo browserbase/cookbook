@@ -1,0 +1,24 @@
+{
+  "name": "ca-edd-demo",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "orchestrator": "tsx src/orchestrator.ts",
+    "check:orchestrator": "tsx src/orchestrator.ts --check",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run && node --test tests/cdp-logging.cjs tests/cdp-transport.cjs tests/invocation-results.cjs tests/setup.cjs && npm run typecheck"
+  },
+  "dependencies": {
+    "agentmail": "0.5.21",
+    "playwright": "1.62.1",
+    "zod": "4.5.4",
+    "dotenv": "17.4.2"
+  },
+  "devDependencies": {
+    "tsx": "4.23.13",
+    "typescript": "7.0.2",
+    "@types/node": "26.4.0",
+    "vitest": "4.1.11"
+  }
+}

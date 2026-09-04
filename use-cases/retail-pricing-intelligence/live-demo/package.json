@@ -1,0 +1,14 @@
+{
+  "name": "retailer-payments-live-demo",
+  "private": true,
+  "type": "module",
+  "description": "RQ1 payment-discovery agent fleet \u2014 reusable Browserbase agents, launched in parallel from the terminal",
+  "scripts": {
+    "sync": "node create-agents.mjs",
+    "sync:dry": "node create-agents.mjs --dry-run",
+    "run": "node run-all.mjs"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.1"
+  }
+}

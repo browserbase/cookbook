@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Payment Experience Competitive Benchmark · Phase 1 · Retailer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --brand:#F03603; --black:#100D0D; --ink:#1c1a1a; --gray:#6b6969; --gray-d:#514F4F;
+    --line:#e5e3e3; --paper:#fff; --wash:#faf9f8;
+    --s5:#8fc64d; --s4:#c3dd97; --s3:#F4BA41; --s2:#ef9a4a; --s1:#F03603; --na:#e9e7e6;
+    --mono:'JetBrains Mono',ui-monospace,monospace;
+  }
+  @page { size: letter; margin: 0.5in; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family:Inter,-apple-system,sans-serif; color:var(--ink); background:#f2f1ef; line-height:1.55; }
+  .doc { max-width: 1000px; margin: 0 auto; background:var(--paper); }
+  section { padding: 54px 64px; border-bottom:1px solid var(--line); }
+  section:last-child { border-bottom:none; }
+
+  .eyebrow { display:flex; align-items:center; gap:11px; font-family:var(--mono); font-size:10.5px;
+    letter-spacing:.2em; text-transform:uppercase; color:var(--gray-d); margin-bottom:20px; }
+  .eyebrow::before { content:""; width:26px; height:3px; background:var(--brand); }
+  h1 { font-size:40px; font-weight:900; letter-spacing:-.025em; line-height:1.05; }
+  h2 { font-size:26px; font-weight:800; letter-spacing:-.02em; margin-bottom:8px; }
+  h3 { font-size:17px; font-weight:700; letter-spacing:-.01em; }
+  p { font-size:14.5px; color:var(--ink); }
+  .muted { color:var(--gray); }
+  .small { font-size:12.5px; }
+
+  /* cover */
+  .cover { background:var(--black); color:#fff; min-height:92vh; display:flex; flex-direction:column;
+    justify-content:space-between; padding:64px; }
+  .cover .eyebrow { color:#c9c6c4; }
+  .cover .eyebrow::before { background:var(--brand); }
+  .cover h1 { font-size:56px; max-width:15ch; }
+  .cover .sub { font-size:18px; color:#c9c6c4; margin-top:22px; max-width:60ch; }
+  .cover .meta { display:flex; gap:48px; flex-wrap:wrap; font-family:var(--mono); font-size:12px; color:#c9c6c4; }
+  .cover .meta b { color:#fff; display:block; font-weight:600; margin-bottom:4px; letter-spacing:.04em; }
+  .cover .tag { display:inline-block; font-family:var(--mono); font-size:11px; letter-spacing:.14em;
+    text-transform:uppercase; border:1px solid #3a3636; color:#e6e3e1; padding:5px 12px; border-radius:2px; }
+  .phasebar { display:flex; gap:4px; margin-top:26px; }
+  .phasebar span { flex:1; height:5px; background:#3a3636; border-radius:2px; }
+  .phasebar span.on { background:var(--brand); }
+
+  /* generic blocks */
+  .lead { font-size:17px; line-height:1.6; color:var(--ink); max-width:70ch; }
+  .grid2 { display:grid; grid-template-columns:1fr 1fr; gap:22px; }
+  .callout { border:1px solid var(--line); border-left:4px solid var(--brand); background:var(--wash);
+    padding:22px 26px; border-radius:0 6px 6px 0; margin-top:8px; }
+  .callout h3 { margin-bottom:8px; }
+  .kpis { display:flex; gap:16px; flex-wrap:wrap; margin:24px 0 4px; }
+  .kpi { flex:1; min-width:180px; border:1px solid var(--line); border-radius:6px; padding:16px 18px; }
+  .kpi .n { font-size:30px; font-weight:900; letter-spacing:-.03em; }
+  .kpi .l { font-family:var(--mono); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase; color:var(--gray-d); margin-top:4px; }
+
+  /* tables */
+  table { width:100%; border-collapse:collapse; font-size:13px; margin-top:18px; }
+  th,td { text-align:left; padding:10px 12px; border-bottom:1px solid var(--line); vertical-align:top; }
+  thead th { font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--gray-d); border-bottom:2px solid var(--black); }
+  tbody th { font-weight:700; font-size:13px; }
+  .rowlabel { font-weight:600; }
+  .cell { text-align:center; font-weight:700; font-size:13px; }
+  .sc { text-align:center; font-weight:800; color:#1c1a1a; border-radius:4px; }
+  .s5{background:var(--s5)} .s4{background:var(--s4)} .s3{background:var(--s3)} .s2{background:var(--s2);color:#fff} .s1{background:var(--s1);color:#fff} .na{background:var(--na);color:#8a8785}
+  .y{color:#4e7d1e;font-weight:800} .n{color:#c23b12;font-weight:800} .part{color:#b07d15;font-weight:800}
+  .wmcol { border-left:2px solid #f6a985; border-right:2px solid #f6a985; }
+  th.wmcol { border-bottom-color:var(--brand); background:#fff5f1; }
+  .cell.wmcol, td.small.wmcol { background:#fff5f1; }
+  .wmtag { font-family:var(--mono); font-size:9px; letter-spacing:.1em; color:var(--brand); display:block; font-weight:600; margin-top:2px; }
+  .legend { display:flex; gap:14px; flex-wrap:wrap; font-family:var(--mono); font-size:10.5px; color:var(--gray-d); margin-top:12px; align-items:center; }
+  .legend i { display:inline-block; width:12px; height:12px; border-radius:3px; margin-right:5px; vertical-align:-1px; }
+
+  /* retailer teardown */
+  .rt { border:1px solid var(--line); border-radius:8px; overflow:hidden; margin-top:22px; }
+  .rt-head { display:flex; justify-content:space-between; align-items:center; padding:16px 22px; background:var(--wash); border-bottom:1px solid var(--line); }
+  .rt-head .name { font-size:18px; font-weight:800; }
+  .rt-head .score { font-family:var(--mono); font-size:12px; color:var(--gray-d); }
+  .rt-body { padding:20px 22px; }
+  .rt-body .row { display:grid; grid-template-columns:150px 1fr; gap:16px; padding:9px 0; border-bottom:1px dashed var(--line); }
+  .rt-body .row:last-of-type { border-bottom:none; }
+  .rt-body .k { font-family:var(--mono); font-size:10.5px; letter-spacing:.08em; text-transform:uppercase; color:var(--gray-d); padding-top:2px; }
+  .rt-body .v { font-size:13.5px; }
+  .quote { font-size:12.5px; color:var(--gray-d); font-style:italic; border-left:2px solid var(--line); padding-left:10px; margin:5px 0; }
+  .prov { display:inline-flex; align-items:center; gap:6px; font-family:var(--mono); font-size:11px; color:var(--brand); text-decoration:none; }
+  .shot { margin-top:14px; border:1px dashed var(--line); border-radius:6px; background:var(--wash); padding:14px 16px;
+    font-family:var(--mono); font-size:11px; color:var(--gray); }
+  .figs { display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:16px; }
+  .fig { border:1px solid var(--line); border-radius:6px; overflow:hidden; break-inside:avoid; }
+  .fig img { width:100%; display:block; border-bottom:1px solid var(--line); }
+  .fig figcaption { font-family:var(--mono); font-size:10px; line-height:1.4; color:var(--gray-d); padding:8px 10px; letter-spacing:.02em; }
+  .fig .pf { color:var(--brand); font-weight:600; }
+  .proofimg { width:100%; border:1px solid var(--line); border-radius:6px; margin-top:12px; display:block; }
+
+  .bp { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:20px; }
+  .bp .item { border:1px solid var(--line); border-radius:6px; padding:16px 18px; }
+  .bp .item .t { font-weight:700; font-size:14px; margin-bottom:5px; }
+  .bp .item .who { font-family:var(--mono); font-size:10px; letter-spacing:.1em; text-transform:uppercase; color:var(--brand); margin-bottom:8px; }
+  .opps { counter-reset:o; margin-top:18px; }
+  .opps .o { display:grid; grid-template-columns:34px 1fr; gap:14px; padding:14px 0; border-bottom:1px solid var(--line); }
+  .opps .o:last-child{border-bottom:none;}
+  .opps .o::before { counter-increment:o; content:counter(o); font-family:var(--mono); font-weight:700; font-size:18px; color:var(--brand); }
+  .roadmap { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin-top:18px; }
+  .rq { display:flex; gap:12px; align-items:flex-start; border:1px solid var(--line); border-radius:6px; padding:12px 14px; }
+  .rq .num { font-family:var(--mono); font-size:11px; color:var(--gray-d); font-weight:600; min-width:34px; }
+  .rq.done { border-color:var(--s5); background:#f4f9ec; }
+  .rq .st { font-family:var(--mono); font-size:9.5px; letter-spacing:.1em; text-transform:uppercase; padding:2px 7px; border-radius:2px; margin-left:auto; white-space:nowrap; }
+  .rq.done .st { background:var(--s5); color:#1c1a1a; }
+  .rq .st.pend { background:#eee; color:#8a8785; }
+  footer { padding:30px 64px; background:var(--black); color:#9a9694; font-family:var(--mono); font-size:11px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:12px; }
+  @media print { body{background:#fff;} .doc{max-width:none;} section{padding:34px 8px;} .cover{min-height:auto;padding:48px 8px;} .rt,.kpi,.bp .item{break-inside:avoid;} }
+</style>
+</head>
+<body>
+<div class="doc">
+
+  <section class="cover">
+    <div>
+      <div class="eyebrow">Payments Competitive Intelligence · Prepared for Retailer</div>
+      <h1>The Payment Experience Benchmark.</h1>
+      <p class="sub">How Amazon, Instacart, Costco and a representative Shopify merchant tell a shopper what they can pay with — and what they will actually pay. Phase 1 of 10: Payment Discovery.</p>
+      <div class="phasebar"><span class="on"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
+    </div>
+    <div class="meta">
+      <div><b>PHASE</b>RQ1 · Payment Discovery</div>
+      <div><b>STOREFRONTS</b>4 agent-run · Retailer pending</div>
+      <div><b>METHOD</b>Live sites · Browserbase agents</div>
+      <div><b>CAPTURED</b>July 2026</div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Executive Summary</div>
+    <h2>Card savings get computed to the cent. Benefit savings get a checkbox.</h2>
+    <p class="lead">Every storefront in this study puts a precise dollar figure on a card-linked offer before the shopper reaches checkout. Amazon's cart states the post-promotion price outright. Not one of them does the equivalent for a benefit tender. SNAP, HSA/FSA and OTC appear as eligibility flags — a badge, a filter, a help article — and never as an amount. The shopper learns that an item <em>can</em> be bought with a benefit, never what they would pay if they did.</p>
+    <p class="lead" style="margin-top:14px;">Costco states the constraint in its own words: <em>"Costco cannot identify specific item eligibility prior to a transaction being tendered."</em> That is the industry position rendered explicit — eligibility is resolved at the register, not in the aisle.</p>
+    <div class="kpis">
+      <div class="kpi"><div class="n">4 / 4</div><div class="l">Quantify a card offer in dollars</div></div>
+      <div class="kpi"><div class="n">0 / 4</div><div class="l">Quantify a benefit tender</div></div>
+      <div class="kpi"><div class="n">349</div><div class="l">Agent steps across the fleet</div></div>
+      <div class="kpi"><div class="n">35.1<span style="font-size:16px">m</span></div><div class="l">Live browsing time</div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Method &amp; Scope</div>
+    <h2>Four storefronts, four agents, every claim traceable to a session replay.</h2>
+    <p class="lead">One Browserbase agent per storefront navigated the live site as an unauthenticated shopper — homepage, a grocery search, a health/OTC search, product pages, and the cart — without logging in, checking out, or submitting payment. Each returned a structured findings object plus a prose narrative. Costco alone took 84 steps over 13.7 minutes; Instacart took 155 steps over 11.0 minutes.</p>
+    <p class="lead" style="margin-top:14px;"><b>Two limits are worth stating plainly.</b> First, Retailer is not scored in this pass. No agent run completed against Retailer.com, so every Retailer cell below is marked <span class="na" style="padding:1px 6px;border-radius:3px;">n/a</span> rather than estimated — the client's own column will be filled when that run lands. Second, Amazon and Instacart both failed on the first attempt against bot protection and completed only on a retry pass; the findings reported here are from the successful runs.</p>
+    <p class="lead" style="margin-top:14px;">Instacart was studied through the Costco storefront on Instacart, so its findings describe the Instacart payment layer rather than Costco's own. Allbirds stands in as a representative Shopify merchant to characterise the Shop Pay stack, not as a competitor in its own right.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Payment Discovery Scorecard</div>
+    <h2>Scored 1–5 across six discovery dimensions.</h2>
+    <table>
+      <thead><tr>
+        <th>Dimension</th>
+        <th class="wmcol">Retailer<span class="wmtag">CLIENT</span></th>
+        <th>Amazon</th><th>Instacart</th><th>Costco</th><th>Shopify</th>
+      </tr></thead>
+      <tbody>
+        <tr><th>Payment-method breadth</th><td class="sc na wmcol">—</td><td class="sc s4">4</td><td class="sc s5">5</td><td class="sc s2">2</td><td class="sc s4">4</td></tr>
+        <tr><th>Payment-method transparency (pre-checkout)</th><td class="sc na wmcol">—</td><td class="sc s3">3</td><td class="sc s3">3</td><td class="sc s3">3</td><td class="sc s2">2</td></tr>
+        <tr><th>Benefit tender support (online)</th><td class="sc na wmcol">—</td><td class="sc s4">4</td><td class="sc s5">5</td><td class="sc s1">1</td><td class="sc na">n/a</td></tr>
+        <tr><th>Benefit discovery &amp; eligibility indicators</th><td class="sc na wmcol">—</td><td class="sc s4">4</td><td class="sc s3">3</td><td class="sc s2">2</td><td class="sc na">n/a</td></tr>
+        <tr><th>Savings surfaced by tender</th><td class="sc na wmcol">—</td><td class="sc s2">2</td><td class="sc s3">3</td><td class="sc s2">2</td><td class="sc s1">1</td></tr>
+        <tr><th>Express / wallet checkout discovery</th><td class="sc na wmcol">—</td><td class="sc s2">2</td><td class="sc s2">2</td><td class="sc s1">1</td><td class="sc s5">5</td></tr>
+      </tbody>
+    </table>
+    <div class="legend">
+      <span><i style="background:var(--s5)"></i>5 Best in class</span>
+      <span><i style="background:var(--s4)"></i>4 Strong</span>
+      <span><i style="background:var(--s3)"></i>3 Adequate</span>
+      <span><i style="background:var(--s2)"></i>2 Weak</span>
+      <span><i style="background:var(--s1)"></i>1 Absent</span>
+      <span><i style="background:var(--na)"></i>n/a Not applicable or no completed run</span>
+    </div>
+    <p class="small muted" style="margin-top:14px;">Shopify scores n/a on the two benefit rows because a DTC footwear merchant sells no benefit-eligible goods — the absence is structural, not a failing. Retailer scores n/a throughout because no agent run completed in this pass.</p>
+  </section>
+
+  <section>
+    <div class="eyebrow">Payment-Method &amp; Benefit-Discovery Matrix</div>
+    <h2>What's accepted, and how a shopper finds out.</h2>
+    <table>
+      <thead><tr>
+        <th>Capability</th>
+        <th class="wmcol">Retailer<span class="wmtag">CLIENT</span></th>
+        <th>Amazon</th><th>Instacart</th><th>Costco</th><th>Shopify</th>
+      </tr></thead>
+      <tbody>
+        <tr><th>EBT / SNAP online</th>
+          <td class="small wmcol">—</td>
+          <td class="small"><span class="y">Yes</span> — SNAP-eligible hub, per-item label</td>
+          <td class="small"><span class="y">Yes</span> — filter chip + "Accepts EBT" store badge</td>
+          <td class="small"><span class="n">No</span> — warehouse only, per FAQ</td>
+          <td class="small"><span class="n">No</span></td></tr>
+        <tr><th>HSA / FSA online</th>
+          <td class="small wmcol">—</td>
+          <td class="small"><span class="y">Yes</span> — dedicated FSA | HSA Store</td>
+          <td class="small"><span class="y">Yes</span> — landing page + benefit toggle</td>
+          <td class="small"><span class="n">No</span> — pharmacy/optical registers only</td>
+          <td class="small"><span class="n">No</span></td></tr>
+        <tr><th>OTC benefit card</th>
+          <td class="small wmcol">—</td>
+          <td class="small"><span class="part">Folded</span> into FSA/HSA, no separate badge</td>
+          <td class="small"><span class="y">Yes</span> — OTC Network, help-article only</td>
+          <td class="small"><span class="n">No</span> — in-warehouse registers</td>
+          <td class="small"><span class="n">No</span></td></tr>
+        <tr><th>BNPL</th>
+          <td class="small wmcol">—</td>
+          <td class="small"><span class="n">None found</span></td>
+          <td class="small"><span class="y">Klarna</span> — 4 payments, $25 off code</td>
+          <td class="small"><span class="y">Affirm</span> — orders $400+</td>
+          <td class="small"><span class="part">Shop Pay</span> installments; Afterpay advertised but absent</td></tr>
+        <tr><th>Express wallets pre-checkout</th>
+          <td class="small wmcol">—</td>
+          <td class="small"><span class="n">None observed</span></td>
+          <td class="small"><span class="n">None</span> before login wall</td>
+          <td class="small"><span class="n">None</span> — plain Checkout button</td>
+          <td class="small"><span class="y">Four</span> in cart drawer</td></tr>
+        <tr><th>Benefit balance tracker</th>
+          <td class="small wmcol">—</td>
+          <td class="small"><span class="n">None observed</span></td>
+          <td class="small"><span class="n">None observed</span></td>
+          <td class="small"><span class="n">None observed</span></td>
+          <td class="small"><span class="n">n/a</span></td></tr>
+        <tr><th>Savings quantified by tender</th>
+          <td class="small wmcol">—</td>
+          <td class="small"><span class="part">Card only</span> — cart computes post-promo price</td>
+          <td class="small"><span class="part">Card &amp; fees only</span> — Klarna, Venmo, delivery threshold</td>
+          <td class="small"><span class="part">Card only</span> — Citi cash-back tiers in cart</td>
+          <td class="small"><span class="n">No</span> — "in full or in installments", no figures</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section>
+    <div class="eyebrow">The Core Finding</div>
+    <h2>Card savings are computed. Benefit savings are a checkbox.</h2>
+    <p class="lead">The asymmetry is consistent across every storefront studied. Where a card is involved, the retailer does the arithmetic for the shopper and shows the result in dollars. Where a benefit is involved, the retailer confirms eligibility and stops.</p>
+    <div class="grid2" style="margin-top:20px;">
+      <div class="callout" style="border-left-color:var(--s5);">
+        <h3 style="color:#4e7d1e;">How card savings look today</h3>
+        <p class="quote">"Pay <s>$15.29</s> $0.00 for this order. Get a $50 Amazon Gift Card upon approval for Amazon Visa."</p>
+        <p class="small muted" style="margin-top:8px;">Exact dollars, computed in-cart, before checkout. (Amazon)</p>
+        <img class="proofimg" src="demo/rq1/shots/amazon/amazon-cart-cost-after-savings.png" alt="Amazon cart showing a computed post-promotion price">
+        <p class="small muted" style="margin-top:6px; font-family:var(--mono); font-size:10px;">PROOF · Amazon guest cart, subtotal $15.29 — the Visa offer is resolved to a dollar figure on the page</p>
+      </div>
+      <div class="callout" style="border-left-color:var(--brand);">
+        <h3 style="color:var(--brand);">How benefit savings look today</h3>
+        <p class="quote">"FSA or HSA eligible item… If you have a card, you can add it in checkout."</p>
+        <p class="quote">"Costco cannot identify specific item eligibility prior to a transaction being tendered."</p>
+        <p class="small muted" style="margin-top:8px;">Eligibility only. No amount, no balance, no deduction — resolved at the register. (Amazon, Costco)</p>
+        <img class="proofimg" src="demo/rq1/shots/costco/costco-payment-methods.png" alt="Costco accepted payment methods page">
+        <p class="small muted" style="margin-top:6px; font-family:var(--mono); font-size:10px;">PROOF · Costco's accepted-methods page: FSA/HSA restricted to "Pharmacies, Optical and Hearing Aid Departments"</p>
+      </div>
+    </div>
+    <div class="callout" style="margin-top:22px;">
+      <h3>The gap is the opportunity.</h3>
+      <p>A shopper using a benefit tender is, almost by definition, price-sensitive. They are the population least served by "eligible" and most served by "you will pay $0.00 out of pocket." No retailer in this study has claimed that ground.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Per-Retailer Teardowns</div>
+    <h2>What each retailer does, in its own words.</h2>
+
+    <div class="rt">
+      <div class="rt-head"><span class="name">Amazon</span><span class="score">Discovery effort: Moderate · 67 steps · 5.5 min</span></div>
+      <div class="rt-body">
+        <div class="row"><div class="k">Benefit discovery</div><div class="v">A dedicated <b>FSA | HSA Store</b> ("1000s of eligible products, delivered to your door", "No separate FSA or HSA order required") and a <b>SNAP-eligible Groceries hub</b>. Eligibility appears as small text labels under the price plus a left-sidebar "FSA or HSA Eligible" filter checkbox. OTC is folded into FSA/HSA with no separate badge.</div></div>
+        <div class="row"><div class="k">Savings by tender</div><div class="v">Only card promotions carry a dollar figure. EBT and FSA/HSA show eligibility yes/no and never a computed amount or benefit deduction.</div></div>
+        <div class="row"><div class="k">Wallets</div><div class="v">None observed. No Amazon Pay, Apple Pay, Google Pay or PayPal express button anywhere on-site — the only recurring nudge is the Amazon Visa banner.</div></div>
+        <div class="row"><div class="k">Notable quotes</div><div class="v">
+          <p class="quote">"On Amazon, these items can be purchased with most FSAs (Flexible Spending Accounts) and HSAs (Health Savings Accounts). If you have a card, you can add it in checkout."</p>
+          <p class="quote">"Shop eligible items with Cash EBT in select states."</p>
+          <p class="quote">"Get 50% off a Prime membership with active EBT card."</p>
+        </div></div>
+        <div class="figs">
+          <figure class="fig"><img src="demo/rq1/shots/amazon/amazon-fsa-hsa-store.png" alt="Amazon FSA HSA Store landing page"><figcaption><span class="pf">PROOF</span> · FSA | HSA Store banner with "Add FSA or HSA card" — eligibility framed as access, never as an amount</figcaption></figure>
+          <figure class="fig"><img src="demo/rq1/shots/amazon/amazon-snap-ebt-hub.png" alt="Amazon EBT hub"><figcaption><span class="pf">PROOF</span> · "Explore ways to shop and save with EBT" — the four savings bullets are membership discounts, not benefit amounts</figcaption></figure>
+        </div>
+        <p class="small muted" style="margin-top:10px;font-family:var(--mono);font-size:10px;">Captured live · July 2026 · <a class="prov" href="https://www.browserbase.com/sessions/34ee9402-b9b9-47ea-ae72-2fe8be360770">Session replay ↗</a></p>
+      </div>
+    </div>
+
+    <div class="rt">
+      <div class="rt-head"><span class="name">Instacart</span><span class="score">Discovery effort: Moderate · 155 steps · 11.0 min</span></div>
+      <div class="rt-body">
+        <div class="row"><div class="k">Benefit discovery</div><div class="v">The widest tender set in the study and the most visible EBT treatment: a <b>"SNAP Eligible" filter chip</b> on search and an <b>"Accepts EBT" badge</b> on store cards. FSA/HSA and OTC Network are documented only in Help Center articles and a landing page — no on-product badges appeared in the storefront browsed.</div></div>
+        <div class="row"><div class="k">Savings by tender</div><div class="v">Promotions are quantified — Klarna $25 off a first order, Venmo $5 off $15+ — as are fee thresholds ("Add $4.96 to get $0 delivery fee", "$10 Min. to checkout"). Benefit tenders carry no equivalent figure.</div></div>
+        <div class="row"><div class="k">Constraint</div><div class="v">Benefits do not stack: <i>"You can't place an order using both an FSA/HSA card and an OTC Network card/EBT SNAP."</i> EBT also requires a card on file to cover fees, taxes and tips.</div></div>
+        <div class="row"><div class="k">Notable quotes</div><div class="v">
+          <p class="quote">"Order FSA/HSA-eligible items right to your door. You can add non-eligible items to your cart too."</p>
+          <p class="quote">"Eligible health plan customers can use their OTC Network benefit to buy eligible items on Instacart."</p>
+        </div></div>
+        <div class="figs">
+          <figure class="fig"><img src="demo/rq1/shots/instacart/instacart-snap-filter.png" alt="Instacart search with SNAP Eligible filter"><figcaption><span class="pf">PROOF</span> · "SNAP Eligible" filter chip on a milk search — a filter, not a per-item badge</figcaption></figure>
+          <figure class="fig"><img src="demo/rq1/shots/instacart/instacart-accepts-ebt-badge.png" alt="Instacart participating EBT SNAP stores"><figcaption><span class="pf">PROOF</span> · "Accepts EBT" chips on store cards — eligibility surfaced at store level before the shopper enters</figcaption></figure>
+        </div>
+        <p class="small muted" style="margin-top:10px;font-family:var(--mono);font-size:10px;">Captured live · July 2026 · <a class="prov" href="https://www.browserbase.com/sessions/bb999294-8558-4f38-9506-9b0686cf0905">Session replay ↗</a></p>
+      </div>
+    </div>
+
+    <div class="rt">
+      <div class="rt-head"><span class="name">Costco</span><span class="score">Discovery effort: Moderate-to-high · 84 steps · 13.7 min</span></div>
+      <div class="rt-body">
+        <div class="row"><div class="k">Benefit discovery</div><div class="v">Benefit acceptance is real but <b>channel-restricted and easy to misread</b>. FSA/HSA and Medicare Advantage OTC cards are promoted as accepted "at every register" — in warehouse. The accepted-methods page limits FSA/HSA to "Pharmacies, Optical and Hearing Aid Departments". EBT is warehouse-only. None is a Costco.com checkout option.</div></div>
+        <div class="row"><div class="k">Eligibility cues</div><div class="v">An "FSA Eligible" badge exists and returns 224 results — but only if the shopper searches the literal phrase "fsa eligible". There is no filter checkbox for FSA/HSA/EBT/OTC in the sidebar, and no badge surfaces through ordinary category browsing.</div></div>
+        <div class="row"><div class="k">Savings by tender</div><div class="v">Not surfaced at the point of shopping. Citi cash-back tiers appear only once an item is in the cart; the non-member 5% surcharge lives on a secondary FAQ. No lowest-cost-by-tender comparison exists anywhere.</div></div>
+        <div class="row"><div class="k">Notable quotes</div><div class="v">
+          <p class="quote">"Costco cannot identify specific item eligibility prior to a transaction being tendered."</p>
+          <p class="quote">"Costco now accepts Medicare Advantage OTC Benefits, FSA and HSA cards at every register."</p>
+          <p class="quote">"Don't let your funds go to waste! Shop with us to stretch your FSA, HSA, and Medicare Advantage Prepaid Benefits Cards before they expire."</p>
+        </div></div>
+        <div class="figs">
+          <figure class="fig"><img src="demo/rq1/shots/costco/costco-fsa-eligible-badge.png" alt="Costco fsa eligible search results"><figcaption><span class="pf">PROOF</span> · "1 - 24 of 224 results for 'fsa eligible'" with blue FSA Eligible badges — reachable only by exact keyword</figcaption></figure>
+          <figure class="fig"><img src="demo/rq1/shots/costco/costco-fsa-hsa-pharmacy.png" alt="Costco pharmacy FSA HSA partner page"><figcaption><span class="pf">PROOF</span> · Costco Pharmacy: "Costco now accepts Medicare Advantage OTC Benefits, FSA and HSA cards at every register" — a pharmacy microsite, not Costco.com</figcaption></figure>
+        </div>
+        <p class="small muted" style="margin-top:10px;font-family:var(--mono);font-size:10px;">Captured live · July 2026 · <a class="prov" href="https://www.browserbase.com/sessions/ef3c819f-c0b1-43a7-bc79-8f6430bcc71a">Session replay ↗</a></p>
+      </div>
+    </div>
+
+    <div class="rt">
+      <div class="rt-head"><span class="name">Shopify (Allbirds)</span><span class="score">Discovery effort: High · 43 steps · 4.9 min</span></div>
+      <div class="rt-body">
+        <div class="row"><div class="k">Benefit discovery</div><div class="v">None observed, of any kind. A DTC footwear merchant sells no benefit-eligible goods, so the absence is structural — it is included here to characterise the Shopify stack against benefit-accepting grocery and pharmacy retail.</div></div>
+        <div class="row"><div class="k">Wallets</div><div class="v">The one clear win in the study. The cart drawer presents <b>four express buttons side by side</b> — Amazon Pay, G Pay, PayPal, Shop Pay — and the hosted checkout repeats an Express checkout row above the contact form.</div></div>
+        <div class="row"><div class="k">Transparency</div><div class="v">Weakest pre-checkout disclosure of the four. Home, footer and product page carry zero payment badges, card-network icons or BNPL copy. A shopper learns the accepted tenders only by opening the cart or entering checkout.</div></div>
+        <div class="row"><div class="k">Advertised vs offered</div><div class="v">A live <i>/pages/afterpay</i> page advertises Afterpay — "four payments made every 2 weeks without any interest" — but Afterpay did not appear as a selectable option in the tested checkout, which offered only card, Shop Pay and PayPal. An advertised-versus-actual gap.</div></div>
+        <div class="row"><div class="k">Notable quotes</div><div class="v">
+          <p class="quote">"Shop Pay • Pay in full or in installments." — no dollar figure disclosed pre-authentication.</p>
+          <p class="quote">"Save my information for a faster checkout — By paying, you agree to create a Shop account…" / "Not now"</p>
+        </div></div>
+        <div class="figs">
+          <figure class="fig"><img src="demo/rq1/shots/shopify/allbirds-cart-express-buttons.png" alt="Allbirds cart drawer with four express payment buttons"><figcaption><span class="pf">PROOF</span> · Cart drawer, $102.98 — Amazon Pay, G Pay, PayPal and Shop Pay presented as one express row</figcaption></figure>
+          <figure class="fig"><img src="demo/rq1/shots/shopify/allbirds-checkout-express-row.png" alt="Allbirds hosted checkout express row"><figcaption><span class="pf">PROOF</span> · Hosted checkout, total $102.98 — Express checkout row shows Shop, Amazon Pay and G Pay above an "OR" divider; the Apple Pay slot never rendered</figcaption></figure>
+        </div>
+        <p class="small muted" style="margin-top:10px;font-family:var(--mono);font-size:10px;">Captured live · July 2026 · <a class="prov" href="https://www.browserbase.com/sessions/fa536bba-5ca6-4200-8c68-6f9bbf64db38">Session replay ↗</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Best Practices Observed</div>
+    <h2>Patterns worth borrowing.</h2>
+    <div class="bp">
+      <div class="item"><div class="who">Amazon</div><div class="t">Resolve the offer to a price, in the cart</div>
+        <p class="small muted">Stating "Pay $0.00 for this order" removes all arithmetic from the shopper. The mechanic is proven — it is simply never pointed at a benefit tender.</p></div>
+      <div class="item"><div class="who">Instacart</div><div class="t">Badge eligibility at the store level, before entry</div>
+        <p class="small muted">An "Accepts EBT" chip on the store card tells a shopper whether a trip is worth starting, rather than making them discover it at checkout.</p></div>
+      <div class="item"><div class="who">Instacart</div><div class="t">Make eligibility a first-class search filter</div>
+        <p class="small muted">A "SNAP Eligible" chip alongside Brand and Dietary treats benefit eligibility as a normal shopping facet, not a payments edge case.</p></div>
+      <div class="item"><div class="who">Shopify</div><div class="t">Present every wallet as one express row</div>
+        <p class="small muted">Four tenders offered side by side in the cart drawer, repeated at checkout. Zero hunting, zero hidden options.</p></div>
+      <div class="item"><div class="who">Amazon</div><div class="t">Give benefits a destination, not just a badge</div>
+        <p class="small muted">A dedicated FSA | HSA store and a SNAP hub give benefit shoppers somewhere to start, with "No separate FSA or HSA order required" removing a known friction.</p></div>
+      <div class="item"><div class="who">Costco</div><div class="t">Name the expiry pressure</div>
+        <p class="small muted">"Don't let your funds go to waste… before they expire" is the sharpest benefit-shopper motivation found anywhere in the study — buried on a pharmacy microsite.</p></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Opportunities for Retailer</div>
+    <h2>Where the industry leaves room to lead.</h2>
+    <div class="opps">
+      <div class="o"><div>
+        <h3>Compute the out-of-pocket figure for benefit tenders</h3>
+        <p class="small muted">No retailer studied does this. Amazon proves the cart can resolve an offer to a price; nobody has pointed that mechanic at SNAP, HSA/FSA or OTC. "You will pay $4.12 out of pocket" is an unclaimed position, and the shoppers it serves are the most price-sensitive in the market.</p></div></div>
+      <div class="o"><div>
+        <h3>Show the benefit balance before the cart, not at the register</h3>
+        <p class="small muted">Not one storefront surfaced a benefit balance pre-checkout. Costco concedes it "cannot identify specific item eligibility prior to a transaction being tendered." A visible remaining balance while shopping would be a category first.</p></div></div>
+      <div class="o"><div>
+        <h3>Make eligibility a filter, not a keyword</h3>
+        <p class="small muted">Costco's FSA badge exists on 224 items but requires searching the exact phrase "fsa eligible" — invisible to ordinary browsing. Instacart's filter chip is the better pattern and the cheaper one to match.</p></div></div>
+      <div class="o"><div>
+        <h3>Do not let acceptance breadth hide behind channel rules</h3>
+        <p class="small muted">Costco accepts FSA/HSA and OTC widely, yet a shopper reading "at every register" cannot tell it excludes Costco.com. Where Retailer accepts a tender online, saying so unambiguously at the point of shopping is itself a differentiator.</p></div></div>
+      <div class="o"><div>
+        <h3>Audit advertised versus actually offered</h3>
+        <p class="small muted">Allbirds advertises Afterpay on a live page that the checkout does not honour. A recurring agent sweep of advertised-versus-offered tenders is cheap to run and catches this class of drift before customers do.</p></div></div>
+    </div>
+  </section>
+
+  <section>
+    <div class="eyebrow">Study Roadmap</div>
+    <h2>Phase 1 of a 10-part payment-experience study.</h2>
+    <div class="roadmap">
+      <div class="rq done"><span class="num">RQ1</span><span>Payment discovery (pre-checkout)</span><span class="st">Done</span></div>
+      <div class="rq"><span class="num">RQ2</span><span>Checkout experience &amp; friction</span><span class="st pend">Pending</span></div>
+      <div class="rq"><span class="num">RQ3</span><span>Payment-method capabilities</span><span class="st pend">Pending</span></div>
+      <div class="rq"><span class="num">RQ4</span><span>Lowest out-of-pocket cost</span><span class="st pend">Pending</span></div>
+      <div class="rq"><span class="num">RQ5</span><span>Eligibility &amp; mixed baskets</span><span class="st pend">Pending</span></div>
+      <div class="rq"><span class="num">RQ6</span><span>Split tender &amp; benefit stacking</span><span class="st pend">Pending</span></div>
+      <div class="rq"><span class="num">RQ7</span><span>Payment failure &amp; recovery</span><span class="st pend">Pending</span></div>
+      <div class="rq"><span class="num">RQ8</span><span>Post-transaction experience</span><span class="st pend">Pending</span></div>
+      <div class="rq"><span class="num">RQ9</span><span>Substitutions, OOS &amp; refunds</span><span class="st pend">Pending</span></div>
+      <div class="rq"><span class="num">RQ10</span><span>Marketplace payment rules</span><span class="st pend">Pending</span></div>
+    </div>
+    <p class="small muted" style="margin-top:18px;">Immediate next step for RQ1 completeness: land the Retailer agent run to fill the client column, then segment findings by shopping mission (e-commerce / online delivery / mixed basket) per the coverage map.</p>
+  </section>
+
+  <footer>
+    <span>Payments Competitive Intelligence · RQ1 Payment Discovery</span>
+    <span>Captured live via Browserbase agents · July 2026</span>
+  </footer>
+
+</div>
+</body>
+</html>

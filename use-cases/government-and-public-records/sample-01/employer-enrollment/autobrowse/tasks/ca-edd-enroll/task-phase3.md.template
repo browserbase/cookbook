@@ -1,0 +1,91 @@
+# California EDD Employer Services Online — Phase 3 (email-OTP submission → dashboard)
+
+## Goal
+
+Phase 2 stopped on the **"One-Time Password Submission"** page (IBM Security Verify's `macotp` flow). The orchestrator fetched the OTP from AgentMail. Your job: fill the OTP code, submit, navigate any post-OTP friction (trust-device prompts, second security questions, MFA-method enrollment offers) and reach the post-authentication dashboard. STOP at the dashboard — do not click into any sub-service that opens a transactional surface.
+
+## Inputs
+
+- Username: `$TEST_USERNAME`
+- OTP code (just received in AgentMail, valid for a few minutes): `$OTP_CODE`
+- Phase-1 security-question answers (in case challenged again): Movie→Avatar, Food→Pizza, Animal→Dog, Character→Superman
+- Browserbase session is the **same** Verified+proxied session used by Phase 1 and Phase 2. Use the `--cdp '<wssUrl>'` flag at the end of every `browse` subcommand.
+
+## CRITICAL GUARDRAILS
+
+- Do **NOT** click into any service that files taxes, submits claims, pays anything, or transmits data to EDD. Specifically do **NOT** click "e-Services for Business", "eWOTC", or "SIDES E-Response" once you reach the dashboard. Reaching the service-selection screen IS the success endpoint.
+- Do **NOT** register a new MFA factor (TOTP enrollment, SMS phone-number entry). If the post-OTP page asks you to enroll an additional factor, emit `reason: mfa_enrollment_required` and stop.
+- Do **NOT** retry a failed OTP more than once. If the first submission fails ("Invalid code" / "Code expired"), emit `reason: error` with `notes: "OTP rejected"` — the orchestrator will refetch a fresh code on the next run.
+
+## Workflow
+
+### Step 3.1 — Confirm starting state
+
+```
+browse get title --cdp '...'
+browse get text "main" --cdp '...'
+```
+
+Title should be "One-Time Password Submission" (or contain "Verification" / "Authentication"). Body text should mention "Enter the verification code you received at" and the (partially masked) AgentMail address. If you see a dashboard already (no OTP field), skip to Step 3.4.
+
+### Step 3.2 — Find and fill the OTP field
+
+```
+browse snapshot --cdp '...'
+```
+
+Look for the textbox prompting for the verification code. It may have id `#otp-input`, `#code-input`, or just be the only `<input type="text">` on the page. Fill it with the code:
+
+```
+browse fill "<otp-input-selector-or-ref>" "$OTP_CODE" --cdp '...'
+```
+
+If CSS selectors fail, use the ref from the snapshot: `browse fill "@N-XXXX" "$OTP_CODE" --cdp '...'`.
+
+### Step 3.3 — Submit
+
+Find the submit button (label is usually "Submit", "Verify", or "Continue"). Click it:
+
+```
+browse click "button:has-text('Submit')" --cdp '...'
+```
+
+If that fails, snapshot and click by ref. Then:
+
+```
+browse wait load --cdp '...'
+browse wait timeout 3000 --cdp '...'
+browse get url --cdp '...'
+browse get title --cdp '...'
+```
+
+### Step 3.4 — Handle the next page
+
+Possible outcomes after a successful OTP submit:
+
+- **"Set Up Login Verification" page** (URL contains `LOGIN_MFA_SETUP`; offers SMS / phone-call factor enrollment). **DO NOT register a new factor.** Look for a link/button labeled **"Use my email instead"** (URL contains `DISMISS_MFA_SETUP`). Click it — this dismisses the setup and keeps email-OTP as the only factor (which is fine, we already control the inbox). Then re-evaluate the next page (should be the dashboard).
+- **Dashboard / service-selection** (page lists multiple services: "e-Services for Business", "eWOTC", "SIDES E-Response", or shows "My Profile" / "Select a Service"). **SUCCESS.** Snapshot, screenshot, capture URL+title, emit `reason: dashboard_reached` with `success: true`.
+- **"Trust this device" / "Remember this browser"** prompt: click the "No" / "Don't trust" / "Skip" option (we don't want EDD to persist a trust cookie on this throwaway session). Then re-evaluate the next page.
+- **Second security questions challenge** (asks one of the 4 Phase-1 questions): answer using the Q/A pairs above. Then re-evaluate.
+- **MFA factor-enrollment prompt with no email-bypass link** (only "Set up an authenticator app" / "Add a phone number" and no way to skip): emit `reason: mfa_enrollment_required` with `notes` describing the prompt. STOP.
+- **OTP error** ("Invalid code" / "Code expired"): do NOT retry. Emit `reason: error` with `notes: "OTP rejected"`.
+- **Akamai "Access Denied"**: emit `reason: bot_challenge`.
+
+## Output
+
+Single JSON code block as your FINAL message:
+
+```json
+{
+  "success": true,
+  "phase": "3",
+  "stopped_at_step": "<e.g. 'Service selection dashboard'>",
+  "stopped_at_url": "<current url>",
+  "reason": "dashboard_reached | mfa_enrollment_required | bot_challenge | error",
+  "post_otp_observations": ["..."],
+  "username_used": "$TEST_USERNAME",
+  "notes": "<optional>"
+}
+```
+
+`reason: dashboard_reached` with `success: true` is the demo finish line.

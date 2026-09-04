@@ -1,0 +1,6 @@
+{
+  "startUrl": "https://app.squareup.com/dashboard/customers/directory",
+  "maxSteps": 70,
+  "model": "anthropic/claude-haiku-4-5-20251001",
+  "resultsLabel": "haiku-4.5-no-cdp-no-export"
+}

@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Work App Performance Monitor - Browserbase</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --work_app-purple: #7B68EE;
+      --work_app-blue: #49CCF9;
+      --accent-orange: #FF6900;
+      --dark: #1a1a1a;
+      --light: #f8f9fa;
+      --font-primary: 'Inter', sans-serif;
+      --success: #22c55e;
+      --warning: #f59e0b;
+      --error: #ef4444;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-600: #4b5563;
+      --gray-800: #1f2937;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: var(--dark);
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 2rem;
+      color: white;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    }
+
+    header p {
+      font-size: 1.1rem;
+      opacity: 0.95;
+    }
+
+    .container {
+      display: grid;
+      grid-template-columns: 30% 45% 25%;
+      gap: 1rem;
+      max-width: 1920px;
+      margin: 0 auto;
+      height: calc(100vh - 200px);
+    }
+
+    .container.no-session {
+      grid-template-columns: 30% 70%;
+    }
+
+    .container.no-session .browser-view {
+      display: none;
+    }
+
+    @media (max-width: 1400px) {
+      .container {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: auto auto;
+      }
+
+      .control-panel {
+        grid-column: 1 / -1;
+      }
+
+      .browser-view {
+        grid-column: 1 / 2;
+      }
+
+      .metrics-panel {
+        grid-column: 2 / 3;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+      }
+
+      .browser-view,
+      .metrics-panel {
+        grid-column: 1 / -1;
+      }
+    }
+
+    .panel {
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      padding: 1.5rem;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .control-panel h2,
+    .metrics-panel h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--dark);
+      font-weight: 600;
+    }
+
+    #dispatch-btn {
+      width: 100%;
+      padding: 1rem 2rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      background: linear-gradient(135deg, var(--work_app-purple), var(--work_app-blue));
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 15px rgba(123, 104, 238, 0.3);
+    }
+
+    #dispatch-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(123, 104, 238, 0.4);
+    }
+
+    #dispatch-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .loading {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-top-color: white;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .status-log {
+      flex: 1;
+      background: var(--gray-100);
+      border-radius: 8px;
+      padding: 1rem;
+      overflow-y: auto;
+      font-family: 'Monaco', 'Menlo', monospace;
+      font-size: 0.85rem;
+      max-height: 500px;
+    }
+
+    .status-entry {
+      padding: 0.5rem;
+      margin-bottom: 0.5rem;
+      border-left: 3px solid var(--work_app-purple);
+      background: white;
+      border-radius: 4px;
+      animation: slideIn 0.3s ease;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .status-entry.success {
+      border-left-color: var(--success);
+    }
+
+    .status-entry.error {
+      border-left-color: var(--error);
+      background: #fef2f2;
+    }
+
+    .status-timestamp {
+      color: var(--gray-600);
+      font-size: 0.75rem;
+    }
+
+    .status-message {
+      color: var(--dark);
+      margin-top: 0.25rem;
+    }
+
+    .browser-view {
+      background: var(--dark);
+      border-radius: 12px;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    }
+
+    .browser-view h3 {
+      color: white;
+      margin-bottom: 1rem;
+      font-size: 1.2rem;
+    }
+
+    #browser-iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 8px;
+      background: white;
+    }
+
+    .iframe-loader {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      color: white;
+    }
+
+    .iframe-loader .loading {
+      width: 40px;
+      height: 40px;
+      border-width: 4px;
+    }
+
+    .metrics-panel {
+      overflow-y: auto;
+    }
+
+    .metrics-section {
+      margin-bottom: 1.5rem;
+    }
+
+    .metrics-section h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--gray-800);
+      margin-bottom: 0.75rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid var(--work_app-purple);
+    }
+
+    .metric-card {
+      background: var(--gray-100);
+      padding: 1rem;
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      position: relative;
+    }
+
+    .metric-label {
+      font-size: 0.75rem;
+      color: var(--gray-600);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 0.25rem;
+    }
+
+    .metric-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--work_app-purple);
+    }
+
+    .metric-delta {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      font-size: 0.75rem;
+      color: var(--success);
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .metric-delta.flash {
+      opacity: 1;
+      animation: flash 0.5s ease;
+    }
+
+    @keyframes flash {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; transform: scale(1.1); }
+    }
+
+    .operation-breakdown {
+      background: var(--gray-100);
+      padding: 1rem;
+      border-radius: 8px;
+    }
+
+    .operation-breakdown h4 {
+      font-size: 0.85rem;
+      color: var(--gray-800);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    .operation-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--gray-200);
+      font-size: 0.85rem;
+    }
+
+    .operation-item:last-child {
+      border-bottom: none;
+    }
+
+    .operation-item span:first-child {
+      color: var(--gray-600);
+    }
+
+    .operation-item span:last-child {
+      font-weight: 600;
+      color: var(--work_app-purple);
+    }
+
+    .metrics-graph {
+      margin-top: 1rem;
+    }
+
+    .metrics-graph h4 {
+      font-size: 0.85rem;
+      color: var(--gray-800);
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+    }
+
+    #metrics-chart {
+      width: 100%;
+      height: 150px;
+      border-radius: 8px;
+      background: var(--gray-100);
+    }
+
+    .test-results {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: var(--gray-100);
+      border-radius: 8px;
+    }
+
+    .test-results h3 {
+      font-size: 1rem;
+      margin-bottom: 0.75rem;
+      color: var(--gray-800);
+    }
+
+    .test-result-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      font-size: 0.85rem;
+    }
+
+    .test-result-item .label {
+      color: var(--gray-600);
+    }
+
+    .test-result-item .value {
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .test-status {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 0.75rem;
+    }
+
+    .test-status.passed {
+      background: var(--success);
+      color: white;
+    }
+
+    .test-status.failed {
+      background: var(--error);
+      color: white;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>📊 Work App Performance Monitor</h1>
+    <p>Real-time page performance and login flow monitoring</p>
+  </header>
+
+  <div class="container no-session">
+    <!-- Control Panel -->
+    <section class="panel control-panel">
+      <h2>Control Panel</h2>
+      <button id="dispatch-btn">Dispatch Agent</button>
+
+      <div class="status-log" id="status-log">
+        <div class="status-entry">
+          <div class="status-timestamp">Ready</div>
+          <div class="status-message">Click "Dispatch Agent" to start automated testing</div>
+        </div>
+      </div>
+
+      <div class="test-results" id="test-results" style="display: none;">
+        <h3>Test Results</h3>
+        <div id="test-results-content"></div>
+      </div>
+    </section>
+
+    <!-- Browser View -->
+    <section class="browser-view">
+      <div class="iframe-loader">
+        <div class="loading"></div>
+        <p>Waiting for browser session...</p>
+      </div>
+      <iframe id="browser-iframe" style="display: none;"></iframe>
+    </section>
+
+    <!-- Metrics Panel -->
+    <section class="panel metrics-panel">
+      <h2>Work App Performance Metrics</h2>
+
+      <div class="metrics-section">
+        <h3>Page Performance</h3>
+        <div class="metric-card">
+          <div class="metric-label">Initial Page Load</div>
+          <div class="metric-value" id="initial-page-load">—</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">DOM Interactive</div>
+          <div class="metric-value" id="dom-interactive-time">—</div>
+        </div>
+      </div>
+
+      <div class="metrics-section">
+        <h3>Login Flow Performance</h3>
+        <div class="metric-card">
+          <div class="metric-label">Login Button Response</div>
+          <div class="metric-value" id="login-button-time">—</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Email Field Fill</div>
+          <div class="metric-value" id="email-fill-time">—</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Password Field Fill</div>
+          <div class="metric-value" id="password-fill-time">—</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Form Submission</div>
+          <div class="metric-value" id="form-submit-time">—</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Post-Submit Wait</div>
+          <div class="metric-value" id="post-submit-wait-time">—</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Total Login Flow</div>
+          <div class="metric-value" id="total-flow-time">—</div>
+        </div>
+      </div>
+
+      <div class="metrics-section">
+        <h3>Page Health</h3>
+        <div class="metric-card">
+          <div class="metric-label">Current URL</div>
+          <div class="metric-value" id="page-url" style="font-size: 0.7rem; word-break: break-all;">-</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-label">Page Title</div>
+          <div class="metric-value" id="page-title" style="font-size: 0.9rem;">-</div>
+        </div>
+      </div>
+
+      <div class="metrics-graph">
+        <h4>Performance Timeline</h4>
+        <canvas id="metrics-chart" width="300" height="150"></canvas>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let statusEventSource = null;
+    let metricsEventSource = null;
+    let metricsHistory = [];
+    let sessionUrl = null;
+    let lastStatusKey = null;
+
+    function connectStatusSSE() {
+      if (statusEventSource) statusEventSource.close();
+
+      statusEventSource = new EventSource('/api/status');
+
+      statusEventSource.onmessage = (event) => {
+        const state = JSON.parse(event.data);
+        updateStatusUI(state);
+      };
+
+      statusEventSource.onerror = (error) => {
+        console.error('Status SSE error:', error);
+        addStatusUpdate('Connection lost, attempting to reconnect...', false, true);
+        // EventSource reconnects automatically; each subscription receives the latest snapshot.
+      };
+    }
+
+    function connectMetricsSSE() {
+      if (metricsEventSource) metricsEventSource.close();
+
+      metricsEventSource = new EventSource('/api/metrics');
+
+      metricsEventSource.onmessage = (event) => {
+        const metrics = JSON.parse(event.data);
+        updateMetricsUI(metrics);
+
+        if (Number.isFinite(metrics.performanceMetrics.totalLoginFlowTime)) {
+          metricsHistory.push({
+            timestamp: new Date(metrics.timestamp),
+            totalTime: metrics.performanceMetrics.totalLoginFlowTime,
+          });
+        }
+
+        if (metricsHistory.length > 60) metricsHistory.shift();
+        updateMetricsChart();
+      };
+
+      metricsEventSource.onerror = (error) => {
+        console.error('Metrics SSE error:', error);
+        setTimeout(() => connectMetricsSSE(), 3000);
+      };
+    }
+
+    function updateStatusUI(state) {
+      const key = `${state.runId}:${state.revision}`;
+      const changed = key !== lastStatusKey;
+      lastStatusKey = key;
+      const preview = state.metadata?.result?.taskPreview;
+      const isSuccess = state.stage === 'completed' && preview?.status === 'PASSED';
+      const isError = state.stage === 'error' || preview?.status === 'FAILED';
+      if (changed) addStatusUpdate(state.message, isSuccess, isError);
+      if (state.metadata?.sessionUrl && state.metadata.sessionUrl !== sessionUrl) {
+        sessionUrl = state.metadata.sessionUrl;
+        loadBrowserIframe(sessionUrl);
+      }
+      if (changed && preview) displayTestResults(preview);
+      const btn = document.getElementById('dispatch-btn');
+      btn.disabled = state.isRunning;
+      btn.textContent = state.isRunning ? 'Test running...' : 'Dispatch Agent';
+    }
+
+    function updateMetricsUI(metrics) {
+      for (const [key, id] of Object.entries({
+        initialPageLoad: 'initial-page-load', domInteractiveTime: 'dom-interactive-time',
+        loginButtonClickTime: 'login-button-time', emailFieldFillTime: 'email-fill-time',
+        passwordFieldFillTime: 'password-fill-time', formSubmissionTime: 'form-submit-time',
+        postSubmitWaitTime: 'post-submit-wait-time'
+      })) {
+        const value = metrics.performanceMetrics[key];
+        document.getElementById(id).textContent = Number.isFinite(value) ? `${value.toFixed(0)}ms` : '—';
+      }
+      const total = metrics.performanceMetrics.totalLoginFlowTime;
+      document.getElementById('total-flow-time').textContent = Number.isFinite(total) ? `${(total / 1000).toFixed(1)}s` : '—';
+      document.getElementById('page-url').textContent = metrics.pageHealth.pageUrl || '—';
+      document.getElementById('page-title').textContent = metrics.pageHealth.pageTitle || '—';
+    }
+
+    function updateMetricsChart() {
+      const canvas = document.getElementById('metrics-chart');
+      const ctx = canvas.getContext('2d');
+
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+      if (metricsHistory.length < 2) return;
+
+      const maxTime = Math.max(1, ...metricsHistory.map(m => m.totalTime));
+      const width = canvas.width;
+      const height = canvas.height;
+      const padding = 20;
+
+      // Draw grid lines
+      ctx.strokeStyle = '#e5e7eb';
+      ctx.lineWidth = 1;
+      for (let i = 0; i < 5; i++) {
+        const y = padding + (i / 4) * (height - 2 * padding);
+        ctx.beginPath();
+        ctx.moveTo(padding, y);
+        ctx.lineTo(width - padding, y);
+        ctx.stroke();
+      }
+
+      // Draw the line
+      ctx.strokeStyle = '#7B68EE';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+
+      metricsHistory.forEach((point, i) => {
+        const x = padding + (i / (metricsHistory.length - 1)) * (width - 2 * padding);
+        const y = height - padding - (point.totalTime / maxTime) * (height - 2 * padding);
+
+        if (i === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      });
+
+      ctx.stroke();
+
+      // Draw points
+      ctx.fillStyle = '#7B68EE';
+      metricsHistory.forEach((point, i) => {
+        const x = padding + (i / (metricsHistory.length - 1)) * (width - 2 * padding);
+        const y = height - padding - (point.totalTime / maxTime) * (height - 2 * padding);
+        ctx.beginPath();
+        ctx.arc(x, y, 3, 0, 2 * Math.PI);
+        ctx.fill();
+      });
+    }
+
+    function addStatusUpdate(message, isSuccess = false, isError = false) {
+      const statusLog = document.getElementById('status-log');
+      const entry = document.createElement('div');
+      entry.className = 'status-entry';
+
+      if (isSuccess) entry.classList.add('success');
+      if (isError) entry.classList.add('error');
+
+      const timestamp = new Date().toLocaleTimeString();
+      entry.innerHTML = `
+        <div class="status-timestamp">${timestamp}</div>
+        <div class="status-message">${message}</div>
+      `;
+
+      statusLog.appendChild(entry);
+      statusLog.scrollTop = statusLog.scrollHeight;
+    }
+
+    function loadBrowserIframe(url) {
+      const container = document.querySelector('.container');
+      const browserView = document.querySelector('.browser-view');
+      const iframe = document.getElementById('browser-iframe');
+      const loader = document.querySelector('.iframe-loader');
+
+      container.classList.remove('no-session');
+      browserView.style.display = 'flex';
+
+      iframe.src = url;
+      iframe.style.display = 'block';
+      loader.style.display = 'none';
+    }
+
+    function displayTestResults(taskPreview) {
+      const resultsDiv = document.getElementById('test-results');
+      const contentDiv = document.getElementById('test-results-content');
+
+      const statusClass = taskPreview.status === 'PASSED' ? 'passed' : 'failed';
+
+      contentDiv.innerHTML = `
+        <div class="test-result-item">
+          <span class="label">Test Name:</span>
+          <span class="value">${taskPreview.testName}</span>
+        </div>
+        <div class="test-result-item">
+          <span class="label">Status:</span>
+          <span class="test-status ${statusClass}">${taskPreview.status}</span>
+        </div>
+        <div class="test-result-item">
+          <span class="label">Total Duration:</span>
+          <span class="value">${(taskPreview.duration / 1000).toFixed(1)}s</span>
+        </div>
+        <div class="test-result-item">
+          <span class="label">Page Load Time:</span>
+          <span class="value">${taskPreview.metrics.pageLoadTime.toFixed(0)}ms</span>
+        </div>
+        <div class="test-result-item">
+          <span class="label">Form Interaction:</span>
+          <span class="value">${taskPreview.metrics.formFillTime.toFixed(0)}ms</span>
+        </div>
+      `;
+
+      resultsDiv.style.display = 'block';
+    }
+
+    document.getElementById('dispatch-btn').addEventListener('click', async () => {
+      const btn = document.getElementById('dispatch-btn');
+      btn.disabled = true;
+      btn.innerHTML = '<span class="loading"></span> Dispatching Agent...';
+
+      // Reset state
+      metricsHistory = [];
+      sessionUrl = null;
+      document.getElementById('test-results').style.display = 'none';
+
+      const container = document.querySelector('.container');
+      const browserView = document.querySelector('.browser-view');
+      container.classList.remove('no-session');
+      browserView.style.display = 'flex';
+
+      try {
+        const response = await fetch('/api/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const result = await response.json();
+
+        if (result.success) {
+          connectStatusSSE();
+          connectMetricsSSE();
+          addStatusUpdate('Agent dispatched successfully', false, false);
+        } else {
+          addStatusUpdate(`Error: ${result.error}`, false, true);
+          btn.disabled = false;
+          btn.textContent = 'Dispatch Agent';
+        }
+      } catch (error) {
+        console.error('Failed to dispatch agent:', error);
+        addStatusUpdate('Failed to dispatch agent', false, true);
+        btn.disabled = false;
+        btn.textContent = 'Dispatch Agent';
+      }
+    });
+
+    // Initialize SSE connections on page load
+    connectStatusSSE();
+    connectMetricsSSE();
+  </script>
+</body>
+</html>

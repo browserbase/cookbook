@@ -1,0 +1,40 @@
+{
+  "syncedAt": "2026-08-03T19:45:15.363Z",
+  "agents": [
+    {
+      "key": "retailer",
+      "name": "RQ1 · Retailer · Payment Discovery",
+      "display": "Retailer",
+      "task": "Run the RQ1 payment-discovery study on Retailer.com and return the structured result.",
+      "agentId": "d9e33948-4c84-477e-b24d-af19c3a56674"
+    },
+    {
+      "key": "amazon",
+      "name": "RQ1 · Amazon · Payment Discovery",
+      "display": "Amazon",
+      "task": "Run the RQ1 payment-discovery study on Amazon.com and return the structured result.",
+      "agentId": "dc091c95-25b0-4751-bba1-7076571897ed"
+    },
+    {
+      "key": "instacart",
+      "name": "RQ1 · Instacart · Payment Discovery",
+      "display": "Instacart",
+      "task": "Run the RQ1 payment-discovery study on Instacart.com and return the structured result.",
+      "agentId": "de95ad11-e90d-44a5-a540-66a83ca2628a"
+    },
+    {
+      "key": "costco",
+      "name": "RQ1 · Costco · Payment Discovery",
+      "display": "Costco",
+      "task": "Run the RQ1 payment-discovery study on Costco.com and return the structured result.",
+      "agentId": "c045c5a4-db24-4bd6-b7bb-7ab61c739d18"
+    },
+    {
+      "key": "shopify_allbirds",
+      "name": "RQ1 · Shopify (Allbirds) · Payment Discovery",
+      "display": "Shopify (Allbirds)",
+      "task": "Run the RQ1 payment-discovery study on Allbirds.com as a representative Shopify merchant and return the structured result.",
+      "agentId": "652eae08-5cf8-4ea2-8a7c-9a907c73c04f"
+    }
+  ]
+}

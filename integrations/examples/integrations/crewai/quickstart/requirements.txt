@@ -1,0 +1,4 @@
+browserbase==1.18.1
+crewai==1.15.20
+playwright==1.62.0
+python-dotenv>=1.2.2,<2

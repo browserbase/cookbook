@@ -1,0 +1,11 @@
+{
+  "name": "browserbase-cookbook-local",
+  "owner": { "name": "Browserbase" },
+  "plugins": [
+    {
+      "name": "browserbase-cookbook",
+      "source": "./",
+      "description": "One Browserbase cookbook skill with focused recipe references."
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+You are on the Square Team management page, already authenticated:
+https://app.squareup.com/dashboard/team/team-members
+
+Goal: export the full team-member list to a file by using the page's built-in Export action. Square
+generates the export and downloads it automatically; Browserbase retrieves the downloaded file for us.
+Keep this simple — it is just a few clicks, no API work needed.
+
+Steps:
+1. Find and click the page's Export control for team members. It may be a button labelled "Export", or
+   an "Actions" / "•••" (more) menu that contains an export option. If a chooser appears, pick exporting
+   the team member list (CSV).
+2. Keep the default scope — all team members, all locations. Do not narrow the selection.
+3. Confirm/submit the export (click the final "Export" button in any dialog, and approve a security or
+   verification prompt if one appears).
+4. That single confirmation triggers the file download. You are DONE as soon as you have confirmed the
+   export once.
+
+Important:
+- Click Export exactly ONCE. Do not click it again, do not re-open the menu, and do not look for a
+  separate "Download" button — the file downloads on its own after you confirm. Repeating the action
+  just produces duplicate files.
+- After confirming, the dialog will close and/or the page may briefly show a spinner or a toast. That
+  is the normal success signal. Treat the export confirmation completing (dialog closed, no error shown)
+  as SUCCESS and stop.
+- Do NOT inspect network traffic, decode responses, or navigate to any download URL — none of that is
+  needed.
+
+When the export has been confirmed, report success: state that you clicked Export and confirmed it once,
+and that the team-members file download was triggered. Work autonomously; do not ask follow-up questions.

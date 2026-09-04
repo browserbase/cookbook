@@ -1,0 +1,4 @@
+stripe==15.6.1
+browserbase==1.18.1
+playwright==1.62.0
+python-dotenv

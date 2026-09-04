@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sample Organization Prior Authorization Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* CSS Variables for Sample Organization branding */
+    :root {
+      --sample_org-orange: #FF6900;
+      --sample_org-blue: #B9C9FF;
+      --sample_org-olive: #777620;
+      --sample_org-dark: #1a1a1a;
+      --sample_org-light: #f8f9fa;
+      --font-primary: 'Montserrat', sans-serif;
+    }
+
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      background: var(--sample_org-light);
+      color: var(--sample_org-dark);
+      overflow: hidden;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--sample_org-orange), #ff8533);
+      color: white;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      opacity: 0.95;
+      font-weight: 400;
+    }
+
+    /* Container */
+    .container {
+      display: grid;
+      grid-template-columns: 60% 40%;
+      height: calc(100vh - 100px);
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    /* Live session view */
+    .session-view {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .session-view h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--sample_org-dark);
+    }
+
+    #browserbase-iframe {
+      flex: 1;
+      width: 100%;
+      border: 2px solid var(--sample_org-blue);
+      border-radius: 4px;
+      background: #f9f9f9;
+    }
+
+    .session-info {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      background: var(--sample_org-light);
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .session-info span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ccc;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    .status-indicator.active {
+      background: #28a745;
+    }
+
+    .status-indicator.waiting {
+      background: var(--sample_org-orange);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Control panel */
+    .control-panel {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .control-panel h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--sample_org-dark);
+    }
+
+    .control-panel h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--sample_org-dark);
+    }
+
+    .patient-info {
+      background: linear-gradient(to right, var(--sample_org-light), white);
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid var(--sample_org-orange);
+    }
+
+    .patient-info p {
+      font-size: 0.9rem;
+      margin-bottom: 0.4rem;
+      line-height: 1.5;
+    }
+
+    .patient-info strong {
+      color: var(--sample_org-dark);
+      font-weight: 600;
+    }
+
+    /* Status log */
+    .status-log {
+      flex: 1;
+      max-height: 300px;
+      overflow-y: auto;
+      background: #f8f9fa;
+      padding: 1rem;
+      border-radius: 4px;
+      margin-bottom: 1.5rem;
+    }
+
+    .status-log::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .status-log::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 3px;
+    }
+
+    .status-log::-webkit-scrollbar-thumb {
+      background: var(--sample_org-blue);
+      border-radius: 3px;
+    }
+
+    .status-log ul {
+      list-style: none;
+    }
+
+    .status-log li {
+      padding: 0.6rem 0.8rem;
+      border-left: 3px solid var(--sample_org-blue);
+      margin-bottom: 0.5rem;
+      background: white;
+      border-radius: 2px;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .status-log li.active {
+      border-left-color: var(--sample_org-orange);
+      font-weight: 600;
+      background: #fff8f0;
+    }
+
+    .status-log li.error {
+      border-left-color: #dc3545;
+      background: #fff5f5;
+    }
+
+    .status-log li.success {
+      border-left-color: #28a745;
+      background: #f0fff4;
+    }
+
+    /* Buttons */
+    .actions {
+      margin-top: auto;
+    }
+
+    button {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1rem;
+      font-weight: 600;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 0.75rem;
+      font-family: var(--font-primary);
+    }
+
+    #start-btn {
+      background: var(--sample_org-orange);
+      color: white;
+    }
+
+    #start-btn:hover:not(:disabled) {
+      background: #e65f00;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 105, 0, 0.3);
+    }
+
+    #start-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    #approve-btn {
+      background: #28a745;
+      color: white;
+    }
+
+    #approve-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    #approve-btn:hover:not(:disabled) {
+      background: #218838;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+    }
+
+    #approve-btn:not(:disabled) {
+      animation: pulse-button 2s infinite;
+    }
+
+    @keyframes pulse-button {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.7); }
+      50% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+    }
+
+    /* Loading state */
+    .loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive design */
+    @media (max-width: 1024px) {
+      .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 60% 40%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sample Organization Prior Authorization Automation</h1>
+    <p>AI-powered healthcare workflow with human oversight</p>
+  </header>
+
+  <div class="container">
+    <section class="session-view">
+      <h2>Live Session View</h2>
+      <iframe id="browserbase-iframe" src="about:blank"></iframe>
+      <div class="session-info">
+        <span id="session-id">
+          <span class="status-indicator"></span>
+          Waiting for session...
+        </span>
+        <span id="session-status">Idle</span>
+      </div>
+    </section>
+
+    <section class="control-panel">
+      <h2>Automation Control</h2>
+
+      <div class="patient-info">
+        <h3>Prior Authorization Request</h3>
+        <p><strong>Patient:</strong> Sarah Thompson (DOB: 06/15/1985)</p>
+        <p><strong>Member ID:</strong> WYS123456789</p>
+        <p><strong>Medication:</strong> Humira 40mg/0.8mL (2 pens, 30 days)</p>
+        <p><strong>Diagnosis:</strong> Rheumatoid arthritis (M06.09)</p>
+        <p><strong>Provider:</strong> Dr. Michael Chen (NPI: 1234567890)</p>
+        <p><strong>Facility:</strong> Valley Medical Center</p>
+      </div>
+
+      <div class="status-log">
+        <h3>Workflow Status</h3>
+        <ul id="status-updates">
+          <li>Ready to start automation</li>
+        </ul>
+      </div>
+
+      <div class="actions">
+        <button id="start-btn">Start Automation</button>
+        <button id="approve-btn" disabled>Approve & Submit</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let eventSource = null;
+    let currentStage = 'idle';
+
+    // Start button handler
+    document.getElementById('start-btn').addEventListener('click', async () => {
+      const startBtn = document.getElementById('start-btn');
+      startBtn.disabled = true;
+      startBtn.innerHTML = '<span class="loading"></span> Starting automation...';
+
+      try {
+        const response = await fetch('/api/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const result = await response.json();
+
+        if (result.success) {
+          connectSSE();
+          addStatusUpdate('Automation started successfully', false, false);
+        } else {
+          addStatusUpdate(`Error: ${result.error}`, false, true);
+          startBtn.disabled = false;
+          startBtn.textContent = 'Start Automation';
+        }
+      } catch (error) {
+        console.error('Failed to start automation:', error);
+        addStatusUpdate('Failed to start automation', false, true);
+        startBtn.disabled = false;
+        startBtn.textContent = 'Start Automation';
+      }
+    });
+
+    // Approve button handler
+    document.getElementById('approve-btn').addEventListener('click', async () => {
+      const approveBtn = document.getElementById('approve-btn');
+
+      if (confirm('Are you sure you want to approve and submit this prior authorization?')) {
+        approveBtn.disabled = true;
+        approveBtn.innerHTML = '<span class="loading"></span> Submitting...';
+
+        try {
+          const response = await fetch('/api/approve', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' }
+          });
+          const result = await response.json();
+
+          if (result.success) {
+            addStatusUpdate('Approval sent - submitting form...', true, false);
+          } else {
+            addStatusUpdate(`Error: ${result.error}`, false, true);
+            approveBtn.disabled = false;
+            approveBtn.textContent = 'Approve & Submit';
+          }
+        } catch (error) {
+          console.error('Failed to send approval:', error);
+          addStatusUpdate('Failed to send approval', false, true);
+          approveBtn.disabled = false;
+          approveBtn.textContent = 'Approve & Submit';
+        }
+      }
+    });
+
+    // SSE connection
+    function connectSSE() {
+      if (eventSource) {
+        eventSource.close();
+      }
+
+      eventSource = new EventSource('/api/status');
+
+      eventSource.onmessage = (event) => {
+        const state = JSON.parse(event.data);
+        updateUI(state);
+      };
+
+      eventSource.onerror = (error) => {
+        console.error('SSE error:', error);
+        addStatusUpdate('Connection error - retrying...', false, true);
+        // Auto-reconnect after 3 seconds
+        setTimeout(() => {
+          if (currentStage !== 'completed' && currentStage !== 'error') {
+            connectSSE();
+          }
+        }, 3000);
+      };
+    }
+
+    // Update UI based on workflow state
+    function updateUI(state) {
+      currentStage = state.stage;
+
+      // Update session ID and indicator
+      const sessionIdEl = document.getElementById('session-id');
+      const indicator = sessionIdEl.querySelector('.status-indicator');
+
+      if (state.sessionId) {
+        sessionIdEl.innerHTML = `<span class="status-indicator active"></span>Session: ${state.sessionId.slice(0, 8)}...`;
+      }
+
+      // Update status indicator based on stage
+      if (indicator) {
+        if (state.stage === 'awaiting_approval') {
+          indicator.className = 'status-indicator waiting';
+        } else if (state.stage === 'completed') {
+          indicator.className = 'status-indicator';
+        } else if (state.stage === 'error') {
+          indicator.className = 'status-indicator';
+        } else {
+          indicator.className = 'status-indicator active';
+        }
+      }
+
+      // Update iframe
+      if (state.sessionUrl) {
+        const iframe = document.getElementById('browserbase-iframe');
+        if (iframe.src !== state.sessionUrl) {
+          iframe.src = state.sessionUrl;
+        }
+      }
+
+      // Update status text
+      const statusEl = document.getElementById('session-status');
+      statusEl.textContent = state.stage.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+      // Add to status log
+      const isActive = state.stage === 'awaiting_approval';
+      const isError = state.stage === 'error';
+      const isSuccess = state.stage === 'completed';
+      addStatusUpdate(state.message, isActive, isError, isSuccess);
+
+      // Enable approve button if awaiting approval
+      const approveBtn = document.getElementById('approve-btn');
+      if (state.approvalRequired && !state.approved) {
+        approveBtn.disabled = false;
+        approveBtn.textContent = '✓ Approve & Submit';
+      }
+
+      // Handle completion
+      if (state.stage === 'completed') {
+        const startBtn = document.getElementById('start-btn');
+        startBtn.disabled = false;
+        startBtn.textContent = 'Start New Automation';
+        approveBtn.disabled = true;
+
+        if (state.result) {
+          addStatusUpdate(`✓ Completed! Confirmation: ${state.result.confirmationNumber}`, false, false, true);
+        }
+
+        // Close SSE connection
+        if (eventSource) {
+          eventSource.close();
+        }
+      }
+
+      // Handle errors
+      if (state.stage === 'error') {
+        const startBtn = document.getElementById('start-btn');
+        startBtn.disabled = false;
+        startBtn.textContent = 'Retry Automation';
+        approveBtn.disabled = true;
+
+        if (state.error) {
+          addStatusUpdate(`✗ Error: ${state.error}`, false, true, false);
+        }
+
+        // Close SSE connection
+        if (eventSource) {
+          eventSource.close();
+        }
+      }
+    }
+
+    // Add status update to log
+    function addStatusUpdate(message, isActive = false, isError = false, isSuccess = false) {
+      const ul = document.getElementById('status-updates');
+
+      // Remove active class from all items
+      ul.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+
+      const li = document.createElement('li');
+      const timestamp = new Date().toLocaleTimeString();
+      li.textContent = `${timestamp} - ${message}`;
+
+      if (isActive) li.classList.add('active');
+      if (isError) li.classList.add('error');
+      if (isSuccess) li.classList.add('success');
+
+      ul.appendChild(li);
+
+      // Auto-scroll to bottom
+      ul.scrollTop = ul.scrollHeight;
+
+      // Keep only last 50 messages
+      while (ul.children.length > 50) {
+        ul.removeChild(ul.firstChild);
+      }
+    }
+
+    // Auto-connect SSE on page load (for reconnection scenarios)
+    window.addEventListener('load', () => {
+      console.log('Sample Organization Prior Authorization Demo loaded');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+{
+  "filing": {
+    "state": "CA",
+    "entityType": "LLC",
+    "formType": "Articles of Organization (LLC-1)"
+  },
+  "llc": {
+    "name": "Vermillion Tide Coffee Roasters LLC",
+    "nameEndingValid": true,
+    "purpose": "The purpose of the limited liability company is to engage in any lawful act or activity for which a limited liability company may be organized under the California Revised Uniform Limited Liability Company Act."
+  },
+  "addresses": {
+    "principal": {
+      "street": "742 Mission St",
+      "suite": "Suite 410",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94103"
+    },
+    "mailing": {
+      "sameAsPrincipal": true
+    }
+  },
+  "agentForServiceOfProcess": {
+    "type": "individual",
+    "individual": {
+      "fullName": "Marcus Halloway",
+      "street": "742 Mission St",
+      "suite": "Suite 410",
+      "city": "San Francisco",
+      "state": "CA",
+      "zip": "94103"
+    }
+  },
+  "management": {
+    "structure": "one_manager"
+  },
+  "organizer": {
+    "fullName": "Priya Ramesh",
+    "signature": "Priya Ramesh"
+  },
+  "billing": {
+    "filerName": "Priya Ramesh",
+    "filerEmail": "priya@vermilliontide.example",
+    "filerPhone": "415-555-0142"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "responsive-visual-lab",
+  "app": "app",
+  "install": "bun install --frozen-lockfile",
+  "serve": "bun run dev --host 127.0.0.1 --port {port}",
+  "validate": [
+    "bun run build"
+  ],
+  "fixerContext": [
+    "src/routes/",
+    "src/app/pages/",
+    "src/app/",
+    "src/components/app-layout",
+    "src/",
+    "src/components/ui/"
+  ],
+  "hosted": {
+    "mobile-nav": "https://btc-responsive-visual-lab.example.invalid/mobile-nav",
+    "mobile-table": "https://btc-responsive-visual-lab.example.invalid/mobile-table",
+    "visual-overflow": "https://btc-responsive-visual-lab.example.invalid/visual-overflow"
+  }
+}
