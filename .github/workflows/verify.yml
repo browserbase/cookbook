@@ -12,8 +12,8 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Check generated catalog
@@ -28,8 +28,8 @@ jobs:
   public-artifact:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         with:
           python-version: "3.12"
       - name: Build history-free public artifact
@@ -74,7 +74,7 @@ jobs:
             -v "$PUBLIC_ARTIFACT:/repo:ro" \
             zricethezav/gitleaks:v8.24.3 \
             detect --source=/repo --no-git --redact --verbose --config=/repo/.gitleaks.toml
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         if: always()
         with:
           name: browserbase-cookbook-public
@@ -110,18 +110,18 @@ jobs:
             directory: integrations/examples/integrations/temporal
             command: npm ci --ignore-scripts && npm test && npm run typecheck
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - uses: actions/checkout@v7
+      - uses: actions/setup-python@v7
         if: matrix.runtime == 'python'
         with:
           python-version: "3.13"
-      - uses: astral-sh/setup-uv@v6
+      - uses: astral-sh/setup-uv@v7
         if: matrix.runtime == 'python'
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v7
         if: matrix.runtime == 'node'
         with:
           node-version: "24.19.0"
-      - uses: actions/setup-go@v5
+      - uses: actions/setup-go@v7
         if: matrix.runtime == 'go'
         with:
           go-version-file: ${{ matrix.directory }}/go.mod
