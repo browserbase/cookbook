@@ -2,7 +2,7 @@ module stagehand-example
 
 go 1.26.0
 
-require github.com/browserbase/stagehand/packages/sdk-go/v4 v4.0.2
+require github.com/browserbase/stagehand/packages/sdk-go/v4 v4.1.0
 
 require (
 	github.com/bahlo/generic-list-go v0.2.0 // indirect
