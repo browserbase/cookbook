@@ -1,0 +1,24 @@
+{
+  "name": "hitl-demo",
+  "version": "1.0.0",
+  "description": "Human-in-the-loop demo: Stagehand agent pauses for human captcha/verification, then resumes",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "serve": "tsx serve.ts",
+    "agent": "tsx agent.ts",
+    "test": "node --test tests/*.test.cjs"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "tsx": "4.23.13",
+    "typescript": "7.0.2",
+    "@types/node": "26.4.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "name": "travel-portal-flight-pricing-demo",
+  "version": "1.0.0",
+  "description": "Travel portal Flight Pricing Benchmark Demo — Concurrent airline price comparison using Browserbase + Stagehand",
+  "type": "module",
+  "scripts": {
+    "demo": "tsx index.ts",
+    "demo:single": "tsx index.ts --single",
+    "demo:travel_portal": "tsx index.ts --single --only-travel_portal",
+    "dev": "tsx watch index.ts"
+  },
+  "dependencies": {
+    "@ai-sdk/openai": "4.0.53",
+    "@browserbasehq/sdk": "2.19.0",
+    "@browserbasehq/stagehand": "4.0.2",
+    "ai": "7.0.87",
+    "dotenv": "17.4.2",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.0",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

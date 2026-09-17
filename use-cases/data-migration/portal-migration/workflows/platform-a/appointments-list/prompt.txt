@@ -1,0 +1,96 @@
+Navigate to this Platform A appointments page, which is already authenticated:
+https://platform-a.example.invalid/dashboard/appointments/calendar
+Goal:
+Pull all Platform A appointment reservations in a 12-month window centered on today: from 6 months BEFORE
+today through 6 months AFTER today (past + upcoming).
+Use the available browser tools:
+- Prefer browserEval for JavaScript executed inside the authenticated Platform A browser page.
+- Do not ask for, print, copy, or expose cookies/session tokens/CSRF secrets. Use the browser’s authenticated same-origin context.
+Date Window:
+Use 6 months before today at 00:00:00 through 6 months after today at 23:59:59. Preserve the timezone/offset style Platform A’s calendar API is already using.
+Approach:
+1. Open the Platform A calendar URL and wait until the authenticated calendar page has loaded.
+2. Use browserEval to inspect the browser page context for existing Platform A Appointments API requests. Look at performance resource entries and find URLs containing:
+   /appointments/merchant/api/reservations
+3. From an existing reservations request, extract:
+   - business_location_id
+   - any staff_ids[] values
+   - date_start/date_end formatting style
+4. If no existing reservations request is visible, inspect the page URL, page scripts, localStorage/sessionStorage keys, and app bootstrap data for business location and staff/team member IDs. Do not read or return cookies.
+5. Replay the reservations API from inside the browser page using browserEval and same-origin fetch:
+   GET /appointments/merchant/api/reservations
+   with:
+   - business_location_id
+   - date_start
+   - date_end
+   - staff_ids[] for each discovered staff member, if required by the API
+6. If multiple staff IDs are present, fetch reservations for each staff ID and merge results.
+7. Deduplicate reservations by reservation id. For recurring reservations, preserve recurrence fields like rrule, parent_id, exdates, and confirmation_messages.
+8. If a request fails, return the HTTP status, response text snippet, and the exact non-secret URL path/query used. Then try the closest known-good request shape from the calendar page.
+9. Return a concise structured JSON result with:
+   - dateWindow: { start, end, timezoneOrOffset }
+   - businessLocationId
+   - staffIdsQueried
+   - reservationCount
+   - reservations: array of normalized reservations
+Normalize each reservation to:
+{
+  "id": string,
+  "status": string,
+  "clientName": string | null,
+  "clientEmail": string | null,
+  "clientPhone": string | null,
+  "dateStart": string,
+  "dateEnd": string,
+  "durationMins": number | null,
+  "timezone": string | null,
+  "serviceNames": string[],
+  "staffNames": string[],
+  "staffTokens": string[],
+  "locationName": string | null,
+  "locationType": string | null,
+  "rrule": string | null,
+  "parentId": string | null,
+  "exdates": any,
+  "buyerNote": string | null,
+  "sellerNote": string | null,
+  "totalMoney": object | null,
+  "raw": object
+}
+Field sourcing (best-effort — confirm exact response fields against a live reservations payload):
+- durationMins: compute from (dateEnd - dateStart) in minutes when both are present, else null.
+- clientEmail / clientPhone: read from the reservation's buyer/customer block if present (e.g. fields
+  like buyer_email_address / email_address, buyer_phone_number / phone_number). If the reservations
+  response does not carry contact info, leave them null — do NOT make extra per-customer lookups.
+- locationName: resolve the reservation's location/business_location_id to a human-readable name if the
+  payload or page bootstrap data provides an id→name map; else null. Keep locationType as before.
+Suggested browserEval code shape:
+Run this only after discovering/replacing the business_location_id, date_start/date_end, and staff_ids values.
+const qs = new URLSearchParams();
+qs.set("business_location_id", "<BUSINESS_LOCATION_ID>");
+qs.set("date_start", "<START>");
+qs.set("date_end", "<END>");
+for (const staffId of <STAFF_IDS_ARRAY>) {
+  qs.append("staff_ids[]", staffId);
+}
+const csrf =
+  document.querySelector('meta[name="csrf-token"]')?.content ||
+  document.cookie.match(/(?:^|; )_js_csrf=([^;]+)/)?.[1];
+const res = await fetch(`/appointments/merchant/api/reservations?${qs}`, {
+  method: "GET",
+  credentials: "same-origin",
+  headers: {
+    accept: "application/json, text/javascript, */*; q=0.01",
+    "x-requested-with": "XMLHttpRequest",
+    ...(csrf ? { "x-csrf-token": decodeURIComponent(csrf) } : {})
+  }
+});
+const body = await res.json();
+return {
+  ok: res.ok,
+  status: res.status,
+  url: res.url,
+  body
+};
+Important:
+Return the final answer as JSON only. Do not include cookies, CSRF tokens, or private headers in the final output.

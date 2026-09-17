@@ -1,0 +1,7 @@
+{
+  "startUrl": "https://us02.platform-b.example.invalid/merchants/reports/customers/list?pageSize=200",
+  "maxSteps": 40,
+  "model": "anthropic/claude-haiku-4-5-20251001",
+  "resultsLabel": "platform-b-customer-list-api-replay",
+  "requireDeliverable": true
+}

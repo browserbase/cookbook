@@ -1,0 +1,4 @@
+stagehand==4.0.2
+playwright==1.62.0
+browserbase==1.18.1
+python-dotenv

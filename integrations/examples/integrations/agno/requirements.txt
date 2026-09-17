@@ -1,0 +1,5 @@
+agno==3.0.6
+browserbase==1.18.1
+playwright==1.62.0
+python-dotenv>=1.2.2,<2
+openai>=2,<3

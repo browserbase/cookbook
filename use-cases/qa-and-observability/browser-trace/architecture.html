@@ -1,0 +1,274 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Record → Fix · architecture &amp; where Browserbase fits</title>
+<style>
+  :root{
+    --cream:#f6f2ea; --ink:#141414; --muted:#6b6459; --line:#e2dccf;
+    --bb:#f24e29; --blue:#3b82f6; --purple:#8b5cf6; --amber:#f59e0b; --green:#1faf62; --red:#c0432a;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:var(--cream);color:vprar(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,'Helvetica Neue',Helvetica,Arial,sans-serif;line-height:1.5}
+  .slide{max-width:1180px;margin:0 auto;padding:60px 48px;border-bottom:1px solid var(--line)}
+  .brand{display:flex;align-items:center;gap:12px;margin-bottom:36px}
+  .logo{width:34px;height:34px;background:var(--bb);border-radius:7px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800;font-size:20px}
+  .brand b{font-size:15px;letter-spacing:-.2px}
+  .brand span{color:var(--muted);font-size:13px}
+  h1{font-size:50px;line-height:1.06;letter-spacing:-1.5px;margin:.1em 0 .25em;font-weight:800}
+  h2{font-size:32px;letter-spacing:-.7px;margin:0 0 8px;font-weight:800}
+  .sub{font-size:18px;color:var(--muted);max-width:780px}
+  .kicker{color:var(--bb);font-weight:800;font-size:12.5px;letter-spacing:1.6px;text-transform:uppercase;margin-bottom:10px}
+  .fade{opacity:0;transform:translateY(14px);transition:.55s ease}
+  .fade.in{opacity:1;transform:none}
+  .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.4px;padding:2px 8px;border-radius:20px}
+  .tag.now{background:#e4f4ea;color:#177a45}
+  .tag.next{background:#eee7fb;color:#6d3fce}
+
+  /* pipeline */
+  .flow{display:flex;align-items:stretch;margin-top:34px;flex-wrap:wrap}
+  .stage{flex:1;min-width:150px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 16px;position:relative}
+  .stage .n{font-size:11px;font-weight:800;color:var(--muted)}
+  .stage h3{margin:6px 0 6px;font-size:16px;letter-spacing:-.3px}
+  .stage p{margin:0;font-size:12.5px;color:var(--muted)}
+  .stage.hero{border:2px solid var(--bb)}
+  .stage.hero .lab{position:absolute;top:-11px;left:16px;background:var(--bb);color:#fff;font-size:10px;font-weight:800;padding:3px 8px;border-radius:10px;letter-spacing:.5px}
+  .arrow{align-self:center;color:var(--bb);font-size:20px;padding:0 6px;font-weight:800}
+  .caption{margin-top:22px;background:#fff;border-left:4px solid var(--bb);border-radius:8px;padding:14px 18px;font-size:15px}
+
+  /* steps list (recording deep-dive) */
+  .steps{margin-top:28px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .step{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+  .step .num{width:26px;height:26px;border-radius:50%;background:var(--ink);color:#fff;font-size:13px;font-weight:800;display:flex;align-items:center;justify-content:center;margin-bottom:10px}
+  .step h4{margin:0 0 4px;font-size:15px}
+  .step p{margin:0;font-size:13px;color:var(--muted)}
+  .step code{background:#efe9dc;border-radius:4px;padding:1px 5px;font-size:12px}
+  .note{margin-top:20px;font-size:14px;background:#fbf7ef;border:1px solid var(--line);border-radius:10px;padding:14px 16px;color:#4a463d}
+
+  /* bundle */
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:32px;align-items:start}
+  .bundle{background:#0f1117;border-radius:14px;padding:20px;color:#e9e9f2;font-size:13.5px}
+  .bundle .sec{margin:14px 0 6px;font-size:10px;letter-spacing:.6px;text-transform:uppercase;font-weight:800;color:#9aa0b0}
+  .bundle .sec:first-child{margin-top:0}
+  .bundle .row{display:flex;gap:8px;padding:3px 0}
+  .bundle .row .ic{width:18px;flex:none;text-align:center}
+  .bundle .voice{color:#c3adff}
+  .bundle .quote{background:#171b26;border-left:2px solid #7c68fa;padding:8px 10px;border-radius:6px;color:#dfe2ee}
+  .bundle pre{background:#080a10;border:1px solid #262b3a;border-radius:8px;padding:10px;overflow:auto;font-family:ui-monospace,Menlo,monospace;font-size:11.5px;line-height:1.55;color:#cfe0ff;margin:4px 0 0}
+  .bundle pre .bug{color:#ff9a9a}
+  .legend li{margin:12px 0;list-style:none}
+  .legend b{display:block;margin-bottom:2px}
+  .legend ul{padding:0;margin:0}
+
+  /* comparison */
+  .cmp{width:100%;border-collapse:collapse;margin-top:26px;background:#fff;border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+  .cmp th,.cmp td{padding:13px 16px;text-align:left;border-bottom:1px solid var(--line);font-size:14px;vertical-align:top}
+  .cmp th{font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+  .cmp th.bb{color:var(--bb)}
+  .cmp td.diy{color:#7a5a2a}
+  .cmp td.bb{color:#177a45;font-weight:600}
+  .cmp tr:last-child td{border-bottom:0}
+  .cmp td:first-child{font-weight:600}
+
+  /* cdp grid */
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:26px}
+  .card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px;border-top:4px solid var(--bb)}
+  .card h4{margin:0 0 4px;font-size:14px;font-family:ui-monospace,Menlo,monospace}
+  .card p{margin:0;font-size:13px;color:var(--muted)}
+  .card.b{border-top-color:var(--blue)} .card.p{border-top-color:var(--purple)}
+  .card.a{border-top-color:var(--amber)} .card.g{border-top-color:var(--green)}
+  .foot{color:var(--muted);font-size:12px;display:flex;justify-content:space-between;margin-top:26px}
+  /* two-CDP-client diagram */
+  .dio{display:flex;align-items:stretch;gap:0;margin-top:34px;flex-wrap:wrap;justify-content:center}
+  .dio .box{background:#fff;border:1px solid var(--line);border-radius:13px;padding:16px 18px;min-width:200px;flex:1}
+  .dio .box.center{border:2px solid var(--bb)}
+  .dio .box h4{margin:0 0 4px;font-size:15px}
+  .dio .box p{margin:0;font-size:12.5px;color:var(--muted)}
+  .dio .conn{display:flex;flex-direction:column;justify-content:center;align-items:center;padding:0 14px;min-width:120px}
+  .dio .conn .l{font-size:10px;font-weight:800;letter-spacing:.4px;color:var(--muted);text-transform:uppercase}
+  .dio .conn .ar{font-size:22px;font-weight:800;color:var(--bb);line-height:1}
+  .dio .conn.ro .ar{color:var(--green)} .dio .conn.ro .l{color:var(--green)}
+  .split{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;margin-top:26px;align-items:start}
+  .list{list-style:none;padding:0;margin:0}
+  .list li{padding:8px 0;border-bottom:1px solid var(--line);font-size:14px}
+  .list li:last-child{border-bottom:0}
+  .list li b{display:block;font-size:13px}
+  .list li span{color:var(--muted);font-size:12.5px}
+  .why{background:#fbf7ef;border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+  .why h4{margin:0 0 10px;font-size:15px}
+  .why li{font-size:13.5px;color:#4a463d;margin:7px 0}
+  .ref{margin-top:18px;font-size:13px;color:var(--muted)}
+  .ref a{color:var(--bb);font-weight:600;text-decoration:none}
+  @media(max-width:760px){ .grid2,.cards,.steps{grid-template-columns:1fr} h1{font-size:38px} .arrow{display:none} }
+</style>
+</head>
+<body>
+
+<!-- 1 · HERO -->
+<section class="slide">
+  <div class="brand"><div class="logo">B</div><b>Browserbase</b><span>record → fix</span></div>
+  <div class="kicker fade">Show the bug, don't prompt it</div>
+  <h1 class="fade">Turn a bug into a<br>fix-ready artifact.</h1>
+  <p class="sub fade">A user demonstrates a bug — clicking through it and talking. We capture that as a
+  precise, structured artifact a coding agent can act on directly. This walks through how the capture
+  works today, and where Browserbase fits.</p>
+</section>
+
+<!-- 2 · PIPELINE -->
+<section class="slide">
+  <div class="kicker fade">The pipeline</div>
+  <h2 class="fade">From a click and a sentence to a fix-ready bundle</h2>
+  <div class="flow fade">
+    <div class="stage"><div class="n">01</div><h3>Demonstrate</h3><p>The user clicks through the bug and narrates it, live in the app.</p></div>
+    <div class="arrow">→</div>
+    <div class="stage hero"><div class="lab">BROWSERBASE</div><div class="n">02</div><h3>Cloud browser</h3><p>A real Chrome we control, shown through an embeddable live view.</p></div>
+    <div class="arrow">→</div>
+    <div class="stage"><div class="n">03</div><h3>Capture</h3><p>Actions + element state from the DOM, and voice through Whisper.</p></div>
+    <div class="arrow">→</div>
+    <div class="stage"><div class="n">04</div><h3>Bundle</h3><p>Actions, voice, element state and source code on one timeline.</p></div>
+    <div class="arrow">→</div>
+    <div class="stage"><div class="n">05</div><h3>Fix</h3><p>Your coding agent (e.g. Claude) gets exact context and patches it.</p></div>
+  </div>
+  <div class="caption fade">The quality of the fix depends on the quality of the artifact the agent receives. The rest of this deck is about capturing a good one.</div>
+</section>
+
+<!-- 3 · RECORDING DEEP-DIVE -->
+<section class="slide">
+  <div class="kicker fade">How the recording works today <span class="tag now">shipping</span></div>
+  <h2 class="fade">The action list comes from the DOM, not from a trace</h2>
+  <p class="sub fade">To be precise about what's running: the action list is built by an injected listener
+  in the page — deterministic DOM-event capture. It is not CDP tracing, and not the Chrome DevTools
+  Recorder. CDP is only the connection to the browser.</p>
+  <div class="steps fade">
+    <div class="step"><div class="num">1</div><h4>Inject once per session</h4><p>On connect, a small script is added to every page and frame via <code>addInitScript</code>.</p></div>
+    <div class="step"><div class="num">2</div><h4>Listen for real interactions</h4><p>Capture-phase listeners for <code>click</code>, <code>change</code>, <code>keydown</code> and <code>scroll</code> — the user's actual actions in the live view.</p></div>
+    <div class="step"><div class="num">3</div><h4>Describe each action</h4><p>Per event: a priority list of selectors (<code>id → aria → text → css → xpath</code>), the element's live state (role, name, value, ARIA flags, visibility, box), and a timestamp.</p></div>
+    <div class="step"><div class="num">4</div><h4>Read it back</h4><p>Events buffer in the page and are collected by the server, then merged with the Whisper transcript and the mapped source code.</p></div>
+  </div>
+  <div class="note fade"><b>Where CDP comes in:</b> the same session is a real Chrome we fully control, so richer, CDP-native
+  signals — the accessibility tree, console errors, network failures, DOM snapshots, and full session
+  recording — are a natural next layer when a bug needs more than the DOM. <span class="tag next">available next</span></div>
+</section>
+
+<!-- 4 · BUNDLE ANATOMY -->
+<section class="slide">
+  <div class="kicker fade">What the fixer receives</div>
+  <h2 class="fade">Anatomy of the diagnostic bundle</h2>
+  <div class="grid2">
+    <div class="bundle fade">
+      <div class="sec">Recording · what the user did</div>
+      <div class="row"><span class="ic">⌨️</span><span>Typed “asd@asd” into the email field</span></div>
+      <div class="row"><span class="ic">🖱️</span><span>Clicked “Invite” <em>(button · type=submit)</em></span></div>
+      <div class="sec">Voice · what they meant <span style="opacity:.6">(Whisper)</span></div>
+      <div class="row voice"><span class="ic">🗣️</span><span>“it accepted an invalid email — it should reject that”</span></div>
+      <div class="sec">Exact element + state</div>
+      <div class="quote">&lt;button&gt; “Invite” · role button<br>type=submit · aria-invalid=false · visible: true</div>
+      <div class="sec">Source · mapped from the repo</div>
+      <pre>validation-email.tsx · handleSubmit() · line 42
+function handleSubmit(e){
+  e.preventDefault();
+  <span class="bug">// only checks non-empty, never validity</span>
+  <span class="bug">if (email.trim().length > 0) setSent(true);</span>
+}</pre>
+    </div>
+    <div class="legend fade">
+      <ul>
+        <li><b>The action</b>Exactly what was done, with selectors that survive small UI changes.</li>
+        <li><b>The intent</b>The user's own words, transcribed and placed on the timeline — so "it's broken" becomes specific.</li>
+        <li><b>The element</b>Role, name, value, ARIA and visibility of the thing they touched.</li>
+        <li><b>The code</b>The recorded element mapped to the handler that renders it, pointing the agent at the line.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · WHY BROWSERBASE (honest) -->
+<section class="slide">
+  <div class="kicker fade">Where Browserbase fits</div>
+  <h2 class="fade">The browser is the hard part to own</h2>
+  <p class="sub fade">A local Chrome with CDP can read the same signals — accessibility tree, console,
+  network. The difference is everything around the browser. To do this yourself, you'd have to build
+  and operate the browser layer. Browserbase is that layer, managed.</p>
+  <table class="cmp fade">
+    <tr><th>What it takes</th><th>Build &amp; operate it yourself</th><th class="bb">On Browserbase</th></tr>
+    <tr><td>Interactive, embeddable live view</td><td class="diy">Build a screencast + input relay and keep it stable — a large effort on its own</td><td class="bb">Hosted live view, embeddable in an iframe</td></tr>
+    <tr><td>Session recording &amp; replay</td><td class="diy">Build and store it yourself</td><td class="bb">Built in</td></tr>
+    <tr><td>Reliability &amp; isolation</td><td class="diy">A browser running next to your app and model competes for resources and can destabilize the preview</td><td class="bb">Dedicated, isolated cloud Chrome</td></tr>
+    <tr><td>Running the browser at all</td><td class="diy">A full browser alongside your app is heavy on RAM and cost</td><td class="bb">Offloaded to Browserbase</td></tr>
+    <tr><td>Scale &amp; concurrency</td><td class="diy">Manage your own pool</td><td class="bb">Thousands of concurrent sessions, warm pool</td></tr>
+    <tr><td>CDP traces (a11y / console / network)</td><td class="diy">Possible locally, but you wire and maintain it</td><td class="bb">Same CDP access, on managed browsers</td></tr>
+  </table>
+  <div class="caption fade">A reliable, embeddable live view and a stable, isolated browser are significant engineering efforts in their own right. That's the gap Browserbase fills.</div>
+</section>
+
+<!-- 6 · SECOND CDP CONNECTION -->
+<section class="slide">
+  <div class="kicker fade">The next layer · a second CDP connection</div>
+  <h2 class="fade">Attach a read-only tracer without touching the session</h2>
+  <p class="sub fade">Every Chrome target accepts multiple concurrent CDP clients. While the user drives the
+  live session, we attach a <b>second, listen-only</b> client that records the full DevTools firehose and
+  never sends an action — so tracing can't interfere with the repro.</p>
+  <div class="dio fade">
+    <div class="box"><h4>User drives</h4><p>Clicks &amp; voice in the live view — the session the recorder is on.</p></div>
+    <div class="conn"><div class="ar">→</div><div class="l">CDP · client&nbsp;1</div></div>
+    <div class="box center"><h4>Browserbase Chrome</h4><p>One real, long-lived, isolated cloud browser.</p></div>
+    <div class="conn ro"><div class="ar">←</div><div class="l">CDP · client&nbsp;2 · read-only</div></div>
+    <div class="box"><h4>Trace recorder</h4><p>Listens on Network / Console / Runtime / Log / Page and writes the firehose.</p></div>
+  </div>
+  <div class="note fade">This is the <b>browser-trace</b> capability: a second CDP client that only enables observation
+  domains and never drives the page. It depends on a browser that stays alive and accepts concurrent
+  clients — which is what a managed Browserbase session provides.
+  <span class="ref"><a href="https://www.skills.sh/browserbase/skills/browser-trace">skills.sh/browserbase/skills/browser-trace</a></span></div>
+</section>
+
+<!-- 7 · THE FIREHOSE -->
+<section class="slide">
+  <div class="kicker fade">The CDP firehose</div>
+  <h2 class="fade">Everything a screenshot can't tell you</h2>
+  <p class="sub fade">The read-only client records the full protocol stream, joined by timestamp and sliced
+  into per-page, searchable buckets — the exact evidence a fixer needs to move from "looks broken" to
+  "here's the failing request and the line that swallowed it."</p>
+  <div class="split">
+    <ul class="list fade">
+      <li><b>Network</b><span>Every request/response, status, timing, payloads — the failed or slow calls behind the bug.</span></li>
+      <li><b>Console &amp; uncaught exceptions</b><span>The errors thrown during the exact repro, in order.</span></li>
+      <li><b>Runtime &amp; Log</b><span>Warnings and runtime messages the UI never surfaces.</span></li>
+      <li><b>DOM snapshots + screenshots over time</b><span>State captured at intervals, joined to the CDP events by timestamp.</span></li>
+      <li><b>Page lifecycle &amp; navigations</b><span>Loads, redirects and route changes across the flow.</span></li>
+      <li><b>Per-page buckets → agent loop</b><span>Structured summaries feed the next iteration, so it learns from the last run.</span></li>
+    </ul>
+    <div class="why fade">
+      <h4>Hard to get on a browser you run yourself</h4>
+      <ul style="padding-left:18px;margin:0">
+        <li>You must keep a real browser alive for the whole session.</li>
+        <li>Attach a <b>second concurrent CDP client</b> reliably, without it interfering with the driver.</li>
+        <li>Stream and store a high-volume firehose, then bisect it per page.</li>
+        <li>Keep it isolated so it doesn't destabilize the app or the model running beside it.</li>
+      </ul>
+      <p style="margin:12px 0 0;font-size:13px;color:#4a463d">Browserbase sessions are built for exactly this: long-lived, isolated, multi-client.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7 · HOW IT'S BUILT -->
+<section class="slide">
+  <div class="kicker fade">How it's built · what's real today</div>
+  <h2 class="fade">The pieces, and where your agent plugs in</h2>
+  <div class="cards fade">
+    <div class="card"><h4>Recording <span class="tag now" style="font-family:inherit">now</span></h4><p>Injected DOM listeners record each action with selectors + full element state. Deterministic; no model involved.</p></div>
+    <div class="card b"><h4>Voice <span class="tag now" style="font-family:inherit">now</span></h4><p>Mic → OpenAI Whisper → transcript, interleaved with actions by segment timestamp. Swappable for Groq or Whisper Flow.</p></div>
+    <div class="card a"><h4>Code mapping <span class="tag now" style="font-family:inherit">now</span></h4><p>Deterministic: the recorded element's anchors → route file → the handler that renders it.</p></div>
+    <div class="card g"><h4>Fixer agent <span class="tag next" style="font-family:inherit">your agent</span></h4><p>Consumes the bundle. In production this is your coding agent (e.g. Claude); the fix step in the live demo is illustrative.</p></div>
+  </div>
+  <div class="foot"><span>Browserbase · record → fix</span><span>architecture overview</span></div>
+</section>
+
+<script>
+  const io = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }), {threshold:.12});
+  document.querySelectorAll('.fade').forEach((el,i)=>{ el.style.transitionDelay=(Math.min(i%4,3)*70)+'ms'; io.observe(el); });
+</script>
+</body>
+</html>

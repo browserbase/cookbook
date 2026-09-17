@@ -1,0 +1,12 @@
+# secrets
+.env
+
+# runtime artifacts produced by run-demo.sh
+*.log
+*.pid
+tunnel.json
+bb-session.json
+test-results/
+rr*/
+.lastshot
+node_modules/

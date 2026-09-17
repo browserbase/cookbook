@@ -1,0 +1,41 @@
+{
+  "name": "cookbook_example-kyc-aml-demo",
+  "version": "1.0.0",
+  "description": "Enterprise KYC/AML Risk Intelligence Demo for COOKBOOK_EXAMPLE - Browserbase + Stagehand",
+  "type": "module",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "demo:full": "tsx src/index.ts --mode full",
+    "demo:adverse-media": "tsx ./src/adverse-media-screening.ts",
+    "demo:company-registry": "tsx ./src/company-registry-research.ts",
+    "demo:pep-sanctions": "tsx ./src/pep-sanctions-check.ts",
+    "demo:beneficial-ownership": "tsx ./src/beneficial-ownership.ts",
+    "demo:risk-score": "tsx ./src/risk-scoring-engine.ts",
+    "dev": "tsx watch src/index.ts",
+    "test": "tsc --noEmit && node --test tests/*.test.cjs"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "zod": "4.4.3",
+    "dotenv": "17.4.2",
+    "chalk": "6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "keywords": [
+    "kyc",
+    "aml",
+    "compliance",
+    "risk-analytics",
+    "browserbase",
+    "stagehand",
+    "cookbook_example"
+  ]
+}

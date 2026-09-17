@@ -1,0 +1,33 @@
+{
+  "name": "cookbook_example-company-intel",
+  "version": "1.0.0",
+  "description": "Company website intelligence scraper for the cookbook example - extracts ATS, leadership, blog mentions, and tech signals from company domains using Browserbase + Stagehand",
+  "type": "commonjs",
+  "scripts": {
+    "intel": "tsx company-intel.ts"
+  },
+  "keywords": [
+    "company-intel",
+    "ats-detection",
+    "enrichment",
+    "browserbase",
+    "stagehand",
+    "cookbook_example"
+  ],
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "@types/node": "26.4.1",
+    "dotenv": "17.4.2",
+    "libnpx": "10.2.4",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "@types/node": "26.4.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

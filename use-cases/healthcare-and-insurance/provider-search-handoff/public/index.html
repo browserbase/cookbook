@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>the cookbook example Provider Search Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* CSS Variables for the cookbook example branding */
+    :root {
+      --cookbook_example-orange: #FF6900;
+      --cookbook_example-blue: #B9C9FF;
+      --cookbook_example-olive: #777620;
+      --cookbook_example-dark: #1a1a1a;
+      --cookbook_example-light: #f8f9fa;
+      --font-primary: 'Montserrat', sans-serif;
+    }
+
+    /* Reset and base styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-primary);
+      background: var(--cookbook_example-light);
+      color: var(--cookbook_example-dark);
+      overflow: hidden;
+    }
+
+    /* Header */
+    header {
+      background: linear-gradient(135deg, var(--cookbook_example-orange), #ff8533);
+      color: white;
+      padding: 1.5rem 2rem;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 0.25rem;
+    }
+
+    header p {
+      font-size: 0.95rem;
+      opacity: 0.95;
+      font-weight: 400;
+    }
+
+    /* Status Banner */
+    .status-banner {
+      background: var(--cookbook_example-olive);
+      color: white;
+      padding: 1rem 2rem;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1.1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+      transition: background 0.3s ease;
+    }
+
+    .status-banner.automation {
+      background: linear-gradient(135deg, #007FFF, #0066cc);
+    }
+
+    .status-banner.human-input {
+      background: linear-gradient(135deg, #6400CC, #5200aa);
+      animation: pulse-banner 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-banner {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.85; }
+    }
+
+    .banner-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+    }
+
+    .banner-icon {
+      font-size: 1.3rem;
+    }
+
+    /* Container */
+    .container {
+      display: grid;
+      grid-template-columns: 60% 40%;
+      height: calc(100vh - 165px); /* Adjusted for banner */
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    /* Single column layout when session view is hidden */
+    .container.no-session {
+      grid-template-columns: 1fr;
+      justify-items: center;
+    }
+
+    .container.no-session .control-panel {
+      max-width: 900px;
+      width: 100%;
+      animation: fadeIn 0.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Live session view */
+    .session-view {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .session-view h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--cookbook_example-dark);
+    }
+
+    #browserbase-iframe {
+      flex: 1;
+      width: 100%;
+      border: 2px solid var(--cookbook_example-blue);
+      border-radius: 4px;
+      background: #f9f9f9;
+    }
+
+    .session-info {
+      margin-top: 1rem;
+      padding: 0.75rem;
+      background: var(--cookbook_example-light);
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.85rem;
+    }
+
+    .session-info span {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .status-indicator {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #ccc;
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    .status-indicator.active {
+      background: #28a745;
+    }
+
+    .status-indicator.waiting {
+      background: var(--cookbook_example-orange);
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    /* Control panel */
+    .control-panel {
+      background: white;
+      border-radius: 12px;
+      padding: 2rem;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .control-panel h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      color: var(--cookbook_example-dark);
+      text-align: center;
+    }
+
+    .control-panel h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--cookbook_example-dark);
+    }
+
+    .search-info {
+      background: linear-gradient(135deg, #fff5f0, #ffffff);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+      border-left: 5px solid var(--cookbook_example-orange);
+      box-shadow: 0 2px 8px rgba(255, 105, 0, 0.08);
+    }
+
+    .search-info h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--cookbook_example-orange);
+    }
+
+    .search-info p {
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      line-height: 1.6;
+    }
+
+    .search-info strong {
+      color: var(--cookbook_example-dark);
+      font-weight: 600;
+    }
+
+    /* Status log */
+    .status-log {
+      flex: 1;
+      overflow-y: auto;
+      background: linear-gradient(135deg, #f8f9fa, #ffffff);
+      padding: 1.5rem;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      border: 1px solid #e9ecef;
+    }
+
+    .status-log::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    .status-log::-webkit-scrollbar-track {
+      background: #f1f1f1;
+      border-radius: 3px;
+    }
+
+    .status-log::-webkit-scrollbar-thumb {
+      background: var(--cookbook_example-blue);
+      border-radius: 3px;
+    }
+
+    .status-log ul {
+      list-style: none;
+    }
+
+    .status-log li {
+      padding: 0.6rem 0.8rem;
+      border-left: 3px solid var(--cookbook_example-blue);
+      margin-bottom: 0.5rem;
+      background: white;
+      border-radius: 2px;
+      font-size: 0.85rem;
+      transition: all 0.2s ease;
+    }
+
+    .status-log li.active {
+      border-left-color: var(--cookbook_example-orange);
+      font-weight: 600;
+      background: #fff8f0;
+    }
+
+    .status-log li.error {
+      border-left-color: #dc3545;
+      background: #fff5f5;
+    }
+
+    .status-log li.success {
+      border-left-color: #28a745;
+      background: #f0fff4;
+    }
+
+    /* Results section */
+    .results {
+      margin-bottom: 1.5rem;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+
+    .doctor-card {
+      background: white;
+      border-left: 3px solid var(--cookbook_example-blue);
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .doctor-card h4 {
+      color: var(--cookbook_example-dark);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .doctor-card p {
+      font-size: 0.85rem;
+      margin: 0.25rem 0;
+      color: #666;
+    }
+
+    /* Extracted results styling */
+    .extracted-results {
+      background: var(--cookbook_example-light);
+      border-radius: 4px;
+    }
+
+    .extracted-results .doctor-card {
+      background: white;
+      border-left: 3px solid var(--cookbook_example-blue);
+      padding: 1rem;
+      margin-bottom: 0.75rem;
+      border-radius: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .extracted-results .doctor-card h4 {
+      color: var(--cookbook_example-dark);
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    .extracted-results .doctor-card p {
+      font-size: 0.85rem;
+      margin: 0.25rem 0;
+      color: #666;
+    }
+
+    /* Buttons */
+    .actions {
+      margin-top: auto;
+    }
+
+    button {
+      width: 100%;
+      padding: 1.25rem;
+      font-size: 1.1rem;
+      font-weight: 700;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      margin-bottom: 0.75rem;
+      font-family: var(--font-primary);
+      letter-spacing: 0.3px;
+    }
+
+    #start-btn {
+      background: var(--cookbook_example-orange);
+      color: white;
+      box-shadow: 0 4px 12px rgba(255, 105, 0, 0.2);
+    }
+
+    #start-btn:hover:not(:disabled) {
+      background: #e65f00;
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(255, 105, 0, 0.4);
+    }
+
+    #start-btn:disabled {
+      background: #ccc;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* Loading state */
+    .loading {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      border: 3px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s linear infinite;
+      margin-right: 8px;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive design */
+    @media (max-width: 1024px) {
+      .container {
+        grid-template-columns: 1fr;
+        grid-template-rows: 60% 40%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>the cookbook example</h1>
+    <p>Attended Bots - reimagined</p>
+  </header>
+
+  <!-- Status Banner -->
+  <div id="status-banner" class="status-banner" style="display: none;">
+    <div class="banner-content">
+      <span class="banner-icon"></span>
+      <span class="banner-text"></span>
+    </div>
+  </div>
+
+  <div class="container no-session">
+    <section class="session-view" style="display: none;">
+      <h2>Live Session View</h2>
+      <iframe id="browserbase-iframe" src="about:blank"></iframe>
+      <div class="session-info">
+        <span id="session-id">
+          <span class="status-indicator"></span>
+          Waiting for session...
+        </span>
+        <span id="session-status">Idle</span>
+      </div>
+    </section>
+
+    <section class="control-panel">
+      <h2>Automation Control</h2>
+
+      <div class="search-info">
+        <h3>Provider Search</h3>
+        <p><strong>Target:</strong> health portal California</p>
+        <p><strong>Location:</strong> 94109 (San Francisco)</p>
+        <p><strong>Goal:</strong> Find first 5 available providers</p>
+      </div>
+
+      <div class="status-log">
+        <h3>Workflow Status</h3>
+        <ul id="status-updates">
+          <li>Ready to start automation</li>
+        </ul>
+      </div>
+
+      <div class="results" id="results-container" style="display:none;">
+        <h3>Found Providers</h3>
+        <div id="doctors-list"></div>
+      </div>
+
+      <div class="actions">
+        <button id="start-btn">Start Automation</button>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    let eventSource = null;
+    let currentStage = 'idle';
+
+    // Update status banner
+    function updateStatusBanner(stage) {
+      const banner = document.getElementById('status-banner');
+      const bannerText = banner.querySelector('.banner-text');
+      const bannerIcon = banner.querySelector('.banner-icon');
+
+      // Show banner when automation is running
+      if (stage === 'idle' || stage === 'completed' || stage === 'error') {
+        banner.style.display = 'none';
+        return;
+      }
+
+      banner.style.display = 'block';
+
+      if (stage === 'awaiting_human_input') {
+        banner.className = 'status-banner human-input';
+        bannerText.textContent = 'Human Input';
+        bannerIcon.textContent = '👤';
+      } else {
+        banner.className = 'status-banner automation';
+        bannerText.textContent = 'Automation';
+        bannerIcon.textContent = '🤖';
+      }
+    }
+
+    function resetSessionView() {
+      const sessionView = document.querySelector('.session-view');
+      const iframe = document.getElementById('browserbase-iframe');
+      if (!sessionView || !iframe) return;
+      sessionView.querySelectorAll('.extracted-results').forEach(result => result.remove());
+      const h2 = sessionView.querySelector('h2');
+      if (h2) h2.textContent = 'Live Browser Session';
+      iframe.style.display = '';
+      iframe.removeAttribute('src');
+      document.getElementById('results-container').style.display = 'none';
+      document.getElementById('doctors-list').innerHTML = '';
+    }
+
+    // Show extracted results without destroying the reusable live-session view.
+    function replaceIframeWithResults(doctors) {
+      const sessionView = document.querySelector('.session-view');
+      const iframe = document.getElementById('browserbase-iframe');
+
+      if (!sessionView || !iframe) return;
+
+      iframe.style.display = 'none';
+      sessionView.querySelectorAll('.extracted-results').forEach(result => result.remove());
+
+      // Update the h2 title
+      const h2 = sessionView.querySelector('h2');
+      if (h2) h2.textContent = 'Extracted Results';
+
+      // Create results container in the session view
+      const resultsDiv = document.createElement('div');
+      resultsDiv.className = 'extracted-results';
+      resultsDiv.style.flex = '1';
+      resultsDiv.style.overflowY = 'auto';
+      resultsDiv.style.padding = '1rem';
+
+      // Add results header
+      const header = document.createElement('h3');
+      header.textContent = `Found ${doctors.length} Providers`;
+      header.style.marginBottom = '1rem';
+      header.style.color = 'var(--cookbook_example-dark)';
+      resultsDiv.appendChild(header);
+
+      // Add doctor cards
+      doctors.forEach((doctor, index) => {
+        const card = document.createElement('div');
+        card.className = 'doctor-card';
+        card.innerHTML = `
+          <h4>${index + 1}. ${doctor.name || 'Unknown'}</h4>
+          ${doctor.specialty ? `<p><strong>Specialty:</strong> ${doctor.specialty}</p>` : ''}
+          ${doctor.location ? `<p><strong>Location:</strong> ${doctor.location}</p>` : ''}
+          ${doctor.phone ? `<p><strong>Phone:</strong> ${doctor.phone}</p>` : ''}
+          ${doctor.address ? `<p><strong>Address:</strong> ${doctor.address}</p>` : ''}
+        `;
+        resultsDiv.appendChild(card);
+      });
+
+      // Insert results before session-info
+      const sessionInfo = sessionView.querySelector('.session-info');
+      sessionView.insertBefore(resultsDiv, sessionInfo);
+    }
+
+    // Start button handler
+    document.getElementById('start-btn').addEventListener('click', async () => {
+      const startBtn = document.getElementById('start-btn');
+      startBtn.disabled = true;
+      startBtn.innerHTML = '<span class="loading"></span> Starting automation...';
+
+      // Show the session view and update container layout
+      const container = document.querySelector('.container');
+      const sessionView = document.querySelector('.session-view');
+      container.classList.remove('no-session');
+      sessionView.style.display = 'flex';
+      resetSessionView();
+
+      try {
+        const response = await fetch('/api/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' }
+        });
+        const result = await response.json();
+
+        if (result.success) {
+          connectSSE();
+          addStatusUpdate('Automation started successfully', false, false);
+        } else {
+          addStatusUpdate(`Error: ${result.error}`, false, true);
+          startBtn.disabled = false;
+          startBtn.textContent = 'Start Automation';
+        }
+      } catch (error) {
+        console.error('Failed to start automation:', error);
+        addStatusUpdate('Failed to start automation', false, true);
+        startBtn.disabled = false;
+        startBtn.textContent = 'Start Automation';
+      }
+    });
+
+    // SSE connection
+    function connectSSE() {
+      if (eventSource) {
+        eventSource.close();
+      }
+
+      eventSource = new EventSource('/api/status');
+
+      eventSource.onmessage = (event) => {
+        const state = JSON.parse(event.data);
+        updateUI(state);
+      };
+
+      eventSource.onerror = (error) => {
+        console.error('SSE error:', error);
+        addStatusUpdate('Connection error - retrying...', false, true);
+        // Auto-reconnect after 3 seconds
+        setTimeout(() => {
+          if (currentStage !== 'completed' && currentStage !== 'error') {
+            connectSSE();
+          }
+        }, 3000);
+      };
+    }
+
+    // Update UI based on workflow state
+    function updateUI(state) {
+      currentStage = state.stage;
+
+      // Update status banner
+      updateStatusBanner(state.stage);
+
+      // Update session ID and indicator
+      const sessionIdEl = document.getElementById('session-id');
+      const indicator = sessionIdEl.querySelector('.status-indicator');
+
+      if (state.sessionId) {
+        sessionIdEl.innerHTML = `<span class="status-indicator active"></span>Session: ${state.sessionId.slice(0, 8)}...`;
+      }
+
+      // Update status indicator based on stage
+      if (indicator) {
+        if (state.stage === 'awaiting_human_input') {
+          indicator.className = 'status-indicator waiting';
+        } else if (state.stage === 'completed') {
+          indicator.className = 'status-indicator';
+        } else if (state.stage === 'error') {
+          indicator.className = 'status-indicator';
+        } else {
+          indicator.className = 'status-indicator active';
+        }
+      }
+
+      // Update iframe
+      if (state.sessionUrl) {
+        const iframe = document.getElementById('browserbase-iframe');
+        if (iframe && iframe.src !== state.sessionUrl) {
+          iframe.src = state.sessionUrl;
+          iframe.style.display = '';
+        }
+      }
+
+      // Update status text
+      const statusEl = document.getElementById('session-status');
+      statusEl.textContent = state.stage.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+
+      // Add to status log
+      const isActive = state.stage === 'awaiting_human_input';
+      const isError = state.stage === 'error';
+      const isSuccess = state.stage === 'completed';
+      addStatusUpdate(state.message, isActive, isError, isSuccess);
+
+      // Handle completion
+      if (state.stage === 'completed') {
+        const startBtn = document.getElementById('start-btn');
+        startBtn.disabled = false;
+        startBtn.textContent = 'Start New Search';
+
+        if (state.result && state.result.doctors) {
+          // Replace iframe with results in left panel
+          replaceIframeWithResults(state.result.doctors);
+
+          addStatusUpdate(`✓ Completed! Found ${state.result.doctors.length} doctors`, false, false, true);
+        }
+
+        // Close SSE connection
+        if (eventSource) {
+          eventSource.close();
+        }
+      }
+
+      // Handle errors
+      if (state.stage === 'error') {
+        const startBtn = document.getElementById('start-btn');
+        startBtn.disabled = false;
+        startBtn.textContent = 'Retry Search';
+
+        if (state.error) {
+          addStatusUpdate(`✗ Error: ${state.error}`, false, true, false);
+        }
+
+        // Close SSE connection
+        if (eventSource) {
+          eventSource.close();
+        }
+      }
+    }
+
+    // Display doctors in the results section
+    function displayDoctors(doctors) {
+      const container = document.getElementById('results-container');
+      const list = document.getElementById('doctors-list');
+
+      container.style.display = 'block';
+      list.innerHTML = '';
+
+      if (!doctors || doctors.length === 0) {
+        list.innerHTML = '<p>No doctors found</p>';
+        return;
+      }
+
+      doctors.forEach((doctor, index) => {
+        const card = document.createElement('div');
+        card.className = 'doctor-card';
+        card.innerHTML = `
+          <h4>${index + 1}. ${doctor.name || 'Unknown'}</h4>
+          ${doctor.specialty ? `<p><strong>Specialty:</strong> ${doctor.specialty}</p>` : ''}
+          ${doctor.location ? `<p><strong>Location:</strong> ${doctor.location}</p>` : ''}
+          ${doctor.phone ? `<p><strong>Phone:</strong> ${doctor.phone}</p>` : ''}
+          ${doctor.address ? `<p><strong>Address:</strong> ${doctor.address}</p>` : ''}
+        `;
+        list.appendChild(card);
+      });
+    }
+
+    // Add status update to log
+    function addStatusUpdate(message, isActive = false, isError = false, isSuccess = false) {
+      const ul = document.getElementById('status-updates');
+
+      // Remove active class from all items
+      ul.querySelectorAll('li').forEach(li => li.classList.remove('active'));
+
+      const li = document.createElement('li');
+      const timestamp = new Date().toLocaleTimeString();
+      li.textContent = `${timestamp} - ${message}`;
+
+      if (isActive) li.classList.add('active');
+      if (isError) li.classList.add('error');
+      if (isSuccess) li.classList.add('success');
+
+      ul.appendChild(li);
+
+      // Auto-scroll to bottom - scroll the parent container, not the ul
+      const statusLogContainer = document.querySelector('.status-log');
+      if (statusLogContainer) {
+        statusLogContainer.scrollTop = statusLogContainer.scrollHeight;
+      }
+
+      // Keep only last 50 messages
+      while (ul.children.length > 50) {
+        ul.removeChild(ul.firstChild);
+      }
+    }
+
+    // Auto-connect SSE on page load (for reconnection scenarios)
+    window.addEventListener('load', () => {
+      console.log('the cookbook example Provider Search Demo loaded');
+    });
+  </script>
+</body>
+</html>

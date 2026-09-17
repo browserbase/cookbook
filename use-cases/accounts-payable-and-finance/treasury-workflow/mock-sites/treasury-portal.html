@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>the cookbook example TMS — Treasury Management System</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f8fafc; color: #1a1a2e; }
+
+    /* Header */
+    .header { background: white; border-bottom: 1px solid #e5e7eb; padding: 14px 32px; display: flex; align-items: center; justify-content: space-between; }
+    .header .logo { display: flex; align-items: center; gap: 10px; }
+    .header .logo .cookbook_example-logo { width: 28px; height: 28px; background: #00D26A; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+    .header .logo .cookbook_example-logo span { color: white; font-weight: 800; font-size: 16px; }
+    .header .logo .product-name { font-size: 16px; font-weight: 600; color: #374151; }
+    .header .logo .product-name .tms { color: #00D26A; }
+    .header .nav { display: flex; gap: 24px; }
+    .header .nav a { color: #64748b; text-decoration: none; font-size: 14px; font-weight: 500; padding: 6px 0; border-bottom: 2px solid transparent; transition: all 0.15s; }
+    .header .nav a:hover, .header .nav a.active { color: #00D26A; border-bottom-color: #00D26A; }
+    .header .user { display: flex; align-items: center; gap: 10px; font-size: 14px; color: #64748b; }
+    .header .user .avatar { width: 32px; height: 32px; border-radius: 50%; background: #00D26A; color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 13px; }
+
+    /* Layout */
+    .content { max-width: 1100px; margin: 0 auto; padding: 32px; }
+    .page-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+    .page-header h1 { font-size: 22px; font-weight: 700; }
+    .page-header .actions { display: flex; gap: 12px; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 0; margin-bottom: 24px; border-bottom: 1px solid #e5e7eb; }
+    .tab { padding: 12px 20px; font-size: 14px; font-weight: 500; color: #64748b; cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.15s; background: none; border-top: none; border-left: none; border-right: none; }
+    .tab:hover { color: #374151; }
+    .tab.active { color: #00D26A; border-bottom-color: #00D26A; }
+
+    /* Upload Section */
+    .upload-section { background: white; border-radius: 12px; padding: 32px; border: 1px solid #e5e7eb; margin-bottom: 24px; }
+    .upload-section h3 { font-size: 16px; font-weight: 600; margin-bottom: 4px; }
+    .upload-section .subtitle { color: #64748b; font-size: 14px; margin-bottom: 24px; }
+
+    /* Drop Zone */
+    .drop-zone { border: 2px dashed #d1d5db; border-radius: 12px; padding: 48px; text-align: center; transition: all 0.2s; cursor: pointer; position: relative; }
+    .drop-zone:hover, .drop-zone.dragover { border-color: #00D26A; background: #f0fdf4; }
+    .drop-zone .icon { width: 48px; height: 48px; margin: 0 auto 16px; background: #f0fdf4; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .drop-zone .icon svg { width: 24px; height: 24px; color: #00D26A; }
+    .drop-zone p { font-size: 15px; color: #374151; margin-bottom: 4px; }
+    .drop-zone .hint { font-size: 13px; color: #94a3b8; }
+    .drop-zone input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+
+    /* Uploaded Files */
+    .uploaded-files { margin-top: 20px; }
+    .file-item { display: flex; align-items: center; justify-content: space-between; padding: 14px 16px; background: #f8fafc; border-radius: 10px; margin-bottom: 8px; border: 1px solid #e5e7eb; animation: fadeIn 0.3s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .file-item .file-info { display: flex; align-items: center; gap: 12px; }
+    .file-item .file-icon { width: 36px; height: 36px; background: #fee2e2; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; color: #dc2626; }
+    .file-item .file-name { font-size: 14px; font-weight: 500; }
+    .file-item .file-size { font-size: 12px; color: #94a3b8; }
+    .file-item .file-status { display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500; }
+    .file-item .file-status.success { color: #059669; }
+    .file-item .file-status.processing { color: #d97706; }
+    .file-item .file-status svg { width: 16px; height: 16px; }
+
+    /* Submit Button */
+    .submit-section { display: flex; align-items: center; justify-content: space-between; margin-top: 24px; padding-top: 24px; border-top: 1px solid #e5e7eb; }
+    .submit-section .info { font-size: 13px; color: #64748b; }
+    .btn-submit { padding: 12px 32px; background: #00D26A; color: white; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.15s; display: flex; align-items: center; gap: 8px; }
+    .btn-submit:hover { background: #00b85c; }
+    .btn-submit:disabled { background: #d1d5db; cursor: not-allowed; }
+    .btn-submit svg { width: 18px; height: 18px; }
+
+    /* Recent Uploads Table */
+    .recent-section { background: white; border-radius: 12px; padding: 24px; border: 1px solid #e5e7eb; }
+    .recent-section h3 { font-size: 16px; font-weight: 600; margin-bottom: 16px; }
+    .recent-table { width: 100%; border-collapse: collapse; }
+    .recent-table th { text-align: left; padding: 10px 14px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px; color: #94a3b8; font-weight: 600; border-bottom: 1px solid #e5e7eb; }
+    .recent-table td { padding: 12px 14px; font-size: 14px; border-bottom: 1px solid #f1f5f9; }
+    .status-badge { display: inline-flex; align-items: center; gap: 4px; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+    .status-processed { background: #ecfdf5; color: #059669; }
+    .status-pending { background: #fefce8; color: #ca8a04; }
+
+    /* Success Modal */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; justify-content: center; align-items: center; }
+    .modal-overlay.active { display: flex; }
+    .modal { background: white; border-radius: 16px; padding: 40px; max-width: 480px; width: 90%; text-align: center; animation: modalIn 0.3s ease; }
+    @keyframes modalIn { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .modal .success-icon { width: 64px; height: 64px; background: #ecfdf5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px; }
+    .modal .success-icon svg { width: 32px; height: 32px; color: #059669; }
+    .modal h2 { font-size: 20px; margin-bottom: 8px; }
+    .modal p { color: #64748b; font-size: 14px; margin-bottom: 24px; line-height: 1.5; }
+    .modal .btn-done { padding: 12px 40px; background: #00D26A; color: white; border: none; border-radius: 10px; font-size: 14px; font-weight: 600; cursor: pointer; }
+
+    /* Toast */
+    .toast { position: fixed; bottom: 24px; right: 24px; background: #059669; color: white; padding: 14px 24px; border-radius: 10px; font-size: 14px; font-weight: 500; display: none; z-index: 100; box-shadow: 0 4px 16px rgba(5,150,105,0.3); animation: slideUp 0.3s ease; }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <div class="cookbook_example-logo"><span>d</span></div>
+      <div class="product-name">the cookbook example <span class="tms">TMS</span></div>
+    </div>
+    <div class="nav">
+      <a href="#">Dashboard</a>
+      <a href="#" class="active">Statements</a>
+      <a href="#">Reconciliation</a>
+      <a href="#">Reports</a>
+      <a href="#">Compliance</a>
+    </div>
+    <div class="user">
+      <span>Treasury Ops</span>
+      <div class="avatar">TO</div>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="content">
+    <div class="page-header">
+      <h1>Bank Statement Management</h1>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs">
+      <button class="tab active">Upload Statements</button>
+      <button class="tab">Processing Queue</button>
+      <button class="tab">Reconciliation</button>
+      <button class="tab">Audit Log</button>
+    </div>
+
+    <!-- Upload Section -->
+    <div class="upload-section">
+      <h3>Upload Bank Statements</h3>
+      <p class="subtitle">Upload monthly bank statements for automated reconciliation and treasury reporting. Supported formats: PDF, CSV, OFX, BAI2.</p>
+
+      <div class="drop-zone" id="dropZone">
+        <div class="icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <p><strong>Drop bank statements here</strong> or click to browse</p>
+        <div class="hint">PDF, CSV, OFX, BAI2 — Maximum 25MB per file</div>
+        <input type="file" id="fileInput" multiple accept=".pdf,.csv,.ofx,.bai2" onchange="handleFiles(this.files)">
+      </div>
+
+      <div class="uploaded-files" id="uploadedFiles"></div>
+
+      <div class="submit-section">
+        <div class="info" id="uploadInfo">No files selected</div>
+        <button class="btn-submit" id="submitBtn" disabled onclick="submitStatements()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          Submit for Processing
+        </button>
+      </div>
+    </div>
+
+    <!-- Recent Uploads -->
+    <div class="recent-section">
+      <h3>Recent Uploads</h3>
+      <table class="recent-table">
+        <thead>
+          <tr>
+            <th>File Name</th>
+            <th>Account</th>
+            <th>Period</th>
+            <th>Uploaded</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>the cookbook example_Operations_Statement_Feb_2026.pdf</strong></td>
+            <td>Operations ••••7842</td>
+            <td>February 2026</td>
+            <td>Mar 3, 2026</td>
+            <td><span class="status-badge status-processed">✓ Processed</span></td>
+          </tr>
+          <tr>
+            <td><strong>the cookbook example_Payroll_Statement_Feb_2026.pdf</strong></td>
+            <td>Payroll ••••3156</td>
+            <td>February 2026</td>
+            <td>Mar 3, 2026</td>
+            <td><span class="status-badge status-processed">✓ Processed</span></td>
+          </tr>
+          <tr>
+            <td><strong>the cookbook example_Treasury_Statement_Jan_2026.pdf</strong></td>
+            <td>Treasury ••••9023</td>
+            <td>January 2026</td>
+            <td>Feb 4, 2026</td>
+            <td><span class="status-badge status-processed">✓ Processed</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div class="modal-overlay" id="successModal">
+    <div class="modal">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h2>Statements Submitted Successfully</h2>
+      <p id="modalMessage">3 bank statements have been submitted for automated reconciliation. Processing typically completes within 15 minutes.</p>
+      <button class="btn-done" onclick="closeModal()">Done</button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast"></div>
+
+  <script>
+    let uploadedFiles = [];
+
+    // Drag and drop
+    const dropZone = document.getElementById('dropZone');
+    dropZone.addEventListener('dragover', (e) => { e.preventDefault(); dropZone.classList.add('dragover'); });
+    dropZone.addEventListener('dragleave', () => { dropZone.classList.remove('dragover'); });
+    dropZone.addEventListener('drop', (e) => {
+      e.preventDefault();
+      dropZone.classList.remove('dragover');
+      handleFiles(e.dataTransfer.files);
+    });
+
+    function handleFiles(files) {
+      for (const file of files) {
+        if (!uploadedFiles.find(f => f.name === file.name)) {
+          uploadedFiles.push(file);
+          addFileToList(file);
+        }
+      }
+      updateSubmitButton();
+    }
+
+    function addFileToList(file) {
+      const container = document.getElementById('uploadedFiles');
+      const ext = file.name.split('.').pop().toUpperCase();
+      const size = (file.size / 1024).toFixed(1) + ' KB';
+
+      const div = document.createElement('div');
+      div.className = 'file-item';
+      div.innerHTML = `
+        <div class="file-info">
+          <div class="file-icon">${ext}</div>
+          <div>
+            <div class="file-name">${file.name}</div>
+            <div class="file-size">${size}</div>
+          </div>
+        </div>
+        <div class="file-status success">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+          Ready to submit
+        </div>
+      `;
+      container.appendChild(div);
+      showToast(`✓ File added: ${file.name}`);
+    }
+
+    function updateSubmitButton() {
+      const btn = document.getElementById('submitBtn');
+      const info = document.getElementById('uploadInfo');
+      if (uploadedFiles.length > 0) {
+        btn.disabled = false;
+        info.textContent = `${uploadedFiles.length} file${uploadedFiles.length > 1 ? 's' : ''} ready for submission`;
+      } else {
+        btn.disabled = true;
+        info.textContent = 'No files selected';
+      }
+    }
+
+    function submitStatements() {
+      const count = uploadedFiles.length;
+      const modal = document.getElementById('successModal');
+      const msg = document.getElementById('modalMessage');
+      msg.textContent = `${count} bank statement${count > 1 ? 's have' : ' has'} been submitted for automated reconciliation. Processing typically completes within 15 minutes.`;
+      modal.classList.add('active');
+    }
+
+    function closeModal() {
+      document.getElementById('successModal').classList.remove('active');
+      // Reset
+      uploadedFiles = [];
+      document.getElementById('uploadedFiles').innerHTML = '';
+      updateSubmitButton();
+      showToast('✓ Statements queued for reconciliation');
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.style.display = 'block';
+      setTimeout(() => { toast.style.display = 'none'; }, 3000);
+    }
+  </script>
+</body>
+</html>

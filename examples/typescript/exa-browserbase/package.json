@@ -1,0 +1,26 @@
+{
+  "name": "exa-browserbase",
+  "version": "1.0.0",
+  "description": "Stagehand + Browserbase + Exa: AI-Powered Job Search and Application",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "start": "tsx index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "dotenv": "latest",
+    "exa-js": "latest",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "tsx": "latest",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "packageManager": "pnpm@10.24.0"
+}

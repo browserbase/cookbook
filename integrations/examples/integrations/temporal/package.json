@@ -1,0 +1,40 @@
+{
+  "name": "temporal-money-transfer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc --build",
+    "build.watch": "tsc --build --watch",
+    "format": "prettier --write .",
+    "test": "node --test tests/*.test.mjs",
+    "worker": "node --env-file-if-exists=.env --import tsx src/research-worker.ts",
+    "worker.watch": "nodemon --exec 'node --env-file-if-exists=.env --import tsx' src/research-worker.ts",
+    "demo": "node --env-file-if-exists=.env --import tsx src/demo.ts",
+    "demo:custom": "node --env-file-if-exists=.env --import tsx src/demo.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "nodemonConfig": {
+    "ext": "ts",
+    "watch": [
+      "src"
+    ]
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "@temporalio/activity": "1.23.0",
+    "@temporalio/client": "1.23.0",
+    "@temporalio/common": "1.23.0",
+    "@temporalio/worker": "1.23.0",
+    "@temporalio/workflow": "1.23.0",
+    "zod": "4.4.3",
+    "@browserbasehq/sdk": "2.19.1"
+  },
+  "devDependencies": {
+    "@tsconfig/node22": "22.0.6",
+    "nodemon": "3.1.10",
+    "prettier": "2.8.8",
+    "typescript": "5.9.3",
+    "tsx": "^4.23.1"
+  }
+}

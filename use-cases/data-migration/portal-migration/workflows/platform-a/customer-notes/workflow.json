@@ -1,0 +1,6 @@
+{
+  "startUrl": "https://platform-a.example.invalid/dashboard/customers/directory",
+  "maxSteps": 15,
+  "model": "anthropic/claude-haiku-4-5-20251001",
+  "resultsLabel": "customer-notes-export-reqquest-replay"
+}

@@ -1,0 +1,20 @@
+// OPTIONAL typed output.
+//
+// Rename this file to `schema.ts` to get structured JSON out of the run (saved as
+// <session-id>.output.json). Leave it as-is (or delete it) to stay prompt-only, or omit it entirely
+// if the workflow produces a file download (the runner saves downloads automatically).
+//
+// Rules:
+//   - default-export a Zod OBJECT (z.object({...})).
+//   - use .describe(...) on fields to guide the agent.
+
+import { z } from "zod";
+
+export default z.object({
+  items: z.array(
+    z.object({
+      name: z.string().describe("..."),
+      // add the fields you want extracted
+    }),
+  ),
+});

@@ -1,0 +1,19 @@
+{
+  "name": "playwright-basic-recaptcha-template",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsx index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.1",
+    "playwright-core": "1.63.0",
+    "dotenv": "^16.4.7"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "7.0.2"
+  }
+}

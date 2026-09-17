@@ -1,0 +1,24 @@
+{
+  "name": "reservation_portal-automation-functions",
+  "version": "1.0.0",
+  "description": "Browserbase Functions for reservation portal restaurant reservation searching and booking",
+  "scripts": {
+    "deploy": "bb publish index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk-functions": "1.0.1",
+    "@browserbasehq/stagehand": "4.0.2",
+    "playwright-core": "1.63.0",
+    "zod": "4.4.3",
+    "ai": "7.0.93",
+    "@ai-sdk/openai": "4.0.59"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "name": "accessibility-layout-lab",
+  "app": "app",
+  "install": "bun install --frozen-lockfile",
+  "serve": "bun run dev --host 127.0.0.1 --port {port}",
+  "validate": [
+    "bun run build"
+  ],
+  "fixerContext": [
+    "src/routes/",
+    "src/app/pages/",
+    "src/app/",
+    "src/components/app-layout",
+    "src/",
+    "src/components/ui/"
+  ],
+  "hosted": {
+    "a11y-dialog-focus": "https://btc-a11y-dialog-focus.example.invalid/a11y-dialog-focus",
+    "visual-hidden-banner": "https://btc-a11y-dialog-focus.example.invalid/visual-hidden-banner",
+    "network-empty": "https://btc-a11y-dialog-focus.example.invalid/network-empty"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "name": "retailer-shovel-demo",
+  "version": "1.0.0",
+  "description": "Browserbase + Stagehand demo: AI shopping agents for Retailer & Retailer Two - search, compare, and add products to cart",
+  "type": "module",
+  "scripts": {
+    "demo": "npx tsx src/demo.ts",
+    "test": "node --test tests/demo.cjs"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "dotenv": "17.4.2",
+    "zod": "4.4.3",
+    "ai": "7.0.93",
+    "@ai-sdk/openai": "4.0.59"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

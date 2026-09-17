@@ -1,0 +1,32 @@
+# Files and documents
+
+Upload files, retrieve downloads, capture PDFs, and parse documents.
+
+Paths below are relative to a local cookbook root, not to the installed skill directory. Locate the checkout first. Read the selected guide and source before adapting code. Historical source links identify the imported revision; they predate cookbook migrations and are not runnable fallbacks.
+
+This topic contains all 22 matching entries. Browse `docs/topics/downloads-and-documents.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
+
+| Recipe | Language | Local guide | Status | Historical source |
+| --- | --- | --- | --- | --- |
+| Browserbase reducto (Python) | python | `docs/recipes/examples-python-browserbase-reducto.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python/browserbase-reducto) |
+| Download financial statements (Python) | python | `docs/recipes/examples-python-download-financial-statements.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python/download-financial-statements) |
+| Extend Browserbase (Python) | python | `docs/recipes/examples-python-extend-browserbase.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python/extend-browserbase) |
+| File upload (Python) | python | `docs/recipes/examples-python-file-upload.md` | current | cookbook-authored |
+| Image url download (Python) | python | `docs/recipes/examples-python-image-url-download.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python/image-url-download) |
+| Browserbase reducto (TypeScript) | typescript | `docs/recipes/examples-typescript-browserbase-reducto.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/browserbase-reducto) |
+| Download financial statements (TypeScript) | typescript | `docs/recipes/examples-typescript-download-financial-statements.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/download-financial-statements) |
+| Extend Browserbase (TypeScript) | typescript | `docs/recipes/examples-typescript-extend-browserbase.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/extend-browserbase) |
+| Image url download (TypeScript) | typescript | `docs/recipes/examples-typescript-image-url-download.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/image-url-download) |
+| Box · agent | typescript | `docs/recipes/integrations-examples-integrations-box-agent.md` | current | [pinned import](https://github.com/browserbase/integrations/tree/b7bc81c6fd4e089ab0c0df2b82529b200739e458/examples/integrations/box/agent) |
+| Box · Stagehand | typescript | `docs/recipes/integrations-examples-integrations-box-stagehand.md` | current | [pinned import](https://github.com/browserbase/integrations/tree/b7bc81c6fd4e089ab0c0df2b82529b200739e458/examples/integrations/box/stagehand) |
+| Cloud download retrieve (TypeScript, Playwright) | typescript | `docs/recipes/playbook-node-playwright-tools-download-cloud-download-retrieve.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/node/playwright/_tools/download/cloud-download-retrieve.ts) |
+| Cloud download save (TypeScript, Playwright) | typescript | `docs/recipes/playbook-node-playwright-tools-download-cloud-download-save.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/node/playwright/_tools/download/cloud-download-save.ts) |
+| Generate PDF (TypeScript, Playwright) | typescript | `docs/recipes/playbook-node-playwright-tools-download-generate-pdf.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/node/playwright/_tools/download/generate_pdf.ts) |
+| Local PDF (TypeScript, Playwright) | typescript | `docs/recipes/playbook-node-playwright-tools-download-local-pdf.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/node/playwright/_tools/download/local-pdf.ts) |
+| Local screenshot (TypeScript, Playwright) | typescript | `docs/recipes/playbook-node-playwright-tools-download-local-screenshot.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/node/playwright/_tools/download/local-screenshot.ts) |
+| Live view upload (TypeScript, Playwright) | typescript | `docs/recipes/playbook-node-playwright-tools-uploads-live-view-upload.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/node/playwright/_tools/uploads/live-view-upload.ts) |
+| Local upload (TypeScript, Playwright) | typescript | `docs/recipes/playbook-node-playwright-tools-uploads-local-upload.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/node/playwright/_tools/uploads/local-upload.ts) |
+| Download retrieve (Python, Playwright) | python | `docs/recipes/playbook-python-playwright-download-download-retrieve.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/python/playwright/download/download_retrieve.py) |
+| Download save (Python, Playwright) | python | `docs/recipes/playbook-python-playwright-download-download-save.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/python/playwright/download/download_save.py) |
+| Upload extension (Python, Playwright) | python | `docs/recipes/playbook-python-playwright-extensions-upload-extension.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/python/playwright/extensions/upload_extension.py) |
+| Synthetic treasury workflow | typescript | `docs/recipes/use-cases-accounts-payable-and-finance-treasury-workflow.md` | legacy | manifested import |

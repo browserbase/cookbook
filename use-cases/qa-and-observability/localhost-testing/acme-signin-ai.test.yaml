@@ -1,0 +1,8 @@
+fileType: test-runner/test/v2
+version: "1.0.0"
+id: acme-staging-login-natural-language
+name: Acme Staging login (natural language, on Browserbase)
+url: http://127.0.0.1:3000
+steps:
+  - act: Log in with email qa@example.invalid and password test123
+  - checkPageContains: Welcome, QA Agent

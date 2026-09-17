@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Browserbase — What We Pull Out of Marketplace B</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --brand: #F03603; --black: #100D0D; --gray: #6b6969; --gray-dark: #514F4F;
+    --border: #e5e3e3; --mono: 'JetBrains Mono', ui-monospace, monospace;
+  }
+  @page { size: 13.333in 7.5in; margin: 0; }
+  body { font-family: Inter, -apple-system, sans-serif; color: var(--black); background: #fff; }
+  .page { width: 13.333in; height: 7.5in; page-break-after: always; position: relative; padding: 0.5in 0.7in; overflow: hidden; }
+  .page:last-child { page-break-after: avoid; }
+
+  .eyebrow { display: flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 11px;
+    letter-spacing: 0.18em; color: var(--gray-dark); text-transform: uppercase; margin-bottom: 18px; }
+  .eyebrow::before { content: ""; width: 28px; height: 3px; background: var(--brand); }
+  h1 { font-size: 38px; font-weight: 800; line-height: 1.08; letter-spacing: -0.02em; max-width: 7in; margin-bottom: 12px; }
+  .lede { font-size: 14px; line-height: 1.5; color: var(--gray); max-width: 6.4in; margin-bottom: 24px; }
+  .lede b { color: var(--black); }
+
+  .fields { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; border: 1px solid var(--border); }
+  .field { padding: 18px 20px; border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .field:nth-child(3n) { border-right: none; }
+  .field:nth-child(n+7) { border-bottom: none; }
+  .f-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gray-dark); margin-bottom: 8px; }
+  .f-value { font-size: 15px; font-weight: 700; letter-spacing: -0.01em; margin-bottom: 6px; }
+  .f-value .big { font-size: 21px; }
+  .f-note { font-size: 11.5px; line-height: 1.5; color: var(--gray); }
+  .f-note s { color: #a5a3a3; }
+  .live { display: inline-block; font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.1em; color: #5a8a2a;
+    border: 1px solid #d9e8c4; background: #f7faf1; padding: 1px 7px; border-radius: 2px; margin-left: 6px; vertical-align: middle; }
+  .auth { color: #7a6a2a; border-color: #ecdfae; background: #fbf7ea; }
+
+  .pageno { position: absolute; right: 0.7in; bottom: 0.32in; font-family: var(--mono); font-size: 11px; letter-spacing: 0.12em; color: #a5a3a3; }
+
+  .how { display: flex; gap: 14px; margin-top: 20px; }
+  .how-item { flex: 1; border: 1px solid var(--border); padding: 14px 16px; }
+  .how-item .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-dark); margin-bottom: 6px; }
+  .how-item .t { font-size: 12px; line-height: 1.5; color: var(--gray); }
+  .how-item .t b { color: var(--black); }
+</style>
+</head>
+<body>
+<div style="padding:12px;background:#fff3cd;color:#5f4500;font:600 14px system-ui">UNVERIFIED RETAINED ARTIFACT — illustrative historical output, not current evidence or a runnable cookbook recipe.</div>
+
+<section class="page">
+  <div class="eyebrow">Illustrative, unverified output · Marketplace B.com · Browserbase Sessions · July 2026</div>
+  <h1>Everything we pull out of Marketplace B.</h1>
+  <p class="lede">Every value below is <b>illustrative data modeled from Marketplace B storefronts</b> by Browserbase sessions — Verified, residential proxies, no account, no API. Each one traces back to a illustrative browser-session record.</p>
+
+  <div class="fields">
+    <div class="field">
+      <div class="f-label">Shelf Price <span class="live">verified live</span></div>
+      <div class="f-value"><span class="big">$4.34</span> — Kirkland Signature Whole Milk, 1 gal</div>
+      <div class="f-note">Merchant C storefront, zip 74039. Every product tile carries a current price; 12+ items per query per retailer in ~15–25s.</div>
+    </div>
+    <div class="field">
+      <div class="f-label">Unit Price <span class="live">verified live</span></div>
+      <div class="f-value"><span class="big">$0.027/oz</span> — Friendly Farms Whole Milk</div>
+      <div class="f-note">Computed from price ÷ pack size on every extraction; also displayed on product detail pages. Enables like-for-like comparison across pack architectures.</div>
+    </div>
+    <div class="field">
+      <div class="f-label">Promotions &amp; Coupons <span class="live">verified live</span></div>
+      <div class="f-value"><span class="big">$11.18</span> <s style="font-weight:400">$15.18</s> — $4 off (26%)</div>
+      <div class="f-note">Malk Almond Milk, Merchant C. Original price, discount amount, percent, and purchase limits ("limit 6") all captured per item.</div>
+    </div>
+    <div class="field">
+      <div class="f-label">Zip-Level Variation <span class="live">verified live</span></div>
+      <div class="f-value"><span class="big">$3.60 → $4.34</span> same item, two markets</div>
+      <div class="f-note">Kirkland Whole Milk: zip 77089 (Houston) vs 74039 (Oklahoma). Geolocated residential proxies pin the market — a Houston run landed both sessions in 77007/77015.</div>
+    </div>
+    <div class="field">
+      <div class="f-label">Delivery-Fee Thresholds <span class="live">verified live</span></div>
+      <div class="f-value"><span class="big">"Add $1.01 to get $0 delivery fee"</span></div>
+      <div class="f-note">Merchant F guest basket: subtotal $8.99, $10 checkout minimum, fee threshold — captured from the live cart drawer, no account. Full personalized fee schedules via authenticated contexts.</div>
+    </div>
+    <div class="field">
+      <div class="f-label">Basket Subtotal <span class="live">verified live</span></div>
+      <div class="f-value"><span class="big">$24.84</span> — 3-item Merchant C basket</div>
+      <div class="f-note">Guest carts assembled programmatically; any basket of items can be priced end-to-end per retailer × market, on a schedule.</div>
+    </div>
+    <div class="field">
+      <div class="f-label">Availability <span class="live">verified live</span></div>
+      <div class="f-value"><span class="big">"Many in stock"</span> per item</div>
+      <div class="f-note">Stock signals on every tile. Repeated runs turn this into an in-stock rate by item × retailer × market.</div>
+    </div>
+    <div class="field">
+      <div class="f-label">Merchandising Signals <span class="live">verified live</span></div>
+      <div class="f-value"><span class="big">Best seller · Sponsored · ★ 1.53K</span></div>
+      <div class="f-note">Badges, sponsored placements, ratings counts, and the SNAP-Eligible facet — how Marketplace B merchandises each category, not just what it charges.</div>
+    </div>
+    <div class="field">
+      <div class="f-label">Retailer Coverage &amp; Markups</div>
+      <div class="f-value"><span class="big">Retailer set per zip</span> + markup posture</div>
+      <div class="f-note">Which chains Marketplace B offers in each market (Merchant C, Merchant F, Merchant E, regional grocers) — including Merchant A's own storefront and its "No markups" badge, seen as shoppers see it.</div>
+    </div>
+  </div>
+
+  <div class="pageno">01 / 02</div>
+</section>
+
+<section class="page">
+  <div class="eyebrow">Why Every Cell Is Defensible</div>
+  <h1>Captured like a shopper. Proven like an audit.</h1>
+  <p class="lede">Marketplace B has no public catalog API — internal endpoints are cookie-fingerprinted and bot-checked, so the browser surface is the only reliable one. That's the moat, and it's what Browserbase industrializes.</p>
+
+  <div class="fields" style="grid-template-columns: 1fr 1fr;">
+    <div class="field" style="border-bottom: 1px solid var(--border);">
+      <div class="f-label">Verified</div>
+      <div class="f-value">Marketplace B's own device check: <span style="font-family:var(--mono)">isBot: false</span></div>
+      <div class="f-note">Every Marketplace B page embeds invisible reCAPTCHA plus edge bot protection that escalates on bare sessions. Verified Browserbase sessions with residential proxies pass cleanly — the challenge never fires.</div>
+    </div>
+    <div class="field" style="border-bottom: 1px solid var(--border); border-right: none;">
+      <div class="f-label">Geo-Pinned Markets</div>
+      <div class="f-value">Zip comes from the IP — so we control the IP</div>
+      <div class="f-note">Marketplace B ignores URL zip overrides; the market is chosen by egress IP. Geolocated residential proxies pin every session to a target metro, so cross-retailer comparisons are like-for-like.</div>
+    </div>
+    <div class="field" style="border-bottom: none;">
+      <div class="f-label">Provenance</div>
+      <div class="f-value">Every price → a session replay</div>
+      <div class="f-note">Each extraction is recorded and replayable. When a number in the feed is questioned, open the replay and watch the exact page render the exact price.</div>
+    </div>
+    <div class="field" style="border-bottom: none; border-right: none;">
+      <div class="f-label">Scale &amp; Cadence</div>
+      <div class="f-value">Parallel sessions · scheduled Functions</div>
+      <div class="f-note">Retailers × markets × items fan out across concurrent isolated browsers; deploy the extractor as a scheduled function and the feed refreshes daily — a standing signal your pricing engine consumes.</div>
+    </div>
+  </div>
+
+  <div class="how">
+    <div class="how-item"><div class="k">01 — Analyze</div><div class="t">Open each retailer storefront in a <b>Verified session</b> pinned to the target <b>market</b>.</div></div>
+    <div class="how-item"><div class="k">02 — Extract</div><div class="t">Pull the same structured fields from every product tile, <b>the same way every time</b>.</div></div>
+    <div class="how-item"><div class="k">03 — Normalize</div><div class="t">Match to your catalog; roll every <b>retailer × zip × item</b> observation into one feed.</div></div>
+  </div>
+
+  <div class="pageno">02 / 02</div>
+</section>
+
+</body>
+</html>

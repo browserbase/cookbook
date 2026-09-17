@@ -1,0 +1,21 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import vm from 'node:vm';
+import {stripTypeScriptTypes} from 'node:module';
+import test from 'node:test';
+const {chromium}=await import(process.env.COOKBOOK_PLAYWRIGHT_MODULE || 'playwright-core');
+const src=await fs.readFile(new URL('../main.ts',import.meta.url),'utf8');
+const code=src.slice(0,src.indexOf('export async function main(')).replace(/^import .*;\n/gm,'').replace(/^export /gm,'');
+const ctx=vm.createContext({console:{log:()=>{}}});vm.runInContext(stripTypeScriptTypes(code),ctx);
+test('actual Playwright form completes Enter, Lines, accounting, attachment and Submit interactions',async t=>{
+ const dir=await fs.mkdtemp(path.join(os.tmpdir(),'cookbook-r180-'));t.after(()=>fs.rm(dir,{recursive:true,force:true}));const attachment=path.join(dir,'synthetic.txt');await fs.writeFile(attachment,'Synthetic attachment');
+ const browser=await chromium.launch({headless:true,executablePath:process.env.CHROME_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'});t.after(()=>browser.close());const page=await browser.newPage({viewport:{width:1400,height:1000}});page.setDefaultTimeout(2000);await page.route('**/*',route=>route.abort());
+ await page.setContent(`<input data-uxi-element-id="selectinput-56$12373" onkeydown="if(event.key==='Enter')window.companyEnter=true"><input data-uxi-element-id="selectinput-56$12374"><div aria-label="Submenu Bank Account for Ad Hoc Transactions">Bank menu</div><div>Synthetic Bank</div><input data-uxi-element-id="selectinput-56$85472" onkeydown="if(event.key==='Enter')window.payeeEnter=true"><div data-automation-id="promptOption">Synthetic Payee</div><input data-uxi-element-id="selectinput-56$12375"><div>Manual</div><input id="56$12461"><input id="56$34417"><input id="56$46596"><div role="tab" onclick="document.querySelector('#lines').hidden=false;window.linesClicked=true">Lines</div><section id="lines" hidden><table><tr><th>Spend Category</th></tr><tr><td style="height:30px">Category cell</td></tr></table><input aria-label="Spend Category"><div><div>Synthetic Supplies</div></div><input id="56$12190-input"><input id="56$12192-input"><input aria-label="*Cost Center"><input aria-label="*Fund"><input aria-label="Line of Business"><div><div>Synthetic Department</div></div></section><div role="tab" onclick="document.querySelector('#attachment').hidden=false">Attachments</div><input id="attachment" type="file" hidden><button onclick="window.submitted=true">Submit</button>`);
+ page.waitForTimeout=async()=>{};
+ const data=ctx.validateData({company:'Synthetic Company',bankAccount:'Synthetic Bank',payee:'Synthetic Payee',paymentType:'Manual',controlAmount:'1.00',memo:'Synthetic memo',addenda:'Synthetic addenda',spendCategory:'Synthetic Supplies',quantity:'1',unitPrice:'1.00',costCenter:'Synthetic Center',fund:'Synthetic Fund',lineOfBusiness:'Synthetic',lineOfBusinessOption:'Synthetic Department',attachment});
+ if(process.env.COOKBOOK_R180_BASELINE){const original=await fs.readFile(process.env.COOKBOOK_R180_BASELINE,'utf8');const start=original.indexOf('  // fill the form'),end=original.indexOf('  await page?.close();',start);vm.runInContext(stripTypeScriptTypes('async function originalFill(page,data){'+(process.env.COOKBOOK_R180_REPAIR_KEYS ? original.slice(start,end).replaceAll('page.keyPress(', 'page.keyboard.press(') : original.slice(start,end))+'}'),ctx);await ctx.originalFill(page,data);}else await ctx.fillPayment(page,data);
+ assert.deepEqual(await page.evaluate(()=>({company:window.companyEnter,payee:window.payeeEnter,lines:window.linesClicked,submitted:window.submitted})),{company:true,payee:true,lines:true,submitted:true});assert.equal(await page.locator('[id="56$12192-input"]').inputValue(),'1.00');assert.equal(await page.locator('[aria-label="*Fund"]').inputValue(),'Synthetic Fund');assert.equal(await page.locator('input[type=file]').evaluate(input=>input.files[0].name),'synthetic.txt');
+});
+test('missing payment fields fail before form execution',()=>{assert.throws(()=>ctx.validateData({company:'Synthetic'}),/payment field/);});

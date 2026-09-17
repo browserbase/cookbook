@@ -1,0 +1,23 @@
+{
+  "name": "cookbook_example-poc",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "tsc --noEmit && node --test tests/draft-result.cjs",
+    "uc1": "tsx uc1-llc-formation.ts"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "dotenv": "17.4.2",
+    "zod": "4.5.4",
+    "@browserbasehq/sdk": "2.19.0"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.0",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

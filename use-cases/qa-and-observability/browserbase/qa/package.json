@@ -1,0 +1,25 @@
+{
+  "name": "synthetic_app-qa-demo",
+  "version": "1.0.0",
+  "description": "Stagehand Agent QA testing demo for a synthetic application",
+  "scripts": {
+    "demo:agent": "npx tsx qa-agent-demo.ts",
+    "demo:self-healing": "npx tsx self-healing-demo.ts",
+    "demo:form-validation": "npx tsx dynamic-form-validation.ts"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "dotenv": "17.4.2",
+    "zod": "4.4.3",
+    "ai": "7.0.93",
+    "@ai-sdk/openai": "4.0.59"
+  },
+  "devDependencies": {
+    "tsx": "4.23.13",
+    "typescript": "7.0.2",
+    "@types/node": "26.4.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

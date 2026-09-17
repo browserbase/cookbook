@@ -1,0 +1,25 @@
+{
+  "name": "sf-business-code-lookup",
+  "version": "1.0.0",
+  "description": "Lookup NAICS and MCC codes for SF businesses",
+  "main": "workflow.ts",
+  "scripts": {
+    "start": "node --env-file=.env --import tsx workflow.ts",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "zod": "4.5.4",
+    "ai": "7.0.87",
+    "@ai-sdk/openai": "4.0.53",
+    "csv-parse": "7.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.0",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

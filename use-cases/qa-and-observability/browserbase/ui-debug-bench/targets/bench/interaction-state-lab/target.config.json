@@ -1,0 +1,22 @@
+{
+  "name": "interaction-state-lab",
+  "app": "app",
+  "install": "bun install --frozen-lockfile",
+  "serve": "bun run dev --host 127.0.0.1 --port {port}",
+  "validate": [
+    "bun run build"
+  ],
+  "fixerContext": [
+    "src/routes/",
+    "src/app/pages/",
+    "src/app/",
+    "src/components/app-layout",
+    "src/",
+    "src/components/ui/"
+  ],
+  "hosted": {
+    "functional-counter": "https://btc-interaction-state-lab.example.invalid/functional-counter",
+    "functional-filter": "https://btc-interaction-state-lab.example.invalid/functional-filter",
+    "state-tab-loss": "https://btc-interaction-state-lab.example.invalid/state-tab-loss"
+  }
+}

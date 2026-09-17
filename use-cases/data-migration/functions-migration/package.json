@@ -1,0 +1,25 @@
+{
+  "name": "cookbook_example-platform-a-functions",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Platform A data-migration extractions as Browserbase Functions \u2014 deterministic API replays (no Stagehand agent at runtime; stagehand stays a pinned build dep because the Functions build needs the known-good lock).",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.1",
+    "@browserbasehq/sdk-functions": "1.0.1",
+    "@browserbasehq/stagehand": "4.0.2",
+    "playwright-core": "1.63.0",
+    "zod": "4.4.3",
+    "ai": "7.0.93",
+    "@ai-sdk/openai": "4.0.59"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

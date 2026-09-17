@@ -1,0 +1,8 @@
+{
+  "name": "starter-functional-counter",
+  "app": "app",
+  "install": "npm ci",
+  "serve": "npm exec vite -- --host 127.0.0.1 --port {port} --strictPort",
+  "validate": ["npm run check", "npm run build"],
+  "fixerContext": ["src/"]
+}

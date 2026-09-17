@@ -1,0 +1,70 @@
+You are on the Platform A Items / Services page, already authenticated:
+https://platform-a.example.invalid/dashboard/items/services
+
+Goal: pull EVERY service and its service options (variants) by replaying the catalog API that backs
+the page — do NOT scroll the UI. Return structured JSON matching the output schema (name, description,
+category_name, duration, price, price_varies, processing_duration, trailing_buffer_duration,
+parent_service_name). The list is bounded, so return it all as your structured answer (no file).
+
+Use the `browserEval` tool. Run the fetch immediately — do not screenshot or wait for the page first.
+
+## Step 1 — fetch the catalog (items + categories) and build the service rows
+A Platform A catalog ITEM is one service; its `variations[]` are the service options (variants). Emit one
+row per variation. When an item has more than one variation, set `parent_service_name` to the item
+name on each variant row. Resolve category ids to names via a CATEGORY fetch.
+```js
+async function fetchAll(type) {
+  let all = [], cursor = null;
+  do {
+    const url = `https://platform-a.example.invalid/v2/catalog/frontend/list?types=${type}` +
+      (cursor ? `&cursor=${encodeURIComponent(cursor)}` : "");
+    const resp = await fetch(url, { credentials: "include" });
+    const data = await resp.json();
+    all = all.concat(data.objects || []);
+    cursor = data.cursor || null;
+  } while (cursor);
+  return all;
+}
+const items = await fetchAll("ITEM");
+const cats = await fetchAll("CATEGORY");
+const catMap = {};
+for (const c of cats) catMap[c.id] = c.category_data?.name || "";
+
+const toMin = (ms) => (typeof ms === "number" && ms > 0 ? String(Math.round(ms / 60000)) : "");
+const services = [];
+for (const obj of items) {
+  const it = obj.item_data || {};
+  const vars = it.variations || [];
+  const isMulti = vars.length > 1;
+  const categoryName =
+    catMap[it.category_id] ||
+    (it.categories && it.categories[0] && catMap[it.categories[0].id]) ||
+    it.reporting_category?.name || "";
+  const description = it.description || it.description_plaintext || "";
+  for (const v of vars) {
+    const vd = v.item_variation_data || {};
+    // best-effort buffer/processing field names — confirm against a live response in Phase B
+    const processingMs = vd.transition_time ?? vd.processing_time ?? vd.processing_duration;
+    const bufferMs = vd.trailing_buffer_time ?? vd.buffer_time ?? vd.trailing_buffer_duration;
+    services.push({
+      name: (isMulti ? (vd.name || it.name) : it.name) || "",
+      description,
+      category_name: categoryName,
+      duration: toMin(vd.service_duration),
+      price: vd.price_money ? (vd.price_money.amount / 100).toFixed(2) : "",
+      price_varies: vd.pricing_type === "VARIABLE_PRICING" || !vd.price_money,
+      processing_duration: toMin(processingMs),
+      trailing_buffer_duration: toMin(bufferMs),
+      parent_service_name: isMulti ? (it.name || "") : "",
+    });
+  }
+}
+window._services = services;
+return { count: services.length, sample: services.slice(0, 2) };
+```
+If the endpoint returns non-2xx or empty, discover the correct one via
+`performance.getEntriesByType('resource')` filtered for entries containing "catalog" or "items".
+
+## Step 2 — return results
+Return `{ services: window._services, count: window._services.length }` as your structured JSON answer,
+all at once. Do not chunk it across calls. Work autonomously; do not ask follow-up questions.

@@ -1,0 +1,217 @@
+{
+  "id": "telecom-a",
+  "name": "Telecom Portal A",
+  "loginUrl": "https://telecom-a.example.invalid/acctmgmt/signin",
+  "notes": "Telecom Portal A uses a 2-step login: (1) User ID (email/username) field → Continue button, (2) Password field → Sign in button. MFA was not triggered during exploration but Telecom Portal A may send verification codes in some scenarios — MFA detection is included. After login a feedback popup ('We'd love your feedback') may appear — dismiss with 'No thanks'. A 'myTelecom Portal A app' banner may appear at the bottom of the login page — dismiss with the X button. The billing center URL is /acctmgmt/billing/mybillingcenter and shows 'Current balance' with 'Total due on [date]' and the dollar amount prominently. The Make a Payment page allows changing amount and selecting from saved bank accounts; the default is pre-selected.",
+  "billPullSteps": [
+    {
+      "description": "Navigate to Telecom Portal A sign-in page",
+      "action": "navigate",
+      "instruction": "https://telecom-a.example.invalid/acctmgmt/signin"
+    },
+    {
+      "description": "Wait for login page to load",
+      "action": "wait",
+      "waitMs": 2000
+    },
+    {
+      "description": "Dismiss myTelecom Portal A app banner if present",
+      "action": "act",
+      "instruction": "If a 'myTelecom Portal A app' banner is visible at the bottom of the screen, click the X button on the left side to dismiss it"
+    },
+    {
+      "description": "Enter User ID (Step 1 of 2-step login)",
+      "action": "act",
+      "instruction": "Type \"{{username}}\" into the User ID input field"
+    },
+    {
+      "description": "Click Continue to proceed to password page",
+      "action": "act",
+      "instruction": "Click the blue Continue button"
+    },
+    {
+      "description": "Wait for password page to load",
+      "action": "wait",
+      "waitMs": 2000
+    },
+    {
+      "description": "Enter password (Step 2 of 2-step login)",
+      "action": "act",
+      "instruction": "Type \"{{password}}\" into the Password field"
+    },
+    {
+      "description": "Click Sign in to submit credentials",
+      "action": "act",
+      "instruction": "Click the blue Sign in button"
+    },
+    {
+      "description": "Wait for account to load (may show MFA or dashboard)",
+      "action": "wait",
+      "waitMs": 5000
+    },
+    {
+      "description": "Check for MFA verification prompt",
+      "action": "observe",
+      "instruction": "Look for any verification code prompt, MFA challenge, 'Confirm your identity', 'Enter the code we sent', or any security code entry field"
+    },
+    {
+      "description": "Dismiss feedback popup if present",
+      "action": "act",
+      "instruction": "If a 'We'd love your feedback after your visit today' popup is visible, click 'No thanks' to dismiss it"
+    },
+    {
+      "description": "Click Billing in the account navigation to do a client-side route change (avoids SPA auth loss)",
+      "action": "act",
+      "instruction": "Click the 'Billing' icon or link in the top account navigation menu bar (between Payments and Profile)"
+    },
+    {
+      "description": "Wait for billing center SPA content to load",
+      "action": "wait",
+      "waitMs": 6000
+    },
+    {
+      "description": "Extract balance and due date from billing center",
+      "action": "extract",
+      "instruction": "Extract the current balance amount and the payment due date from the 'My billing center' page. Look for 'Current balance' section showing the dollar amount and 'Total due on [date]' text.",
+      "schema": {
+        "balance": "string",
+        "due_date": "string"
+      },
+      "isFinalResult": true
+    }
+  ],
+  "billPaySteps": [
+    {
+      "description": "Navigate to Telecom Portal A sign-in page",
+      "action": "navigate",
+      "instruction": "https://telecom-a.example.invalid/acctmgmt/signin"
+    },
+    {
+      "description": "Wait for login page to load",
+      "action": "wait",
+      "waitMs": 2000
+    },
+    {
+      "description": "Dismiss myTelecom Portal A app banner if present",
+      "action": "act",
+      "instruction": "If a 'myTelecom Portal A app' banner is visible at the bottom of the screen, click the X button on the left side to dismiss it"
+    },
+    {
+      "description": "Enter User ID (Step 1 of 2-step login)",
+      "action": "act",
+      "instruction": "Type \"{{username}}\" into the User ID input field"
+    },
+    {
+      "description": "Click Continue to proceed to password page",
+      "action": "act",
+      "instruction": "Click the blue Continue button"
+    },
+    {
+      "description": "Wait for password page to load",
+      "action": "wait",
+      "waitMs": 2000
+    },
+    {
+      "description": "Enter password (Step 2 of 2-step login)",
+      "action": "act",
+      "instruction": "Type \"{{password}}\" into the Password field"
+    },
+    {
+      "description": "Click Sign in to submit credentials",
+      "action": "act",
+      "instruction": "Click the blue Sign in button"
+    },
+    {
+      "description": "Wait for account to load (may show MFA or dashboard)",
+      "action": "wait",
+      "waitMs": 5000
+    },
+    {
+      "description": "Check for MFA verification prompt",
+      "action": "observe",
+      "instruction": "Look for any verification code prompt, MFA challenge, 'Confirm your identity', 'Enter the code we sent', or any security code entry field"
+    },
+    {
+      "description": "Dismiss feedback popup if present",
+      "action": "act",
+      "instruction": "If a 'We'd love your feedback after your visit today' popup is visible, click 'No thanks' to dismiss it"
+    },
+    {
+      "description": "Click Billing in the account navigation to do a client-side route change (avoids SPA auth loss)",
+      "action": "act",
+      "instruction": "Click the 'Billing' icon or link in the top account navigation menu bar (between Payments and Profile)"
+    },
+    {
+      "description": "Wait for billing center SPA content to load",
+      "action": "wait",
+      "waitMs": 6000
+    },
+    {
+      "description": "Click Other payment options to open Make a Payment page",
+      "action": "act",
+      "instruction": "Click the 'Other payment options' button below the PAY NOW button in the Current balance section"
+    },
+    {
+      "description": "Wait for Make a Payment page to load",
+      "action": "wait",
+      "waitMs": 3000
+    },
+    {
+      "description": "Clear and enter the payment amount",
+      "action": "act",
+      "instruction": "Click on the 'Enter amount' field, clear the existing value, and type \"{{payment_amount}}\""
+    },
+    {
+      "description": "Scroll down to see payment method and submit button",
+      "action": "act",
+      "instruction": "Scroll down to see the 'Pay with' section showing the selected bank account and find the Continue or Review payment button"
+    },
+    {
+      "description": "Submit the payment",
+      "action": "act",
+      "instruction": "Click the 'Continue' or 'Review payment' or 'Submit payment' button to proceed with the payment using the pre-selected bank account"
+    },
+    {
+      "description": "Wait for payment review or confirmation page",
+      "action": "wait",
+      "waitMs": 3000
+    },
+    {
+      "description": "Confirm the payment if a review step is shown",
+      "action": "act",
+      "instruction": "If a payment review page is shown, click the 'Submit payment', 'Pay now', or 'Confirm' button to finalize the payment"
+    },
+    {
+      "description": "Wait for payment confirmation",
+      "action": "wait",
+      "waitMs": 5000
+    },
+    {
+      "description": "Extract payment confirmation details",
+      "action": "extract",
+      "instruction": "Extract the payment confirmation details. Look for a confirmation number, amount paid, and payment date.",
+      "schema": {
+        "transaction_id": "string",
+        "amount_paid": "number",
+        "payment_date": "string"
+      },
+      "isFinalResult": true
+    }
+  ],
+  "mfaDetection": {
+    "observeInstruction": "Look for any page asking for a verification code, 'Confirm your identity', 'Enter the code we sent you', or any field requesting a security code sent via SMS or email",
+    "indicators": [
+      "Confirm your identity",
+      "verification code",
+      "Enter the code",
+      "We sent a code",
+      "6-digit code",
+      "security code",
+      "Verify your identity",
+      "check your email",
+      "check your phone",
+      "sent you a code",
+      "authentication code"
+    ]
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "resultSchema": {
+    "type": "object",
+    "properties": {
+      "retailer": { "type": "string" },
+      "payment_methods_advertised": { "type": "array", "items": { "type": "string" }, "description": "Every payment method visible anywhere pre-checkout: footer, help pages, PDP, cart. Cards, PayPal, Apple/Google Pay, retailer wallet, BNPL (which provider), EBT/SNAP, HSA/FSA, OTC benefit cards, gift cards, rewards/points." },
+      "benefit_messaging": {
+        "type": "object",
+        "properties": {
+          "ebt_snap": { "type": "string", "description": "How/where EBT-SNAP is surfaced (badges, filters, banners), or 'none observed'." },
+          "hsa_fsa": { "type": "string", "description": "How/where HSA/FSA eligibility is surfaced, or 'none observed'." },
+          "otc": { "type": "string", "description": "How/where OTC benefit-card eligibility is surfaced, or 'none observed'." },
+          "use_your_benefits_prompts": { "type": "string", "description": "Any 'use your benefits' / 'shop eligible items' prompts and where they appear." }
+        },
+        "required": ["ebt_snap", "hsa_fsa", "otc", "use_your_benefits_prompts"]
+      },
+      "eligibility_indicators": { "type": "string", "description": "How eligible items are badged/filtered on search and PDP; whether a shopper knows eligibility before checkout." },
+      "benefit_tracker": { "type": "string", "description": "Any benefit/balance tracker surfaced pre-checkout, or 'none observed'." },
+      "payment_promotions": { "type": "array", "items": { "type": "string" }, "description": "Promotions tied to a payment method: card % back, PayPal offers, BNPL 'as low as $X/mo', membership pricing." },
+      "wallet_express_prompts": { "type": "string", "description": "Wallet/express-checkout prompts shown pre-checkout (Apple Pay, Shop Pay, retailer wallet)." },
+      "savings_surfaced_by_method": { "type": "string", "description": "Whether savings/lowest-cost-by-tender is surfaced proactively or the shopper must discover it." },
+      "discovery_effort": { "type": "string", "description": "Qualitative: how much effort for a customer to learn payment/benefit eligibility before checkout." },
+      "key_screens_observed": { "type": "array", "items": { "type": "string" }, "description": "Screens visited (home, search, PDP, cart) with a one-line note each." },
+      "notable_quotes": { "type": "array", "items": { "type": "string" }, "description": "Exact on-page messaging strings worth quoting in the report." }
+    },
+    "required": ["retailer", "payment_methods_advertised", "benefit_messaging", "eligibility_indicators", "discovery_effort"]
+  },
+  "tasks": [
+    {
+      "label": "marketplace_a",
+      "task": "You are a payments-UX researcher studying Marketplace A.com. Do NOT log in, do NOT add to cart beyond what's needed to view messaging, do NOT check out, do NOT buy anything. Study how Marketplace A communicates PAYMENT and BENEFIT options to shoppers BEFORE checkout. Visit the homepage, search a grocery item ('milk') and a health/OTC item ('allergy relief tablets' or 'FSA eligible'), open 1-2 product detail pages, and view the cart. Capture: every payment method advertised anywhere (footer 'Marketplace A payment products', help, PDP, cart) including cards, Marketplace A Pay, Apple/Google Pay, PayPal, Affirm/BNPL, EBT/SNAP (Marketplace A Fresh), HSA/FSA (Marketplace A has an FSA/HSA store), OTC, gift cards, points ('Shop with Points'); how EBT/SNAP, HSA/FSA, and OTC eligibility are badged or filtered (look for an 'FSA/HSA eligible' badge/store and 'SNAP EBT eligible' labels); any benefit tracker; payment-linked promotions (card %, 'Shop with Points', BNPL 'as low as'); wallet/express prompts; and how hard it is to know eligibility/savings before checkout. Quote exact on-page text. Return the structured result."
+    },
+    {
+      "label": "marketplace_b",
+      "task": "You are a payments-UX researcher studying Marketplace B.com. Do NOT log in, do NOT check out, do NOT buy anything (a login wall blocks checkout — that's fine, stay before it). Study how Marketplace B communicates PAYMENT and BENEFIT options BEFORE checkout. Visit the homepage, pick a retailer storefront (e.g., /store/merchant_c/storefront or a grocery store), search a grocery item ('milk') and a health/OTC item ('allergy' or 'vitamins'), open product pages, and open the cart drawer. Capture: every payment method advertised anywhere (help pages marketplace-b.example.invalid/paypal, /p/venmo, /lp/klarna, /help/article/ebt-snap-payments, FSA/HSA help) including cards, Apple/Google Pay, PayPal, Venmo, Cash App, Klarna BNPL, EBT/SNAP, HSA/FSA, OTC Network card, Marketplace B gift cards, Marketplace B Card Network/points; how EBT/SNAP eligibility is surfaced (SNAP-eligible filter/badges), how HSA/FSA and OTC are surfaced; any 'use your benefits' prompts and benefit tracker; the cart economics messaging (delivery/service fees, $0-fee thresholds, order minimum); payment-linked promotions; and effort to learn eligibility before checkout. Quote exact on-page text. Return the structured result."
+    },
+    {
+      "label": "merchant_c",
+      "task": "You are a payments-UX researcher studying Merchant C.com. Do NOT log in, do NOT check out, do NOT buy anything. Study how Merchant C communicates PAYMENT and BENEFIT options to shoppers BEFORE checkout. Visit the homepage, search a grocery item ('milk') and a health item ('vitamins' or visit the Pharmacy/Optical or FSA-eligible area if present), open 1-2 product pages, and view the cart. Capture: every payment method advertised anywhere (help/'online payment methods' page, footer, PDP, cart) including which cards (note Merchant C's Visa-only in-warehouse but broader online), Merchant C Anywhere Visa, Affirm/BNPL online, Apple/Google Pay, digital wallets, Merchant C Shop Cards (gift), and whether EBT/SNAP, HSA/FSA, or OTC are accepted or mentioned; how membership pricing/savings are surfaced; any benefit or eligibility badging; payment-linked promotions; wallet/express prompts; and how hard it is to learn eligibility/savings before checkout. Note membership gating. Quote exact on-page text. Return the structured result."
+    },
+    {
+      "label": "platform_d_merchant",
+      "task": "You are a payments-UX researcher studying Merchant D.com, used as a REPRESENTATIVE Commerce Platform D merchant to characterize the Commerce Platform D/Shop Pay checkout stack. Do NOT log in, do NOT complete checkout, do NOT buy anything (you may proceed to the checkout/payment screen to observe methods, then stop). Study how a typical Commerce Platform D storefront communicates PAYMENT options to shoppers BEFORE and at checkout. Add an item to cart and open the cart/checkout. Capture: every payment method advertised (cards, Shop Pay, Apple Pay, Google Pay, PayPal, Marketplace A Pay, Shop Pay Installments / Affirm BNPL 'as low as $X/mo'); the express-checkout / accelerated-checkout buttons shown on the cart and checkout (Shop Pay, Apple Pay, etc.); how Shop Pay is promoted (one-click, saved info, installments messaging); whether any benefit tenders (EBT/SNAP, HSA/FSA, OTC) are offered (likely none — note that explicitly, as it characterizes DTC Commerce Platform D vs retailers); payment-linked promotions; and the overall discovery effort. Quote exact on-page text. Return the structured result."
+    }
+  ]
+}

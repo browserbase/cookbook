@@ -1,0 +1,22 @@
+{
+  "name": "async-network-lab",
+  "app": "app",
+  "install": "bun install --frozen-lockfile",
+  "serve": "bun run dev --host 127.0.0.1 --port {port}",
+  "validate": [
+    "bun run build"
+  ],
+  "fixerContext": [
+    "src/routes/",
+    "src/app/pages/",
+    "src/app/",
+    "src/components/app-layout",
+    "src/",
+    "src/components/ui/"
+  ],
+  "hosted": {
+    "async-loading": "https://btc-async-loading.example.invalid/async-loading",
+    "async-race": "https://btc-async-loading.example.invalid/async-race",
+    "network-retry": "https://btc-async-loading.example.invalid/network-retry"
+  }
+}

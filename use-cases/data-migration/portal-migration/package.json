@@ -1,0 +1,39 @@
+{
+  "name": "portal-migration-reference",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Browserbase and Stagehand reference for operator-configured portal data extraction.",
+  "scripts": {
+    "portal-login": "tsx scripts/portal-login.ts",
+    "portal-login:platform-a": "tsx scripts/portal-login.ts platform-a",
+    "portal-login:platform-b": "tsx scripts/portal-login.ts platform-b",
+    "platform-a/customer-list": "tsx scripts/run-workflow.ts platform-a/customer-list",
+    "platform-a/customer-notes": "tsx scripts/run-workflow.ts platform-a/customer-notes",
+    "platform-a/appointments-list": "tsx scripts/run-workflow.ts platform-a/appointments-list",
+    "platform-a/services-list": "tsx scripts/run-workflow.ts platform-a/services-list",
+    "platform-a/team-members": "tsx scripts/run-workflow.ts platform-a/team-members",
+    "platform-b/customer-list": "tsx scripts/run-workflow.ts platform-b/customer-list",
+    "platform-b/customer-notes": "tsx scripts/run-workflow.ts platform-b/customer-notes",
+    "check-context": "tsx scripts/check-context.ts",
+    "stats": "tsx scripts/stats.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "npm run typecheck && node --test tests/*.test.cjs"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.1",
+    "@browserbasehq/stagehand": "4.0.2",
+    "dotenv": "17.4.2",
+    "zod": "4.4.3",
+    "ai": "7.0.93",
+    "@ai-sdk/openai": "4.0.59"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

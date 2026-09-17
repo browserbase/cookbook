@@ -1,0 +1,10 @@
+{
+  "name": "cookbook_example-browserbase-demo",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "node server.js",
+    "start": "node server.js",
+    "agent:setup": "node scripts/setup-agent.js"
+  }
+}

@@ -1,0 +1,19 @@
+.audit/
+node_modules/
+.venv/
+__pycache__/
+*.pyc
+.env
+.env.*
+!.env.example
+!.env.*.example
+!.env.sample
+.DS_Store
+*.tsbuildinfo
+
+# Private workflow resume results
+.browser-workflow-journals/
+.journal.json
+.journal-v2-*.json
+.journal-v2-*.json.lock
+.journal-*.tmp

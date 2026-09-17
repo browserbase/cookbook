@@ -1,0 +1,27 @@
+{
+  "name": "cookbook_example",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test tests/*.test.cjs",
+    "start": "tsx index.ts",
+    "postinstall": "playwright install"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.1",
+    "@browserbasehq/stagehand": "4.0.2",
+    "@playwright/test": "1.63.0",
+    "boxen": "8.0.1",
+    "chalk": "6.0.0",
+    "dotenv": "17.4.2",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "tsx": "4.23.13",
+    "typescript": "7.0.2",
+    "@types/node": "26.4.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

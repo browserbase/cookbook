@@ -1,0 +1,17 @@
+{
+  "company": "Synthetic Company",
+  "bankAccount": "Synthetic Bank Account",
+  "payee": "Synthetic Payee",
+  "paymentType": "Manual",
+  "controlAmount": "1.00",
+  "memo": "Synthetic example payment",
+  "addenda": "Synthetic example addenda",
+  "spendCategory": "Synthetic Supplies",
+  "quantity": "1",
+  "unitPrice": "1.00",
+  "costCenter": "Synthetic Cost Center",
+  "fund": "Synthetic Fund",
+  "lineOfBusiness": "Synthetic",
+  "lineOfBusinessOption": "Synthetic Department",
+  "attachment": "/absolute/path/to/reviewed-attachment.pdf"
+}

@@ -1,0 +1,25 @@
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const path=require('node:path');
+const vm=require('node:vm');
+const {stripTypeScriptTypes}=require('node:module');
+const test=require('node:test');
+function fixture(options={}) {
+  const calls=[]; const messages=[]; const timers=new Map(); let timerId=0;
+  const page={async goto(url,args){calls.push(['goto',url,args]);if(options.gotoError)throw Error('synthetic');if(options.gotoPending)return new Promise(()=>{});return options.nullResponse?null:{status:()=>options.status||200};}};
+  const browser={context:{async newPage(){calls.push(['newPage']);if(options.pageError)throw Error('synthetic');return page;}},async close(){calls.push(['close']);if(options.closeError)throw Error('synthetic');if(options.closePending)return new Promise(()=>{});}};
+  let resolveLaunch;
+  const source=fs.readFileSync(process.env.COOKBOOK_R169_BASELINE||path.join(__dirname,'../src/main.ts'),'utf8').replace(/^#!.*\n/,'').replace(/^import .*;\s*$/gm,'').split('// CLI execution')[0].replace('class HackerNewsIntelligenceDemo','globalThis.Demo = class HackerNewsIntelligenceDemo');
+  const context=vm.createContext({Stagehand:{create(){throw Error('Model client must not be initialized for connectivity check')}},StagehandCreateOptionsSchema:{parse:x=>x},browserbase:{launch(args){calls.push(['launch',args]);if(options.launchPending)return new Promise(resolve=>{resolveLaunch=resolve;});if(options.launchError)return Promise.reject(Error('synthetic'));return Promise.resolve(browser);}},browserbaseConfig:{apiKey:'synthetic'},validateConfig(){calls.push(['validate']);if(options.invalid)throw Error('synthetic');},IntelligenceReporter:class{},logger:Object.fromEntries(['info','success','warn','error','debug'].map(name=>[name,(...args)=>messages.push([name,...args])])),setTimeout(fn,ms){const id=++timerId;timers.set(id,{fn,ms});return id;},clearTimeout(id){timers.delete(id);}});
+  vm.runInContext(stripTypeScriptTypes(source),context);
+  return {demo:new context.Demo(),calls,messages,timers,resolveLaunch(){resolveLaunch(browser);},async fire(ms){await new Promise(setImmediate);const entry=[...timers].find(([,x])=>x.ms===ms);assert.ok(entry,`pending timer ${ms}`);timers.delete(entry[0]);entry[1].fn();}};
+}
+test('fresh demo initializes browser, navigates and releases its own session',async()=>{const f=fixture();assert.equal(await f.demo.healthCheck(),true);assert.deepEqual(f.calls.map(x=>x[0]),['validate','launch','newPage','goto','close']);const opts=f.calls[1][1];assert.equal(opts.api_timeout,60);assert.equal(opts.keepAlive,false);assert.equal(f.calls[3][2].timeout,10000);assert.equal(f.timers.size,0);});
+test('configuration-only check performs no browser allocation',async()=>{const f=fixture();assert.equal(await f.demo.healthCheck({configurationOnly:true}),true);assert.deepEqual(f.calls.map(x=>x[0]),['validate']);});
+test('invalid configuration fails before allocation',async()=>{const f=fixture({invalid:true});assert.equal(await f.demo.healthCheck(),false);assert.deepEqual(f.calls.map(x=>x[0]),['validate']);});
+for(const options of [{launchError:true},{pageError:true},{gotoError:true},{nullResponse:true},{status:503},{closeError:true}]) test(`failure reported and acquired browser cleaned: ${JSON.stringify(options)}`,async()=>{const f=fixture(options);assert.equal(await f.demo.healthCheck(),false);assert.equal(f.calls.filter(x=>x[0]==='close').length,options.launchError?0:1);assert.equal(f.timers.size,0);});
+test('navigation deadline fails and releases acquired browser',async()=>{const f=fixture({gotoPending:true});const result=f.demo.healthCheck();await f.fire(15000);assert.equal(await result,false);assert.equal(f.calls.filter(x=>x[0]==='close').length,1);});
+test('cleanup deadline fails without claiming success',async()=>{const f=fixture({closePending:true});const result=f.demo.healthCheck();await f.fire(10000);assert.equal(await result,false);assert.ok(!f.messages.some(x=>String(x[1]).includes('connectivity verified')));});
+test('late allocation after launch deadline is released',async()=>{const f=fixture({launchPending:true});const result=f.demo.healthCheck();await f.fire(30000);assert.equal(await result,false);f.resolveLaunch();await new Promise(setImmediate);assert.equal(f.calls.filter(x=>x[0]==='close').length,1);assert.equal(f.calls.filter(x=>x[0]==='newPage').length,0);assert.equal(f.timers.size,0);});
+test('repeated checks each own a fresh session',async()=>{const f=fixture();assert.equal(await f.demo.healthCheck(),true);assert.equal(await f.demo.healthCheck(),true);assert.equal(f.calls.filter(x=>x[0]==='launch').length,2);assert.equal(f.calls.filter(x=>x[0]==='close').length,2);});
+test('allocation resolving in the deadline turn is still released once',async()=>{const f=fixture({launchPending:true});const result=f.demo.healthCheck();await new Promise(setImmediate);const [id,timer]=[...f.timers].find(([,x])=>x.ms===30000);f.timers.delete(id);timer.fn();f.resolveLaunch();assert.equal(await result,false);await new Promise(setImmediate);assert.equal(f.calls.filter(x=>x[0]==='close').length,1);assert.equal(f.timers.size,0);});

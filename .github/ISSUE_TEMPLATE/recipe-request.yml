@@ -1,0 +1,33 @@
+name: Recipe request
+description: Suggest a browser automation task for the cookbook.
+title: "[Recipe]: "
+labels: [enhancement, recipe]
+body:
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+      description: Describe the observable result the recipe should produce.
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: Preferred language
+      options:
+        - TypeScript
+        - Python
+        - Go
+        - No preference
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Frameworks and constraints
+      description: Include relevant frameworks, target sites, authentication, and side effects.
+  - type: textarea
+    id: prior-art
+    attributes:
+      label: Existing examples
+      description: Link related public documentation or recipes.

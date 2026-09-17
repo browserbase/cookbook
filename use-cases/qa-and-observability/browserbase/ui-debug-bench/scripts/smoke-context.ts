@@ -1,0 +1,11 @@
+import { loadTarget } from "../src/targets.js";
+import { listFiles } from "../src/runtime/fs.js";
+import { selectContextFiles } from "../src/agents/fixer.js";
+const t = await loadTarget("targets/bench/accessibility-layout-lab");
+const files = await listFiles(t.appDir);
+const ctx = selectContextFiles(files, t.config.fixerContext ?? []);
+console.log("first 12:", ctx.slice(0, 12));
+console.log("includes MetricsPage:", ctx.includes("src/app/pages/MetricsPage.tsx"));
+const t2 = await loadTarget("targets/bench/interaction-state-lab");
+const ctx2 = selectContextFiles(await listFiles(t2.appDir), t2.config.fixerContext ?? []);
+console.log("includes functional-counter route:", ctx2.includes("src/routes/functional-counter.tsx"));

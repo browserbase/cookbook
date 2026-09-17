@@ -1,0 +1,20 @@
+// OPTIONAL typed output.
+//
+// Rename this file to `schema.ts` to get structured JSON out of the run. The runner
+// auto-detects schema.ts and passes it to the agent as `output`, so result.output is
+// validated against this shape. Leave it as-is (or delete it) to stay prompt-only.
+//
+// Rules:
+//   - default-export a Zod OBJECT (z.object({...})).
+//   - use .describe(...) on fields to guide the agent.
+
+import { z } from "zod";
+
+export default z.object({
+  items: z.array(
+    z.object({
+      name: z.string().describe("..."),
+      // add the fields you want extracted
+    }),
+  ),
+});

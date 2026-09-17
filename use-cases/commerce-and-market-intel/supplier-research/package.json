@@ -1,0 +1,27 @@
+{
+  "name": "supplier_marketplace-product_search-demo",
+  "version": "1.0.0",
+  "description": "Supplier Marketplace Product Search Supplier Intelligence Agent demo \u2014 powered by Browserbase + Stagehand",
+  "type": "commonjs",
+  "scripts": {
+    "demo": "tsx supplier_marketplace-product_search-parallel-demo.ts",
+    "start": "tsx supplier_marketplace-product_search-parallel-demo.ts"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "@types/node": "26.4.1",
+    "dotenv": "17.4.2",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2",
+    "zod": "4.4.3",
+    "ai": "7.0.93",
+    "@ai-sdk/openai": "4.0.59"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2",
+    "@types/node": "26.4.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

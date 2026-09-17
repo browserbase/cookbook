@@ -1,0 +1,14 @@
+{
+  "name": "cookbook-localhost-testing",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "start": "node server.mjs",
+    "shim": "node shim.mjs",
+    "check": "node --check server.mjs && node --check shim.mjs"
+  },
+  "dependencies": {}
+}

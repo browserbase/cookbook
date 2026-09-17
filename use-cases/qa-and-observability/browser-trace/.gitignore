@@ -1,0 +1,4 @@
+node_modules/
+.env
+**/.o11y/
+**/report.html

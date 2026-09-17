@@ -1,0 +1,24 @@
+{
+  "name": "cookbook_example-test-sites",
+  "private": true,
+  "type": "module",
+  "description": "Browserbase login-coverage diagnostic for the four sites the cookbook example needs proven out",
+  "scripts": {
+    "start": "tsx run.ts",
+    "test": "tsc --noEmit",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "dotenv": "17.4.2",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.1",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

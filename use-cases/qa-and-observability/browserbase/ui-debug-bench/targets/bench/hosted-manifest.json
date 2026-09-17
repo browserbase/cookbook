@@ -1,0 +1,62 @@
+[
+  {
+    "labId": "accessibility-layout-lab",
+    "latestCommitSha": "bde5bde9f6fe0eb74645228ad2e21b5c2a4e751a",
+    "publishedUrl": "https://btc-a11y-dialog-focus.example.invalid",
+    "routes": {
+      "a11y-dialog-focus": "https://btc-a11y-dialog-focus.example.invalid/a11y-dialog-focus",
+      "visual-hidden-banner": "https://btc-a11y-dialog-focus.example.invalid/visual-hidden-banner",
+      "network-empty": "https://btc-a11y-dialog-focus.example.invalid/network-empty"
+    }
+  },
+  {
+    "labId": "forms-validation-lab",
+    "latestCommitSha": "6c16f7875797ea719062de216c1a6bd53f5477d1",
+    "publishedUrl": "https://btc-forms-validation-lab.example.invalid",
+    "routes": {
+      "a11y-label": "https://btc-forms-validation-lab.example.invalid/a11y-label",
+      "validation-email": "https://btc-forms-validation-lab.example.invalid/validation-email",
+      "validation-password": "https://btc-forms-validation-lab.example.invalid/validation-password"
+    }
+  },
+  {
+    "labId": "async-network-lab",
+    "latestCommitSha": "b05abbae057f08f0d01a39827f1fb28ae67ab8dd",
+    "publishedUrl": "https://btc-async-loading.example.invalid",
+    "routes": {
+      "async-loading": "https://btc-async-loading.example.invalid/async-loading",
+      "async-race": "https://btc-async-loading.example.invalid/async-race",
+      "network-retry": "https://btc-async-loading.example.invalid/network-retry"
+    }
+  },
+  {
+    "labId": "interaction-state-lab",
+    "latestCommitSha": "1925ba134e8e187f03ea7c43c96fe1bea7825d94",
+    "publishedUrl": "https://btc-interaction-state-lab.example.invalid",
+    "routes": {
+      "functional-counter": "https://btc-interaction-state-lab.example.invalid/functional-counter",
+      "functional-filter": "https://btc-interaction-state-lab.example.invalid/functional-filter",
+      "state-tab-loss": "https://btc-interaction-state-lab.example.invalid/state-tab-loss"
+    }
+  },
+  {
+    "labId": "auth-state-lab",
+    "latestCommitSha": "0018440876ddaedea735be0507786f2cc2a47474",
+    "publishedUrl": "https://btc-auth-state-lab.example.invalid",
+    "routes": {
+      "auth-guard": "https://btc-auth-state-lab.example.invalid/auth-guard",
+      "auth-logout": "https://btc-auth-state-lab.example.invalid/auth-logout",
+      "state-theme-reset": "https://btc-auth-state-lab.example.invalid/state-theme-reset"
+    }
+  },
+  {
+    "labId": "responsive-visual-lab",
+    "latestCommitSha": "1b00fd4533bce2cb3b93a1ddaacecf4cb032ee86",
+    "publishedUrl": "https://btc-responsive-visual-lab.example.invalid",
+    "routes": {
+      "mobile-nav": "https://btc-responsive-visual-lab.example.invalid/mobile-nav",
+      "mobile-table": "https://btc-responsive-visual-lab.example.invalid/mobile-table",
+      "visual-overflow": "https://btc-responsive-visual-lab.example.invalid/visual-overflow"
+    }
+  }
+]

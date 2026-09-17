@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Local credential-wrapping simulation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  @font-face{font-family:'PP Supply Sans';src:url('assets/pp-supply-sans-regular.woff2') format('woff2');font-weight:400;font-display:swap;}
+  :root{
+    --ink:#100D0D; --paper:#F9F6F4; --card:#ffffff; --line:#e4e0dc; --muted:#6f6a66;
+    --accent:#F03603; --accent-soft:#fdeee9; --ok:#2f9e44; --ok-soft:#eef8f0; --blue:#2f6f9e; --dim:#cfcac6;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html,body{height:100%;}
+  body{font-family:Inter,-apple-system,sans-serif;background:var(--paper);color:var(--ink);display:flex;flex-direction:column;overflow:hidden;}
+  .mono{font-family:"Geist Mono","SF Mono",Menlo,Consolas,monospace;}
+
+  header{background:var(--ink);color:#fff;padding:13px 26px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+  .brand{display:flex;align-items:center;gap:11px;}
+  .brand .bb{font-family:'PP Supply Sans',sans-serif;font-size:19px;color:#fff;}
+  .brand .x{color:#57524e;font-size:14px;}
+  .brand .rip{font-weight:800;font-size:14px;color:var(--accent);}
+  .brand .sep{width:1px;height:20px;background:#3a3633;margin:0 5px;}
+  .brand .sub{font-size:12px;color:#9a938d;}
+  .runbtn{background:var(--accent);color:#fff;border:none;height:38px;padding:0 20px;font-size:14px;font-weight:700;border-radius:8px;cursor:pointer;transition:background .18s;}
+  .runbtn:hover{background:#fff;color:var(--ink);}
+  .runbtn:disabled{opacity:.55;cursor:default;}
+
+  .tabs{display:flex;gap:4px;padding:9px 26px 0;flex-shrink:0;}
+  .tab{border:none;background:none;padding:7px 15px;font-size:13.5px;font-weight:700;color:var(--muted);cursor:pointer;border-bottom:2.5px solid transparent;}
+  .tab.on{color:var(--ink);border-bottom-color:var(--accent);}
+
+  main{flex:1;display:grid;grid-template-columns:1fr 400px;gap:16px;padding:12px 26px;min-height:0;}
+  .stagebox{background:var(--card);border:1px solid var(--line);border-radius:14px;position:relative;overflow:hidden;display:flex;}
+  svg#diagram{width:100%;height:100%;display:block;}
+
+  /* nodes rendered as HTML inside foreignObject */
+  .dnode{width:100%;height:100%;border:1.5px solid var(--line);border-radius:14px;background:var(--card);
+    padding:14px 16px;display:flex;flex-direction:column;justify-content:center;transition:border-color .25s,background .25s,box-shadow .25s;}
+  .dnode.on{border-color:var(--accent);border-width:2.5px;background:var(--accent-soft);box-shadow:0 6px 20px rgba(240,54,3,.12);}
+  .dnode.ok{border-color:var(--ok);border-width:2.5px;background:var(--ok-soft);box-shadow:0 6px 20px rgba(47,158,68,.12);}
+  .dhead{display:flex;align-items:center;gap:10px;}
+  .dic{font-size:22px;line-height:1;}
+  .dtitle{font-weight:800;font-size:16px;font-family:"Geist Mono",monospace;letter-spacing:-.01em;}
+  .drole{font-size:12.5px;color:var(--muted);margin-top:5px;margin-left:32px;}
+  .dmap{font-size:12px;color:var(--muted);font-weight:600;margin-top:2px;margin-left:32px;}
+
+  /* browser node mini form */
+  .browsernode{padding:11px 14px;justify-content:flex-start;}
+  .miniform{margin-top:8px;display:flex;flex-direction:column;gap:6px;}
+  .mfield{display:flex;align-items:center;justify-content:space-between;gap:8px;height:26px;border:1.5px solid var(--line);border-radius:7px;padding:0 10px;background:#fff;transition:border-color .2s;overflow:hidden;}
+  .mfield .val{font-family:"Geist Mono",monospace;font-size:12.5px;color:var(--ink);flex:1;min-width:0;overflow:hidden;white-space:nowrap;}
+  .mfield .lab{font-size:10px;color:#b7b1ab;flex-shrink:0;}
+  .ok .mfield{border-color:#bfe3c8;}
+  .mrow{display:flex;align-items:center;gap:12px;margin-top:1px;}
+  .msignin{background:var(--blue);color:#fff;border:none;height:27px;padding:0 16px;font-size:12px;font-weight:700;border-radius:7px;}
+  .mok{font-size:12.5px;font-weight:800;color:var(--ok);opacity:0;transition:opacity .3s;}
+  .mok.show{opacity:1;}
+
+  #liveWrap{display:none;flex-direction:column;width:100%;}
+  #liveBar{background:#eae6e2;display:flex;align-items:center;gap:7px;padding:8px 12px;border-bottom:1px solid var(--line);flex-shrink:0;}
+  #liveBar .dot{width:10px;height:10px;border-radius:50%;}
+  .dot.r{background:#ff5f57;}.dot.y{background:#febc2e;}.dot.g{background:#28c840;}
+  #liveBar .u{flex:1;background:#fff;border-radius:5px;padding:4px 10px;font-size:11px;color:var(--muted);margin-left:6px;}
+  #liveBar .lv{font-size:10px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.05em;display:flex;align-items:center;gap:5px;}
+  #liveBar .pulse{width:7px;height:7px;border-radius:50%;background:var(--accent);animation:pulse 1.4s infinite;}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(240,54,3,.5);}70%{box-shadow:0 0 0 7px rgba(240,54,3,0);}100%{box-shadow:0 0 0 0 rgba(240,54,3,0);}}
+  #liveFrame{flex:1;border:none;background:#0d1117;width:100%;}
+  #liveMsg{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:var(--muted);text-align:center;padding:30px;}
+
+  /* right: accumulating transcript */
+  .panel{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 8px;display:flex;flex-direction:column;min-height:0;overflow-y:auto;}
+  /* live console */
+  .console{display:none;flex-direction:column;min-height:0;height:100%;}
+  .console-head{font-size:11px;font-weight:800;color:var(--accent);text-transform:uppercase;letter-spacing:.06em;padding:6px 8px 10px;}
+  #consoleBody{flex:1;background:#0d1117;border-radius:10px;padding:12px 13px;overflow-y:auto;font-family:"Geist Mono",monospace;font-size:11.5px;line-height:1.7;}
+  .cline{white-space:pre-wrap;word-break:break-word;}
+  .cline .ts{color:#5a6570;}
+  .cline.ok{color:#7ee787;} .cline.send{color:#a5d6ff;} .cline.step{color:#f0f3f6;font-weight:700;margin-top:6px;} .cline.info{color:#c9d1d9;} .cline.err{color:#ff7b72;}
+  .sitem{border-radius:10px;padding:11px 13px;transition:opacity .25s,background .25s;}
+  .sitem-head{display:flex;align-items:center;gap:10px;}
+  .sitem .sn{width:22px;height:22px;border-radius:6px;background:#efeae6;color:var(--muted);font-weight:800;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+  .sitem .sh{font-size:13px;font-weight:700;color:var(--ink);}
+  .sitem-detail{display:none;margin-top:8px;margin-left:32px;}
+  .sitem-detail ul{list-style:none;display:flex;flex-direction:column;gap:5px;}
+  .sitem-detail li{font-size:13px;color:#33302e;padding-left:15px;position:relative;}
+  .sitem-detail li::before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--accent);}
+  .sitem-detail .data{margin-top:9px;background:#0d1117;color:#c9d1d9;border-radius:8px;padding:9px 11px;font-family:"Geist Mono",monospace;font-size:10.5px;white-space:pre-wrap;word-break:break-word;line-height:1.55;}
+  .sitem-detail .data .k{color:#7ee787;}.sitem-detail .data .s{color:#a5d6ff;}.sitem-detail .data .c{color:#8b949e;}.sitem-detail .data .l{color:#ff7b72;}
+  .sitem-detail .who{margin-top:11px;font-size:11.5px;color:var(--muted);}
+  .sitem-detail .who b{color:var(--ink);}
+  /* states */
+  .sitem.past{opacity:.5;cursor:pointer;}
+  .sitem.past:hover{opacity:.8;background:#faf8f7;}
+  .sitem.future{opacity:.32;cursor:pointer;}
+  .sitem.current{opacity:1;background:var(--accent-soft);}
+  .sitem.current .sn{background:var(--accent);color:#fff;}
+  .sitem.current .sitem-detail{display:block;}
+  .sitem.past .sn{background:var(--ok);color:#fff;}
+
+  /* bottom rail */
+  .rail{display:flex;align-items:center;gap:7px;padding:10px 26px 16px;flex-shrink:0;overflow-x:auto;}
+  .chip{flex-shrink:0;display:flex;align-items:center;gap:7px;border:1px solid var(--line);background:var(--card);border-radius:9px;padding:7px 11px;cursor:pointer;transition:all .18s;}
+  .chip .n{width:20px;height:20px;border-radius:5px;background:#efeae6;color:var(--muted);font-weight:800;font-size:11px;display:flex;align-items:center;justify-content:center;}
+  .chip .t{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap;}
+  .chip.on{border-color:var(--accent);background:var(--accent-soft);}
+  .chip.on .n{background:var(--accent);color:#fff;}.chip.on .t{color:var(--ink);}
+  .chip.done .n{background:var(--ok);color:#fff;}
+
+  .edge{stroke:var(--dim);stroke-width:2;fill:none;transition:stroke .25s,stroke-width .25s;marker-end:url(#ah);}
+  .edge.on{stroke:var(--accent);stroke-width:2.8;marker-end:url(#ah-on);}
+  .elabel{font:700 12px Inter;fill:var(--muted);opacity:0;transition:opacity .25s;paint-order:stroke;stroke:#ffffff;stroke-width:5px;stroke-linejoin:round;}
+  .elabel.on{opacity:1;fill:var(--accent);}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <span class="bb">Browserbase</span><span class="x">×</span><span class="rip">Local simulation</span>
+    <span class="sep"></span>
+    <span class="sub">Local credential-wrapping simulation · synthetic credentials only</span>
+  </div>
+  <button class="runbtn" id="runBtn" onclick="runLive()">▶ Run live demo</button>
+</header>
+
+<div class="tabs">
+  <button class="tab on" id="tabDiagram" onclick="showTab('diagram')">Flow illustration</button>
+  <button class="tab" id="tabLive" onclick="showTab('live')">Live browser</button>
+</div>
+
+<main>
+  <div class="stagebox">
+    <svg id="diagram" viewBox="0 0 940 500" preserveAspectRatio="xMidYMid meet">
+      <defs>
+        <marker id="ah" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 Z" fill="#cfcac6"/></marker>
+        <marker id="ah-on" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto"><path d="M1,1 L11,6 L1,11 Z" fill="#F03603"/></marker>
+      </defs>
+
+      <!-- edges (straight, ending short of each box) -->
+      <path id="e-idp-demo"     class="edge" d="M 348 126 L 420 198"/>
+      <path id="e-demo-vault"   class="edge" d="M 424 288 L 352 340"/>
+      <path id="e-vault-demo"   class="edge" d="M 356 364 L 426 302"/>
+      <path id="e-demo-browser" class="edge" d="M 626 240 L 682 240"/>
+      <path id="e-browser-demo" class="edge" d="M 684 266 L 628 266"/>
+      <text class="elabel" id="l-idp-demo"     x="356" y="150">mint JWT</text>
+      <text class="elabel" id="l-demo-vault"   x="352" y="300" text-anchor="end">ask vault</text>
+      <text class="elabel" id="l-vault-demo"   x="452" y="348">🔒 lockbox</text>
+      <text class="elabel" id="l-demo-browser" x="653" y="228">inject</text>
+      <text class="elabel" id="l-browser-demo" x="653" y="284">public key</text>
+
+      <!-- identity-provider: top-left -->
+      <foreignObject x="40" y="44" width="300" height="104">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="dnode" id="n-idp">
+          <div class="dhead"><span class="dic">🪪</span><span class="dtitle">identity-provider.mjs</span></div>
+          <div class="drole">signs JWTs</div>
+          <div class="dmap">→ unauthenticated demo token issuer</div>
+        </div>
+      </foreignObject>
+
+      <!-- vault-server: bottom-left -->
+      <foreignObject x="40" y="352" width="300" height="104">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="dnode" id="n-vault">
+          <div class="dhead"><span class="dic">🗄️</span><span class="dtitle">vault-server.mjs</span></div>
+          <div class="drole">holds credentials</div>
+          <div class="dmap">→ trusted server decrypts credentials</div>
+        </div>
+      </foreignObject>
+
+      <!-- demo.py: center -->
+      <foreignObject x="432" y="192" width="188" height="116">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="dnode" id="n-demo">
+          <div class="dhead"><span class="dic">🤖</span><span class="dtitle">demo.py</span></div>
+          <div class="drole">orchestrator</div>
+          <div class="dmap">→ trusted local orchestrator</div>
+        </div>
+      </foreignObject>
+
+      <!-- cloud browser: right -->
+      <foreignObject x="690" y="158" width="240" height="180">
+        <div xmlns="http://www.w3.org/1999/xhtml" class="dnode browsernode" id="n-browser">
+          <div class="dhead"><span class="dic">🌐</span><span class="dtitle" style="font-family:Inter;">Cloud Browser</span></div>
+          <div class="drole" style="margin-left:32px;">Browserbase · demo extension</div>
+          <div class="miniform">
+            <div class="mfield"><span class="val" id="bf-user"></span><span class="lab">username</span></div>
+            <div class="mfield"><span class="val" id="bf-pass"></span><span class="lab">password</span></div>
+            <div class="mrow"><button class="msignin">Sign in</button><span class="mok" id="bf-ok">✓ logged in</span></div>
+          </div>
+        </div>
+      </foreignObject>
+    </svg>
+
+    <div id="liveWrap">
+      <div id="liveBar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+        <span class="u" id="liveUrlBar">the-internet.herokuapp.com/login</span>
+        <span class="lv"><span class="pulse"></span>Live</span>
+      </div>
+      <iframe id="liveFrame" allow="clipboard-read; clipboard-write"></iframe>
+      <div id="liveMsg">
+        <div style="font-size:40px;">🌐</div>
+        <div style="font-size:13px;max-width:360px;">Click <b>▶ Run live demo</b> to start the real flow.<br>The live Browserbase session loads here and the steps light up as it runs.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- right: accumulating step transcript -->
+  <aside class="panel"><div id="transcript"></div></aside>
+</main>
+
+<div class="rail" id="rail"></div>
+
+<script>
+  const STEPS = [
+    { id:0, chip:"Mint JWT", head:"Get a signed token",
+      points:[
+        "A task kicks off, like \"file Jane's taxes\".",
+        "demo.py asks the identity provider for a token.",
+        "The demo signs caller-selected identity and host claims; no authorization policy is applied.",
+      ],
+      data:`<span class="c">// a JWT. signed, not secret. only the IdP can make a real one.</span>
+{ <span class="k">sub</span>: <span class="s">"agent:cookbook_example-agent-tax-2026"</span>,
+  <span class="k">on_behalf_of</span>: <span class="s">"user:operator@example.invalid"</span>,
+  <span class="k">scope</span>: [<span class="s">"vault:read:taxagency.com"</span>],
+  <span class="k">exp</span>: <span class="s">"+5 min"</span> }`,
+      who:"<b>identity-provider.mjs</b> is a local simulation, not a production identity platform.",
+      nodes:["n-demo","n-idp"], edges:["e-idp-demo"], labels:["l-idp-demo"] },
+
+    { id:1, chip:"Start browser", head:"Start a cloud browser with the demo extension",
+      points:[
+        "demo.py opens a fresh Browserbase session.",
+        "It loads this repository's demo extension into that browser.",
+        "No human. No Touch ID. The browser is throwaway.",
+      ],
+      data:`session: <span class="s">"bf98…a5b9"</span>
+extension: <span class="s">"Demo extension (content.js)"</span>`,
+      who:"When the task ends, the browser and everything in it are wiped.",
+      nodes:["n-demo","n-browser"], edges:["e-demo-browser"], labels:[] },
+
+    { id:2, chip:"Make a lock", head:"The browser makes its own lock",
+      points:[
+        "The demo extension makes a recipient keypair inside the browser.",
+        "This flow keeps the private key in extension memory; no browser attestation is performed.",
+        "The extension writes the public key to a cookie.",
+        "demo.py keeps polling that cookie until the key shows up.",
+      ],
+      data:`public  key 🔓  <span class="c">→ handed to demo.py</span>
+private key 🔑  <span class="l">→ stays in the browser</span>`,
+      who:"The matching private key unwraps the reply. The vault does not verify that this key belongs to a browser.",
+      nodes:["n-browser","n-demo"], edges:["e-browser-demo"], labels:["l-browser-demo"] },
+
+    { id:3, chip:"Ask vault", head:"Ask the vault",
+      points:[
+        "demo.py calls the vault and sends two things.",
+        "A signed token containing claims selected by the caller.",
+        "The browser's public key, so the reply can be locked to it.",
+      ],
+      data:`POST /lease
+  <span class="k">Authorization</span>: Bearer <span class="s">&lt;JWT&gt;</span>
+  <span class="k">sessionPublicKey</span>: <span class="s">"MIIBIjANBg…"</span>`,
+      who:"<b>vault-server.mjs</b> is a trusted-server simulation with access to plaintext credentials.",
+      nodes:["n-demo","n-vault"], edges:["e-demo-vault"], labels:["l-demo-vault"] },
+
+    { id:4, chip:"Wrap it", head:"The vault checks the token and seals the password",
+      points:[
+        "The vault checks the token's signature, scope, and expiry.",
+        "It pulls the credential from encrypted storage.",
+        "It wraps the credential to the caller-supplied public key.",
+        "The vault has the plaintext and the content key while creating the result.",
+      ],
+      data:`<span class="c">// the sealed "lockbox" it sends back</span>
+{ <span class="k">wrappedKey</span>:  <span class="l">"oEdiW1hI…Kd1Mw=="</span>
+  <span class="k">ciphertext</span>: <span class="l">"sXMnDl1M…WdK0A=="</span> }`,
+      who:"The server holds the master key and decrypts credentials before wrapping; this is not zero-knowledge.",
+      nodes:["n-vault","n-demo"], edges:["e-vault-demo"], labels:["l-vault-demo"] },
+
+    { id:5, chip:"Deliver", head:"Hand the sealed box to the browser",
+      points:[
+        "demo.py drops the lockbox into a cookie in the browser.",
+        "This flow delivers ciphertext, but a caller can request a lease to a key it controls.",
+        "The password stays locked the whole way there.",
+      ],
+      data:`<span class="c">// demo.py only ever holds ciphertext</span>
+cookie __rpass_wrapped_lease__ = <span class="l">"{ wrappedKey…, ciphertext… }"</span>`,
+      who:"There is no enforced recipient-key/session binding. Treat the orchestrator as trusted.",
+      nodes:["n-demo","n-browser"], edges:["e-demo-browser"], labels:["l-demo-browser"] },
+
+    { id:6, chip:"Fill form", head:"The browser opens the box and fills the form",
+      points:[
+        "The extension polls for the lockbox cookie.",
+        "It opens the box with its private key.",
+        "It types the username and password into the form.",
+        "It deletes the lockbox. One time use.",
+      ],
+      data:`<span class="c">// opened only here, only now</span>
+{ <span class="k">username</span>: <span class="s">"tomsmith"</span>, <span class="k">password</span>: <span class="s">"••••••••"</span> }`,
+      who:"The password is in plain text only inside the browser, for a moment.",
+      nodes:["n-browser"], edges:[], labels:[], fill:true },
+
+    { id:7, chip:"Verify login", head:"Submit and check the result",
+      points:[
+        "The agent clicks Sign in.",
+        "The runner checks the secure URL and visible authenticated controls.",
+        "Done requires authentication evidence and successful cleanup.",
+      ],
+      data:`<span class="c">Illustration only. A live run must observe the success notice, secure heading and logout control.</span>`,
+      who:"The diagram is explanatory. Its current step is not proof that login succeeded.",
+      nodes:["n-browser"], edges:[], labels:[], ok:true, submit:true },
+  ];
+
+  const USER="tomsmith", PASS="••••••••••••";
+  let cur=-1;
+
+  function clearHighlights(){
+    document.querySelectorAll('.dnode').forEach(n=>n.classList.remove('on','ok'));
+    document.querySelectorAll('.edge').forEach(e=>e.classList.remove('on'));
+    document.querySelectorAll('.elabel').forEach(e=>e.classList.remove('on'));
+  }
+  function setStep(i,observed=false){
+    if(i<0||i>=STEPS.length)return;
+    cur=i; const s=STEPS[i];
+    clearHighlights();
+    s.nodes.forEach(id=>document.getElementById(id).classList.add(observed&&s.ok&&id==='n-browser'?'ok':'on'));
+    s.edges.forEach(id=>document.getElementById(id).classList.add('on'));
+    s.labels.forEach(id=>document.getElementById(id).classList.add('on'));
+    document.getElementById('bf-user').textContent=(s.fill||s.submit)?USER:'';
+    document.getElementById('bf-pass').textContent=(s.fill||s.submit)?PASS:'';
+    document.getElementById('bf-ok').classList.toggle('show',observed&&!!s.submit);
+    // transcript
+    document.querySelectorAll('.sitem').forEach((el,idx)=>{
+      el.classList.remove('past','current','future');
+      el.classList.add(idx<i?'past':idx>i?'future':'current');
+    });
+    const cel=document.querySelector('.sitem.current'); if(cel)cel.scrollIntoView({block:'nearest',behavior:'smooth'});
+    // rail
+    document.querySelectorAll('.chip').forEach((c,idx)=>{c.classList.toggle('on',idx===i);c.classList.toggle('done',idx<i);});
+  }
+
+  // build transcript
+  const panel=document.getElementById('transcript');
+  STEPS.forEach((s,i)=>{
+    const el=document.createElement('div'); el.className='sitem'; el.onclick=()=>setStep(i);
+    el.innerHTML=`<div class="sitem-head"><span class="sn">${s.id}</span><span class="sh">${s.head}</span></div>
+      <div class="sitem-detail"><ul>${s.points.map(p=>`<li>${p}</li>`).join('')}</ul><div class="data">${s.data}</div><div class="who">${s.who}</div></div>`;
+    panel.appendChild(el);
+  });
+  // build rail
+  const rail=document.getElementById('rail');
+  STEPS.forEach((s,i)=>{
+    const c=document.createElement('div'); c.className='chip'; c.onclick=()=>setStep(i);
+    c.innerHTML=`<span class="n">${s.id}</span><span class="t">${s.chip}</span>`;
+    rail.appendChild(c);
+  });
+  document.addEventListener('keydown',e=>{
+    if(e.key==='ArrowRight')setStep(Math.min(cur+1,STEPS.length-1));
+    if(e.key==='ArrowLeft')setStep(Math.max(cur-1,0));
+  });
+
+  function showTab(which){
+    const d=which==='diagram';
+    document.getElementById('tabDiagram').classList.toggle('on',d);
+    document.getElementById('tabLive').classList.toggle('on',!d);
+    document.getElementById('diagram').style.display=d?'block':'none';
+    document.getElementById('liveWrap').style.display=d?'none':'flex';
+  }
+
+  let polling=null;
+  async function runLive(){
+    showTab('live');
+    const btn=document.getElementById('runBtn'); btn.disabled=true; btn.textContent='● Running…';
+    try{
+      const r=await fetch('/run',{method:'POST'}); const j=await r.json();
+      if(j.error){alert('Could not start: '+j.error);resetRun();return;}
+      if(j.liveViewUrl){document.getElementById('liveMsg').style.display='none';document.getElementById('liveFrame').src=j.liveViewUrl;}
+      polling=setInterval(pollStatus,700);
+    }catch(e){
+      alert('The control server isn’t running.\nStart it with:  BROWSERBASE_API_KEY=… node control.mjs\nThen open http://localhost:8791');
+      resetRun();
+    }
+  }
+  async function pollStatus(){
+    try{
+      const s=await (await fetch('/status')).json();
+      if(s.step>=0)setStep(s.step,s.authenticated===true&&s.done===true);
+      if(!s.running&&(s.done||s.error)){clearInterval(polling);const b=document.getElementById('runBtn');b.disabled=false;b.textContent=s.error?'▶ Run live demo (retry)':'✓ Done. Run again';}
+    }catch(e){}
+  }
+  function resetRun(){const b=document.getElementById('runBtn');b.disabled=false;b.textContent='▶ Run live demo';}
+
+  setStep(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,493 @@
+{
+  "schemaVersion": 1,
+  "pathPattern": "<use-case>/<workflow>",
+  "generatedFrom": "codex/use-case-taxonomy",
+  "useCases": [
+    {
+      "id": "accounts-payable-and-finance",
+      "label": "Accounts Payable And Finance",
+      "description": "Bills, payments, treasury, AP, tax bills, receipts, and finance operations."
+    },
+    {
+      "id": "business-formation",
+      "label": "Business Formation",
+      "description": "LLC formation, EIN, state filing, and business-registration workflows."
+    },
+    {
+      "id": "commerce-and-market-intel",
+      "label": "Commerce And Market Intel",
+      "description": "Marketplace, product, pricing, PDP, and competitor-monitoring workflows."
+    },
+    {
+      "id": "content-and-research",
+      "label": "Content And Research",
+      "description": "Search, fetch, company news, web research, and intelligence-gathering workflows."
+    },
+    {
+      "id": "data-migration",
+      "label": "Data Migration",
+      "description": "Portal exports and migration workflows where authenticated data is moved out of source systems."
+    },
+    {
+      "id": "developer-tools-and-infra",
+      "label": "Developer Tools And Infra",
+      "description": "Reusable Browserbase, Stagehand, workflow, recording, and infrastructure references."
+    },
+    {
+      "id": "government-and-public-records",
+      "label": "Government And Public Records",
+      "description": "Government portals, courts, tax records, public records, and agency workflows."
+    },
+    {
+      "id": "healthcare-and-insurance",
+      "label": "Healthcare And Insurance",
+      "description": "Healthcare, provider, payer, insurance, and adjacent operational workflows."
+    },
+    {
+      "id": "kyc-and-verification",
+      "label": "KYC And Verification",
+      "description": "KYC, KYB, AML, identity, company verification, and compliance workflows."
+    },
+    {
+      "id": "qa-and-observability",
+      "label": "QA And Observability",
+      "description": "Testing, tracing, debugging, browser observability, benchmarks, and QA agents."
+    },
+    {
+      "id": "sales-support-and-ops",
+      "label": "Sales Support And Ops",
+      "description": "CRM, support, sales operations, customer operations, and general workflow workflows."
+    },
+    {
+      "id": "travel-and-hospitality",
+      "label": "Travel And Hospitality",
+      "description": "Travel booking, reservations, hospitality, and related pricing or booking workflows."
+    }
+  ],
+  "workflows": [
+    {
+      "useCase": "accounts-payable-and-finance",
+      "path": "accounts-payable-and-finance/payment-verification-handoff",
+      "title": "Synthetic payment verification handoff",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "payment-verification-handoff"
+    },
+    {
+      "useCase": "accounts-payable-and-finance",
+      "path": "accounts-payable-and-finance/payment-checkout",
+      "title": "Payment checkout reference",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "payment-checkout"
+    },
+    {
+      "useCase": "accounts-payable-and-finance",
+      "path": "accounts-payable-and-finance/treasury-workflow",
+      "title": "Synthetic treasury workflow",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "treasury-workflow"
+    },
+    {
+      "useCase": "accounts-payable-and-finance",
+      "path": "accounts-payable-and-finance/property-tax-document",
+      "title": "Property tax document workflow",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "property-tax-document"
+    },
+    {
+      "useCase": "accounts-payable-and-finance",
+      "path": "accounts-payable-and-finance/telecom-invoice-automation",
+      "title": "Telecom invoice automation",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "telecom-invoice-automation"
+    },
+    {
+      "useCase": "accounts-payable-and-finance",
+      "path": "accounts-payable-and-finance/tax-form-1099",
+      "title": "1099 tax form workflow",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "tax-form-1099"
+    },
+    {
+      "useCase": "accounts-payable-and-finance",
+      "path": "accounts-payable-and-finance/airline-receipt-reference",
+      "title": "Airline receipt retrieval",
+      "hasReadme": false,
+      "hasPackageJson": false,
+      "workflow": "airline-receipt-reference"
+    },
+    {
+      "useCase": "accounts-payable-and-finance",
+      "path": "accounts-payable-and-finance/postal-evidence-reference",
+      "title": "Postal evidence reference",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "postal-evidence-reference"
+    },
+    {
+      "useCase": "business-formation",
+      "path": "business-formation/state-filing-payment-handoff",
+      "title": "State filing payment handoff",
+      "hasReadme": true,
+      "hasPackageJson": false,
+      "workflow": "state-filing-payment-handoff"
+    },
+    {
+      "useCase": "business-formation",
+      "path": "business-formation/llc-state-filing",
+      "title": "LLC state filing",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "llc-state-filing"
+    },
+    {
+      "useCase": "business-formation",
+      "path": "business-formation/ein-application",
+      "title": "EIN application workflow",
+      "hasReadme": true,
+      "hasPackageJson": false,
+      "workflow": "ein-application"
+    },
+    {
+      "useCase": "commerce-and-market-intel",
+      "path": "commerce-and-market-intel/supplier-research",
+      "title": "Supplier research workflow",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "supplier-research"
+    },
+    {
+      "useCase": "commerce-and-market-intel",
+      "path": "commerce-and-market-intel/product-data-extraction",
+      "title": "Product data extraction",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "product-data-extraction"
+    },
+    {
+      "useCase": "commerce-and-market-intel",
+      "path": "commerce-and-market-intel/erp-payment-form",
+      "title": "ERP payment form",
+      "hasReadme": false,
+      "hasPackageJson": false,
+      "workflow": "erp-payment-form"
+    },
+    {
+      "useCase": "commerce-and-market-intel",
+      "path": "commerce-and-market-intel/pause-inject-resume",
+      "title": "Pause inject resume",
+      "hasReadme": true,
+      "hasPackageJson": false,
+      "workflow": "pause-inject-resume"
+    },
+    {
+      "useCase": "content-and-research",
+      "path": "content-and-research/news-intelligence",
+      "title": "News intelligence workflow",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "news-intelligence"
+    },
+    {
+      "useCase": "content-and-research",
+      "path": "content-and-research/search-and-fetch",
+      "title": "Search and fetch",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "search-and-fetch"
+    },
+    {
+      "useCase": "data-migration",
+      "path": "data-migration/functions-migration",
+      "title": "Functions migration workflow",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "functions-migration"
+    },
+    {
+      "useCase": "data-migration",
+      "path": "data-migration/live-session-login",
+      "title": "Live session login",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "live-session-login"
+    },
+    {
+      "useCase": "data-migration",
+      "path": "data-migration/portal-migration",
+      "title": "Portal migration workflows",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "portal-migration"
+    },
+    {
+      "useCase": "developer-tools-and-infra",
+      "path": "developer-tools-and-infra/stagehand/caching-demo",
+      "title": "Caching Demo",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "caching-demo"
+    },
+    {
+      "useCase": "developer-tools-and-infra",
+      "path": "developer-tools-and-infra/stagehand/v4-demo-kit",
+      "title": "V4 Demo Kit",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "v4-demo-kit"
+    },
+    {
+      "useCase": "developer-tools-and-infra",
+      "path": "developer-tools-and-infra/workflow-recorder",
+      "title": "Workflow recorder",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "workflow-recorder"
+    },
+    {
+      "useCase": "government-and-public-records",
+      "path": "government-and-public-records/agency-form-workflow",
+      "title": "Agency form workflow",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "agency-form-workflow"
+    },
+    {
+      "useCase": "government-and-public-records",
+      "path": "government-and-public-records/property-tax-portal",
+      "title": "Property tax portal",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "property-tax-portal"
+    },
+    {
+      "useCase": "government-and-public-records",
+      "path": "government-and-public-records/saved-context-reference",
+      "title": "Saved context reference",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "saved-context-reference"
+    },
+    {
+      "useCase": "healthcare-and-insurance",
+      "path": "healthcare-and-insurance/health-portal-login",
+      "title": "Health portal login",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "health-portal-login"
+    },
+    {
+      "useCase": "healthcare-and-insurance",
+      "path": "healthcare-and-insurance/license-verification",
+      "title": "License verification",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "license-verification"
+    },
+    {
+      "useCase": "healthcare-and-insurance",
+      "path": "healthcare-and-insurance/provider-search-handoff",
+      "title": "Provider search with human handoff",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "provider-search-handoff"
+    },
+    {
+      "useCase": "kyc-and-verification",
+      "path": "kyc-and-verification/kyc-aml-screening",
+      "title": "KYC AML screening",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "kyc-aml-screening"
+    },
+    {
+      "useCase": "kyc-and-verification",
+      "path": "kyc-and-verification/business-code-classification",
+      "title": "Business code classification",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "business-code-classification"
+    },
+    {
+      "useCase": "kyc-and-verification",
+      "path": "kyc-and-verification/business-entity-research",
+      "title": "Business entity research",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "business-entity-research"
+    },
+    {
+      "useCase": "kyc-and-verification",
+      "path": "kyc-and-verification/authenticated-portal-navigation",
+      "title": "Authenticated portal navigation",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "authenticated-portal-navigation"
+    },
+    {
+      "useCase": "kyc-and-verification",
+      "path": "kyc-and-verification/parallel-business-verification",
+      "title": "Parallel business verification",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "parallel-business-verification"
+    },
+    {
+      "useCase": "qa-and-observability",
+      "path": "qa-and-observability/browserbase/qa",
+      "title": "Qa",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "qa"
+    },
+    {
+      "useCase": "qa-and-observability",
+      "path": "qa-and-observability/browserbase/qa-agent-demo",
+      "title": "Qa Agent Demo",
+      "hasReadme": true,
+      "hasPackageJson": false,
+      "workflow": "qa-agent-demo"
+    },
+    {
+      "useCase": "qa-and-observability",
+      "path": "qa-and-observability/browserbase/ui-debug-bench",
+      "title": "Ui Debug Bench",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "ui-debug-bench"
+    },
+    {
+      "useCase": "qa-and-observability",
+      "path": "qa-and-observability/login-coverage",
+      "title": "Multi-portal login coverage reference",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "login-coverage"
+    },
+    {
+      "useCase": "qa-and-observability",
+      "path": "qa-and-observability/browser-trace",
+      "title": "Browser trace",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "browser-trace"
+    },
+    {
+      "useCase": "qa-and-observability",
+      "path": "qa-and-observability/localhost-testing",
+      "title": "Localhost cloud-browser testing reference",
+      "hasReadme": true,
+      "hasPackageJson": false,
+      "workflow": "localhost-testing"
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "path": "sales-support-and-ops/restaurant-reservation",
+      "title": "Restaurant reservation function",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "restaurant-reservation"
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "path": "sales-support-and-ops/browserbase/support",
+      "title": "Support",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "support"
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "path": "sales-support-and-ops/mortgage-rate-extraction",
+      "title": "Mortgage rate extraction",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "mortgage-rate-extraction"
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "path": "sales-support-and-ops/registry-form-processing",
+      "title": "Registry form processing",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "registry-form-processing"
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "path": "sales-support-and-ops/voice-context-workflow",
+      "title": "Voice context workflow",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "voice-context-workflow"
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "path": "sales-support-and-ops/supply-chain-login",
+      "title": "Supply chain portal login",
+      "hasReadme": true,
+      "hasPackageJson": false,
+      "workflow": "supply-chain-login"
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "path": "sales-support-and-ops/real-estate-research",
+      "title": "Real estate research agent",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "real-estate-research"
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "path": "sales-support-and-ops/navigation-context-checkout",
+      "title": "Navigation context checkout",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "navigation-context-checkout"
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "path": "sales-support-and-ops/job-site-browser",
+      "title": "Job site browser starter",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "job-site-browser"
+    },
+    {
+      "useCase": "sales-support-and-ops",
+      "path": "sales-support-and-ops/stock-price-extraction",
+      "title": "Stock price extraction",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "stock-price-extraction"
+    },
+    {
+      "useCase": "travel-and-hospitality",
+      "path": "travel-and-hospitality/restaurant-reservation-pattern",
+      "title": "Restaurant reservation pattern",
+      "hasReadme": true,
+      "hasPackageJson": false,
+      "workflow": "restaurant-reservation-pattern"
+    },
+    {
+      "useCase": "travel-and-hospitality",
+      "path": "travel-and-hospitality/flight-pricing-benchmark",
+      "title": "Flight pricing benchmark",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "flight-pricing-benchmark"
+    },
+    {
+      "useCase": "travel-and-hospitality",
+      "path": "travel-and-hospitality/flight-booking",
+      "title": "Flight booking",
+      "hasReadme": true,
+      "hasPackageJson": true,
+      "workflow": "flight-booking"
+    }
+  ]
+}

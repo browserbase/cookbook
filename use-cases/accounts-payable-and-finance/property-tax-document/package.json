@@ -1,0 +1,29 @@
+{
+  "name": "cookbook_example-tax-bill-demo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Fetch a county property-tax bill from a public portal with Browserbase + Stagehand, then file it into AP platform.",
+  "type": "module",
+  "scripts": {
+    "fetch": "node --import tsx stagehand/fetch-bill.ts",
+    "fetch:agent": "node --import tsx stagehand/fetch-bill-agent.ts",
+    "upload": "node upload-bill.mjs",
+    "test": "tsc --noEmit",
+    "typecheck": "tsc --noEmit"
+  },
+  "engines": {
+    "node": ">=22"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.0",
+    "@browserbasehq/stagehand": "4.0.2",
+    "zod": "4.5.4",
+    "ai": "7.0.87",
+    "@ai-sdk/openai": "4.0.53"
+  },
+  "devDependencies": {
+    "@types/node": "26.4.0",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  }
+}

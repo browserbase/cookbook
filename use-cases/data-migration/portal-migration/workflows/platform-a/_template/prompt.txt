@@ -1,0 +1,9 @@
+Describe the extraction task for the agent here. The agent reads this verbatim as
+its instruction, so be specific.
+
+- What data to collect, and for which records.
+- How far to go (e.g. "page through every result, don't stop at page one").
+- When to stop.
+
+The starting page is set by "startUrl" in workflow.json — you don't need to tell the
+agent how to get there from the dashboard.

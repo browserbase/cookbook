@@ -1,0 +1,24 @@
+{
+  "name": "basic-caching",
+  "version": "1.0.0",
+  "description": "Stagehand + Browserbase: Basic Caching Demo",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "start": "tsx index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "dotenv": "latest"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "tsx": "latest",
+    "typescript": "7.0.2"
+  },
+  "packageManager": "pnpm@10.24.0",
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}
