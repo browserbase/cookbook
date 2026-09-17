@@ -1,0 +1,22 @@
+{
+  "1": {
+    "url": "https://www.apple.com/newsroom/pdfs/fy2025-q1/FY25_Q1_Consolidated_Financial_Statements.pdf",
+    "sha256": "b45c21d81378d635103ac213cddf853599716b42b4df4646b2f5c07e5079c748",
+    "bytes": 3136548
+  },
+  "2": {
+    "url": "https://www.apple.com/newsroom/pdfs/fy2025-q2/FY25_Q2_Consolidated_Financial_Statements.pdf",
+    "sha256": "e333dd821d9ef827e82d8e0b696493a127c4ee171ea63aca3a80dc1dfea60e89",
+    "bytes": 3147962
+  },
+  "3": {
+    "url": "https://www.apple.com/newsroom/pdfs/fy2025-q3/FY25_Q3_Consolidated_Financial_Statements.pdf",
+    "sha256": "7c982ae6fed09ee53acab12afb1ad374b3fd6a5905c44bf0ef3130f8a8bd67fe",
+    "bytes": 3148382
+  },
+  "4": {
+    "url": "https://www.apple.com/newsroom/pdfs/fy2025-q4/FY25_Q4_Consolidated_Financial_Statements.pdf",
+    "sha256": "43e7f0730b3cce0fc37301a2f43c29712bbde6ab299d97c6df345fd0c754508a",
+    "bytes": 4919649
+  }
+}

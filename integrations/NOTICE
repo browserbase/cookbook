@@ -1,0 +1,11 @@
+Browserbase integrations
+Copyright (c) 2026 Browserbase, Inc.
+
+This directory contains source imported from the Browserbase integrations
+repository at commit b7bc81c6fd4e089ab0c0df2b82529b200739e458.
+File-level provenance and modifications are recorded in
+../SOURCE_MANIFEST.json and ../COOKBOOK_AUTHORED.json.
+
+The integrations source is licensed under the MIT terms in LICENSE. Nested
+license files and source-level notices remain in effect for the code they
+accompany. Third-party dependencies remain subject to their own license terms.

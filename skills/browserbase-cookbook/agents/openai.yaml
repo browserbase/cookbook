@@ -1,0 +1,4 @@
+interface:
+  display_name: "Browserbase Cookbook"
+  short_description: "Find and adapt the right browser automation example"
+  default_prompt: "Use $browserbase-cookbook to find a recipe for my task and adapt its existing code."

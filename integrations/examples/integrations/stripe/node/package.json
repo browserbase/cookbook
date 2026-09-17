@@ -1,0 +1,22 @@
+{
+  "name": "stripe_stagehand",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "start": "tsx 4-make-payment.ts"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.1",
+    "@browserbasehq/stagehand": "4.0.2",
+    "@playwright/test": "1.63.0",
+    "boxen": "8.0.1",
+    "chalk": "6.0.0",
+    "dotenv": "16.6.1",
+    "zod": "4.4.3",
+    "stripe": "22.6.1"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "7.0.2"
+  }
+}

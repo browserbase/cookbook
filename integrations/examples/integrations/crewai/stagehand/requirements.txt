@@ -1,0 +1,5 @@
+crewai==1.15.20
+crewai-tools[mcp]==1.15.20
+mcp>=1.28,<2
+python-dotenv>=1.2.2,<2
+stagehand==4.0.2

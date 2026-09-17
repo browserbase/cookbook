@@ -1,0 +1,29 @@
+{
+  "name": "browserbase-reducto",
+  "version": "1.0.0",
+  "description": "Stagehand + Browserbase: Download Apple's Q4 Financial Statement and Parse with Reducto",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "start": "tsx index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.1",
+    "@browserbasehq/stagehand": "4.0.2",
+    "adm-zip": "latest",
+    "dotenv": "latest",
+    "reductoai": "latest",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "latest",
+    "tsx": "latest",
+    "typescript": "7.0.2",
+    "@types/adm-zip": "^0.5.8"
+  },
+  "packageManager": "pnpm@10.24.0",
+  "engines": {
+    "node": ">=22.18.0"
+  }
+}

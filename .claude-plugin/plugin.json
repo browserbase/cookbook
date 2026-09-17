@@ -1,0 +1,6 @@
+{
+  "name": "browserbase-cookbook",
+  "version": "0.1.0",
+  "description": "Find and adapt Browserbase cookbook examples.",
+  "author": { "name": "Browserbase" }
+}

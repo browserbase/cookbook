@@ -1,0 +1,19 @@
+{
+  "name": "langchain-stagehand",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test tests/*.test.js",
+    "start": "node src/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "@browserbasehq/stagehand": "4.0.2",
+    "@langchain/core": "1.2.9",
+    "zod": "4.4.3"
+  }
+}

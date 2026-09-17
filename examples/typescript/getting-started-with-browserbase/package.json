@@ -1,0 +1,22 @@
+{
+  "name": "getting-started-with-browserbase",
+  "version": "1.0.0",
+  "description": "Browserbase + Playwright: Getting Started — connect to a cloud browser, navigate, and extract data",
+  "type": "module",
+  "main": "index.ts",
+  "scripts": {
+    "start": "tsx index.ts",
+    "dev": "tsx watch index.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.1",
+    "dotenv": "^16.4.5",
+    "playwright-core": "1.63.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "tsx": "^4.16.0",
+    "typescript": "7.0.2"
+  }
+}

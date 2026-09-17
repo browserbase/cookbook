@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Browserbase support
+    url: https://www.browserbase.com/contact
+    about: Get help with accounts, billing, quota, or the Browserbase service.

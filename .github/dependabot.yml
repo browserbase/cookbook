@@ -1,0 +1,62 @@
+version: 2
+updates:
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]
+  - package-ecosystem: npm
+    directory: /examples
+    schedule:
+      interval: monthly
+    groups:
+      examples-tooling:
+        patterns: ["*"]
+  - package-ecosystem: npm
+    directory: /examples/typescript/getting-started-with-browserbase
+    schedule:
+      interval: monthly
+    groups:
+      typescript-quickstart:
+        patterns: ["*"]
+  - package-ecosystem: pip
+    directory: /examples/python/getting-started-with-browserbase
+    schedule:
+      interval: monthly
+    groups:
+      python-quickstart:
+        patterns: ["*"]
+  - package-ecosystem: npm
+    directory: /integrations
+    schedule:
+      interval: monthly
+    groups:
+      integrations:
+        patterns: ["*"]
+  - package-ecosystem: npm
+    directory: /integrations/examples/integrations/temporal
+    schedule:
+      interval: monthly
+    groups:
+      temporal:
+        patterns: ["*"]
+  - package-ecosystem: npm
+    directory: /playbook/node
+    schedule:
+      interval: monthly
+    groups:
+      playbook-node:
+        patterns: ["*"]
+  - package-ecosystem: npm
+    directory: /playbook/guides/1password/node
+    schedule:
+      interval: monthly
+    groups:
+      one-password-guide:
+        patterns: ["*"]
+  - package-ecosystem: gomod
+    directory: /examples/go/hackernews
+    schedule:
+      interval: monthly
