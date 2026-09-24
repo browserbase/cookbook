@@ -83,16 +83,33 @@ npx --yes prettier@3.9.6 --write . --ignore-unknown
 
 Repository policy: external contributors must submit pull requests from forks and
 must not be granted upstream write access. Maintainers with write access can open
-pull requests from repository branches. Administrators must enforce this through repository and team
-permissions; this document does not configure access.
+pull requests from repository branches. Administrators must enforce this through
+repository and team permissions; this document does not configure access.
 
 Fork contributions require repository access and forking to be enabled under the
 organization and enterprise policies. An internal repository is not open to the
 general public. Enabling forks does not require existing writers to use them.
 
-The `Verify cookbook` workflow runs on pull requests, pushes to `main`, and merge
-queue groups, and supports manual dispatch once the workflow is on the default
-branch. Its `Merge checks` job passes only when style checks, catalog and
+External pull requests must not run Actions or other CI until a maintainer
+explicitly approves the run. This applies even to lint, build, typecheck, and
+tests that do not use secrets. In **Settings > Actions > General**, administrators
+must require approval for fork pull request workflows. For public repositories,
+select **Require approval for all external contributors**, not either first-time
+contributor option. Keep fork workflows disabled until this approval policy is
+configured. Review the proposed code and workflow changes before approving a run.
+Approval to run CI does not approve the pull request for merging or grant access
+to application secrets.
+
+These controls are GitHub settings, not enforced by this Markdown or the workflow
+YAML. Organization and enterprise policies can constrain the available settings.
+Separately configure any third-party CI or GitHub App that reacts to pull requests;
+GitHub Actions approval does not gate those services. Disable external-PR runs for
+such integrations unless they provide an equivalent explicit approval mechanism.
+
+The `Verify cookbook` workflow subscribes to pull requests, pushes to `main`, and
+merge queue groups. External PR runs must be held by the approval policy above.
+It also supports manual dispatch once the workflow is on the default branch.
+Its `Merge checks` job passes only when style checks, catalog and
 provenance validation, repository tests, history secret scanning, and every
 representative recipe check succeed. Failed, cancelled, or skipped prerequisite
 jobs cause the aggregate check to fail when it runs. Cancelling the entire
@@ -116,7 +133,7 @@ gate because remote site availability is independent of a pull request.
 Current CI does not require application secrets. Keep fork pull request runs
 limited to checks that need no secrets, with a read-only token on GitHub-hosted
 runners. Administrators must disable sending secrets and write tokens to fork
-workflows and configure fork workflow approval according to organization policy.
+workflows and enforce the external-PR approval policy above.
 Do not execute fork code in privileged `pull_request_target` or `workflow_run`
 workflows.
 
@@ -141,8 +158,9 @@ If a future integration test or deployment needs secrets:
 
 Keep designated maintainer teams in `CODEOWNERS` and require code-owner approval,
 stale approval dismissal, and approval after the latest push in the ruleset.
-Once repository access and forking are enabled, reviewed fork PRs that need only
-checks without secrets can merge directly after satisfying the ruleset. The
+Once repository access and forking are enabled, fork PRs that need only checks
+without secrets can merge directly after a maintainer approves their CI run, the
+required checks pass, and the ruleset's review requirements are satisfied. The
 second-PR procedure above is a maintainer process for privileged runs, not a rule
 currently enforced by the workflow.
 
