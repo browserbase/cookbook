@@ -54,12 +54,25 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+          path: content
+      # Policy changes take effect only after review and merge into the base branch.
+      - name: Check out trusted scanner policy
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          ref: ${{ github.event.pull_request.base.sha || github.event.merge_group.base_sha || github.sha }}
+          persist-credentials: false
+          sparse-checkout: .gitleaks.toml
+          sparse-checkout-cone-mode: false
+          path: policy
       - name: Scan repository history for secrets
         run: |
-          docker run --rm \
-            -v "$GITHUB_WORKSPACE:/repo:ro" \
+          docker run --rm --network=none --cap-drop=ALL \
+            --security-opt=no-new-privileges \
+            -v "$GITHUB_WORKSPACE/content:/repo:ro" \
+            -v "$GITHUB_WORKSPACE/policy/.gitleaks.toml:/policy/gitleaks.toml:ro" \
             zricethezav/gitleaks@sha256:e1b35e12a8c6fa8901f060459cfb6b2fc4c484d3afbe3b029733a3bbfab07055 \
-            detect --source=/repo --redact --verbose --config=/repo/.gitleaks.toml
+            detect --source=/repo --redact --verbose --ignore-gitleaks-allow \
+            --gitleaks-ignore-path=/dev/null --config=/policy/gitleaks.toml
 
   representative-recipes:
     name: ${{ matrix.name }}
