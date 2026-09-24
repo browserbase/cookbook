@@ -81,18 +81,24 @@ npx --yes prettier@3.9.6 --write . --ignore-unknown
 
 ## Pull requests and merge checks
 
-External contributors must submit pull requests from forks and must not be granted
-upstream write access. Maintainers with write access can open pull requests from
-repository branches.
-Contributors without write access need a fork; a repository administrator must
-first enable forking if it is disabled, subject to organization and enterprise
-policy. Enabling forks does not require existing writers to use them.
+Repository policy: external contributors must submit pull requests from forks and
+must not be granted upstream write access. Maintainers with write access can open
+pull requests from repository branches. Administrators must enforce this through repository and team
+permissions; this document does not configure access.
+
+Fork contributions require repository access and forking to be enabled under the
+organization and enterprise policies. An internal repository is not open to the
+general public. Enabling forks does not require existing writers to use them.
 
 The `Verify cookbook` workflow runs on pull requests, pushes to `main`, and merge
-queue groups. Its `Merge checks` job passes only when style checks, catalog and
+queue groups, and supports manual dispatch once the workflow is on the default
+branch. Its `Merge checks` job passes only when style checks, catalog and
 provenance validation, repository tests, history secret scanning, and every
 representative recipe check succeed. Failed, cancelled, or skipped prerequisite
-jobs fail the aggregate check. These checks require no repository secrets.
+jobs cause the aggregate check to fail when it runs. Cancelling the entire
+workflow can cancel the aggregate job too; this does not produce a passing check.
+These checks require no application secrets; checkout uses GitHub's automatic
+`GITHUB_TOKEN` with read-only repository permissions.
 
 To enforce this gate, an administrator must add `Merge checks` as a required
 status check in the ruleset targeting `main`, selecting GitHub Actions as its
@@ -117,8 +123,12 @@ workflows.
 If a future integration test or deployment needs secrets:
 
 1. Keep it separate from fork CI and explicitly exclude fork pull requests.
-   Require a protected environment with maintainer approval before releasing
-   secrets; a same-repository branch check alone is not a security review.
+   Store credentials as environment secrets and make the privileged job reference
+   that environment, with maintainer approval required before secrets are released.
+   Do not duplicate those credentials in unprotected repository or organization
+   secrets. Required environment reviewers depend on the GitHub plan and repository
+   visibility; establish an equivalent approval boundary if unavailable. A
+   same-repository branch check alone is not a security review.
 2. Review the exact fork commit, including workflow files, dependencies, install
    scripts, and tests, before copying it into an upstream branch.
 3. Create a maintainer-owned branch from current `main`, merge the reviewed fork
@@ -131,7 +141,15 @@ If a future integration test or deployment needs secrets:
 
 Keep designated maintainer teams in `CODEOWNERS` and require code-owner approval,
 stale approval dismissal, and approval after the latest push in the ruleset.
-For today's checks without secrets, reviewed fork PRs can merge directly.
+Once repository access and forking are enabled, reviewed fork PRs that need only
+checks without secrets can merge directly after satisfying the ruleset. The
+second-PR procedure above is a maintainer process for privileged runs, not a rule
+currently enforced by the workflow.
+
+See GitHub's [fork workflow settings](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository),
+[environment protections](https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments),
+and [ruleset requirements](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)
+for the corresponding administrator controls.
 
 ## Review a change
 
