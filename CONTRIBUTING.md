@@ -79,6 +79,15 @@ ruff check --fix scripts tests
 npx --yes prettier@3.9.6 --write . --ignore-unknown
 ```
 
+## Open a pull request
+
+External contributors should open a pull request from a fork. Describe the change
+and include the verification commands you ran and their results.
+
+CI for external contributions requires maintainer approval. You do not need to
+provide credentials or repository secrets. Address review feedback and keep the
+pull request updated until the required checks and reviews pass.
+
 ## Review a change
 
 Check the actual selected example. A syntax check does not prove a live automation works. Record dependency installation, compilation, and live execution separately. For a browser run, report the page result or replay and how the browser session was closed.
