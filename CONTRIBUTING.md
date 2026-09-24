@@ -79,6 +79,60 @@ ruff check --fix scripts tests
 npx --yes prettier@3.9.6 --write . --ignore-unknown
 ```
 
+## Pull requests and merge checks
+
+External contributors must submit pull requests from forks and must not be granted
+upstream write access. Maintainers with write access can open pull requests from
+repository branches.
+Contributors without write access need a fork; a repository administrator must
+first enable forking if it is disabled, subject to organization and enterprise
+policy. Enabling forks does not require existing writers to use them.
+
+The `Verify cookbook` workflow runs on pull requests, pushes to `main`, and merge
+queue groups. Its `Merge checks` job passes only when style checks, catalog and
+provenance validation, repository tests, history secret scanning, and every
+representative recipe check succeed. Failed, cancelled, or skipped prerequisite
+jobs fail the aggregate check. These checks require no repository secrets.
+
+To enforce this gate, an administrator must add `Merge checks` as a required
+status check in the ruleset targeting `main`, selecting GitHub Actions as its
+source. Require branches to be up to date, or use a merge queue. Keep the existing
+pull request approval requirement. Adding the workflow alone does not enable
+merge enforcement; wait for its first successful run before selecting the check.
+Existing required check names are preserved, including lint and formatting inside
+`verify`, so the current ruleset continues to cover those checks during rollout.
+
+External link checks run weekly and on demand. They are not part of the merge
+gate because remote site availability is independent of a pull request.
+
+### Workflows that need secrets
+
+Current CI does not require application secrets. Keep fork pull request runs
+limited to checks that need no secrets, with a read-only token on GitHub-hosted
+runners. Administrators must disable sending secrets and write tokens to fork
+workflows and configure fork workflow approval according to organization policy.
+Do not execute fork code in privileged `pull_request_target` or `workflow_run`
+workflows.
+
+If a future integration test or deployment needs secrets:
+
+1. Keep it separate from fork CI and explicitly exclude fork pull requests.
+   Require a protected environment with maintainer approval before releasing
+   secrets; a same-repository branch check alone is not a security review.
+2. Review the exact fork commit, including workflow files, dependencies, install
+   scripts, and tests, before copying it into an upstream branch.
+3. Create a maintainer-owned branch from current `main`, merge the reviewed fork
+   commit into it, and open a new pull request to `main`. Link the original PR
+   and reviewed commit SHA. Review any additional edits before privileged runs.
+4. Run the privileged checks on that reviewed revision. Changes after review
+   require another review before secrets are released.
+5. Obtain approval from another designated code owner after the latest push,
+   resolve review conversations, and pass all required checks before merging.
+
+Keep designated maintainer teams in `CODEOWNERS` and require code-owner approval,
+stale approval dismissal, and approval after the latest push in the ruleset.
+For today's checks without secrets, reviewed fork PRs can merge directly.
+
 ## Review a change
 
 Check the actual selected example. A syntax check does not prove a live automation works. Record dependency installation, compilation, and live execution separately. For a browser run, report the page result or replay and how the browser session was closed.
