@@ -79,95 +79,14 @@ ruff check --fix scripts tests
 npx --yes prettier@3.9.6 --write . --ignore-unknown
 ```
 
-## Pull requests and merge checks
+## Open a pull request
 
-Repository policy: external contributors must submit pull requests from forks and
-must not be granted upstream write access. Maintainers with write access can open
-pull requests from repository branches. Administrators must enforce this through
-repository and team permissions; this document does not configure access.
+External contributors should open a pull request from a fork. Describe the change
+and include the verification commands you ran and their results.
 
-Fork contributions require repository access and forking to be enabled under the
-organization and enterprise policies. An internal repository is not open to the
-general public. Enabling forks does not require existing writers to use them.
-
-External pull requests must not run Actions or other CI until a maintainer
-explicitly approves the run. This applies even to lint, build, typecheck, and
-tests that do not use secrets. In **Settings > Actions > General**, administrators
-must require approval for fork pull request workflows. For public repositories,
-select **Require approval for all external contributors**, not either first-time
-contributor option. Keep fork workflows disabled until this approval policy is
-configured. Review the proposed code and workflow changes before approving a run.
-Approval to run CI does not approve the pull request for merging or grant access
-to application secrets.
-
-These controls are GitHub settings, not enforced by this Markdown or the workflow
-YAML. Organization and enterprise policies can constrain the available settings.
-Separately configure any third-party CI or GitHub App that reacts to pull requests;
-GitHub Actions approval does not gate those services. Disable external-PR runs for
-such integrations unless they provide an equivalent explicit approval mechanism.
-
-The `Verify cookbook` workflow subscribes to pull requests, pushes to `main`, and
-merge queue groups. External PR runs must be held by the approval policy above.
-It also supports manual dispatch once the workflow is on the default branch.
-Its `Merge checks` job passes only when style checks, catalog and
-provenance validation, repository tests, history secret scanning, and every
-representative recipe check succeed. Failed, cancelled, or skipped prerequisite
-jobs cause the aggregate check to fail when it runs. Cancelling the entire
-workflow can cancel the aggregate job too; this does not produce a passing check.
-These checks require no application secrets; checkout uses GitHub's automatic
-`GITHUB_TOKEN` with read-only repository permissions.
-
-To enforce this gate, an administrator must add `Merge checks` as a required
-status check in the ruleset targeting `main`, selecting GitHub Actions as its
-source. Require branches to be up to date, or use a merge queue. Keep the existing
-pull request approval requirement. Adding the workflow alone does not enable
-merge enforcement; wait for its first successful run before selecting the check.
-Existing required check names are preserved, including lint and formatting inside
-`verify`, so the current ruleset continues to cover those checks during rollout.
-
-External link checks run weekly and on demand. They are not part of the merge
-gate because remote site availability is independent of a pull request.
-
-### Workflows that need secrets
-
-Current CI does not require application secrets. Keep fork pull request runs
-limited to checks that need no secrets, with a read-only token on GitHub-hosted
-runners. Administrators must disable sending secrets and write tokens to fork
-workflows and enforce the external-PR approval policy above.
-Do not execute fork code in privileged `pull_request_target` or `workflow_run`
-workflows.
-
-If a future integration test or deployment needs secrets:
-
-1. Keep it separate from fork CI and explicitly exclude fork pull requests.
-   Store credentials as environment secrets and make the privileged job reference
-   that environment, with maintainer approval required before secrets are released.
-   Do not duplicate those credentials in unprotected repository or organization
-   secrets. Required environment reviewers depend on the GitHub plan and repository
-   visibility; establish an equivalent approval boundary if unavailable. A
-   same-repository branch check alone is not a security review.
-2. Review the exact fork commit, including workflow files, dependencies, install
-   scripts, and tests, before copying it into an upstream branch.
-3. Create a maintainer-owned branch from current `main`, merge the reviewed fork
-   commit into it, and open a new pull request to `main`. Link the original PR
-   and reviewed commit SHA. Review any additional edits before privileged runs.
-4. Run the privileged checks on that reviewed revision. Changes after review
-   require another review before secrets are released.
-5. Obtain approval from another designated code owner after the latest push,
-   resolve review conversations, and pass all required checks before merging.
-
-Keep designated maintainer teams in `CODEOWNERS` and require code-owner approval,
-stale approval dismissal, and approval after the latest push in the ruleset.
-Once repository access and forking are enabled, fork PRs that need only checks
-without secrets can merge directly after a maintainer approves their CI run, the
-required checks pass, and the ruleset's review requirements are satisfied. The
-second-PR procedure above is a maintainer process for privileged runs, not a rule
-currently enforced by the workflow.
-
-See GitHub's [fork workflow settings](https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/enabling-features-for-your-repository/managing-github-actions-settings-for-a-repository),
-[environment protections](https://docs.github.com/en/actions/reference/workflows-and-actions/deployments-and-environments),
-and [ruleset requirements](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-rulesets/available-rules-for-rulesets)
-for the corresponding administrator controls.
+CI for external contributions requires maintainer approval. You do not need to
+provide credentials or repository secrets. Address review feedback and keep the
+pull request updated until the required checks and reviews pass.
 
 ## Review a change
 
