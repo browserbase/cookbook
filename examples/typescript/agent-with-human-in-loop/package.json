@@ -1,0 +1,44 @@
+{
+  "name": "human-in-the-loop",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ai-sdk/mcp": "^2.0.29",
+    "@browserbasehq/sdk": "2.19.1",
+    "@browserbasehq/stagehand-codemode": "github:browserbase/stagehand#54302fc5f13be5ad8e717d8e1388502de22be2ed&path:packages/integrations",
+    "ai": "^7.0.58",
+    "next": "16.3.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "zod": "4.4.3"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "eslint": "^9",
+    "eslint-config-next": "16.3.6",
+    "tailwindcss": "^4",
+    "typescript": "6.0.3"
+  },
+  "pnpm": {
+    "overrides": {
+      "@browserbasehq/stagehand": "4.0.2",
+      "@modelcontextprotocol/sdk": "1.29.0",
+      "zod": "4.4.3"
+    }
+  },
+  "//": "TODO: Replace this commit pin and its pnpm overrides with @browserbasehq/stagehand-codemode@4.0.0 after it is published.",
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "packageManager": "pnpm@10.24.0"
+}

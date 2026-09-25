@@ -1,0 +1,32 @@
+# Browserbase public cookbook
+
+> Public demo and reference code for Browserbase templates, Playbook patterns, and integrations. Independently review every recipe, obtain authorization, and use it at your own risk.
+
+## Agent entrypoint
+
+- [Browserbase cookbook skill](skills/browserbase-cookbook/SKILL.md): Task routing and source-selection rules.
+- [Agent installation](docs/agents.md): Local setup for Codex, Claude Code, and Cursor.
+
+## Browse
+
+- [Recipe catalog](docs/catalog.md): Public recipes with language and lifecycle labels.
+- [Getting started](docs/topics/getting-started.md)
+- [Authentication](docs/topics/authentication.md)
+- [Browser features](docs/topics/browser-features.md)
+- [Downloads and documents](docs/topics/downloads-and-documents.md)
+- [Extraction and research](docs/topics/extraction-and-research.md)
+- [Forms and transactions](docs/topics/forms-and-transactions.md)
+- [Agents and human handoff](docs/topics/agents-and-human-handoff.md)
+- [Integrations and orchestration](docs/topics/integrations-and-orchestration.md)
+- [Testing and observability](docs/topics/testing-and-observability.md)
+- [Commerce and travel](docs/topics/commerce-and-travel.md)
+- [Business operations](docs/topics/business-operations.md)
+
+## Maintenance
+
+- [Catalog data](catalog.json)
+- [Source manifest](SOURCE_MANIFEST.json)
+- [Verification](docs/verification.md)
+- [Contributing](CONTRIBUTING.md)
+
+Paths are relative to this public artifact. Source inspection is not runtime verification.

@@ -1,0 +1,61 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import fsp from 'node:fs/promises';
+import os from 'node:os';
+import path from 'node:path';
+import crypto from 'node:crypto';
+import { Readable } from 'node:stream';
+import { pipeline } from 'node:stream/promises';
+import { stripTypeScriptTypes } from 'node:module';
+import vm from 'node:vm';
+import test from 'node:test';
+const tar = await import(process.env.COOKBOOK_TAR_MODULE);
+async function fixture() {
+  const base = fs.realpathSync(await fsp.mkdtemp(path.join(os.tmpdir(), 'cookbook-r160-test-')));
+  const target = path.join(base, 'skills'); await fsp.mkdir(path.join(target, 'unrelated'), { recursive: true });
+  await fsp.writeFile(path.join(target, 'unrelated/SKILL.md'), 'Keep unrelated skill');
+  let failRename; let renameCount = 0;
+  const localFsp = { ...fsp, rename: async (...args) => { renameCount++; if (failRename?.(...args)) throw Error('injected rename failure'); return fsp.rename(...args); } };
+  const source = fs.readFileSync(process.env.COOKBOOK_R160_BASELINE || new URL('../src/skills-sync.ts', import.meta.url), 'utf8').replace(/^import .*;\s*$/gm, '').replace(/^export /gm, '');
+  const context = vm.createContext({ fs, fsp: localFsp, path, os: { tmpdir: () => base, homedir: () => base }, crypto, createHash: crypto.createHash, randomUUID: crypto.randomUUID, Readable, pipeline, x: tar.x, process: { cwd: () => base }, fetch, Buffer, AbortSignal });
+  vm.runInContext(stripTypeScriptTypes(source), context);
+  async function archive(files = { 'browser/SKILL.md': 'Synthetic browser v1', 'functions/SKILL.md': 'Synthetic functions v1' }) {
+    const src = await fsp.mkdtemp(path.join(base, 'source-'));
+    for (const [file, content] of Object.entries(files)) { const p = path.join(src, 'repo/skills', file); await fsp.mkdir(path.dirname(p), { recursive: true }); await fsp.writeFile(p, content); }
+    const chunks = []; for await (const chunk of tar.c({ cwd: src, gzip: true }, ['repo'])) chunks.push(chunk);
+    return Buffer.concat(chunks);
+  }
+  return { base, target, context, localFsp, archive,
+    fail(fn) { failRename = fn; },
+    async sync(files) { const bytes = await archive(files); return context.syncBrowserbaseSkills({ targetRoot: target, fetchImpl: async () => new Response(bytes) }); },
+    async clean() { await fsp.rm(base, { recursive: true, force: true }); },
+    async untouched() { assert.equal(await fsp.readFile(path.join(target, 'unrelated/SKILL.md'), 'utf8'), 'Keep unrelated skill'); },
+  };
+}
+test('unrelated skills do not establish Browserbase installation', async () => { const f = await fixture(); try { assert.equal(f.context.hasBrowserbaseSkills(f.target), false); assert.deepEqual(Array.from(f.context.installedSkillFiles(f.target)), []); } finally { await f.clean(); } });
+test('sync preserves unrelated content and records only installed owned files', async () => { const f = await fixture(); try { await f.sync(); await f.untouched(); assert.equal(f.context.hasBrowserbaseSkills(f.target), true); const files = f.context.installedSkillFiles(f.target); assert.equal(files.length, 2); assert.ok(files.every(x => !x.includes('unrelated'))); } finally { await f.clean(); } });
+test('partial or modified managed install is incomplete', async () => { const f = await fixture(); try { await f.sync(); await fsp.writeFile(path.join(f.target, 'browser/SKILL.md'), 'Local changes'); assert.equal(f.context.hasBrowserbaseSkills(f.target), false); await assert.rejects(f.sync()); assert.equal(await fsp.readFile(path.join(f.target, 'browser/SKILL.md'), 'utf8'), 'Local changes'); await f.untouched(); } finally { await f.clean(); } });
+test('unmanaged same-name directory is not adopted or overwritten', async () => { const f = await fixture(); try { await fsp.mkdir(path.join(f.target, 'browser')); await fsp.writeFile(path.join(f.target, 'browser/SKILL.md'), 'User owned'); await assert.rejects(f.sync()); assert.equal(await fsp.readFile(path.join(f.target, 'browser/SKILL.md'), 'utf8'), 'User owned'); await f.untouched(); } finally { await f.clean(); } });
+test('successful upgrade replaces owned content and preserves unrelated skills', async () => { const f = await fixture(); try { await f.sync(); await f.sync({ 'browser/SKILL.md': 'Browser v2', 'functions/SKILL.md': 'Functions v2' }); assert.equal(await fsp.readFile(path.join(f.target, 'browser/SKILL.md'), 'utf8'), 'Browser v2'); assert.equal(f.context.hasBrowserbaseSkills(f.target), true); await f.untouched(); } finally { await f.clean(); } });
+test('injected replacement failure restores previous installed files', async () => { const f = await fixture(); try { await f.sync(); let failed = false; f.fail((from, to) => { if (!failed && to === path.join(f.target, 'functions')) { failed = true; return true; } return false; }); await assert.rejects(f.sync({ 'browser/SKILL.md': 'Browser v2', 'functions/SKILL.md': 'Functions v2' })); assert.equal(failed, true); assert.equal(await fsp.readFile(path.join(f.target, 'browser/SKILL.md'), 'utf8'), 'Synthetic browser v1'); assert.equal(await fsp.readFile(path.join(f.target, 'functions/SKILL.md'), 'utf8'), 'Synthetic functions v1'); assert.equal(f.context.hasBrowserbaseSkills(f.target), true); await f.untouched(); } finally { await f.clean(); } });
+test('archive missing skill entrypoint fails before target mutation', async () => { const f = await fixture(); try { await assert.rejects(f.sync({ 'browser/README.md': 'No entrypoint' })); await f.untouched(); assert.equal(fs.existsSync(path.join(f.target, 'browser')), false); } finally { await f.clean(); } });
+test('symlink target is rejected without modifying destination', async () => { const f = await fixture(); try { const link = path.join(f.base, 'linked'); await fsp.symlink(f.target, link); const bytes = await f.archive(); await assert.rejects(f.context.syncBrowserbaseSkills({ targetRoot: link, fetchImpl: async () => new Response(bytes) })); await f.untouched(); } finally { await f.clean(); } });
+test('missing managed entrypoint is incomplete and is not overwritten', async () => { const f = await fixture(); try { await f.sync(); await fsp.unlink(path.join(f.target, 'functions/SKILL.md')); assert.equal(f.context.getBrowserbaseSkillsStatus(f.target).state, 'incomplete'); await assert.rejects(f.sync()); await f.untouched(); } finally { await f.clean(); } });
+test('extra local file inside owned skill stops replacement', async () => { const f = await fixture(); try { await f.sync(); await fsp.writeFile(path.join(f.target, 'browser/local.md'), 'Keep my notes'); await assert.rejects(f.sync()); assert.equal(await fsp.readFile(path.join(f.target, 'browser/local.md'), 'utf8'), 'Keep my notes'); } finally { await f.clean(); } });
+test('removed upstream skill retires only its owned directory', async () => { const f = await fixture(); try { await f.sync(); await f.sync({ 'browser/SKILL.md': 'Browser v2' }); assert.equal(fs.existsSync(path.join(f.target, 'functions')), false); assert.equal(f.context.hasBrowserbaseSkills(f.target), true); await f.untouched(); } finally { await f.clean(); } });
+test('manifest replacement failure restores the old manifest and directories', async () => { const f = await fixture(); try { await f.sync(); const before = await fsp.readFile(path.join(f.target, '.browserbase-skills.json'), 'utf8'); let failed = false; f.fail((from, to) => { if (!failed && to === path.join(f.target, '.browserbase-skills.json')) { failed = true; return true; } return false; }); await assert.rejects(f.sync({ 'browser/SKILL.md': 'Browser v2' })); assert.equal(await fsp.readFile(path.join(f.target, '.browserbase-skills.json'), 'utf8'), before); assert.equal(f.context.hasBrowserbaseSkills(f.target), true); await f.untouched(); } finally { await f.clean(); } });
+test('failed rollback keeps journal and backup for manual recovery', async () => { const f = await fixture(); try { await f.sync(); f.fail((from, to) => to === path.join(f.target, 'functions')); await assert.rejects(f.sync({ 'browser/SKILL.md': 'Browser v2', 'functions/SKILL.md': 'Functions v2' }), /rollback/); const journal = JSON.parse(await fsp.readFile(path.join(f.target, '.browserbase-skills-transaction.json'), 'utf8')); assert.equal(await fsp.readFile(path.join(journal.stage, 'backup/functions/SKILL.md'), 'utf8'), 'Synthetic functions v1'); assert.equal(f.context.getBrowserbaseSkillsStatus(f.target).state, 'incomplete'); await assert.rejects(f.sync(), /recovery/); await f.untouched(); } finally { await f.clean(); } });
+test('concurrent sync cannot acquire lock or mutate the first transaction', async () => { const f = await fixture(); let finish; let started; const ready = new Promise(resolve => { started = resolve; }); try { const bytes = await f.archive(); const first = f.context.syncBrowserbaseSkills({ targetRoot: f.target, fetchImpl: async () => { started(); await new Promise(resolve => { finish = resolve; }); return new Response(bytes); } }); await ready; await assert.rejects(f.sync(), /lock/); finish(); await first; assert.equal(f.context.hasBrowserbaseSkills(f.target), true); await f.untouched(); } finally { finish?.(); await f.clean(); } });
+test('archive symlinks are rejected before installing any files', async () => { const f = await fixture(); try { const src = path.join(f.base, 'unsafe-source'); await fsp.mkdir(path.join(src, 'repo/skills/browser'), { recursive: true }); await fsp.writeFile(path.join(src, 'repo/skills/browser/SKILL.md'), 'Synthetic'); await fsp.symlink('/outside-fixture', path.join(src, 'repo/skills/browser/link')); const chunks = []; for await (const chunk of tar.c({ cwd: src, gzip: true }, ['repo'])) chunks.push(chunk); await assert.rejects(f.context.syncBrowserbaseSkills({ targetRoot: f.target, fetchImpl: async () => new Response(Buffer.concat(chunks)) })); await f.untouched(); assert.equal(fs.existsSync(path.join(f.target, 'browser')), false); } finally { await f.clean(); } });
+test('different archive roots cannot overwrite the same stripped destination', async () => { const f = await fixture(); try { const src = path.join(f.base, 'duplicate-source'); for (const root of ['one', 'two']) { await fsp.mkdir(path.join(src, root, 'skills/browser'), { recursive: true }); await fsp.writeFile(path.join(src, root, 'skills/browser/SKILL.md'), root); } const chunks = []; for await (const chunk of tar.c({ cwd: src, gzip: true }, ['one', 'two'])) chunks.push(chunk); await assert.rejects(f.context.syncBrowserbaseSkills({ targetRoot: f.target, fetchImpl: async () => new Response(Buffer.concat(chunks)) })); await f.untouched(); assert.equal(fs.existsSync(path.join(f.target, 'browser')), false); } finally { await f.clean(); } });
+test('registered status command reports absent and incomplete with managed-only files', async () => { const f = await fixture(); try {
+  const commands = new Map(); const logs = [];
+  function command(prefix = '') { return { command(name) { return command(`${prefix}/${name}`); }, description() { return this; }, option() { return this; }, action(handler) { commands.set(prefix, handler); return this; } }; }
+  const source = fs.readFileSync(new URL('../src/index.ts', import.meta.url), 'utf8').replace(/^import[\s\S]*?;\s*$/gm, '').replace(/export default[\s\S]*$/, '');
+  const ctx = vm.createContext({ console: { log: value => logs.push(value) }, resolveSkillsRoot: value => value, getBrowserbaseSkillsStatus: root => f.context.getBrowserbaseSkillsStatus(root), installedSkillFiles: root => f.context.installedSkillFiles(root) });
+  vm.runInContext(stripTypeScriptTypes(source), ctx);
+  ctx.registerCli({ registerCli: handler => handler({ program: command() }) }, {});
+  const status = commands.get('/browserbase/skills/status'); assert.ok(status);
+  status({ dir: f.target, json: true }); let result = JSON.parse(logs.pop()); assert.equal(result.state, 'absent'); assert.equal(result.installed, false); assert.deepEqual(result.files, []);
+  await f.sync(); await fsp.unlink(path.join(f.target, 'functions/SKILL.md')); status({ dir: f.target, json: true }); result = JSON.parse(logs.pop()); assert.equal(result.state, 'incomplete'); assert.equal(result.installed, false); assert.deepEqual(result.files, []);
+} finally { await f.clean(); } });

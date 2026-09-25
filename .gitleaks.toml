@@ -1,0 +1,12 @@
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Known public test fixtures"
+regexes = [
+  '''I65VU7K5ZQL7WB4E''',
+  '''ANTHROPIC_API_KEY=''',
+  '''fixture-holder-001''',
+  '''synthetic-holder-1''',
+  '''synthetic-order-1''',
+]

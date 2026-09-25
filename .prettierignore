@@ -1,0 +1,20 @@
+node_modules/
+.next/
+dist/
+build/
+coverage/
+.source-checkouts/
+
+# Imported collections retain their own package-level formatting rules.
+examples/**
+integrations/**
+playbook/**
+
+# Generated or machine-maintained repository content.
+assets/**
+docs/**
+skills/browserbase-cookbook/references/**
+COOKBOOK_AUTHORED.json
+SOURCE_MANIFEST.json
+catalog.json
+llms.txt

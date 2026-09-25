@@ -1,0 +1,37 @@
+[tool.poetry]
+name = "tutorial-crewai"
+version = "0.1.0"
+description = "Build a Crew that finds the best roundtrip flights on the given dates."
+package-mode = false
+authors = ["Browserbase"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.14"
+crewai = "1.15.20"
+html2text = ">=2024.2.26"
+playwright = "1.62.0"
+python-dotenv = ">=1.2.2,<2"
+
+# Minimum patched versions for dependencies used by this tutorial.
+cryptography = ">=50.0.0"
+aiohttp = ">=3.14.3"
+pyasn1 = ">=0.6.4"
+starlette = ">=1.3.1"
+pyarrow = ">=23.0.1"
+idna = ">=3.15"
+urllib3 = ">=2.7.0"
+requests = ">=2.33.0"
+orjson = ">=3.11.6"
+filelock = ">=3.20.3"
+
+[tool.poetry.group.dev.dependencies]
+black = "^26.3.1"
+flake8 = "^7.1.1"
+pylint = "^3.2.7"
+setuptools = ">=83.0.0"
+virtualenv = ">=20.36.1,<21.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

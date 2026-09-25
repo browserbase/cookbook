@@ -1,0 +1,8 @@
+{
+  "node": {
+    "externalPackages": [
+      "@browserbasehq/stagehand"
+    ],
+    "nodeVersion": "24"
+  }
+}

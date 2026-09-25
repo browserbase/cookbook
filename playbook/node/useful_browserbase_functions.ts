@@ -1,0 +1,347 @@
+/**
+ * Browserbase Node.js/TypeScript Examples
+ *
+ * This file demonstrates how to use Browserbase's Node.js SDK to:
+ * - Create and manage browser sessions
+ * - Configure Verified and anti-bot features
+ * - Set up proxies and fingerprinting
+ * - Handle contexts and metadata
+ *
+ * TO RUN:
+ * 1. Set up environment variables in .env:
+ *    BROWSERBASE_API_KEY=your_api_key
+ *
+ * 2. Install dependencies:
+ *    npm install
+ *
+ * 3. You can call to these functions directly from other scripts by adding:
+ * import { createSession} from ./core_utils.ts
+ *
+ *
+ * Each function shows a different aspect of session configuration.
+ * Uncomment and modify parameters as needed for your use case.
+ */
+
+import { Browserbase } from "@browserbasehq/sdk";
+import axios from "axios";
+
+const bb = new Browserbase({ apiKey: process.env.BROWSERBASE_API_KEY! });
+
+// CREATE A SESSION
+async function createSession() {
+  const session = await bb.sessions.create({
+    // Add configuration options here
+  });
+  return session;
+}
+
+// CREATE A CUSTOM-FINGERPRINT SESSION
+async function createCustomFingerprintSession() {
+  const session = await bb.sessions.create({
+    proxies: true,
+    browserSettings: {
+      verified: false, // Disable Verified when supplying a custom viewport
+      os: "windows",
+      viewport: {
+        width: 1920,
+        height: 1080,
+      },
+      solveCaptchas: true,
+    },
+  });
+  return session;
+}
+
+async function createSessionWithCustomProxies() {
+  const bb = new Browserbase({ apiKey: process.env.BROWSERBASE_API_KEY! });
+  const session = await bb.sessions.create({
+    proxies: [
+      {
+        type: "external",
+        server: "http://...",
+        username: "user",
+        password: "pass",
+      },
+    ],
+  });
+  return session;
+}
+
+async function createSessionWithGeoLocation() {
+  const bb = new Browserbase({ apiKey: process.env.BROWSERBASE_API_KEY! });
+  const session = await bb.sessions.create({
+    proxies: [
+      {
+        type: "browserbase",
+        geolocation: {
+          city: "New York",
+          state: "NY",
+          country: "US",
+        },
+      },
+    ],
+  });
+  return session;
+}
+
+async function createSessionWithProxyRouting() {
+  const bb = new Browserbase({ apiKey: process.env.BROWSERBASE_API_KEY! });
+  const session = await bb.sessions.create({
+    proxies: [
+      // Use an external proxy for wikipedia.org
+      {
+        type: "external",
+        server: "http://...",
+        username: "user",
+        password: "pass",
+        domainPattern: "wikipedia\.org",
+      },
+      // Use an external proxy for all other .gov domains
+      {
+        type: "external",
+        server: "http://...",
+        username: "user",
+        password: "pass",
+        domainPattern: ".*\.gov",
+      },
+      // Use the Browserbase proxies for all other domains
+      // Excluding this line will not use a proxy on any other domains
+      {
+        type: "browserbase",
+      },
+    ],
+  });
+  return session;
+}
+
+// CREATE HIGH SECURITY SESSION - No session recording and no logs
+async function createHighSecuritySession() {
+  const session = await bb.sessions.create({
+    browserSettings: {
+      recordSession: false,
+      logSession: false,
+    },
+  });
+  return session;
+}
+
+// CREATE SESSION WITH METADATA
+async function createSessionWithMetadata() {
+  const session = await bb.sessions.create({
+    userMetadata: {
+      key: "value",
+      key2: {
+        keyA: "valueA",
+        keyB: "valueB",
+      },
+    },
+  });
+  return session;
+}
+
+// LIST SESSIONS WITH METADATA
+async function listSessionsWithMetadata(query: string) {
+  const sessions = await bb.sessions.list({
+    q: query,
+  });
+  return sessions;
+}
+// EXAMPLE: listSessionsWithMetadata("user_metadata['client']:'enterprise_customer_xyz'")
+
+// CREATE A CUSTOM CAPTCHA SESSION
+async function createCustomCaptchaSession(
+  imageSelector: string,
+  inputSelector: string,
+) {
+  // Create a new session
+  const session = await bb.sessions.create({
+    browserSettings: {
+      //@ts-ignore
+      captchaImageSelector: imageSelector, // should look like this: "#c_turingtestpage_ctl00_maincontent_captcha1_CaptchaImage"
+      captchaInputSelector: inputSelector, // should look like this: "#ctl00_MainContent_txtTuringText"
+    },
+  });
+  return session;
+}
+
+// CAPTCHA SOLVING OFF
+async function createSessionWithoutCaptchaSolving() {
+  const session = await bb.sessions.create({
+    browserSettings: {
+      solveCaptchas: false,
+    },
+  });
+  return session;
+}
+
+// CREATE A CONTEXT
+async function createContext() {
+  const options = {
+    method: "POST",
+    headers: {
+      "X-BB-API-Key": `${process.env.BROWSERBASE_API_KEY}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({}),
+  };
+  const response = await fetch(
+    `https://api.browserbase.com/v1/contexts`,
+    options,
+  );
+  const json = await response.json();
+  return json;
+}
+
+// USE A CONTEXT
+async function useContext(contextId: string) {
+  const session = await bb.sessions.create({
+    browserSettings: {
+      context: {
+        id: contextId,
+        persist: true,
+      },
+    },
+  });
+  return session;
+}
+
+// CREATE SESSION - ALL PARAMS
+async function createSessionAllParams() {
+  const session = await bb.sessions.create({
+    browserSettings: {
+      // verified: true,
+      // context: {
+      //   id: "<contextId>",
+      //   persist: true
+      // },
+      // extensionId: "<extensionId>",
+      os: "windows",
+      viewport: {
+        width: 1920,
+        height: 1080,
+      },
+      blockAds: true,
+      solveCaptchas: true,
+      recordSession: true,
+      logSession: true,
+      // timeout: 10000,
+      // region: "us-east-1",
+    },
+    keepAlive: true,
+    proxies: true,
+    userMetadata: {
+      key: "value",
+    },
+  });
+  return session;
+}
+
+// GET LIVE DEBUG URL
+async function getLiveDebugURL(sessionId: string) {
+  const options = {
+    method: "GET",
+    headers: { "X-BB-API-Key": `${process.env.BROWSERBASE_API_KEY}` },
+  };
+  const response = await fetch(
+    `https://api.browserbase.com/v1/sessions/${sessionId}/debug`,
+    options,
+  );
+  const json = await response.json();
+  return json.debuggerUrl;
+}
+
+// GET PROJECT LIST
+async function getProjectList() {
+  const options = {
+    method: "GET",
+    headers: { "X-BB-API-Key": `${process.env.BROWSERBASE_API_KEY}` },
+  };
+
+  const response = await fetch(
+    `https://api.browserbase.com/v1/projects`,
+    options,
+  );
+  const data = await response.json();
+
+  return data;
+}
+
+// GET PROJECT USAGE
+async function getProjectUsage(projectId: string) {
+  const response = await axios.get(
+    `https://api.browserbase.com/v1/projects/${encodeURIComponent(projectId)}/usage`,
+    {
+      headers: { "X-BB-API-Key": process.env.BROWSERBASE_API_KEY },
+    },
+  );
+  return response.data;
+}
+
+// GET SESSION DETAILS
+async function getSessionDetails(sessionId: string) {
+  const options = {
+    method: "GET",
+    headers: { "X-BB-API-Key": `${process.env.BROWSERBASE_API_KEY}` },
+  };
+
+  const response = await fetch(
+    `https://api.browserbase.com/v1/sessions/${sessionId}`,
+    options,
+  );
+  const data = await response.json();
+
+  return data;
+}
+
+// GET SESSION LOGS
+async function getSessionLogs(sessionId: string) {
+  const options = {
+    method: "GET",
+    headers: { "X-BB-API-Key": `${process.env.BROWSERBASE_API_KEY}` },
+  };
+
+  const response = await fetch(
+    `https://api.browserbase.com/v1/sessions/${sessionId}/logs`,
+    options,
+  );
+  const data = await response.json();
+
+  return data;
+}
+
+// GET SESSION RECORDING
+async function getSessionRecording(sessionId: string) {
+  const options = {
+    method: "GET",
+    headers: { "X-BB-API-Key": `${process.env.BROWSERBASE_API_KEY}` },
+  };
+
+  const response = await fetch(
+    `https://api.browserbase.com/v1/sessions/${sessionId}/recording`,
+    options,
+  );
+  const data = await response.json();
+
+  return data;
+}
+
+export {
+  createSession,
+  createCustomFingerprintSession,
+  createHighSecuritySession,
+  createCustomCaptchaSession,
+  createSessionWithoutCaptchaSolving,
+  createSessionWithMetadata,
+  createContext,
+  useContext,
+  createSessionAllParams,
+  getLiveDebugURL,
+  getProjectList,
+  getProjectUsage,
+  getSessionDetails,
+  getSessionLogs,
+  getSessionRecording,
+  createSessionWithCustomProxies,
+  createSessionWithGeoLocation,
+  createSessionWithProxyRouting,
+};

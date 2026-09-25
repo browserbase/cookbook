@@ -1,0 +1,56 @@
+[tool.ruff]
+# Set the maximum line length
+line-length = 100
+
+# Exclude common directories
+exclude = [
+    ".git",
+    "__pycache__",
+    ".venv",
+    "venv",
+    "node_modules",
+    "dist",
+    "build",
+]
+
+[tool.ruff.lint]
+# Enable a comprehensive set of rules
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+    "SIM", # flake8-simplify
+]
+
+ignore = [
+    "E501",  # line too long (handled by formatter)
+    "B008",  # do not perform function calls in argument defaults
+    "N815",  # mixedCase in class scope (common in Pydantic models for API compatibility)
+    "N806",  # mixedCase in function scope (template/example code)
+    "E712",  # equality comparison to True (sometimes needed for clarity)
+    "B904",  # raise without from (template code, less strict)
+]
+
+# Make style issues warnings instead of errors (like ESLint)
+# This allows template/example code to be more flexible
+[tool.ruff.lint.per-file-ignores]
+"__init__.py" = ["F401"]  # unused imports in __init__.py are common
+
+[tool.ruff.lint.isort]
+# Use double quotes
+known-first-party = ["stagehand"]
+
+[tool.ruff.format]
+# Use double quotes for strings
+quote-style = "double"
+# Indent with spaces
+indent-style = "space"
+# Use 2 spaces for indentation
+skip-magic-trailing-comma = false
+line-ending = "auto"
+
