@@ -10,12 +10,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@browserbasehq/sdk": "2.19.1",
-    "dotenv": "^16.4.5",
+    "@browserbasehq/sdk": "2.21.0",
+    "dotenv": "^18.0.4",
     "playwright-core": "1.63.0"
   },
   "devDependencies": {
-    "@types/node": "^20.14.0",
+    "@types/node": "^26.6.3",
     "tsx": "^4.16.0",
     "typescript": "7.0.2"
   }
