@@ -7,14 +7,14 @@ Every entry is source-inspected at minimum. Recipes with stronger install, offli
 Search locally with `python3 scripts/catalog.py search "persistent login" --language python --limit 5`. Add `--json` for structured output.
 
 - [Getting started](topics/getting-started.md) (10). Create your first cloud browser and choose a browser SDK.
-- [Authentication and saved sessions](topics/authentication.md) (23). Reuse authenticated contexts, handle MFA, and connect login workflows.
-- [Browser configuration](topics/browser-features.md) (30). Configure proxies, CAPTCHA handling, extensions, metadata, and caching.
+- [Authentication and saved sessions](topics/authentication.md) (24). Reuse authenticated contexts, handle MFA, and connect login workflows.
+- [Browser configuration](topics/browser-features.md) (31). Configure proxies, CAPTCHA handling, extensions, metadata, and caching.
 - [Files and documents](topics/downloads-and-documents.md) (21). Upload files, retrieve downloads, capture PDFs, and parse documents.
 - [Extraction and research](topics/extraction-and-research.md) (53). Find pages and extract structured information from them.
 - [Forms and transactions](topics/forms-and-transactions.md) (28). Fill forms and prepare application, booking, and payment workflows.
-- [Agents and human handoff](topics/agents-and-human-handoff.md) (26). Build browser agents and pause work for human input.
-- [Integrations and orchestration](topics/integrations-and-orchestration.md) (31). Connect Browserbase to agent frameworks, services, and workflow engines.
-- [Testing and observability](topics/testing-and-observability.md) (5). Test sites and inspect browser behavior, reliability, and performance.
+- [Agents and human handoff](topics/agents-and-human-handoff.md) (27). Build browser agents and pause work for human input.
+- [Integrations and orchestration](topics/integrations-and-orchestration.md) (32). Connect Browserbase to agent frameworks, services, and workflow engines.
+- [Testing and observability](topics/testing-and-observability.md) (6). Test sites and inspect browser behavior, reliability, and performance.
 - [Commerce and travel](topics/commerce-and-travel.md) (14). Compare products, research travel, and inspect booking workflows.
 - [Business operations](topics/business-operations.md) (10). Automate research and operations across business domains.
 
@@ -183,3 +183,4 @@ Search locally with `python3 scripts/catalog.py search "persistent login" --lang
 | [Download save (Python, Playwright)](recipes/playbook-python-playwright-download-download-save.md) | python | runnable example | current / public | playbook |
 | [Upload extension (Python, Playwright)](recipes/playbook-python-playwright-extensions-upload-extension.md) | python | runnable example | current / public | playbook |
 | [Captcha listening (Python, Browserbase)](recipes/playbook-python-selenium-stealth-captcha-listening.md) | python | runnable example | current / public | playbook |
+| [Browsie: consumer browser agent](recipes/projects-browsie.md) | typescript | runnable example | current / public | projects |

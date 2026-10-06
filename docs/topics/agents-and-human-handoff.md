@@ -32,5 +32,6 @@ Open a recipe guide for its working directory, commands, environment references,
 | [Vercel · Eve example](../recipes/integrations-examples-integrations-vercel-eve-example.md) | typescript | runnable example | current / public | integrations |
 | [Job app agent (TypeScript, Stagehand)](../recipes/playbook-node-stagehand-complete-task-jobappagent.md) | typescript | runnable example | current / public | playbook |
 | [SF ticket agent (TypeScript, Stagehand)](../recipes/playbook-node-stagehand-complete-task-sfticketagent.md) | typescript | runnable example | current / public | playbook |
+| [Browsie: consumer browser agent](../recipes/projects-browsie.md) | typescript | runnable example | current / public | projects |
 
 [All topics](../catalog.md)

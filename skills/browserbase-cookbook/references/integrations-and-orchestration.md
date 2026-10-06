@@ -4,7 +4,7 @@ Connect Browserbase to agent frameworks, services, and workflow engines.
 
 Paths below are relative to a local cookbook root, not to the installed skill directory. Locate the checkout first. Read the selected guide and source before adapting code. Historical source links identify the imported revision; they predate cookbook migrations and are not runnable fallbacks.
 
-This topic contains all 31 matching entries. Browse `docs/topics/integrations-and-orchestration.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
+This topic contains all 32 matching entries. Browse `docs/topics/integrations-and-orchestration.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
 
 | Recipe | Language | Local guide | Status | Historical source |
 | --- | --- | --- | --- | --- |
@@ -39,3 +39,4 @@ This topic contains all 31 matching entries. Browse `docs/topics/integrations-an
 | Convex Stagehand | javascript, typescript | `docs/recipes/integrations-packages-convex-stagehand.md` | current | [pinned import](https://github.com/browserbase/integrations/tree/b7bc81c6fd4e089ab0c0df2b82529b200739e458/packages/convex-stagehand) |
 | Eve Browserbase | typescript | `docs/recipes/integrations-packages-eve-browserbase.md` | current | [pinned import](https://github.com/browserbase/integrations/tree/b7bc81c6fd4e089ab0c0df2b82529b200739e458/packages/eve-browserbase) |
 | OpenClaw Browserbase | typescript | `docs/recipes/integrations-packages-openclaw-browserbase.md` | current | [pinned import](https://github.com/browserbase/integrations/tree/b7bc81c6fd4e089ab0c0df2b82529b200739e458/packages/openclaw-browserbase) |
+| Browsie: consumer browser agent | typescript | `docs/recipes/projects-browsie.md` | current | cookbook-authored |

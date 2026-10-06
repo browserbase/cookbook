@@ -1,0 +1,9 @@
+node_modules/
+.next/
+.output/
+.eve/
+.browsie/
+tsconfig.tsbuildinfo
+runs/*.json
+.env
+.DS_Store
