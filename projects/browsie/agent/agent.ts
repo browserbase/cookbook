@@ -22,7 +22,12 @@ export default defineAgent({
   }),
   reasoning: "provider-default",
   build: {
-    externalDependencies: ["@browserbasehq/sdk", "@browserbasehq/stagehand"],
+    externalDependencies: [
+      "@browserbasehq/sdk",
+      "@browserbasehq/stagehand",
+      "@stripe/link-integrations-eve",
+      "@stripe/link-sdk",
+    ],
   },
   limits: {
     sessionTimeoutMs: 30 * 24 * 60 * 60 * 1_000,

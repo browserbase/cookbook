@@ -16,6 +16,8 @@ human handoff, credentials, messaging, and an inspectable web interface.
 - A draft Browserbase Context for every hosted task. A user can later name and save that same
   Context, then use it in another task.
 - A native encrypted vault example and an optional 1Password service-account integration.
+- An optional Stripe Link Agent Wallet integration with approved one-time cards and secure browser
+  checkout.
 - Browserbase Live View handoff for OTP, passkeys, login approval, and other human-only steps.
 - Durable CAPTCHA state, cancellation, restart recovery, and redacted activity events.
 - One agent core for the web interface and the optional Linq iMessage/SMS channel.
@@ -90,6 +92,7 @@ does not provide Browserbase Contexts, Live View, proxies, or Verified Browsers.
 | `BROWSIE_PUBLIC_URL`       | Handoff      | Public HTTPS origin for handoff links.                               |
 | `BROWSIE_VAULT_MASTER_KEY` | Native vault | Encrypts the local vault example.                                    |
 | `OP_SERVICE_ACCOUNT_TOKEN` | 1Password    | Gives server-side access to an allowed 1Password vault.              |
+| `LINK_ACCESS_TOKEN`        | Link payment | Connects a server-side Stripe Link Agent Wallet.                     |
 | `LINQ_API_KEY`             | Linq         | Enables the Linq channel.                                            |
 | `LINQ_WEBHOOK_SECRET`      | Linq         | Verifies Linq webhooks.                                              |
 
@@ -118,6 +121,12 @@ Useful manual checks:
 3. Start another task, select that Context, and confirm that the login state is present.
 4. Stop an active task and confirm that model work and browser work both stop.
 5. Open the activity feed and confirm that tool inputs are useful and private values are redacted.
+
+For an authorized Link test, configure `LINK_ACCESS_TOKEN`, inspect a real checkout, and ask Browsie
+to pay with Link. Browsie confirms the final purchase details, creates a Link spend request, waits
+for Link approval, asks for Eve approval, and then fills the one-time card inside the browser
+runtime. The card number, CVC, expiry, and payment token do not enter model output or activity
+events. See [the payment guide](docs/link-payments.md) before you test a charge.
 
 ## Optional iMessage and SMS test
 
@@ -157,6 +166,7 @@ rotation and deletion procedures.
   reusable guide for developers who want to adapt this architecture.
 - [`docs/contexts-and-vaults.md`](docs/contexts-and-vaults.md): browser identity and credentials.
 - [`docs/vault-and-otp.md`](docs/vault-and-otp.md): vault login and human handoff.
+- [`docs/link-payments.md`](docs/link-payments.md): Stripe Link approvals and secure checkout.
 - [`docs/stagehand-v4-doc-map.md`](docs/stagehand-v4-doc-map.md): links to official Stagehand and
   Browserbase documentation.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md): development and validation rules.

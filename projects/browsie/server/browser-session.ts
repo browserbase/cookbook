@@ -7,9 +7,11 @@ import {
   type CookieParam,
   type StagehandBrowser,
 } from "@browserbasehq/stagehand";
+import type { Card } from "@stripe/link-sdk";
 
 import { parseBrowserbaseCaptchaEvent, safeCaptchaPage, type CaptchaSignal } from "../src/captcha";
 import { toEmbeddedBrowserbaseLiveViewUrl } from "../src/live-view.js";
+import { allowedLinkCheckoutHosts, formatLinkExpiry } from "./link-wallet.js";
 import { addTrace } from "./trace.js";
 import type { BrowserProxyLocation, BrowserState, ConversationState, RunAction } from "./types.js";
 
@@ -377,6 +379,127 @@ export class BrowsieBrowserSession {
       );
       throw new Error(
         "Secure login failed. Inspect the current page and field selectors, then retry.",
+      );
+    } finally {
+      release();
+    }
+  }
+
+  async secureLinkCheckout(input: {
+    merchantUrl: string;
+    card: Card;
+    cardNumberTarget: string;
+    cvcTarget: string;
+    expiryTarget?: string;
+    expiryMonthTarget?: string;
+    expiryYearTarget?: string;
+    expiryFormat: "MM/YY" | "MMYY" | "MM/YYYY";
+    cardholderNameTarget?: string;
+    postalCodeTarget?: string;
+    submitTarget: string;
+    successTarget: string;
+  }): Promise<{
+    status: "complete" | "unverified";
+    host: string;
+    url: string;
+  }> {
+    const release = await this.acquireOperation();
+    try {
+      await this.start();
+      await this.gateCaptcha("before");
+      const started = performance.now();
+      const allowedHosts = allowedLinkCheckoutHosts(input.merchantUrl);
+      const values = {
+        ...input,
+        allowedHosts,
+        expiryValue: formatLinkExpiry(input.card.exp_month, input.card.exp_year, input.expiryFormat),
+        cardNumberTarget: this.resolveTarget(input.cardNumberTarget),
+        cvcTarget: this.resolveTarget(input.cvcTarget),
+        expiryTarget: input.expiryTarget ? this.resolveTarget(input.expiryTarget) : undefined,
+        expiryMonthTarget: input.expiryMonthTarget
+          ? this.resolveTarget(input.expiryMonthTarget)
+          : undefined,
+        expiryYearTarget: input.expiryYearTarget
+          ? this.resolveTarget(input.expiryYearTarget)
+          : undefined,
+        cardholderNameTarget: input.cardholderNameTarget
+          ? this.resolveTarget(input.cardholderNameTarget)
+          : undefined,
+        postalCodeTarget: input.postalCodeTarget
+          ? this.resolveTarget(input.postalCodeTarget)
+          : undefined,
+        submitTarget: this.resolveTarget(input.submitTarget),
+        successTarget: this.resolveTarget(input.successTarget),
+      };
+      const result = await this.requireStagehand().experimentalBatch(
+        async ({ page }, payment) => {
+          const before = new URL(await page.url());
+          if (!payment.allowedHosts.includes(before.hostname.toLowerCase())) {
+            throw new Error("host mismatch");
+          }
+          await page.locator(payment.cardNumberTarget).fill(payment.card.number);
+          if (payment.expiryTarget) {
+            await page.locator(payment.expiryTarget).fill(payment.expiryValue);
+          } else {
+            await page
+              .locator(payment.expiryMonthTarget!)
+              .fill(String(payment.card.exp_month).padStart(2, "0"));
+            await page.locator(payment.expiryYearTarget!).fill(String(payment.card.exp_year));
+          }
+          if (!payment.card.cvc) throw new Error("missing CVC");
+          await page.locator(payment.cvcTarget).fill(payment.card.cvc);
+          if (payment.cardholderNameTarget) {
+            const name = payment.card.billing_address?.name;
+            if (!name) throw new Error("missing cardholder name");
+            await page.locator(payment.cardholderNameTarget).fill(name);
+          }
+          if (payment.postalCodeTarget) {
+            const postalCode = payment.card.billing_address?.postal_code;
+            if (!postalCode) throw new Error("missing billing postal code");
+            await page.locator(payment.postalCodeTarget).fill(postalCode);
+          }
+          await page.locator(payment.submitTarget).click();
+          await page.waitForTimeout(1_500);
+          const url = await page.url();
+          const title = await page.title();
+          const success = (await page.locator(payment.successTarget).count()) > 0;
+          return { url, title, success };
+        },
+        values,
+        { timeout: 60_000 },
+      );
+      await this.gateCaptcha("after");
+      this.xpathMap = {};
+      this.updateBrowserState(result.url, result.title);
+      await this.refreshRemoteLiveUrl();
+      const host = new URL(result.url).hostname;
+      const status = result.success ? "complete" : "unverified";
+      addTrace(
+        this.state,
+        "tool",
+        "link.checkout",
+        status === "complete"
+          ? `Verified the checkout success state on ${host}.`
+          : `Submitted the checkout on ${host}, but success is not verified yet.`,
+        {
+          host,
+          status,
+          provider: "Stripe Link",
+          oneTimeCredential: true,
+          secretValuesRedacted: true,
+        },
+        Math.round(performance.now() - started),
+      );
+      return { status, host, url: result.url };
+    } catch {
+      addTrace(
+        this.state,
+        "error",
+        "link.checkout",
+        "The secure Link checkout failed. Payment values were redacted.",
+      );
+      throw new Error(
+        "Secure Link checkout failed. Inspect the page and spend-request status before any retry.",
       );
     } finally {
       release();
