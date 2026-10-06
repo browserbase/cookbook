@@ -1,5 +1,3 @@
-import "server-only";
-
 import { Link, type Card, type SpendRequest } from "@stripe/link-sdk";
 
 export interface ApprovedLinkCard {

@@ -14,6 +14,12 @@ const inputSchema = z
     spendRequestId: z.string().min(1),
     cardNumberTarget: target,
     cvcTarget: target,
+    expiryMode: z
+      .enum(["combined", "split"])
+      .default("combined")
+      .describe(
+        "Use combined for one expiry field or split for separate month and year fields. Only targets for the selected mode are used.",
+      ),
     expiryTarget: target.optional(),
     expiryMonthTarget: target.optional(),
     expiryYearTarget: target.optional(),
@@ -24,17 +30,20 @@ const inputSchema = z
     successTarget: target,
   })
   .superRefine((input, ctx) => {
-    const splitExpiry = Boolean(input.expiryMonthTarget && input.expiryYearTarget);
-    if (!input.expiryTarget && !splitExpiry) {
+    if (input.expiryMode === "combined" && !input.expiryTarget) {
       ctx.addIssue({
         code: "custom",
-        message: "Provide expiryTarget or both expiryMonthTarget and expiryYearTarget.",
+        message: "Provide expiryTarget when expiryMode is combined.",
       });
     }
-    if (input.expiryTarget && (input.expiryMonthTarget || input.expiryYearTarget)) {
+    if (
+      input.expiryMode === "split" &&
+      (!input.expiryMonthTarget || !input.expiryYearTarget)
+    ) {
       ctx.addIssue({
         code: "custom",
-        message: "Use either a combined expiry target or separate month and year targets.",
+        message:
+          "Provide both expiryMonthTarget and expiryYearTarget when expiryMode is split.",
       });
     }
   });
@@ -53,9 +62,11 @@ export default defineTool({
           card: credential.card,
           cardNumberTarget: input.cardNumberTarget,
           cvcTarget: input.cvcTarget,
-          expiryTarget: input.expiryTarget,
-          expiryMonthTarget: input.expiryMonthTarget,
-          expiryYearTarget: input.expiryYearTarget,
+          expiryTarget: input.expiryMode === "combined" ? input.expiryTarget : undefined,
+          expiryMonthTarget:
+            input.expiryMode === "split" ? input.expiryMonthTarget : undefined,
+          expiryYearTarget:
+            input.expiryMode === "split" ? input.expiryYearTarget : undefined,
           expiryFormat: input.expiryFormat,
           cardholderNameTarget: input.cardholderNameTarget,
           postalCodeTarget: input.postalCodeTarget,

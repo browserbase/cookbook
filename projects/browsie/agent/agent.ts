@@ -25,7 +25,6 @@ export default defineAgent({
     externalDependencies: [
       "@browserbasehq/sdk",
       "@browserbasehq/stagehand",
-      "@stripe/link-integrations-eve",
       "@stripe/link-sdk",
     ],
   },
