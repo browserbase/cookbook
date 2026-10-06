@@ -13,6 +13,7 @@ playbook/**
 # Generated or machine-maintained repository content.
 assets/**
 docs/**
+projects/README.md
 skills/browserbase-cookbook/references/**
 COOKBOOK_AUTHORED.json
 SOURCE_MANIFEST.json

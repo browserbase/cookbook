@@ -143,7 +143,7 @@ class Verification:
                 self.fail(location, "duplicate id")
             ids.add(identifier)
             verification_levels = {"source-inspected", "install-verified", "typechecked", "offline-tested", "live-tested"}
-            enums = {"collection": {"examples", "integrations", "playbook"}, "access": {"public"}, "lifecycle": {"current", "legacy", "retired"}, "verification": verification_levels}
+            enums = {"collection": {"examples", "integrations", "playbook", "projects"}, "access": {"public"}, "lifecycle": {"current", "legacy", "retired"}, "verification": verification_levels}
             for field, values in enums.items():
                 if recipe.get(field) not in values:
                     self.fail(location, f"invalid {field}")

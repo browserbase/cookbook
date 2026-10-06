@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-COLLECTIONS = ("examples", "integrations", "playbook")
+COLLECTIONS = ("examples", "integrations", "playbook", "projects")
 IGNORED_PARTS = {".git", ".audit", ".next", ".venv", "node_modules", "__pycache__"}
 
 
@@ -29,8 +29,12 @@ def authored_paths(root):
             continue
         for path in base.rglob("*"):
             relative = path.relative_to(root)
-            if (any(part in IGNORED_PARTS or part.endswith(".egg-info") for part in relative.parts)
-                    or not path.is_file() or path.is_symlink()):
+            if (
+                any(part in IGNORED_PARTS or part.endswith(".egg-info") for part in relative.parts)
+                or path.suffix == ".tsbuildinfo"
+                or not path.is_file()
+                or path.is_symlink()
+            ):
                 continue
             if relative.as_posix() not in imported:
                 paths.append(relative.as_posix())

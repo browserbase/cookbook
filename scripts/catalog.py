@@ -377,7 +377,7 @@ def generated(recipes):
         out[reference] = '\n'.join(['# ' + title, '', purpose, '', 'Paths below are relative to a local cookbook root, not to the installed skill directory. Locate the checkout first. Read the selected guide and source before adapting code. Historical source links identify the imported revision; they predate cookbook migrations and are not runnable fallbacks.', '', 'This topic contains all ' + str(len(members)) + ' matching entries. Browse `docs/topics/' + topic + '.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.', '', '| Recipe | Language | Local guide | Status | Historical source |', '| --- | --- | --- | --- | --- |', *['| ' + clean(r['title']) + ' | ' + ', '.join(r['languages']) + ' | `' + r['readme'] + '` | ' + r['lifecycle'] + ' | ' + source_label(r) + ' |' for r in picks], ''])
     main += ['', '## All recipes', '', table(recipes, 'docs/catalog.md'), '']
     out['docs/catalog.md'] = '\n'.join(main)
-    for collection in ['examples', 'integrations', 'playbook']:
+    for collection in ['examples', 'integrations', 'playbook', 'projects']:
         name = collection + '/README.md'
         path = ROOT / name
         if not path.is_file():

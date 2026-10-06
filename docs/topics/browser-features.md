@@ -36,5 +36,6 @@ Open a recipe guide for its working directory, commands, environment references,
 | [Custom captcha (Python, Playwright)](../recipes/playbook-python-playwright-captcha-custom-captcha.md) | python | runnable example | current / public | playbook |
 | [Upload extension (Python, Playwright)](../recipes/playbook-python-playwright-extensions-upload-extension.md) | python | runnable example | current / public | playbook |
 | [Captcha listening (Python, Browserbase)](../recipes/playbook-python-selenium-stealth-captcha-listening.md) | python | runnable example | current / public | playbook |
+| [Browsie: consumer browser agent](../recipes/projects-browsie.md) | typescript | runnable example | current / public | projects |
 
 [All topics](../catalog.md)

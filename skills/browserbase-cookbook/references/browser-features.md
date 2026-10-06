@@ -4,7 +4,7 @@ Configure proxies, CAPTCHA handling, extensions, metadata, and caching.
 
 Paths below are relative to a local cookbook root, not to the installed skill directory. Locate the checkout first. Read the selected guide and source before adapting code. Historical source links identify the imported revision; they predate cookbook migrations and are not runnable fallbacks.
 
-This topic contains all 30 matching entries. Browse `docs/topics/browser-features.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
+This topic contains all 31 matching entries. Browse `docs/topics/browser-features.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
 
 | Recipe | Language | Local guide | Status | Historical source |
 | --- | --- | --- | --- | --- |
@@ -38,3 +38,4 @@ This topic contains all 30 matching entries. Browse `docs/topics/browser-feature
 | Custom captcha (Python, Playwright) | python | `docs/recipes/playbook-python-playwright-captcha-custom-captcha.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/python/playwright/captcha/custom_captcha.py) |
 | Upload extension (Python, Playwright) | python | `docs/recipes/playbook-python-playwright-extensions-upload-extension.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/python/playwright/extensions/upload_extension.py) |
 | Captcha listening (Python, Browserbase) | python | `docs/recipes/playbook-python-selenium-stealth-captcha-listening.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/python/selenium/stealth/captcha_listening.py) |
+| Browsie: consumer browser agent | typescript | `docs/recipes/projects-browsie.md` | current | cookbook-authored |

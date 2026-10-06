@@ -17,7 +17,7 @@
 
 Find a working starting point for browser automation. Browse by task, choose your language or framework, and open the recipe's setup guide and code.
 
-This cookbook brings together Browserbase's public templates, Playbook patterns, and integrations. It includes the source code, with each project's dependencies kept together. Imported examples have been inspected, but have not all been run against live services.
+This cookbook brings together Browserbase's public templates, complete projects, Playbook patterns, and integrations. It includes the source code, with each project's dependencies kept together. Imported examples have been inspected, but have not all been run against live services.
 
 > [!CAUTION]
 > **Demo and reference code only.** Browserbase does not claim that any recipe, integration, target, data source, vendor, or workflow in this repository has been vetted, approved, secured, or validated for production use. Independently review the code and obtain all required authorization before running it. You are responsible for compliance, site terms, privacy, security, costs, and outcomes. **Use at your own risk.**
@@ -34,6 +34,7 @@ This cookbook brings together Browserbase's public templates, Playbook patterns,
 | Save a login and handle MFA                           | [Authentication recipes](docs/topics/authentication.md)                                                                            |
 | Pause an agent for a person                           | [Human-in-the-loop app](examples/typescript/agent-with-human-in-loop/)                                                             |
 | Add Browserbase to an agent framework                 | [Integrations](integrations/README.md)                                                                                             |
+| Study a complete consumer browser agent               | [Browsie](projects/browsie/)                                                                                                       |
 
 ## Browse by task
 
@@ -99,6 +100,7 @@ Example requests include:
 examples/       Standalone Python, TypeScript, and Go templates
 integrations/   Framework examples and integration packages
 playbook/       Browserbase Playbook patterns and shared helpers
+projects/       Complete applications built from Browserbase features
 skills/         One cookbook skill with focused topic references
 docs/           Recipe guides, task indexes, setup, and maintenance
 scripts/        Import, catalog generation, search, and validation

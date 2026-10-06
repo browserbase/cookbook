@@ -37,5 +37,6 @@ Open a recipe guide for its working directory, commands, environment references,
 | [Convex Stagehand](../recipes/integrations-packages-convex-stagehand.md) | javascript, typescript | runnable example | current / public | integrations |
 | [Eve Browserbase](../recipes/integrations-packages-eve-browserbase.md) | typescript | integration package | current / public | integrations |
 | [OpenClaw Browserbase](../recipes/integrations-packages-openclaw-browserbase.md) | typescript | integration package | current / public | integrations |
+| [Browsie: consumer browser agent](../recipes/projects-browsie.md) | typescript | runnable example | current / public | projects |
 
 [All topics](../catalog.md)

@@ -1,0 +1,47 @@
+{
+  "name": "browsie",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "dev": "next dev -p 4318",
+    "dev:eve": "eve dev",
+    "dev:linq": "exec node scripts/linq-local.mjs",
+    "build": "pnpm run build:eve && next build",
+    "start": "next start -p 4318",
+    "eve:check": "eve info --json",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "vitest run",
+    "test:linq-local": "node scripts/linq-local.mjs --self-test",
+    "typecheck": "tsc --noEmit -p tsconfig.json",
+    "build:eve": "eve build --skip-sandbox-prewarm"
+  },
+  "dependencies": {
+    "@1password/sdk": "0.5.0",
+    "@ai-sdk/openai": "4.0.46",
+    "@browserbasehq/sdk": "2.18.0",
+    "@browserbasehq/stagehand": "4.0.2",
+    "ai": "7.0.82",
+    "dotenv": "^17.2.0",
+    "eve": "0.47.6",
+    "lucide-react": "^1.34.0",
+    "next": "16.3.8",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "zod": "^4.4.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.39.0",
+    "eslint-config-next": "16.3.8",
+    "microsandbox": "^0.5.10",
+    "typescript": "6.0.3",
+    "vitest": "^4.0.0"
+  }
+}
