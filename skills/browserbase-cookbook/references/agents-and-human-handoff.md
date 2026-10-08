@@ -4,7 +4,7 @@ Build browser agents and pause work for human input.
 
 Paths below are relative to a local cookbook root, not to the installed skill directory. Locate the checkout first. Read the selected guide and source before adapting code. Historical source links identify the imported revision; they predate cookbook migrations and are not runnable fallbacks.
 
-This topic contains all 27 matching entries. Browse `docs/topics/agents-and-human-handoff.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
+This topic contains all 28 matching entries. Browse `docs/topics/agents-and-human-handoff.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
 
 | Recipe | Language | Local guide | Status | Historical source |
 | --- | --- | --- | --- | --- |
@@ -34,4 +34,5 @@ This topic contains all 27 matching entries. Browse `docs/topics/agents-and-huma
 | Vercel · Eve example | typescript | `docs/recipes/integrations-examples-integrations-vercel-eve-example.md` | current | [pinned import](https://github.com/browserbase/integrations/tree/b7bc81c6fd4e089ab0c0df2b82529b200739e458/examples/integrations/vercel/eve-example) |
 | Job app agent (TypeScript, Stagehand) | typescript | `docs/recipes/playbook-node-stagehand-complete-task-jobappagent.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/node/stagehand/complete_task/jobAppAgent.ts) |
 | SF ticket agent (TypeScript, Stagehand) | typescript | `docs/recipes/playbook-node-stagehand-complete-task-sfticketagent.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/node/stagehand/complete_task/sfTicketAgent.ts) |
+| Bell-Stack: a separate assistant using the Browsie runtime | typescript | `docs/recipes/projects-bell-stack.md` | current | cookbook-authored |
 | Browsie: consumer browser agent | typescript | `docs/recipes/projects-browsie.md` | current | cookbook-authored |

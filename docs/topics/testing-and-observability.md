@@ -12,6 +12,7 @@ Open a recipe guide for its working directory, commands, environment references,
 | [Website link tester (Python)](../recipes/examples-python-website-link-tester.md) | python | runnable example | current / public | examples |
 | [Smart fetch scraper (TypeScript)](../recipes/examples-typescript-smart-fetch-scraper.md) | typescript | runnable example | current / public | examples |
 | [Website link tester (TypeScript)](../recipes/examples-typescript-website-link-tester.md) | typescript | runnable example | current / public | examples |
+| [Bell-Stack: a separate assistant using the Browsie runtime](../recipes/projects-bell-stack.md) | typescript | runnable example | current / public | projects |
 | [Browsie: consumer browser agent](../recipes/projects-browsie.md) | typescript | runnable example | current / public | projects |
 
 [All topics](../catalog.md)

@@ -14422,6 +14422,199 @@
       "upstream_readme": "playbook/python/selenium/stealth/README.md",
       "verification": "source-inspected",
       "working_directory": "playbook/python"
+    },
+    {
+      "access": "public",
+      "caveats": [
+        "Install from the cookbook checkout: the file:../browsie dependency requires its sibling package and a shared-library build.",
+        "Bell owns its agent, interface, configuration, and integrations. It does not copy Browsie or call a separately deployed agent.",
+        "The capture panel displays requested screenshots; interactive input uses the shared human-handoff tool.",
+        "The local reference uses one demo operator. Production authentication and durable storage require configuration.",
+        "Linq conversations use the same agent definition but have their own Eve sessions. Live Linq, 1Password login, and checkout were not tested."
+      ],
+      "collection": "projects",
+      "dependencies": {
+        "@ai-sdk/openai": "4.0.46",
+        "@browserbasehq/sdk": "2.18.0",
+        "@browserbasehq/stagehand": "4.0.2",
+        "browsie": "file:../browsie",
+        "eve": "0.47.6",
+        "next": "16.3.8",
+        "react": "19.3.0",
+        "react-dom": "19.3.0",
+        "zod": "4.6.5"
+      },
+      "entrypoints": [
+        "projects/bell-stack/app/page.tsx",
+        "projects/bell-stack/agent/agent.ts"
+      ],
+      "environment_setup_command": "test -f .env || cp .env.example .env",
+      "environment_template": "projects/bell-stack/.env.example",
+      "environment_variables": [
+        {
+          "default": null,
+          "name": "OPENAI_API_KEY",
+          "provider": "OpenAI",
+          "purpose": "Runs the Eve agent model.",
+          "requirement": "required",
+          "safe_example": "<set-locally>",
+          "secret": true,
+          "setup_url": "https://platform.openai.com/api-keys",
+          "validation": "Must be a valid OpenAI API key"
+        },
+        {
+          "default": null,
+          "name": "BROWSERBASE_API_KEY",
+          "provider": "Browserbase",
+          "purpose": "Creates hosted sessions, Contexts, Live View links, proxies, and Verified Browsers.",
+          "requirement": "conditional",
+          "safe_example": "<set-locally>",
+          "secret": true,
+          "setup_url": "https://www.browserbase.com/settings",
+          "validation": "Required when STAGEHAND_BROWSER is browserbase"
+        },
+        {
+          "default": "browserbase",
+          "name": "STAGEHAND_BROWSER",
+          "provider": "Browsie",
+          "purpose": "Selects automatic, local, or Browserbase browser mode.",
+          "requirement": "optional",
+          "safe_example": "browserbase",
+          "secret": false,
+          "setup_url": null,
+          "validation": "Must be auto, local, or browserbase"
+        },
+        {
+          "default": null,
+          "name": "BROWSIE_HANDOFF_SECRET",
+          "provider": "Browsie",
+          "purpose": "Signs short-lived human-handoff links.",
+          "requirement": "conditional",
+          "safe_example": "<random-32-or-more-character-value>",
+          "secret": true,
+          "setup_url": null,
+          "validation": "Use a random value with at least 32 characters"
+        },
+        {
+          "default": "gpt-5.6-sol",
+          "name": "BELL_MODEL",
+          "provider": "OpenAI",
+          "purpose": "Selects Bell's agent model.",
+          "requirement": "optional",
+          "safe_example": "gpt-5.6-sol",
+          "secret": false,
+          "setup_url": "https://platform.openai.com/docs/models",
+          "validation": "Must be available to the configured OpenAI account."
+        },
+        {
+          "default": "https://example.com",
+          "name": "BELL_DEMO_URL",
+          "provider": "Bell-Stack",
+          "purpose": "URL used by the demo starter button.",
+          "requirement": "optional",
+          "safe_example": "https://example.com",
+          "secret": false,
+          "setup_url": null,
+          "validation": "Use a site you are authorized to access."
+        },
+        {
+          "default": "false",
+          "name": "BROWSIE_LOG_SESSION",
+          "provider": "Browserbase",
+          "purpose": "Controls network logging in the shared browser runtime.",
+          "requirement": "optional",
+          "safe_example": "false",
+          "secret": false,
+          "setup_url": null,
+          "validation": "Must be false before starting a browser used for merchant credentials."
+        },
+        {
+          "default": null,
+          "name": "OP_ACCOUNT",
+          "provider": "1Password",
+          "purpose": "Selects the account for local desktop SDK authorization.",
+          "requirement": "conditional",
+          "safe_example": "Your account name",
+          "secret": false,
+          "setup_url": "https://www.1password.dev/sdks/desktop-app-integrations",
+          "validation": "Use the account display name or UUID; Bell must run on the same computer as the desktop app."
+        },
+        {
+          "default": null,
+          "name": "OP_SERVICE_ACCOUNT_TOKEN",
+          "provider": "1Password",
+          "purpose": "Enables hosted vault access and takes precedence over OP_ACCOUNT.",
+          "requirement": "conditional",
+          "safe_example": "<set-locally>",
+          "secret": true,
+          "setup_url": "https://www.1password.dev/service-accounts/get-started",
+          "validation": "Grant access only to the vaults needed by this assistant."
+        }
+      ],
+      "frameworks": [
+        "Stagehand",
+        "Browserbase SDK",
+        "Eve",
+        "Next.js"
+      ],
+      "id": "projects-bell-stack",
+      "languages": [
+        "typescript"
+      ],
+      "lifecycle": "current",
+      "manifests": [
+        "projects/bell-stack/package.json"
+      ],
+      "path": "projects/bell-stack",
+      "readme": "docs/recipes/projects-bell-stack.md",
+      "run_commands": [
+        "pnpm dev"
+      ],
+      "search_aliases": [
+        "consumer agent",
+        "browser agent",
+        "contexts",
+        "vault",
+        "live view",
+        "imessage",
+        "linq",
+        "bell stack",
+        "personal assistant"
+      ],
+      "setup_commands": [
+        "pnpm --dir ../browsie install --frozen-lockfile",
+        "pnpm --dir ../browsie build:library",
+        "pnpm install --frozen-lockfile"
+      ],
+      "source": {
+        "kind": "cookbook-authored",
+        "path": "projects/bell-stack"
+      },
+      "summary": "Run an independent Bell assistant and compact web interface while importing Browsie browser tools, Linq, and vault integrations as a local package.",
+      "tags": [
+        "reference-app"
+      ],
+      "title": "Bell-Stack: a separate assistant using the Browsie runtime",
+      "topics": [
+        "agents-and-human-handoff",
+        "authentication",
+        "browser-features",
+        "integrations-and-orchestration",
+        "testing-and-observability"
+      ],
+      "upstream_readme": "projects/bell-stack/README.md",
+      "verification": "offline-tested",
+      "verification_evidence": [
+        {
+          "command": "pnpm install --frozen-lockfile && pnpm test && pnpm typecheck && pnpm lint && pnpm build",
+          "date": "2026-10-08",
+          "kind": "offline-tested",
+          "limits": "4 projection tests passed. Frozen-lockfile installation, type checking, zero-warning lint, and Eve/Next compilation passed with the shared Browsie package built first. This stage does not include Baselayer presentation. Live agent and browser work are verified separately with the merchant integration.",
+          "result": "passed",
+          "runtime": "Node.js 24.15.0; pnpm 10.33.4; Linux x64; Eve 0.47.6"
+        }
+      ],
+      "working_directory": "projects/bell-stack"
     }
   ],
   "schema_version": 1

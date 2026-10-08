@@ -1053,7 +1053,217 @@
     },
     {
       "path": "projects/README.md",
-      "sha256": "e0a94cc7989d4915d1442a3af1407cd9c23eb639eb07ef3b1fb9490e4c2269fe",
+      "sha256": "fac85c8d8717595c1de0a0eec12cdce12ad9e4b3e750c670a46b2ee497c99959",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/.env.example",
+      "sha256": "d5be8020a642245ed7799ab37a83f605add919a9c7214082d7612843a0b485b3",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/.gitignore",
+      "sha256": "62bf3d811fa7aca12abed42ca5cc917017a8b443229efb79b0b06408ec36df03",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/AGENTS.md",
+      "sha256": "c8a5ced71be77d08256198aa3a18da72e866359155ad08f89107f72c5cfb928e",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/README.md",
+      "sha256": "99a409eb963738c6b4f3ba0b6051ae65a7d1d44485165d24ceb281ef7579e9e8",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/agent.ts",
+      "sha256": "2124af5210b386f5a4786ffaa11f0f1a50d2b2b3b9daae1258f816966b57b666",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/channels/linq.ts",
+      "sha256": "dd2e7cdb01866b14d908606a59bab36b6989560777a7848b7c5227786ddb6908",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/hooks/browser-lifecycle.ts",
+      "sha256": "7343bb23d467e3fbe67fbba0734257bbe01c019e5fea6326ffeee8b9948e689b",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/hooks/task-state.ts",
+      "sha256": "102ea8dd31c0ef5bf6b40111a390c813bcdf45dcffc98410f32f0984b663a09f",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/instructions.md",
+      "sha256": "51a147fa72f04e6aabcc53dd63c86c6197b76c9657d08c2762b795adee45f6e3",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/agent.ts",
+      "sha256": "3a4cda85fee0e8b3c5b033d414eb53439b5d2b8e7a2f848da430c21babfb131b",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/bash.ts",
+      "sha256": "3a4cda85fee0e8b3c5b033d414eb53439b5d2b8e7a2f848da430c21babfb131b",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/context_create.ts",
+      "sha256": "baf593f4332bcdbf73c0a2353c0e9fccc93d308aeb930ca0852ef6f4cb718320",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/context_list.ts",
+      "sha256": "09fbd6809a0ed14902daf9d7ec3c9881345f01d5d6df94053647ec75d7b4ec51",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/context_save.ts",
+      "sha256": "967b38f575263b16be17fd1ede4432d5582303c8e763a2a983fcafab3a826858",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/context_select.ts",
+      "sha256": "6ac2776352b37175e8534c2dc5b62723d1b5a09007be868eacd22dc07a6592c8",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/human_handoff.ts",
+      "sha256": "e403aac81eab20682356954e14e00d4c5c16d5ec64ca81759087f07753508789",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/read_file.ts",
+      "sha256": "3a4cda85fee0e8b3c5b033d414eb53439b5d2b8e7a2f848da430c21babfb131b",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/run.ts",
+      "sha256": "ff99d985e2be612cf15cb569796bbac6ccb9a87203e45c88817b010d09cf334a",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/screenshot.ts",
+      "sha256": "0f78d65d110f0060a09d4484d7cdcb8b81cc9c6256d6002f37df1c8d132a3bf8",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/snapshot.ts",
+      "sha256": "43ea83e8f9101f945e402d043916dd7bd1626346bada5a96cd034bf7aa893d53",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/todo.ts",
+      "sha256": "3a4cda85fee0e8b3c5b033d414eb53439b5d2b8e7a2f848da430c21babfb131b",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/vault_list_logins.ts",
+      "sha256": "f500169408b895231dcddb7fb89cba78c3987dd7f932f162ee588e1e24874599",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/vault_login.ts",
+      "sha256": "50772d53b664180fe2331690047271130f0cff1000142c1cf803e8fc915a601b",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/web_fetch.ts",
+      "sha256": "3a4cda85fee0e8b3c5b033d414eb53439b5d2b8e7a2f848da430c21babfb131b",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/web_search.ts",
+      "sha256": "3a4cda85fee0e8b3c5b033d414eb53439b5d2b8e7a2f848da430c21babfb131b",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/write_file.ts",
+      "sha256": "3a4cda85fee0e8b3c5b033d414eb53439b5d2b8e7a2f848da430c21babfb131b",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/app/chat.tsx",
+      "sha256": "28de93161ac5dd944a9d4c45c207c73c2a49b6a81fbd44b448c0960898d08d20",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/app/handoff/[token]/live/route.ts",
+      "sha256": "e32819902c82d8928f7f9bf3591d9d1d9b24edc0f2b354b8e656a02056dd4540",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/app/handoff/[token]/route.ts",
+      "sha256": "2cd72a0ae9d8c3efaf646b09f042d88f95b550c0c6ef441c1714d734a1e058f0",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/app/layout.tsx",
+      "sha256": "8f343a7b6c1c97c0552b2d39ac6e6cd3d15d6075305ff5ca53eeb06084b1da8c",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/app/page.tsx",
+      "sha256": "710dddcf70e8315bca2fd86e4660de0c97f93d909223f4104ddeafa6d257bdd7",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/app/projection.ts",
+      "sha256": "b5e261bdad464d400b332faf9e2840cd4ca785415aaec100fbe846d6f982ac94",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/app/s/[sessionId]/page.tsx",
+      "sha256": "1c5dd56771f98af071e546aa98b8048ab75c7c9ca44e64ed6a4e7639a53e7531",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/app/style.css",
+      "sha256": "58d1916a70c15a525a01a37ebbaeaff9ab91deac689a634a84ad122a3d8ed7b4",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/eslint.config.mjs",
+      "sha256": "641501266c046d1bc81dd60bb7626053d248953eb8411e52f279e6e96b8adacb",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/next-env.d.ts",
+      "sha256": "1862ac4bbbc5192d4bf562161df66ea547ed3e67173100656ab606ae9797db2b",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/next.config.ts",
+      "sha256": "2a88a2a012578f0eaebc8a47dbd2af21a2ce7ce62bd407a87c856fbc95fc501a",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/package.json",
+      "sha256": "9e8baed93cf6d3dfa20b3e4506911caa8e25dae630255d430f55629b00638dd9",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/pnpm-lock.yaml",
+      "sha256": "9d4b4f4aaccf3caa0109a7456663d256243f7c6d6ac9030d3a5fc6165dc39529",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/tests/projection.test.ts",
+      "sha256": "9b95cc7170944ea0c849f6376096a1b90f8f634cc4d529b6f3669afbe425e106",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/tsconfig.json",
+      "sha256": "ce7127573ca2d71dacf62160b905c6c10eb0e0b22fec4cd195341aa6335e190c",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/vitest.config.ts",
+      "sha256": "9859ef8a581b38500f388298b3b4a835b7fa36b949017783148b83ca162a0fbf",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
