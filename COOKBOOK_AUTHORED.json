@@ -3,12 +3,97 @@
   "files": [
     {
       "path": "examples/README.md",
-      "sha256": "abfd0ade6b6e84668e9494697741d1654a4b1b22655e4538fe90c091e33aeb53",
+      "sha256": "d4b80442ca66ab0f2c3a4d9666ff6b16bdfeed6aa4396ee76ebef5f3253ea63c",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "examples/go/hackernews/.env.example",
       "sha256": "f2397eaef401700a0baed905b587b31320715da4655b6edb876906f476d1e351",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/.env.example",
+      "sha256": "f2397eaef401700a0baed905b587b31320715da4655b6edb876906f476d1e351",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/.gitignore",
+      "sha256": "0b072d91aed27d79bc4bab1be49b4ea25fab96d836f6332e293ab94a3e24e250",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/README.md",
+      "sha256": "4fe13ee683a2ecf0fb3788ae866b0b7ebfa249272f749e59a2ebceba74135a7e",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/browser_helpers.py",
+      "sha256": "37172d6a555fba94e1a55d8a7201d328db4e1783a714c4f1de102e2782d55349",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/field-guide.md",
+      "sha256": "e7686a7759832eb3cdb5d00ee98e63b01abef9c9af016c81aa774e601fbaac64",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/main.py",
+      "sha256": "44b417ce89d7ea6b5389223e978993e12ee670724292d7d8aa380dafb3330147",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/matching.py",
+      "sha256": "f5f6e6f97ad04392f98d49d5d9a8d97aefda5fb5bec322c491d5ee45f344f157",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/models.py",
+      "sha256": "11ffcf43336c1375a0174d4c59ea9b32aa201cdb5a006a5ce06fc5a62effe945",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/pyproject.toml",
+      "sha256": "cdc35827ba7321208c75416eb14a15d91f643b4bc3574fb49f46a1a39ca16209",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/registries/__init__.py",
+      "sha256": "595df91a32257a9a63d01bf3ac6edef3b4bf488017df60e6ae2de3eb50cc4df9",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/registries/colorado.py",
+      "sha256": "3f78e147bfa6675781ecfa0891c2a00c6471e2fb928073f91b1c2f41c2ffb40f",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/registries/ohio.py",
+      "sha256": "b6c2a5ca322b28e4405f3bfeb2d5d8a14b767d725c8a74a7237e62183a248aac",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/registries/wyoming.py",
+      "sha256": "42af3f9553061a0253872bdd9fa6a32c3a98be811cf78c48c64f4a0148c9c700",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/runtime.py",
+      "sha256": "f09d189546ef7a550e2ac974bc5e07fab1796ab03b5fd82009622e0ae2927d3f",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/sample-input.jsonl",
+      "sha256": "5a85ebb00f891c1d0bbe721abb35173a22a94c2d7f7145bfd88a12893a850029",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/tests/test_recipe.py",
+      "sha256": "47abced7a30954f319406fe57ad40b93a6a23b60314a75d46f19922c43b536d3",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/python/agentic-kyb/uv.lock",
+      "sha256": "a797e4abd22d0d1f9fd3456575059c268f7b9dbf5adf49294db43540d0634276",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {

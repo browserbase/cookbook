@@ -7,6 +7,7 @@ Open a recipe guide for its working directory, commands, environment references,
 | Recipe | Language | Type | Status | Collection |
 | --- | --- | --- | --- | --- |
 | [Hackernews (Go)](../recipes/examples-go-hackernews.md) | go | runnable example | current / public | examples |
+| [Agentic KYB registry research (Python, Stagehand v4)](../recipes/examples-python-agentic-kyb.md) | python | runnable example | current / public | examples |
 | [Amazon product scraping (Python)](../recipes/examples-python-amazon-product-scraping.md) | python | runnable example | current / public | examples |
 | [Anthropic Claude browser agent (Python)](../recipes/examples-python-anthropic-cua.md) | python | runnable example | current / public | examples |
 | [Browserbase reducto (Python)](../recipes/examples-python-browserbase-reducto.md) | python | runnable example | current / public | examples |

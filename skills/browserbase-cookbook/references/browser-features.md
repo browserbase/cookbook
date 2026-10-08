@@ -4,10 +4,11 @@ Configure proxies, CAPTCHA handling, extensions, metadata, and caching.
 
 Paths below are relative to a local cookbook root, not to the installed skill directory. Locate the checkout first. Read the selected guide and source before adapting code. Historical source links identify the imported revision; they predate cookbook migrations and are not runnable fallbacks.
 
-This topic contains all 31 matching entries. Browse `docs/topics/browser-features.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
+This topic contains all 32 matching entries. Browse `docs/topics/browser-features.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
 
 | Recipe | Language | Local guide | Status | Historical source |
 | --- | --- | --- | --- | --- |
+| Agentic KYB registry research (Python, Stagehand v4) | python | `docs/recipes/examples-python-agentic-kyb.md` | current | cookbook-authored |
 | Amazon global price comparison (Python) | python | `docs/recipes/examples-python-amazon-global-price-comparison.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python/amazon-global-price-comparison) |
 | Basic caching (Python) | python | `docs/recipes/examples-python-basic-caching.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python/basic-caching) |
 | Basic CAPTCHA (Python) | python | `docs/recipes/examples-python-basic-captcha.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python) |

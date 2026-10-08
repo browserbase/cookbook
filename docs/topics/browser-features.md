@@ -6,6 +6,7 @@ Open a recipe guide for its working directory, commands, environment references,
 
 | Recipe | Language | Type | Status | Collection |
 | --- | --- | --- | --- | --- |
+| [Agentic KYB registry research (Python, Stagehand v4)](../recipes/examples-python-agentic-kyb.md) | python | runnable example | current / public | examples |
 | [Amazon global price comparison (Python)](../recipes/examples-python-amazon-global-price-comparison.md) | python | runnable example | current / public | examples |
 | [Basic caching (Python)](../recipes/examples-python-basic-caching.md) | python | runnable example | current / public | examples |
 | [Basic CAPTCHA (Python)](../recipes/examples-python-basic-captcha.md) | python | runnable example | current / public | examples |
