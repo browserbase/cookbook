@@ -50,14 +50,6 @@
       "run_commands": [
         "uv run python main.py --live --input sample-input.jsonl --concurrency 1 --output runs/first-batch"
       ],
-      "setup_commands": [
-        "uv sync --frozen"
-      ],
-      "source": {
-        "kind": "cookbook-authored",
-        "path": "examples/python/agentic-kyb"
-      },
-      "summary": "Research exact official business records with Stagehand v4, isolated Browserbase sessions, bounded batches, and evidence-backed partial outcomes",
       "search_aliases": [
         "KYB",
         "business verification",
@@ -66,6 +58,14 @@
         "Ohio",
         "Wyoming"
       ],
+      "setup_commands": [
+        "uv sync --frozen"
+      ],
+      "source": {
+        "kind": "cookbook-authored",
+        "path": "examples/python/agentic-kyb"
+      },
+      "summary": "Research exact official business records with Stagehand v4, isolated Browserbase sessions, bounded batches, and evidence-backed partial outcomes",
       "tags": [
         "stagehand-v4",
         "registry-research",
@@ -82,44 +82,44 @@
       "verification": "live-tested",
       "verification_evidence": [
         {
-          "kind": "install-verified",
-          "date": "2026-10-07",
-          "runtime": "Python 3.11.14; uv frozen lock; stagehand 4.1.0; pydantic 2.13.5",
           "command": "uv sync --frozen --python 3.11",
+          "date": "2026-10-07",
+          "kind": "install-verified",
+          "limits": "Independent disposable package directory; no browser session. All 36 synthetic tests also passed using the independent environment.",
           "result": "passed",
-          "limits": "Independent disposable package directory; no browser session. All 36 synthetic tests also passed using the independent environment."
+          "runtime": "Python 3.11.14; uv frozen lock; stagehand 4.1.0; pydantic 2.13.5"
         },
         {
-          "kind": "typechecked",
-          "date": "2026-10-07",
-          "runtime": "Python 3.13.12; mypy 1.20.2; stagehand 4.1.0",
           "command": "uv run mypy .",
+          "date": "2026-10-07",
+          "kind": "typechecked",
+          "limits": "Static signatures and application contracts only.",
           "result": "passed",
-          "limits": "Static signatures and application contracts only."
+          "runtime": "Python 3.13.12; mypy 1.20.2; stagehand 4.1.0"
         },
         {
-          "kind": "offline-tested",
-          "date": "2026-10-07",
-          "runtime": "Python 3.13.12 and independent Python 3.11.14; stagehand 4.1.0; synthetic fixtures",
           "command": "uv run python -m unittest discover -s tests -v",
+          "date": "2026-10-07",
+          "kind": "offline-tested",
+          "limits": "36 synthetic matching, proof, wait, challenge, retry, concurrency, deadline, and cleanup checks. No live websites.",
           "result": "passed",
-          "limits": "36 synthetic matching, proof, wait, challenge, retry, concurrency, deadline, and cleanup checks. No live websites."
+          "runtime": "Python 3.13.12 and independent Python 3.11.14; stagehand 4.1.0; synthetic fixtures"
         },
         {
-          "kind": "live-tested",
-          "date": "2026-10-07",
-          "runtime": "Python 3.13.12; stagehand 4.1.0; Browserbase",
           "command": "uv run python main.py --live --input sample-input.jsonl --concurrency 2 --output runs/review-concurrent",
+          "date": "2026-10-07",
+          "kind": "live-tested",
+          "limits": "Earlier diagnostic suite: nine jobs, 11 sessions; Colorado passed while Ohio and Wyoming failed. Led to readiness, credential-mode, and parsing corrections. Code changed during that suite. Public command substitutes only the private output directory; exact invocations and raw evidence remain private.",
           "result": "failed",
-          "limits": "Earlier diagnostic suite: nine jobs, 11 sessions; Colorado passed while Ohio and Wyoming failed. Led to readiness, credential-mode, and parsing corrections. Code changed during that suite. Public command substitutes only the private output directory; exact invocations and raw evidence remain private."
+          "runtime": "Python 3.13.12; stagehand 4.1.0; Browserbase"
         },
         {
-          "kind": "live-tested",
-          "date": "2026-10-07",
-          "runtime": "Python 3.13.12; stagehand 4.1.0; pydantic 2.13.5; Browserbase hosted Chromium",
           "command": "uv run python main.py --live --input sample-input.jsonl --concurrency 2 --output runs/acceptance-concurrent",
+          "date": "2026-10-07",
+          "kind": "live-tested",
+          "limits": "Final suite: nine successful fresh jobs on three public records (individual, sequential, concurrency-2), nine sessions, no retries. Batch maxima 1 and 2; elapsed 30.250s and 18.938s. All fields checked against official evidence. No large-scale, reliability, CAPTCHA-recovery, or policy-decision claim. Public command substitutes only the private output directory; exact invocations and raw evidence remain private.",
           "result": "passed",
-          "limits": "Final suite: nine successful fresh jobs on three public records (individual, sequential, concurrency-2), nine sessions, no retries. Batch maxima 1 and 2; elapsed 30.250s and 18.938s. All fields checked against official evidence. No large-scale, reliability, CAPTCHA-recovery, or policy-decision claim. Public command substitutes only the private output directory; exact invocations and raw evidence remain private."
+          "runtime": "Python 3.13.12; stagehand 4.1.0; pydantic 2.13.5; Browserbase hosted Chromium"
         }
       ],
       "working_directory": "examples/python/agentic-kyb"
@@ -207,6 +207,17 @@
           "secret": true,
           "setup_url": null,
           "validation": "Use a random value with at least 32 characters"
+        },
+        {
+          "default": "true",
+          "name": "BROWSIE_LOG_SESSION",
+          "provider": "Browserbase",
+          "purpose": "Controls hosted network recording. Disable for server-side credential integrations.",
+          "requirement": "optional",
+          "safe_example": "false",
+          "secret": false,
+          "setup_url": null,
+          "validation": "Set false before starting credential-bearing sessions."
         }
       ],
       "frameworks": [
@@ -260,12 +271,12 @@
       "verification": "offline-tested",
       "verification_evidence": [
         {
-          "command": "pnpm test && pnpm typecheck && pnpm build && pnpm test:linq-local",
-          "date": "2026-09-30",
+          "command": "pnpm install --frozen-lockfile && pnpm build:library && pnpm test && pnpm typecheck && pnpm lint && pnpm build",
+          "date": "2026-10-08",
           "kind": "offline-tested",
-          "limits": "84 unit tests passed and 7 credential-dependent live tests skipped; no live Browserbase, model, Linq, or 1Password call was made.",
+          "limits": "93 tests passed; 7 opt-in live tests skipped. Shared-library build, type checking, strict lint, and app compilation passed. A separate Bell consumer also compiled successfully. Live Linq, 1Password, and Context login were not exercised.",
           "result": "passed",
-          "runtime": "Node.js 25.9.0 with pnpm 10.33.0 on macOS arm64; package target is Node.js 24.x"
+          "runtime": "Node.js 24.15.0; pnpm 10.33.4; Linux x64; Eve 0.47.6; Stagehand 4.0.2"
         }
       ],
       "working_directory": "projects/browsie"
@@ -3631,7 +3642,7 @@
         "path": "python/website-link-tester",
         "repository": "https://github.com/browserbase/templates"
       },
-      "summary": "Crawl a website’s homepage, collect all links, and verify that each link loads successfully and matches its link text.",
+      "summary": "Crawl a website\u2019s homepage, collect all links, and verify that each link loads successfully and matches its link text.",
       "tags": [],
       "title": "Website link tester (Python)",
       "topics": [
@@ -4572,9 +4583,9 @@
       "dependencies": {
         "@browserbasehq/sdk": "2.19.1",
         "@browserbasehq/stagehand": "4.0.2",
+        "adm-zip": "0.6.1",
         "dotenv": "^16.4.5",
-        "zod": "4.4.3",
-        "adm-zip": "0.6.1"
+        "zod": "4.4.3"
       },
       "entrypoints": [
         "examples/typescript/download-financial-statements/index.ts"
@@ -6714,7 +6725,7 @@
         "path": "typescript/website-link-tester",
         "repository": "https://github.com/browserbase/templates"
       },
-      "summary": "Crawl a website’s homepage, collect all links, and verify that each link loads successfully and matches its link text.",
+      "summary": "Crawl a website\u2019s homepage, collect all links, and verify that each link loads successfully and matches its link text.",
       "tags": [],
       "title": "Website link tester (TypeScript)",
       "topics": [
@@ -6781,7 +6792,7 @@
       },
       "summary": "Reddit Search Agent with Browserbase and Agent Kit",
       "tags": [],
-      "title": "AgentKit · Browserbase",
+      "title": "AgentKit \u00b7 Browserbase",
       "topics": [
         "extraction-and-research",
         "agents-and-human-handoff",
@@ -6849,7 +6860,7 @@
       },
       "summary": "Simple Search Agent with AgentKit and Stagehand",
       "tags": [],
-      "title": "AgentKit · Stagehand",
+      "title": "AgentKit \u00b7 Stagehand",
       "topics": [
         "extraction-and-research",
         "agents-and-human-handoff",
@@ -7062,7 +7073,7 @@
       },
       "summary": "Authenticated PG&E Bill Intake with Browserbase + Box AI",
       "tags": [],
-      "title": "Box · agent",
+      "title": "Box \u00b7 agent",
       "topics": [
         "authentication",
         "downloads-and-documents",
@@ -7215,7 +7226,7 @@
       },
       "summary": "Browserbase + Box AI Compliance Intake",
       "tags": [],
-      "title": "Box · Stagehand",
+      "title": "Box \u00b7 Stagehand",
       "topics": [
         "downloads-and-documents",
         "integrations-and-orchestration"
@@ -7455,20 +7466,20 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "crewai": "1.15.20",
-        "html2text": ">=2024.2.26",
-        "playwright": "1.62.0",
-        "python-dotenv": ">=1.2.2,<2",
-        "cryptography": ">=50.0.0",
         "aiohttp": ">=3.14.3",
-        "pyasn1": ">=0.6.4",
-        "starlette": ">=1.3.1",
-        "pyarrow": ">=23.0.1",
+        "crewai": "1.15.20",
+        "cryptography": ">=50.0.0",
+        "filelock": ">=3.20.3",
+        "html2text": ">=2024.2.26",
         "idna": ">=3.15",
-        "urllib3": ">=2.7.0",
-        "requests": ">=2.33.0",
         "orjson": ">=3.11.6",
-        "filelock": ">=3.20.3"
+        "playwright": "1.62.0",
+        "pyarrow": ">=23.0.1",
+        "pyasn1": ">=0.6.4",
+        "python-dotenv": ">=1.2.2,<2",
+        "requests": ">=2.33.0",
+        "starlette": ">=1.3.1",
+        "urllib3": ">=2.7.0"
       },
       "entrypoints": [
         "integrations/examples/integrations/crewai/crewai-tutorial/main.py"
@@ -7512,7 +7523,7 @@
       },
       "summary": "Tutorial: build a Flight Booking Crew",
       "tags": [],
-      "title": "CrewAI · CrewAI tutorial",
+      "title": "CrewAI \u00b7 CrewAI tutorial",
       "topics": [
         "forms-and-transactions",
         "integrations-and-orchestration",
@@ -7562,7 +7573,7 @@
       },
       "summary": "Quickstart",
       "tags": [],
-      "title": "CrewAI · quickstart",
+      "title": "CrewAI \u00b7 quickstart",
       "topics": [
         "getting-started",
         "integrations-and-orchestration"
@@ -7635,7 +7646,7 @@
       },
       "summary": "CrewAI Integration",
       "tags": [],
-      "title": "CrewAI · Stagehand",
+      "title": "CrewAI \u00b7 Stagehand",
       "topics": [
         "integrations-and-orchestration"
       ],
@@ -7695,7 +7706,7 @@
       },
       "summary": "Langchain Integration",
       "tags": [],
-      "title": "LangChain · Browserbase",
+      "title": "LangChain \u00b7 Browserbase",
       "topics": [
         "integrations-and-orchestration"
       ],
@@ -7824,7 +7835,7 @@
       },
       "summary": "LangChain Deep Agents + Browserbase (Python)",
       "tags": [],
-      "title": "LangChain · deepagents Browserbase",
+      "title": "LangChain \u00b7 deepagents Browserbase",
       "topics": [
         "agents-and-human-handoff",
         "integrations-and-orchestration"
@@ -7874,7 +7885,7 @@
       },
       "summary": "Langchain JS",
       "tags": [],
-      "title": "LangChain · Stagehand",
+      "title": "LangChain \u00b7 Stagehand",
       "topics": [
         "integrations-and-orchestration"
       ],
@@ -8031,7 +8042,7 @@
       },
       "summary": "Stagehand MongoDB Scraper (Python)",
       "tags": [],
-      "title": "MongoDB · Python",
+      "title": "MongoDB \u00b7 Python",
       "topics": [
         "integrations-and-orchestration"
       ],
@@ -8121,7 +8132,7 @@
       },
       "summary": "Stagehand MongoDB Scraper",
       "tags": [],
-      "title": "MongoDB · TypeScript",
+      "title": "MongoDB \u00b7 TypeScript",
       "topics": [
         "integrations-and-orchestration"
       ],
@@ -8289,7 +8300,7 @@
       },
       "summary": "Confirm an owned $10 USD checkout in the browser, then verify a Stripe Issuing sandbox authorization.",
       "tags": [],
-      "title": "Stripe · node",
+      "title": "Stripe \u00b7 node",
       "topics": [
         "agents-and-human-handoff",
         "integrations-and-orchestration"
@@ -8452,7 +8463,7 @@
       },
       "summary": "Confirm an owned $10 USD checkout in the browser, then verify a Stripe Issuing sandbox authorization.",
       "tags": [],
-      "title": "Stripe · Python",
+      "title": "Stripe \u00b7 Python",
       "topics": [
         "agents-and-human-handoff",
         "integrations-and-orchestration"
@@ -8606,7 +8617,7 @@
       },
       "summary": "Confirm an owned $10 USD checkout in the browser, then verify a Stripe Issuing sandbox authorization.",
       "tags": [],
-      "title": "Stripe · Stagehand",
+      "title": "Stripe \u00b7 Stagehand",
       "topics": [
         "integrations-and-orchestration"
       ],
@@ -8754,6 +8765,7 @@
       "dependencies": {
         "@aws-sdk/client-s3": "3.1127.0",
         "@react-email/components": "1.0.12",
+        "@react-email/render": "2.1.0",
         "@react-pdf/renderer": "4.9.0",
         "@trigger.dev/sdk": "4.6.3",
         "next": "16.3.4",
@@ -8763,8 +8775,7 @@
         "react": "19.2.4",
         "react-dom": "19.2.4",
         "react-email": "^4.0.16",
-        "resend": "6.26.0",
-        "@react-email/render": "2.1.0"
+        "resend": "6.26.0"
       },
       "entrypoints": [
         "integrations/examples/integrations/trigger/src/trigger/puppeteer-scrape-with-proxy.tsx",
@@ -8986,7 +8997,7 @@
       },
       "summary": "BrowseGPT",
       "tags": [],
-      "title": "Vercel · browse gpt",
+      "title": "Vercel \u00b7 browse gpt",
       "topics": [
         "integrations-and-orchestration"
       ],
@@ -9070,7 +9081,7 @@
       },
       "summary": "Example Eve browser agent",
       "tags": [],
-      "title": "Vercel · Eve example",
+      "title": "Vercel \u00b7 Eve example",
       "topics": [
         "agents-and-human-handoff",
         "integrations-and-orchestration"
@@ -9091,8 +9102,8 @@
         "@browserbasehq/stagehand": "4.0.2",
         "next": "16.3.4",
         "node-html-markdown": "^1.3.0",
-        "prettier": "3.9.6",
         "playwright-core": "1.63.0",
+        "prettier": "3.9.6",
         "puppeteer-core": "25.10.0",
         "react": "19.2.4",
         "react-dom": "19.2.4",
@@ -9146,7 +9157,7 @@
       },
       "summary": "Export page content in Next.js and fill synthetic form inputs with verified DOM field mapping.",
       "tags": [],
-      "title": "Vercel · vercel Puppeteer",
+      "title": "Vercel \u00b7 vercel Puppeteer",
       "topics": [
         "integrations-and-orchestration"
       ],

@@ -13,12 +13,13 @@
     "build": "pnpm run build:eve && next build",
     "start": "next start -p 4318",
     "eve:check": "eve info --json",
-    "lint": "eslint .",
+    "lint": "eslint . --max-warnings=0",
     "lint:fix": "eslint . --fix",
     "test": "vitest run",
     "test:linq-local": "node scripts/linq-local.mjs --self-test",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "build:eve": "eve build --skip-sandbox-prewarm"
+    "build:eve": "eve build --skip-sandbox-prewarm",
+    "build:library": "node scripts/build-library.mjs"
   },
   "dependencies": {
     "@1password/sdk": "0.5.0",
@@ -35,13 +36,50 @@
     "zod": "^4.4.0"
   },
   "devDependencies": {
+    "@testing-library/react": "16.3.3",
     "@types/node": "^24.0.0",
     "@types/react": "^19.0.0",
     "@types/react-dom": "^19.0.0",
     "eslint": "^9.39.0",
     "eslint-config-next": "16.3.8",
+    "jsdom": "30.1.2",
     "microsandbox": "^0.5.10",
     "typescript": "6.0.3",
-    "vitest": "^4.0.0"
-  }
+    "vitest": "^4.0.0",
+    "esbuild": "0.28.2"
+  },
+  "exports": {
+    "./runtime": {
+      "types": "./agent/lib/browser-runtime.ts",
+      "default": "./dist/shared/runtime.js"
+    },
+    "./tools/*": {
+      "types": "./agent/tools/*.ts",
+      "default": "./dist/shared/tools/*.js"
+    },
+    "./hooks/*": {
+      "types": "./agent/hooks/*.ts",
+      "default": "./dist/shared/hooks/*.js"
+    },
+    "./channels/linq": {
+      "types": "./agent/channels/linq.ts",
+      "default": "./dist/shared/channels/linq.js"
+    },
+    "./handoff": {
+      "types": "./app/handoff/[token]/route.ts",
+      "default": "./dist/shared/handoff.js"
+    },
+    "./handoff/live": {
+      "types": "./app/handoff/[token]/live/route.ts",
+      "default": "./dist/shared/handoff-live.js"
+    }
+  },
+  "files": [
+    "agent",
+    "server",
+    "src",
+    "app/handoff",
+    "LICENSE",
+    "dist/shared"
+  ]
 }

@@ -9,7 +9,7 @@ import {
   ShieldCheck,
   Trash2,
 } from "lucide-react";
-import { FormEvent, useCallback, useEffect, useMemo, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import {
   isBrowserbaseDisconnectMessage,
@@ -28,6 +28,8 @@ export default function ContextStudio({ configured }: { configured: boolean }) {
   const [busy, setBusy] = useState<string>();
   const [startUrl, setStartUrl] = useState("");
   const [error, setError] = useState<string>();
+  const liveViewFrame = useRef<HTMLIFrameElement>(null);
+  const sessionId = session?.sessionId;
 
   const request = useCallback(
     async (url: string, init: RequestInit = {}) => {
@@ -70,6 +72,19 @@ export default function ContextStudio({ configured }: { configured: boolean }) {
       setLiveUrl(safe);
     },
     [request],
+  );
+
+  const updateSession = useCallback(
+    async (action: "finish" | "disconnected" | "reconnected") => {
+      if (!sessionId) return;
+      const response = await request("/api/context-sessions", {
+        method: "PATCH",
+        body: JSON.stringify({ sessionId, action }),
+      });
+      const body = (await response.json()) as { session: ContextSessionView };
+      setSession((current) => (current?.sessionId === sessionId ? body.session : current));
+    },
+    [request, sessionId],
   );
 
   useEffect(() => {
@@ -121,15 +136,21 @@ export default function ContextStudio({ configured }: { configured: boolean }) {
   }, [loadContexts, request, session]);
 
   useEffect(() => {
-    if (!session) return;
+    if (!sessionId || !liveUrl) return;
+    const origin = new URL(liveUrl).origin;
     const onMessage = (event: MessageEvent) => {
-      if (!isBrowserbaseDisconnectMessage(event.data)) return;
+      if (
+        event.source !== liveViewFrame.current?.contentWindow ||
+        event.origin !== origin ||
+        !isBrowserbaseDisconnectMessage(event.data)
+      )
+        return;
       setLiveUrl(undefined);
-      void updateSession("disconnected");
+      void updateSession("disconnected").catch((cause: unknown) => setError(message(cause)));
     };
     window.addEventListener("message", onMessage);
     return () => window.removeEventListener("message", onMessage);
-  }, [session?.sessionId]);
+  }, [liveUrl, sessionId, updateSession]);
 
   async function createContext(event: FormEvent) {
     event.preventDefault();
@@ -179,16 +200,6 @@ export default function ContextStudio({ configured }: { configured: boolean }) {
       await loadLiveView(body.session.sessionId);
       await loadContexts();
     });
-  }
-
-  async function updateSession(action: "finish" | "disconnected" | "reconnected") {
-    if (!session) return;
-    const response = await request("/api/context-sessions", {
-      method: "PATCH",
-      body: JSON.stringify({ sessionId: session.sessionId, action }),
-    });
-    const body = (await response.json()) as { session: ContextSessionView };
-    setSession(body.session);
   }
 
   async function reconnect() {
@@ -366,6 +377,7 @@ export default function ContextStudio({ configured }: { configured: boolean }) {
         {liveUrl && sessionOpen ? (
           <div className="context-live-view">
             <iframe
+              ref={liveViewFrame}
               key={liveUrl}
               src={liveUrl}
               title="Interactive Browserbase login"
