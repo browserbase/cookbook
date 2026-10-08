@@ -6,6 +6,7 @@ Open a recipe guide for its working directory, commands, environment references,
 
 | Recipe | Language | Type | Status | Collection |
 | --- | --- | --- | --- | --- |
+| [Agentic KYB registry research (Python, Stagehand v4)](../recipes/examples-python-agentic-kyb.md) | python | runnable example | current / public | examples |
 | [Business lookup (Python)](../recipes/examples-python-business-lookup.md) | python | runnable example | current / public | examples |
 | [Council events (Python)](../recipes/examples-python-council-events.md) | python | runnable example | current / public | examples |
 | [License verification (Python)](../recipes/examples-python-license-verification.md) | python | runnable example | current / public | examples |

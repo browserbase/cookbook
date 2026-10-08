@@ -8,21 +8,22 @@ Search locally with `python3 scripts/catalog.py search "persistent login" --lang
 
 - [Getting started](topics/getting-started.md) (10). Create your first cloud browser and choose a browser SDK.
 - [Authentication and saved sessions](topics/authentication.md) (24). Reuse authenticated contexts, handle MFA, and connect login workflows.
-- [Browser configuration](topics/browser-features.md) (31). Configure proxies, CAPTCHA handling, extensions, metadata, and caching.
+- [Browser configuration](topics/browser-features.md) (32). Configure proxies, CAPTCHA handling, extensions, metadata, and caching.
 - [Files and documents](topics/downloads-and-documents.md) (21). Upload files, retrieve downloads, capture PDFs, and parse documents.
-- [Extraction and research](topics/extraction-and-research.md) (53). Find pages and extract structured information from them.
+- [Extraction and research](topics/extraction-and-research.md) (54). Find pages and extract structured information from them.
 - [Forms and transactions](topics/forms-and-transactions.md) (28). Fill forms and prepare application, booking, and payment workflows.
 - [Agents and human handoff](topics/agents-and-human-handoff.md) (27). Build browser agents and pause work for human input.
 - [Integrations and orchestration](topics/integrations-and-orchestration.md) (32). Connect Browserbase to agent frameworks, services, and workflow engines.
-- [Testing and observability](topics/testing-and-observability.md) (6). Test sites and inspect browser behavior, reliability, and performance.
+- [Testing and observability](topics/testing-and-observability.md) (7). Test sites and inspect browser behavior, reliability, and performance.
 - [Commerce and travel](topics/commerce-and-travel.md) (14). Compare products, research travel, and inspect booking workflows.
-- [Business operations](topics/business-operations.md) (10). Automate research and operations across business domains.
+- [Business operations](topics/business-operations.md) (11). Automate research and operations across business domains.
 
 ## All recipes
 
 | Recipe | Language | Type | Status | Collection |
 | --- | --- | --- | --- | --- |
 | [Hackernews (Go)](recipes/examples-go-hackernews.md) | go | runnable example | current / public | examples |
+| [Agentic KYB registry research (Python, Stagehand v4)](recipes/examples-python-agentic-kyb.md) | python | runnable example | current / public | examples |
 | [Amazon global price comparison (Python)](recipes/examples-python-amazon-global-price-comparison.md) | python | runnable example | current / public | examples |
 | [Amazon product scraping (Python)](recipes/examples-python-amazon-product-scraping.md) | python | runnable example | current / public | examples |
 | [Anthropic Claude browser agent (Python)](recipes/examples-python-anthropic-cua.md) | python | runnable example | current / public | examples |
