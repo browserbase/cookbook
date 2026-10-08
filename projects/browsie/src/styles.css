@@ -679,6 +679,7 @@ a:focus-visible {
 }
 
 .browser-dock .browser-viewport {
+  position: relative;
   min-height: 0;
   flex: 1;
   aspect-ratio: auto;
@@ -1404,7 +1405,6 @@ a:focus-visible {
   gap: 12px;
 }
 
-.context-card,
 .details-card,
 .setting-row {
   display: grid;
@@ -1415,19 +1415,6 @@ a:focus-visible {
   background: rgba(255, 255, 255, 0.72);
 }
 
-.context-card {
-  grid-template-columns: 40px minmax(0, 1fr) auto;
-  align-items: start;
-}
-
-.context-card > div:nth-child(2) > span {
-  color: var(--faint);
-  font: 600 9px var(--mono);
-  letter-spacing: 0.07em;
-  text-transform: uppercase;
-}
-
-.context-card h2,
 .details-title h2 {
   margin: 5px 0 0;
   font-family: Inter, ui-sans-serif, system-ui, sans-serif;
@@ -1435,25 +1422,11 @@ a:focus-visible {
   font-weight: 400;
 }
 
-.context-card p,
 .details-card p {
   margin: 8px 0 0;
   color: var(--muted);
   font-size: 13px;
   line-height: 1.6;
-}
-
-.context-card > strong {
-  padding: 4px 8px;
-  border-radius: 99px;
-  color: var(--muted);
-  background: var(--layer);
-  font-size: 10px;
-}
-
-.context-card > strong.connected {
-  color: #416a22;
-  background: rgba(144, 201, 77, 0.18);
 }
 
 .details-card {
@@ -1753,15 +1726,6 @@ a:focus-visible {
 
   .workspace-heading {
     margin-bottom: 30px;
-  }
-
-  .context-card {
-    grid-template-columns: 40px minmax(0, 1fr);
-  }
-
-  .context-card > strong {
-    grid-column: 2;
-    justify-self: start;
   }
 }
 

@@ -1,5 +1,7 @@
 "use client";
 
+import Image from "next/image";
+
 import { useEveAgent } from "eve/react";
 import {
   Activity,
@@ -492,7 +494,6 @@ export default function App({
           />
         ) : (
           <WorkspacePage
-            activeContext={activeContext}
             activeSkill={activeSkill}
             bootstrap={bootstrap}
             agentSettings={agentSettings}
@@ -931,14 +932,12 @@ function BrowserDockCard({
 }
 
 function WorkspacePage({
-  activeContext,
   activeSkill,
   agentSettings,
   bootstrap,
   onSaveAgentSettings,
   view,
 }: {
-  activeContext: string;
   activeSkill?: string;
   agentSettings: AgentSettings;
   bootstrap: Bootstrap;
@@ -1296,7 +1295,13 @@ function BrowserPanel({
             allow="clipboard-read; clipboard-write"
           />
         ) : browser.screenshotDataUrl ? (
-          <img src={browser.screenshotDataUrl} alt="Current browser page" />
+          <Image
+            src={browser.screenshotDataUrl}
+            alt="Current browser page"
+            fill
+            unoptimized
+            sizes="100vw"
+          />
         ) : (
           <div className="empty-browser">
             <Globe2 size={32} />
@@ -1357,28 +1362,6 @@ function SkillsPanel({ skills, active }: { skills: Bootstrap["skills"]; active?:
         </article>
       ))}
     </div>
-  );
-}
-
-function ContextPanel({ active, configured }: { active?: string; configured?: boolean }) {
-  return (
-    <article className="context-card">
-      <div className="context-icon">
-        <Database size={22} />
-      </div>
-      <div>
-        <span>Browser identity</span>
-        <h2>{active ?? (configured ? "Saved Browserbase Context" : "Fresh session")}</h2>
-        <p>
-          {configured
-            ? "Cookies and site state can persist between Browserbase sessions."
-            : "No saved Context is set. Each new browser starts clean."}
-        </p>
-      </div>
-      <strong className={configured ? "connected" : ""}>
-        {configured ? "Connected" : "Fresh"}
-      </strong>
-    </article>
   );
 }
 
