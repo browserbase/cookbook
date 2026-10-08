@@ -31,6 +31,7 @@ All entries below were inspected at their pinned source revision. Live website b
 | Recipe | Language | Type | Status | Collection |
 | --- | --- | --- | --- | --- |
 | [Hackernews (Go)](../docs/recipes/examples-go-hackernews.md) | go | runnable example | current / public | examples |
+| [Agentic KYB registry research (Python, Stagehand v4)](../docs/recipes/examples-python-agentic-kyb.md) | python | runnable example | current / public | examples |
 | [Amazon global price comparison (Python)](../docs/recipes/examples-python-amazon-global-price-comparison.md) | python | runnable example | current / public | examples |
 | [Amazon product scraping (Python)](../docs/recipes/examples-python-amazon-product-scraping.md) | python | runnable example | current / public | examples |
 | [Anthropic Claude browser agent (Python)](../docs/recipes/examples-python-anthropic-cua.md) | python | runnable example | current / public | examples |

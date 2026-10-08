@@ -3,6 +3,130 @@
     {
       "access": "public",
       "caveats": [
+        "Registry research only; does not issue a KYB approval or risk-policy verdict.",
+        "Fresh acceptance checks extracted one public record per adapter three times; this does not establish general registry coverage or live recovery guarantees.",
+        "Small-batch diagnostic measurements do not establish production throughput or reliability. Protect runtime evidence and obtain site authorization."
+      ],
+      "collection": "examples",
+      "dependencies": [
+        "pydantic>=2.12,<3",
+        "python-dotenv>=1.2,<2",
+        "stagehand==4.1.0"
+      ],
+      "entrypoints": [
+        "examples/python/agentic-kyb/main.py"
+      ],
+      "environment_setup_command": "test -f .env || cp .env.example .env",
+      "environment_template": "examples/python/agentic-kyb/.env.example",
+      "environment_variables": [
+        {
+          "default": null,
+          "name": "BROWSERBASE_API_KEY",
+          "provider": "Browserbase",
+          "purpose": "Authenticates hosted browsers and Model Gateway; no separate model-provider key is needed.",
+          "requirement": "required",
+          "safe_example": "<set-locally>",
+          "secret": true,
+          "setup_url": "https://www.browserbase.com/settings",
+          "validation": "Must be non-empty for explicit live execution"
+        }
+      ],
+      "frameworks": [
+        "Stagehand",
+        "Browserbase SDK",
+        "Pydantic"
+      ],
+      "id": "examples-python-agentic-kyb",
+      "languages": [
+        "python"
+      ],
+      "lifecycle": "current",
+      "manifests": [
+        "examples/python/agentic-kyb/pyproject.toml",
+        "examples/python/agentic-kyb/uv.lock"
+      ],
+      "path": "examples/python/agentic-kyb",
+      "readme": "docs/recipes/examples-python-agentic-kyb.md",
+      "run_commands": [
+        "uv run python main.py --live --input sample-input.jsonl --concurrency 1 --output runs/first-batch"
+      ],
+      "setup_commands": [
+        "uv sync --frozen"
+      ],
+      "source": {
+        "kind": "cookbook-authored",
+        "path": "examples/python/agentic-kyb"
+      },
+      "summary": "Research exact official business records with Stagehand v4, isolated Browserbase sessions, bounded batches, and evidence-backed partial outcomes",
+      "search_aliases": [
+        "KYB",
+        "business verification",
+        "business registry",
+        "Colorado",
+        "Ohio",
+        "Wyoming"
+      ],
+      "tags": [
+        "stagehand-v4",
+        "registry-research",
+        "bounded-batches"
+      ],
+      "title": "Agentic KYB registry research (Python, Stagehand v4)",
+      "topics": [
+        "business-operations",
+        "extraction-and-research",
+        "testing-and-observability",
+        "browser-features"
+      ],
+      "upstream_readme": "examples/python/agentic-kyb/README.md",
+      "verification": "live-tested",
+      "verification_evidence": [
+        {
+          "kind": "install-verified",
+          "date": "2026-10-07",
+          "runtime": "Python 3.11.14; uv frozen lock; stagehand 4.1.0; pydantic 2.13.5",
+          "command": "uv sync --frozen --python 3.11",
+          "result": "passed",
+          "limits": "Independent disposable package directory; no browser session. All 36 synthetic tests also passed using the independent environment."
+        },
+        {
+          "kind": "typechecked",
+          "date": "2026-10-07",
+          "runtime": "Python 3.13.12; mypy 1.20.2; stagehand 4.1.0",
+          "command": "uv run mypy .",
+          "result": "passed",
+          "limits": "Static signatures and application contracts only."
+        },
+        {
+          "kind": "offline-tested",
+          "date": "2026-10-07",
+          "runtime": "Python 3.13.12 and independent Python 3.11.14; stagehand 4.1.0; synthetic fixtures",
+          "command": "uv run python -m unittest discover -s tests -v",
+          "result": "passed",
+          "limits": "36 synthetic matching, proof, wait, challenge, retry, concurrency, deadline, and cleanup checks. No live websites."
+        },
+        {
+          "kind": "live-tested",
+          "date": "2026-10-07",
+          "runtime": "Python 3.13.12; stagehand 4.1.0; Browserbase",
+          "command": "uv run python main.py --live --input sample-input.jsonl --concurrency 2 --output runs/review-concurrent",
+          "result": "failed",
+          "limits": "Earlier diagnostic suite: nine jobs, 11 sessions; Colorado passed while Ohio and Wyoming failed. Led to readiness, credential-mode, and parsing corrections. Code changed during that suite. Public command substitutes only the private output directory; exact invocations and raw evidence remain private."
+        },
+        {
+          "kind": "live-tested",
+          "date": "2026-10-07",
+          "runtime": "Python 3.13.12; stagehand 4.1.0; pydantic 2.13.5; Browserbase hosted Chromium",
+          "command": "uv run python main.py --live --input sample-input.jsonl --concurrency 2 --output runs/acceptance-concurrent",
+          "result": "passed",
+          "limits": "Final suite: nine successful fresh jobs on three public records (individual, sequential, concurrency-2), nine sessions, no retries. Batch maxima 1 and 2; elapsed 30.250s and 18.938s. All fields checked against official evidence. No large-scale, reliability, CAPTCHA-recovery, or policy-decision claim. Public command substitutes only the private output directory; exact invocations and raw evidence remain private."
+        }
+      ],
+      "working_directory": "examples/python/agentic-kyb"
+    },
+    {
+      "access": "public",
+      "caveats": [
         "Local Context metadata and native-vault data use local files and need a durable database for a multi-instance deployment.",
         "Handoff links expire but are not single-use links.",
         "Live integration tests use billable external services and skip without explicit credentials."

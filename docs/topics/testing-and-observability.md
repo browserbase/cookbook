@@ -6,6 +6,7 @@ Open a recipe guide for its working directory, commands, environment references,
 
 | Recipe | Language | Type | Status | Collection |
 | --- | --- | --- | --- | --- |
+| [Agentic KYB registry research (Python, Stagehand v4)](../recipes/examples-python-agentic-kyb.md) | python | runnable example | current / public | examples |
 | [Cerebras docs checker (Python)](../recipes/examples-python-cerebras-docs-checker.md) | python | runnable example | current / public | examples |
 | [Smart fetch scraper (Python)](../recipes/examples-python-smart-fetch-scraper.md) | python | runnable example | current / public | examples |
 | [Website link tester (Python)](../recipes/examples-python-website-link-tester.md) | python | runnable example | current / public | examples |
