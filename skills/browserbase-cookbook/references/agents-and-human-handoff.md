@@ -8,7 +8,7 @@ This topic contains all 28 matching entries. Browse `docs/topics/agents-and-huma
 
 | Recipe | Language | Local guide | Status | Historical source |
 | --- | --- | --- | --- | --- |
-| Live View special pointers (JavaScript) | javascript | `docs/recipes/examples-javascript-live-view-cursor-ui.md` | current | cookbook-authored |
+| Live View agent pointer (JavaScript) | javascript | `docs/recipes/examples-javascript-live-view-cursor-ui.md` | current | cookbook-authored |
 | Anthropic Claude browser agent (Python) | python | `docs/recipes/examples-python-anthropic-cua.md` | current | cookbook-authored |
 | Business lookup (Python) | python | `docs/recipes/examples-python-business-lookup.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python/business-lookup) |
 | Cartesia form filling (Python) | python | `docs/recipes/examples-python-cartesia-form-filling.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python/cartesia-form-filling) |

@@ -1,7 +1,5 @@
 const stage = document.querySelector("#stage");
-const layer = document.querySelector("#input-layer");
 const frame = document.querySelector("#live-frame");
-const human = document.querySelector("#human-cursor");
 const agent = document.querySelector("#agent-cursor");
 const status = document.querySelector("#status");
 const sessionLabel = document.querySelector("#session-id");
@@ -11,14 +9,10 @@ const playwrightButton = document.querySelector("#run-playwright");
 const newButton = document.querySelector("#new-session");
 let viewport = { width: 1280, height: 800 };
 let agentRunning = false;
-let humanInside = false;
 let agentPoint = null;
-let buttons = 0;
-const actionQueue = [];
-let latestMove = null;
-let sending = false;
-let pendingMove = null;
-let moveTimer = null;
+let loadedSessionId = null;
+let lastPointSeq = 0;
+let pollingPointer = false;
 
 function moveCursor(element, x, y) {
   element.style.transform = `translate3d(${x - 2}px,${y - 2}px,0)`;
@@ -32,165 +26,58 @@ function pulse(element) {
   ring.classList.add("pulse");
 }
 
-function screenPoint(event) {
-  const rect = stage.getBoundingClientRect();
-  const localX = Math.max(0, Math.min(rect.width, event.clientX - rect.left));
-  const localY = Math.max(0, Math.min(rect.height, event.clientY - rect.top));
-  return {
-    x: Math.round((localX / rect.width) * viewport.width),
-    y: Math.round((localY / rect.height) * viewport.height),
-    localX,
-    localY,
-  };
-}
-
-async function flushInputs() {
-  if (sending) return;
-  sending = true;
-  try {
-    while (actionQueue.length || latestMove) {
-      const input = actionQueue.length ? actionQueue.shift() : latestMove;
-      if (input === latestMove) latestMove = null;
-      try {
-        const response = await fetch("/api/input", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(input),
-        });
-        if (!response.ok) throw new Error("Browser input failed");
-      } catch (error) {
-        status.textContent = String(error.message ?? error);
-      }
-    }
-  } finally {
-    sending = false;
-  }
-}
-
-function send(input) {
-  if (input.type === "move") latestMove = input;
-  else actionQueue.push(input);
-  void flushInputs();
-}
-
-function flushMove() {
-  moveTimer = null;
-  if (!pendingMove || agentRunning) return;
-  const point = pendingMove;
-  pendingMove = null;
-  void send({ type: "move", x: point.x, y: point.y, buttons });
-}
-
 function showAgentIfNeeded() {
   if (agentRunning && agentPoint) agent.classList.add("visible");
   else agent.classList.remove("visible");
 }
 
-layer.addEventListener("pointerenter", () => {
-  humanInside = true;
-  showAgentIfNeeded();
-});
-layer.addEventListener("pointerleave", () => {
-  humanInside = false;
-  human.classList.remove("visible");
-  showAgentIfNeeded();
-});
-layer.addEventListener("pointermove", (event) => {
-  const point = screenPoint(event);
-  moveCursor(human, point.localX, point.localY);
-  if (agentRunning) return;
-  pendingMove = point;
-  if (!moveTimer) moveTimer = setTimeout(flushMove, 32);
-});
-layer.addEventListener("pointerdown", (event) => {
-  if (event.button !== 0) return;
-  event.preventDefault();
-  layer.focus();
-  layer.setPointerCapture(event.pointerId);
-  const point = screenPoint(event);
-  moveCursor(human, point.localX, point.localY);
-  pulse(human);
-  if (agentRunning) return;
-  buttons = 1;
-  pendingMove = null;
-  latestMove = null;
-  void send({ type: "down", x: point.x, y: point.y });
-});
-layer.addEventListener("pointerup", (event) => {
-  if (event.button !== 0 || agentRunning) return;
-  buttons = 0;
-  const point = screenPoint(event);
-  if (pendingMove || latestMove) {
-    actionQueue.push({ type: "move", x: point.x, y: point.y, buttons: 1 });
-    pendingMove = null;
-    latestMove = null;
-  }
-  void send({ type: "up", x: point.x, y: point.y });
-});
-layer.addEventListener("pointercancel", (event) => {
-  if (buttons && !agentRunning) {
-    const point = screenPoint(event);
-    void send({ type: "up", x: point.x, y: point.y });
-  }
-  buttons = 0;
-});
-layer.addEventListener(
-  "wheel",
-  (event) => {
-    event.preventDefault();
-    if (agentRunning) return;
-    const point = screenPoint(event);
-    void send({
-      type: "wheel",
-      x: point.x,
-      y: point.y,
-      deltaX: event.deltaX,
-      deltaY: event.deltaY,
-    });
-  },
-  { passive: false },
-);
-layer.addEventListener("keydown", (event) => {
-  if (agentRunning || ["Shift", "Control", "Alt", "Meta"].includes(event.key)) {
-    event.preventDefault();
-    return;
-  }
-  const key = event.key;
-  if ((event.metaKey || event.ctrlKey) && key.toLowerCase() === "v") return;
-  if (!event.metaKey && !event.ctrlKey && !event.altKey && key.length === 1) return;
-  event.preventDefault();
-  const mods = [
-    event.ctrlKey && "Control",
-    event.metaKey && "Meta",
-    event.altKey && "Alt",
-    event.shiftKey && "Shift",
-  ].filter(Boolean);
-  void send({ type: "key", key: [...mods, key].join("+") });
-});
-layer.addEventListener("beforeinput", (event) => {
-  event.preventDefault();
-  if (agentRunning || !event.data) return;
-  if (event.inputType === "insertText" || event.inputType === "insertCompositionText") {
-    void send({ type: "text", text: event.data });
-  }
-});
-layer.addEventListener("paste", (event) => {
-  event.preventDefault();
-  if (agentRunning) return;
-  const text = event.clipboardData?.getData("text/plain");
-  if (text) void send({ type: "text", text });
-});
-window.addEventListener("blur", () => human.classList.remove("visible"));
-
 async function loadSession() {
   const response = await fetch("/api/config", { cache: "no-store" });
   const config = await response.json();
   if (!config.liveViewUrl) throw new Error(config.error || "Live View is not ready");
+  if (config.sessionId === loadedSessionId) return;
+  loadedSessionId = config.sessionId;
   viewport = config.viewport;
   sessionLabel.textContent = config.sessionId;
-  frame.src = config.liveViewUrl;
+  loading.classList.remove("hidden");
   frame.onload = () => loading.classList.add("hidden");
+  frame.src = config.liveViewUrl;
   status.textContent = "Live View is ready";
+}
+
+async function pollPointer() {
+  if (pollingPointer || document.visibilityState !== "visible") return;
+  pollingPointer = true;
+  try {
+    const response = await fetch("/api/pointer", { cache: "no-store" });
+    if (!response.ok) return;
+    const snapshot = await response.json();
+    if (snapshot.sessionId && snapshot.sessionId !== loadedSessionId) {
+      void loadSession().catch((error) => {
+        status.textContent = error.message;
+      });
+    }
+    agentRunning = snapshot.running;
+    runButton.disabled = agentRunning;
+    playwrightButton.disabled = agentRunning;
+    if (snapshot.status) status.textContent = snapshot.status;
+    if (snapshot.seq !== lastPointSeq && snapshot.point) {
+      lastPointSeq = snapshot.seq;
+      agentPoint = snapshot.point;
+      moveCursor(
+        agent,
+        (agentPoint.x / viewport.width) * stage.clientWidth,
+        (agentPoint.y / viewport.height) * stage.clientHeight,
+      );
+      if (agentPoint.click) pulse(agent);
+    }
+    if (!agentRunning) agentPoint = null;
+    showAgentIfNeeded();
+  } catch (error) {
+    status.textContent = String(error.message ?? error);
+  } finally {
+    pollingPointer = false;
+  }
 }
 
 async function startDemo(driver) {
@@ -230,7 +117,11 @@ const events = new EventSource("/api/events");
 events.onmessage = ({ data }) => {
   const message = JSON.parse(data);
   if (message.type === "status") status.textContent = message.text;
-  if (message.type === "session") sessionLabel.textContent = message.sessionId;
+  if (message.type === "session" && message.sessionId !== loadedSessionId) {
+    void loadSession().catch((error) => {
+      status.textContent = error.message;
+    });
+  }
   if (message.type === "agent-state") {
     agentRunning = message.running;
     runButton.disabled = agentRunning;
@@ -252,3 +143,11 @@ events.onmessage = ({ data }) => {
 loadSession().catch((error) => {
   status.textContent = error.message;
 });
+setInterval(() => void pollPointer(), 100);
+setInterval(() => {
+  if (document.visibilityState === "visible") {
+    void loadSession().catch((error) => {
+      status.textContent = error.message;
+    });
+  }
+}, 5000);

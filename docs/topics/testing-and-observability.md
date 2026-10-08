@@ -6,7 +6,7 @@ Open a recipe guide for its working directory, commands, environment references,
 
 | Recipe | Language | Type | Status | Collection |
 | --- | --- | --- | --- | --- |
-| [Live View special pointers (JavaScript)](../recipes/examples-javascript-live-view-cursor-ui.md) | javascript | runnable example | current / public | examples |
+| [Live View agent pointer (JavaScript)](../recipes/examples-javascript-live-view-cursor-ui.md) | javascript | runnable example | current / public | examples |
 | [Agentic KYB registry research (Python, Stagehand v4)](../recipes/examples-python-agentic-kyb.md) | python | runnable example | current / public | examples |
 | [Cerebras docs checker (Python)](../recipes/examples-python-cerebras-docs-checker.md) | python | runnable example | current / public | examples |
 | [Smart fetch scraper (Python)](../recipes/examples-python-smart-fetch-scraper.md) | python | runnable example | current / public | examples |

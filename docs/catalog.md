@@ -23,7 +23,7 @@ Search locally with `python3 scripts/catalog.py search "persistent login" --lang
 | Recipe | Language | Type | Status | Collection |
 | --- | --- | --- | --- | --- |
 | [Hackernews (Go)](recipes/examples-go-hackernews.md) | go | runnable example | current / public | examples |
-| [Live View special pointers (JavaScript)](recipes/examples-javascript-live-view-cursor-ui.md) | javascript | runnable example | current / public | examples |
+| [Live View agent pointer (JavaScript)](recipes/examples-javascript-live-view-cursor-ui.md) | javascript | runnable example | current / public | examples |
 | [Agentic KYB registry research (Python, Stagehand v4)](recipes/examples-python-agentic-kyb.md) | python | runnable example | current / public | examples |
 | [Amazon global price comparison (Python)](recipes/examples-python-amazon-global-price-comparison.md) | python | runnable example | current / public | examples |
 | [Amazon product scraping (Python)](recipes/examples-python-amazon-product-scraping.md) | python | runnable example | current / public | examples |

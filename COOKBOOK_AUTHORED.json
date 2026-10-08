@@ -3,7 +3,7 @@
   "files": [
     {
       "path": "examples/README.md",
-      "sha256": "757e05989f94ed1929ff954abd7292c389baa293e9befeda9f73c325bbf92cc2",
+      "sha256": "92f2c66626bc21a74f9641616fdfe8395de6b788fb2d248cf8cf56db55d70405",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -18,7 +18,7 @@
     },
     {
       "path": "examples/javascript/live-view-cursor-ui/README.md",
-      "sha256": "34d0cb596846a3765c2737cabcb6846accca5302463c8aeee43533f665de1efb",
+      "sha256": "71fcc1931cdf76cb93fa874b426b6e6d069fb8b1ea64c31379800830bd84d8b2",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -28,22 +28,22 @@
     },
     {
       "path": "examples/javascript/live-view-cursor-ui/server.mjs",
-      "sha256": "f0d08d27c23d4ad133cfef3882c0c7b9e32f4108ddd422fa5c535fe6007da371",
+      "sha256": "1fc37d1f1247b19adf3db6a9b7a4697c104f51e300302d1878b126b0eaacbf05",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "examples/javascript/live-view-cursor-ui/ui/app.js",
-      "sha256": "8fd52d9966eb6c26cdc4424a4254cd31dfe23e6314a056ce4462bb04a3bde853",
+      "sha256": "4c68b8e8ac26912a809742b83296a56a25e52d48661dc78505a13d7cf11701ab",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "examples/javascript/live-view-cursor-ui/ui/index.html",
-      "sha256": "6286bc862bd28e322555a9522421962778bc94f3c25cf78bdc1e0cdf8a38052c",
+      "sha256": "ce1202bba1719ec1f2665da875bab354b0becfa2c7eb923ebabab5abb110626c",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "examples/javascript/live-view-cursor-ui/ui/styles.css",
-      "sha256": "0fb0c203ef6ef19ea62b59630d5feab754a06788c896a9dd44f91e5d99d91672",
+      "sha256": "999fc836f8b0a64c7e79f9dbd8058c8039740103c7a3edfa4fedb92a64b0e81a",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {

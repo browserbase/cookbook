@@ -8,7 +8,7 @@ This topic contains all 8 matching entries. Browse `docs/topics/testing-and-obse
 
 | Recipe | Language | Local guide | Status | Historical source |
 | --- | --- | --- | --- | --- |
-| Live View special pointers (JavaScript) | javascript | `docs/recipes/examples-javascript-live-view-cursor-ui.md` | current | cookbook-authored |
+| Live View agent pointer (JavaScript) | javascript | `docs/recipes/examples-javascript-live-view-cursor-ui.md` | current | cookbook-authored |
 | Agentic KYB registry research (Python, Stagehand v4) | python | `docs/recipes/examples-python-agentic-kyb.md` | current | cookbook-authored |
 | Cerebras docs checker (Python) | python | `docs/recipes/examples-python-cerebras-docs-checker.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python/cerebras-docs-checker) |
 | Smart fetch scraper (Python) | python | `docs/recipes/examples-python-smart-fetch-scraper.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python/smart-fetch-scraper) |

@@ -228,19 +228,8 @@ p {
   width: 100%;
   height: 100%;
   border: 0;
-  pointer-events: none;
+  pointer-events: auto;
   background: #fff;
-}
-.input-layer {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  cursor: none;
-  touch-action: none;
-  outline: none;
-  caret-color: transparent;
-  color: transparent;
-  user-select: none;
 }
 .loading {
   position: absolute;

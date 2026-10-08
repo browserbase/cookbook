@@ -1,6 +1,6 @@
-# Live View special pointers (JavaScript)
+# Live View agent pointer (JavaScript)
 
-Embed Browserbase Live View in a local page with matching human and agent pointers for Stagehand and Playwright actions.
+Embed Browserbase Live View with a custom agent pointer while human input uses the native Live View.
 
 > [!CAUTION]
 > Demo and reference code only. This recipe is not a vetted production implementation. Independently review it, obtain authorization, and validate security, privacy, compliance, cost, and site-term requirements before use. Use at your own risk.
@@ -73,10 +73,11 @@ Source and setup metadata were inspected. A scoped live workflow check is record
 | Clean install verified | 2026-10-08 | `Node.js 25.9.0 and npm on macOS arm64` | `npm install --ignore-scripts --no-audit --no-fund --package-lock=false` | passed. Installed inside a new recipe directory without a shared dependency tree. This did not run a browser session. |
 | Live workflow tested | 2026-10-08 | `Node.js 25.9.0 on macOS arm64; Browserbase SDK 2.18.0, Stagehand 4.0.2, Playwright Core 1.55.0` | `LIVE_VIEW_UI_PORT=4792 npm start; node /private/tmp/live-view-cursor-smoke.mjs playwright; node /private/tmp/live-view-cursor-smoke.mjs stagehand` | passed. One Browserbase SauceDemo session. Playwright emitted 6 pointer events and 3 clicks; Stagehand emitted 8 pointer events and 4 clicks. Both ended with the backpack in the cart. Human UI input and other browser clients were not retested in this checkout. The session was closed. |
 | Live workflow tested | 2026-10-08 | `Node.js 25.9.0 on macOS arm64; Browserbase SDK 2.18.0 and Stagehand 4.0.2` | `env -u BROWSERBASE_PROJECT_ID LIVE_VIEW_UI_PORT=4793 npm start` | passed. The Browserbase and Stagehand session initialized with no project ID in the environment or launch options and was closed. This check did not rerun the Playwright or Stagehand cart actions. |
+| Live workflow tested | 2026-10-08 | `Node.js 25.9.0 on macOS arm64; Browserbase SDK 2.18.0, Stagehand 4.0.2, Playwright Core 1.55.0` | `LIVE_VIEW_UI_PORT=4804 node server.mjs; node /private/tmp/live-view-independent-test.mjs http://127.0.0.1:4804 cookbook; node /private/tmp/cookbook-agent-only-test.mjs` | passed. Agent-only version: a human click through the iframe showed the SauceDemo username error with no /api/input request. Playwright showed the custom agent pointer and added the backpack to the cart. Stagehand was not rerun for this version. The session was reset after testing. |
 
-- The pointer styling appears in the localhost wrapper, not in a direct Browserbase Live View URL.
-- The sample routes input and pointer events for the main browser tab only; new remote tabs and frames need more routing.
-- The local server gives its signed Live View URL to its own page; keep the server bound to loopback and review access before deployment.
+- The agent pointer styling appears in the wrapper, not in a direct Browserbase Live View URL.
+- The sample tracks agent pointer events in the main browser tab only; new remote tabs and frames need their own pointer listener.
+- The local server gives its signed Live View URL to its own page; protect the page and API routes before deployment.
 
 ## Provenance
 

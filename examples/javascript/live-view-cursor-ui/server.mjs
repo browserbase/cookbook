@@ -20,9 +20,17 @@ const viewport = { width: 1280, height: 800 };
 const clients = new Set();
 let current;
 let agentRunning = false;
-let inputQueue = Promise.resolve();
+let agentPoint = null;
+let agentPointSeq = 0;
+let statusText = "Starting a new Browserbase session";
 
 function emit(message) {
+  if (message.type === "status") statusText = message.text;
+  if (message.type === "agent-pointer") {
+    agentPoint = message;
+    agentPointSeq++;
+  }
+  if (message.type === "agent-state" && !message.running) agentPoint = null;
   const line = `data: ${JSON.stringify(message)}\n\n`;
   for (const client of clients) client.write(line);
 }
@@ -45,6 +53,7 @@ async function closeSession(session) {
 
 async function createSession() {
   agentRunning = false;
+  agentPoint = null;
   emit({ type: "status", text: "Starting a new Browserbase session" });
   const old = current;
   current = undefined;
@@ -69,8 +78,6 @@ async function createSession() {
     playwrightBrowser = await chromium.connectOverCDP(session.connectUrl);
     const context = playwrightBrowser.contexts()[0];
     const page = context.pages()[0] ?? (await context.newPage());
-    const cdp = await context.newCDPSession(page);
-
     await page.exposeFunction("__liveCursorFromPage", (point) => {
       if (agentRunning && current?.id === sessionId) {
         emit({ type: "agent-pointer", x: point.x, y: point.y, click: point.click });
@@ -98,7 +105,6 @@ async function createSession() {
     current = {
       id: sessionId,
       page,
-      cdp,
       stagehand,
       stagehandBrowser,
       playwrightBrowser,
@@ -140,60 +146,6 @@ async function readJson(request) {
     if (raw.length > 32_000) throw new Error("Input is too large");
   }
   return JSON.parse(raw || "{}");
-}
-
-function point(input) {
-  const x = Number(input.x);
-  const y = Number(input.y);
-  if (!Number.isFinite(x) || !Number.isFinite(y)) throw new Error("Invalid pointer position");
-  return {
-    x: Math.max(0, Math.min(viewport.width - 1, x)),
-    y: Math.max(0, Math.min(viewport.height - 1, y)),
-  };
-}
-
-async function dispatchInput(input) {
-  if (!current || agentRunning) return;
-  const { cdp, page } = current;
-  switch (input.type) {
-    case "move":
-      await cdp.send("Input.dispatchMouseEvent", {
-        type: "mouseMoved",
-        ...point(input),
-        button: "none",
-        buttons: input.buttons ? 1 : 0,
-      });
-      break;
-    case "down":
-    case "up":
-      await cdp.send("Input.dispatchMouseEvent", {
-        type: input.type === "down" ? "mousePressed" : "mouseReleased",
-        ...point(input),
-        button: "left",
-        buttons: input.type === "down" ? 1 : 0,
-        clickCount: 1,
-      });
-      break;
-    case "wheel":
-      await cdp.send("Input.dispatchMouseEvent", {
-        type: "mouseWheel",
-        ...point(input),
-        deltaX: Number(input.deltaX) || 0,
-        deltaY: Number(input.deltaY) || 0,
-      });
-      break;
-    case "text":
-      if (typeof input.text !== "string" || input.text.length > 1000)
-        throw new Error("Invalid text");
-      await page.keyboard.insertText(input.text);
-      break;
-    case "key":
-      if (typeof input.key !== "string" || input.key.length > 60) throw new Error("Invalid key");
-      await page.keyboard.press(input.key);
-      break;
-    default:
-      throw new Error("Invalid input type");
-  }
 }
 
 async function runAgent(driver) {
@@ -282,6 +234,15 @@ const server = http.createServer(async (request, response) => {
           : { error: "Session is starting" },
       );
     }
+    if (request.method === "GET" && url.pathname === "/api/pointer") {
+      return sendJson(response, 200, {
+        sessionId: current?.id ?? null,
+        running: agentRunning,
+        point: agentPoint,
+        seq: agentPointSeq,
+        status: statusText,
+      });
+    }
     if (request.method === "GET" && url.pathname === "/api/events") {
       response.writeHead(200, {
         "Content-Type": "text/event-stream",
@@ -290,7 +251,7 @@ const server = http.createServer(async (request, response) => {
       });
       response.write("\n");
       clients.add(response);
-      request.on("close", () => clients.delete(response));
+      response.on("close", () => clients.delete(response));
       return;
     }
     if (request.method === "POST") {
@@ -301,12 +262,6 @@ const server = http.createServer(async (request, response) => {
         origin !== `http://localhost:${port}`
       ) {
         return sendJson(response, 403, { error: "Invalid origin" });
-      }
-      if (url.pathname === "/api/input") {
-        const input = await readJson(request);
-        inputQueue = inputQueue.catch(() => {}).then(() => dispatchInput(input));
-        await inputQueue;
-        return sendJson(response, 200, { ok: true });
       }
       if (url.pathname === "/api/run") {
         if (agentRunning) return sendJson(response, 409, { error: "Agent is running" });

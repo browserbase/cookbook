@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Browserbase Live View · Cursor Lab</title>
+    <title>Browserbase Live View · Agent Pointer</title>
     <link rel="stylesheet" href="/styles.css" />
     <script src="/app.js" defer></script>
   </head>
@@ -16,7 +16,7 @@
           </div>
           <span>browserbase</span>
           <span class="slash">/</span>
-          <span class="product">Live View</span>
+          <span class="product">Live View · Agent Pointer</span>
         </div>
         <div class="top-actions">
           <span class="local-badge"><span class="local-dot"></span> LOCAL VIEWER</span>
@@ -30,8 +30,7 @@
             <div class="eyebrow">INTERACTIVE SESSION</div>
             <h1>Live browser</h1>
             <p>
-              Use your mouse and keyboard here. Run Stagehand or Playwright to see the agent
-              pointer.
+              Use the Live View directly. Run Stagehand or Playwright to see the agent pointer.
             </p>
           </div>
           <div class="demo-actions">
@@ -65,27 +64,7 @@
               title="Browserbase Live View"
               allow="clipboard-read; clipboard-write"
             ></iframe>
-            <div
-              id="input-layer"
-              class="input-layer"
-              tabindex="0"
-              contenteditable="plaintext-only"
-              aria-label="Interactive browser screen"
-            ></div>
             <div id="agent-cursor" class="cursor agent-cursor" aria-hidden="true">
-              <svg width="20" height="21" viewBox="0 0 50 50">
-                <path
-                  d="M5.1 4.8C3.4 4.2 2.1 5.7 2.7 7.7L19.3 43.2C20.7 46.5 24.5 46.4 25.8 43L30.7 30.8C31.1 29.8 31.8 29.1 32.8 28.6L44.2 23.6C47.5 22.2 47.5 18.4 44.1 17.1L5.1 4.8Z"
-                  fill="#080a0f"
-                  stroke="#fff"
-                  stroke-width="3.8"
-                  stroke-linejoin="round"
-                  stroke-linecap="round"
-                />
-              </svg>
-              <span class="click-ring"></span>
-            </div>
-            <div id="human-cursor" class="cursor human-cursor" aria-hidden="true">
               <svg width="20" height="21" viewBox="0 0 50 50">
                 <path
                   d="M5.1 4.8C3.4 4.2 2.1 5.7 2.7 7.7L19.3 43.2C20.7 46.5 24.5 46.4 25.8 43L30.7 30.8C31.1 29.8 31.8 29.1 32.8 28.6L44.2 23.6C47.5 22.2 47.5 18.4 44.1 17.1L5.1 4.8Z"
@@ -104,14 +83,13 @@
               <span class="status-dot"></span
               ><span id="status">Starting a new Browserbase session</span>
             </div>
-            <span class="footer-help">Mouse and keyboard input go to the browser session</span>
+            <span class="footer-help">Human mouse and keyboard input stay in Live View</span>
           </div>
         </div>
         <div class="hint">
           <span class="hint-icon">↗</span
           ><span
-            >This local page draws both pointers. The Browserbase Live View remains inside the
-            frame.</span
+            >This page draws only the agent pointer. Human input stays inside Live View.</span
           >
         </div>
       </section>
