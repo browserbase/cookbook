@@ -33,6 +33,7 @@ This cookbook brings together Browserbase's public templates, complete projects,
 | Extract structured product data with Stagehand        | [Python](examples/python/amazon-product-scraping/) or [TypeScript](examples/typescript/amazon-product-scraping/)                   |
 | Save a login and handle MFA                           | [Authentication recipes](docs/topics/authentication.md)                                                                            |
 | Pause an agent for a person                           | [Human-in-the-loop app](examples/typescript/agent-with-human-in-loop/)                                                             |
+| Style Live View pointers for people and agents        | [JavaScript pointer UI](examples/javascript/live-view-cursor-ui/)                                                                  |
 | Add Browserbase to an agent framework                 | [Integrations](integrations/README.md)                                                                                             |
 | Study a complete consumer browser agent               | [Browsie](projects/browsie/)                                                                                                       |
 

@@ -1,6 +1,6 @@
 # Browserbase examples
 
-Start with a standalone example in Python, TypeScript, or Go. These templates cover Browserbase APIs, browser frameworks, Stagehand agents, authentication, extraction, and research.
+Start with a standalone example in Python, JavaScript, TypeScript, or Go. These templates cover Browserbase APIs, browser frameworks, Stagehand agents, authentication, extraction, and research.
 
 ## Choose a starting point
 
@@ -9,6 +9,7 @@ Start with a standalone example in Python, TypeScript, or Go. These templates co
 - [Saved sessions and MFA](../docs/topics/authentication.md).
 - [Extraction and research](../docs/topics/extraction-and-research.md).
 - [Human-in-the-loop agent app](typescript/agent-with-human-in-loop/).
+- [Live View pointers for people and agents](javascript/live-view-cursor-ui/).
 
 ## Install the selected example
 
@@ -31,6 +32,7 @@ All entries below were inspected at their pinned source revision. Live website b
 | Recipe | Language | Type | Status | Collection |
 | --- | --- | --- | --- | --- |
 | [Hackernews (Go)](../docs/recipes/examples-go-hackernews.md) | go | runnable example | current / public | examples |
+| [Live View special pointers (JavaScript)](../docs/recipes/examples-javascript-live-view-cursor-ui.md) | javascript | runnable example | current / public | examples |
 | [Agentic KYB registry research (Python, Stagehand v4)](../docs/recipes/examples-python-agentic-kyb.md) | python | runnable example | current / public | examples |
 | [Amazon global price comparison (Python)](../docs/recipes/examples-python-amazon-global-price-comparison.md) | python | runnable example | current / public | examples |
 | [Amazon product scraping (Python)](../docs/recipes/examples-python-amazon-product-scraping.md) | python | runnable example | current / public | examples |

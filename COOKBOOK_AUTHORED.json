@@ -3,12 +3,47 @@
   "files": [
     {
       "path": "examples/README.md",
-      "sha256": "d4b80442ca66ab0f2c3a4d9666ff6b16bdfeed6aa4396ee76ebef5f3253ea63c",
+      "sha256": "757e05989f94ed1929ff954abd7292c389baa293e9befeda9f73c325bbf92cc2",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "examples/go/hackernews/.env.example",
       "sha256": "f2397eaef401700a0baed905b587b31320715da4655b6edb876906f476d1e351",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/javascript/live-view-cursor-ui/.env.example",
+      "sha256": "42b43bad0fa9275b332ccc4eb93bd4f05cc674ad8f219e0e410271d32ba32039",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/javascript/live-view-cursor-ui/README.md",
+      "sha256": "4bf38408c44420ab9639be6e99659ee08fff86c49264c91ce449cb698d8fa1f6",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/javascript/live-view-cursor-ui/package.json",
+      "sha256": "2dd68b36eab0409135d534fa1d9b6f2b157450c50f656258c0b4d85fd546b2d7",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/javascript/live-view-cursor-ui/server.mjs",
+      "sha256": "f0d08d27c23d4ad133cfef3882c0c7b9e32f4108ddd422fa5c535fe6007da371",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/javascript/live-view-cursor-ui/ui/app.js",
+      "sha256": "4373ed332643025748a513ec1ec322218dc783fc7ae3a8ae48ebf679655ccc69",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/javascript/live-view-cursor-ui/ui/index.html",
+      "sha256": "6286bc862bd28e322555a9522421962778bc94f3c25cf78bdc1e0cdf8a38052c",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/javascript/live-view-cursor-ui/ui/styles.css",
+      "sha256": "0fb0c203ef6ef19ea62b59630d5feab754a06788c896a9dd44f91e5d99d91672",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
