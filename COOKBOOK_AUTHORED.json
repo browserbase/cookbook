@@ -1058,7 +1058,7 @@
     },
     {
       "path": "projects/bell-stack/.env.example",
-      "sha256": "d5be8020a642245ed7799ab37a83f605add919a9c7214082d7612843a0b485b3",
+      "sha256": "4343c229df0d6870bf1df0bb0c03860d0b1d62b4d02f7874d542d966aa7992b4",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -1073,12 +1073,12 @@
     },
     {
       "path": "projects/bell-stack/README.md",
-      "sha256": "99a409eb963738c6b4f3ba0b6051ae65a7d1d44485165d24ceb281ef7579e9e8",
+      "sha256": "8538133c0119a6933e9b0e01524402a2958d84cf6e8ff2c55ad19f3696b907b5",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "projects/bell-stack/agent/agent.ts",
-      "sha256": "2124af5210b386f5a4786ffaa11f0f1a50d2b2b3b9daae1258f816966b57b666",
+      "sha256": "cf79c2c749687a4a05fa753d1bc75f48cf8475ba81253095e1a443a924f0d7f9",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -1098,7 +1098,7 @@
     },
     {
       "path": "projects/bell-stack/agent/instructions.md",
-      "sha256": "51a147fa72f04e6aabcc53dd63c86c6197b76c9657d08c2762b795adee45f6e3",
+      "sha256": "9dff1d55c5962dd548921ba1bf0dc72d16cf255b34750b219480883c7c9decfe",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -1134,6 +1134,11 @@
     {
       "path": "projects/bell-stack/agent/tools/human_handoff.ts",
       "sha256": "e403aac81eab20682356954e14e00d4c5c16d5ec64ca81759087f07753508789",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/agent/tools/merchant_access.ts",
+      "sha256": "fe1e7c4340bf4a9e3a789f150de9878e5b85cb4290c3bc423b05a2617b7f9fad",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -1238,22 +1243,62 @@
     },
     {
       "path": "projects/bell-stack/next.config.ts",
-      "sha256": "2a88a2a012578f0eaebc8a47dbd2af21a2ce7ce62bd407a87c856fbc95fc501a",
+      "sha256": "d1f53ecd0389433306470c960c288c0db34cabfc1f2077b5476e2631b4f0ccb8",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "projects/bell-stack/package.json",
-      "sha256": "9e8baed93cf6d3dfa20b3e4506911caa8e25dae630255d430f55629b00638dd9",
+      "sha256": "89942d1d7199b11f55f505e6e2575fb824c58a71bec2431a0279ba232145ecbb",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "projects/bell-stack/pnpm-lock.yaml",
-      "sha256": "9d4b4f4aaccf3caa0109a7456663d256243f7c6d6ac9030d3a5fc6165dc39529",
+      "sha256": "62dbc111556721263ef669b0321dd3a8fb2d5a10314fc42ad5057760d858112c",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/scripts/mint-baselayer-credential.mjs",
+      "sha256": "5419b046bb63964d629578649ba814957cc14a9ca67a7b30a1dd40901f3e9780",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/server/baselayer.ts",
+      "sha256": "137e3cdccbb0287bf781f920024850347d984bd26cbc4414d09694ea98cf5fd2",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/server/merchant-access.ts",
+      "sha256": "78bcbc62423a78491ac66a23254bf431db847b39542a981692bbd867ca491156",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/server/merchant-navigation.ts",
+      "sha256": "7c7771baa891348bfa7bef16173ccb9513b8c51f5c4fc26d0b0774db3680f7aa",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/server/verified-merchant.ts",
+      "sha256": "7b4314dbdc0300373aedd81949974e7d3972769668c865fdcc565350f08abc16",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/tests/baselayer.test.ts",
+      "sha256": "4fb43ae09da4729d1a2bbaad6a2696f70d7337c69c774472b40f00ff4e082bc4",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/tests/merchant-access.test.ts",
+      "sha256": "f34d13d4c088ef93a8f5fc91bb69c034ff0f65d2523836f2d21a9a19a1f067a8",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "projects/bell-stack/tests/projection.test.ts",
       "sha256": "9b95cc7170944ea0c849f6376096a1b90f8f634cc4d529b6f3669afbe425e106",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "projects/bell-stack/tests/verified-merchant.test.ts",
+      "sha256": "ffdfa7455dbe275218617d7fcbef2c4ed19d27d5758e8c489f5661cb89cfc4da",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {

@@ -30,6 +30,39 @@ requires the sibling package at install time. It does not call a second deployed
 There is one Eve runtime and one browser per conversation. Do not install a different Eve version
 in either project without testing the shared runtime. The lockfile is generated dependency data.
 
+## Baselayer merchant demo
+
+Set `BASELAYER_API_KEY`, `BASELAYER_PRINCIPAL_REF`, and `BASELAYER_ALLOWED_ORIGINS` in `.env`.
+The principal must be eligible in the same Baselayer sandbox account. Keep
+`BROWSIE_LOG_SESSION=false` before starting a browser so request credentials are not recorded.
+`BELL_DEMO_URL` selects the visible demo target. The allowlist contains exact HTTPS origins.
+Changing merchants requires both the new URL and its allowlist entry; the merchant must implement
+an L2 KYA profile at `/.well-known/kya-profile.json`, a same-origin nonce endpoint, and verification.
+
+Sandbox timing note: newly minted agent credentials usually expire after about one hour.
+Check the returned `expiresAt` or credential `exp` for the actual expiry, and mint a fresh
+credential when needed. This is separate from the revocation status list's own expiry;
+a fresh agent credential does not make an expired status-list token valid.
+
+For a standalone mint, run `pnpm baselayer:mint https://bell-stack-demo-site.vercel.app`.
+The CLI writes the credential and ephemeral presenter key into a private temporary directory,
+with secret files restricted to mode 0600. It prints only the directory, audience, and expiry.
+Minting alone does not grant browser access.
+
+To film the full flow, open the app and keep the same conversation:
+
+1. Select **Open demo site**. Confirm the protected merchant denies the ordinary visit.
+2. Ask: "Use merchant_access for https://bell-stack-demo-site.vercel.app/protected, then snapshot
+   and screenshot the page." Confirm HTTP 200 and the wholesale catalog.
+3. Ask: "Use ordinary run/goto on that same URL, then snapshot and screenshot." Confirm denial
+   again. The credential was attached only to the approved main-frame request.
+4. Ask for merchant_access again to demonstrate a fresh nonce-bound presentation.
+
+The merchant handler blocks redirects and strips credential headers from subresources. A
+revocation-status service error can trigger one retry with a fresh nonce. Results expose status,
+audience, scope, and attempts, never the credential or signing key. The merchant site is hosted
+separately; this project does not deploy or replace it.
+
 ## Optional integrations
 
 - 1Password: for local desktop access, set `OP_ACCOUNT="Your account name"` in `.env.local`,
