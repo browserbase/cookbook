@@ -4,7 +4,7 @@ Reuse authenticated contexts, handle MFA, and connect login workflows.
 
 Paths below are relative to a local cookbook root, not to the installed skill directory. Locate the checkout first. Read the selected guide and source before adapting code. Historical source links identify the imported revision; they predate cookbook migrations and are not runnable fallbacks.
 
-This topic contains all 24 matching entries. Browse `docs/topics/authentication.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
+This topic contains all 25 matching entries. Browse `docs/topics/authentication.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
 
 | Recipe | Language | Local guide | Status | Historical source |
 | --- | --- | --- | --- | --- |
@@ -31,4 +31,5 @@ This topic contains all 24 matching entries. Browse `docs/topics/authentication.
 | Create extension (TypeScript, Stagehand) | typescript | `docs/recipes/playbook-node-stagehand-tools-1password-createextension.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/node/stagehand/_tools/1password/createExtension.ts) |
 | Main (TypeScript, Stagehand) | typescript | `docs/recipes/playbook-node-stagehand-tools-1password-main.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/node/stagehand/_tools/1password/main.ts) |
 | Initialize context (Python, Playwright) | python | `docs/recipes/playbook-python-playwright-context-initialize-context.md` | current | [pinned import](https://github.com/browserbase/playbook/tree/001362e91bf6af47c03f16258cb1126e2043bff1/python/playwright/context/initialize_context.py) |
+| Bell-Stack: a separate assistant using the Browsie runtime | typescript | `docs/recipes/projects-bell-stack.md` | current | cookbook-authored |
 | Browsie: consumer browser agent | typescript | `docs/recipes/projects-browsie.md` | current | cookbook-authored |

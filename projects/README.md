@@ -7,6 +7,7 @@ need an end-to-end architecture, not one isolated recipe.
 
 | Recipe | Language | Type | Status | Collection |
 | --- | --- | --- | --- | --- |
+| [BELL: the personal assistant stack 🔔](../docs/recipes/projects-bell-stack.md) | typescript | runnable example | current / public | projects |
 | [Browsie: consumer browser agent](../docs/recipes/projects-browsie.md) | typescript | runnable example | current / public | projects |
 
 <!-- recipes:end -->
