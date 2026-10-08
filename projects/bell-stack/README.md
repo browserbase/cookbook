@@ -1,9 +1,11 @@
-# Bell-Stack
+# BELL
 
-A separate personal-assistant project that imports Browsie's browser capabilities instead of
-copying its application. Bell owns its Eve agent, interface, configuration, and merchant integration.
-The sibling `browsie` package supplies Stagehand/Browserbase session management, browser tools,
-Contexts, human handoff, the optional Linq channel, and optional 1Password access.
+# BELL: the personal assistant stack 🔔
+
+Ring the BELL and put your personal assistant to work.
+
+Powered by Browserbase, Linq, Eve, Baselayer, 1Password, Visa, and Stripe via Link CLI.
+
 
 ## Run locally
 
@@ -20,7 +22,7 @@ cp .env.example .env
 pnpm dev
 ```
 
-Open `http://127.0.0.1:4320` and select **Open demo site**. Bell opens the configured `BELL_DEMO_URL`
+Open `http://127.0.0.1:4320` and select **Open demo site**. BELL opens the configured `BELL_DEMO_URL`
 in one persistent Browserbase session. Ask for a screenshot to update the capture panel. Follow-up
 messages at the same `/s/...` address reuse the conversation and browser. Stop cancels active work.
 The panel is a screenshot viewer; use `human_handoff` when you need to interact with the browser.
@@ -35,7 +37,7 @@ in either project without testing the shared runtime. The lockfile is generated 
 - 1Password: for local desktop access, set `OP_ACCOUNT="Your account name"` in `.env.local`,
   using the account name shown in the 1Password sidebar. In the desktop app, enable
   **Settings > Developer > Integrate with other apps** under the SDK options, then approve
-  the request when prompted. Bell must run on the same computer as the desktop app.
+  the request when prompted. BELL must run on the same computer as the desktop app.
   For hosted access, set `OP_SERVICE_ACCOUNT_TOKEN` instead; it takes precedence over `OP_ACCOUNT`.
   Save a Login item with the destination website, username, and password before asking Bell to log in.
   Add a one-time password field if the site uses TOTP. The shared vault tools enforce the saved
