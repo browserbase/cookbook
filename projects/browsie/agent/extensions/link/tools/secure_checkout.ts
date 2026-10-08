@@ -3,10 +3,7 @@ import { always } from "eve/tools/approval";
 import { z } from "zod";
 
 import { retrieveApprovedLinkCard } from "../../../../server/link-wallet.js";
-import {
-  runBrowserOperation,
-  runCancelableBrowserWork,
-} from "../../../lib/browser-runtime.js";
+import { runBrowserOperation, runCancelableBrowserWork } from "../../../lib/browser-runtime.js";
 
 const target = z.string().min(1).max(500);
 const inputSchema = z
@@ -36,14 +33,10 @@ const inputSchema = z
         message: "Provide expiryTarget when expiryMode is combined.",
       });
     }
-    if (
-      input.expiryMode === "split" &&
-      (!input.expiryMonthTarget || !input.expiryYearTarget)
-    ) {
+    if (input.expiryMode === "split" && (!input.expiryMonthTarget || !input.expiryYearTarget)) {
       ctx.addIssue({
         code: "custom",
-        message:
-          "Provide both expiryMonthTarget and expiryYearTarget when expiryMode is split.",
+        message: "Provide both expiryMonthTarget and expiryYearTarget when expiryMode is split.",
       });
     }
   });
@@ -63,10 +56,8 @@ export default defineTool({
           cardNumberTarget: input.cardNumberTarget,
           cvcTarget: input.cvcTarget,
           expiryTarget: input.expiryMode === "combined" ? input.expiryTarget : undefined,
-          expiryMonthTarget:
-            input.expiryMode === "split" ? input.expiryMonthTarget : undefined,
-          expiryYearTarget:
-            input.expiryMode === "split" ? input.expiryYearTarget : undefined,
+          expiryMonthTarget: input.expiryMode === "split" ? input.expiryMonthTarget : undefined,
+          expiryYearTarget: input.expiryMode === "split" ? input.expiryYearTarget : undefined,
           expiryFormat: input.expiryFormat,
           cardholderNameTarget: input.cardholderNameTarget,
           postalCodeTarget: input.postalCodeTarget,

@@ -43,9 +43,9 @@ describe("Stripe Link wallet boundary", () => {
     expect(approved.spendRequestId).toBe("lsrq_test");
     expect(approved.merchantUrl).toBe("https://shop.example/checkout");
 
-    expect(() =>
-      approvedLinkCard(request({ status: "pending_approval" }), "lsrq_test"),
-    ).toThrow("not approved");
+    expect(() => approvedLinkCard(request({ status: "pending_approval" }), "lsrq_test")).toThrow(
+      "not approved",
+    );
     expect(() => approvedLinkCard(request(), "another_request")).toThrow("not found");
   });
 

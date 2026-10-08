@@ -17,9 +17,7 @@ export function requireLinkAccessToken(): string {
   return token;
 }
 
-export async function retrieveApprovedLinkCard(
-  spendRequestId: string,
-): Promise<ApprovedLinkCard> {
+export async function retrieveApprovedLinkCard(spendRequestId: string): Promise<ApprovedLinkCard> {
   try {
     const link = new Link({ accessToken: requireLinkAccessToken() });
     const request = await link.spendRequests.retrieve(spendRequestId, { include: ["card"] });

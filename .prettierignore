@@ -11,6 +11,7 @@ integrations/**
 playbook/**
 
 # Generated or machine-maintained repository content.
+**/pnpm-lock.yaml
 assets/**
 docs/**
 projects/README.md

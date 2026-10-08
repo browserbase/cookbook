@@ -412,7 +412,11 @@ export class BrowsieBrowserSession {
       const values = {
         ...input,
         allowedHosts,
-        expiryValue: formatLinkExpiry(input.card.exp_month, input.card.exp_year, input.expiryFormat),
+        expiryValue: formatLinkExpiry(
+          input.card.exp_month,
+          input.card.exp_year,
+          input.expiryFormat,
+        ),
         cardNumberTarget: this.resolveTarget(input.cardNumberTarget),
         cvcTarget: this.resolveTarget(input.cvcTarget),
         expiryTarget: input.expiryTarget ? this.resolveTarget(input.expiryTarget) : undefined,
