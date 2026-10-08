@@ -14,7 +14,9 @@ let agentRunning = false;
 let humanInside = false;
 let agentPoint = null;
 let buttons = 0;
-let sendQueue = Promise.resolve();
+const actionQueue = [];
+let latestMove = null;
+let sending = false;
 let pendingMove = null;
 let moveTimer = null;
 
@@ -42,18 +44,33 @@ function screenPoint(event) {
   };
 }
 
+async function flushInputs() {
+  if (sending) return;
+  sending = true;
+  try {
+    while (actionQueue.length || latestMove) {
+      const input = actionQueue.length ? actionQueue.shift() : latestMove;
+      if (input === latestMove) latestMove = null;
+      try {
+        const response = await fetch("/api/input", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(input),
+        });
+        if (!response.ok) throw new Error("Browser input failed");
+      } catch (error) {
+        status.textContent = String(error.message ?? error);
+      }
+    }
+  } finally {
+    sending = false;
+  }
+}
+
 function send(input) {
-  sendQueue = sendQueue
-    .catch(() => {})
-    .then(async () => {
-      const response = await fetch("/api/input", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(input),
-      });
-      if (!response.ok) throw new Error("Browser input failed");
-    });
-  return sendQueue;
+  if (input.type === "move") latestMove = input;
+  else actionQueue.push(input);
+  void flushInputs();
 }
 
 function flushMove() {
@@ -96,13 +113,18 @@ layer.addEventListener("pointerdown", (event) => {
   if (agentRunning) return;
   buttons = 1;
   pendingMove = null;
-  void send({ type: "move", x: point.x, y: point.y, buttons: 0 });
+  latestMove = null;
   void send({ type: "down", x: point.x, y: point.y });
 });
 layer.addEventListener("pointerup", (event) => {
   if (event.button !== 0 || agentRunning) return;
   buttons = 0;
   const point = screenPoint(event);
+  if (pendingMove || latestMove) {
+    actionQueue.push({ type: "move", x: point.x, y: point.y, buttons: 1 });
+    pendingMove = null;
+    latestMove = null;
+  }
   void send({ type: "up", x: point.x, y: point.y });
 });
 layer.addEventListener("pointercancel", (event) => {

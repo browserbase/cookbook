@@ -18,7 +18,7 @@
     },
     {
       "path": "examples/javascript/live-view-cursor-ui/README.md",
-      "sha256": "4bf38408c44420ab9639be6e99659ee08fff86c49264c91ce449cb698d8fa1f6",
+      "sha256": "34d0cb596846a3765c2737cabcb6846accca5302463c8aeee43533f665de1efb",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -33,7 +33,7 @@
     },
     {
       "path": "examples/javascript/live-view-cursor-ui/ui/app.js",
-      "sha256": "4373ed332643025748a513ec1ec322218dc783fc7ae3a8ae48ebf679655ccc69",
+      "sha256": "8fd52d9966eb6c26cdc4424a4254cd31dfe23e6314a056ce4462bb04a3bde853",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {

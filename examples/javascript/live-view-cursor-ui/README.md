@@ -36,6 +36,12 @@ The overlay receives `mousemove` and `mousedown` events from the remote page whi
 
 The direct Browserbase Live View URL keeps its normal pointer. The special pointers appear only in this local UI. The server binds to `127.0.0.1`; it sends the signed Live View URL to the local page, and it keeps the Browserbase API key on the server.
 
+## Latency
+
+The human pointer moves in the local page as soon as it receives a pointer event. The page sends mouse moves to the server at most once every 32 ms. If a request is still in flight, the page keeps only the newest mouse move and sends clicks before waiting moves. This prevents old moves from delaying a click on a slow connection.
+
+The remote page and agent pointer still depend on network delay. For a hosted app, place the input server near the Browserbase browser session. Browserbase's [performance guide](https://docs.browserbase.com/optimizations/latency/speed-optimization) explains how region choice affects command round trips. Compare the direct Live View and this UI on the same session to find out whether the delay is in the viewer or the input path.
+
 ## Change the target
 
 Change the `page.goto()` call in `createSession()` and the browser steps in `runAgent()` in [`server.mjs`](server.mjs). The viewer is set to 1280 × 800 pixels. Change both the server viewport and UI aspect ratio if you use another size. This example handles the main browser tab. A new remote tab or a frame inside the remote page needs its own input route and pointer listener.
