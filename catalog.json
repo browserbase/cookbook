@@ -272,6 +272,156 @@
     },
     {
       "access": "public",
+      "caveats": [
+        "Local Context metadata and native-vault data use local files and need a durable database for a multi-instance deployment.",
+        "Handoff links expire but are not single-use links.",
+        "Live integration tests use billable external services and skip without explicit credentials.",
+        "The foundation retains Browsie UI labels and configuration names.",
+        "Production hosting requires application authentication and durable storage; local demo validation does not establish production readiness."
+      ],
+      "collection": "projects",
+      "dependencies": {
+        "@1password/sdk": "0.5.0",
+        "@ai-sdk/openai": "4.0.46",
+        "@browserbasehq/sdk": "2.18.0",
+        "@browserbasehq/stagehand": "4.0.2",
+        "ai": "7.0.82",
+        "dotenv": "^17.2.0",
+        "eve": "0.47.6",
+        "lucide-react": "^1.34.0",
+        "next": "16.3.8",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
+        "zod": "^4.4.0"
+      },
+      "entrypoints": [
+        "projects/bell-stack/app/page.tsx",
+        "projects/bell-stack/agent/agent.ts"
+      ],
+      "environment_setup_command": "test -f .env || cp .env.example .env",
+      "environment_template": "projects/bell-stack/.env.example",
+      "environment_variables": [
+        {
+          "default": null,
+          "name": "OPENAI_API_KEY",
+          "provider": "OpenAI",
+          "purpose": "Runs the Eve agent model.",
+          "requirement": "required",
+          "safe_example": "<set-locally>",
+          "secret": true,
+          "setup_url": "https://platform.openai.com/api-keys",
+          "validation": "Must be a valid OpenAI API key"
+        },
+        {
+          "default": null,
+          "name": "BROWSERBASE_API_KEY",
+          "provider": "Browserbase",
+          "purpose": "Creates hosted sessions, Contexts, Live View links, proxies, and Verified Browsers.",
+          "requirement": "conditional",
+          "safe_example": "<set-locally>",
+          "secret": true,
+          "setup_url": "https://www.browserbase.com/settings",
+          "validation": "Required when STAGEHAND_BROWSER is browserbase"
+        },
+        {
+          "default": "auto",
+          "name": "STAGEHAND_BROWSER",
+          "provider": "Browsie",
+          "purpose": "Selects automatic, local, or Browserbase browser mode.",
+          "requirement": "optional",
+          "safe_example": "browserbase",
+          "secret": false,
+          "setup_url": null,
+          "validation": "Must be auto, local, or browserbase"
+        },
+        {
+          "default": "gpt-5.6-sol",
+          "name": "BROWSIE_MODEL",
+          "provider": "OpenAI",
+          "purpose": "Selects the model used by the Eve agent.",
+          "requirement": "optional",
+          "safe_example": "gpt-5.6-sol",
+          "secret": false,
+          "setup_url": "https://platform.openai.com/docs/models",
+          "validation": "Must be a model available to the configured OpenAI account"
+        },
+        {
+          "default": null,
+          "name": "BROWSIE_HANDOFF_SECRET",
+          "provider": "Browsie",
+          "purpose": "Signs short-lived human-handoff links.",
+          "requirement": "conditional",
+          "safe_example": "<random-32-or-more-character-value>",
+          "secret": true,
+          "setup_url": null,
+          "validation": "Use a random value with at least 32 characters"
+        }
+      ],
+      "frameworks": [
+        "Stagehand",
+        "Browserbase SDK",
+        "Eve",
+        "Next.js"
+      ],
+      "id": "projects-bell-stack",
+      "languages": [
+        "typescript"
+      ],
+      "lifecycle": "current",
+      "manifests": [
+        "projects/bell-stack/package.json"
+      ],
+      "path": "projects/bell-stack",
+      "readme": "docs/recipes/projects-bell-stack.md",
+      "run_commands": [
+        "pnpm dev"
+      ],
+      "search_aliases": [
+        "consumer agent",
+        "browser agent",
+        "contexts",
+        "vault",
+        "live view",
+        "imessage",
+        "linq",
+        "bell stack",
+        "personal assistant"
+      ],
+      "setup_commands": [
+        "pnpm install"
+      ],
+      "source": {
+        "kind": "cookbook-authored",
+        "path": "projects/bell-stack"
+      },
+      "summary": "Build a personal assistant from Browsie with one Eve conversation, a persistent Browserbase browser, Linq messaging, and optional 1Password access.",
+      "tags": [
+        "reference-app"
+      ],
+      "title": "Bell-Stack: personal assistant foundation",
+      "topics": [
+        "agents-and-human-handoff",
+        "authentication",
+        "browser-features",
+        "integrations-and-orchestration",
+        "testing-and-observability"
+      ],
+      "upstream_readme": "projects/bell-stack/README.md",
+      "verification": "offline-tested",
+      "verification_evidence": [
+        {
+          "kind": "offline-tested",
+          "date": "2026-10-07",
+          "runtime": "Node.js 24.15.0; pnpm 10.33.4; Linux x64; Eve 0.47.6; Stagehand 4.0.2; Browserbase SDK 2.18.0",
+          "command": "pnpm install --frozen-lockfile && pnpm test && pnpm typecheck && pnpm lint && pnpm test:linq-local && pnpm build",
+          "result": "passed",
+          "limits": "88 tests passed, including 4 React lifecycle regression tests; 7 opt-in live tests skipped in the default suite. Type checking covers server modules and TSX tests. Lint passed with zero warnings and errors. Frozen-lockfile installation, Eve and Next.js compilation, and the Linq parser self-test passed. Live Context login, Linq delivery, 1Password, and payment checkout were not tested. Production startup/authentication and durable storage still require configuration."
+        }
+      ],
+      "working_directory": "projects/bell-stack"
+    },
+    {
+      "access": "public",
       "caveats": [],
       "collection": "examples",
       "dependencies": {
