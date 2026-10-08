@@ -25,6 +25,9 @@ importers:
       next:
         specifier: 16.3.8
         version: 16.3.8(@babel/core@7.29.7)(@opentelemetry/api@1.9.1)(@types/node@24.19.0)(react-dom@19.3.0(react@19.3.0))(react@19.3.0)
+      playwright-core:
+        specifier: 1.62.1
+        version: 1.62.1
       react:
         specifier: 19.3.0
         version: 19.3.0
@@ -3368,6 +3371,14 @@ packages:
       }
     engines: { node: ">=12" }
 
+  playwright-core@1.62.1:
+    resolution:
+      {
+        integrity: sha512-wPYSwEBJY9GHraISXqyqtx0na0LpO3XEX7jNDhntbex7tzUS7kLnZsOlFruFJB4Hi/rhDMjXGqHewDZ68nYZVw==,
+      }
+    engines: { node: ">=20" }
+    hasBin: true
+
   possible-typed-array-names@1.1.0:
     resolution:
       {
@@ -6340,6 +6351,8 @@ snapshots:
   picomatch@2.3.2: {}
 
   picomatch@4.0.7: {}
+
+  playwright-core@1.62.1: {}
 
   possible-typed-array-names@1.1.0: {}
 

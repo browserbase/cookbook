@@ -14430,7 +14430,9 @@
         "Bell owns its agent, interface, configuration, and integrations. It does not copy Browsie or call a separately deployed agent.",
         "The capture panel displays requested screenshots; interactive input uses the shared human-handoff tool.",
         "The local reference uses one demo operator. Production authentication and durable storage require configuration.",
-        "Linq conversations use the same agent definition but have their own Eve sessions. Live Linq, 1Password login, and checkout were not tested."
+        "Linq conversations use the same agent definition but have their own Eve sessions. Live Linq, 1Password login, and checkout were not tested.",
+        "The demo merchant is hosted separately at bell-stack-demo-site.vercel.app. A replacement merchant must implement the L2 KYA profile, nonce, and verification protocol.",
+        "Set BROWSIE_LOG_SESSION=false before launching credential-bearing sessions. Credentials are scoped to an exact allowlisted origin and a single main-frame request."
       ],
       "collection": "projects",
       "dependencies": {
@@ -14440,6 +14442,7 @@
         "browsie": "file:../browsie",
         "eve": "0.47.6",
         "next": "16.3.8",
+        "playwright-core": "1.62.1",
         "react": "19.3.0",
         "react-dom": "19.3.0",
         "zod": "4.6.5"
@@ -14507,12 +14510,12 @@
           "validation": "Must be available to the configured OpenAI account."
         },
         {
-          "default": "https://example.com",
+          "default": "https://bell-stack-demo-site.vercel.app/protected",
           "name": "BELL_DEMO_URL",
           "provider": "Bell-Stack",
           "purpose": "URL used by the demo starter button.",
           "requirement": "optional",
-          "safe_example": "https://example.com",
+          "safe_example": "https://bell-stack-demo-site.vercel.app/protected",
           "secret": false,
           "setup_url": null,
           "validation": "Use a site you are authorized to access."
@@ -14527,6 +14530,39 @@
           "secret": false,
           "setup_url": null,
           "validation": "Must be false before starting a browser used for merchant credentials."
+        },
+        {
+          "default": null,
+          "name": "BASELAYER_API_KEY",
+          "provider": "Baselayer",
+          "purpose": "Mints Baselayer sandbox credentials on the server.",
+          "requirement": "conditional",
+          "safe_example": "<set-locally>",
+          "secret": true,
+          "setup_url": "https://docs.baselayer.com/docs/minting-credentials",
+          "validation": "Required for merchant_access; never expose through NEXT_PUBLIC_."
+        },
+        {
+          "default": null,
+          "name": "BASELAYER_PRINCIPAL_REF",
+          "provider": "Baselayer",
+          "purpose": "Selects the sandbox principal represented by the assistant.",
+          "requirement": "conditional",
+          "safe_example": "<sandbox-principal-reference>",
+          "secret": true,
+          "setup_url": "https://docs.baselayer.com/docs/minting-credentials",
+          "validation": "Must reference an eligible principal in the configured Baselayer account."
+        },
+        {
+          "default": null,
+          "name": "BASELAYER_ALLOWED_ORIGINS",
+          "provider": "Baselayer",
+          "purpose": "Restricts merchant credential presentation to exact approved HTTPS origins.",
+          "requirement": "conditional",
+          "safe_example": "https://bell-stack-demo-site.vercel.app",
+          "secret": false,
+          "setup_url": "https://docs.baselayer.com/docs/minting-credentials",
+          "validation": "Comma-separated HTTPS origins without paths, queries, fragments, or embedded credentials."
         },
         {
           "default": null,
@@ -14590,7 +14626,7 @@
         "kind": "cookbook-authored",
         "path": "projects/bell-stack"
       },
-      "summary": "Run an independent Bell assistant and compact web interface while importing Browsie browser tools, Linq, and vault integrations as a local package.",
+      "summary": "Run a separate Bell assistant using Browsie browser tools, with Baselayer minting and one-request merchant credential presentation.",
       "tags": [
         "reference-app"
       ],
@@ -14603,15 +14639,23 @@
         "testing-and-observability"
       ],
       "upstream_readme": "projects/bell-stack/README.md",
-      "verification": "offline-tested",
+      "verification": "live-tested",
       "verification_evidence": [
         {
           "command": "pnpm install --frozen-lockfile && pnpm test && pnpm typecheck && pnpm lint && pnpm build",
           "date": "2026-10-08",
           "kind": "offline-tested",
-          "limits": "4 projection tests passed. Frozen-lockfile installation, type checking, zero-warning lint, and Eve/Next compilation passed with the shared Browsie package built first. This stage does not include Baselayer presentation. Live agent and browser work are verified separately with the merchant integration.",
+          "limits": "26 tests passed. Frozen-lockfile installation, type checking, zero-warning lint, and Eve/Next compilation passed with the shared Browsie library built first. Live checks are documented separately.",
           "result": "passed",
           "runtime": "Node.js 24.15.0; pnpm 10.33.4; Linux x64; Eve 0.47.6"
+        },
+        {
+          "command": "Open demo site; merchant_access then snapshot/screenshot; ordinary run/goto then snapshot/screenshot; reload conversation; fresh merchant_access then snapshot/screenshot.",
+          "date": "2026-10-08",
+          "kind": "live-tested",
+          "limits": "One persistent Browserbase session: CREDENTIAL_MISSING denial, HTTP 200 catalog, ordinary-request denial, then HTTP 200 with a fresh presentation. Verified tool events through the Eve client and the browser UI. No API keys, JWT presentations, or private JWK fields detected in the event stream. Linq, 1Password login, Link CLI, Visa payments, and production deployment were not tested.",
+          "result": "passed",
+          "runtime": "Node.js 24.15.0; pnpm 10.33.4; Browserbase; Baselayer sandbox; local Next/Eve app"
         }
       ],
       "working_directory": "projects/bell-stack"

@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 
 const config: NextConfig = {
   allowedDevOrigins: ["127.0.0.1", "localhost"],
-  serverExternalPackages: ["@browserbasehq/sdk", "@browserbasehq/stagehand"],
+  serverExternalPackages: ["@browserbasehq/sdk", "@browserbasehq/stagehand", "playwright-core"],
   transpilePackages: ["browsie"],
   turbopack: { root: process.cwd() },
 };
