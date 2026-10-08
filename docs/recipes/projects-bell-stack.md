@@ -1,6 +1,8 @@
-# Bell-Stack: a separate assistant using the Browsie runtime
+# BELL: the personal assistant stack 🔔
 
-Run an independent Bell assistant and compact web interface while importing Browsie browser tools, Linq, and vault integrations as a local package.
+Ring the BELL and put your personal assistant to work.
+
+Powered by Browserbase, Linq, Eve, Baselayer, 1Password, Visa, and Stripe via Link CLI.
 
 > [!CAUTION]
 > Demo and reference code only. This recipe is not a vetted production implementation. Independently review it, obtain authorization, and validate security, privacy, compliance, cost, and site-term requirements before use. Use at your own risk.
@@ -64,7 +66,7 @@ pnpm dev
 | --- | --- | --- | --- |
 | `STAGEHAND_BROWSER` | Browsie. Selects automatic, local, or Browserbase browser mode. Non-secret. | `browserbase` | Must be auto, local, or browserbase. Default: `browserbase`. |
 | `BELL_MODEL` | [OpenAI](https://platform.openai.com/docs/models). Selects Bell's agent model. Non-secret. | `gpt-5.6-sol` | Must be available to the configured OpenAI account.. Default: `gpt-5.6-sol`. |
-| `BELL_DEMO_URL` | Bell-Stack. URL used by the demo starter button. Non-secret. | `https://example.com` | Use a site you are authorized to access.. Default: `https://example.com`. |
+| `BELL_DEMO_URL` | URL used by the demo starter button. Non-secret. | `https://example.com` | Use a site you are authorized to access.. Default: `https://example.com`. |
 | `BROWSIE_LOG_SESSION` | Browserbase. Controls network logging in the shared browser runtime. Non-secret. | `false` | Must be false before starting a browser used for merchant credentials.. Default: `false`. |
 
 
