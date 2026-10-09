@@ -17,7 +17,14 @@ export async function GET(request: Request) {
       ids.map(async (sessionId) => {
         try {
           const snapshot = await client.sessions.attach(sessionId).snapshot();
-          return summarizeTask(sessionId, snapshot.events);
+          const summary = summarizeTask(sessionId, snapshot.events);
+          if (!summary.hasUserMessage) return undefined;
+          return {
+            sessionId: summary.sessionId,
+            title: summary.title,
+            updatedAt: summary.updatedAt,
+            state: summary.state,
+          };
         } catch {
           return undefined;
         }
@@ -79,7 +86,8 @@ export function sortTasksNewestFirst<T extends { updatedAt: string }>(tasks: T[]
 export function summarizeTask(sessionId: string, events: readonly MessageStreamEvent[]) {
   let title = "Untitled task",
     updatedAt = "",
-    state = "idle";
+    state = "idle",
+    hasUserMessage = false;
   for (const event of events) {
     updatedAt = event.meta.at || updatedAt;
     if (event.type === "message.received" && title === "Untitled task") {
@@ -90,7 +98,10 @@ export function summarizeTask(sessionId: string, events: readonly MessageStreamE
           : typeof data.text === "string"
             ? data.text
             : "";
-      if (text) title = text.trim().replace(/\s+/g, " ").slice(0, 64);
+      if (text.trim()) {
+        title = text.trim().replace(/\s+/g, " ").slice(0, 64);
+        hasUserMessage = true;
+      }
     }
     if (event.type === "turn.started" || event.type === "step.started") state = "running";
     else if (event.type === "input.requested") state = "waiting_for_user";
@@ -108,5 +119,6 @@ export function summarizeTask(sessionId: string, events: readonly MessageStreamE
     title,
     updatedAt: updatedAt || new Date(0).toISOString(),
     state,
+    hasUserMessage,
   };
 }

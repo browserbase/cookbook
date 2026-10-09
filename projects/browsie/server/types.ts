@@ -32,15 +32,6 @@ export interface BrowserProxyLocation {
   city?: string;
 }
 
-export type RunAction =
-  | { action: "goto"; url: string }
-  | { action: "click"; target: string }
-  | { action: "fill"; target: string; value: string }
-  | { action: "type"; target: string; value: string }
-  | { action: "press"; target?: string; key: string }
-  | { action: "select"; target: string; value: string }
-  | { action: "wait"; milliseconds: number };
-
 export interface SkillSummary {
   id: string;
   name: string;
