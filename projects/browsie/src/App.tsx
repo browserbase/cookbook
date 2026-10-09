@@ -131,6 +131,7 @@ export default function App({
   const [stopError, setStopError] = useState<string>();
   const stopRequestRef = useRef<Promise<unknown> | undefined>(undefined);
   const cancellationObservedRef = useRef(false);
+  const registeredTaskRef = useRef<string | undefined>(undefined);
   const [agentSettings, setAgentSettings] = useState<AgentSettings>(defaultAgentSettings);
   const agent = useEveAgent({
     initialSession: sessionId ? { sessionId, streamIndex: 0 } : undefined,
@@ -157,12 +158,6 @@ export default function App({
       }
     },
     onSessionChange(session) {
-      if (session)
-        void fetch("/api/tasks", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ sessionId: session.sessionId }),
-        });
       if (!sessionId && session) {
         History.prototype.replaceState.call(
           window.history,
@@ -269,7 +264,19 @@ export default function App({
 
   useEffect(() => {
     if (!activeSessionId || !firstRequest) return;
-    void fetch("/api/tasks", { cache: "no-store" })
+    const registration =
+      registeredTaskRef.current === activeSessionId
+        ? Promise.resolve()
+        : fetch("/api/tasks", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify({ sessionId: activeSessionId }),
+          }).then((response) => {
+            if (!response.ok) throw new Error("Could not save the task in history.");
+            registeredTaskRef.current = activeSessionId;
+          });
+    void registration
+      .then(() => fetch("/api/tasks", { cache: "no-store" }))
       .then((response) => response.json())
       .then((body: { tasks?: TaskHistoryItem[] }) => setHistory(body.tasks ?? []))
       .catch(() => undefined);

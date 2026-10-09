@@ -21,11 +21,22 @@ describe("durable task list", () => {
       }),
     ]);
     expect(task.title).toBe("First durable task");
+    expect(task.hasUserMessage).toBe(true);
     expect(task.updatedAt).toBe("2026-09-05T01:00:01.000Z");
+  });
+
+  it("marks a session without a user message as empty", () => {
+    const task = summarizeTask("session_empty", [
+      event("session.started", "2026-09-05T01:00:00.000Z"),
+    ]);
+
+    expect(task.title).toBe("Untitled task");
+    expect(task.hasUserMessage).toBe(false);
   });
 
   it("keeps parked tasks waiting and sorts newest first", () => {
     const older = summarizeTask("session_old", [
+      event("message.received", "2026-09-05T00:59:59.000Z", { message: "Wait for login" }),
       event("input.requested", "2026-09-05T01:00:00.000Z"),
       event("session.waiting", "2026-09-05T01:00:01.000Z"),
     ]);
