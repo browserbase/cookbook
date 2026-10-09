@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  eve>undici: 8.10.2
+
 importers:
   .:
     dependencies:
@@ -4485,10 +4488,10 @@ packages:
       }
     engines: { node: ">=22.19.0" }
 
-  undici@8.9.0:
+  undici@8.10.2:
     resolution:
       {
-        integrity: sha512-aWZpUj7XoGonMClx4gdDRfgBjqeA+F473aDmROQQbM9n6PRfK/u1q/a0X4wMTgcHfT8H6fpbt98PFuDUwFg2YA==,
+        integrity: sha512-/y4/bH9YNU5hi9NIrpOuvGXFcxrj3CMrV+/AYpowAYTpHn8gX/XPFjNy766FPoYY0miQhdW977JFWKGNhBdwyQ==,
       }
     engines: { node: ">=22.19.0" }
 
@@ -6409,7 +6412,7 @@ snapshots:
     dependencies:
       ai: 7.0.82(zod@4.6.5)
       nitro: 3.0.260610-beta(dotenv@17.4.2)(lru-cache@11.5.3)(vite@8.3.1(@types/node@24.19.0)(esbuild@0.28.2))
-      undici: 8.9.0
+      undici: 8.10.2
     optionalDependencies:
       "@opentelemetry/api": 1.9.1
       microsandbox: 0.5.10
@@ -7602,7 +7605,7 @@ snapshots:
 
   undici@8.11.2: {}
 
-  undici@8.9.0: {}
+  undici@8.10.2: {}
 
   unenv@2.0.0-rc.24:
     dependencies:

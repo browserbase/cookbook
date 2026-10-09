@@ -8,4 +8,6 @@ For automated 1Password access, create a least-privilege service account, grant 
 
 The model can list only labels, host mappings, field availability, and opaque item/field references. `vault_login` resolves values server-side immediately before filling. Stagehand v4.0.2 does not expose the older `act(..., { variables })` API; Browsie therefore uses a browser-session-bound `experimentalBatch` adapter with Stagehand logging disabled and redacted results. A success selector is mandatory because filling and clicking alone do not prove authentication.
 
+Vault login requires HTTPS on an allowed hostname. The runtime rechecks the destination before each credential fill and submit, including an OTP step after navigation. Hosted login also requires `BROWSIE_LOG_SESSION=false` before the browser session starts. Changing this setting requires a new session; it cannot disable recording retroactively.
+
 TOTP codes are generated server-side using RFC 6238 and are never stored. Challenges without a mapped TOTP secret must park the Eve task in `waiting_for_user`; the interactive Browserbase Live View remains the primary safe handoff.

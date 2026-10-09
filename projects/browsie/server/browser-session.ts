@@ -68,11 +68,11 @@ export class BrowsieBrowserSession {
     } = {},
   ) {}
 
-  async start(forceLocal = false): Promise<void> {
+  async start(): Promise<void> {
     if (this.closeRequested)
       throw new DOMException("The browser session was closed.", "AbortError");
     if (this.stagehand && this.browser && !this.browser.closed) return;
-    const startPromise = this.startPromise ?? this.startOnce(forceLocal);
+    const startPromise = this.startPromise ?? this.startOnce();
     this.startPromise = startPromise;
     try {
       await startPromise;
@@ -83,10 +83,10 @@ export class BrowsieBrowserSession {
     }
   }
 
-  private async startOnce(forceLocal: boolean): Promise<void> {
+  private async startOnce(): Promise<void> {
     this.state.browser.status = "starting";
     const started = performance.now();
-    const requested = browserProvider(forceLocal);
+    const requested = browserProvider();
     let contextStatus: "draft" | "saved" | undefined;
 
     try {
@@ -257,13 +257,19 @@ export class BrowsieBrowserSession {
   }
 
   async run(actions: RunAction[]): Promise<{ completed: number; url: string }> {
+    for (const item of actions) {
+      if (item.action !== "goto") continue;
+      const destination = new URL(item.url);
+      if (
+        !["https:", "http:"].includes(destination.protocol) ||
+        destination.username ||
+        destination.password
+      )
+        throw new Error("Browser navigation requires an HTTP(S) URL without embedded credentials.");
+    }
     const release = await this.acquireOperation();
     try {
-      const localFixture = actions.some(
-        (item) =>
-          item.action === "goto" && /^http:\/\/(?:127\.0\.0\.1|localhost)(?::|\/)/.test(item.url),
-      );
-      await this.start(localFixture);
+      await this.start();
       await this.gateCaptcha();
       const started = performance.now();
       const resolvedActions = actions.map((item) =>
@@ -348,21 +354,39 @@ export class BrowsieBrowserSession {
     try {
       await this.start();
       await this.gateCaptcha();
+      if (this.browserbase && !this.sessionLogsDisabled)
+        throw new Error("Hosted credential operations require session logging to be disabled.");
       const started = performance.now();
       const result = await this.requireStagehand().experimentalBatch(
         async ({ page }, values) => {
-          const before = new URL(await page.url());
-          if (!values.allowedHosts.includes(before.hostname.toLowerCase()))
-            throw new Error("host mismatch");
+          const checkDestination = async () => {
+            const destination = new URL(await page.url());
+            if (
+              destination.protocol !== "https:" ||
+              destination.username ||
+              destination.password ||
+              !values.allowedHosts.includes(destination.hostname.toLowerCase())
+            )
+              throw new Error("Unsafe credential destination.");
+          };
+          await checkDestination();
           await page.locator(values.usernameTarget).fill(values.username);
+          await checkDestination();
           await page.locator(values.passwordTarget).fill(values.password);
-          if (values.totpTarget && values.totp && !values.totpAfterSubmit)
+          if (values.totpTarget && values.totp && !values.totpAfterSubmit) {
+            await checkDestination();
             await page.locator(values.totpTarget).fill(values.totp);
+          }
+          await checkDestination();
           await page.locator(values.submitTarget).click();
           await page.waitForTimeout(1_000);
           if (values.totpTarget && values.totp && values.totpAfterSubmit) {
+            await checkDestination();
             await page.locator(values.totpTarget).fill(values.totp);
-            if (values.otpSubmitTarget) await page.locator(values.otpSubmitTarget).click();
+            if (values.otpSubmitTarget) {
+              await checkDestination();
+              await page.locator(values.otpSubmitTarget).click();
+            }
             await page.waitForTimeout(1_000);
           }
           const url = await page.url(),
@@ -840,8 +864,8 @@ function errorMessage(error: unknown): string {
   return error instanceof Error ? error.message : String(error);
 }
 
-export function browserProvider(forceLocal = false): "local" | "browserbase" {
-  if (forceLocal || process.env.STAGEHAND_BROWSER === "local") return "local";
+export function browserProvider(): "local" | "browserbase" {
+  if (process.env.STAGEHAND_BROWSER === "local") return "local";
   if (process.env.STAGEHAND_BROWSER === "browserbase") return "browserbase";
   return process.env.BROWSERBASE_API_KEY ? "browserbase" : "local";
 }

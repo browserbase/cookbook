@@ -57,6 +57,10 @@ Browsie supports these typed actions:
 It does not run model-written JavaScript in the Eve process. Snapshot IDs expire after page state
 changes, and the next action must use a new snapshot.
 
+Navigation accepts only HTTP and HTTPS URLs without embedded credentials. A destination cannot
+change the browser provider. Local fixtures require the operator to set `STAGEHAND_BROWSER=local`;
+a localhost URL never switches a hosted session to the application server's local browser.
+
 ## Hosted session settings
 
 The Browserbase adapter requests `proxies: true`, `keepAlive: true`, and
