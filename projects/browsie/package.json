@@ -81,5 +81,10 @@
     "app/handoff",
     "LICENSE",
     "dist/shared"
-  ]
+  ],
+  "pnpm": {
+    "overrides": {
+      "eve>undici": "8.10.2"
+    }
+  }
 }
