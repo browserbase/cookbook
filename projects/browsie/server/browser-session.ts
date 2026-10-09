@@ -8,10 +8,12 @@ import {
   type StagehandBrowser,
 } from "@browserbasehq/stagehand";
 
+import type { BrowserRefAction, BrowserRunInput } from "../agent/lib/browser-schema.js";
 import { parseBrowserbaseCaptchaEvent, safeCaptchaPage, type CaptchaSignal } from "../src/captcha";
 import { toEmbeddedBrowserbaseLiveViewUrl } from "../src/live-view.js";
+import { executeStagehandCode } from "./stagehand-run-code.js";
 import { addTrace } from "./trace.js";
-import type { BrowserProxyLocation, BrowserState, ConversationState, RunAction } from "./types.js";
+import type { BrowserProxyLocation, BrowserState, ConversationState } from "./types.js";
 
 export interface BrowserCaptchaTransition {
   id: string;
@@ -48,6 +50,8 @@ export class BrowsieBrowserSession {
   private closeRequested = false;
   private operationTail: Promise<void> = Promise.resolve();
   private xpathMap: Record<string, string> = {};
+  private snapshotUrl?: string;
+  private snapshotPageId?: string;
   private readonly visitedOrigins = new Set<string>();
   private readonly blockedOrigins = new Set<string>();
   private readonly liveSourceOrigins = new Set<string>();
@@ -175,10 +179,13 @@ export class BrowsieBrowserSession {
           snapshot,
           url: await page.url(),
           title: await page.title(),
+          pageId: page.pageId,
         };
       });
       await this.gateCaptcha("after");
       this.xpathMap = result.snapshot.xpathMap;
+      this.snapshotUrl = result.url;
+      this.snapshotPageId = result.pageId;
       const url = result.url;
       this.updateBrowserState(result.url, result.title);
       await this.refreshRemoteLiveUrl();
@@ -225,73 +232,142 @@ export class BrowsieBrowserSession {
     }
   }
 
-  async run(actions: RunAction[]): Promise<{ completed: number; url: string }> {
+  async run(
+    input: BrowserRunInput,
+  ): Promise<
+    | { mode: "code"; value: unknown; url: string }
+    | { mode: "actions"; completed: number; url: string }
+  > {
     const release = await this.acquireOperation();
     try {
-      const localFixture = actions.some(
-        (item) =>
-          item.action === "goto" && /^http:\/\/(?:127\.0\.0\.1|localhost)(?::|\/)/.test(item.url),
-      );
+      const localFixture =
+        input.code !== undefined &&
+        /page\.goto\(\s*["'`]http:\/\/(?:127\.0\.0\.1|localhost)(?::|\/)/u.test(input.code);
       await this.start(localFixture);
       await this.gateCaptcha("before");
       const started = performance.now();
-      const resolvedActions = actions.map((item) =>
-        "target" in item && item.target
-          ? { ...item, target: this.resolveTarget(item.target) }
-          : item,
-      );
-      const result = await this.requireStagehand().experimentalBatch(
-        async ({ page }, batchActions) => {
-          for (const item of batchActions) {
-            switch (item.action) {
-              case "goto":
-                await page.goto(item.url);
-                await page.waitForLoadState("domcontentloaded", 15_000);
-                break;
-              case "click":
-                await page.locator(item.target).click();
-                break;
-              case "fill":
-                await page.locator(item.target).fill(item.value);
-                break;
-              case "type":
-                await page.locator(item.target).type(item.value);
-                break;
-              case "press":
-                if (item.target) await page.locator(item.target).click();
-                await page.keyPress(item.key);
-                break;
-              case "select":
-                await page.locator(item.target).selectOption(item.value);
-                break;
-              case "wait":
-                await page.waitForTimeout(Math.min(item.milliseconds, 10_000));
-                break;
+      const page =
+        (await this.browser!.context.activePage()) ?? (await this.browser!.context.newPage());
+      let response:
+        | { mode: "code"; value: unknown; url: string }
+        | { mode: "actions"; completed: number; url: string };
+      let title: string;
+      let activityCode: string;
+      let traceDetail: Record<string, unknown>;
+
+      if (input.code !== undefined) {
+        this.invalidateSnapshot();
+        const codeResult = await executeStagehandCode({
+          stagehand: this.requireStagehand(),
+          page,
+          code: input.code,
+          artifactRoot: process.env.BROWSIE_ARTIFACT_ROOT ?? ".browsie/run-artifacts",
+        });
+        if (codeResult.closeRequested) {
+          throw new Error(
+            "The run code requested browser.close(). Browsie owns this persistent browser; do not close it from run.",
+          );
+        }
+        const activePage = (await this.browser!.context.activePage()) ?? page;
+        const url = await activePage.url();
+        title = await activePage.title();
+        response = { mode: "code", value: codeResult.value, url };
+        activityCode = redactActivityCode(input.code);
+        traceDetail = {
+          mode: "code",
+          url,
+          batchRuntimeMs: Math.round(codeResult.batchRuntimeMs),
+          browserCalls: codeResult.telemetry.calls,
+          snapshotIdsInvalidated: true,
+        };
+      } else {
+        const actions = input.actions!;
+        const currentUrl = await page.url();
+        if (!this.snapshotUrl || !this.snapshotPageId || page.pageId !== this.snapshotPageId) {
+          throw new Error("No hydrated snapshot exists for this page. Call snapshot first.");
+        }
+        if (currentUrl !== this.snapshotUrl) {
+          this.invalidateSnapshot();
+          throw new Error("The page changed after its snapshot. Call snapshot again.");
+        }
+        const hydratedActions = actions.map((action) => ({
+          ...action,
+          selector: this.resolveSnapshotId(action.id),
+        }));
+        this.invalidateSnapshot();
+        const result = await this.requireStagehand().experimentalBatch(
+          async ({ page: batchPage }, batchActions) => {
+            let completed = 0;
+            for (const action of batchActions) {
+              const locator = batchPage.locator(action.selector);
+              switch (action.op) {
+                case "click":
+                  await locator.click();
+                  break;
+                case "hover":
+                  await locator.hover();
+                  break;
+                case "fill":
+                  await locator.fill(action.value);
+                  break;
+                case "type":
+                  await locator.type(
+                    action.text,
+                    action.delay === undefined ? undefined : { delay: action.delay },
+                  );
+                  break;
+                case "press":
+                  await locator.click();
+                  await batchPage.keyPress(action.key);
+                  break;
+                case "select":
+                  await locator.selectOption(action.values);
+                  break;
+              }
+              completed += 1;
             }
-          }
-          return { url: await page.url(), title: await page.title() };
-        },
-        resolvedActions,
-        { timeout: 60_000 },
-      );
+            return {
+              completed,
+              url: await batchPage.url(),
+              title: await batchPage.title(),
+            };
+          },
+          hydratedActions,
+          { page, timeout: 60_000 },
+        );
+        title = result.title;
+        response = { mode: "actions", completed: result.completed, url: result.url };
+        activityCode = formatRunCode(
+          actions,
+          hydratedActions.map((action) => action.selector),
+        );
+        traceDetail = {
+          mode: "actions",
+          actions: redactActions(actions),
+          url: result.url,
+          snapshotIdsInvalidated: true,
+        };
+      }
 
       await this.gateCaptcha("after");
-      this.xpathMap = {};
-      this.updateBrowserState(result.url, result.title);
+      this.invalidateSnapshot();
+      this.updateBrowserState(response.url, title);
       await this.refreshRemoteLiveUrl();
-      const url = result.url;
+      const url = response.url;
       const origin = originOf(url);
       if (origin) this.visitedOrigins.add(origin);
       addTrace(
         this.state,
         "tool",
         "run",
-        `Completed ${actions.length} exact browser action${actions.length === 1 ? "" : "s"}.`,
-        { actions, url, snapshotIdsInvalidated: true },
+        response.mode === "code"
+          ? "Executed Stagehand browser code."
+          : `Completed ${response.completed} snapshot action${response.completed === 1 ? "" : "s"}.`,
+        traceDetail,
         Math.round(performance.now() - started),
-        formatRunCode(resolvedActions),
+        activityCode,
       );
-      return { completed: actions.length, url };
+      return response;
     } finally {
       release();
     }
@@ -491,14 +567,19 @@ export class BrowsieBrowserSession {
     );
   }
 
-  private resolveTarget(target: string): string {
-    const raw = target.replace(/^\[/, "").replace(/\]$/, "");
-    const xpath = this.xpathMap[target] ?? this.xpathMap[raw];
-    if (!xpath && /^\[?\d+\]?$/.test(target)) {
-      throw new Error("This snapshot ID is not in the latest snapshot. Call snapshot again.");
+  private resolveSnapshotId(id: string): string {
+    const xpath = this.xpathMap[id];
+    if (!xpath) {
+      throw new Error(`Snapshot ID "${id}" is stale or not actionable. Call snapshot again.`);
     }
-    if (!xpath) return target;
-    return xpath.startsWith("xpath=") ? xpath : `xpath=${xpath}`;
+    const elementXpath = xpath.replace(/\/text\(\)\[\d+\]$/u, "");
+    return elementXpath.startsWith("xpath=") ? elementXpath : `xpath=${elementXpath}`;
+  }
+
+  private invalidateSnapshot(): void {
+    this.xpathMap = {};
+    this.snapshotUrl = undefined;
+    this.snapshotPageId = undefined;
   }
 
   private requireStagehand(): Stagehand {
@@ -712,8 +793,11 @@ export class BrowsieBrowserSession {
         snapshot: await page.snapshot({ includeIframes: true }),
         url: await page.url(),
         title: await page.title(),
+        pageId: page.pageId,
       }));
       this.xpathMap = result.snapshot.xpathMap;
+      this.snapshotUrl = result.url;
+      this.snapshotPageId = result.pageId;
       this.updateBrowserState(result.url, result.title);
       addTrace(
         this.state,
@@ -787,48 +871,60 @@ export class BrowsieBrowserSession {
   }
 }
 
-export function formatRunCode(actions: RunAction[]): string {
+export function formatRunCode(actions: BrowserRefAction[], selectors: string[]): string {
   return actions
-    .flatMap((item) => {
-      switch (item.action) {
-        case "goto":
-          return [
-            `await page.goto(${JSON.stringify(safeActivityUrl(item.url))});`,
-            'await page.waitForLoadState("domcontentloaded", 15_000);',
-          ];
+    .flatMap((item, index) => {
+      const selector = selectors[index] ?? `[snapshot id ${item.id}]`;
+      switch (item.op) {
         case "click":
-          return `await page.locator(${JSON.stringify(item.target)}).click();`;
+          return `await page.locator(${JSON.stringify(selector)}).click();`;
+        case "hover":
+          return `await page.locator(${JSON.stringify(selector)}).hover();`;
         case "fill":
-          return `await page.locator(${JSON.stringify(item.target)}).fill("[value hidden]");`;
+          return `await page.locator(${JSON.stringify(selector)}).fill("[value hidden]");`;
         case "type":
-          return `await page.locator(${JSON.stringify(item.target)}).type("[value hidden]");`;
+          return `await page.locator(${JSON.stringify(selector)}).type("[value hidden]");`;
         case "press":
           return [
-            ...(item.target ? [`await page.locator(${JSON.stringify(item.target)}).click();`] : []),
+            `await page.locator(${JSON.stringify(selector)}).click();`,
             `await page.keyPress(${JSON.stringify(item.key)});`,
           ];
         case "select":
-          return `await page.locator(${JSON.stringify(item.target)}).selectOption("[value hidden]");`;
-        case "wait":
-          return `await page.waitForTimeout(${Math.min(item.milliseconds, 10_000)});`;
+          return `await page.locator(${JSON.stringify(selector)}).selectOption("[value hidden]");`;
       }
     })
     .join("\n");
 }
 
-function safeActivityUrl(value: string): string {
-  try {
-    const url = new URL(value);
-    url.username = "";
-    url.password = "";
-    for (const key of url.searchParams.keys()) {
-      if (/(?:auth|code|key|otp|password|secret|token)/i.test(key))
-        url.searchParams.set(key, "[REDACTED]");
+function redactActions(actions: BrowserRefAction[]): unknown[] {
+  return actions.map((action) => {
+    switch (action.op) {
+      case "fill":
+        return { ...action, value: "[value hidden]" };
+      case "type":
+        return { ...action, text: "[value hidden]" };
+      case "select":
+        return { ...action, values: "[value hidden]" };
+      default:
+        return action;
     }
-    return url.toString();
-  } catch {
-    return value;
-  }
+  });
+}
+
+export function redactActivityCode(code: string): string {
+  return code
+    .replace(
+      /(\.fill|\.type|\.selectOption)\(\s*(["'`])(?:\\.|(?!\2)[\s\S])*?\2\s*\)/gu,
+      '$1("[value hidden]")',
+    )
+    .replace(
+      /\b(password|passwd|secret|token|otp|apiKey|api_key)\b(\s*[:=]\s*)(["'`])(?:\\.|(?!\3)[\s\S])*?\3/giu,
+      '$1$2"[value hidden]"',
+    )
+    .replace(/([?&](?:auth|code|key|otp|password|secret|token)=)[^&\s"'`]+/giu, "$1[REDACTED]")
+    .replace(/\b(sk-[A-Za-z0-9_-]{6})[A-Za-z0-9_-]+/gu, "$1[redacted]")
+    .replace(/\b(bb_(?:live|test)_[A-Za-z0-9]{4})[A-Za-z0-9_-]+/gu, "$1[redacted]")
+    .replace(/\b(Bearer\s+)[A-Za-z0-9._~+/=-]{8,}/giu, "$1[redacted]");
 }
 
 function configuredCaptchaTimeoutMs(): number {
