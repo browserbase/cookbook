@@ -2,14 +2,14 @@
 
 Deploy a Stagehand v4 browser workflow as a Browserbase Function. The Function reads login credentials from attached Secrets, signs into Browserbase with email and password, and checks whether the authenticated dashboard is visible.
 
-Stagehand identifies each submit button before the corresponding credential is filled. Native Stagehand locators fill the fields and click the identified buttons. Credential values are never interpolated into model instructions. Stagehand still processes page content, which may include the account email displayed by the site. Session recording is enabled so you can inspect replays in the Browserbase dashboard. Stagehand uses its default logging; browser session logging remains disabled. Replays and page content can include account information.
+Stagehand identifies each submit button before the corresponding credential is filled. Playwright connects to the same managed session to wait for fields, fill them, and click the identified buttons. This avoids a Stagehand 4.1.0 extension-world readiness failure in native locator calls. Credential values are never interpolated into model instructions. Stagehand still processes page content, which may include the account email displayed by the site. Session recording is enabled so you can inspect replays in the Browserbase dashboard. Stagehand uses its default logging; browser session logging remains disabled. Replays and page content can include account information.
 
 ## Prerequisites
 
 - Node.js 24 and npm (the hosted build is constrained to the Node 24 release line).
 - A Browserbase project with access to Functions, Secrets, and the Model Gateway.
 - The official [Browserbase CLI](https://www.npmjs.com/package/browse) (`browse`), with the Secrets commands shown below.
-- A Browserbase account that supports email/password login. Google sign-in, company SSO, MFA, and email verification are not automated by this recipe.
+- A Browserbase account that supports email/password login or Browserbase company SSO at `https://browserbase.okta.com`. For that SSO flow, `BROWSERBASE_LOGIN_PASSWORD` must contain your Okta password. Google sign-in and other identity providers are not automated.
 
 The Function uses Browserbase's Model Gateway; no separate model-provider API key is required. Running it consumes browser and model usage. It submits a real sign-in attempt, then closes the browser. It does not persist the authenticated session or change dashboard settings.
 
@@ -98,6 +98,10 @@ curl -X POST http://127.0.0.1:14113/v1/functions/browserbase-login/invoke \
 
 Local execution still uses a real hosted browser and incurs usage. The local Functions server does not automatically load attached project Secrets.
 
+## Okta and verification
+
+For Browserbase company SSO, the workflow selects the Password method before filling the password. Password submission is restricted to the Browserbase and Browserbase Okta origins. It then waits up to two minutes for authentication to return to the dashboard. If Okta requires a second factor, complete it in the live session; the Function does not bypass MFA or read verification codes. Session IDs appear in the invocation metadata, and the session is available in the Browserbase dashboard.
+
 ## Results and limitations
 
 On verified dashboard visibility, the handler returns:
@@ -114,8 +118,8 @@ An unsupported sign-in flow, rejected credentials, timeout, or browser error ret
 
 The stage is `connect`, `email`, `password`, or `verification`. It identifies where the workflow stopped, not the underlying cause. Check `status` even if the Functions invocation itself completed successfully. Missing configuration and cleanup failures fail the invocation with a sanitized error.
 
-The workflow restricts credential submission to `https://www.browserbase.com`. It waits up to 20 seconds for each credential field and up to 30 seconds for the post-submit redirect; model calls have their own runtime limits. Dashboard verification is an AI assessment, not a server-side authentication or account-identity assertion. No success is claimed for MFA, SSO, onboarding, or uncertain pages. A changed login UI can require an update.
+The email is submitted only to `https://www.browserbase.com`; passwords are allowed there and at `https://browserbase.okta.com`. It waits up to 20 seconds for each credential field and up to two minutes after password submission; model calls have their own runtime limits. Dashboard verification is an AI assessment, not a server-side authentication or account-identity assertion. No success is claimed for an outstanding MFA challenge, onboarding, or uncertain pages. A changed login UI can require an update.
 
-Validation currently covers dependency installation, TypeScript checking, Function registration, and the publish archive. A successful account login has not been verified.
+Validation covers dependency installation, TypeScript checking, hosted deployment, and reaching the Okta password field in a live browser. A successful account login has not yet been verified.
 
 See the [Functions SDK](https://github.com/browserbase/sdk-functions-node) and [Secrets overview](https://www.browserbase.com/blog/introducing-secrets-in-browserbase-functions) for platform setup.

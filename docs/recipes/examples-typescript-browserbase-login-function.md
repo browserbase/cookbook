@@ -14,7 +14,7 @@ Deploy a Stagehand email/password login as a Browserbase Function with attached 
 
 - Working directory from the cookbook root: `examples/typescript/browserbase-login-function`.
 - Languages: typescript.
-- Frameworks: Stagehand, Browserbase Functions.
+- Frameworks: Stagehand, Playwright, Browserbase Functions.
 - [Upstream setup and behavior](../../examples/typescript/browserbase-login-function/README.md).
 - [Dependency manifest `examples/typescript/browserbase-login-function/package.json`](../../examples/typescript/browserbase-login-function/package.json).
 - [Dependency manifest `examples/typescript/browserbase-login-function/package-lock.json`](../../examples/typescript/browserbase-login-function/package-lock.json).
@@ -59,6 +59,7 @@ Declared runtime dependencies from [examples/typescript/browserbase-login-functi
 | `@browserbasehq/sdk-functions` | `1.0.3` |
 | `@browserbasehq/stagehand` | `4.1.0` |
 | `dotenv` | `^16.4.5` |
+| `playwright-core` | `1.55.0` |
 | `zod` | `4.4.3` |
 
 ## Caveats and verification
@@ -70,7 +71,7 @@ Source and setup metadata were inspected. No passing authenticated live-workflow
 | Clean install verified | 2026-10-13 | `Node.js 24.19.0; npm 11.17.0; package-lock.json` | `cd examples/typescript/browserbase-login-function && npm ci --ignore-scripts` | passed. Fresh package dependency tree installed; does not establish hosted build or login behavior. |
 | Typechecked | 2026-10-13 | `TypeScript 7.0.2; Stagehand 4.1.0; sdk-functions 1.0.3` | `cd examples/typescript/browserbase-login-function && npm run typecheck` | passed. Static validation only; successful login, MFA, and account identity are not verified. |
 
-- Email/password only; Google sign-in, SSO, MFA, and email verification are not automated.
+- Supports email/password and Browserbase Okta password selection. Google sign-in and other identity providers are unsupported; any required MFA must be completed by the user.
 - Upload the matching Stagehand extension and set its project-specific ID in index.ts before publishing.
 - Attach the API key, login email, and password Secrets to the deployed Function; local dev uses .env.
 - Session recording and default Stagehand logging are enabled; browser session logging is disabled. Replays and page content can include account identifiers.

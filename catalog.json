@@ -4095,7 +4095,7 @@
     {
       "access": "public",
       "caveats": [
-        "Email/password only; Google sign-in, SSO, MFA, and email verification are not automated.",
+        "Supports email/password and Browserbase Okta password selection. Google sign-in and other identity providers are unsupported; any required MFA must be completed by the user.",
         "Upload the matching Stagehand extension and set its project-specific ID in index.ts before publishing.",
         "Attach the API key, login email, and password Secrets to the deployed Function; local dev uses .env.",
         "Session recording and default Stagehand logging are enabled; browser session logging is disabled. Replays and page content can include account identifiers.",
@@ -4106,6 +4106,7 @@
         "@browserbasehq/sdk-functions": "1.0.3",
         "@browserbasehq/stagehand": "4.1.0",
         "dotenv": "^16.4.5",
+        "playwright-core": "1.55.0",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -4150,6 +4151,7 @@
       ],
       "frameworks": [
         "Stagehand",
+        "Playwright",
         "Browserbase Functions"
       ],
       "id": "examples-typescript-browserbase-login-function",
