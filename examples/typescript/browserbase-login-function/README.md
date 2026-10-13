@@ -8,12 +8,19 @@ Stagehand identifies each submit button before the corresponding credential is f
 
 - Node.js 24 and npm (the hosted build is constrained to the Node 24 release line).
 - A Browserbase project with access to Functions, Secrets, and the Model Gateway.
-- The official [Browserbase CLI](https://github.com/browserbase/cli) (`browse`).
+- The official [Browserbase CLI](https://www.npmjs.com/package/browse) (`browse`), with the Secrets commands shown below.
 - A Browserbase account that supports email/password login. Google sign-in, company SSO, MFA, and email verification are not automated by this recipe.
 
 The Function uses Browserbase's Model Gateway; no separate model-provider API key is required. Running it consumes browser and model usage. It submits a real sign-in attempt, then closes the browser. It does not persist the authenticated session or change dashboard settings.
 
 ## Install and configure
+
+Install the Browserbase CLI and confirm that Secrets commands are available:
+
+```sh
+npm install -g browse
+browse cloud secrets create --help
+```
 
 From the cookbook root:
 
@@ -33,7 +40,7 @@ browse cloud extensions upload node_modules/@browserbasehq/stagehand/dist/assets
 
 Replace `REPLACE_WITH_UPLOADED_STAGEHAND_EXTENSION_ID` in `index.ts` with the returned extension ID. The ID is project-specific configuration, not a secret. It must be present in the source because the hosted build does not receive your local `.env`.
 
-## Publish and attach Secrets
+## Publish and manage Secrets with the Browserbase CLI
 
 ```sh
 npm run typecheck
@@ -43,7 +50,7 @@ npm run publish:function
 
 The dry run checks the upload archive; it does not compile, deploy, or execute the Function. Save the Function ID returned after the hosted build succeeds.
 
-Create each Secret interactively. Enter its value at the CLI prompt, not in the command or source code:
+Use the Browserbase CLI to create and attach Secrets before invoking the deployed Function. Run these setup commands in your terminal, not inside the Function. Enter each value at the interactive CLI prompt, not in the command or source code:
 
 ```sh
 browse cloud secrets create BROWSERBASE_API_KEY
@@ -61,8 +68,16 @@ browse functions secrets attach <function-id> <password-secret-id>
 
 The deployed handler reads these values from `context.secrets`. Only local development falls back to environment variables. The publish archive excludes `.env` files.
 
+Verify that the Function has all three Secret names attached. This command lists metadata, not the secret values:
+
 ```sh
-npx bb invoke <function-id>
+browse functions secrets list <function-id>
+```
+
+Then invoke the Function with the Browserbase CLI:
+
+```sh
+browse functions invoke <function-id>
 ```
 
 ## Local execution

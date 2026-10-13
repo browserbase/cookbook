@@ -338,12 +338,12 @@
     },
     {
       "path": "examples/typescript/browserbase-login-function/README.md",
-      "sha256": "5781bd535f2c304dcd7e4f8e95280bba9076dc295c83d7edee07918bf7a9ed1b",
+      "sha256": "47c81127fb183c72e793231e61da31b173966e1cff4c35cda57a7d5c16825005",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "examples/typescript/browserbase-login-function/index.ts",
-      "sha256": "de92a056edfe2b2ebacbc780355ec71c30d670ea00bba60d977625379b10f435",
+      "sha256": "bff007caf2dc8a1c390d85a30c41649eb583e52c13a253736d753106e8766c38",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {

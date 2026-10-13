@@ -43,6 +43,15 @@ async function submitCredential(
 export default defineFn(
   "browserbase-login",
   async (context): Promise<LoginResult> => {
+    // Provision Secrets once with the Browserbase CLI (`npm install -g browse`):
+    // browse cloud secrets create BROWSERBASE_API_KEY
+    // browse cloud secrets create BROWSERBASE_LOGIN_EMAIL
+    // browse cloud secrets create BROWSERBASE_LOGIN_PASSWORD
+    // Enter values at the CLI prompts; never put them in this source or invocation params.
+    // After publishing, attach each returned Secret ID to the Function ID:
+    // browse functions secrets attach <function-id> <secret-id>
+    // Verify all three attachments: browse functions secrets list <function-id>
+    // Attached values arrive in context.secrets; .env is the local-dev fallback.
     const secret = (name: string) => {
       const value = context.secrets?.[name] ?? process.env[name];
       if (!value) throw new Error(`Missing secret: ${name}`);
