@@ -4098,7 +4098,7 @@
         "Email/password only; Google sign-in, SSO, MFA, and email verification are not automated.",
         "Upload the matching Stagehand extension and set its project-specific ID in index.ts before publishing.",
         "Attach the API key, login email, and password Secrets to the deployed Function; local dev uses .env.",
-        "Recording and logging are disabled; Stagehand still processes page content, which can include account identifiers.",
+        "Session recording and default Stagehand logging are enabled; browser session logging is disabled. Replays and page content can include account identifiers.",
         "Dashboard verification is an AI assessment, not a server-side authentication or identity assertion. Successful login has not been verified."
       ],
       "collection": "examples",

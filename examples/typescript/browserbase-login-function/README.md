@@ -2,7 +2,7 @@
 
 Deploy a Stagehand v4 browser workflow as a Browserbase Function. The Function reads login credentials from attached Secrets, signs into Browserbase with email and password, and checks whether the authenticated dashboard is visible.
 
-Stagehand identifies each submit button before the corresponding credential is filled. Native Stagehand locators fill the fields and click the identified buttons. Credential values are never interpolated into model instructions. Stagehand still processes page content, which may include the account email displayed by the site. Browser session recording, session logging, and Stagehand logging are disabled for this example.
+Stagehand identifies each submit button before the corresponding credential is filled. Native Stagehand locators fill the fields and click the identified buttons. Credential values are never interpolated into model instructions. Stagehand still processes page content, which may include the account email displayed by the site. Session recording is enabled so you can inspect replays in the Browserbase dashboard. Stagehand uses its default logging; browser session logging remains disabled. Replays and page content can include account information.
 
 ## Prerequisites
 

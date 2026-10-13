@@ -65,7 +65,7 @@ export default defineFn(
     let stagehand: Stagehand | undefined;
     try {
       browser = await browserbase.connect({ apiKey, sessionId: context.session.id });
-      stagehand = await Stagehand.create({ browser, logging: { level: "off" } });
+      stagehand = await Stagehand.create({ browser });
       const page = (await browser.context.activePage()) ?? (await browser.context.newPage());
       await page.goto(`${origin}/sign-in`);
 
@@ -111,5 +111,5 @@ export default defineFn(
       if (cleanupFailed) throw new Error("Login session cleanup failed");
     }
   },
-  { sessionConfig: { extensionId, browserSettings: { recordSession: false, logSession: false } } },
+  { sessionConfig: { extensionId, browserSettings: { recordSession: true, logSession: false } } },
 );
