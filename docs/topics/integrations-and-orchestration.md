@@ -7,6 +7,7 @@ Open a recipe guide for its working directory, commands, environment references,
 | Recipe | Language | Type | Status | Collection |
 | --- | --- | --- | --- | --- |
 | [Hackernews (Go)](../recipes/examples-go-hackernews.md) | go | runnable example | current / public | examples |
+| [Browserbase login with Functions and Secrets (TypeScript)](../recipes/examples-typescript-browserbase-login-function.md) | typescript | runnable example | current / public | examples |
 | [Gemini CUA (TypeScript)](../recipes/examples-typescript-gemini-cua.md) | typescript | runnable example | current / public | examples |
 | [Microsoft CUA (TypeScript)](../recipes/examples-typescript-microsoft-cua.md) | typescript | runnable example | current / public | examples |
 | [AgentKit · Browserbase](../recipes/integrations-examples-integrations-agentkit-browserbase.md) | typescript | runnable example | current / public | integrations |

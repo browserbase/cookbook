@@ -3,7 +3,7 @@
   "files": [
     {
       "path": "examples/README.md",
-      "sha256": "d4b80442ca66ab0f2c3a4d9666ff6b16bdfeed6aa4396ee76ebef5f3253ea63c",
+      "sha256": "d328a6c4c19768b3090953460b80e66ee1de5db81dc633a17523728818ea9aa0",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -324,6 +324,41 @@
     {
       "path": "examples/typescript/basic-captcha/tsconfig.json",
       "sha256": "c4fcd54c2e1b9946965ee4f87369f0b79e5b26026dfb3e5977d2babc6b191721",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/browserbase-login-function/.env.example",
+      "sha256": "5fb125246309e7fe625cda164ba95a4ae2b4a705e90f9c1414fb463955747699",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/browserbase-login-function/.gitignore",
+      "sha256": "e93c9fc70530529fbc104f50c3e33c5a87b175ccd77d420ac82c7f5978a93145",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/browserbase-login-function/README.md",
+      "sha256": "5781bd535f2c304dcd7e4f8e95280bba9076dc295c83d7edee07918bf7a9ed1b",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/browserbase-login-function/index.ts",
+      "sha256": "de92a056edfe2b2ebacbc780355ec71c30d670ea00bba60d977625379b10f435",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/browserbase-login-function/package-lock.json",
+      "sha256": "fae7239c8c90a0fc52c8ccc9f7fc572676be09e62f9609270e9debc163f75467",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/browserbase-login-function/package.json",
+      "sha256": "bd7cdad863e6c49cc4774d413fc39afd3f788087528d76f8087d7a8cd66f2d36",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/browserbase-login-function/tsconfig.json",
+      "sha256": "4ececca8184c89629920ea967c0055f60fc2ebd6376cde1ee8cbd3d9bb0ebbb1",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {

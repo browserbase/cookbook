@@ -79,6 +79,7 @@ All entries below were inspected at their pinned source revision. Live website b
 | [Basic caching (TypeScript)](../docs/recipes/examples-typescript-basic-caching.md) | typescript | runnable example | current / public | examples |
 | [Basic CAPTCHA (TypeScript)](../docs/recipes/examples-typescript-basic-captcha.md) | typescript | runnable example | current / public | examples |
 | [Browser agent demo (TypeScript)](../docs/recipes/examples-typescript-browser-agent-demo.md) | typescript | runnable example | current / public | examples |
+| [Browserbase login with Functions and Secrets (TypeScript)](../docs/recipes/examples-typescript-browserbase-login-function.md) | typescript | runnable example | current / public | examples |
 | [Browserbase reducto (TypeScript)](../docs/recipes/examples-typescript-browserbase-reducto.md) | typescript | runnable example | current / public | examples |
 | [Business lookup (TypeScript)](../docs/recipes/examples-typescript-business-lookup.md) | typescript | runnable example | current / public | examples |
 | [Company address finder (TypeScript)](../docs/recipes/examples-typescript-company-address-finder.md) | typescript | runnable example | current / public | examples |
