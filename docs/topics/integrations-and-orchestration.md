@@ -10,6 +10,7 @@ Open a recipe guide for its working directory, commands, environment references,
 | [Browserbase login with Functions and Secrets (TypeScript)](../recipes/examples-typescript-browserbase-login-function.md) | typescript | runnable example | current / public | examples |
 | [Gemini CUA (TypeScript)](../recipes/examples-typescript-gemini-cua.md) | typescript | runnable example | current / public | examples |
 | [Microsoft CUA (TypeScript)](../recipes/examples-typescript-microsoft-cua.md) | typescript | runnable example | current / public | examples |
+| [Order lookup for AI support with Functions and Secrets (TypeScript)](../recipes/examples-typescript-order-lookup-function.md) | typescript | runnable example | current / public | examples |
 | [AgentKit · Browserbase](../recipes/integrations-examples-integrations-agentkit-browserbase.md) | typescript | runnable example | current / public | integrations |
 | [AgentKit · Stagehand](../recipes/integrations-examples-integrations-agentkit-stagehand.md) | typescript | runnable example | current / public | integrations |
 | [Agno](../recipes/integrations-examples-integrations-agno.md) | python | runnable example | current / public | integrations |

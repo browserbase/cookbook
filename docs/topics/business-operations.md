@@ -15,6 +15,7 @@ Open a recipe guide for its working directory, commands, environment references,
 | [Council events (TypeScript)](../recipes/examples-typescript-council-events.md) | typescript | runnable example | current / public | examples |
 | [License verification (TypeScript)](../recipes/examples-typescript-license-verification.md) | typescript | runnable example | current / public | examples |
 | [Nurse verification (TypeScript)](../recipes/examples-typescript-nurse-verification.md) | typescript | runnable example | current / public | examples |
+| [Order lookup for AI support with Functions and Secrets (TypeScript)](../recipes/examples-typescript-order-lookup-function.md) | typescript | runnable example | current / public | examples |
 | [City council search (TypeScript, Stagehand)](../recipes/playbook-node-stagehand-research-citycouncilsearch.md) | typescript | runnable example | current / public | playbook |
 | [Validate nurses (TypeScript, Stagehand)](../recipes/playbook-node-stagehand-research-validatenurses.md) | typescript | runnable example | current / public | playbook |
 

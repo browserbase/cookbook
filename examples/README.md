@@ -103,6 +103,7 @@ All entries below were inspected at their pinned source revision. Live website b
 | [MFA handling (TypeScript)](../docs/recipes/examples-typescript-mfa-handling.md) | typescript | runnable example | current / public | examples |
 | [Microsoft CUA (TypeScript)](../docs/recipes/examples-typescript-microsoft-cua.md) | typescript | runnable example | current / public | examples |
 | [Nurse verification (TypeScript)](../docs/recipes/examples-typescript-nurse-verification.md) | typescript | runnable example | current / public | examples |
+| [Order lookup for AI support with Functions and Secrets (TypeScript)](../docs/recipes/examples-typescript-order-lookup-function.md) | typescript | runnable example | current / public | examples |
 | [Pickleball (TypeScript)](../docs/recipes/examples-typescript-pickleball.md) | typescript | runnable example | current / public | examples |
 | [Basic CAPTCHA (TypeScript)](../docs/recipes/examples-typescript-playwright-basic-captcha.md) | typescript | runnable example | current / public | examples |
 | [Playwright MFA handling (TypeScript)](../docs/recipes/examples-typescript-playwright-mfa-handling.md) | typescript | runnable example | current / public | examples |

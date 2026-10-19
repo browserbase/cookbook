@@ -14,6 +14,7 @@ Open a recipe guide for its working directory, commands, environment references,
 | [Context (TypeScript)](../recipes/examples-typescript-context.md) | typescript | runnable example | current / public | examples |
 | [Manual MFA with contexts (TypeScript)](../recipes/examples-typescript-manual-mfa-with-contexts.md) | typescript | runnable example | current / public | examples |
 | [MFA handling (TypeScript)](../recipes/examples-typescript-mfa-handling.md) | typescript | runnable example | current / public | examples |
+| [Order lookup for AI support with Functions and Secrets (TypeScript)](../recipes/examples-typescript-order-lookup-function.md) | typescript | runnable example | current / public | examples |
 | [Playwright MFA handling (TypeScript)](../recipes/examples-typescript-playwright-mfa-handling.md) | typescript | runnable example | current / public | examples |
 | [Box · agent](../recipes/integrations-examples-integrations-box-agent.md) | typescript | runnable example | current / public | integrations |
 | [Create extension (TypeScript, Browserbase)](../recipes/playbook-guides-1password-node-createextension.md) | typescript | runnable example | current / public | playbook |
