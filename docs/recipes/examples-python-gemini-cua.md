@@ -66,11 +66,11 @@ Declared runtime dependencies from [examples/python/gemini-cua/pyproject.toml](.
 
 Declared source dependencies.
 
-- `deepagents==0.7.5`
+- `deepagents==0.7.24`
 - `langchain-mcp-adapters==0.3.2`
-- `langchain-openai==1.4.3`
-- `pydantic>=2.12,<3`
-- `python-dotenv==1.2.2`
+- `langchain-openai==1.7.1`
+- `pydantic>=2.14.1,<3`
+- `python-dotenv==1.2.4`
 
 ## Caveats and verification
 

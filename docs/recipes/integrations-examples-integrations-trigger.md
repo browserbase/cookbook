@@ -72,19 +72,19 @@ Declared runtime dependencies from [integrations/examples/integrations/trigger/p
 
 | Package | Declared version |
 | --- | --- |
-| `@aws-sdk/client-s3` | `3.1127.0` |
+| `@aws-sdk/client-s3` | `3.1151.0` |
 | `@react-email/components` | `1.0.12` |
 | `@react-email/render` | `2.1.0` |
 | `@react-pdf/renderer` | `4.9.0` |
-| `@trigger.dev/sdk` | `4.6.3` |
-| `next` | `16.3.4` |
-| `openai` | `7.10.0` |
-| `puppeteer` | `25.10.0` |
-| `puppeteer-core` | `25.10.0` |
-| `react` | `19.2.4` |
-| `react-dom` | `19.2.4` |
-| `react-email` | `^4.0.16` |
-| `resend` | `6.26.0` |
+| `@trigger.dev/sdk` | `4.7.3` |
+| `next` | `16.4.0` |
+| `openai` | `7.32.0` |
+| `puppeteer` | `25.13.0` |
+| `puppeteer-core` | `25.13.0` |
+| `react` | `19.3.0` |
+| `react-dom` | `19.3.0` |
+| `react-email` | `^4.3.2` |
+| `resend` | `6.32.1` |
 
 ## Caveats and verification
 

@@ -9,8 +9,8 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@browserbasehq/sdk": "2.19.1",
-    "@browserbasehq/stagehand": "4.0.2",
+    "@browserbasehq/sdk": "2.21.0",
+    "@browserbasehq/stagehand": "4.2.1",
     "adm-zip": "latest",
     "dotenv": "latest",
     "reductoai": "latest",
@@ -22,7 +22,7 @@
     "typescript": "7.0.2",
     "@types/adm-zip": "^0.5.8"
   },
-  "packageManager": "pnpm@10.24.0",
+  "packageManager": "pnpm@10.34.7",
   "engines": {
     "node": ">=22.18.0"
   }

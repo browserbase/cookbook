@@ -57,9 +57,9 @@ Declared runtime dependencies from [examples/typescript/order-lookup-function/pa
 | Package | Declared version |
 | --- | --- |
 | `@browserbasehq/sdk-functions` | `1.0.3` |
-| `@browserbasehq/stagehand` | `4.1.0` |
-| `dotenv` | `^16.4.5` |
-| `playwright-core` | `1.55.0` |
+| `@browserbasehq/stagehand` | `4.2.1` |
+| `dotenv` | `^16.6.1` |
+| `playwright-core` | `1.64.0` |
 | `zod` | `4.4.3` |
 
 ## Caveats and verification

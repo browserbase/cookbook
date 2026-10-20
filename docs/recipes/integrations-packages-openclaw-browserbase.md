@@ -47,7 +47,7 @@ Declared runtime dependencies from [integrations/packages/openclaw-browserbase/p
 | Package | Declared version |
 | --- | --- |
 | `json5` | `2.2.3` |
-| `tar` | `^7.5.9` |
+| `tar` | `^7.5.22` |
 
 ## Caveats and verification
 

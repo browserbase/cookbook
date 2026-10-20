@@ -50,13 +50,13 @@ Declared runtime dependencies from [integrations/examples/integrations/crewai/cr
 | Package | Declared version |
 | --- | --- |
 | `aiohttp` | `>=3.14.3` |
-| `crewai` | `1.15.20` |
+| `crewai` | `1.15.27` |
 | `cryptography` | `>=50.0.0` |
 | `filelock` | `>=3.20.3` |
 | `html2text` | `>=2024.2.26` |
 | `idna` | `>=3.15` |
 | `orjson` | `>=3.11.6` |
-| `playwright` | `1.62.0` |
+| `playwright` | `1.63.0` |
 | `pyarrow` | `>=23.0.1` |
 | `pyasn1` | `>=0.6.4` |
 | `python-dotenv` | `>=1.2.2,<2` |

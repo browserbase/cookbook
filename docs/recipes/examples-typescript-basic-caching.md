@@ -53,7 +53,7 @@ Declared runtime dependencies from [examples/typescript/basic-caching/package.js
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/stagehand` | `4.0.2` |
+| `@browserbasehq/stagehand` | `4.2.1` |
 | `dotenv` | `latest` |
 
 ## Caveats and verification

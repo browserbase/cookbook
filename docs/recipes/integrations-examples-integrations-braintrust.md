@@ -42,14 +42,14 @@ Declared runtime dependencies from [integrations/examples/integrations/braintrus
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/sdk` | `2.19.1` |
-| `braintrust` | `3.30.0` |
-| `next` | `16.3.4` |
-| `node` | `^22.16.0` |
-| `playwright-core` | `1.63.0` |
-| `react` | `19.2.4` |
-| `react-dom` | `19.2.4` |
-| `zod` | `4.4.3` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `braintrust` | `3.37.2` |
+| `next` | `16.4.0` |
+| `node` | `^22.23.3` |
+| `playwright-core` | `1.64.0` |
+| `react` | `19.3.0` |
+| `react-dom` | `19.3.0` |
+| `zod` | `4.6.7` |
 
 ## Caveats and verification
 

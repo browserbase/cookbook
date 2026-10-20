@@ -6,18 +6,18 @@
     "start": "tsx index.ts"
   },
   "dependencies": {
-    "@browserbasehq/sdk": "2.19.1",
-    "@browserbasehq/stagehand": "4.0.2",
-    "@playwright/test": "1.63.0",
+    "@browserbasehq/sdk": "2.21.0",
+    "@browserbasehq/stagehand": "4.2.1",
+    "@playwright/test": "1.64.0",
     "boxen": "8.0.1",
-    "chalk": "6.0.0",
+    "chalk": "6.0.1",
     "dotenv": "16.6.1",
-    "mongodb": "7.6.0",
+    "mongodb": "7.7.0",
     "zod": "4.4.3"
   },
   "devDependencies": {
-    "tsx": "^4.19.2",
+    "tsx": "^4.23.15",
     "typescript": "7.0.2"
   },
-  "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c"
+  "packageManager": "pnpm@9.15.9"
 }

@@ -11,12 +11,12 @@
     "test": "node --experimental-vm-modules --test tests/*.test.cjs"
   },
   "dependencies": {
-    "@browserbasehq/sdk": "2.19.1",
+    "@browserbasehq/sdk": "2.21.0",
     "dotenv": "16.6.1"
   },
   "devDependencies": {
-    "@types/node": "^25.0.9",
-    "tsx": "^4.19.2",
+    "@types/node": "^25.9.9",
+    "tsx": "^4.23.15",
     "typescript": "7.0.2"
   }
 }

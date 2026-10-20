@@ -38,8 +38,8 @@ Declared runtime dependencies from [integrations/packages/eve-browserbase/packag
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/sdk` | `2.19.1` |
-| `@browserbasehq/stagehand` | `4.0.2` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `@browserbasehq/stagehand` | `4.2.1` |
 | `zod` | `4.4.3` |
 
 ## Caveats and verification

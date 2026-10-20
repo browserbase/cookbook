@@ -58,11 +58,11 @@ Declared runtime dependencies from [integrations/examples/integrations/agno/requ
 
 Declared source dependencies.
 
-- `agno==3.0.6`
-- `browserbase==1.18.1`
+- `agno==3.1.3`
+- `browserbase==1.20.0`
 - `openai>=2,<3`
-- `playwright==1.62.0`
-- `python-dotenv>=1.2.2,<2`
+- `playwright==1.63.0`
+- `python-dotenv>=1.2.4,<2`
 
 ## Caveats and verification
 

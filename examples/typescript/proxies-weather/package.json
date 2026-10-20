@@ -7,17 +7,17 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@browserbasehq/stagehand": "4.0.2",
-    "dotenv": "^16.4.7",
+    "@browserbasehq/stagehand": "4.2.1",
+    "dotenv": "^16.6.1",
     "zod": "4.4.3"
   },
   "devDependencies": {
-    "@types/node": "^22.18.0",
-    "tsx": "^4.19.2",
+    "@types/node": "^22.20.5",
+    "tsx": "^4.23.15",
     "typescript": "7.0.2"
   },
   "engines": {
     "node": ">=22.18.0"
   },
-  "packageManager": "pnpm@10.24.0"
+  "packageManager": "pnpm@10.34.7"
 }

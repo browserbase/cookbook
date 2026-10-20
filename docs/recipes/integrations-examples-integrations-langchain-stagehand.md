@@ -40,8 +40,8 @@ Declared runtime dependencies from [integrations/examples/integrations/langchain
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/stagehand` | `4.0.2` |
-| `@langchain/core` | `1.2.9` |
+| `@browserbasehq/stagehand` | `4.2.1` |
+| `@langchain/core` | `1.2.17` |
 | `zod` | `4.4.3` |
 
 ## Caveats and verification

@@ -52,10 +52,10 @@ Declared runtime dependencies from [examples/python/smart-fetch-scraper/pyprojec
 
 Declared source dependencies.
 
-- `browserbase==1.18.1`
+- `browserbase==1.20.0`
 - `pydantic`
 - `python-dotenv`
-- `stagehand==4.0.2`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

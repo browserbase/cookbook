@@ -55,10 +55,10 @@ Declared runtime dependencies from [examples/python/browserbase-reducto/pyprojec
 
 Declared source dependencies.
 
-- `browserbase==1.18.1`
+- `browserbase==1.20.0`
 - `python-dotenv`
 - `reductoai`
-- `stagehand==4.0.2`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

@@ -65,11 +65,11 @@ Declared runtime dependencies from [examples/typescript/browser-agent-demo/packa
 
 | Package | Declared version |
 | --- | --- |
-| `@ai-sdk/mcp` | `^2.0.29` |
-| `@browserbasehq/sdk` | `2.19.1` |
+| `@ai-sdk/mcp` | `^2.0.74` |
+| `@browserbasehq/sdk` | `2.21.0` |
 | `@browserbasehq/stagehand-codemode` | `github:browserbase/stagehand#54302fc5f13be5ad8e717d8e1388502de22be2ed&path:packages/integrations` |
-| `ai` | `^7.0.58` |
-| `dotenv` | `^17.4.0` |
+| `ai` | `^7.0.139` |
+| `dotenv` | `^17.4.2` |
 
 ## Caveats and verification
 

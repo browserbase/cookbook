@@ -58,10 +58,10 @@ Declared runtime dependencies from [examples/python/extend-browserbase/pyproject
 
 Declared source dependencies.
 
-- `browserbase==1.18.1`
-- `extend-ai>=1.0.0`
-- `python-dotenv>=1.2.1`
-- `stagehand==4.0.2`
+- `browserbase==1.20.0`
+- `extend-ai>=1.19.0`
+- `python-dotenv>=1.2.4`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

@@ -58,11 +58,11 @@ Declared runtime dependencies from [integrations/examples/integrations/crewai/st
 
 Declared source dependencies.
 
-- `crewai-tools[mcp]==1.15.20`
-- `crewai==1.15.20`
-- `mcp>=1.28,<2`
-- `python-dotenv>=1.2.2,<2`
-- `stagehand==4.0.2`
+- `crewai-tools[mcp]==1.15.27`
+- `crewai==1.15.27`
+- `mcp>=1.30.0,<2`
+- `python-dotenv>=1.2.4,<2`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

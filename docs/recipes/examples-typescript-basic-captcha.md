@@ -53,7 +53,7 @@ Declared runtime dependencies from [examples/typescript/basic-captcha/package.js
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/stagehand` | `4.0.2` |
+| `@browserbasehq/stagehand` | `4.2.1` |
 | `dotenv` | `^17.4.2` |
 
 ## Caveats and verification

@@ -59,8 +59,8 @@ Declared runtime dependencies from [examples/typescript/browserbase-reducto/pack
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/sdk` | `2.19.1` |
-| `@browserbasehq/stagehand` | `4.0.2` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `@browserbasehq/stagehand` | `4.2.1` |
 | `adm-zip` | `latest` |
 | `dotenv` | `latest` |
 | `reductoai` | `latest` |

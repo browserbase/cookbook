@@ -58,10 +58,10 @@ Declared runtime dependencies from [examples/python/amazon-global-price-comparis
 
 Declared source dependencies.
 
-- `browserbase==1.18.1`
-- `pydantic>=2.0.0`
+- `browserbase==1.20.0`
+- `pydantic>=2.14.1`
 - `python-dotenv`
-- `stagehand==4.0.2`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

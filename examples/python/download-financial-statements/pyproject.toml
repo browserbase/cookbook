@@ -3,10 +3,10 @@ name = "download-financial-statements"
 version = "0.1.0"
 requires-python = ">=3.11,<3.14"
 dependencies = [
-    "browserbase==1.18.1",
+    "browserbase==1.20.0",
     "httpx==0.28.1",
-    "python-dotenv==1.2.2",
-    "stagehand==4.0.2",
+    "python-dotenv==1.2.4",
+    "stagehand==4.2.1",
 ]
 
 [tool.uv]
