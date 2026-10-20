@@ -5,6 +5,7 @@ export default async function SessionPage({ params }: { params: Promise<{ sessio
   return (
     <App
       browserbaseConfigured={Boolean(process.env.BROWSERBASE_API_KEY)}
+      key={sessionId}
       sessionId={sessionId}
       modelConfigured={Boolean(process.env.OPENAI_API_KEY)}
       contextConfigured={Boolean(process.env.BROWSERBASE_CONTEXT_ID)}

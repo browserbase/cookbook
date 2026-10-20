@@ -31,6 +31,8 @@ type CliItem = {
 export class OnePasswordVaultProvider implements VaultProvider {
   private client?: Promise<import("@1password/sdk").Client>;
   private backend?: Backend;
+  private itemCache?: { items: SafeLoginItem[]; expiresAt: number };
+  private itemRequest?: Promise<SafeLoginItem[]>;
 
   async status(): Promise<VaultProviderStatus> {
     const mode = authMode();
@@ -70,6 +72,19 @@ export class OnePasswordVaultProvider implements VaultProvider {
   }
 
   async list(): Promise<SafeLoginItem[]> {
+    if (this.itemCache && this.itemCache.expiresAt > Date.now()) return this.itemCache.items;
+    if (this.itemRequest) return this.itemRequest;
+    this.itemRequest = this.loadItems();
+    try {
+      const items = await this.itemRequest;
+      this.itemCache = { items, expiresAt: Date.now() + 30_000 };
+      return items;
+    } finally {
+      this.itemRequest = undefined;
+    }
+  }
+
+  private async loadItems(): Promise<SafeLoginItem[]> {
     const backend = await this.selectBackend();
     if (backend === "cli") return this.listWithCli();
     try {
@@ -124,32 +139,37 @@ export class OnePasswordVaultProvider implements VaultProvider {
   private async listWithSdk(): Promise<SafeLoginItem[]> {
     const sdk = await import("@1password/sdk"),
       client = await this.getClient(),
-      vaults = await client.vaults.list({ decryptDetails: true }),
-      items: SafeLoginItem[] = [];
-    for (const vault of vaults) {
-      for (const overview of await client.items.list(vault.id)) {
-        if (overview.category !== sdk.ItemCategory.Login) continue;
-        const item = await client.items.get(vault.id, overview.id),
-          has = (id: string) => item.fields.some((field) => field.id === id),
-          hasTotp = item.fields.some((field) => field.fieldType === sdk.ItemFieldType.Totp);
-        items.push({
-          provider: "onepassword",
-          vaultId: vault.id,
-          vaultName: vault.title,
-          itemId: item.id,
-          label: item.title,
-          allowedHosts: item.websites.map((site) => host(site.url)).filter(Boolean),
-          fields: {
-            username: has("username"),
-            password: has("password"),
-            totp: hasTotp,
-          },
-          createdAt: item.createdAt.toISOString(),
-          updatedAt: item.updatedAt.toISOString(),
-        });
-      }
-    }
-    return items;
+      vaults = await client.vaults.list({ decryptDetails: true });
+    const items = await Promise.all(
+      vaults.map(async (vault) => {
+        const overviews = await client.items.list(vault.id);
+        return Promise.all(
+          overviews
+            .filter((overview) => overview.category === sdk.ItemCategory.Login)
+            .map(async (overview) => {
+              const item = await client.items.get(vault.id, overview.id),
+                has = (id: string) => item.fields.some((field) => field.id === id),
+                hasTotp = item.fields.some((field) => field.fieldType === sdk.ItemFieldType.Totp);
+              return {
+                provider: "onepassword" as const,
+                vaultId: vault.id,
+                vaultName: vault.title,
+                itemId: item.id,
+                label: item.title,
+                allowedHosts: item.websites.map((site) => host(site.url)).filter(Boolean),
+                fields: {
+                  username: has("username"),
+                  password: has("password"),
+                  totp: hasTotp,
+                },
+                createdAt: item.createdAt.toISOString(),
+                updatedAt: item.updatedAt.toISOString(),
+              } satisfies SafeLoginItem;
+            }),
+        );
+      }),
+    );
+    return items.flat();
   }
 
   private async resolveWithSdk(ref: SecretRef): Promise<string> {

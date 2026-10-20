@@ -1,6 +1,7 @@
 "use client";
 
 import { useEveAgent } from "eve/react";
+import Hls from "hls.js";
 import {
   Activity,
   ArrowDown,
@@ -29,13 +30,20 @@ import {
   Wrench,
   X,
 } from "lucide-react";
-import { FormEvent, useEffect, useMemo, useRef, useState } from "react";
+import { FormEvent, useCallback, useEffect, useMemo, useRef, useState } from "react";
 
 import { isNearScrollBottom } from "./chat-scroll";
 import { buildClientContext } from "./client-context";
 import ContextStudio from "./ContextStudio";
 import { toEmbeddedBrowserbaseLiveViewUrl } from "./live-view";
-import { parseTaskHistory, TASK_HISTORY_KEY, type TaskHistoryItem } from "./task-history";
+import {
+  LEGACY_TASK_HISTORY_KEY,
+  mergeTaskHistory,
+  parseTaskHistory,
+  TASK_HISTORY_KEY,
+  taskTitle,
+  type TaskHistoryItem,
+} from "./task-history";
 import type { AgentSettings, Bootstrap, BrowserState, TraceEvent } from "./types";
 import VaultStudio from "./VaultStudio";
 
@@ -53,7 +61,22 @@ type CaptchaProjection = {
   attemptCount: number;
 };
 type BrowserCardView = "browser" | "activity";
+type BrowserDisplayMode = "live" | "replay" | "other";
 type StopStatus = "idle" | "stopping" | "stopped";
+type ReplayPage = {
+  pageId: string;
+  url: string;
+  startTimeMs: number;
+  endTimeMs: number;
+};
+type RemoteBrowserView = {
+  sessionId: string;
+  mode: "live" | "replay" | "processing";
+  status: string;
+  liveUrl?: string;
+  pageCount?: number;
+  pages?: ReplayPage[];
+};
 
 const starterPrompts = [
   { icon: Braces, label: "Fill a demo form", hint: "Stop before Submit" },
@@ -132,6 +155,13 @@ export default function App({
   const stopRequestRef = useRef<Promise<unknown> | undefined>(undefined);
   const cancellationObservedRef = useRef(false);
   const [agentSettings, setAgentSettings] = useState<AgentSettings>(defaultAgentSettings);
+  const historyRef = useRef<TaskHistoryItem[]>([]);
+  const rememberTaskHistory = useCallback((tasks: TaskHistoryItem[]) => {
+    const next = mergeTaskHistory(historyRef.current, tasks);
+    historyRef.current = next;
+    setHistory(next);
+    window.localStorage.setItem(TASK_HISTORY_KEY, JSON.stringify(next));
+  }, []);
   const agent = useEveAgent({
     initialSession: sessionId ? { sessionId, streamIndex: 0 } : undefined,
     resume: Boolean(sessionId),
@@ -157,12 +187,15 @@ export default function App({
       }
     },
     onSessionChange(session) {
-      if (session)
+      if (session) {
         void fetch("/api/tasks", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ sessionId: session.sessionId }),
-        });
+          body: JSON.stringify({
+            sessionIds: [session.sessionId, ...historyRef.current.map((item) => item.sessionId)],
+          }),
+        }).catch(() => undefined);
+      }
       if (!sessionId && session) {
         History.prototype.replaceState.call(
           window.history,
@@ -217,6 +250,7 @@ export default function App({
           : "Fresh session";
   const activeSessionId = agent.session?.sessionId ?? sessionId;
   const firstRequest = messages.find((message) => message.role === "user")?.text;
+  const latestMessageAt = useMemo(() => latestConversationMessageAt(agent.events), [agent.events]);
   const bootstrap = useMemo<Bootstrap>(
     () => ({
       product: "Browsie",
@@ -247,33 +281,39 @@ export default function App({
   );
 
   useEffect(() => {
-    const legacy = parseTaskHistory(window.localStorage.getItem(TASK_HISTORY_KEY));
-    void Promise.all(
-      legacy.map((item) =>
-        fetch("/api/tasks", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({ sessionId: item.sessionId }),
-        }),
-      ),
-    )
-      .then(() => {
-        setAgentSettings(parseAgentSettings(window.localStorage.getItem(AGENT_SETTINGS_KEY)));
-        window.localStorage.removeItem(TASK_HISTORY_KEY);
-        return fetch("/api/tasks", { cache: "no-store" });
-      })
-      .then((response) => response.json())
-      .then((body: { tasks?: TaskHistoryItem[] }) => setHistory(body.tasks ?? []))
-      .catch(() => undefined);
-  }, []);
+    const frame = requestAnimationFrame(() => {
+      const cached = parseTaskHistory(window.localStorage.getItem(TASK_HISTORY_KEY));
+      const legacy = cached.length
+        ? []
+        : parseTaskHistory(window.localStorage.getItem(LEGACY_TASK_HISTORY_KEY));
+      setAgentSettings(parseAgentSettings(window.localStorage.getItem(AGENT_SETTINGS_KEY)));
+      if (cached.length) rememberTaskHistory(cached);
+      else if (legacy.length) {
+        historyRef.current = legacy;
+        setHistory(legacy);
+      }
+      if (cached.length) return;
+
+      void fetch("/api/tasks", { cache: "no-store" })
+        .then((response) => response.json())
+        .then((body: { tasks?: TaskHistoryItem[] }) => {
+          rememberTaskHistory(body.tasks ?? []);
+          window.localStorage.removeItem(LEGACY_TASK_HISTORY_KEY);
+        })
+        .catch(() => undefined);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, [rememberTaskHistory]);
 
   useEffect(() => {
-    if (!activeSessionId || !firstRequest) return;
-    void fetch("/api/tasks", { cache: "no-store" })
-      .then((response) => response.json())
-      .then((body: { tasks?: TaskHistoryItem[] }) => setHistory(body.tasks ?? []))
-      .catch(() => undefined);
-  }, [activeSessionId, firstRequest, messages.length]);
+    if (resuming || !activeSessionId || !firstRequest || !latestMessageAt) return;
+    const task = {
+      sessionId: activeSessionId,
+      title: taskTitle(firstRequest),
+      updatedAt: latestMessageAt,
+    };
+    rememberTaskHistory([task]);
+  }, [activeSessionId, firstRequest, latestMessageAt, rememberTaskHistory, resuming]);
 
   useEffect(() => {
     const updateLayout = () => setSidebar(window.innerWidth > 720);
@@ -298,6 +338,15 @@ export default function App({
     setStopError(undefined);
 
     const optimisticId = `optimistic-${crypto.randomUUID()}`;
+    if (activeSessionId) {
+      rememberTaskHistory([
+        {
+          sessionId: activeSessionId,
+          title: taskTitle(firstRequest ?? clean),
+          updatedAt: new Date().toISOString(),
+        },
+      ]);
+    }
     if (!pendingInput?.allowFreeform) {
       setOptimisticMessages((current) => [
         ...current,
@@ -348,16 +397,7 @@ export default function App({
   }
 
   function newChat() {
-    agent.reset();
-    cancellationObservedRef.current = false;
-    stopRequestRef.current = undefined;
-    setInput("");
-    setOptimisticMessages([]);
-    setStopStatus("idle");
-    setStopError(undefined);
-    setView("chat");
-    History.prototype.replaceState.call(window.history, window.history.state, "", "/s");
-    if (window.innerWidth <= 720) setSidebar(false);
+    window.location.assign("/s");
   }
 
   function openWorkspace(nextView: WorkspaceView) {
@@ -614,7 +654,13 @@ function ChatView({
             if (nearBottom) setHasNewMessage(false);
           }}
         >
-          {messages.length === 0 ? (
+          {messages.length === 0 && resuming ? (
+            <div className="welcome chat-restoring" role="status">
+              <p className="kicker">RESTORING CHAT</p>
+              <h1>Loading this browser task…</h1>
+              <p className="lede">Browsie is reading the saved conversation and activity trace.</p>
+            </div>
+          ) : messages.length === 0 ? (
             <div className="welcome">
               <p className="kicker">BROWSIE · BROWSER AGENT</p>
               <h1>
@@ -840,13 +886,18 @@ function BrowserDockCard({
   traces: TraceEvent[];
 }) {
   const [cardView, setCardView] = useState<BrowserCardView>("browser");
+  const [displayMode, setDisplayMode] = useState<BrowserDisplayMode>(
+    browser.replaySessionId ? "replay" : browser.status === "active" ? "live" : "other",
+  );
   const [fullscreen, setFullscreen] = useState(false);
   const label =
-    browser.status === "active"
-      ? "Browser live"
-      : browser.status === "starting"
-        ? "Starting browser"
-        : "Browser";
+    displayMode === "replay"
+      ? "Session replay"
+      : browser.status === "active" || displayMode === "live"
+        ? "Browser live"
+        : browser.status === "starting"
+          ? "Starting browser"
+          : "Browser";
 
   return (
     <article
@@ -919,7 +970,12 @@ function BrowserDockCard({
         {expanded ? (
           <div className="browser-card-content">
             {cardView === "browser" ? (
-              <BrowserPanel browser={browser} latestTool={latestTool} fullscreen={fullscreen} />
+              <BrowserPanel
+                browser={browser}
+                latestTool={latestTool}
+                fullscreen={fullscreen}
+                onModeChange={setDisplayMode}
+              />
             ) : (
               <EventsPanel traces={traces} />
             )}
@@ -1183,17 +1239,21 @@ function BrowserPanel({
   browser,
   fullscreen,
   latestTool,
+  onModeChange,
 }: {
   browser: BrowserState;
   fullscreen: boolean;
   latestTool?: TraceEvent;
+  onModeChange: (mode: BrowserDisplayMode) => void;
 }) {
   const directLiveUrl = toEmbeddedBrowserbaseLiveViewUrl(browser.liveUrl);
-  const [resolvedLiveUrl, setResolvedLiveUrl] = useState<string>();
-  const [liveViewStatus, setLiveViewStatus] = useState<"idle" | "loading" | "ready" | "error">(
+  const browserbaseSessionId = browser.sessionId ?? browser.replaySessionId;
+  const [remoteView, setRemoteView] = useState<RemoteBrowserView>();
+  const [selectedReplayPageId, setSelectedReplayPageId] = useState<string>();
+  const [viewStatus, setViewStatus] = useState<"idle" | "loading" | "ready" | "error">(
     directLiveUrl ? "ready" : "idle",
   );
-  const [liveViewCapability, setLiveViewCapability] = useState<string>();
+  const [viewCapability, setViewCapability] = useState<string>();
 
   useEffect(() => {
     if (browser.provider !== "browserbase") return;
@@ -1206,79 +1266,85 @@ function BrowserPanel({
       .then((response) =>
         response.ok ? (response.json() as Promise<{ token: string }>) : Promise.reject(),
       )
-      .then(({ token }) => setLiveViewCapability(token))
+      .then(({ token }) => setViewCapability(token))
       .catch(() => undefined);
     return () => controller.abort();
   }, [browser.provider]);
 
   useEffect(() => {
-    let cancelled = false;
-    const updateState = (status: "idle" | "loading" | "ready", url?: string) => {
-      queueMicrotask(() => {
-        if (cancelled) return;
-        setResolvedLiveUrl(url);
-        setLiveViewStatus(status);
-      });
-    };
-
-    if (directLiveUrl) {
-      updateState("ready");
-      return () => {
-        cancelled = true;
-      };
-    }
-    if (
-      browser.provider !== "browserbase" ||
-      browser.status !== "active" ||
-      !browser.sessionId ||
-      !liveViewCapability
-    ) {
-      updateState("idle");
-      return () => {
-        cancelled = true;
-      };
-    }
+    if (browser.provider !== "browserbase" || !browserbaseSessionId || !viewCapability) return;
 
     const controller = new AbortController();
-    updateState("loading");
-    fetch(`/api/browser-live-view?sessionId=${encodeURIComponent(browser.sessionId)}`, {
-      cache: "no-store",
-      signal: controller.signal,
-      headers: { "x-browsie-context-capability": liveViewCapability },
-    })
-      .then(async (response) => {
-        if (!response.ok) throw new Error("Live view unavailable");
-        return response.json() as Promise<{ liveUrl?: string }>;
-      })
-      .then(({ liveUrl }) => {
-        const safeLiveUrl = toEmbeddedBrowserbaseLiveViewUrl(liveUrl);
-        if (!safeLiveUrl) throw new Error("Invalid live view URL");
-        setResolvedLiveUrl(safeLiveUrl);
-        setLiveViewStatus("ready");
-      })
-      .catch((error: unknown) => {
-        if (error instanceof DOMException && error.name === "AbortError") return;
-        setLiveViewStatus("error");
-      });
+    let requestRunning = false;
+    const refresh = async () => {
+      if (requestRunning) return;
+      requestRunning = true;
+      if (!directLiveUrl) setViewStatus("loading");
+      try {
+        const response = await fetch(
+          `/api/browser-session-view?sessionId=${encodeURIComponent(browserbaseSessionId)}`,
+          {
+            cache: "no-store",
+            signal: controller.signal,
+            headers: { "x-browsie-context-capability": viewCapability },
+          },
+        );
+        if (!response.ok) throw new Error("Browser session unavailable");
+        const next = (await response.json()) as Omit<RemoteBrowserView, "sessionId">;
+        setRemoteView({ ...next, sessionId: browserbaseSessionId });
+        onModeChange(next.mode === "replay" ? "replay" : next.mode === "live" ? "live" : "other");
+        setViewStatus("ready");
+        if (next.mode === "replay" && next.pages?.length) {
+          setSelectedReplayPageId((current) =>
+            next.pages?.some((page) => page.pageId === current)
+              ? current
+              : next.pages?.at(-1)?.pageId,
+          );
+        }
+      } catch (error) {
+        if (!(error instanceof DOMException && error.name === "AbortError"))
+          setViewStatus(directLiveUrl ? "ready" : "error");
+      } finally {
+        requestRunning = false;
+      }
+    };
+    void refresh();
+    const timer = window.setInterval(() => void refresh(), 4_000);
     return () => {
-      cancelled = true;
+      window.clearInterval(timer);
       controller.abort();
     };
-  }, [browser.provider, browser.sessionId, browser.status, directLiveUrl, liveViewCapability]);
+  }, [browserbaseSessionId, browser.provider, directLiveUrl, onModeChange, viewCapability]);
 
-  const liveUrl = directLiveUrl ?? resolvedLiveUrl;
+  const currentRemoteView = remoteView?.sessionId === browserbaseSessionId ? remoteView : undefined;
+  const replayPages = currentRemoteView?.mode === "replay" ? (currentRemoteView.pages ?? []) : [];
+  const selectedReplayPage =
+    replayPages.find((page) => page.pageId === selectedReplayPageId) ?? replayPages.at(-1);
+  const resolvedRemoteLiveUrl =
+    currentRemoteView?.mode === "live"
+      ? toEmbeddedBrowserbaseLiveViewUrl(currentRemoteView.liveUrl)
+      : undefined;
+  const liveUrl =
+    currentRemoteView?.mode === "replay" || currentRemoteView?.mode === "processing"
+      ? undefined
+      : (resolvedRemoteLiveUrl ?? directLiveUrl);
   const emptyTitle =
-    liveViewStatus === "loading"
-      ? "Connecting live view"
-      : liveViewStatus === "error"
-        ? "Live view unavailable"
-        : "No page open";
+    currentRemoteView?.mode === "processing"
+      ? "Preparing session replay"
+      : viewStatus === "loading"
+        ? "Connecting live view"
+        : viewStatus === "error"
+          ? "Browser view unavailable"
+          : "No page open";
   const emptyDetail =
-    liveViewStatus === "loading"
-      ? "Waiting for Browserbase."
-      : liveViewStatus === "error"
-        ? "Start a new task to open another session."
-        : "Run a browser task to see the page.";
+    currentRemoteView?.mode === "processing"
+      ? "Browserbase is processing the recording."
+      : viewStatus === "loading"
+        ? "Waiting for Browserbase."
+        : viewStatus === "error"
+          ? "Start a new task to open another session."
+          : "Run a browser task to see the page.";
+  const displayUrl = selectedReplayPage?.url ?? browser.url;
 
   return (
     <div className={`browser-panel ${fullscreen ? "is-fullscreen" : ""}`}>
@@ -1286,10 +1352,35 @@ function BrowserPanel({
         <span />
         <span />
         <span />
-        <div>{safeHost(browser.url)}</div>
+        <div>{safeHost(displayUrl)}</div>
       </div>
       <div className="browser-viewport">
-        {liveUrl ? (
+        {selectedReplayPage && browserbaseSessionId && viewCapability ? (
+          <div className="browser-replay">
+            <div className="replay-toolbar">
+              <span>Session replay</span>
+              {replayPages.length > 1 ? (
+                <select
+                  aria-label="Replay page"
+                  value={selectedReplayPage.pageId}
+                  onChange={(event) => setSelectedReplayPageId(event.target.value)}
+                >
+                  {replayPages.map((page, index) => (
+                    <option key={page.pageId} value={page.pageId}>
+                      Page {index + 1} · {safeHost(page.url)}
+                    </option>
+                  ))}
+                </select>
+              ) : null}
+            </div>
+            <ReplayVideo
+              capability={viewCapability}
+              key={selectedReplayPage.pageId}
+              pageId={selectedReplayPage.pageId}
+              sessionId={browserbaseSessionId}
+            />
+          </div>
+        ) : liveUrl ? (
           <iframe
             src={liveUrl}
             title="Live Browserbase session"
@@ -1330,6 +1421,76 @@ function BrowserPanel({
         <span className="tool-name">{latestTool?.name ?? "No tool"}</span>
       </div>
     </div>
+  );
+}
+
+function ReplayVideo({
+  capability,
+  pageId,
+  sessionId,
+}: {
+  capability: string;
+  pageId: string;
+  sessionId: string;
+}) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    const controller = new AbortController();
+    let hls: Hls | undefined;
+    let playlistUrl: string | undefined;
+
+    void fetch(
+      `/api/browser-replay/${encodeURIComponent(sessionId)}/${encodeURIComponent(pageId)}`,
+      {
+        cache: "no-store",
+        signal: controller.signal,
+        headers: { "x-browsie-context-capability": capability },
+      },
+    )
+      .then(async (response) => {
+        if (!response.ok) throw new Error("Replay unavailable");
+        const playlist = await response.text();
+        playlistUrl = URL.createObjectURL(
+          new Blob([playlist], { type: "application/vnd.apple.mpegurl" }),
+        );
+        if (Hls.isSupported()) {
+          hls = new Hls();
+          hls.loadSource(playlistUrl);
+          hls.attachMedia(video);
+          hls.on(Hls.Events.ERROR, (_event, data) => {
+            if (data.fatal) setError(true);
+          });
+          return;
+        }
+        if (!video.canPlayType("application/vnd.apple.mpegurl"))
+          throw new Error("Replay is not supported");
+        video.src = playlistUrl;
+      })
+      .catch((caught: unknown) => {
+        if (!(caught instanceof DOMException && caught.name === "AbortError")) setError(true);
+      });
+
+    return () => {
+      controller.abort();
+      hls?.destroy();
+      video.removeAttribute("src");
+      video.load();
+      if (playlistUrl) URL.revokeObjectURL(playlistUrl);
+    };
+  }, [capability, pageId, sessionId]);
+
+  return error ? (
+    <div className="empty-browser replay-error">
+      <Globe2 size={32} />
+      <strong>Replay unavailable</strong>
+      <span>The recording could not load.</span>
+    </div>
+  ) : (
+    <video ref={videoRef} controls playsInline preload="metadata" />
   );
 }
 
@@ -1475,6 +1636,29 @@ function projectMessages(source: readonly unknown[]): Message[] {
   return messages;
 }
 
+function latestConversationMessageAt(events: readonly unknown[]): string | undefined {
+  let latest: string | undefined;
+  for (const value of events) {
+    if (!value || typeof value !== "object") continue;
+    const event = value as {
+      type?: unknown;
+      data?: unknown;
+      meta?: { at?: unknown };
+    };
+    if (event.type !== "message.received" && event.type !== "message.completed") continue;
+    if (event.type === "message.completed") {
+      const message =
+        event.data && typeof event.data === "object"
+          ? (event.data as { message?: unknown }).message
+          : undefined;
+      if (typeof message !== "string" || !message.trim()) continue;
+    }
+    const at = event.meta?.at;
+    if (typeof at === "string" && !Number.isNaN(Date.parse(at))) latest = at;
+  }
+  return latest;
+}
+
 function formatProxyLocation(location: { country: string; state?: string; city?: string }): string {
   return [location.city, location.state, location.country].filter(Boolean).join(", ");
 }
@@ -1505,6 +1689,7 @@ function projectWorkbench(events: readonly unknown[]): {
       browser = {
         ...browser,
         status: "idle",
+        replaySessionId: browser.sessionId ?? browser.replaySessionId,
         sessionId: undefined,
         liveUrl: undefined,
       };

@@ -1,8 +1,11 @@
 node_modules/
+.turbo/
 .next/
 .output/
 .eve/
 .browsie/
+desktop/dist/
+desktop/release/
 tsconfig.tsbuildinfo
 runs/*.json
 .env

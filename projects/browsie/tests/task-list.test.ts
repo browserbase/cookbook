@@ -1,7 +1,11 @@
 import type { MessageStreamEvent } from "eve/client";
 import { describe, expect, it } from "vitest";
 
-import { sortTasksNewestFirst, summarizeTask } from "../app/api/tasks/route";
+import {
+  sessionIdsFromRunFiles,
+  sortTasksNewestFirst,
+  summarizeTask,
+} from "../app/api/tasks/route";
 
 const event = (type: string, at: string, data: Record<string, unknown> = {}) =>
   ({
@@ -11,6 +15,15 @@ const event = (type: string, at: string, data: Record<string, unknown> = {}) =>
   }) as unknown as MessageStreamEvent;
 
 describe("durable task list", () => {
+  it("selects recent local Eve sessions for development recovery", () => {
+    expect(
+      sessionIdsFromRunFiles(
+        ["wrun_01MOLD.json", "not-a-run.json", "wrun_01MNEW.json", "wrun_01MNEW.txt"],
+        2,
+      ),
+    ).toEqual(["wrun_01MOLD", "wrun_01MNEW"]);
+  });
+
   it("uses the first user message as a bounded title", () => {
     const task = summarizeTask("session_one", [
       event("message.received", "2026-09-05T01:00:00.000Z", {
@@ -21,6 +34,19 @@ describe("durable task list", () => {
       }),
     ]);
     expect(task.title).toBe("First durable task");
+    expect(task.updatedAt).toBe("2026-09-05T01:00:01.000Z");
+  });
+
+  it("orders tasks by the latest visible message, not a later tool event", () => {
+    const task = summarizeTask("session_one", [
+      event("message.received", "2026-09-05T01:00:00.000Z", {
+        message: "Do the task",
+      }),
+      event("message.completed", "2026-09-05T01:00:01.000Z", {
+        message: "Done",
+      }),
+      event("action.result", "2026-09-05T01:00:02.000Z"),
+    ]);
     expect(task.updatedAt).toBe("2026-09-05T01:00:01.000Z");
   });
 

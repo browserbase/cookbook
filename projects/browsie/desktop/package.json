@@ -1,0 +1,80 @@
+{
+  "name": "browsie-desktop",
+  "version": "0.1.3",
+  "description": "Desktop and MCP packaging for the Browsie consumer browser agent.",
+  "author": "Browserbase",
+  "private": true,
+  "type": "module",
+  "main": "electron/main.cjs",
+  "engines": {
+    "node": "24.x"
+  },
+  "scripts": {
+    "build": "pnpm run build:mcp",
+    "build:mcp": "esbuild mcp/server.ts --bundle --platform=node --format=esm --target=node22 --outfile=dist/mcp/server.mjs && esbuild mcp/http-server.ts --bundle --platform=node --format=esm --target=node22 --outfile=dist/mcp/http-server.mjs && esbuild mcp/launcher.ts --bundle --platform=node --format=esm --target=node22 --external:dotenv --external:./server.mjs --outfile=dist/mcp/launcher.mjs",
+    "dev": "electron electron/main.cjs",
+    "dev:mcp": "electron electron/main.cjs --mcp",
+    "dev:mcp:node": "node dist/mcp/launcher.mjs",
+    "pack": "pnpm --filter browsie build && pnpm run build && electron-builder --dir",
+    "dist:mac": "pnpm --filter browsie build && pnpm run build && electron-builder --mac dmg",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs",
+    "test:mcp": "node tests/mcp-smoke.mjs",
+    "test:mcp:http": "node tests/http-mcp-smoke.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.1",
+    "dotenv": "18.0.8",
+    "eve": "0.66.3",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "@types/node": "24.13.3",
+    "electron": "39.8.10",
+    "electron-builder": "24.13.3",
+    "esbuild": "0.27.7",
+    "typescript": "6.0.3"
+  },
+  "build": {
+    "appId": "com.browserbase.browsie",
+    "productName": "Browsie",
+    "artifactName": "Browsie-${version}-${arch}.${ext}",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "electron/**/*",
+      "dist/**/*",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../.next/standalone",
+        "to": "browsie-server"
+      },
+      {
+        "from": "../.next/static",
+        "to": "browsie-server/.next/static"
+      },
+      {
+        "from": "../public",
+        "to": "browsie-server/public"
+      },
+      {
+        "from": "../.output",
+        "to": "browsie-server/.output"
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.productivity",
+      "target": "dmg"
+    },
+    "linux": {
+      "category": "Utility",
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    }
+  }
+}

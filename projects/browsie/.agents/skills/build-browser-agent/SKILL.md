@@ -48,12 +48,17 @@ layer.
 Prefer one persistent browser and three basic tools:
 
 - `snapshot` reads compact page state and fresh target IDs.
-- `run` makes a short, exact state change.
+- `run` accepts either Playwright-shaped JavaScript or a short batch of snapshot-ID actions.
 - `screenshot` verifies visual state.
 
 Keep the same browser alive across tool calls and turns in one durable conversation. Do not create
 a new browser or MCP process for each call. Add product tools, such as Context selection or human
 handoff, only when they represent a separate capability.
+
+For the shared Stagehand v4 contract, expose exactly one of `code` or `actions` per `run` call.
+Use code for navigation, multi-step logic, waits, and extraction. Use actions with `op` and `id`
+for simple work on the latest snapshot. Run code in Stagehand's browser-side callback batch, not
+with `eval` or `Function` in the agent host process.
 
 ## Identity and recovery
 

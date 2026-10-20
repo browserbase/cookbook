@@ -20,6 +20,7 @@ export interface BrowserState {
   contextStatus?: "draft" | "saved";
   proxyLocation?: BrowserProxyLocation;
   sessionId?: string;
+  replaySessionId?: string;
   liveUrl?: string;
   url?: string;
   title?: string;

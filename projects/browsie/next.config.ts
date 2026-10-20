@@ -5,13 +5,13 @@ import { withEve } from "eve/next";
 import type { NextConfig } from "next";
 
 const appRoot = path.dirname(fileURLToPath(import.meta.url));
-const workspaceRoot = appRoot;
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1", "localhost"],
-  outputFileTracingRoot: workspaceRoot,
+  output: "standalone",
+  outputFileTracingRoot: appRoot,
   serverExternalPackages: ["@browserbasehq/stagehand"],
-  turbopack: { root: workspaceRoot },
+  turbopack: { root: appRoot },
 };
 
 export default withEve(nextConfig);

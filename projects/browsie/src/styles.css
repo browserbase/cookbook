@@ -1,3 +1,11 @@
+@font-face {
+  font-family: "PP Supply Sans";
+  src: url("/fonts/pp-supply-sans-regular.woff2") format("woff2");
+  font-display: swap;
+  font-style: normal;
+  font-weight: 400;
+}
+
 :root {
   color: #100d0d;
   background: #f9f6f4;
@@ -97,7 +105,7 @@ a:focus-visible {
   color: var(--ink);
   background: transparent;
   cursor: pointer;
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: "PP Supply Sans", Inter, sans-serif;
   font-size: 19px;
   letter-spacing: -0.02em;
 }
@@ -148,9 +156,15 @@ a:focus-visible {
 }
 
 .history-list {
+  flex: 1;
   min-height: 0;
-  max-height: 42%;
-  overflow: auto;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.history-list::-webkit-scrollbar {
+  display: none;
 }
 
 .history {
@@ -167,9 +181,17 @@ a:focus-visible {
 }
 
 .history span {
+  flex: 1;
+  min-width: 0;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+}
+
+.history svg {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
 }
 
 .history:hover,
@@ -190,7 +212,7 @@ a:focus-visible {
 }
 
 .sidebar-spacer {
-  flex: 1;
+  display: none;
 }
 
 .side-nav {
@@ -420,7 +442,7 @@ a:focus-visible {
 .welcome h1,
 .workspace-heading h1 {
   margin: 0;
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: "PP Supply Sans", Inter, sans-serif;
   font-size: clamp(48px, 5.5vw, 72px);
   font-weight: 400;
   line-height: 0.96;
@@ -874,7 +896,8 @@ a:focus-visible {
 }
 
 .browser-viewport iframe,
-.browser-viewport img {
+.browser-viewport img,
+.browser-viewport video {
   width: 100%;
   height: 100%;
   border: 0;
@@ -883,6 +906,49 @@ a:focus-visible {
 .browser-viewport img {
   object-fit: cover;
   object-position: top;
+}
+
+.browser-viewport video {
+  min-height: 0;
+  flex: 1;
+  object-fit: contain;
+  background: #111;
+}
+
+.browser-replay {
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: #111;
+}
+
+.replay-toolbar {
+  min-height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 5px 10px;
+  color: #f7f5f3;
+  background: #1d1b1a;
+  font-size: 11px;
+}
+
+.replay-toolbar select {
+  min-width: 0;
+  max-width: 70%;
+  border: 1px solid #45413f;
+  border-radius: 3px;
+  color: #f7f5f3;
+  background: #292624;
+  font: 10px var(--mono);
+}
+
+.replay-error {
+  flex: 1;
+  background: #f1eeeb;
 }
 
 .empty-browser {
@@ -1404,6 +1470,73 @@ a:focus-visible {
   gap: 12px;
 }
 
+.vault-studio {
+  width: 100%;
+  max-width: 980px;
+  margin: 0 auto;
+}
+
+.vault-provider-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.vault-provider-card {
+  width: 100%;
+  min-height: 112px;
+  grid-template-columns: 40px minmax(0, 1fr);
+  align-items: center;
+  text-align: left;
+  cursor: pointer;
+  font: inherit;
+}
+
+.vault-provider-card:hover {
+  border-color: var(--line-strong);
+  background: var(--white);
+}
+
+.vault-provider-icon {
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border-radius: var(--radius);
+  color: var(--brand);
+  background: rgba(240, 54, 3, 0.07);
+}
+
+.vault-provider-copy {
+  min-width: 0;
+  display: grid;
+  gap: 6px;
+}
+
+.vault-provider-copy strong {
+  color: var(--ink);
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.vault-provider-copy small {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.vault-loading-card {
+  align-items: center;
+}
+
+.vault-setup-card {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.vault-setup-card h2 {
+  margin: 0;
+}
+
 .context-card,
 .details-card,
 .setting-row {
@@ -1430,7 +1563,7 @@ a:focus-visible {
 .context-card h2,
 .details-title h2 {
   margin: 5px 0 0;
-  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-family: "PP Supply Sans", Inter, sans-serif;
   font-size: 23px;
   font-weight: 400;
 }
@@ -1953,7 +2086,7 @@ a:focus-visible {
 .context-session-heading h2 {
   margin: 5px 0 0;
   font:
-    400 23px Inter,
+    400 23px "PP Supply Sans",
     Inter,
     sans-serif;
 }
@@ -2034,6 +2167,10 @@ a:focus-visible {
 }
 
 @media (max-width: 720px) {
+  .vault-provider-grid {
+    grid-template-columns: 1fr;
+  }
+
   .context-create,
   .context-session-heading {
     align-items: stretch;

@@ -3,40 +3,15 @@ import { openai } from "@ai-sdk/openai";
 import { generateText, stepCountIs, tool, type LanguageModel, type ModelMessage } from "ai";
 import { z } from "zod";
 
+import {
+  BROWSER_RUN_TOOL_DESCRIPTION,
+  browserRunInputSchema,
+} from "../agent/lib/browser-schema.js";
 import type { BrowsieBrowserSession } from "./browser-session.js";
 import { buildSystemPrompt } from "./prompt.js";
 import type { LoadedSkill } from "./skills.js";
 
 const MAX_RECOVERY_ROUNDS = 4;
-
-const actionSchema = z.discriminatedUnion("action", [
-  z.object({ action: z.literal("goto"), url: z.string().url() }),
-  z.object({ action: z.literal("click"), target: z.string() }),
-  z.object({
-    action: z.literal("fill"),
-    target: z.string(),
-    value: z.string(),
-  }),
-  z.object({
-    action: z.literal("type"),
-    target: z.string(),
-    value: z.string(),
-  }),
-  z.object({
-    action: z.literal("press"),
-    target: z.string().optional(),
-    key: z.string(),
-  }),
-  z.object({
-    action: z.literal("select"),
-    target: z.string(),
-    value: z.string(),
-  }),
-  z.object({
-    action: z.literal("wait"),
-    milliseconds: z.number().int().positive().max(10_000),
-  }),
-]);
 
 export function configuredModel(): LanguageModel | undefined {
   if (process.env.OPENAI_API_KEY) return openai(process.env.BROWSIE_MODEL ?? "gpt-5.4-mini");
@@ -63,10 +38,9 @@ export async function runAgent(input: {
       execute: async () => input.browser.snapshot(),
     }),
     run: tool({
-      description:
-        "Run a short batch of exact actions in the persistent browser session. Use CSS selectors or IDs from the latest snapshot. If one site blocks access, navigate to a different source in the same browser task. This safe adapter does not execute model-authored JavaScript in the server process.",
-      inputSchema: z.object({ actions: z.array(actionSchema).min(1).max(12) }),
-      execute: async ({ actions }) => input.browser.run(actions),
+      description: BROWSER_RUN_TOOL_DESCRIPTION,
+      inputSchema: browserRunInputSchema,
+      execute: async (runInput) => input.browser.run(runInput),
     }),
     screenshot: tool({
       description:

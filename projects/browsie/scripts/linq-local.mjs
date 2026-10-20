@@ -294,17 +294,19 @@ async function run() {
 }
 
 function selfTest() {
-  const signingSecretFixture = ["wh", "sec_", "abcdefghijklmnopqrstuvwxyz", "123456"].join("");
-  const tokenFixture = ["linq", "_test_", "12345678901234567890"].join("");
   assert.equal(localServiceUrl(4318), "http://localhost:4318");
   assert.throws(() => localServiceUrl(0));
   const launch = browsieLaunchSpec(4318);
   assert.equal(launch.command, process.execPath);
   assert.deepEqual(launch.args.slice(1), ["dev", "-p", "4318"]);
   assert.match(launch.args[0], /[/\\]next[/\\]dist[/\\]bin[/\\]next$/u);
-  assert.equal(parseStoredLinqToken(JSON.stringify({ token: tokenFixture })), tokenFixture);
+  const linqTokenFixture = ["linq", "test", "12345678901234567890"].join("_");
+  assert.equal(parseStoredLinqToken(JSON.stringify({ token: linqTokenFixture })), linqTokenFixture);
   assert.throws(() => parseStoredLinqToken('{"token":"short"}'));
-  assert.throws(() => parseStoredLinqToken(JSON.stringify({ token: tokenFixture, extra: true })));
+  assert.throws(() =>
+    parseStoredLinqToken(JSON.stringify({ token: linqTokenFixture, extra: true })),
+  );
+  const signingSecretFixture = ["whsec", "abcdefghijklmnopqrstuvwxyz123456"].join("_");
   assert.equal(
     extractLinqSigningSecret(`Signing secret: ${signingSecretFixture} (this session only)`),
     signingSecretFixture,

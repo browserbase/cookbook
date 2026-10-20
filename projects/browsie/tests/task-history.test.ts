@@ -1,6 +1,11 @@
 import { describe, expect, it } from "vitest";
 
-import { parseTaskHistory, taskTitle, upsertTaskHistory } from "../src/task-history";
+import {
+  mergeTaskHistory,
+  parseTaskHistory,
+  taskTitle,
+  upsertTaskHistory,
+} from "../src/task-history";
 
 describe("task history", () => {
   it("rejects invalid stored data", () => {
@@ -34,6 +39,35 @@ describe("task history", () => {
       updatedAt: "2026-01-02T00:00:00.000Z",
     };
     expect(upsertTaskHistory([first], second, 1)).toEqual([second]);
+  });
+
+  it("keeps cached tasks when a durable refresh is empty or partial", () => {
+    const first = {
+      sessionId: "one",
+      title: "One",
+      updatedAt: "2026-01-01T00:00:00.000Z",
+    };
+    const second = {
+      sessionId: "two",
+      title: "Two",
+      updatedAt: "2026-01-02T00:00:00.000Z",
+    };
+    expect(mergeTaskHistory([first, second], [])).toEqual([second, first]);
+    expect(mergeTaskHistory([first, second], [first])).toEqual([second, first]);
+  });
+
+  it("uses the durable value when it refreshes a cached task", () => {
+    const cached = {
+      sessionId: "one",
+      title: "Untitled task",
+      updatedAt: "2026-01-01T00:00:00.000Z",
+    };
+    const durable = {
+      sessionId: "one",
+      title: "Amazon login",
+      updatedAt: "2026-01-02T00:00:00.000Z",
+    };
+    expect(mergeTaskHistory([cached], [durable])).toEqual([durable]);
   });
 
   it("makes a short title from the first request", () => {
