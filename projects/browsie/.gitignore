@@ -7,3 +7,4 @@ tsconfig.tsbuildinfo
 runs/*.json
 .env
 .DS_Store
+dist/

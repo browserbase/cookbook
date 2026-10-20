@@ -15,7 +15,6 @@ const LINQ_EVENTS = "message.received,reaction.added,reaction.removed";
 const STARTUP_TIMEOUT_MS = 45_000;
 const MAX_CAPTURE_BYTES = 256 * 1024;
 // ANSI escape sequences contain one required control character.
-// eslint-disable-next-line no-control-regex
 const ANSI_PATTERN = /\u001B(?:[@-Z\\-_]|\[[0-?]*[ -/]*[@-~])/g;
 const require = createRequire(import.meta.url);
 

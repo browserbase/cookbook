@@ -162,3 +162,20 @@ rotation and deletion procedures.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md): development and validation rules.
 
 Browsie is licensed under the MIT License. See [`LICENSE`](LICENSE).
+
+## Reuse the browser runtime
+
+Sibling cookbook projects can depend on this private package with `"browsie": "file:../browsie"`.
+Run `pnpm install --frozen-lockfile && pnpm build:library` before installing a consumer.
+The public exports are `browsie/runtime`, `browsie/tools/*`, `browsie/hooks/*`,
+`browsie/channels/linq`, and the two handoff routes. Exports provide compiled JavaScript plus source types; consumers use the same Eve version.
+The generated `dist/shared` directory is not committed. One shared bundle keeps browser state
+consistent across all tools and hooks. These exports do not start a second agent or browser service.
+
+Re-export the browser lifecycle and task-state hooks alongside the selected tools. Every custom
+browser tool must use `runBrowserOperation` and `runCancelableBrowserWork` from `browsie/runtime`.
+A server-side integration can call `browser.withHostedPage(signal, callback)` to work with the
+existing hosted page under its operation lock. Set `BROWSIE_LOG_SESSION=false` before starting
+that session. Never return the connection URL or credential headers from the callback.
+
+The Bell-Stack project is a consumer of this interface. Browsie remains independently runnable.

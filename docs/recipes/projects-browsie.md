@@ -60,6 +60,7 @@ pnpm dev
 | --- | --- | --- | --- |
 | `STAGEHAND_BROWSER` | Browsie. Selects automatic, local, or Browserbase browser mode. Non-secret. | `browserbase` | Must be auto, local, or browserbase. Default: `auto`. |
 | `BROWSIE_MODEL` | [OpenAI](https://platform.openai.com/docs/models). Selects the model used by the Eve agent. Non-secret. | `gpt-5.6-sol` | Must be a model available to the configured OpenAI account. Default: `gpt-5.6-sol`. |
+| `BROWSIE_LOG_SESSION` | Browserbase. Controls hosted network recording. Disable for server-side credential integrations. Non-secret. | `false` | Set false before starting credential-bearing sessions.. Default: `true`. |
 
 
 ## Dependencies
@@ -87,7 +88,7 @@ Source and setup metadata were inspected. No passing authenticated live-workflow
 
 | Check | Date | Runtime | Command | Result and limits |
 | --- | --- | --- | --- | --- |
-| Offline behavior tested | 2026-09-30 | `Node.js 25.9.0 with pnpm 10.33.0 on macOS arm64; package target is Node.js 24.x` | `pnpm test && pnpm typecheck && pnpm build && pnpm test:linq-local` | passed. 84 unit tests passed and 7 credential-dependent live tests skipped; no live Browserbase, model, Linq, or 1Password call was made. |
+| Offline behavior tested | 2026-10-08 | `Node.js 24.15.0; pnpm 10.33.4; Linux x64; Eve 0.47.6; Stagehand 4.0.2` | `pnpm install --frozen-lockfile && pnpm build:library && pnpm test && pnpm typecheck && pnpm lint && pnpm build` | passed. 93 tests passed; 7 opt-in live tests skipped. Shared-library build, type checking, strict lint, and app compilation passed. A separate Bell consumer also compiled successfully. Live Linq, 1Password, and Context login were not exercised. |
 
 - Local Context metadata and native-vault data use local files and need a durable database for a multi-instance deployment.
 - Handoff links expire but are not single-use links.

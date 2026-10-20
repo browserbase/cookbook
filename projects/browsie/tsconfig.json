@@ -7,6 +7,8 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "resolveJsonModule": true,
@@ -31,11 +33,9 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "agent/**/*.ts",
-    "server/browser-session.ts",
-    "server/redact.ts",
-    "server/trace.ts",
-    "server/types.ts",
+    "server/**/*.ts",
     "tests/**/*.ts",
+    "tests/**/*.tsx",
     ".next/dev/types/**/*.ts"
   ],
   "exclude": ["node_modules", "build-server", "dist"]

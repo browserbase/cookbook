@@ -6,10 +6,10 @@ import {
   type CDPSubscription,
   type CookieParam,
   type StagehandBrowser,
+  type Page,
 } from "@browserbasehq/stagehand";
 
 import { parseBrowserbaseCaptchaEvent, safeCaptchaPage, type CaptchaSignal } from "../src/captcha";
-import { toEmbeddedBrowserbaseLiveViewUrl } from "../src/live-view.js";
 import { addTrace } from "./trace.js";
 import type { BrowserProxyLocation, BrowserState, ConversationState, RunAction } from "./types.js";
 
@@ -43,9 +43,9 @@ export class BrowsieBrowserSession {
   private browser?: StagehandBrowser;
   private browserbase?: Browserbase;
   private remoteSessionId?: string;
-  private remoteLiveUrl?: string;
   private startPromise?: Promise<void>;
   private closeRequested = false;
+  private sessionLogsDisabled = false;
   private operationTail: Promise<void> = Promise.resolve();
   private xpathMap: Record<string, string> = {};
   private readonly visitedOrigins = new Set<string>();
@@ -121,7 +121,6 @@ export class BrowsieBrowserSession {
         proxyLocation: requested === "browserbase" ? this.options.proxyLocation : undefined,
         sessionId: this.remoteSessionId,
       };
-      await this.refreshRemoteLiveUrl();
       await this.ensureCaptchaSubscriptions();
       if (requested === "browserbase" && contextStatus) {
         addTrace(
@@ -157,6 +156,39 @@ export class BrowsieBrowserSession {
     }
   }
 
+  /** Run a server-owned integration in the existing hosted browser under its operation lock.
+   * Never return the connection URL or private request headers from the callback.
+   */
+  async withHostedPage<T>(
+    signal: AbortSignal,
+    operation: (page: Page, connectUrl: string) => Promise<T>,
+  ): Promise<T> {
+    signal.throwIfAborted();
+    const release = await this.acquireOperation();
+    try {
+      signal.throwIfAborted();
+      await this.start();
+      await this.gateCaptcha();
+      if (!this.browserbase || !this.remoteSessionId || !this.browser)
+        throw new Error("This integration requires a hosted Browserbase session.");
+      if (!this.sessionLogsDisabled)
+        throw new Error(
+          "Set BROWSIE_LOG_SESSION=false before starting a credential-bearing integration.",
+        );
+      const page =
+        (await this.browser.context.activePage()) ?? (await this.browser.context.newPage());
+      const session = await this.browserbase.sessions.retrieve(this.remoteSessionId);
+      if (!session.connectUrl) throw new Error("The hosted browser connection is unavailable.");
+      const result = await operation(page, session.connectUrl);
+      this.xpathMap = {};
+      this.updateBrowserState(await page.url(), await page.title());
+      await this.gateCaptcha();
+      return result;
+    } finally {
+      release();
+    }
+  }
+
   async snapshot(): Promise<{
     tree: string;
     url: string;
@@ -167,7 +199,7 @@ export class BrowsieBrowserSession {
     const release = await this.acquireOperation();
     try {
       await this.start();
-      await this.gateCaptcha("before");
+      await this.gateCaptcha();
       const started = performance.now();
       const result = await this.requireStagehand().experimentalBatch(async ({ page }) => {
         const snapshot = await page.snapshot({ includeIframes: true });
@@ -177,11 +209,10 @@ export class BrowsieBrowserSession {
           title: await page.title(),
         };
       });
-      await this.gateCaptcha("after");
+      await this.gateCaptcha();
       this.xpathMap = result.snapshot.xpathMap;
       const url = result.url;
       this.updateBrowserState(result.url, result.title);
-      await this.refreshRemoteLiveUrl();
       const assessment = assessSnapshot(result.snapshot.formattedTree, url);
       const origin = originOf(url);
       if (origin) this.visitedOrigins.add(origin);
@@ -233,7 +264,7 @@ export class BrowsieBrowserSession {
           item.action === "goto" && /^http:\/\/(?:127\.0\.0\.1|localhost)(?::|\/)/.test(item.url),
       );
       await this.start(localFixture);
-      await this.gateCaptcha("before");
+      await this.gateCaptcha();
       const started = performance.now();
       const resolvedActions = actions.map((item) =>
         "target" in item && item.target
@@ -275,10 +306,9 @@ export class BrowsieBrowserSession {
         { timeout: 60_000 },
       );
 
-      await this.gateCaptcha("after");
+      await this.gateCaptcha();
       this.xpathMap = {};
       this.updateBrowserState(result.url, result.title);
-      await this.refreshRemoteLiveUrl();
       const url = result.url;
       const origin = originOf(url);
       if (origin) this.visitedOrigins.add(origin);
@@ -317,7 +347,7 @@ export class BrowsieBrowserSession {
     const release = await this.acquireOperation();
     try {
       await this.start();
-      await this.gateCaptcha("before");
+      await this.gateCaptcha();
       const started = performance.now();
       const result = await this.requireStagehand().experimentalBatch(
         async ({ page }, values) => {
@@ -345,9 +375,8 @@ export class BrowsieBrowserSession {
         input,
         { timeout: 45_000 },
       );
-      await this.gateCaptcha("after");
+      await this.gateCaptcha();
       this.updateBrowserState(result.url, result.title);
-      await this.refreshRemoteLiveUrl();
       const host = new URL(result.url).hostname;
       const status =
         input.totpTarget && !input.totp
@@ -391,18 +420,17 @@ export class BrowsieBrowserSession {
     const release = await this.acquireOperation();
     try {
       await this.start();
-      await this.gateCaptcha("before");
+      await this.gateCaptcha();
       const started = performance.now();
       const result = await this.requireStagehand().experimentalBatch(async ({ page }) => ({
         data: await page.screenshot({ type: "png" }),
         url: await page.url(),
         title: await page.title(),
       }));
-      await this.gateCaptcha("after");
+      await this.gateCaptcha();
       const buffer = toBuffer(result.data);
       this.state.screenshot = buffer;
       this.updateBrowserState(result.url, result.title);
-      await this.refreshRemoteLiveUrl();
       const url = result.url;
       addTrace(
         this.state,
@@ -429,7 +457,6 @@ export class BrowsieBrowserSession {
     await stagehand?.close().catch(() => undefined);
     await browser?.close().catch(() => undefined);
     await this.releaseRemoteSession();
-    this.remoteLiveUrl = undefined;
     if (this.state.browser.status !== "error") this.state.browser.status = "idle";
   }
 
@@ -455,7 +482,6 @@ export class BrowsieBrowserSession {
           timeout: 30_000,
         });
         this.updateBrowserState(await page.url(), await page.title());
-        await this.refreshRemoteLiveUrl();
       }
       addTrace(
         this.state,
@@ -478,17 +504,6 @@ export class BrowsieBrowserSession {
       blockedOrigins: [...this.blockedOrigins],
       liveSourceOrigins: [...this.liveSourceOrigins],
     };
-  }
-
-  recordRecovery(): void {
-    const report = this.recoveryReport();
-    addTrace(
-      this.state,
-      "system",
-      "recovery.continue",
-      "The last answer stopped too early. Browsie kept the browser open and continued with another source.",
-      report,
-    );
   }
 
   private resolveTarget(target: string): string {
@@ -518,12 +533,18 @@ export class BrowsieBrowserSession {
   }
 
   private async startBrowserbase(apiKey: string): Promise<void> {
+    this.sessionLogsDisabled = process.env.BROWSIE_LOG_SESSION === "false";
     this.browserbase = new Browserbase({ apiKey });
     const persistedSessionId = this.loadPersistedSessionId();
 
     if (persistedSessionId) {
       for (let attempt = 1; attempt <= 2; attempt += 1) {
         try {
+          if (this.sessionLogsDisabled) {
+            const prior = await this.browserbase.sessions.retrieve(persistedSessionId);
+            if (prior.userMetadata?.networkLogging !== "false")
+              throw new Error("Session logging configuration cannot be verified.");
+          }
           const browser = await stagehandBrowserbase.connect({
             apiKey,
             sessionId: persistedSessionId,
@@ -676,7 +697,7 @@ export class BrowsieBrowserSession {
     }
   }
 
-  private async gateCaptcha(phase: "before" | "after"): Promise<void> {
+  private async gateCaptcha(): Promise<void> {
     await this.ensureCaptchaSubscriptions();
     if (this.captchaStatus === "solving") {
       const started = Date.parse(this.captchaStartedAt ?? new Date().toISOString());
@@ -756,27 +777,6 @@ export class BrowsieBrowserSession {
 
   private clearPersistedSessionId(): void {
     delete this.state.browser.sessionId;
-  }
-
-  private async refreshRemoteLiveUrl(): Promise<void> {
-    if (!this.remoteSessionId || !this.browserbase) return;
-
-    for (let attempt = 1; attempt <= 4; attempt += 1) {
-      try {
-        const debug = await this.browserbase.sessions.debug(this.remoteSessionId);
-        const liveUrl = toEmbeddedBrowserbaseLiveViewUrl(debug.debuggerFullscreenUrl);
-        if (liveUrl) {
-          this.remoteLiveUrl = liveUrl;
-          return;
-        }
-      } catch {
-        // A new session can need a short time before its live view is ready.
-      }
-
-      if (attempt < 4) {
-        await new Promise((resolve) => setTimeout(resolve, attempt * 250));
-      }
-    }
   }
 
   private updateBrowserState(url: string, title: string): BrowserState {
@@ -867,10 +867,15 @@ export function browserbaseLaunchOptions(
     keepAlive: true,
     browserSettings: {
       verified: true,
+      logSession: process.env.BROWSIE_LOG_SESSION !== "false",
       solveCaptchas: true,
       ...(contextId ? { context: { id: contextId, persist: true } } : {}),
     },
-    userMetadata: { product: "browsie", transport: "stagehand-v4-eve" },
+    userMetadata: {
+      product: "browsie",
+      transport: "stagehand-v4-eve",
+      networkLogging: String(process.env.BROWSIE_LOG_SESSION !== "false"),
+    },
   };
 }
 
