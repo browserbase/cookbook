@@ -59,10 +59,10 @@ Declared runtime dependencies from [examples/python/gift-finder/pyproject.toml](
 
 Declared source dependencies.
 
-- `openai>=2.26,<3`
-- `pydantic>=2.12,<3`
-- `python-dotenv==1.2.2`
-- `stagehand==4.0.2`
+- `openai>=2.54.0,<3`
+- `pydantic>=2.14.1,<3`
+- `python-dotenv==1.2.4`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

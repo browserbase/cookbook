@@ -64,14 +64,14 @@ Declared runtime dependencies from [integrations/examples/integrations/cartesia/
 
 Declared source dependencies.
 
-- `PyYAML>=6.0.0`
-- `aiohttp>=3.12.0`
+- `PyYAML>=6.0.3`
+- `aiohttp>=3.14.5`
 - `cartesia-line`
-- `google-genai>=1.26.0; python_version>='3.9'`
-- `loguru>=0.7.0`
-- `pydantic>=2.0.0`
-- `python-dotenv>=1.0.0`
-- `stagehand==4.0.2`
+- `google-genai>=1.75.0; python_version>='3.9'`
+- `loguru>=0.7.3`
+- `pydantic>=2.14.1`
+- `python-dotenv>=1.2.4`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

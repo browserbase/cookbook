@@ -53,8 +53,8 @@ Declared runtime dependencies from [examples/typescript/sec-filing-research/pack
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/stagehand` | `4.0.2` |
-| `dotenv` | `^16.4.5` |
+| `@browserbasehq/stagehand` | `4.2.1` |
+| `dotenv` | `^16.6.1` |
 | `zod` | `4.4.3` |
 
 ## Caveats and verification

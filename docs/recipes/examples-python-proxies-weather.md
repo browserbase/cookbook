@@ -50,17 +50,17 @@ Declared runtime dependencies from [examples/python/proxies-weather/pyproject.to
 
 Declared source dependencies.
 
-- `pydantic>=2.12,<3`
-- `python-dotenv==1.2.2`
-- `stagehand==4.0.2`
+- `pydantic>=2.14.1,<3`
+- `python-dotenv==1.2.4`
+- `stagehand==4.2.1`
 
 ### Additional manifest: `examples/python/proxies-weather/requirements.txt`
 
 [Manifest](../../examples/python/proxies-weather/requirements.txt). Follow the documented setup path; these declarations are not merged with the primary manifest.
 
-- `pydantic>=2.12,<3`
-- `python-dotenv==1.2.2`
-- `stagehand==4.0.2`
+- `pydantic>=2.14.1,<3`
+- `python-dotenv==1.2.4`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

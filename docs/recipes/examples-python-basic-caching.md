@@ -53,15 +53,15 @@ Declared runtime dependencies from [examples/python/basic-caching/pyproject.toml
 
 Declared source dependencies.
 
-- `python-dotenv==1.2.2`
-- `stagehand==4.0.2`
+- `python-dotenv==1.2.4`
+- `stagehand==4.2.1`
 
 ### Additional manifest: `examples/python/basic-caching/requirements.txt`
 
 [Manifest](../../examples/python/basic-caching/requirements.txt). Follow the documented setup path; these declarations are not merged with the primary manifest.
 
-- `python-dotenv==1.2.2`
-- `stagehand==4.0.2`
+- `python-dotenv==1.2.4`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

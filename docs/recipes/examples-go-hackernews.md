@@ -52,7 +52,7 @@ Declared runtime dependencies from [examples/go/hackernews/go.mod](../../example
 
 | Package | Declared version |
 | --- | --- |
-| `github.com/browserbase/stagehand/packages/sdk-go/v4` | `v4.0.2` |
+| `github.com/browserbase/stagehand/packages/sdk-go/v4` | `v4.3.0` |
 
 ## Caveats and verification
 

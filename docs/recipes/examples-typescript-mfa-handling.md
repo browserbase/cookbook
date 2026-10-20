@@ -53,8 +53,8 @@ Declared runtime dependencies from [examples/typescript/mfa-handling/package.jso
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/stagehand` | `4.0.2` |
-| `dotenv` | `^16.0.0` |
+| `@browserbasehq/stagehand` | `4.2.1` |
+| `dotenv` | `^16.6.1` |
 | `zod` | `4.4.3` |
 
 ## Caveats and verification

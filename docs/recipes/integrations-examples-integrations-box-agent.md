@@ -71,7 +71,7 @@ Declared runtime dependencies from [integrations/examples/integrations/box/agent
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/sdk` | `2.19.1` |
+| `@browserbasehq/sdk` | `2.21.0` |
 | `dotenv` | `16.6.1` |
 
 ## Caveats and verification
