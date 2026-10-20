@@ -3,7 +3,7 @@
   "files": [
     {
       "path": "examples/README.md",
-      "sha256": "d4b80442ca66ab0f2c3a4d9666ff6b16bdfeed6aa4396ee76ebef5f3253ea63c",
+      "sha256": "43d39fb77a804337bf0f9c0df229f51d4d68dcd21b044c22fdd257b18873cd6a",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -479,6 +479,36 @@
     {
       "path": "examples/typescript/nurse-verification/tsconfig.json",
       "sha256": "c4fcd54c2e1b9946965ee4f87369f0b79e5b26026dfb3e5977d2babc6b191721",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/order-lookup-function/.env.example",
+      "sha256": "3ff25e7252df7d4b76289ff5e479063de3d99e3b2ad3aec511b00eb92c97e0a2",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/order-lookup-function/README.md",
+      "sha256": "054b1e26668656e9c99d3cd74705e64cdb458c23bbb0ae5221a529107b954256",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/order-lookup-function/index.ts",
+      "sha256": "64b7b3ff75732e2a9d164d0af690ffa7b41b9b6b56d0d162055d16ecf5ad46a3",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/order-lookup-function/package-lock.json",
+      "sha256": "9a6b3ae9860dbb176e5c2419aff0a7ea0ae7a97b041bb5f03939313aab749d92",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/order-lookup-function/package.json",
+      "sha256": "1efcaf3cd530e65c218f442d5e06ec88cec3e423bda3106168e65fd681accac2",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/order-lookup-function/tsconfig.json",
+      "sha256": "4ececca8184c89629920ea967c0055f60fc2ebd6376cde1ee8cbd3d9bb0ebbb1",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
