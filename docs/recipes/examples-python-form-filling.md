@@ -52,8 +52,8 @@ Declared runtime dependencies from [examples/python/form-filling/pyproject.toml]
 
 Declared source dependencies.
 
-- `python-dotenv==1.2.2`
-- `stagehand==4.0.2`
+- `python-dotenv==1.2.4`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

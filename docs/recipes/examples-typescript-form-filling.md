@@ -52,7 +52,7 @@ Declared runtime dependencies from [examples/typescript/form-filling/package.jso
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/stagehand` | `4.0.2` |
+| `@browserbasehq/stagehand` | `4.2.1` |
 | `dotenv` | `^17.4.2` |
 
 ## Caveats and verification

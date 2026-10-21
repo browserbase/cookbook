@@ -8,9 +8,9 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = ">=3.12,<3.14"
-crewai = "1.15.20"
+crewai = "1.15.27"
 html2text = ">=2024.2.26"
-playwright = "1.62.0"
+playwright = "1.63.0"
 python-dotenv = ">=1.2.2,<2"
 
 # Minimum patched versions for dependencies used by this tutorial.

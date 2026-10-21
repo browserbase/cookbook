@@ -59,10 +59,10 @@ Declared runtime dependencies from [examples/python/context/pyproject.toml](../.
 
 Declared source dependencies.
 
-- `browserbase==1.18.1`
-- `pydantic>=2.12,<3`
-- `python-dotenv==1.2.2`
-- `stagehand==4.0.2`
+- `browserbase==1.20.0`
+- `pydantic>=2.14.1,<3`
+- `python-dotenv==1.2.4`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

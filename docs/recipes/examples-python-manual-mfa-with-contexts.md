@@ -60,19 +60,19 @@ Declared runtime dependencies from [examples/python/manual-mfa-with-contexts/pyp
 
 Declared source dependencies.
 
-- `browserbase==1.18.1`
-- `pydantic>=2.12,<3`
-- `python-dotenv==1.2.2`
-- `stagehand==4.0.2`
+- `browserbase==1.20.0`
+- `pydantic>=2.14.1,<3`
+- `python-dotenv==1.2.4`
+- `stagehand==4.2.1`
 
 ### Additional manifest: `examples/python/manual-mfa-with-contexts/requirements.txt`
 
 [Manifest](../../examples/python/manual-mfa-with-contexts/requirements.txt). Follow the documented setup path; these declarations are not merged with the primary manifest.
 
-- `browserbase==1.18.1`
-- `pydantic>=2.12,<3`
-- `python-dotenv==1.2.2`
-- `stagehand==4.0.2`
+- `browserbase==1.20.0`
+- `pydantic>=2.14.1,<3`
+- `python-dotenv==1.2.4`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

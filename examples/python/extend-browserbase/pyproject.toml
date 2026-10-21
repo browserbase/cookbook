@@ -5,21 +5,21 @@ description = "Download expense receipts and parse with Extend AI using Stagehan
 readme = "README.md"
 requires-python = ">=3.11,<3.14"
 dependencies = [
-    "browserbase==1.18.1",
-    "extend-ai>=1.0.0",
-    "python-dotenv>=1.2.1",
-    "stagehand==4.0.2",
+    "browserbase==1.20.0",
+    "extend-ai>=1.19.0",
+    "python-dotenv>=1.2.4",
+    "stagehand==4.2.1",
 ]
 
 [project.optional-dependencies]
 dev = [
-    "pytest>=7.0.0",
-    "black>=23.0.0",
-    "ruff>=0.1.0",
+    "pytest>=7.4.4",
+    "black>=23.12.1",
+    "ruff>=0.1.15",
 ]
 
 [build-system]
-requires = ["setuptools>=61.0", "wheel"]
+requires = ["setuptools>=61.3.1", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [tool.black]

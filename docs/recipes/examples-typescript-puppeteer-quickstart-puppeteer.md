@@ -52,9 +52,9 @@ Declared runtime dependencies from [examples/typescript/puppeteer/quickstart-pup
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/sdk` | `2.19.1` |
-| `dotenv` | `^16.4.5` |
-| `puppeteer-core` | `^24.39.1` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `dotenv` | `^16.6.1` |
+| `puppeteer-core` | `^24.43.1` |
 
 ## Caveats and verification
 

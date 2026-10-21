@@ -66,9 +66,9 @@ Declared runtime dependencies from [examples/typescript/pickleball/package.json]
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/stagehand` | `4.0.2` |
-| `dotenv` | `^16.4.5` |
-| `inquirer` | `^12.9.4` |
+| `@browserbasehq/stagehand` | `4.2.1` |
+| `dotenv` | `^16.6.1` |
+| `inquirer` | `^12.11.1` |
 | `zod` | `4.4.3` |
 
 ## Caveats and verification

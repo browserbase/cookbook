@@ -60,9 +60,9 @@ Declared runtime dependencies from [examples/python/human-in-the-loop/pyproject.
 
 Declared source dependencies.
 
-- `browserbase==1.18.1`
-- `playwright==1.62.0`
-- `python-dotenv==1.2.2`
+- `browserbase==1.20.0`
+- `playwright==1.63.0`
+- `python-dotenv==1.2.4`
 
 ## Caveats and verification
 

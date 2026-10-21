@@ -65,13 +65,13 @@ Declared runtime dependencies from [integrations/examples/integrations/langchain
 
 Declared source dependencies.
 
-- `beautifulsoup4>=4.13.0`
-- `browserbase==1.18.1`
-- `deepagents>=0.6.3`
-- `langchain-mcp-adapters>=0.2,<1`
-- `langchain-openai>=1.2.1`
-- `python-dotenv>=1.0.0`
-- `stagehand==4.0.2`
+- `beautifulsoup4>=4.15.0`
+- `browserbase==1.20.0`
+- `deepagents>=0.6.12`
+- `langchain-mcp-adapters>=0.2.2,<1`
+- `langchain-openai>=1.7.1`
+- `python-dotenv>=1.2.4`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

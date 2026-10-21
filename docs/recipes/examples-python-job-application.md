@@ -60,9 +60,9 @@ Declared runtime dependencies from [examples/python/job-application/pyproject.to
 Declared source dependencies.
 
 - `httpx==0.28.1`
-- `pydantic>=2.12,<3`
-- `python-dotenv==1.2.2`
-- `stagehand==4.0.2`
+- `pydantic>=2.14.1,<3`
+- `python-dotenv==1.2.4`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

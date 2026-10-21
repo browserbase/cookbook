@@ -8,12 +8,12 @@
     "test": "node --test tests/*.test.mjs"
   },
   "dependencies": {
-    "@browserbasehq/sdk": "2.19.1",
-    "playwright-core": "1.63.0",
-    "dotenv": "^16.4.7"
+    "@browserbasehq/sdk": "2.21.0",
+    "playwright-core": "1.64.0",
+    "dotenv": "^16.6.1"
   },
   "devDependencies": {
-    "tsx": "^4.19.2",
+    "tsx": "^4.23.15",
     "typescript": "7.0.2"
   }
 }

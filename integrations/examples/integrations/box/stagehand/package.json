@@ -9,12 +9,12 @@
     "test": "node --test tests/*.test.cjs"
   },
   "dependencies": {
-    "@browserbasehq/stagehand": "4.0.2",
+    "@browserbasehq/stagehand": "4.2.1",
     "dotenv": "16.6.1"
   },
   "devDependencies": {
-    "@types/node": "^25.0.9",
-    "tsx": "^4.19.2",
+    "@types/node": "^25.9.9",
+    "tsx": "^4.23.15",
     "typescript": "7.0.2"
   },
   "engines": {

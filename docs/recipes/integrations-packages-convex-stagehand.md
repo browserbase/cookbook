@@ -55,12 +55,12 @@ Declared runtime dependencies from [integrations/packages/convex-stagehand/packa
 
 | Package | Declared version |
 | --- | --- |
-| `@ai-sdk/anthropic` | `4.0.49` |
-| `@ai-sdk/google` | `4.0.64` |
-| `@ai-sdk/openai` | `4.0.59` |
-| `@browserbasehq/sdk` | `2.19.1` |
-| `@browserbasehq/stagehand` | `4.0.2` |
-| `ai` | `7.0.93` |
+| `@ai-sdk/anthropic` | `4.0.79` |
+| `@ai-sdk/google` | `4.0.95` |
+| `@ai-sdk/openai` | `4.0.93` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `@browserbasehq/stagehand` | `4.2.1` |
+| `ai` | `7.0.139` |
 
 ## Caveats and verification
 

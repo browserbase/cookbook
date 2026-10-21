@@ -69,19 +69,19 @@ Declared runtime dependencies from [projects/browsie/package.json](../../project
 | Package | Declared version |
 | --- | --- |
 | `@1password/sdk` | `0.5.0` |
-| `@ai-sdk/openai` | `4.0.46` |
-| `@browserbasehq/sdk` | `2.18.0` |
-| `@browserbasehq/stagehand` | `4.0.2` |
+| `@ai-sdk/openai` | `4.0.93` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `@browserbasehq/stagehand` | `4.2.1` |
 | `@stripe/link-integrations-eve` | `0.3.0` |
 | `@stripe/link-sdk` | `0.12.0` |
-| `ai` | `7.0.105` |
-| `dotenv` | `^17.2.0` |
-| `eve` | `0.66.3` |
-| `lucide-react` | `^1.34.0` |
-| `next` | `16.3.8` |
-| `react` | `^19.2.0` |
-| `react-dom` | `^19.2.0` |
-| `zod` | `^4.4.0` |
+| `ai` | `7.0.139` |
+| `dotenv` | `^17.4.2` |
+| `eve` | `0.47.7` |
+| `lucide-react` | `^1.60.0` |
+| `next` | `16.4.0` |
+| `react` | `^19.3.1` |
+| `react-dom` | `^19.3.1` |
+| `zod` | `4.4.3` |
 
 ## Caveats and verification
 

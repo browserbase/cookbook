@@ -52,9 +52,9 @@ Declared runtime dependencies from [examples/typescript/selenium/quickstart-sele
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/sdk` | `2.19.1` |
-| `dotenv` | `^16.4.5` |
-| `selenium-webdriver` | `^4.29.0` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `dotenv` | `^16.6.1` |
+| `selenium-webdriver` | `^4.51.0` |
 
 ## Caveats and verification
 
