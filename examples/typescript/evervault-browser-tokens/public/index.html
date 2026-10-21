@@ -150,6 +150,29 @@
                 Waiting for encrypted test-card values
               </p>
             </div>
+            <div id="tokens" class="token-display" hidden>
+              <p class="eyebrow">Returned Browser Tokens · 5-minute lifetime</p>
+              <dl class="token-grid">
+                <div>
+                  <dt>Visa test number → card-number token</dt>
+                  <dd>
+                    <span class="original-value">4242 4242 4242 4242</span
+                    ><span aria-hidden="true">→</span><code id="number-token"></code>
+                  </dd>
+                </div>
+                <div>
+                  <dt>Test CVC → CVC token</dt>
+                  <dd>
+                    <span class="original-value">123</span><span aria-hidden="true">→</span
+                    ><code id="cvc-token"></code>
+                  </dd>
+                </div>
+              </dl>
+              <p>
+                Both browsers receive these same tokens. Only the proxied request reveals the
+                original test values to the merchant. Tokens clear when the run ends.
+              </p>
+            </div>
           </section>
           <p id="error" class="error" role="alert" hidden></p>
           <div id="comparison" class="comparison">
@@ -233,12 +256,6 @@
               Evervault proxy and trusted CA differ.
             </p>
           </div>
-          <details id="tokens" class="token-display" hidden>
-            <summary>Inspect temporary tokens · 5-minute lifetime</summary>
-            <label>Card-number token</label><code id="number-token"></code><label>CVC token</label
-            ><code id="cvc-token"></code>
-            <p>These exact values go into both browsers and clear when the run ends.</p>
-          </details>
         </section>
       </div>
 

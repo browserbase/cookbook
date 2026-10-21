@@ -403,7 +403,7 @@
     },
     {
       "path": "examples/typescript/evervault-browser-tokens/README.md",
-      "sha256": "c2fbcfe2b10b7ec6cd053cca6358abf851cf850a8022b5dcecd7a97211ef43e4",
+      "sha256": "6e5ce5b2e959ce74664f865c9e841b8fc9678faa30e0cf223f1ff8ff874a470d",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -433,7 +433,7 @@
     },
     {
       "path": "examples/typescript/evervault-browser-tokens/public/index.html",
-      "sha256": "9c577602892a0294f57e4cd3da1ff1ef669157deeac911721c7e853a3d27fe76",
+      "sha256": "71617dd313cb77a223ecef786be90cce6fbcbe4e2deaf768a2c676781fcb9646",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -443,7 +443,7 @@
     },
     {
       "path": "examples/typescript/evervault-browser-tokens/public/styles.css",
-      "sha256": "c6dc7b301698478035b916a762ddc1a7a700c796cf402b8048ddf3068290d74c",
+      "sha256": "2fbe49ee7844aca2322a18e127a8c938367bfbfaeed799894f59dbd9be149801",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
