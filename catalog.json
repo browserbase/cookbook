@@ -9,9 +9,9 @@
       ],
       "collection": "examples",
       "dependencies": [
-        "pydantic>=2.12,<3",
-        "python-dotenv>=1.2,<2",
-        "stagehand==4.1.0"
+        "pydantic>=2.14.1,<3",
+        "python-dotenv>=1.2.4,<2",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/agentic-kyb/main.py"
@@ -134,17 +134,17 @@
       "collection": "projects",
       "dependencies": {
         "@1password/sdk": "0.5.0",
-        "@ai-sdk/openai": "4.0.46",
-        "@browserbasehq/sdk": "2.18.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.82",
-        "dotenv": "^17.2.0",
-        "eve": "0.47.6",
-        "lucide-react": "^1.34.0",
-        "next": "16.3.8",
-        "react": "^19.2.0",
-        "react-dom": "^19.2.0",
-        "zod": "^4.4.0"
+        "@ai-sdk/openai": "4.0.93",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "ai": "7.0.139",
+        "dotenv": "^17.4.2",
+        "eve": "0.47.7",
+        "lucide-react": "^1.60.0",
+        "next": "16.4.0",
+        "react": "^19.3.1",
+        "react-dom": "^19.3.1",
+        "zod": "4.4.3"
       },
       "entrypoints": [
         "projects/browsie/app/page.tsx",
@@ -275,7 +275,7 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "github.com/browserbase/stagehand/packages/sdk-go/v4": "v4.0.2"
+        "github.com/browserbase/stagehand/packages/sdk-go/v4": "v4.3.0"
       },
       "entrypoints": [
         "examples/go/hackernews/main.go"
@@ -337,10 +337,10 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
-        "pydantic>=2.0.0",
+        "browserbase==1.20.0",
+        "pydantic>=2.14.1",
         "python-dotenv",
-        "stagehand==4.0.2"
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/amazon-global-price-comparison/main.py"
@@ -412,10 +412,10 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "beautifulsoup4==4.14.3",
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "beautifulsoup4==4.15.0",
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/amazon-product-scraping/main.py"
@@ -476,11 +476,11 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "deepagents==0.7.5",
+        "deepagents==0.7.24",
         "langchain-mcp-adapters==0.3.2",
-        "langchain-openai==1.4.3",
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2"
+        "langchain-openai==1.7.1",
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4"
       ],
       "entrypoints": [
         "examples/python/anthropic-cua/main.py"
@@ -593,8 +593,8 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/basic-caching/main.py"
@@ -656,8 +656,8 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/basic-captcha/main.py"
@@ -719,10 +719,10 @@
       ],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
+        "browserbase==1.20.0",
         "python-dotenv",
         "reductoai",
-        "stagehand==4.0.2"
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/browserbase-reducto/main.py"
@@ -794,11 +794,11 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "deepagents==0.7.5",
+        "deepagents==0.7.24",
         "langchain-mcp-adapters==0.3.2",
-        "langchain-openai==1.4.3",
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2"
+        "langchain-openai==1.7.1",
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4"
       ],
       "entrypoints": [
         "examples/python/business-lookup/main.py"
@@ -909,15 +909,15 @@
       ],
       "collection": "examples",
       "dependencies": [
-        "PyYAML>=6.0.0",
-        "aiohttp>=3.12.0",
+        "PyYAML>=6.0.3",
+        "aiohttp>=3.14.5",
         "cartesia-line==0.1.12",
         "fastapi==0.115.14",
-        "google-genai>=1.26.0",
-        "loguru>=0.7.0",
-        "pydantic>=2.0.0",
-        "python-dotenv>=1.0.0",
-        "stagehand==4.0.2"
+        "google-genai>=1.75.0",
+        "loguru>=0.7.3",
+        "pydantic>=2.14.1",
+        "python-dotenv>=1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/cartesia-form-filling/main.py"
@@ -1000,13 +1000,13 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
-        "deepagents==0.7.5",
+        "browserbase==1.20.0",
+        "deepagents==0.7.24",
         "httpx",
         "langchain-mcp-adapters==0.3.2",
-        "langchain-openai==1.4.3",
+        "langchain-openai==1.7.1",
         "openai",
-        "playwright==1.62.0",
+        "playwright==1.63.0",
         "pydantic",
         "python-dotenv"
       ],
@@ -1136,11 +1136,11 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "deepagents==0.7.5",
+        "deepagents==0.7.24",
         "langchain-mcp-adapters==0.3.2",
-        "langchain-openai==1.4.3",
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2"
+        "langchain-openai==1.7.1",
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4"
       ],
       "entrypoints": [
         "examples/python/company-address-finder/main.py"
@@ -1247,9 +1247,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/company-value-prop-generator/main.py"
@@ -1312,10 +1312,10 @@
       ],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "browserbase==1.20.0",
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/context/main.py"
@@ -1397,9 +1397,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/council-events/main.py"
@@ -1460,10 +1460,10 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
+        "browserbase==1.20.0",
         "httpx==0.28.1",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/download-financial-statements/main.py"
@@ -1524,9 +1524,9 @@
       "collection": "examples",
       "dependencies": [
         "exa-py",
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/exa-browserbase/main.py"
@@ -1620,10 +1620,10 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
-        "extend-ai>=1.0.0",
-        "python-dotenv>=1.2.1",
-        "stagehand==4.0.2"
+        "browserbase==1.20.0",
+        "extend-ai>=1.19.0",
+        "python-dotenv>=1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/extend-browserbase/main.py"
@@ -1695,9 +1695,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
-        "python-dotenv==1.2.2"
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
+        "python-dotenv==1.2.4"
       ],
       "entrypoints": [
         "examples/python/file-upload/main.py"
@@ -1807,8 +1807,8 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/form-filling/main.py"
@@ -1868,11 +1868,11 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "deepagents==0.7.5",
+        "deepagents==0.7.24",
         "langchain-mcp-adapters==0.3.2",
-        "langchain-openai==1.4.3",
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2"
+        "langchain-openai==1.7.1",
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4"
       ],
       "entrypoints": [
         "examples/python/gemini-cua/main.py"
@@ -1983,8 +1983,8 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
         "python-dotenv"
       ],
       "entrypoints": [
@@ -2058,10 +2058,10 @@
       ],
       "collection": "examples",
       "dependencies": [
-        "openai>=2.26,<3",
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "openai>=2.54.0,<3",
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/gift-finder/main.py"
@@ -2144,9 +2144,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/google-trends/main.py"
@@ -2206,9 +2206,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
-        "python-dotenv==1.2.2"
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
+        "python-dotenv==1.2.4"
       ],
       "entrypoints": [
         "examples/python/human-in-the-loop/main.py"
@@ -2297,10 +2297,10 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
         "python-dotenv",
-        "stagehand==4.0.2"
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/image-url-download/main.py"
@@ -2373,9 +2373,9 @@
       "collection": "examples",
       "dependencies": [
         "httpx==0.28.1",
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/job-application/main.py"
@@ -2457,9 +2457,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/license-verification/main.py"
@@ -2524,10 +2524,10 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "browserbase==1.20.0",
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/manual-mfa-with-contexts/main.py"
@@ -2611,9 +2611,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/mfa-handling/main.py"
@@ -2675,9 +2675,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/nurse-verification/main.py"
@@ -2743,11 +2743,11 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "deepagents==0.7.5",
+        "deepagents==0.7.24",
         "langchain-mcp-adapters==0.3.2",
-        "langchain-openai==1.4.3",
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2"
+        "langchain-openai==1.7.1",
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4"
       ],
       "entrypoints": [
         "examples/python/openai-cua/main.py"
@@ -2861,9 +2861,9 @@
       ],
       "collection": "examples",
       "dependencies": [
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/pickleball/main.py"
@@ -2990,8 +2990,8 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
         "python-dotenv"
       ],
       "entrypoints": [
@@ -3053,8 +3053,8 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
         "python-dotenv"
       ],
       "entrypoints": [
@@ -3115,8 +3115,8 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
         "python-dotenv"
       ],
       "entrypoints": [
@@ -3182,9 +3182,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/polymarket-research/main.py"
@@ -3247,9 +3247,9 @@
       ],
       "collection": "examples",
       "dependencies": [
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/proxies/main.py"
@@ -3315,9 +3315,9 @@
       ],
       "collection": "examples",
       "dependencies": [
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/proxies-weather/main.py"
@@ -3383,10 +3383,10 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "beautifulsoup4==4.14.3",
+        "beautifulsoup4==4.15.0",
         "pydantic",
         "python-dotenv",
-        "stagehand==4.0.2"
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/sec-filing-research/main.py"
@@ -3447,9 +3447,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
-        "python-dotenv>=1.2.2",
-        "selenium==4.48.0"
+        "browserbase==1.20.0",
+        "python-dotenv>=1.2.4",
+        "selenium==4.51.0"
       ],
       "entrypoints": [
         "examples/python/selenium/quickstart-selenium/main.py"
@@ -3510,10 +3510,10 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "browserbase==1.18.1",
+        "browserbase==1.20.0",
         "pydantic",
         "python-dotenv",
-        "stagehand==4.0.2"
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/smart-fetch-scraper/main.py"
@@ -3573,9 +3573,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": [
-        "pydantic>=2.12,<3",
-        "python-dotenv==1.2.2",
-        "stagehand==4.0.2"
+        "pydantic>=2.14.1,<3",
+        "python-dotenv==1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "examples/python/website-link-tester/main.py"
@@ -3648,14 +3648,14 @@
       ],
       "collection": "examples",
       "dependencies": {
-        "@ai-sdk/mcp": "^2.0.29",
-        "@browserbasehq/sdk": "2.19.1",
+        "@ai-sdk/mcp": "^2.0.74",
+        "@browserbasehq/sdk": "2.21.0",
         "@browserbasehq/stagehand-codemode": "github:browserbase/stagehand#54302fc5f13be5ad8e717d8e1388502de22be2ed&path:packages/integrations",
-        "ai": "^7.0.58",
-        "next": "16.3.6",
-        "react": "19.2.4",
-        "react-dom": "19.2.4",
-        "zod": "4.4.3"
+        "ai": "^7.0.139",
+        "next": "16.4.0",
+        "react": "19.3.0",
+        "react-dom": "19.3.0",
+        "zod": "4.6.7"
       },
       "entrypoints": [
         "examples/typescript/agent-with-human-in-loop/app/page.tsx"
@@ -3742,8 +3742,8 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
-        "dotenv": "^16.4.7",
+        "@browserbasehq/stagehand": "4.2.1",
+        "dotenv": "^16.6.1",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -3817,8 +3817,8 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
-        "dotenv": "^16.4.5",
+        "@browserbasehq/stagehand": "4.2.1",
+        "dotenv": "^16.6.1",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -3881,7 +3881,7 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/stagehand": "4.2.1",
         "dotenv": "latest"
       },
       "entrypoints": [
@@ -3943,7 +3943,7 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/stagehand": "4.2.1",
         "dotenv": "^17.4.2"
       },
       "entrypoints": [
@@ -4007,11 +4007,11 @@
       ],
       "collection": "examples",
       "dependencies": {
-        "@ai-sdk/mcp": "^2.0.29",
-        "@browserbasehq/sdk": "2.19.1",
+        "@ai-sdk/mcp": "^2.0.74",
+        "@browserbasehq/sdk": "2.21.0",
         "@browserbasehq/stagehand-codemode": "github:browserbase/stagehand#54302fc5f13be5ad8e717d8e1388502de22be2ed&path:packages/integrations",
-        "ai": "^7.0.58",
-        "dotenv": "^17.4.0"
+        "ai": "^7.0.139",
+        "dotenv": "^17.4.2"
       },
       "entrypoints": [
         "examples/typescript/browser-agent-demo/index.ts"
@@ -4097,8 +4097,8 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
         "adm-zip": "latest",
         "dotenv": "latest",
         "reductoai": "latest",
@@ -4177,11 +4177,11 @@
       ],
       "collection": "examples",
       "dependencies": {
-        "@ai-sdk/mcp": "^2.0.29",
+        "@ai-sdk/mcp": "^2.0.74",
         "@browserbasehq/stagehand-codemode": "github:browserbase/stagehand#54302fc5f13be5ad8e717d8e1388502de22be2ed&path:packages/integrations",
-        "ai": "^7.0.58",
+        "ai": "^7.0.139",
         "dotenv": "^17.4.2",
-        "zod": "4.4.3"
+        "zod": "4.6.7"
       },
       "entrypoints": [
         "examples/typescript/business-lookup/index.ts"
@@ -4269,11 +4269,11 @@
       ],
       "collection": "examples",
       "dependencies": {
-        "@ai-sdk/mcp": "^2.0.29",
+        "@ai-sdk/mcp": "^2.0.74",
         "@browserbasehq/stagehand-codemode": "github:browserbase/stagehand#54302fc5f13be5ad8e717d8e1388502de22be2ed&path:packages/integrations",
-        "ai": "^7.0.58",
+        "ai": "^7.0.139",
         "dotenv": "^17.4.2",
-        "zod": "4.4.3"
+        "zod": "4.6.7"
       },
       "entrypoints": [
         "examples/typescript/company-address-finder/index.ts"
@@ -4357,7 +4357,7 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/stagehand": "4.2.1",
         "dotenv": "^17.4.2",
         "zod": "4.4.3"
       },
@@ -4420,9 +4420,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
-        "dotenv": "^16.4.5",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "dotenv": "^16.6.1",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -4506,7 +4506,7 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/stagehand": "4.2.1",
         "dotenv": "^17.4.2",
         "zod": "4.4.3"
       },
@@ -4570,9 +4570,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
-        "dotenv": "^16.4.5",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "dotenv": "^16.6.1",
         "zod": "4.4.3",
         "adm-zip": "0.6.1"
       },
@@ -4637,9 +4637,9 @@
       ],
       "collection": "examples",
       "dependencies": {
-        "@ai-sdk/mcp": "^2.0.29",
+        "@ai-sdk/mcp": "^2.0.74",
         "@browserbasehq/stagehand-codemode": "github:browserbase/stagehand#54302fc5f13be5ad8e717d8e1388502de22be2ed&path:packages/integrations",
-        "ai": "^7.0.58",
+        "ai": "^7.0.139",
         "dotenv": "^17.4.2"
       },
       "entrypoints": [
@@ -4725,7 +4725,7 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/stagehand": "4.2.1",
         "dotenv": "latest",
         "exa-js": "latest",
         "zod": "4.4.3"
@@ -4823,12 +4823,12 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
         "adm-zip": "0.6.1",
-        "dotenv": "^17.2.4",
-        "extend-ai": "^1.0.2",
-        "open": "^11.0.0"
+        "dotenv": "^17.4.2",
+        "extend-ai": "^1.17.0",
+        "open": "^11.0.4"
       },
       "entrypoints": [
         "examples/typescript/extend-browserbase/index.ts"
@@ -4901,7 +4901,7 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/stagehand": "4.2.1",
         "dotenv": "^17.4.2"
       },
       "entrypoints": [
@@ -4964,9 +4964,9 @@
       ],
       "collection": "examples",
       "dependencies": {
-        "@ai-sdk/mcp": "^2.0.29",
+        "@ai-sdk/mcp": "^2.0.74",
         "@browserbasehq/stagehand-codemode": "github:browserbase/stagehand#54302fc5f13be5ad8e717d8e1388502de22be2ed&path:packages/integrations",
-        "ai": "^7.0.58",
+        "ai": "^7.0.139",
         "dotenv": "^17.4.2"
       },
       "entrypoints": [
@@ -5054,9 +5054,9 @@
       ],
       "collection": "examples",
       "dependencies": {
-        "@ai-sdk/mcp": "^2.0.29",
+        "@ai-sdk/mcp": "^2.0.74",
         "@browserbasehq/stagehand-codemode": "github:browserbase/stagehand#54302fc5f13be5ad8e717d8e1388502de22be2ed&path:packages/integrations",
-        "ai": "^7.0.58",
+        "ai": "^7.0.139",
         "dotenv": "^17.4.2"
       },
       "entrypoints": [
@@ -5149,9 +5149,9 @@
       ],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "dotenv": "^16.4.5",
-        "playwright-core": "1.63.0"
+        "@browserbasehq/sdk": "2.21.0",
+        "dotenv": "^16.6.1",
+        "playwright-core": "1.64.0"
       },
       "entrypoints": [
         "examples/typescript/getting-started-with-browserbase/index.ts"
@@ -5238,7 +5238,7 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/stagehand": "4.2.1",
         "dotenv": "latest",
         "openai": "latest",
         "zod": "4.4.3"
@@ -5325,8 +5325,8 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
-        "dotenv": "^16.0.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "dotenv": "^16.6.1",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -5388,9 +5388,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
-        "dotenv": "^16.4.5",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "dotenv": "^16.6.1",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -5464,9 +5464,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
-        "dotenv": "^16.4.5",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "dotenv": "^16.6.1",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -5530,7 +5530,7 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/stagehand": "4.2.1",
         "dotenv": "^17.4.2",
         "zod": "4.4.3"
       },
@@ -5597,9 +5597,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
-        "dotenv": "^16.4.5",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "dotenv": "^16.6.1",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -5683,8 +5683,8 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
-        "dotenv": "^16.0.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "dotenv": "^16.6.1",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -5748,9 +5748,9 @@
       ],
       "collection": "examples",
       "dependencies": {
-        "@ai-sdk/mcp": "^2.0.29",
+        "@ai-sdk/mcp": "^2.0.74",
         "@browserbasehq/stagehand-codemode": "github:browserbase/stagehand#54302fc5f13be5ad8e717d8e1388502de22be2ed&path:packages/integrations",
-        "ai": "^7.0.58",
+        "ai": "^7.0.139",
         "dotenv": "^17.4.2"
       },
       "entrypoints": [
@@ -5841,7 +5841,7 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/stagehand": "4.2.1",
         "dotenv": "^17.4.2",
         "zod": "4.4.3"
       },
@@ -5905,9 +5905,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
-        "dotenv": "^16.4.5",
-        "inquirer": "^12.9.4",
+        "@browserbasehq/stagehand": "4.2.1",
+        "dotenv": "^16.6.1",
+        "inquirer": "^12.11.1",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -6003,9 +6003,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "dotenv": "^16.4.7",
-        "playwright-core": "1.63.0"
+        "@browserbasehq/sdk": "2.21.0",
+        "playwright-core": "1.64.0",
+        "dotenv": "^16.6.1"
       },
       "entrypoints": [
         "examples/typescript/playwright/basic-captcha/index.ts"
@@ -6066,9 +6066,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "dotenv": "^16.0.0",
-        "playwright-core": "1.63.0"
+        "@browserbasehq/sdk": "2.21.0",
+        "dotenv": "^16.6.1",
+        "playwright-core": "1.64.0"
       },
       "entrypoints": [
         "examples/typescript/playwright-mfa-handling/index.ts"
@@ -6128,9 +6128,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "dotenv": "^16.4.5",
-        "playwright-core": "1.63.0"
+        "@browserbasehq/sdk": "2.21.0",
+        "dotenv": "^16.6.1",
+        "playwright-core": "1.64.0"
       },
       "entrypoints": [
         "examples/typescript/playwright/quickstart-playwright/index.ts"
@@ -6195,7 +6195,7 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/stagehand": "4.2.1",
         "dotenv": "^17.4.2",
         "zod": "4.4.3"
       },
@@ -6257,7 +6257,7 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/stagehand": "4.2.1",
         "dotenv": "^17.4.2",
         "zod": "4.4.3"
       },
@@ -6323,8 +6323,8 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
-        "dotenv": "^16.4.7",
+        "@browserbasehq/stagehand": "4.2.1",
+        "dotenv": "^16.6.1",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -6390,9 +6390,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "dotenv": "^16.4.5",
-        "puppeteer-core": "^24.39.1"
+        "@browserbasehq/sdk": "2.21.0",
+        "dotenv": "^16.6.1",
+        "puppeteer-core": "^24.43.1"
       },
       "entrypoints": [
         "examples/typescript/puppeteer/quickstart-puppeteer/index.ts"
@@ -6453,8 +6453,8 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
-        "dotenv": "^16.4.5",
+        "@browserbasehq/stagehand": "4.2.1",
+        "dotenv": "^16.6.1",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -6517,9 +6517,9 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "dotenv": "^16.4.5",
-        "selenium-webdriver": "^4.29.0"
+        "@browserbasehq/sdk": "2.21.0",
+        "dotenv": "^16.6.1",
+        "selenium-webdriver": "^4.51.0"
       },
       "entrypoints": [
         "examples/typescript/selenium/quickstart-selenium/index.ts"
@@ -6580,11 +6580,11 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
-        "cheerio": "1.2.0",
-        "dotenv": "^16.4.5",
-        "zod": "4.4.3"
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "cheerio": "1.2.0"
       },
       "entrypoints": [
         "examples/typescript/smart-fetch-scraper/index.ts"
@@ -6645,7 +6645,7 @@
       "caveats": [],
       "collection": "examples",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/stagehand": "4.2.1",
         "dotenv": "^17.4.2",
         "zod": "4.4.3"
       },
@@ -6731,11 +6731,11 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
+        "@browserbasehq/sdk": "2.21.0",
         "@inngest/agent-kit": "0.13.2",
         "dotenv": "16.6.1",
-        "playwright-core": "1.63.0",
-        "zod": "4.4.3"
+        "playwright-core": "1.64.0",
+        "zod": "4.6.7"
       },
       "entrypoints": [
         "integrations/examples/integrations/agentkit/browserbase/src/index.ts"
@@ -6796,11 +6796,11 @@
       "caveats": [],
       "collection": "integrations",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
         "@inngest/agent-kit": "0.13.2",
         "dotenv": "16.6.1",
-        "inngest": "4.20.0",
+        "inngest": "4.23.0",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -6864,11 +6864,11 @@
       "caveats": [],
       "collection": "integrations",
       "dependencies": [
-        "agno==3.0.6",
-        "browserbase==1.18.1",
+        "agno==3.1.3",
+        "browserbase==1.20.0",
         "openai>=2,<3",
-        "playwright==1.62.0",
-        "python-dotenv>=1.2.2,<2"
+        "playwright==1.63.0",
+        "python-dotenv>=1.2.4,<2"
       ],
       "entrypoints": [
         "integrations/examples/integrations/agno/main.py"
@@ -6938,7 +6938,7 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
+        "@browserbasehq/sdk": "2.21.0",
         "dotenv": "16.6.1"
       },
       "entrypoints": [
@@ -7080,7 +7080,7 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/stagehand": "4.2.1",
         "dotenv": "16.6.1"
       },
       "entrypoints": [
@@ -7231,14 +7231,14 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "braintrust": "3.30.0",
-        "next": "16.3.4",
-        "node": "^22.16.0",
-        "playwright-core": "1.63.0",
-        "react": "19.2.4",
-        "react-dom": "19.2.4",
-        "zod": "4.4.3"
+        "@browserbasehq/sdk": "2.21.0",
+        "braintrust": "3.37.2",
+        "next": "16.4.0",
+        "node": "^22.23.3",
+        "playwright-core": "1.64.0",
+        "zod": "4.6.7",
+        "react": "19.3.0",
+        "react-dom": "19.3.0"
       },
       "entrypoints": [],
       "environment_setup_command": null,
@@ -7295,8 +7295,8 @@
       "collection": "integrations",
       "dependencies": [
         "browser-use==0.11.13",
-        "browserbase==1.18.1",
-        "python-dotenv>=1.2.2,<2"
+        "browserbase==1.20.0",
+        "python-dotenv>=1.2.4,<2"
       ],
       "entrypoints": [
         "integrations/examples/integrations/browser-use/main.py"
@@ -7364,14 +7364,14 @@
       "caveats": [],
       "collection": "integrations",
       "dependencies": [
-        "PyYAML>=6.0.0",
-        "aiohttp>=3.12.0",
+        "PyYAML>=6.0.3",
+        "aiohttp>=3.14.5",
         "cartesia-line",
-        "google-genai>=1.26.0; python_version>='3.9'",
-        "loguru>=0.7.0",
-        "pydantic>=2.0.0",
-        "python-dotenv>=1.0.0",
-        "stagehand==4.0.2"
+        "google-genai>=1.75.0; python_version>='3.9'",
+        "loguru>=0.7.3",
+        "pydantic>=2.14.1",
+        "python-dotenv>=1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "integrations/examples/integrations/cartesia/main.py"
@@ -7455,9 +7455,9 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "crewai": "1.15.20",
+        "crewai": "1.15.27",
         "html2text": ">=2024.2.26",
-        "playwright": "1.62.0",
+        "playwright": "1.63.0",
         "python-dotenv": ">=1.2.2,<2",
         "cryptography": ">=50.0.0",
         "aiohttp": ">=3.14.3",
@@ -7527,10 +7527,10 @@
       "caveats": [],
       "collection": "integrations",
       "dependencies": [
-        "browserbase==1.18.1",
-        "crewai==1.15.20",
-        "playwright==1.62.0",
-        "python-dotenv>=1.2.2,<2"
+        "browserbase==1.20.0",
+        "crewai==1.15.27",
+        "playwright==1.63.0",
+        "python-dotenv>=1.2.4,<2"
       ],
       "entrypoints": [
         "integrations/examples/integrations/crewai/quickstart/main.py"
@@ -7576,11 +7576,11 @@
       "caveats": [],
       "collection": "integrations",
       "dependencies": [
-        "crewai-tools[mcp]==1.15.20",
-        "crewai==1.15.20",
-        "mcp>=1.28,<2",
-        "python-dotenv>=1.2.2,<2",
-        "stagehand==4.0.2"
+        "crewai-tools[mcp]==1.15.27",
+        "crewai==1.15.27",
+        "mcp>=1.30.0,<2",
+        "python-dotenv>=1.2.4,<2",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "integrations/examples/integrations/crewai/stagehand/main.py"
@@ -7648,10 +7648,10 @@
       "caveats": [],
       "collection": "integrations",
       "dependencies": [
-        "browserbase==1.18.1",
+        "browserbase==1.20.0",
         "langchain-community==0.4.2",
-        "playwright==1.62.0",
-        "python-dotenv>=1.2.2,<2"
+        "playwright==1.63.0",
+        "python-dotenv>=1.2.4,<2"
       ],
       "entrypoints": [
         "integrations/examples/integrations/langchain/browserbase/main.py"
@@ -7708,13 +7708,13 @@
       "caveats": [],
       "collection": "integrations",
       "dependencies": [
-        "beautifulsoup4>=4.13.0",
-        "browserbase==1.18.1",
-        "deepagents>=0.6.3",
-        "langchain-mcp-adapters>=0.2,<1",
-        "langchain-openai>=1.2.1",
-        "python-dotenv>=1.0.0",
-        "stagehand==4.0.2"
+        "beautifulsoup4>=4.15.0",
+        "browserbase==1.20.0",
+        "deepagents>=0.6.12",
+        "langchain-mcp-adapters>=0.2.2,<1",
+        "langchain-openai>=1.7.1",
+        "python-dotenv>=1.2.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "integrations/examples/integrations/langchain/deepagents-browserbase/main.py"
@@ -7840,8 +7840,8 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "@browserbasehq/stagehand": "4.0.2",
-        "@langchain/core": "1.2.9",
+        "@browserbasehq/stagehand": "4.2.1",
+        "@langchain/core": "1.2.17",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -7889,12 +7889,12 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "@ai-sdk/openai": "4.0.59",
-        "@browserbasehq/stagehand": "4.0.2",
-        "@mastra/core": "1.64.0",
-        "@mastra/loggers": "1.3.1",
-        "@mastra/memory": "1.28.2",
-        "mastra": "1.27.3",
+        "@ai-sdk/openai": "4.0.93",
+        "@browserbasehq/stagehand": "4.2.1",
+        "@mastra/core": "1.76.0",
+        "@mastra/loggers": "1.3.6",
+        "@mastra/memory": "1.37.0",
+        "mastra": "1.34.0",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -7961,11 +7961,11 @@
       "collection": "integrations",
       "dependencies": [
         "colorama>=0.4.6",
-        "pydantic>=2.0.0",
-        "pymongo>=4.6.0",
-        "python-dotenv>=1.0.0",
-        "rich>=13.0.0",
-        "stagehand==4.0.2"
+        "pydantic>=2.14.1",
+        "pymongo>=4.18.3",
+        "python-dotenv>=1.2.4",
+        "rich>=13.9.4",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "integrations/examples/integrations/mongodb/python/main.py"
@@ -8044,13 +8044,13 @@
       "caveats": [],
       "collection": "integrations",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
-        "@playwright/test": "1.63.0",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "@playwright/test": "1.64.0",
         "boxen": "8.0.1",
-        "chalk": "6.0.0",
+        "chalk": "6.0.1",
         "dotenv": "16.6.1",
-        "mongodb": "7.6.0",
+        "mongodb": "7.7.0",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -8138,14 +8138,14 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
-        "@playwright/test": "1.63.0",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "@playwright/test": "1.64.0",
         "boxen": "8.0.1",
-        "chalk": "6.0.0",
+        "chalk": "6.0.1",
         "dotenv": "16.6.1",
-        "stripe": "22.6.1",
-        "zod": "4.4.3"
+        "zod": "4.4.3",
+        "stripe": "22.6.2"
       },
       "entrypoints": [
         "integrations/examples/integrations/stripe/node/1-create-cardholder.ts",
@@ -8307,8 +8307,8 @@
       ],
       "collection": "integrations",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
         "python-dotenv",
         "stripe==15.6.1"
       ],
@@ -8470,13 +8470,13 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
-        "@playwright/test": "1.63.0",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "stripe": "22.6.2",
+        "@playwright/test": "1.64.0",
         "boxen": "8.0.1",
-        "chalk": "6.0.0",
+        "chalk": "6.0.1",
         "dotenv": "16.6.1",
-        "stripe": "22.6.1",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -8621,14 +8621,14 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
-        "@temporalio/activity": "1.23.0",
-        "@temporalio/client": "1.23.0",
-        "@temporalio/common": "1.23.0",
-        "@temporalio/worker": "1.23.0",
-        "@temporalio/workflow": "1.23.0",
-        "zod": "4.4.3"
+        "@browserbasehq/stagehand": "4.2.1",
+        "@temporalio/activity": "1.24.0",
+        "@temporalio/client": "1.24.0",
+        "@temporalio/common": "1.24.0",
+        "@temporalio/worker": "1.24.0",
+        "@temporalio/workflow": "1.24.0",
+        "zod": "4.4.3",
+        "@browserbasehq/sdk": "2.21.0"
       },
       "entrypoints": [
         "integrations/examples/integrations/temporal/src/research-worker.ts",
@@ -8752,18 +8752,18 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "@aws-sdk/client-s3": "3.1127.0",
+        "@aws-sdk/client-s3": "3.1151.0",
         "@react-email/components": "1.0.12",
         "@react-pdf/renderer": "4.9.0",
-        "@trigger.dev/sdk": "4.6.3",
-        "next": "16.3.4",
-        "openai": "7.10.0",
-        "puppeteer": "25.10.0",
-        "puppeteer-core": "25.10.0",
-        "react": "19.2.4",
-        "react-dom": "19.2.4",
-        "react-email": "^4.0.16",
-        "resend": "6.26.0",
+        "@trigger.dev/sdk": "4.7.3",
+        "next": "16.4.0",
+        "openai": "7.32.0",
+        "puppeteer": "25.13.0",
+        "puppeteer-core": "25.13.0",
+        "react": "19.3.0",
+        "react-dom": "19.3.0",
+        "react-email": "^4.3.2",
+        "resend": "6.32.1",
         "@react-email/render": "2.1.0"
       },
       "entrypoints": [
@@ -8917,28 +8917,28 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@ai-sdk/openai": "4.0.52",
-        "@ai-sdk/react": "4.0.89",
-        "@headlessui/react": "^2.1.10",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@ai-sdk/openai": "4.0.93",
+        "@ai-sdk/react": "4.0.142",
+        "@headlessui/react": "^2.2.10",
         "@mozilla/readability": "0.6.0",
-        "@radix-ui/react-icons": "^1.3.0",
-        "ai": "7.0.86",
+        "@radix-ui/react-icons": "^1.3.2",
+        "ai": "7.0.139",
         "class-variance-authority": "0.7.1",
         "clsx": "2.1.1",
-        "framer-motion": "13.1.1",
+        "framer-motion": "13.5.1",
         "geist": "1.7.2",
-        "jsdom": "30.0.1",
-        "lucide-react": "1.38.0",
-        "next": "16.3.3",
-        "playwright": "1.62.1",
-        "react": "19.2.4",
-        "react-dom": "19.2.4",
+        "jsdom": "30.1.2",
+        "lucide-react": "1.56.0",
+        "next": "16.4.0",
+        "playwright": "1.64.0",
+        "react": "19.3.0",
+        "react-dom": "19.3.0",
         "react-markdown": "10.1.0",
         "remark-gfm": "4.0.1",
-        "tailwind-merge": "3.6.0",
+        "tailwind-merge": "3.7.0",
         "tailwindcss-animate": "^1.0.7",
-        "zod": "4.4.3"
+        "zod": "4.6.7"
       },
       "entrypoints": [
         "integrations/examples/integrations/vercel/BrowseGPT/app/api/chat/route.ts"
@@ -9003,9 +9003,9 @@
       "collection": "integrations",
       "dependencies": {
         "@browserbasehq/eve": "workspace:*",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.93",
-        "eve": "0.52.1",
+        "@browserbasehq/stagehand": "4.2.1",
+        "ai": "7.0.139",
+        "eve": "0.52.5",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -9087,15 +9087,15 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
-        "next": "16.3.4",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "next": "16.4.0",
         "node-html-markdown": "^1.3.0",
-        "prettier": "3.9.6",
-        "playwright-core": "1.63.0",
-        "puppeteer-core": "25.10.0",
-        "react": "19.2.4",
-        "react-dom": "19.2.4",
+        "prettier": "3.9.10",
+        "playwright-core": "1.64.0",
+        "puppeteer-core": "25.13.0",
+        "react": "19.3.0",
+        "react-dom": "19.3.0",
         "zod": "4.4.3"
       },
       "entrypoints": [
@@ -9161,12 +9161,12 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.49",
-        "@ai-sdk/google": "4.0.64",
-        "@ai-sdk/openai": "4.0.59",
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.93"
+        "@browserbasehq/stagehand": "4.2.1",
+        "@browserbasehq/sdk": "2.21.0",
+        "ai": "7.0.139",
+        "@ai-sdk/openai": "4.0.93",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@ai-sdk/google": "4.0.95"
       },
       "entrypoints": [
         "integrations/packages/convex-stagehand/src/client/index.ts"
@@ -9237,8 +9237,8 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
         "zod": "4.4.3"
       },
       "entrypoints": [],
@@ -9286,8 +9286,8 @@
       ],
       "collection": "integrations",
       "dependencies": {
-        "json5": "2.2.3",
-        "tar": "^7.5.9"
+        "tar": "^7.5.22",
+        "json5": "2.2.3"
       },
       "entrypoints": [
         "integrations/packages/openclaw-browserbase/src/index.ts"
@@ -9349,10 +9349,10 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
-        "dotenv": "16.6.1",
-        "playwright-core": "1.63.0"
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "playwright-core": "1.64.0",
+        "dotenv": "16.6.1"
       },
       "entrypoints": [
         "playbook/guides/1password/node/createExtension.ts"
@@ -9428,10 +9428,10 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
-        "dotenv": "16.6.1",
-        "playwright-core": "1.63.0"
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "playwright-core": "1.64.0",
+        "dotenv": "16.6.1"
       },
       "entrypoints": [
         "playbook/guides/1password/node/playwright.ts"
@@ -9507,10 +9507,10 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@browserbasehq/sdk": "2.19.1",
-        "@browserbasehq/stagehand": "4.0.2",
-        "dotenv": "16.6.1",
-        "playwright-core": "1.63.0"
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "playwright-core": "1.64.0",
+        "dotenv": "16.6.1"
       },
       "entrypoints": [
         "playbook/guides/1password/node/stagehand.ts"
@@ -9586,11 +9586,11 @@
       ],
       "collection": "playbook",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
-        "python-dotenv>=1.2.2,<2",
-        "requests>=2.32,<3",
-        "stagehand==4.0.2"
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
+        "python-dotenv>=1.2.4,<2",
+        "requests>=2.34.2,<3",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "playbook/guides/1password/python/create_extension.py"
@@ -9668,11 +9668,11 @@
       ],
       "collection": "playbook",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
-        "python-dotenv>=1.2.2,<2",
-        "requests>=2.32,<3",
-        "stagehand==4.0.2"
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
+        "python-dotenv>=1.2.4,<2",
+        "requests>=2.34.2,<3",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "playbook/guides/1password/python/run_playwright.py"
@@ -9750,11 +9750,11 @@
       ],
       "collection": "playbook",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
-        "python-dotenv>=1.2.2,<2",
-        "requests>=2.32,<3",
-        "stagehand==4.0.2"
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
+        "python-dotenv>=1.2.4,<2",
+        "requests>=2.34.2,<3",
+        "stagehand==4.2.1"
       ],
       "entrypoints": [
         "playbook/guides/1password/python/run_stagehand.py"
@@ -9840,18 +9840,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/authenticate/basicLogin.ts"
@@ -9968,18 +9968,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/authenticate/createContext.ts"
@@ -10096,18 +10096,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/research/bookSearch.ts"
@@ -10215,18 +10215,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/research/searchAlaskaFlights.ts"
@@ -10328,18 +10328,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/task/eharmonyForm.ts"
@@ -10455,18 +10455,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/task/tikTokForm.ts"
@@ -10573,18 +10573,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/_tools/context/initialize_context.ts"
@@ -10646,18 +10646,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/_tools/context/wikipedia_login.ts"
@@ -10720,18 +10720,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/_tools/download/cloud-download-retrieve.ts"
@@ -10813,18 +10813,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/_tools/download/cloud-download-save.ts"
@@ -10896,18 +10896,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/_tools/download/generate_pdf.ts"
@@ -10979,18 +10979,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/_tools/download/local-pdf.ts"
@@ -11062,18 +11062,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/_tools/download/local-screenshot.ts"
@@ -11145,18 +11145,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/_tools/metadata/listMetadata.ts"
@@ -11227,18 +11227,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/_tools/metadata/setMetadata.ts"
@@ -11310,18 +11310,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/_tools/stealth/verified.ts"
@@ -11384,18 +11384,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/_tools/stealth/customCaptcha.ts"
@@ -11457,18 +11457,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/_tools/uploads/live-view-upload.ts"
@@ -11530,18 +11530,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/playwright/_tools/uploads/local-upload.ts"
@@ -11604,18 +11604,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/authenticate/githubLogin.ts"
@@ -11713,18 +11713,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/complete_task/contactForm.ts"
@@ -11864,18 +11864,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/complete_task/googleForm.ts"
@@ -11971,18 +11971,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/complete_task/jobAppAgent.ts"
@@ -12079,18 +12079,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/complete_task/jobAppExplicit.ts"
@@ -12286,18 +12286,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/complete_task/searchDocs.ts"
@@ -12394,18 +12394,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/complete_task/sfTicketAgent.ts"
@@ -12513,18 +12513,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/complete_task/workday.ts"
@@ -12687,18 +12687,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/research/apptSearch.ts"
@@ -12795,18 +12795,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/research/cityCouncilSearch.ts"
@@ -12904,18 +12904,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/research/polymarket.ts"
@@ -13044,18 +13044,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/research/pullNews.ts"
@@ -13161,18 +13161,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/research/searchAlaskaFlights.ts"
@@ -13285,18 +13285,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/research/searchSouthwestFlights.ts"
@@ -13398,18 +13398,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/research/validateNurses.ts"
@@ -13515,18 +13515,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/_tools/1password/createExtension.ts"
@@ -13655,18 +13655,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/_tools/1password/main.ts"
@@ -13796,18 +13796,18 @@
       ],
       "collection": "playbook",
       "dependencies": {
-        "@ai-sdk/anthropic": "4.0.46",
-        "@browserbasehq/sdk": "2.19.0",
-        "@browserbasehq/stagehand": "4.0.2",
-        "ai": "7.0.86",
-        "axios": "^1.8.1",
+        "@ai-sdk/anthropic": "4.0.79",
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "axios": "^1.20.0",
         "boxen": "^8.0.1",
-        "chalk": "^5.3.0",
-        "dotenv": "^16.4.7",
-        "jszip": "3.10.1",
-        "open": "11.0.2",
-        "playwright-core": "1.62.1",
-        "zod": "4.4.3"
+        "chalk": "^5.6.2",
+        "dotenv": "^16.6.1",
+        "zod": "4.4.3",
+        "ai": "7.0.139",
+        "playwright-core": "1.64.0",
+        "open": "11.0.4",
+        "jszip": "3.10.2"
       },
       "entrypoints": [
         "playbook/node/stagehand/_tools/blank.ts"
@@ -13903,11 +13903,11 @@
       ],
       "collection": "playbook",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
-        "python-dotenv>=1.2.2,<2",
-        "requests>=2.32,<3",
-        "selenium==4.48.0"
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
+        "python-dotenv>=1.2.4,<2",
+        "requests>=2.34.2,<3",
+        "selenium==4.51.0"
       ],
       "entrypoints": [
         "playbook/python/playwright/captcha/captcha_listening.py"
@@ -13982,11 +13982,11 @@
       ],
       "collection": "playbook",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
-        "python-dotenv>=1.2.2,<2",
-        "requests>=2.32,<3",
-        "selenium==4.48.0"
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
+        "python-dotenv>=1.2.4,<2",
+        "requests>=2.34.2,<3",
+        "selenium==4.51.0"
       ],
       "entrypoints": [
         "playbook/python/playwright/captcha/custom_captcha.py"
@@ -14061,11 +14061,11 @@
       ],
       "collection": "playbook",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
-        "python-dotenv>=1.2.2,<2",
-        "requests>=2.32,<3",
-        "selenium==4.48.0"
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
+        "python-dotenv>=1.2.4,<2",
+        "requests>=2.34.2,<3",
+        "selenium==4.51.0"
       ],
       "entrypoints": [
         "playbook/python/playwright/context/initialize_context.py"
@@ -14130,11 +14130,11 @@
       ],
       "collection": "playbook",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
-        "python-dotenv>=1.2.2,<2",
-        "requests>=2.32,<3",
-        "selenium==4.48.0"
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
+        "python-dotenv>=1.2.4,<2",
+        "requests>=2.34.2,<3",
+        "selenium==4.51.0"
       ],
       "entrypoints": [
         "playbook/python/playwright/download/download_retrieve.py"
@@ -14200,11 +14200,11 @@
       ],
       "collection": "playbook",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
-        "python-dotenv>=1.2.2,<2",
-        "requests>=2.32,<3",
-        "selenium==4.48.0"
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
+        "python-dotenv>=1.2.4,<2",
+        "requests>=2.34.2,<3",
+        "selenium==4.51.0"
       ],
       "entrypoints": [
         "playbook/python/playwright/download/download_save.py"
@@ -14269,11 +14269,11 @@
       ],
       "collection": "playbook",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
-        "python-dotenv>=1.2.2,<2",
-        "requests>=2.32,<3",
-        "selenium==4.48.0"
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
+        "python-dotenv>=1.2.4,<2",
+        "requests>=2.34.2,<3",
+        "selenium==4.51.0"
       ],
       "entrypoints": [
         "playbook/python/playwright/extensions/upload_extension.py"
@@ -14340,11 +14340,11 @@
       ],
       "collection": "playbook",
       "dependencies": [
-        "browserbase==1.18.1",
-        "playwright==1.62.0",
-        "python-dotenv>=1.2.2,<2",
-        "requests>=2.32,<3",
-        "selenium==4.48.0"
+        "browserbase==1.20.0",
+        "playwright==1.63.0",
+        "python-dotenv>=1.2.4,<2",
+        "requests>=2.34.2,<3",
+        "selenium==4.51.0"
       ],
       "entrypoints": [
         "playbook/python/selenium/stealth/captcha_listening.py"
@@ -14411,6 +14411,131 @@
       "upstream_readme": "playbook/python/selenium/stealth/README.md",
       "verification": "source-inspected",
       "working_directory": "playbook/python"
+    },
+    {
+      "access": "public",
+      "caveats": [
+        "Uses the shared nopCommerce admin demo, which resets hourly; sample orders and availability can change.",
+        "Upload the matching Stagehand extension and attach API key, NOPCOMMERCE_EMAIL, and NOPCOMMERCE_PASSWORD Secrets.",
+        "Recordings and model-visible page content can contain sample customer details; returned fields exclude contact data.",
+        "Only read-only order lookup is supported; production callers must enforce customer/order authorization.",
+        "Missing orders and site failures return unavailable; never infer nonexistence from an unavailable result."
+      ],
+      "collection": "examples",
+      "dependencies": {
+        "@browserbasehq/sdk-functions": "1.0.3",
+        "@browserbasehq/stagehand": "4.2.1",
+        "dotenv": "^16.6.1",
+        "playwright-core": "1.64.0",
+        "zod": "4.4.3"
+      },
+      "entrypoints": [
+        "examples/typescript/order-lookup-function/index.ts"
+      ],
+      "environment_setup_command": "test -f .env || cp .env.example .env",
+      "environment_template": "examples/typescript/order-lookup-function/.env.example",
+      "environment_variables": [
+        {
+          "name": "BROWSERBASE_API_KEY",
+          "provider": "Browserbase",
+          "purpose": "Connects to the Function-managed session and the Browserbase Model Gateway.",
+          "requirement": "required",
+          "secret": true,
+          "default": null,
+          "safe_example": "<set-locally>",
+          "setup_url": "https://www.browserbase.com/settings",
+          "validation": "Non-empty; attach as a Function Secret for deployed runs or set locally in .env"
+        },
+        {
+          "name": "NOPCOMMERCE_EMAIL",
+          "provider": "nopCommerce",
+          "purpose": "Admin demo login email.",
+          "requirement": "required",
+          "secret": true,
+          "default": null,
+          "safe_example": "<set-locally>",
+          "setup_url": "https://admin-demo.nopcommerce.com/login",
+          "validation": "Non-empty; attach as a Function Secret for deployed runs or set locally in .env"
+        },
+        {
+          "name": "NOPCOMMERCE_PASSWORD",
+          "provider": "nopCommerce",
+          "purpose": "Admin demo login password.",
+          "requirement": "required",
+          "secret": true,
+          "default": null,
+          "safe_example": "<set-locally>",
+          "setup_url": "https://admin-demo.nopcommerce.com/login",
+          "validation": "Non-empty; attach as a Function Secret for deployed runs or set locally in .env"
+        }
+      ],
+      "frameworks": [
+        "Stagehand",
+        "Playwright",
+        "Browserbase Functions"
+      ],
+      "id": "examples-typescript-order-lookup-function",
+      "languages": [
+        "typescript"
+      ],
+      "lifecycle": "current",
+      "manifests": [
+        "examples/typescript/order-lookup-function/package.json",
+        "examples/typescript/order-lookup-function/package-lock.json"
+      ],
+      "path": "examples/typescript/order-lookup-function",
+      "readme": "docs/recipes/examples-typescript-order-lookup-function.md",
+      "run_commands": [
+        "npm run dev"
+      ],
+      "search_aliases": [
+        "AI support agent",
+        "order lookup",
+        "merchant portal",
+        "nopCommerce",
+        "context.secrets"
+      ],
+      "setup_commands": [
+        "npm ci --ignore-scripts"
+      ],
+      "source": {
+        "kind": "cookbook-authored",
+        "path": "examples/typescript/order-lookup-function"
+      },
+      "summary": "Log into the nopCommerce admin demo, look up an order, and return structured fulfillment data and a session replay.",
+      "tags": [
+        "functions",
+        "secrets",
+        "stagehand-v4",
+        "order-lookup"
+      ],
+      "title": "Order lookup for AI support with Functions and Secrets (TypeScript)",
+      "topics": [
+        "authentication",
+        "business-operations",
+        "integrations-and-orchestration"
+      ],
+      "upstream_readme": "examples/typescript/order-lookup-function/README.md",
+      "verification": "live-tested",
+      "verification_evidence": [
+        {
+          "kind": "typechecked",
+          "date": "2026-10-19",
+          "runtime": "TypeScript 7.0.2; Stagehand 4.1.0; sdk-functions 1.0.3",
+          "command": "npm --prefix examples/typescript/order-lookup-function run typecheck",
+          "result": "passed",
+          "limits": "Static validation only."
+        },
+        {
+          "kind": "live-tested",
+          "date": "2026-10-19",
+          "runtime": "Browserbase Functions; Node.js 24.x; Stagehand 4.1.0; sdk-functions 1.0.3",
+          "command": "browse functions invoke <function-id> --params '{\"orderId\":\"1\"}'",
+          "result": "passed",
+          "limits": "Published Function authenticated against the shared nopCommerce demo and returned the matching sample order with replay. Malformed order ID returned invalid_input. Shared data, Cloudflare checks, and future availability can vary."
+        }
+      ],
+      "working_directory": "examples/typescript/order-lookup-function"
     }
   ],
   "schema_version": 1

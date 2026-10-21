@@ -54,9 +54,9 @@ Declared runtime dependencies from [examples/python/agentic-kyb/pyproject.toml](
 
 Declared source dependencies.
 
-- `pydantic>=2.12,<3`
-- `python-dotenv>=1.2,<2`
-- `stagehand==4.1.0`
+- `pydantic>=2.14.1,<3`
+- `python-dotenv>=1.2.4,<2`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

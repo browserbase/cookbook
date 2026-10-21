@@ -68,13 +68,13 @@ Declared runtime dependencies from [examples/python/cerebras-docs-checker/pyproj
 
 Declared source dependencies.
 
-- `browserbase==1.18.1`
-- `deepagents==0.7.5`
+- `browserbase==1.20.0`
+- `deepagents==0.7.24`
 - `httpx`
 - `langchain-mcp-adapters==0.3.2`
-- `langchain-openai==1.4.3`
+- `langchain-openai==1.7.1`
 - `openai`
-- `playwright==1.62.0`
+- `playwright==1.63.0`
 - `pydantic`
 - `python-dotenv`
 

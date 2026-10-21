@@ -75,13 +75,13 @@ Declared runtime dependencies from [integrations/examples/integrations/stripe/no
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/sdk` | `2.19.1` |
-| `@browserbasehq/stagehand` | `4.0.2` |
-| `@playwright/test` | `1.63.0` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `@browserbasehq/stagehand` | `4.2.1` |
+| `@playwright/test` | `1.64.0` |
 | `boxen` | `8.0.1` |
-| `chalk` | `6.0.0` |
+| `chalk` | `6.0.1` |
 | `dotenv` | `16.6.1` |
-| `stripe` | `22.6.1` |
+| `stripe` | `22.6.2` |
 | `zod` | `4.4.3` |
 
 ## Caveats and verification

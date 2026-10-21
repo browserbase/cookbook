@@ -60,14 +60,14 @@ Declared runtime dependencies from [examples/typescript/agent-with-human-in-loop
 
 | Package | Declared version |
 | --- | --- |
-| `@ai-sdk/mcp` | `^2.0.29` |
-| `@browserbasehq/sdk` | `2.19.1` |
+| `@ai-sdk/mcp` | `^2.0.74` |
+| `@browserbasehq/sdk` | `2.21.0` |
 | `@browserbasehq/stagehand-codemode` | `github:browserbase/stagehand#54302fc5f13be5ad8e717d8e1388502de22be2ed&path:packages/integrations` |
-| `ai` | `^7.0.58` |
-| `next` | `16.3.6` |
-| `react` | `19.2.4` |
-| `react-dom` | `19.2.4` |
-| `zod` | `4.4.3` |
+| `ai` | `^7.0.139` |
+| `next` | `16.4.0` |
+| `react` | `19.3.0` |
+| `react-dom` | `19.3.0` |
+| `zod` | `4.6.7` |
 
 ## Caveats and verification
 

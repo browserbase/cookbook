@@ -52,9 +52,9 @@ Declared runtime dependencies from [examples/python/selenium/quickstart-selenium
 
 Declared source dependencies.
 
-- `browserbase==1.18.1`
-- `python-dotenv>=1.2.2`
-- `selenium==4.48.0`
+- `browserbase==1.20.0`
+- `python-dotenv>=1.2.4`
+- `selenium==4.51.0`
 
 ## Caveats and verification
 

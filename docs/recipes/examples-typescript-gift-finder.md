@@ -60,7 +60,7 @@ Declared runtime dependencies from [examples/typescript/gift-finder/package.json
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/stagehand` | `4.0.2` |
+| `@browserbasehq/stagehand` | `4.2.1` |
 | `dotenv` | `latest` |
 | `openai` | `latest` |
 | `zod` | `4.4.3` |

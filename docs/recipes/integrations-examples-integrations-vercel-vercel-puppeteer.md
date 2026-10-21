@@ -51,15 +51,15 @@ Declared runtime dependencies from [integrations/examples/integrations/vercel/ve
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/sdk` | `2.19.1` |
-| `@browserbasehq/stagehand` | `4.0.2` |
-| `next` | `16.3.4` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `@browserbasehq/stagehand` | `4.2.1` |
+| `next` | `16.4.0` |
 | `node-html-markdown` | `^1.3.0` |
-| `playwright-core` | `1.63.0` |
-| `prettier` | `3.9.6` |
-| `puppeteer-core` | `25.10.0` |
-| `react` | `19.2.4` |
-| `react-dom` | `19.2.4` |
+| `playwright-core` | `1.64.0` |
+| `prettier` | `3.9.10` |
+| `puppeteer-core` | `25.13.0` |
+| `react` | `19.3.0` |
+| `react-dom` | `19.3.0` |
 | `zod` | `4.4.3` |
 
 ## Caveats and verification

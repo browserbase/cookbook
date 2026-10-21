@@ -16,8 +16,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "6355bd5140bc82ede622764706053916514c1595165924e7b593f1494de994f0"
+            "sha256": "95f2cb9679697b984b9731586dc702d154ba706e4036fdff6dfc02399d3ffa7b",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/image-url-download/pyproject.toml",
           "sha256": "e8d3ca0cf5b1ba656f783c22c3ea0126bff5fc6709fb3e3f81483a57f10bcc1e",
@@ -47,7 +47,11 @@
           "path": "examples/go/hackernews/go.sum",
           "sha256": "bca334e16e5c93c0ecb942d0e2685c350363ad27e361e83cf56f0b41230fda4c",
           "source_path": "go/hackernews/go.sum",
-          "source_sha256": "bca334e16e5c93c0ecb942d0e2685c350363ad27e361e83cf56f0b41230fda4c"
+          "source_sha256": "bca334e16e5c93c0ecb942d0e2685c350363ad27e361e83cf56f0b41230fda4c",
+          "adaptation": {
+            "sha256": "d35a3168cafc38a214714a01224831d14869ec11a739afcf41d54f0716c8f1fb",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
+          }
         },
         {
           "action": "imported",
@@ -59,8 +63,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed R131: verify signed-in GitHub identity on protected settings after login and after context reuse; exact owned MFA handoff, cleanup before success, no future-MFA guarantee, executable synthetic identity/lifecycle tests.",
-            "sha256": "2e2af726a03aded3f99b809a75fb8093504c286d6761d1a41210adb5d0f9128c"
+            "sha256": "f8cdd629be8b852b02c898c6742e044cb3ea6dc1c35bcadbb63b1d5ec18d1b75",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/manual-mfa-with-contexts/package.json",
           "sha256": "59f34957ef6fa1ca84782bc3582f9b775964d7e2574f91bb44d86d37059b52af",
@@ -84,14 +88,22 @@
           "path": "examples/python/business-lookup/pyproject.toml",
           "sha256": "752f1198978f0ab6de1aede56bc7297b0ecce972a43f4bdce62ebbac179c163a",
           "source_path": "python/business-lookup/pyproject.toml",
-          "source_sha256": "752f1198978f0ab6de1aede56bc7297b0ecce972a43f4bdce62ebbac179c163a"
+          "source_sha256": "752f1198978f0ab6de1aede56bc7297b0ecce972a43f4bdce62ebbac179c163a",
+          "adaptation": {
+            "sha256": "049e0d32975baad8218274ba75a2f84cec03411f45793adeb9cd86c5f7186e68",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
+          }
         },
         {
           "action": "imported",
           "path": "examples/python/company-address-finder/pyproject.toml",
           "sha256": "74c789c82ca6033065cab964e54b4ce5583c81c3a236d1fa9155fbada832e10b",
           "source_path": "python/company-address-finder/pyproject.toml",
-          "source_sha256": "74c789c82ca6033065cab964e54b4ce5583c81c3a236d1fa9155fbada832e10b"
+          "source_sha256": "74c789c82ca6033065cab964e54b4ce5583c81c3a236d1fa9155fbada832e10b",
+          "adaptation": {
+            "sha256": "cb2231e4953b769c07106b492b0f2ac86bff2578e061e256b19d1b7c9c4bd287",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
+          }
         },
         {
           "action": "imported",
@@ -107,8 +119,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "R133 form-filling: reject incomplete or ambiguous mappings, check action results and final control values before completion, retain fill-only behavior and verify synthetic failures.",
-            "sha256": "6e8076736decdd10f97e8dcceb3f1394cd6466941ccbe0143d3b540987e97666"
+            "sha256": "c5f41daae679775b48c69d34e67dd9604296d93ced7fb1aed97eba9de7e514cd",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/form-filling/package.json",
           "sha256": "48967b63892cff781fe741d1b63cd092b513bf47f266f47d92a8b4fa15af44ad",
@@ -167,8 +179,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "R143: reviewed current SDK/Extend runner; actual flattened ZIP paths, preflight collision/path/integrity checks and exclusive writes; per-file success/error in JSON and CSV, PROCESSED/object output guard, save reports before nonzero failure; package regression command and documented evidence/limits. Update dependency constraints and lockfiles for the September 2026 Dependabot alert snapshot; document unresolved upstream advisories.",
-            "sha256": "db006ccc5aa3fc04b4dd157e6a43ac946c58cf3c89202b66fb55d67c82aba35b"
+            "sha256": "f41bb3089b7917fe04ae91eff28134e571e38ef150921c7bf0c2ea3ef996fcb6",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/extend-browserbase/package.json",
           "sha256": "b6d98098a226f2b9204d470b88f1735bc270d4f0eec4b885aea7d86b9917491d",
@@ -196,8 +208,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "703c03492978b50fc2aa0b0e7281d2fae0e01740d85e98b135767a6282161feb"
+            "sha256": "f03531aa282854f6437bab01020e0d453219d880907e363825575bf4895cf019",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/nurse-verification/pyproject.toml",
           "sha256": "b250d58d0e9da96ec0fd21e9408c18d6aa2490878f1784612701fa6da62d88d0",
@@ -246,8 +258,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Regenerated with declared pnpm 9.0.0 to match exact TypeScript 5.9.3 specifier; all resolved versions retained. Verified full frozen install in a second independent directory and tsc version 5.9.3. Update dependency constraints and lockfiles for the September 2026 Dependabot alert snapshot; document unresolved upstream advisories. Use parent-package upgrades and compatible lockfile refreshes without security overrides; record blocked transitive fixes.",
-            "sha256": "3b6bd2a2c76403badacbea2d7b95a811a5151e512cecf66676ca4305361685fa"
+            "sha256": "83b03964edfdfa4ed92ef9eb12a522bb6b43a3ee8c57d06df04c6d4e2fa6d900",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/pnpm-lock.yaml",
           "sha256": "54f476f171c5c1d63982e70151638398215afd490bcdbb28be35d18206a07081",
@@ -304,8 +316,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "17b748be1c8f2e01ced3106fb1191bf91129800926a2fc4a515171ce67f731b2"
+            "sha256": "7fb61bd4cee9f41ac0477a259252c20a5a521159ec8698bd79ed089742ff979e",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/smart-fetch-scraper/pyproject.toml",
           "sha256": "6b7204191d00b56639bfe4851eb84bf6fa8b06efc615b1e154dd18c7076db981",
@@ -343,8 +355,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "fafae1b9196a66ff5a4a4a07fb68fc99ca5db909a69e21fc6070f9a011355ad8"
+            "sha256": "8f25b25e8620a34dcaacab19cd9dc4202e12f219bb27bbf4061a8ac0e3349c76",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/basic-caching/package.json",
           "sha256": "0f3fb74871afbb870de9661078b0f4be9db2da57ffd7231a7848fbf6f5302ea5",
@@ -354,8 +366,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "ab0e6344f86181c977e752b75e9c57a2890c306aefa1ff144a51cfa1cdb6c3e1"
+            "sha256": "32114d66d33f9bd89ac7caf2bc733ea9bd3ba2677c4403ffd020887975337ace",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/gemini-cua/package.json",
           "sha256": "c098b30134d573b30d55f1d42243df207fbf2c18ecde417e83d1b80e2f7db7e3",
@@ -372,8 +384,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "310636e48f5c0b2fa70cc2c49151c39519ec33ba28a04729bdbbb67a67c1de5a"
+            "sha256": "c9007866aadc669fc3339aaf0098f410255aedeb42535af1b4ef0c23b8f8be36",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/proxies-weather/pyproject.toml",
           "sha256": "709275704dc569c13cb5d7c2146359d5f8161c797f336fe225597d93cf857799",
@@ -481,8 +493,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "c55ff3ba8a4572959b461e30cd723aa041ec05b070912804d2bf3a6dbfe5682e"
+            "sha256": "525478f776cb2d91b338bba26acbf9044cb6590ab3743f7a840fc5ce47bab076",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/exa-browserbase/pyproject.toml",
           "sha256": "c9ed3a4e4c085b60c996698b995b9492f717c516238d6ee422f9b5bb0bda30de",
@@ -539,8 +551,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "1051cfa487b731ff1f5928372f64cded9ea90e1a02642091b3b72ae71296461b"
+            "sha256": "d83270c9a4a9e9cc50a1c272504868f6c9f2ba3aff48c997e20dd9823056115f",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/microsoft-cua/package.json",
           "sha256": "6ec192bc13ce186049a8ed5c2d1cedb2da73e03f2f58543763daa91ae573a892",
@@ -550,8 +562,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "c1431595ebdc99b7994c55c2cbd568d6a7db47fbc431d6c160f017378323c876"
+            "sha256": "27cb7868e6a0c4cd671031655cb6304bef016c5ac1f91b5b63eab87ccc83f72c",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/playwright/quickstart-playwright/pyproject.toml",
           "sha256": "0c60bb533d9838ff851ad24de63ee6efd291a19c832bc188a18fa8bdad30169a",
@@ -597,8 +609,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "0c2314c1dd9480fa53adc2073a05fcce103967883cd14e5853903f160c12a3f9"
+            "sha256": "cf15678a5f7828bcd2474fed224f46ba2a0f344840f53df814362792b7e7390b",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/google-trends/pyproject.toml",
           "sha256": "b8bc866670051ace2d9d35c64626b1b8bf6ee80817a8593e4626b41e12865b09",
@@ -630,8 +642,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "f14231a87454d70a8c7f83534dac4a09cd3ce98176c09ae637d8fdab3181db76"
+            "sha256": "3560ced10936ad2abf05205045f57e94bc16ffd1416385d76ee2952b85e8da07",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/proxies-weather/package.json",
           "sha256": "e9a04ef32bbf1ee669896e591fcb73a60ac4b349e2a3d705e626e1f7ea5587c1",
@@ -641,8 +653,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "f4e21e9259cee6a42c6f4481430d890424bc0d26f40d444ba5c7a0c097fb3967"
+            "sha256": "e842353a7045e5630995e7f3f476437915c5890ca8a90b2c12fb18c237fd9518",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/nurse-verification/package.json",
           "sha256": "2db0a127e084639793249abceee912f0569d40299d0895fea50d77eaa47057ba",
@@ -652,8 +664,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "56dd1bfbf5896236a73ffc87745c67c635dbab94a11c8b4b45a61f3604e2eb02"
+            "sha256": "000aba90d83a75943f8d531c009e2f91c405149ca509a271fa5f50e96b034b3d",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/proxies-weather/requirements.txt",
           "sha256": "81f5898e7a63c93672a6dff38e2ecdd351fab0cda507d4bc8b767223211a0956",
@@ -737,7 +749,11 @@
           "path": "examples/go/hackernews/go.mod",
           "sha256": "103aa7c2e126e2c24faa531cd074873233cc3ccf09a035eb0cab9c90edb57eb4",
           "source_path": "go/hackernews/go.mod",
-          "source_sha256": "103aa7c2e126e2c24faa531cd074873233cc3ccf09a035eb0cab9c90edb57eb4"
+          "source_sha256": "103aa7c2e126e2c24faa531cd074873233cc3ccf09a035eb0cab9c90edb57eb4",
+          "adaptation": {
+            "sha256": "16a0d250cec61a2a03f275755651c251349a4506233efb22edc41f728723a3e0",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
+          }
         },
         {
           "action": "imported",
@@ -756,8 +772,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "R144: preserve semantic failures independently of HTTP reachability, validate social host boundaries, document result states and add local regression command.",
-            "sha256": "34e3895138620ea288711009b8e841d5b9c8618b394a235a1aa8366e9bcccc93"
+            "sha256": "0977d048287be05b6b047ce612e448d43aa0922905ee442c36d2bcc227d7013c",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/website-link-tester/package.json",
           "sha256": "2fada769cb3a7c6810b556d5541e9dd3bd8f7dd8011f8035d83d4daa9dc7a1ac",
@@ -774,8 +790,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "66129134b2937d600eee47a795c00360822f6ae43444ef5cbf8690c4c94119d9"
+            "sha256": "69d317f1fa7c55e7366bfefb43f7529d7f1e7edc4567ee3a4eeb8f1e58b11e73",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/form-filling/pyproject.toml",
           "sha256": "29d0915fa6a8e94e8f83ea26cb863e8e9b150cbe5b54b57737c83fe7216239ae",
@@ -792,8 +808,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "b9166b1eb961cf9005256844c0b27190a492fb9fbfeace9abf6d55f179d77343"
+            "sha256": "08beb137cc40088a08f6ef4bf8bafa464f93274c0641b1e3777c6de2e15a4fe1",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/gift-finder/pyproject.toml",
           "sha256": "b8745a0ea4e1bc3cc2146a80064ac232492c1a549ba35e2b8568f0d2c3f57e98",
@@ -810,8 +826,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "eacde0ec36755c0fc5fbf6f19c136ad13f848d976280af44ac41f7957807e0be"
+            "sha256": "6bbb9561320b91e40d52a3bfdf167da2517ef30cb28ee45b001c9638ecd7fad0",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/mfa-handling/pyproject.toml",
           "sha256": "af6e11cade8932e7e45e627eccab354aba66dcca470a1550fa1c2e4ab4e69e93",
@@ -832,8 +848,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "714a272d3a73760f8b2fbdefe51ea2c316aa9f32ebca4d0207f9a22936b96888"
+            "sha256": "2e6644cc53dbab5e97f28b3aa32afe1a585a9fb86293ce305e5ca851eccc736d",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/amazon-product-scraping/pyproject.toml",
           "sha256": "01919330b4147e0387a7cb7e67010584a8d832d90baf67261ad959cf469a4f14",
@@ -872,8 +888,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "d4994a541c3d6943eabe7f7e5fbe8f6177d79fc7ff261bb3e3c87f199ae889f5"
+            "sha256": "837d9a0d49f98c7f31934a62bfd1b94a6d46d70a719b0787c607bfed9d580bcc",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/sec-filing-research/package.json",
           "sha256": "48ae941ead9c053a2c50086022f29c060e98e2adc53fd3c595b2fb0167c6cb07",
@@ -948,8 +964,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "fd7c1ef88740d4b1f2ca91ba754eb7a8873cbd3c6cf08a9d26532c618b45d0e5"
+            "sha256": "a3dedb5ab308e421738487beff16559ee73882a1da5548b47f18276c54d4a9ad",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/company-value-prop-generator/pyproject.toml",
           "sha256": "e5ef997b86ab6a122fac9a91fbea79f1e34f694afc7410a3ac5796dd6a935dce",
@@ -1035,8 +1051,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "83b752114c40519ec58ad47c33c9c35c73f5b92d87e161a566f2029825871ead"
+            "sha256": "0cb4fa1857150ee692316520c3608b80fdb55a36b0d51805474448750b80c85d",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/polymarket-research/package.json",
           "sha256": "f549aeae182514c9d4ddd3e6a2bdb6100e7456aa9d481f6b5d8f22e18f3bcb49",
@@ -1053,8 +1069,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "f2f7fd109a87271ca995f9135e2083949bd80ba2127902864d71744d401060c5"
+            "sha256": "64e04c55a864f1b0c8a06e0e00ee6e9de8b8da6f1764ba2425dece84bacada52",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/package.json",
           "sha256": "609f254e684317e93a891fb912961c806dfc5d18ef4cdc9eaf818c725b8edbde",
@@ -1064,8 +1080,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "5fff0e487c9b50dfd9791b9b626f005348191847a9934531a01a5f2229521786"
+            "sha256": "b320e655c64d20d60ef9b01d99a3b1954c4a49c9c8e898430bbf0283c08313fd",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/cerebras-docs-checker/pyproject.toml",
           "sha256": "5f53a5cce0abbf832d5e2450219591ef3a9150d65aedf70760ba8060d304d058",
@@ -1099,7 +1115,11 @@
           "path": "examples/python/gemini-cua/pyproject.toml",
           "sha256": "10d5b54e91dbe97b89fc6f6c9cada0476803abde167711d3965c51063db29558",
           "source_path": "python/gemini-cua/pyproject.toml",
-          "source_sha256": "10d5b54e91dbe97b89fc6f6c9cada0476803abde167711d3965c51063db29558"
+          "source_sha256": "10d5b54e91dbe97b89fc6f6c9cada0476803abde167711d3965c51063db29558",
+          "adaptation": {
+            "sha256": "983b822e47198c4ad448a4e0e6e0ad9458c21d205c9ae0edbe0667e8d6f6c4d7",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
+          }
         },
         {
           "action": "imported",
@@ -1111,8 +1131,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "bd4eb3d3257093cd68b8990b5d458eb817eb560cad51069a9ccb554fa7567319"
+            "sha256": "215bb089ce6aaffc7bdba160862509db7dec62fb1ba243ac6efcb1869f81d6d6",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/dynamic-form-filling/package.json",
           "sha256": "3924e7cb9786d2d05181c89f7fd4b6ce69e0af1e2b1a8f7bf157c0bd20776522",
@@ -1140,8 +1160,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "R135: full San Francisco calendar-date selection and selected-state verification, month-transition settling, date-menu consistency and scoped regression evidence.",
-            "sha256": "cb7ef5275f4ff8a6bd3d9cde169fe179b18efd5bf483390ef37739576da879cf"
+            "sha256": "eb1d451be30d2943a5bfde2cba0b09055eea51164a5c54524fae1322f8f83477",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/pickleball/package.json",
           "sha256": "fc3cfdf28dd48d45c08ea157e395ed20c3ed0d41c61b9430916ba90f208fde98",
@@ -1151,8 +1171,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "c02182736ae3d9d9f518076e46fe3da7322afa8976ecd5269e2f9ea1d131325e"
+            "sha256": "54e84dddc1d66e082897be398500672901193fec8d3bfeb4bfe78e27678f6bc5",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/gift-finder/package.json",
           "sha256": "2108d62c9c3672557285a10d57c3a77d7805f10b2703670a0c274b68af4acc44",
@@ -1216,8 +1236,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "93d7ebc793678cab593dfa9f9ac458c1601241b73fe47af5044bc740c99d885e"
+            "sha256": "cb571b259ecf5622ac29977e960dbec99fd824e3d6752b14a34a02156b5e4c1f",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/job-application/pyproject.toml",
           "sha256": "e5feb993fd32b1124cf5aab5b54ae269bed19484b5e536ef57c70dbe4d292d74",
@@ -1234,8 +1254,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "56b1c0b5fac3a138fdaf0b35a50bb8e0b83f6cac79146bab691cbeed56a3dd8f"
+            "sha256": "ce44b86ef0b95a75b02760db2aa717fa7fb7738973f16e1ed78fb24f8e399181",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/google-trends/package.json",
           "sha256": "14c56bb8e9cf60a25751b4fad75b2629f478d79d0f4effe5dd02354dfde00bf5",
@@ -1278,8 +1298,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults. Generalize CAPTCHA-solving wording without changing demo URLs, selectors, or runtime behavior. Rename local CAPTCHA recipe paths, package identifiers, and references to provider-neutral names; preserve pinned upstream source paths.",
-            "sha256": "ad38d8d53f3e938c0e50dc0c6beff3ab1075eee68296420d4fb1810f5cc91e99"
+            "sha256": "d03edc723b8ae8c741ca4b35aa58ff48e39d4cd76e41af6f1a301347f15f234c",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/playwright/basic-captcha/pyproject.toml",
           "sha256": "80928c4c741bbe0ac236866d397ad53f7f2ea3e94b28801f616e40edf5cb3477",
@@ -1296,8 +1316,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "38eb5fad847919190e7ec318625ac79cb7a6f49211f6bdbb893f6446ef4a342f"
+            "sha256": "a4fdaa44de756d5b7ec492c1e8f970c68282378c7073f7d3e39e7b6401f7f908",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/manual-mfa-with-contexts/pyproject.toml",
           "sha256": "9121b0610f36c6b98c3537b624990af11faa79b345da288272b55a190847eb1c",
@@ -1332,8 +1352,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "f84487e18705f7504ca673074a55500aa9dab9cec05ebc9283f6aad78db9ec7f"
+            "sha256": "033088329791e814178823f7cc76fc5bd55b1405fdae52fb3da5d35f9da37687",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/selenium/quickstart-selenium/package.json",
           "sha256": "0ebcab4b7b18b0bd63a78d503f97c38da191d327cdbbc904e570c86724b96590",
@@ -1343,8 +1363,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "ba0571b7ff55a2e60370a6989d5f9b10f78ae8a386ccf730c66be73e31438da1"
+            "sha256": "135ae8ffbd7673e7e39fc5513ae06bf6f4945507c917548aeff182cf19a5cb08",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/download-financial-statements/pyproject.toml",
           "sha256": "89c21f7c5ed5ce3fd9613c616233bb99c269c640b78dee661bde152e08d1e8e5",
@@ -1354,8 +1374,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "0c79512556301633ad6c7fb5d1073ee6976d73410bd1a4ec3f539fcc2ffd74ae"
+            "sha256": "b6047e9338623c218f7c531ffa9a01f931b792b654028861c0ea5453f71f1e65",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/cartesia-form-filling/pyproject.toml",
           "sha256": "563a3fec1b37ee056bc606571594f7715ec79b40eeb13abc8179cf7b1132a8ac",
@@ -1365,8 +1385,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "68668a0d98d0e1b4492bee1e3162661fd18de6af7c4d23d1338612c37880a006"
+            "sha256": "aec38237b5bafb93aea83549b6c8a3dac38d7bccb9a03f3fa57b44417c743d56",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/browser-agent-demo/package.json",
           "sha256": "64abd70497fa451ee897066765b25292a3f1571f403b0e1b08117b893899a613",
@@ -1447,8 +1467,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "13dab8d57862daa7be55f73a5d43657a3fef09d716b6056455a645f0915ef1f3"
+            "sha256": "3bcbdbad8b0ca48d2223b894f23e8b274a00a90c8a5c7617ae53bf85d53bdd92",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/browserbase-reducto/pyproject.toml",
           "sha256": "506f54ff8d9a04a4f596ff6d0b04eb5c8291793a07b0ec36964f460c05da32cb",
@@ -1501,8 +1521,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "539b0281438b6d4ad4472e46fb2d871517b3c9f230b1900958337f27964a6adc"
+            "sha256": "6a8fc13d16594243720c8c338fb25afe14ba9e052e51ba9ba19066afe544e9fc",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/polymarket-research/pyproject.toml",
           "sha256": "3af593671054ba92bc7877e7eed31e1e30b7cbda3fb41438ad7587aedfdec33f",
@@ -1541,8 +1561,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "cfcb624491da510c74d02b48c1618faf7e0cb7aad32df28fe74742e0a47eef9c"
+            "sha256": "d05ae558edb0df41f4279a5798a37a1e39ca1423294a0212c13e84ca1de8d60b",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/proxies/package.json",
           "sha256": "7f4e52392fec6d9205724e100b307b6997709313e879ec0b7e1f897dc4c5c3d1",
@@ -1552,8 +1572,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "2e36338d3b16d9318c9305cb1124497401c3a2ab06d86d388489d54c90cd6ce1"
+            "sha256": "9d9e7e357d84f9548697ffcad89f6e64bbae76abdab8f828290c31473abdff8d",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/extend-browserbase/pyproject.toml",
           "sha256": "9e4418551701413d932718e973be5ff6e9a8b5170bc814ddf49861102fb01e0a",
@@ -1563,8 +1583,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "R133 job application: checked actions, attempt-bound form/upload and local demo confirmation, invoked DOM expression, ownership cleanup and documented synthetic verification.",
-            "sha256": "51eced3f645131a193e43d3abfb513e7073c2a212b6737521df8ee467768e452"
+            "sha256": "a5aab847abf46559fd60f1721e47ecd0d308399d1cc0a2252c72c3cce0bdd4ab",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/job-application/package.json",
           "sha256": "0c48139ea8f1b8c43dfff8288dc5997e1b82529e7a0cb171427f22bdff290440",
@@ -1574,8 +1594,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "81c847915ab02bbe5bfc7f6c17a0f77742ba3c51d07c3271ef3ebf316490a537"
+            "sha256": "9d96852edd9e47dc41ef4ff625a145d75279c7188f44b80833d0171768541953",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/website-link-tester/pyproject.toml",
           "sha256": "5562d49ccf13b30b40966a0533426939d7bb485cd3170dbb6197ebe8518150d9",
@@ -1599,8 +1619,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "2434aad90c843497c463faf4b2e76531d94c838ed39806114359f2778e786fd4"
+            "sha256": "5bb2fb25a57cf96dd40a6d8231e574a9d8820e3a5ce87d279a9be466207583d7",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/council-events/package.json",
           "sha256": "796cd20102c239f568d8eee43361f5d548758cf6d41c95d4fac5243b8a5cf83b",
@@ -1774,8 +1794,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "ffa63c48a7ff5170d9a4389fcbf1fd7856fff045c937f7ce96f0c3a311403459"
+            "sha256": "d4fa430cdf5c4ee35f15ad4991b04441831eae22cb3e010851a16b790a5b62a0",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/gemini-3-flash/package.json",
           "sha256": "74a1b3f73e5cb8160666f44d151982a0b91ecf296e9047b9df60b038e732c892",
@@ -1785,8 +1805,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "R134: validate four distinct pinned PDF contents and recognized quarter links, serialized deadline polling with no late writes, and document verification scope. Update dependency constraints and lockfiles for the September 2026 Dependabot alert snapshot; document unresolved upstream advisories.",
-            "sha256": "6f66b1ffd8471b89abba001d99b0398693d0fc32096ac545bfd03915271626c6"
+            "sha256": "70ceea11f2d3bf41874aa4a7691d7cf0075d56720cb8518a1ffbddb89e35daa3",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/download-financial-statements/package.json",
           "sha256": "0aaad3e3996c231fddf3b05daa2f005ada8050123267291413fbf1ad766a3550",
@@ -1836,8 +1856,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "12fb16c117d58cf5cb037e2e5206a68d94f909844cc052625732252b5d5c2c5a"
+            "sha256": "a342ea2a9deabcef0b47873b791554b9b06be71b149447880a8c7c0f27cdb89b",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/pickleball/pyproject.toml",
           "sha256": "c409fb0db5ce24cec0a31e43d5b6b18b2840df8651e8892aeef8aa80614e07af",
@@ -1854,8 +1874,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "b2819d7780c5cf751bb06958e6967a36ad5b803290d4795f5f026f7b59ea404a"
+            "sha256": "1747cfc2db5144ec17af67f40fcf34c52903bed593b7fc7f79e99a0f77c1d579",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/business-lookup/package.json",
           "sha256": "5318260feee8845f242e6e93af4c1248ae480aa5394cf5929f595f54eeaaca37",
@@ -1883,8 +1903,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "3d5eee4acdf2ee3e329f72f6d772556ca3e83826cf5c57b753539d6cf09dff0a"
+            "sha256": "e8448f4740302dd441c0f3150d4a3f75660477fc95ce9a55bf5986ed868dd702",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/mfa-handling/package.json",
           "sha256": "a31a16edb27b651507e61da1302187a774d323ab40112197b7deede768953eb1",
@@ -1916,8 +1936,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "1929ecfc1642b95823bd861c6e4f07f99a6c837d57e4896b3896f396b518fd88"
+            "sha256": "8a51d7cc084e36da300aba2b01dd352c8addebed989b7acd89e739896c90111f",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/council-events/pyproject.toml",
           "sha256": "0dc613cadb824f04080eb288403cc304649e997b00e7b5ba425360a834dd0537",
@@ -1938,8 +1958,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "61810cc88aacb57d5a64492ccd73f46982ffb54cd4244c810966b76b697aefcd"
+            "sha256": "7ab75ff22a94605074abe2aada7371e10088a735516770358d7fad1e64acfa32",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/context/package.json",
           "sha256": "d3d4cb1419dfb95338ce82bf207d78c617c854e17d00fdee6deac15db2bd59b3",
@@ -1967,8 +1987,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "d5fdb894d42ba1c18a7555152d581129fc566e514b06e9f73e5cd9273f5f785d"
+            "sha256": "bf10453fb278de1a27cbe27226491c3d976c938c814e4406ba9d72cca8f4cdda",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/proxies/pyproject.toml",
           "sha256": "0f1e05b1a5fe9a7a37de2c7639a9038a2745a0e5bc62774470fbdcc68b33cfaa",
@@ -1989,8 +2009,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "83a9a7e2920a196b02bd9f36e2e1aecd6a03a5b4869997718b72602309ff4956"
+            "sha256": "ff4a7addff473d76a1e6b27269fffec22e64fc2662cd9e5860bdf829cf5fbfba",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/amazon-global-price-comparison/pyproject.toml",
           "sha256": "87136eb3d14b05c2e8022e3347044ef3c2016c8770a862f6cd3749c7fcadf3e0",
@@ -2000,8 +2020,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "1161c6807d146dc1f549073de9df9c3d07403f565d271ceff32650a930c801a5"
+            "sha256": "86ef7c842ad87d96a5557baecf98d148eb05fb3b541e429682690d3f2404af47",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/playwright/quickstart-playwright/package.json",
           "sha256": "652966bfef0b3e360288b505a75a37359792159995eaf4e2ff7604b96760b4c7",
@@ -2030,8 +2050,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "R141: reviewed current SDK runner; Stagehand subscribes before navigation, bounded handled waiter, checked action results, rethrown errors and owned cleanup; both variants clear wait timers and listeners. Document tested local behavior and expose per-package regression commands. Rename local CAPTCHA recipe paths, package identifiers, and references to provider-neutral names; preserve pinned upstream source paths.",
-            "sha256": "d3771a212138c78b5538df1d2cb92cb46f1b6115d07a6d354269e6cdcfe73032"
+            "sha256": "52180b184d72c2ee6250bb1f310dba0ea8f797e76b08451b9e2a842aed5cc00a",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/playwright/basic-captcha/package.json",
           "sha256": "146a922c19a9102f4c0eb52011fb29327275b62433d6c43858eb885ddf356d54",
@@ -2062,8 +2082,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "e2b21827ab0e93895238e0fbce119313e8380592c86460ca9a4a38b00270d47b"
+            "sha256": "58be65d9ca38fdf6faea83f3b2a6eba455897d7d23d09d5a3057acc8c50fc241",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/company-address-finder/package.json",
           "sha256": "f557d2dae5108b45319a75c79119712d5f3f002c548b635a5e60f99adf153515",
@@ -2116,8 +2136,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "13bbbb43eced109e1b8c2ee08b2cae72b84b531a694e9ff7a29ff888af8cf8cf"
+            "sha256": "8d443351885e2a4b4bf5e5a9085a112e0a556258e79c79c9a0a504dae4a5ff8c",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/browserbase-reducto/package.json",
           "sha256": "f68ee1b2d59c80db9e7eaea3ce2cd346ee264f62a69113d71df8a164033c4966",
@@ -2249,8 +2269,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "56dd1bfbf5896236a73ffc87745c67c635dbab94a11c8b4b45a61f3604e2eb02"
+            "sha256": "000aba90d83a75943f8d531c009e2f91c405149ca509a271fa5f50e96b034b3d",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/mfa-handling/requirements.txt",
           "sha256": "1c7bcb49996ead20f54fabd9c067bbe5904924886ac2cab4880826c3645f5d59",
@@ -2274,8 +2294,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "1594b9e4f0f382046cd4b6b358984cef7f3d9c549f9355b8a892524c56a6eff2"
+            "sha256": "5f6a057ac2ace83351a66f73b065db22271fa1fc2d17f59767fe7d797d4246f2",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/context/pyproject.toml",
           "sha256": "407aa3191144d7e0f6778f99cb37935ea17144f6febbe5014efa51f97dcf5b41",
@@ -2318,8 +2338,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "4a5c9ae5e62eb4dadc1ddcde8f9e59f9c6239e7c12698a382a188f57ab72953a"
+            "sha256": "ec672b0bbe143d4225f228993fb8c19846cf6b2e9be4f2c9cdf2341d99a9e0e9",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/basic-caching/pyproject.toml",
           "sha256": "4261fab44fea6d427015758281ec8327261deb7dd040b042d6d235f716d043b9",
@@ -2352,8 +2372,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "R141: reviewed current SDK runner; Stagehand subscribes before navigation, bounded handled waiter, checked action results, rethrown errors and owned cleanup; both variants clear wait timers and listeners. Document tested local behavior and expose per-package regression commands. Rename local CAPTCHA recipe paths, package identifiers, and references to provider-neutral names; preserve pinned upstream source paths.",
-            "sha256": "a66ce493c25bb710ab1aaeeef7928d6619b6e3829ddd396df70b22fc472dedbe"
+            "sha256": "392b4fe408dbd2f6ca137b8a899df3b89c36238ade9af381df4e7222d3204b62",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/basic-captcha/package.json",
           "sha256": "ee4be0592bb81e7285b989e8b2ff3cc5caec32d831a69d14956c610c50c04553",
@@ -2363,8 +2383,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "2063068010d6d1128765a22fcfd99d2cf6c64b8a1b7bb9a160789b9017afc16a"
+            "sha256": "c12d221fb0d8eee297aaaa246200746d660135a546d5943704615b82dcb08ac2",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/company-value-prop-generator/package.json",
           "sha256": "65ee832599a0af0f5acc695dc12e32280f43f812fba583b1ab170b8895ff9394",
@@ -2374,8 +2394,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "dff9baf85d215ab49b3705c53d2cb9af9854c235950738c68d615cc3206722a4"
+            "sha256": "ca0130ea5937eca687983f67620ed72b32f28794e1ca7df2895eba0aa05d441e",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/selenium/quickstart-selenium/pyproject.toml",
           "sha256": "f81fecff7fceca1c09a7eabb24e6d06dd533dc7f1218b420ee393d524a63117f",
@@ -2399,8 +2419,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "R132: require explicit demo authentication success, reject negative or ambiguous results, fail exhausted retry, and document synthetic verification.",
-            "sha256": "4136623244118f1ecf073a2293eccfb0f618812641a370aa333fe84b517b7bd3"
+            "sha256": "9663f421e349b4323b6b2b6af0218bbea50a36bb6ae4e753990f01ab301b0857",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/playwright-mfa-handling/package.json",
           "sha256": "c704dbcef26b0b63d6d6bee644a95f2315cd88228ba0349e912f83631f0a698f",
@@ -2463,8 +2483,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "d8acac0a16ba75a50c93354218bc2e0a1982dd86610a296244f01dc034ad510c"
+            "sha256": "c1a53873335b22fe142ddfa1419af4c66b3297321567f81c634d5ceac77cd9b7",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/amazon-global-price-comparison/package.json",
           "sha256": "8bb1d19ab09cb7adef05034418833922aaae3f55dd8c811bbae840041df6de10",
@@ -2474,8 +2494,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "R142: reviewed raw Fetch/Stagehand SDK calls and Cheerio1.2.0 parser; exclude inert/hidden content from approximate density, parse title/anchors, reject nonstring raw responses, expose regression command and document heuristic/verification limits.",
-            "sha256": "79c6442fc2e7a342ba1d7bb277d1343d42e59cb20f75c5227a18dc1f9f2b9237"
+            "sha256": "906c29ae67975a4e587009c2419ce7bb8a692f9887cd35d0380136bd00cbbb1d",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/smart-fetch-scraper/package.json",
           "sha256": "7249a91ad5291f1b6f98a4bf5cc0081ccbd0a27a28701c2debb771429e6b0e27",
@@ -2525,8 +2545,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed R124 compiler compatibility repair: TypeScript6.0.3 retains the JavaScript compiler API required by pinned Next16.2.1. Document explicit typecheck/build and outstanding clean-install verification limit; historical source digests retained. Update dependency constraints and lockfiles for the September 2026 Dependabot alert snapshot; document unresolved upstream advisories.",
-            "sha256": "9c002562fb3c0baf6deda69686d017285b0580034d4de8cd5d3944da0d8b7ec4"
+            "sha256": "160316fcf0cc138f6d01a59b620211298f4a300f6c283af559dffa836c6e9dca",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/agent-with-human-in-loop/package.json",
           "sha256": "9fcef02677d6b8bdff5706f9bb6fb57450a6370e1883761d9b8bebd80dd686a6",
@@ -2766,8 +2786,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "a41ccff875f17aacb60ffdadefd2ececd55220fa087668ddcabd7e0d34efb0a2"
+            "sha256": "5b88a1070a296e2c16586eef96485fbbf5d91ad2e2a45bdb39e3623292afab01",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/basic-caching/requirements.txt",
           "sha256": "aec5073800de2b4eb41fd329c8a7efa68de266d45860328915061bc64e15f55b",
@@ -2853,8 +2873,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "94451d3496efd9daa4a817962ec2e08464e17885c51f93deb46da84e04359102"
+            "sha256": "6836b017598b1d060cce8063fb54eddaffdaf72790d901d0240ece6a597f592d",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/image-url-download/package.json",
           "sha256": "156865e42fd75a3f90fb97de3d133bfe0ec828cef5bfb308dbffb5451fe5f5bd",
@@ -2864,8 +2884,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "33c2ed1b1fb276683077e1ecec7913785894934d4f3885c306f760325b9f3a63"
+            "sha256": "09296b99e326cd90b1d2f0b534bd8928b7628bcd41529098a7615f59bd37dd1c",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/license-verification/package.json",
           "sha256": "2a9c7c4b022565a5c1dc63dbbc87cf64f76023a322be42a3f33dbc411f08af8e",
@@ -2882,8 +2902,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults. Rename local CAPTCHA recipe paths, package identifiers, and references to provider-neutral names; preserve pinned upstream source paths.",
-            "sha256": "0ebee611b3973da380603b823da89d379b97d97b08a246ac975050ad5592aadc"
+            "sha256": "1745c8fb55a504717440f17ac242b64fffdaa2f92e73b73711744809e4415909",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/basic-captcha/pyproject.toml",
           "sha256": "bce2fc3420aa627baeb05929ba620af1604b68bec468699c04deb2613f75f8c8",
@@ -2893,8 +2913,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "815cab7732c134444a54cb6aa08590402ca4925ce93ce28e7ee3e85934f30b0d"
+            "sha256": "0a46bf3a04f396b5ff172a811394576319874fba991b2aa6cb030441e14956f8",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/getting-started-with-browserbase/package.json",
           "sha256": "e31add35e34140a60c6d7ebf215210bead6b9b757d1dc9b67fd0485b129fe341",
@@ -2940,8 +2960,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "092897468ad061adc48f4c47aa5fc6733f58998978d1a3832ae85a976659752d"
+            "sha256": "0ee2797ce40513a02f9776bbad4a9faf85af25e09b3987be0f96ca94c16d8bf4",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/getting-started-with-browserbase/pyproject.toml",
           "sha256": "f7bbec8788a0ff812c867aafe8f56733c9ec1738e6370cc9c5168561e2edd12b",
@@ -2958,8 +2978,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "03e0b41637f1f1eb615614f01f22881c5e4699d4889da63e656b71bfcc6e0504"
+            "sha256": "44cc40dafc8e881a49aaf89cd8189636b80502a64b79fa7fe7fe4fa9217023e4",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/puppeteer/quickstart-puppeteer/package.json",
           "sha256": "4b667753379d070d99dbb5d433c030d5e328b40e195370d8c58c214646d005c1",
@@ -2980,8 +3000,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "9a6ee01cec9896706e519533b1e39f7fb4c1c9ba8964f6b370518f089d78d285"
+            "sha256": "7bb0de4cf626d96c7dd5976aa9869df98bb6ecbb339e8948e7f908720ae407a5",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/sec-filing-research/pyproject.toml",
           "sha256": "b7e1a610c51768bed0420bd9458cbc61384cc9db8dcf9334503d4c865c90d9a2",
@@ -3057,8 +3077,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "837ea5dda9caeb1fa00237f4a38154c6a568f5589532e2d06ae3300a9cbefb1c"
+            "sha256": "8088ce172ef743a5aa1d6be9b40e5330de2730e4469f7f2bf0bd80fee22e093f",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/license-verification/pyproject.toml",
           "sha256": "afd91495885d2c4841997ae82ffb81a11179d2805ea20ea2bb412c8318cf2a4a",
@@ -3145,8 +3165,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "6dedaa12055ce00e6b687484e1cab1f22b813a1c3adcf611b015c2d0fd46b6f4"
+            "sha256": "3db218f5d1d55d202b7491f5823f889b62925777f3cf88f43829935e72af40e7",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/exa-browserbase/package.json",
           "sha256": "754cd1cece39f5a4ac18b6ec6fdfbb69d243b79471dceb57736286bc9dfa781b",
@@ -3156,8 +3176,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "d8fcc701f3d514ddf6ac163dd60d727fb4380efbf07cc213ec4c6aa0e51a093f"
+            "sha256": "4f78bc3e2409bcae12a782e11c53fbe6112771c4c53aee3429aadea42c69441f",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/typescript/amazon-product-scraping/package.json",
           "sha256": "b3b27d831a13d1ef4b5788afc12e8a25d29070d2cbfc946bb37af1be7ea2c56b",
@@ -3203,8 +3223,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "ee97fe09daedb08d89e5ebf8590f78bd28feb05d8cc1b673e346201212fc9286"
+            "sha256": "7f0005b70832653156648c595993a581bea130cec49e98f5c42139dc965e8500",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/manual-mfa-with-contexts/requirements.txt",
           "sha256": "bf90cd93679279d0df872942a55968949a829677f75e4ec8540ddf5897b84337",
@@ -3214,8 +3234,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "c26f3ee355d9b54a95d5d430bfe4e47a94d706374d3fbc73aa25227f7313f2e1"
+            "sha256": "95996a781b8f017c728d77a221aa159c7548cdc5fc6c12da5d4b53dbee005610",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "examples/python/playwright-mfa-handling/pyproject.toml",
           "sha256": "3190540c50017defcf84e54591719c968f917bc64cf84edebde599468e027a00",
@@ -3393,8 +3413,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "eeddf38e88c107d25f7093b1e45f56c9e54a66d229e26b649d58f871cd5b6749"
+            "sha256": "a63b349100e73690cbabce57c2aa78bba5d6ba4623a2c38510164b0d454cea63",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "playbook/node/package.json",
           "sha256": "50d5766ac58287f2da19f0965182852a73ea01d9b739692a3f21c53ab51a5310",
@@ -3825,8 +3845,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "db7e7b88a8e74c566d8fedd23196b942320cf23f458c10b53e4f8395f95d1a77"
+            "sha256": "24f76779244b59dc55bfa615b41442cde0bf1009ced848eab3e82604d3b16740",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "playbook/python/requirements.txt",
           "sha256": "6bad2ef5d6e16cc8684f895dfbf6440f6817a1f8a6c1b660970ea923874935c5",
@@ -4275,8 +4295,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Live E2E: run Temporal and Stagehand as ESM so the worker and demo load the Stagehand 4 import-only package at runtime.",
-            "sha256": "8015dba9022b4f9b7c1adcd5e6d6879deb021c0b5727e114402514c094d2d017"
+            "sha256": "c34d9fd9f592c9d2b442c425d03af3e6e59049fb9957d2913abceaa2e584c470",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/temporal/package.json",
           "sha256": "d9c983a4f483165d102e36d31f4b22c2aa65c529a2bca88f2eefd85f6379ee42",
@@ -4322,8 +4342,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Sanitized internal or customer-specific provenance and repaired cookbook correctness, portability, or discoverability. Update dependency constraints and lockfiles for the September 2026 Dependabot alert snapshot; document unresolved upstream advisories.",
-            "sha256": "56189fde427597fd0ac23161ccf51129cdac04a5c41e2fd11e3c09313b6e0a42"
+            "sha256": "0877a6b5701a70d843437072aac646e5f60a1a2662d5ee051e89418d249e4bf7",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/agentkit/stagehand/package-lock.json",
           "sha256": "71e3bb722876e565083711dcbf9e934b0f361c0bb35f5d82ebc3466f193f4c02",
@@ -4440,8 +4460,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "bdd7b95a937fcddd66af50c52201f7f9ef9370ad60f2e7b5796c615f3efe46b5"
+            "sha256": "4e34d4e8a5f3563cfa88c8262c8b80c02a0127f883c0a3df2be8f927227bb416",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/stripe/stagehand/package.json",
           "sha256": "ce3e8d0dadf1dd6268c6aa1c49f3542a8da53c51ace1be39091c7745f6579485",
@@ -4490,8 +4510,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "3bdea2b675396412179dc7cfb3412d0ed1ad8f6cc666d2ed2f69cfdc19c31b54"
+            "sha256": "544148311b4988cbb4aac43685dd1f27947653a832e9930959aa3e17e7203cc1",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/crewai/quickstart/requirements.txt",
           "sha256": "3c77198b749ef687f9b2dbe31ced5ea3c16a4c3f6aa221c694044365202657af",
@@ -4559,8 +4579,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "R162: separate task worker from web setup, require caller project, provide owned browser fixture with checked output and dashboard test instructions; worker verification remains pending. Update dependency constraints and lockfiles for the September 2026 Dependabot alert snapshot; document unresolved upstream advisories. Use parent-package upgrades and compatible lockfile refreshes without security overrides; record blocked transitive fixes.",
-            "sha256": "e21caa25d110522b6e431442ea3a9a5d25a06e74b61a87a8a7df4e7e065dad6a"
+            "sha256": "dae709060f900eb9c7817bfbcd6e090a82aedb8ba8a51d1d1e3aa52be8e98b6a",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/trigger/package.json",
           "sha256": "4b12ab2af375dfc9fa4bd4b36f5629480b1a5d3d53bba2507196d44bc7d61ef9",
@@ -4603,8 +4623,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "fafac109659a5c6683f72e441e9f699f1a446c03467f42f6612c908189246653"
+            "sha256": "26b1d33a652de05f186766dae47f5b78208c79f6a2af0330b834d698c2e02bd2",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/mongodb/python/requirements.txt",
           "sha256": "f741b54a61f52f3752053e5d08f33100ccfe1f155139a98d7ee1ecc83fea4297",
@@ -4621,8 +4641,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "cef5ec2a7bbebad45be3f75b0194db8aea41efcafef71c264b5d6cae508cd7d0"
+            "sha256": "ebcdc1e000fe8079100ed478a3a9a71345081b620f76aa0da2f4f3cacc7fc52f",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/cartesia/requirements.txt",
           "sha256": "019161c23365959996c0537439b32b0a544269d8101119969edcacb44d69c875",
@@ -4668,8 +4688,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "2181205a5b582a25ce4b3b240f94bc0e0f62e7b87f70855db2202975a8461448"
+            "sha256": "cc5daec0b6cb43cc06230a1be4d37e5412faa5e1a4d04d3b372b587a2c56c206",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/crewai/stagehand/requirements.txt",
           "sha256": "663e22641f7d78fd724e8b94bd7ac5a8a536bae4a54a876494faafff5fd26f1b",
@@ -4882,8 +4902,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Sanitized internal or customer-specific provenance and repaired cookbook correctness, portability, or discoverability.",
-            "sha256": "6548f383500c27d62cc47d5123f272eedec94276b0480928ea0985c4199603f8"
+            "sha256": "3bece0af76f2472d105840425268b4b0fc3780c6f90221aaf3620a71b692e0d9",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/temporal/package-lock.json",
           "sha256": "770d12dfe2f053808b679d145776bf1906c66e50021f35cd2ac6eece93b4d7de",
@@ -4915,8 +4935,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "efe449a43e627d02b9010d8c4c57baf1b4fd3552a3fe6cedee3f99df4db0a890"
+            "sha256": "7f8aabb5c0c7deb1a670e9fbd4f62ec1ae78d6730db1f1aa1d00a21d1dc187f7",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/agno/requirements.txt",
           "sha256": "64537c2ec017a3cc5a03ca20fb30ef6cba09eadbdf285f585723f9c4c5f36265",
@@ -5073,8 +5093,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Sanitized internal or customer-specific provenance and repaired cookbook correctness, portability, or discoverability. Update dependency constraints and lockfiles for the September 2026 Dependabot alert snapshot; document unresolved upstream advisories.",
-            "sha256": "c1e5852da3fbb868635749ebd3ed6cd87f6ff51e5ce398c87a3fbf429061174d"
+            "sha256": "1e360a85d892e7a6041550882f857368559a0374d701cbe0bc3ad9944fa13e67",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/vercel/vercel-puppeteer/package-lock.json",
           "sha256": "4f0924548a3fd4de5443c61bee2f3926a52a6acedce95148198c5d14d3a06325",
@@ -5084,8 +5104,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "69840aefaa1742f86e054b427f0334a53fdd21a485fd3f5b0b28f4bbea997833"
+            "sha256": "30d57882dffe178972d2a09e7dc3ff279f86ab15bcae0cfc09a854ecdfe4a4e8",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/mongodb/typescript/package.json",
           "sha256": "b3eb7836a09016e57c8f99f352eaacdf2e2f74c8143d4f831ed5c5141543365b",
@@ -5237,8 +5257,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "039b91bd8324987b44e2cba013db125e8725c44cd2da035bec67523d069ec47c"
+            "sha256": "a76a4b5dad9223ef78cbb630ac64d29af6b22587f33c775c961dfe5dce028fa3",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/braintrust/package.json",
           "sha256": "b99910467033f3139786b04586a7dcfae9407f710655a50a3aaeee940b2ff283",
@@ -5281,8 +5301,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed R125: validate explicit flat extraction schema before connection, serialize ISO date fields, independently disconnect owned handles and release workflow session on success or failure, with executable synthetic lifecycle tests and scoped README claims.",
-            "sha256": "5398dc01c5094728a8852c7d4a6eb84fcfd6ef717e1fdd6f0c9a7c6c1ac9935c"
+            "sha256": "10b99411de2797c404d2dbfaf95661ea6bd222e44629eb337335c1f56ab1e214",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/agentkit/stagehand/package.json",
           "sha256": "99e1a11b80534c747ebb730710070dab05cf2c0f8317ab1fddb69f7e7c5805a0",
@@ -5292,8 +5312,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Sanitized internal or customer-specific provenance and repaired cookbook correctness, portability, or discoverability.",
-            "sha256": "28838aed44a0035691a7918e70c74388a16e44ac56026864ecc6505f61895f22"
+            "sha256": "40149ea2c94098e10059f3984087431676b42295e71c5b07aa74fb5b1b83d8d1",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/packages/convex-stagehand/example/package-lock.json",
           "sha256": "d2e29b2c857186d36c3fbe8d9074fd15265d40976b976269c87191d621da6f9e",
@@ -5363,8 +5383,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Sanitized internal or customer-specific provenance and repaired cookbook correctness, portability, or discoverability.",
-            "sha256": "84c7c7ceb80b7eab718a1dae99e658eb6eb39af0b003b89014133070f8c38505"
+            "sha256": "e38aaf3348e1a837082728b8d6563719c3b464632f0f1440d42504338ee0e9fa",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/braintrust/package-lock.json",
           "sha256": "2ee3764d302fb3fc02f1277982eb7ad22d038db571db7be28cdd1755f96e4872",
@@ -5422,8 +5442,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "R158: replace unsupported external checkout with verified owned sandbox order and test authorization; document configuration and verification limits.",
-            "sha256": "2a5a10997d3f336f4bce4fa46fc417def7e72751f7c837adcd302641b5a6cbb6"
+            "sha256": "f60330d2c677eed4c0efbe5ca18e098c30ff04d1cd5222bf7b2d5b052c3c5738",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/stripe/python/requirements.txt",
           "sha256": "4e75ea7a5fc48f83d5a69b50b16aadb86fb8870509cde009436f7411335c4596",
@@ -5487,8 +5507,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults. Update dependency constraints and lockfiles for the September 2026 Dependabot alert snapshot; document unresolved upstream advisories.",
-            "sha256": "f40f55ca0b4dad08fd822f9e3c1171843b8599e85ce64b9bed073a80225d375a"
+            "sha256": "85397ef61b90d1c95dac29acdf901de0b3c3d01f5952b03f27d3875b4e38ce4d",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/vercel/vercel-puppeteer/package.json",
           "sha256": "328fe0f0382b2ef79b582130b8de5482b8e36c31319cca67d44f52fa1005a29b",
@@ -5621,8 +5641,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "17b3164740f8d51eeebb6d4cf7bfc88bde04f50b8e8f06d4836ca8c64b056c7b"
+            "sha256": "5a5b7808c456bd4b012aeba3fd99d81f148eafb2877a1d38b78fc8919f933abb",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/langchain/browserbase/requirements.txt",
           "sha256": "8f9172e87c525bea97fd4b6804f00a4d55833ff2f053468011dddfe019a1f767",
@@ -5660,8 +5680,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "6893a0404cdcc95ff948d2be897f576f5f045adf01aeed443c7f7897e52e2a16"
+            "sha256": "8e13f5419ab2f1ce836e7d61d6c878e4e83b3aff49a9b202b28585cc424d0490",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/packages/convex-stagehand/package.json",
           "sha256": "044bc0137b3024ab722dac23da7d9ab7c6d34a06c7c176a2916ab8930fdf3b61",
@@ -5671,8 +5691,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook migration: preserve current SDK compatibility, renamed collection paths, or anonymized private workflow content while retaining source provenance.",
-            "sha256": "e64300a64232398420535ef36ea8a4d8a65455ab7a97765f11d74ead27fe96b6"
+            "sha256": "dba3297e7057ef10c3d2e4efd3f8cbe80f6bb49e0ec0a92bb73ccacf7d48b3a6",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/box/stagehand/package.json",
           "sha256": "1477fedff1034f0177eb01a3606c42ce5ba2af75968701f4e569dfe52e9058e6",
@@ -5682,8 +5702,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed R122: align aggregate lint compiler TypeScript6.0.3 and typescript-eslint8.69.0 supported peers; document distinct leaf compiler boundaries.",
-            "sha256": "d212f5591acaf742e13e66922fdb17378b60a3a0411f108bbb51b691a5127196"
+            "sha256": "2eb57a91edc2cf13750d18513abb215e4d3af9e244df44bb76386eb67031ff03",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/package.json",
           "sha256": "d39ad801d0e4bc2178d5267e4da62127bf2d2b0b9440a8d2b9934c807dfccf0b",
@@ -5857,8 +5877,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "5ed9298ed56319e5e3f09a2938e853392ceaf81396ef3f903b86d06d31e9cc23"
+            "sha256": "47bb7798de71e0c84b34e7eb12259eb9f3d3358f626bceed69aea3c80d9dc963",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/agentkit/browserbase/package.json",
           "sha256": "74e9feacba51d3fdc4f76437b694767bc8716110ede6850aebdc0aca62dd1240",
@@ -5926,8 +5946,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "40f20b6acbaedc960f5f83419ac168701b9480fbece55ce3045d09dccc567098"
+            "sha256": "39d2b53254cae3ec2252cc7d747fbd4ea73421ab362656f955464578c66473ad",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/vercel/eve-example/package.json",
           "sha256": "2d778898d5391a26a3d22eb6db0cb3627e488a2384658958a100f5f024d60891",
@@ -5984,8 +6004,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "6c7fded902302f6f0e2a5c8fc40ff522d655cb4db50482aefcc33ea367f457f5"
+            "sha256": "72dfde660b32ca3c087bf15e8a5ffb84498059299b97b2934e4c19e8236778f9",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/packages/convex-stagehand/example/package.json",
           "sha256": "a576aec3caf5c675e7f11f0559767b4b2cbb9037ad4b17155cfc48aa71a2224d",
@@ -6002,8 +6022,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook migration: preserve current SDK compatibility, renamed collection paths, or anonymized private workflow content while retaining source provenance.",
-            "sha256": "b2a8f5ff8b1276aa94efd11e21e07f1e218972a9ccab3c2600d239fe578c8aec"
+            "sha256": "4cd8ae30f0b327d79ed92027de81fdd3dbfae4c9065846508fb60d27382d7051",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/langchain/stagehand/package.json",
           "sha256": "859e668d53b8873a32770c4764bb7d4c62d3e5f4a9688605d4651d08ad3b0a71",
@@ -6024,8 +6044,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "6bb1d2db96c88b44decd9382ebc96214e59c07fc5e949e835c7ecc0d01bd5b15"
+            "sha256": "7cd323227ea32c58f377806b134a806572b2f6efd66ed250ec58709159d72bfb",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/langchain/deepagents-browserbase/requirements.txt",
           "sha256": "704be9661117fd129e84791ae50f5e9db9e1fdd7e2ae3fc20ca647e524e1fc05",
@@ -6067,8 +6087,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Sanitized internal or customer-specific provenance and repaired cookbook correctness, portability, or discoverability. Update dependency constraints and lockfiles for the September 2026 Dependabot alert snapshot; document unresolved upstream advisories.",
-            "sha256": "8227b3d940e9fa7504360b0e85abd5ccac632efedf3be176223062b0dd23b78a"
+            "sha256": "af8b4eecdf301aa8b42709e1c1caf29c18468c7d830fa8c53c4e22d4ea6ad504",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/agentkit/browserbase/package-lock.json",
           "sha256": "ccf0915bcddcc7ec8c22ab0af4f6ba5d9a2879f0d9907f54a094c442f91a0e98",
@@ -6128,8 +6148,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Sanitized internal or customer-specific provenance and repaired cookbook correctness, portability, or discoverability.",
-            "sha256": "b01b5acdc2b90df9adb83d37b80994469b4189888db04377f8e20908f3320192"
+            "sha256": "b644cf418d66d0f831666bc211ef603cacbd1b8439e932c9df591fe72a9c15a1",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/packages/convex-stagehand/package-lock.json",
           "sha256": "f4734012b9a573c215ccd791867bc74df28463a85a1cbd9b5f983c07750dbf4c",
@@ -6139,8 +6159,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "R158 partial Node: replace external merchant with owned checkout and verified idempotent sandbox authorization, metadata-only card preflight, independent cleanup, working start entrypoint and rewritten setup documentation.",
-            "sha256": "8e74a761ad9d03dcb23039ff49f60de14a96f12dce3f363590682280584ef5f7"
+            "sha256": "323227d1aaaf5294c7024bb97f01a84d53d7297f528d857c16ebff07900b4eaf",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/stripe/node/package.json",
           "sha256": "e91c4c5a982b520ab8894b2c0d532414f76b63238e9f038ad5e6b1e8751def3f",
@@ -6221,8 +6241,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults. Update dependency constraints and lockfiles for the September 2026 Dependabot alert snapshot; document unresolved upstream advisories.",
-            "sha256": "bda919eb001132a7d3d697bab6ac7c0331c43fe71ee8eb9564c6b24e11af4dab"
+            "sha256": "a91fccbec8b2a5c9065013aa1e06b1962252948f2ea678f960d8981b55f1a455",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/crewai/crewai-tutorial/poetry.lock",
           "sha256": "d270a42a6c8e16578d8edaaf98bdb6ddf88677151203a936a8d4f25971d9c691",
@@ -6253,8 +6273,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Sanitized internal or customer-specific provenance and repaired cookbook correctness, portability, or discoverability.",
-            "sha256": "196fa1779084340bac893867ce8879dc20537dee307b71e43ea634c6014585c3"
+            "sha256": "9bc7fd69a702fa842cd888e474a252da258fc74ca6d23749a1b410283d210d53",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/langchain/stagehand/package-lock.json",
           "sha256": "57a7d03fbc11c88bfa666e3a5a1ec1c5dbdbef34624ae59352ce6a6a720fb109",
@@ -6406,8 +6426,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Sanitized internal or customer-specific provenance and repaired cookbook correctness, portability, or discoverability. Update dependency constraints and lockfiles for the September 2026 Dependabot alert snapshot; document unresolved upstream advisories. Use parent-package upgrades and compatible lockfile refreshes without security overrides; record blocked transitive fixes.",
-            "sha256": "3aa057e833cc9ff6ac5d5692742e130de8ce517e6afa538707316776e067e3ff"
+            "sha256": "4764a2ba98bb0ac9d7a3b4cb3eee78ba8ccf32f6f82b7bc9f5fd8df1ba3cfa09",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/trigger/package-lock.json",
           "sha256": "064bed805d9bd2200244623f7b1f3d4c6b320a2cb711853266cd019f0eb60523",
@@ -6424,8 +6444,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "108b864c2d154e1c9d52a5fe29a771da0e1f4a2ba97cb9604a3cc8aac7b0ce0d"
+            "sha256": "72d3aea245eaafa047ce4f55cbc498eb8de82940b97f6a6c5caaa6d2a59bd6c2",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/packages/eve-browserbase/package.json",
           "sha256": "6b589c895df35fa17c39e6393632cdc9643b229720fbd7e767e7bd04a5a8857d",
@@ -6468,8 +6488,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed R127: enforce requested billing field allowlist and value formats at response boundary, drop extra metadata, prevent provider-content/identifier/error logging, remove public-safe claims and document private/synthetic presentation boundary.",
-            "sha256": "61825bfe91fc936f37495430d2e9f7705e872af90536a53d02b9cab725cf13b8"
+            "sha256": "abad447d593660715494d89e606ac842444c2c05bda785ed12de216f71656aa1",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/box/agent/package.json",
           "sha256": "8793439ed927fc4d23d4556ebaa08d0f9f5deaf68572305c770475c98b932f6e",
@@ -6497,8 +6517,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Sanitized internal or customer-specific provenance and repaired cookbook correctness, portability, or discoverability.",
-            "sha256": "ece82c5dd3cc1ceaf4001ddba041f7b7e47369189d50073ba01966417a70d288"
+            "sha256": "0d8444a51e9ac8dd295664c8bbc9f0e0586ce6cf386e2e69ca8c4f44fb28b4c6",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/mastra/package-lock.json",
           "sha256": "69ada2a77ef5c25137d19e5c4b1c605fa32806ddd90066e652e64bc57adf7c3b",
@@ -6728,8 +6748,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "R167: support JSON5 configuration with atomic replacement, conflict detection, validation, and documented formatting normalization.",
-            "sha256": "1faabc47bff377b7730061fad881946a450486021cdd8fbb9ceaa48da5c82e1a"
+            "sha256": "b3bc5ddf321902768ffc395875a55e045e0fe783c97838b65c0743476a1a2bf2",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/packages/openclaw-browserbase/package.json",
           "sha256": "af1f92377a3a96b189af8add9d713685f1e528fea386ba24963e487669122163",
@@ -6757,8 +6777,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "506ae4cab5bb338aa0fb1572953349795a35507da6aff9a3f1bd37c63de7dc1b"
+            "sha256": "3a5bfff295a0954a2f5ac246042a3f587cd64cda176d614b4684e0fa22105d19",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/browser-use/requirements.txt",
           "sha256": "839b4edb46522bb901c0222f17c273bd7696cfbdc96b95fe1a83203e11a11a13",
@@ -6837,8 +6857,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Sanitized internal or customer-specific provenance and repaired cookbook correctness, portability, or discoverability. Update dependency constraints and lockfiles for the September 2026 Dependabot alert snapshot; document unresolved upstream advisories.",
-            "sha256": "d0a91029b94acca350da89d2768523402efe1042020e2756dd29b11b3753a41d"
+            "sha256": "688a23a41666ed4b5c62b9e7ea7e4bda32eb7e0f3b6a53d397484bd2d7ff4d05",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/crewai/crewai-tutorial/pyproject.toml",
           "sha256": "8f43c626a5af3d6e265a4e9bffe7dd47f50e01e67aecdc5bd2440d437b98f529",
@@ -6913,8 +6933,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Sanitized internal or customer-specific provenance and repaired cookbook correctness, portability, or discoverability.",
-            "sha256": "5fa7185d802db10bb5ec65a2c4059f18be5746fb6949f97887d9d839b638d49d"
+            "sha256": "03727823d2f9e004278a22274cb4b8f4d513ef396beaa7d7cc6c849a4b64359e",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/vercel/BrowseGPT/package-lock.json",
           "sha256": "055975737e4eb319f4e9a5fae4512bed8379f5bd52d4f7ed3116775992224eff",
@@ -6945,8 +6965,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Sanitized internal or customer-specific provenance and repaired cookbook correctness, portability, or discoverability.",
-            "sha256": "0e10e080b4ebe112107faf231275afad56635fb2419d2674e6ab7e980323d5e1"
+            "sha256": "5bd03c97c8d954203342bb9271cb441e831b4a127d363940ac5798647de20510",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/mongodb/typescript/package-lock.json",
           "sha256": "aa1f7ee28f6f0a7a1f393369ac91e3d259e172ecc37831099c60f9a719110b3f",
@@ -6967,8 +6987,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook consolidation: migrate to current Browserbase and Stagehand contracts, preserve package boundaries, correct lifecycle and verification behavior, and remove unsafe or customer-specific defaults.",
-            "sha256": "64763ca2ea036e12753dcf5fb39155686f2d9b14669f6412dfa9a02a29031288"
+            "sha256": "b70c4d0ebc0e3c1fcc4caa6e20858490618204e5ae8e5c11a270dd297180baa9",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/vercel/BrowseGPT/package.json",
           "sha256": "aefb9f3f39d468277c0ba851231013c682435d830399dc1da44f57a26752a975",
@@ -6992,8 +7012,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed cookbook migration: preserve current SDK compatibility, renamed collection paths, or anonymized private workflow content while retaining source provenance.",
-            "sha256": "758ad6dc691b2233196872eceb49a11d47a9d1e289520a5e9cc63b0d968cf0ee"
+            "sha256": "c07b4a01b0f69ea2e7072263a34cecf4ce58fd5736f57585c0db0a3cb3bb9620",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
           },
           "path": "integrations/examples/integrations/mastra/package.json",
           "sha256": "78ac56a4ced85a25b0836ad744fb4b2f9cd36fed7a8c2c464f39a55d1b70f3df",

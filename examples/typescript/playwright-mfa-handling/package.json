@@ -21,13 +21,13 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "@browserbasehq/sdk": "2.19.1",
-    "dotenv": "^16.0.0",
-    "playwright-core": "1.63.0"
+    "@browserbasehq/sdk": "2.21.0",
+    "dotenv": "^16.6.1",
+    "playwright-core": "1.64.0"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
-    "tsx": "^4.7.0",
+    "@types/node": "^20.19.43",
+    "tsx": "^4.23.15",
     "typescript": "7.0.2"
   }
 }

@@ -90,6 +90,10 @@ jobs:
             runtime: node
             directory: examples/typescript/getting-started-with-browserbase
             command: npm install --ignore-scripts --package-lock=false && npm run typecheck
+          - name: Order lookup install and typecheck
+            runtime: node
+            directory: examples/typescript/order-lookup-function
+            command: npm ci --ignore-scripts && npm run typecheck
           - name: Go dependency and compile check
             runtime: go
             directory: examples/go/hackernews

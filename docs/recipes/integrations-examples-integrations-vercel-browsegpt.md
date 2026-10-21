@@ -50,28 +50,28 @@ Declared runtime dependencies from [integrations/examples/integrations/vercel/Br
 
 | Package | Declared version |
 | --- | --- |
-| `@ai-sdk/anthropic` | `4.0.46` |
-| `@ai-sdk/openai` | `4.0.52` |
-| `@ai-sdk/react` | `4.0.89` |
-| `@headlessui/react` | `^2.1.10` |
+| `@ai-sdk/anthropic` | `4.0.79` |
+| `@ai-sdk/openai` | `4.0.93` |
+| `@ai-sdk/react` | `4.0.142` |
+| `@headlessui/react` | `^2.2.10` |
 | `@mozilla/readability` | `0.6.0` |
-| `@radix-ui/react-icons` | `^1.3.0` |
-| `ai` | `7.0.86` |
+| `@radix-ui/react-icons` | `^1.3.2` |
+| `ai` | `7.0.139` |
 | `class-variance-authority` | `0.7.1` |
 | `clsx` | `2.1.1` |
-| `framer-motion` | `13.1.1` |
+| `framer-motion` | `13.5.1` |
 | `geist` | `1.7.2` |
-| `jsdom` | `30.0.1` |
-| `lucide-react` | `1.38.0` |
-| `next` | `16.3.3` |
-| `playwright` | `1.62.1` |
-| `react` | `19.2.4` |
-| `react-dom` | `19.2.4` |
+| `jsdom` | `30.1.2` |
+| `lucide-react` | `1.56.0` |
+| `next` | `16.4.0` |
+| `playwright` | `1.64.0` |
+| `react` | `19.3.0` |
+| `react-dom` | `19.3.0` |
 | `react-markdown` | `10.1.0` |
 | `remark-gfm` | `4.0.1` |
-| `tailwind-merge` | `3.6.0` |
+| `tailwind-merge` | `3.7.0` |
 | `tailwindcss-animate` | `^1.0.7` |
-| `zod` | `4.4.3` |
+| `zod` | `4.6.7` |
 
 ## Caveats and verification
 

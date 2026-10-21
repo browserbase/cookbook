@@ -8,12 +8,12 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "convex": "1.45.0",
-    "zod": "4.4.3",
+    "convex": "1.46.0",
+    "zod": "4.6.7",
     "@browserbasehq/convex-stagehand": "file:.."
   },
   "devDependencies": {
-    "@types/node": "^20.10.0",
+    "@types/node": "^20.19.43",
     "typescript": "6.0.3"
   }
 }

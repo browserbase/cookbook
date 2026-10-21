@@ -52,10 +52,10 @@ Declared runtime dependencies from [examples/python/amazon-product-scraping/pypr
 
 Declared source dependencies.
 
-- `beautifulsoup4==4.14.3`
-- `pydantic>=2.12,<3`
-- `python-dotenv==1.2.2`
-- `stagehand==4.0.2`
+- `beautifulsoup4==4.15.0`
+- `pydantic>=2.14.1,<3`
+- `python-dotenv==1.2.4`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

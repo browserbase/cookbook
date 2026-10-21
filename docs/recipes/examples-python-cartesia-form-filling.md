@@ -64,15 +64,15 @@ Declared runtime dependencies from [examples/python/cartesia-form-filling/pyproj
 
 Declared source dependencies.
 
-- `PyYAML>=6.0.0`
-- `aiohttp>=3.12.0`
+- `PyYAML>=6.0.3`
+- `aiohttp>=3.14.5`
 - `cartesia-line==0.1.12`
 - `fastapi==0.115.14`
-- `google-genai>=1.26.0`
-- `loguru>=0.7.0`
-- `pydantic>=2.0.0`
-- `python-dotenv>=1.0.0`
-- `stagehand==4.0.2`
+- `google-genai>=1.75.0`
+- `loguru>=0.7.3`
+- `pydantic>=2.14.1`
+- `python-dotenv>=1.2.4`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

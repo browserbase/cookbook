@@ -55,10 +55,10 @@ Declared runtime dependencies from [playbook/guides/1password/node/package.json]
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/sdk` | `2.19.1` |
-| `@browserbasehq/stagehand` | `4.0.2` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `@browserbasehq/stagehand` | `4.2.1` |
 | `dotenv` | `16.6.1` |
-| `playwright-core` | `1.63.0` |
+| `playwright-core` | `1.64.0` |
 
 ## Caveats and verification
 

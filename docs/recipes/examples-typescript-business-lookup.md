@@ -65,11 +65,11 @@ Declared runtime dependencies from [examples/typescript/business-lookup/package.
 
 | Package | Declared version |
 | --- | --- |
-| `@ai-sdk/mcp` | `^2.0.29` |
+| `@ai-sdk/mcp` | `^2.0.74` |
 | `@browserbasehq/stagehand-codemode` | `github:browserbase/stagehand#54302fc5f13be5ad8e717d8e1388502de22be2ed&path:packages/integrations` |
-| `ai` | `^7.0.58` |
+| `ai` | `^7.0.139` |
 | `dotenv` | `^17.4.2` |
-| `zod` | `4.4.3` |
+| `zod` | `4.6.7` |
 
 ## Caveats and verification
 

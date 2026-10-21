@@ -59,12 +59,12 @@ Declared runtime dependencies from [examples/typescript/extend-browserbase/packa
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/sdk` | `2.19.1` |
-| `@browserbasehq/stagehand` | `4.0.2` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `@browserbasehq/stagehand` | `4.2.1` |
 | `adm-zip` | `0.6.1` |
-| `dotenv` | `^17.2.4` |
-| `extend-ai` | `^1.0.2` |
-| `open` | `^11.0.0` |
+| `dotenv` | `^17.4.2` |
+| `extend-ai` | `^1.17.0` |
+| `open` | `^11.0.4` |
 
 ## Caveats and verification
 

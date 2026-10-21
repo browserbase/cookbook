@@ -3,7 +3,7 @@
   "files": [
     {
       "path": "examples/README.md",
-      "sha256": "d4b80442ca66ab0f2c3a4d9666ff6b16bdfeed6aa4396ee76ebef5f3253ea63c",
+      "sha256": "43d39fb77a804337bf0f9c0df229f51d4d68dcd21b044c22fdd257b18873cd6a",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -53,7 +53,7 @@
     },
     {
       "path": "examples/python/agentic-kyb/pyproject.toml",
-      "sha256": "cdc35827ba7321208c75416eb14a15d91f643b4bc3574fb49f46a1a39ca16209",
+      "sha256": "71f8db480233d4bdc7bc9c5c4c710a26787d7205518385e2e00bd74a54286f4c",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -93,7 +93,7 @@
     },
     {
       "path": "examples/python/agentic-kyb/uv.lock",
-      "sha256": "a797e4abd22d0d1f9fd3456575059c268f7b9dbf5adf49294db43540d0634276",
+      "sha256": "a8c581acee7fb19b2b6b59af51f7416f389f828223823280b8b670a369a30865",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -118,12 +118,12 @@
     },
     {
       "path": "examples/python/anthropic-cua/pyproject.toml",
-      "sha256": "f3048cd389adf9c5b9b7903ddb853d80956c2f5da38824522fa581e07a8a1c97",
+      "sha256": "cbb4574eb8647185db838376953487ffafdc10a6f000553ff2c4b6b5a4ea57df",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "examples/python/anthropic-cua/uv.lock",
-      "sha256": "08dad5516e487fbc309878e3ac5eced2ce886247ddfdd6252af3d80d88ac41c5",
+      "sha256": "2f6b9c417b12a380339ab4b34e31c92f67f8b066c97714ed2405aa0e2dbc01b6",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -188,12 +188,12 @@
     },
     {
       "path": "examples/python/file-upload/pyproject.toml",
-      "sha256": "6fcc5d359b52edc8d2085275a7cd1afeda460f376fe89dc0794f29edfdbf538e",
+      "sha256": "0b9c1a0351aed317bd7f1e3adfe533a18607c849e15b9c08a36f2d7de7f0c80b",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "examples/python/file-upload/uv.lock",
-      "sha256": "db99d57d7c0a061a80cd9e7559df155830add371a97826de9585e1ce4273fcd0",
+      "sha256": "b2401e93326966d568018cd2b5acd8c9db7df5d9b515fbdd87d1a0fbf5dfc28a",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -213,12 +213,12 @@
     },
     {
       "path": "examples/python/human-in-the-loop/pyproject.toml",
-      "sha256": "b5baeb98a03319214adbf2c0ec5611eed3085ca56c837dc94fbd067789ff2621",
+      "sha256": "5dbecf2833e50a712531c1889d8f14868afc179b19bb5ccee125b387ef558b1e",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "examples/python/human-in-the-loop/uv.lock",
-      "sha256": "2b13130349d86a928caafea95721b5ee27ca981779a56f0bf4ce33b6d2e1b7cc",
+      "sha256": "efe5adbc95aec53c8af4a0ca139097bd0c2ffd84a8a7f534bcf37df03540d55a",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -253,12 +253,12 @@
     },
     {
       "path": "examples/python/openai-cua/pyproject.toml",
-      "sha256": "005ecf66c5794b1227ee66005ecf432685541a6dbfa145309561f69dcd5b4918",
+      "sha256": "802697361d62dcd88f15d02890b8d5bcd38d8483d09b544c73a4f0a57fe6c50f",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "examples/python/openai-cua/uv.lock",
-      "sha256": "be86001b05514a0a6e3793302b0508d00326e712f994e2ca5ba6e17404e84e46",
+      "sha256": "84579b45a9e06c2c27130466d48b69ca23393da3fb0a043e8852472586957d8c",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -482,6 +482,36 @@
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
+      "path": "examples/typescript/order-lookup-function/.env.example",
+      "sha256": "3ff25e7252df7d4b76289ff5e479063de3d99e3b2ad3aec511b00eb92c97e0a2",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/order-lookup-function/README.md",
+      "sha256": "054b1e26668656e9c99d3cd74705e64cdb458c23bbb0ae5221a529107b954256",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/order-lookup-function/index.ts",
+      "sha256": "64b7b3ff75732e2a9d164d0af690ffa7b41b9b6b56d0d162055d16ecf5ad46a3",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/order-lookup-function/package-lock.json",
+      "sha256": "a3b343172e6552c1b7fc03e3ce3e27e3af07e711b1312d44e6aef35df72ca657",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/order-lookup-function/package.json",
+      "sha256": "184ddcd527fb8e1b15222e234f76fa32a4b02ae5b2d8c5e7e25f0add7d42f264",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/order-lookup-function/tsconfig.json",
+      "sha256": "4ececca8184c89629920ea967c0055f60fc2ebd6376cde1ee8cbd3d9bb0ebbb1",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
       "path": "examples/typescript/pickleball/booking-contract.ts",
       "sha256": "249d22800e7f3a944fc5807bc41e4438cb09d709baf834931f35cd3ab9cf92a3",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
@@ -623,7 +653,7 @@
     },
     {
       "path": "integrations/examples/integrations/box/stagehand/package-lock.json",
-      "sha256": "e50ff67b279425fe29817e1c60c5494ccdb0c740491be9b24292c8f1638601c2",
+      "sha256": "1704d15f8b74aa37f03448c45eb1f8796e4317c9a473eed2cc040f37c94c9eb4",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -968,7 +998,7 @@
     },
     {
       "path": "playbook/guides/1password/node/package.json",
-      "sha256": "cb386f8f5634d8daf7ea4d8d40378d2a31254f3e3af7a81cbb3a64ac80ea4784",
+      "sha256": "37499bb3e422d9164123d92a4d561a7cc6bee5b7a0d985696cc62294209c9ebb",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -978,7 +1008,7 @@
     },
     {
       "path": "playbook/guides/1password/python/requirements.txt",
-      "sha256": "d7efd5c4637c54ee9b1f0139da182b284d3ee1f7cc3c59766ce84eca89d0f175",
+      "sha256": "93e9e66bcb160cce84e869aec087cf4f4d7b8f3fcac0e00b939a8a66a144db17",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -1368,12 +1398,12 @@
     },
     {
       "path": "projects/browsie/package.json",
-      "sha256": "cd7fb160f550fd32873754ff72fd4378c77fe21e7bb2bbf1a4246ff2e2e3b3af",
+      "sha256": "ba2bb6841a6f97739b17006f08a3b4045d0ba8b5ed8538dd8269f4a24d4fbe4f",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "projects/browsie/pnpm-lock.yaml",
-      "sha256": "a0da17359de7dad0eb49a75cdedf3bc9bc78198a2b2616c183bbed357bc5aa67",
+      "sha256": "defe801d9b5e1312da237741919b2b2fe0f15f1b8d7d0b95b225988840fd23b8",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {

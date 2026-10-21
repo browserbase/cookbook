@@ -7,16 +7,16 @@ Every entry is source-inspected at minimum. Recipes with stronger install, offli
 Search locally with `python3 scripts/catalog.py search "persistent login" --language python --limit 5`. Add `--json` for structured output.
 
 - [Getting started](topics/getting-started.md) (10). Create your first cloud browser and choose a browser SDK.
-- [Authentication and saved sessions](topics/authentication.md) (24). Reuse authenticated contexts, handle MFA, and connect login workflows.
+- [Authentication and saved sessions](topics/authentication.md) (25). Reuse authenticated contexts, handle MFA, and connect login workflows.
 - [Browser configuration](topics/browser-features.md) (32). Configure proxies, CAPTCHA handling, extensions, metadata, and caching.
 - [Files and documents](topics/downloads-and-documents.md) (21). Upload files, retrieve downloads, capture PDFs, and parse documents.
 - [Extraction and research](topics/extraction-and-research.md) (54). Find pages and extract structured information from them.
 - [Forms and transactions](topics/forms-and-transactions.md) (28). Fill forms and prepare application, booking, and payment workflows.
 - [Agents and human handoff](topics/agents-and-human-handoff.md) (27). Build browser agents and pause work for human input.
-- [Integrations and orchestration](topics/integrations-and-orchestration.md) (32). Connect Browserbase to agent frameworks, services, and workflow engines.
+- [Integrations and orchestration](topics/integrations-and-orchestration.md) (33). Connect Browserbase to agent frameworks, services, and workflow engines.
 - [Testing and observability](topics/testing-and-observability.md) (7). Test sites and inspect browser behavior, reliability, and performance.
 - [Commerce and travel](topics/commerce-and-travel.md) (14). Compare products, research travel, and inspect booking workflows.
-- [Business operations](topics/business-operations.md) (11). Automate research and operations across business domains.
+- [Business operations](topics/business-operations.md) (12). Automate research and operations across business domains.
 
 ## All recipes
 
@@ -94,6 +94,7 @@ Search locally with `python3 scripts/catalog.py search "persistent login" --lang
 | [MFA handling (TypeScript)](recipes/examples-typescript-mfa-handling.md) | typescript | runnable example | current / public | examples |
 | [Microsoft CUA (TypeScript)](recipes/examples-typescript-microsoft-cua.md) | typescript | runnable example | current / public | examples |
 | [Nurse verification (TypeScript)](recipes/examples-typescript-nurse-verification.md) | typescript | runnable example | current / public | examples |
+| [Order lookup for AI support with Functions and Secrets (TypeScript)](recipes/examples-typescript-order-lookup-function.md) | typescript | runnable example | current / public | examples |
 | [Pickleball (TypeScript)](recipes/examples-typescript-pickleball.md) | typescript | runnable example | current / public | examples |
 | [Basic CAPTCHA (TypeScript)](recipes/examples-typescript-playwright-basic-captcha.md) | typescript | runnable example | current / public | examples |
 | [Playwright MFA handling (TypeScript)](recipes/examples-typescript-playwright-mfa-handling.md) | typescript | runnable example | current / public | examples |

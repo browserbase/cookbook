@@ -70,7 +70,7 @@ Declared runtime dependencies from [integrations/examples/integrations/box/stage
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/stagehand` | `4.0.2` |
+| `@browserbasehq/stagehand` | `4.2.1` |
 | `dotenv` | `16.6.1` |
 
 ## Caveats and verification

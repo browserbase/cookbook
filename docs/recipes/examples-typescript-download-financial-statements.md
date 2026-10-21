@@ -53,10 +53,10 @@ Declared runtime dependencies from [examples/typescript/download-financial-state
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/sdk` | `2.19.1` |
-| `@browserbasehq/stagehand` | `4.0.2` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `@browserbasehq/stagehand` | `4.2.1` |
 | `adm-zip` | `0.6.1` |
-| `dotenv` | `^16.4.5` |
+| `dotenv` | `^16.6.1` |
 | `zod` | `4.4.3` |
 
 ## Caveats and verification
