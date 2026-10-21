@@ -17,7 +17,10 @@ import { DemoError, isEvervaultCiphertext, safeError } from "./sanitize.js";
 export function merchantPage(outcome?: "approved" | "declined"): string {
   const content = outcome
     ? `<section id="authorization-result" data-outcome="${outcome}"><p class="tag ${outcome}">${outcome === "approved" ? "APPROVED" : "DECLINED AS EXPECTED"}</p><h1>${outcome === "approved" ? "Synthetic authorization approved" : "Card verification failed"}</h1><p>${outcome === "approved" ? "The destination received the documented test fixture." : "The destination did not receive the approved test fixture."}</p></section>`
-    : `<form id="mock-checkout" method="post" action="/mock-merchant/authorize" autocomplete="off">
+    : `<h1>Dummy card checkout</h1>
+      <p><strong>4242 4242 4242 4242</strong> is a public Visa test card number, not a real card. This demo accepts that number with CVC <strong>123</strong> (the 3-digit security code) and expiry <strong>12/34</strong>.</p>
+      <p>During the comparison, Stagehand fills temporary Evervault tokens here. The proxy swaps them for these dummy values before the request reaches this merchant. No purchase or real charge occurs.</p>
+      <form id="mock-checkout" method="post" action="/mock-merchant/authorize" autocomplete="off">
         <label>Card number<input id="card-number" name="number" inputmode="numeric" required></label>
         <div class="row"><label>Expiry<input id="card-expiry" name="expiry" value="12/34" required></label><label>CVC<input id="card-cvc" name="cvc" inputmode="numeric" required></label></div>
         <button type="submit">Authorize synthetic card</button>

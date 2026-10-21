@@ -423,7 +423,7 @@
     },
     {
       "path": "examples/typescript/evervault-browser-tokens/public/index.html",
-      "sha256": "5d4245c33a458edd3d09f4baf9e2d215b20d11b53ced0bb661b0b6d7872eed4a",
+      "sha256": "079ff21f6a0b0840aa50e24c4e76fa8a4e6a930d8cc720dcdbb1bb57b3967e47",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -468,7 +468,7 @@
     },
     {
       "path": "examples/typescript/evervault-browser-tokens/src/server.ts",
-      "sha256": "180493f47b9ed776afc81156f52ae3b81eb0c05621962826498b07e18ae44a63",
+      "sha256": "dd09d875a9c97d6b49f9b120d786fe110edc19e3ae57188d78720fb0cc2d63c8",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
