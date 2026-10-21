@@ -152,4 +152,4 @@ Code map:
 - [Stagehand v4 logging](https://docs.stagehand.dev/v4/configuration/logging)
 - [Caddy installation](https://caddyserver.com/docs/install)
 
-This recipe is distributed under the cookbook's MIT license. It contains no proprietary font files or private demo deployment assets.
+This recipe's code is distributed under the cookbook's MIT license. It contains no proprietary font files or private demo deployment assets. The unmodified Browserbase logo is public media-kit artwork; see [its asset notice](public/assets/NOTICE.txt) and the [cookbook artwork provenance](../../../assets/brand/README.md). Its inclusion does not grant trademark rights.

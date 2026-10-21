@@ -64,6 +64,7 @@ async function mountCollection() {
           ? { number: card.number, cvc: card.cvc }
           : undefined;
       $("create").disabled = !encryptedCard;
+      $("collection-status").dataset.ready = String(Boolean(encryptedCard));
       $("collection-status").textContent = encryptedCard
         ? "Encrypted test-card values ready"
         : "Complete the hosted test-card fields";
@@ -76,6 +77,7 @@ async function mountCollection() {
     component.on("error", () => {
       encryptedCard = undefined;
       $("create").disabled = true;
+      $("collection-status").dataset.ready = "false";
       showError("The secure frame could not encrypt the test values.");
     });
     component.mount("#card-collection");
@@ -104,6 +106,7 @@ function setView(prefix, url) {
 }
 
 function render(state) {
+  $("status").dataset.state = state.status;
   $("enter").disabled = state.awaitingAction !== "enter_token" || busy;
   $("submit").disabled = state.awaitingAction !== "submit_token" || busy;
   $("stop").disabled = !runId || state.status === "stopping";
@@ -121,6 +124,7 @@ function render(state) {
   $("proxied-result").textContent = state.proxiedOutcome ? "Approved" : "Waiting";
   $("proxied-result").classList.toggle("approved", Boolean(state.proxiedOutcome));
   $("control-result").textContent = state.controlOutcome ? "Declined as expected" : "Waiting";
+  $("control-result").classList.toggle("rejected", Boolean(state.controlOutcome));
   $("events").replaceChildren(
     ...state.events.map((event) => {
       const li = document.createElement("li");
@@ -167,6 +171,7 @@ $("create").addEventListener("click", async () => {
   destroyCollection();
   $("collection-status").textContent =
     "Secure frame removed; ciphertext sent only to the local backend";
+  $("collection-status").dataset.ready = "false";
   try {
     const started = await api("/api/card-runs", payload);
     runId = started.runId;

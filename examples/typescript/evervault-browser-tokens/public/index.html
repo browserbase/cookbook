@@ -10,124 +10,263 @@
     <script defer src="/app.js"></script>
   </head>
   <body>
-    <header>
-      <p class="eyebrow">Browserbase / Stagehand / Evervault</p>
-      <h1>Same card tokens.<br />Different network paths.</h1>
-      <p>
-        Collect a test card securely, enter matching tokens in two browsers, and compare what
-        reaches the synthetic merchant.
-      </p>
+    <header class="topbar">
+      <div class="brand-lockup">
+        <img src="/assets/browserbase-logo-color.svg" alt="Browserbase" width="142" height="26" />
+        <span class="brand-divider" aria-hidden="true"></span>
+        <span class="partner-name">Evervault</span>
+      </div>
+      <span class="reference-label">Browser Tokens / interactive reference</span>
     </header>
     <main>
-      <section class="controls" aria-labelledby="collect-title">
+      <section class="hero" aria-labelledby="page-title">
         <div>
-          <p class="eyebrow">01 / Collect</p>
-          <h2 id="collect-title">Use the Visa test card</h2>
-          <p>
-            <strong>4242 4242 4242 4242</strong> is a public Visa test card number, not a real card.
-            Use only these dummy values in this demo:
+          <p class="eyebrow">
+            <span class="accent-dot" aria-hidden="true"></span> Secure card automation
           </p>
-          <ul>
-            <li><strong>Card number:</strong> 4242 4242 4242 4242</li>
-            <li><strong>CVC (3-digit security code):</strong> 123</li>
-            <li><strong>Expiry:</strong> 12/34 — set automatically</li>
-          </ul>
-          <p>No purchase or real charge occurs. Do not enter a real card.</p>
-          <p>
-            Card number and CVC are entered inside Evervault’s hosted iframe. This page receives
-            ciphertext.
+          <h1 id="page-title">Collect in Evervault.<br />Execute in Browserbase.</h1>
+          <p class="lede">
+            One test card. The same temporary tokens. See what changes when only one browser goes
+            through Evervault’s proxy.
           </p>
-          <div id="card-collection"></div>
-          <p id="collection-status" role="status">Loading secure collection…</p>
+        </div>
+        <aside class="proof-intro">
+          <p class="eyebrow">What you’ll see</p>
+          <h2>The difference happens<br />on the network.</h2>
+          <p>
+            Browserbase enters tokens. Evervault swaps them for the original test values only on the
+            approved request.
+          </p>
+          <span class="badge">Public test data only</span>
+        </aside>
+      </section>
+
+      <ol class="journey" aria-label="How the card demo works">
+        <li>
+          <span class="journey-number">01</span>
+          <div><strong>Collect</strong><small>Evervault-hosted card fields</small></div>
+        </li>
+        <li>
+          <span class="journey-number">02</span>
+          <div><strong>Protect</strong><small>Encrypted values → 5-minute tokens</small></div>
+        </li>
+        <li>
+          <span class="journey-number">03</span>
+          <div><strong>Execute</strong><small>Same tokens in both browsers</small></div>
+        </li>
+        <li>
+          <span class="journey-number">04</span>
+          <div><strong>Compare</strong><small>Proxied approval vs. direct decline</small></div>
+        </li>
+      </ol>
+
+      <div class="workspace">
+        <aside class="controls" aria-label="Card collection and presenter controls">
+          <section class="control-card collection-card" aria-labelledby="collect-title">
+            <div class="card-heading">
+              <p class="eyebrow">01 / Collect</p>
+              <span class="badge">Sandbox</span>
+            </div>
+            <h2 id="collect-title">Use the Visa test card</h2>
+            <p class="help-text">
+              The number beginning <strong>4242</strong> is a public Visa test card number, not a
+              real card.
+            </p>
+            <dl class="fixture" aria-label="Public Visa test-card values">
+              <div class="fixture-number">
+                <dt>Card number</dt>
+                <dd>4242 4242 4242 4242</dd>
+              </div>
+              <div>
+                <dt>CVC · 3-digit security code</dt>
+                <dd>123</dd>
+              </div>
+              <div>
+                <dt>Expiry · automatic</dt>
+                <dd>12/34</dd>
+              </div>
+            </dl>
+            <div class="collection-heading">
+              <h3>Evervault Card Collection</h3>
+              <span class="frame-label">Hosted fields</span>
+            </div>
+            <div
+              id="card-collection"
+              aria-label="Evervault-hosted card number and CVC fields"
+            ></div>
+            <p id="collection-status" class="collection-status" role="status">
+              Loading secure collection…
+            </p>
+            <p class="collection-note">
+              Enter only the dummy card number and CVC above. The card fields live inside
+              Evervault’s iframe; this page receives ciphertext.
+            </p>
+            <p class="test-notice">No purchase or real charge occurs. Never enter a real card.</p>
+          </section>
+
+          <section class="control-card action-card" aria-labelledby="actions-title">
+            <p class="eyebrow">02 / Protect &amp; execute</p>
+            <h2 id="actions-title">Advance the comparison</h2>
+            <p class="help-text">
+              Take it one step at a time. Each checkpoint waits up to 45 seconds.
+            </p>
+            <div class="buttons">
+              <button id="create" class="step-action" disabled>
+                <span class="action-number" aria-hidden="true">1</span
+                ><span>Create tokens &amp; launch</span
+                ><span class="action-arrow" aria-hidden="true">→</span>
+              </button>
+              <button id="enter" class="step-action" disabled>
+                <span class="action-number" aria-hidden="true">2</span
+                ><span>Enter tokens in both</span
+                ><span class="action-arrow" aria-hidden="true">→</span>
+              </button>
+              <button id="submit" class="step-action" disabled>
+                <span class="action-number" aria-hidden="true">3</span
+                ><span>Submit both checkouts</span
+                ><span class="action-arrow" aria-hidden="true">→</span>
+              </button>
+              <button id="stop" class="secondary stop-action" disabled>Stop &amp; release</button>
+              <button id="reset" class="secondary" hidden>New comparison</button>
+            </div>
+            <p class="usage-note">
+              Each comparison uses 2 billable Browserbase sessions. Both close automatically.
+            </p>
+            <div id="tokens" class="token-display" hidden>
+              <p class="eyebrow">Temporary tokens · 5-minute lifetime</p>
+              <label>Card-number token</label><code id="number-token"></code><label>CVC token</label
+              ><code id="cvc-token"></code>
+              <p>These exact values go into both browsers and clear when the run ends.</p>
+            </div>
+          </section>
+        </aside>
+
+        <section class="monitor" aria-labelledby="compare-title">
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">03 / Compare</p>
+              <h2 id="compare-title">One destination. Two paths.</h2>
+            </div>
+            <button id="focus" class="secondary compact" aria-pressed="false">
+              Focus comparison
+            </button>
+          </div>
+          <div class="run-status">
+            <span class="status-dot" aria-hidden="true"></span>
+            <p id="status" role="status" aria-live="polite">
+              Waiting for encrypted test-card values
+            </p>
+          </div>
+          <p id="error" class="error" role="alert" hidden></p>
+          <div id="comparison" class="comparison">
+            <article class="session-panel proxied-panel">
+              <div class="panel-title">
+                <div>
+                  <p class="eyebrow">With Evervault proxy</p>
+                  <h3>Protected path</h3>
+                </div>
+                <span id="proxied-result" class="result-badge">Waiting</span>
+              </div>
+              <p class="path-description">
+                Tokens become the original test values on the request to the merchant.
+              </p>
+              <div class="live-surface">
+                <div id="proxied-placeholder" class="placeholder">
+                  <span class="placeholder-label">Live browser</span>
+                  <div class="network-path" aria-hidden="true">
+                    <span>Tokens</span><b>→</b><span>Proxy</span><b>→</b><span>Merchant</span>
+                  </div>
+                  <strong>Ready when you are</strong>
+                  <p>Launch the comparison to see this browser.</p>
+                </div>
+                <iframe
+                  id="proxied-view"
+                  title="Evervault proxied browser"
+                  referrerpolicy="no-referrer"
+                  allow="clipboard-write; fullscreen"
+                  allowfullscreen
+                  hidden
+                ></iframe>
+              </div>
+              <div class="panel-footer">
+                <span><span class="path-dot" aria-hidden="true"></span> Expected: approved</span
+                ><button class="secondary fullscreen" data-view="proxied" disabled>
+                  Full screen
+                </button>
+              </div>
+            </article>
+            <article class="session-panel control-panel">
+              <div class="panel-title">
+                <div>
+                  <p class="eyebrow">Without Evervault proxy</p>
+                  <h3>Direct control</h3>
+                </div>
+                <span id="control-result" class="result-badge">Waiting</span>
+              </div>
+              <p class="path-description">
+                Unchanged tokens reach the same merchant. The test card is not revealed.
+              </p>
+              <div class="live-surface">
+                <div id="control-placeholder" class="placeholder">
+                  <span class="placeholder-label">Live browser</span>
+                  <div class="network-path" aria-hidden="true">
+                    <span>Tokens</span><b>→</b><span>Merchant</span>
+                  </div>
+                  <strong>The same tokens, unchanged</strong>
+                  <p>Watch the direct path for comparison.</p>
+                </div>
+                <iframe
+                  id="control-view"
+                  title="Direct control browser"
+                  referrerpolicy="no-referrer"
+                  allow="clipboard-write; fullscreen"
+                  allowfullscreen
+                  hidden
+                ></iframe>
+              </div>
+              <div class="panel-footer">
+                <span><span class="path-dot" aria-hidden="true"></span> Expected: declined</span
+                ><button class="secondary fullscreen" data-view="control" disabled>
+                  Full screen
+                </button>
+              </div>
+            </article>
+          </div>
+          <div class="comparison-note">
+            <strong>What makes this a fair comparison?</strong>
+            <p>
+              Same card tokens, destination, region, viewport, and browser settings. Only the
+              Evervault proxy and trusted CA differ.
+            </p>
+          </div>
+        </section>
+      </div>
+
+      <section class="boundary" aria-labelledby="boundary-title">
+        <div>
+          <p class="eyebrow">Know the boundary</p>
+          <h2 id="boundary-title">A visible proof, using public test data.</h2>
         </div>
         <div>
-          <p class="eyebrow">02 / Protect &amp; execute</p>
-          <h2>Move at your own pace</h2>
           <p>
-            Each checkpoint expires after 45 seconds. The comparison uses two billable Browserbase
-            sessions.
+            The synthetic merchant is part of this demo and receives the public test values in
+            plaintext. A production integration reveals card data to a separately controlled
+            merchant or PSP.
           </p>
-          <div class="buttons">
-            <button id="create" disabled>Create tokens &amp; launch</button
-            ><button id="enter" disabled>Enter tokens in both</button
-            ><button id="submit" disabled>Submit both checkouts</button
-            ><button id="stop" class="secondary" disabled>Stop &amp; release</button
-            ><button id="reset" class="secondary" hidden>New comparison</button>
-          </div>
-          <p id="status" role="status" aria-live="polite">Waiting for encrypted test-card values</p>
-          <p id="error" role="alert" hidden></p>
-          <p id="tokens" hidden>
-            Temporary card-number token: <code id="number-token"></code><br />CVC token:
-            <code id="cvc-token"></code>
+          <p class="boundary-note">
+            This is reference code, not a production payment service or PCI certification. Keep
+            temporary tokens and Live Views private.
           </p>
         </div>
       </section>
-      <section aria-labelledby="compare-title">
-        <div class="section-title">
-          <div>
-            <p class="eyebrow">03 / Compare</p>
-            <h2 id="compare-title">One destination, two paths</h2>
-          </div>
-          <button id="focus" class="secondary" aria-pressed="false">Focus comparison</button>
-        </div>
-        <div id="comparison" class="comparison">
-          <article>
-            <div class="panel-title">
-              <h3>Through Evervault</h3>
-              <span id="proxied-result">Waiting</span
-              ><button class="secondary fullscreen" data-view="proxied" disabled>
-                Full screen
-              </button>
-            </div>
-            <p>Tokens are swapped over the network for the public fixture.</p>
-            <p id="proxied-placeholder" class="placeholder">Live View appears after launch</p>
-            <iframe
-              id="proxied-view"
-              title="Evervault proxied browser"
-              referrerpolicy="no-referrer"
-              allow="clipboard-write; fullscreen"
-              allowfullscreen
-              hidden
-            ></iframe>
-          </article>
-          <article>
-            <div class="panel-title">
-              <h3>Direct control</h3>
-              <span id="control-result">Waiting</span
-              ><button class="secondary fullscreen" data-view="control" disabled>
-                Full screen
-              </button>
-            </div>
-            <p>Unchanged tokens reach the same synthetic merchant.</p>
-            <p id="control-placeholder" class="placeholder">Live View appears after launch</p>
-            <iframe
-              id="control-view"
-              title="Direct control browser"
-              referrerpolicy="no-referrer"
-              allow="clipboard-write; fullscreen"
-              allowfullscreen
-              hidden
-            ></iframe>
-          </article>
-        </div>
-      </section>
-      <section class="boundary">
-        <p class="eyebrow">The boundary</p>
-        <p>
-          Stagehand fills token values. Evervault reveals the originals only to the configured
-          merchant hostname. The synthetic merchant is part of this demo and receives the public
-          fixture in plaintext. This is not a production payment service or a PCI certification.
-        </p>
-        <p>
-          Live Views and temporary tokens are private runtime data. Do not share them, use real
-          cards, or expose the presenter UI to the internet.
-        </p>
-      </section>
-      <details>
-        <summary>Run activity</summary>
+      <details class="activity">
+        <summary>Run activity<span class="activity-hint">Inspect the steps</span></summary>
         <ol id="events"></ol>
       </details>
     </main>
-    <footer>Reference code · synthetic card authorization · no purchase</footer>
+    <footer>
+      <span>Browserbase + Stagehand + Evervault</span
+      ><span>Reference demo · synthetic merchant · no real payment</span>
+    </footer>
   </body>
 </html>
