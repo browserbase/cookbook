@@ -52,8 +52,8 @@ Declared runtime dependencies from [examples/python/playwright-mfa-handling/pypr
 
 Declared source dependencies.
 
-- `browserbase==1.18.1`
-- `playwright==1.62.0`
+- `browserbase==1.20.0`
+- `playwright==1.63.0`
 - `python-dotenv`
 
 ## Caveats and verification

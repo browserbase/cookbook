@@ -9,7 +9,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@browserbasehq/stagehand": "4.0.2",
+    "@browserbasehq/stagehand": "4.2.1",
     "dotenv": "latest",
     "openai": "latest",
     "zod": "4.4.3"
@@ -22,5 +22,5 @@
   "engines": {
     "node": ">=22.18.0"
   },
-  "packageManager": "pnpm@10.24.0"
+  "packageManager": "pnpm@10.34.7"
 }

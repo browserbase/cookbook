@@ -57,11 +57,11 @@ Declared runtime dependencies from [integrations/examples/integrations/mongodb/p
 Declared source dependencies.
 
 - `colorama>=0.4.6`
-- `pydantic>=2.0.0`
-- `pymongo>=4.6.0`
-- `python-dotenv>=1.0.0`
-- `rich>=13.0.0`
-- `stagehand==4.0.2`
+- `pydantic>=2.14.1`
+- `pymongo>=4.18.3`
+- `python-dotenv>=1.2.4`
+- `rich>=13.9.4`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

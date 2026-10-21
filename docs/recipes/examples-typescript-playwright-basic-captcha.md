@@ -52,9 +52,9 @@ Declared runtime dependencies from [examples/typescript/playwright/basic-captcha
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/sdk` | `2.19.1` |
-| `dotenv` | `^16.4.7` |
-| `playwright-core` | `1.63.0` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `dotenv` | `^16.6.1` |
+| `playwright-core` | `1.64.0` |
 
 ## Caveats and verification
 

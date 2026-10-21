@@ -59,8 +59,8 @@ Declared runtime dependencies from [integrations/examples/integrations/browser-u
 Declared source dependencies.
 
 - `browser-use==0.11.13`
-- `browserbase==1.18.1`
-- `python-dotenv>=1.2.2,<2`
+- `browserbase==1.20.0`
+- `python-dotenv>=1.2.4,<2`
 
 ## Caveats and verification
 

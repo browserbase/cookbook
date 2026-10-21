@@ -44,10 +44,10 @@ Declared runtime dependencies from [integrations/examples/integrations/crewai/qu
 
 Declared source dependencies.
 
-- `browserbase==1.18.1`
-- `crewai==1.15.20`
-- `playwright==1.62.0`
-- `python-dotenv>=1.2.2,<2`
+- `browserbase==1.20.0`
+- `crewai==1.15.27`
+- `playwright==1.63.0`
+- `python-dotenv>=1.2.4,<2`
 
 ## Caveats and verification
 

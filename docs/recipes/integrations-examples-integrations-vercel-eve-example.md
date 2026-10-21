@@ -63,9 +63,9 @@ Declared runtime dependencies from [integrations/examples/integrations/vercel/ev
 | Package | Declared version |
 | --- | --- |
 | `@browserbasehq/eve` | `workspace:*` |
-| `@browserbasehq/stagehand` | `4.0.2` |
-| `ai` | `7.0.93` |
-| `eve` | `0.52.1` |
+| `@browserbasehq/stagehand` | `4.2.1` |
+| `ai` | `7.0.139` |
+| `eve` | `0.52.5` |
 | `zod` | `4.4.3` |
 
 ### Additional manifest: `integrations/packages/eve-browserbase/package.json`
@@ -74,8 +74,8 @@ Declared runtime dependencies from [integrations/examples/integrations/vercel/ev
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/sdk` | `2.19.1` |
-| `@browserbasehq/stagehand` | `4.0.2` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `@browserbasehq/stagehand` | `4.2.1` |
 | `zod` | `4.4.3` |
 
 ## Caveats and verification

@@ -61,17 +61,17 @@ Declared runtime dependencies from [playbook/node/package.json](../../playbook/n
 
 | Package | Declared version |
 | --- | --- |
-| `@ai-sdk/anthropic` | `4.0.46` |
-| `@browserbasehq/sdk` | `2.19.0` |
-| `@browserbasehq/stagehand` | `4.0.2` |
-| `ai` | `7.0.86` |
-| `axios` | `^1.8.1` |
+| `@ai-sdk/anthropic` | `4.0.79` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `@browserbasehq/stagehand` | `4.2.1` |
+| `ai` | `7.0.139` |
+| `axios` | `^1.20.0` |
 | `boxen` | `^8.0.1` |
-| `chalk` | `^5.3.0` |
-| `dotenv` | `^16.4.7` |
-| `jszip` | `3.10.1` |
-| `open` | `11.0.2` |
-| `playwright-core` | `1.62.1` |
+| `chalk` | `^5.6.2` |
+| `dotenv` | `^16.6.1` |
+| `jszip` | `3.10.2` |
+| `open` | `11.0.4` |
+| `playwright-core` | `1.64.0` |
 | `zod` | `4.4.3` |
 
 ## Caveats and verification

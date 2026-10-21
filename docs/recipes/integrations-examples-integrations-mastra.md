@@ -51,12 +51,12 @@ Declared runtime dependencies from [integrations/examples/integrations/mastra/pa
 
 | Package | Declared version |
 | --- | --- |
-| `@ai-sdk/openai` | `4.0.59` |
-| `@browserbasehq/stagehand` | `4.0.2` |
-| `@mastra/core` | `1.64.0` |
-| `@mastra/loggers` | `1.3.1` |
-| `@mastra/memory` | `1.28.2` |
-| `mastra` | `1.27.3` |
+| `@ai-sdk/openai` | `4.0.93` |
+| `@browserbasehq/stagehand` | `4.2.1` |
+| `@mastra/core` | `1.76.0` |
+| `@mastra/loggers` | `1.3.6` |
+| `@mastra/memory` | `1.37.0` |
+| `mastra` | `1.34.0` |
 | `zod` | `4.4.3` |
 
 ## Caveats and verification

@@ -69,13 +69,13 @@ Declared runtime dependencies from [integrations/examples/integrations/temporal/
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/sdk` | `2.19.1` |
-| `@browserbasehq/stagehand` | `4.0.2` |
-| `@temporalio/activity` | `1.23.0` |
-| `@temporalio/client` | `1.23.0` |
-| `@temporalio/common` | `1.23.0` |
-| `@temporalio/worker` | `1.23.0` |
-| `@temporalio/workflow` | `1.23.0` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `@browserbasehq/stagehand` | `4.2.1` |
+| `@temporalio/activity` | `1.24.0` |
+| `@temporalio/client` | `1.24.0` |
+| `@temporalio/common` | `1.24.0` |
+| `@temporalio/worker` | `1.24.0` |
+| `@temporalio/workflow` | `1.24.0` |
 | `zod` | `4.4.3` |
 
 ## Caveats and verification

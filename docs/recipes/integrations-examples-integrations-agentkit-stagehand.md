@@ -52,11 +52,11 @@ Declared runtime dependencies from [integrations/examples/integrations/agentkit/
 
 | Package | Declared version |
 | --- | --- |
-| `@browserbasehq/sdk` | `2.19.1` |
-| `@browserbasehq/stagehand` | `4.0.2` |
+| `@browserbasehq/sdk` | `2.21.0` |
+| `@browserbasehq/stagehand` | `4.2.1` |
 | `@inngest/agent-kit` | `0.13.2` |
 | `dotenv` | `16.6.1` |
-| `inngest` | `4.20.0` |
+| `inngest` | `4.23.0` |
 | `zod` | `4.4.3` |
 
 ## Caveats and verification

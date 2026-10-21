@@ -52,10 +52,10 @@ Declared runtime dependencies from [examples/python/sec-filing-research/pyprojec
 
 Declared source dependencies.
 
-- `beautifulsoup4==4.14.3`
+- `beautifulsoup4==4.15.0`
 - `pydantic`
 - `python-dotenv`
-- `stagehand==4.0.2`
+- `stagehand==4.2.1`
 
 ## Caveats and verification
 

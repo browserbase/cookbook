@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
-  "packageManager": "pnpm@10.9.0",
+  "packageManager": "pnpm@10.34.7",
   "scripts": {
     "build": "eve build",
     "dev": "eve dev",
@@ -12,13 +12,13 @@
   },
   "dependencies": {
     "@browserbasehq/eve": "workspace:*",
-    "@browserbasehq/stagehand": "4.0.2",
-    "ai": "7.0.93",
-    "eve": "0.52.1",
+    "@browserbasehq/stagehand": "4.2.1",
+    "ai": "7.0.139",
+    "eve": "0.52.5",
     "zod": "4.4.3"
   },
   "devDependencies": {
-    "@types/node": "24.10.1",
+    "@types/node": "24.19.2",
     "typescript": "7.0.2"
   },
   "overrides": {
