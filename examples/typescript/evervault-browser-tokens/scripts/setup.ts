@@ -2,13 +2,9 @@ import { Browserbase, toFile } from "@browserbasehq/sdk";
 import { X509Certificate } from "node:crypto";
 import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
-import { loadConfig } from "../evervault.js";
+import { loadConfig, type AppConfig } from "../evervault.js";
 
-export async function setup(
-  config = loadConfig(),
-  client?: Browserbase,
-  fetcher = fetch,
-): Promise<string> {
+export async function setup(config: AppConfig, client?: Browserbase, fetcher = fetch) {
   client ??= new Browserbase({ apiKey: config.browserbaseApiKey, timeout: 15_000, maxRetries: 0 });
   if (config.caCertificateId) {
     try {
@@ -37,9 +33,8 @@ export async function setup(
   return uploaded.id;
 }
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  void setup()
+  void setup(loadConfig(process.env, false))
     .then((id) => {
-      console.info("Copy into .env; verify any reused certificate is the intended Evervault CA:");
       console.info(`BROWSERBASE_CA_CERTIFICATE_ID=${id}`);
     })
     .catch(() => {

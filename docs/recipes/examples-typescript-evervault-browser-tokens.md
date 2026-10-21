@@ -5,7 +5,7 @@ Collect an encrypted test card, create Evervault Browser Tokens, run one proxied
 > [!CAUTION]
 > Demo and reference code only. This recipe is not a vetted production implementation. Independently review it, obtain authorization, and validate security, privacy, compliance, cost, and site-term requirements before use. Use at your own risk.
 
-**Status:** current · public · live workflow tested.
+**Status:** current · public · offline behavior tested.
 
 **Recipe type:** runnable example.
 **LLM requirement:** not required (derived from the inspected framework and configuration metadata).
@@ -62,6 +62,7 @@ npm start
 | Variable | Provider and purpose | Safe example | Validation and default |
 | --- | --- | --- | --- |
 | `PORT` | Local application. Loopback-only local page/API port; update the merchant proxy upstream if changed. Non-secret. | `4173` | See recipe setup and configuration requirements. Default: `4173`. |
+| `DEMO_RECORD_SESSION` | [Local application](https://docs.browserbase.com/platform/browser/observability/session-replay). Explicit opt-in to Browserbase recording for public-fixture debugging; network logs stay disabled. Non-secret. | `false` | Accepts only true or false; never use with real cards or customer data. Default: `false`. |
 
 
 ## Dependencies
@@ -77,19 +78,19 @@ Declared runtime dependencies from [examples/typescript/evervault-browser-tokens
 
 ## Caveats and verification
 
-Source and setup metadata were inspected. A scoped live workflow check is recorded below; only its stated command, date, result, and limits are verified. Other websites, accounts, permissions, costs, and configurations remain unverified.
+Source and setup metadata were inspected. No passing authenticated live-workflow check is recorded for this recipe. Websites, model access, paid services, permissions, costs, and operator-specific configuration remain unverified.
 
 | Check | Date | Runtime | Command | Result and limits |
 | --- | --- | --- | --- | --- |
-| Clean install verified | 2026-10-21 | `Node.js 24.19.0; npm 12.2.0; macOS arm64; pinned package-lock.json; new disposable package without node_modules` | `npm exec --yes --package=npm@12.2.0 -- npm ci --ignore-scripts --min-release-age=7` | passed. Independent clean installation of the one-shot refactor succeeded with 116 packages and zero audit findings. No certificate setup or external browser workflow was run. |
-| Offline behavior tested | 2026-10-21 | `Node.js 24.19.0; npm 12.2.0; TypeScript 5.9.2; Stagehand 4.1.0; Browserbase SDK 2.18.0; macOS arm64` | `npm exec --yes --package=npm@12.2.0 -- npm run check` | passed. Typecheck and 33 offline tests passed in the independently installed one-shot refactor. Provider calls were mocked. Local browser checks used a fixture SDK/iframe and mocked provider workflow, verifying desktop/390px collection, receipt acknowledgement, synthetic merchant approval, terminal completion and exit. No fresh live session, proxy swap, CA upload, HTTPS deployment or payment was executed. |
-| Live workflow tested | 2026-10-21 | `Node.js 24.19.0; npm 12.2.0; Stagehand 4.1.0; Browserbase SDK 2.18.0; macOS arm64; recipe commit 427c50c` | `npm start` | passed. One successful live sandbox run with reader-owned credentials and the documented public Visa fixture. Real Evervault-hosted collection and Browser Tokens fed one proxied Browserbase session; the recipe verified approval at the exact expected HTTPS destination, confirmed release, closed its server, and exited zero. An independent Browserbase SDK inventory/retrieve check found exactly one new session and confirmed COMPLETED. The existing-CA setup reuse branch and route-limited HTTPS boundary were checked. No new CA upload, Caddy deployment, real purchase, or general reliability/merchant compatibility is established. Credentials, runtime values, public endpoint and session identifiers are excluded. |
+| Clean install verified | 2026-10-21 | `Node.js 24.19.0; npm 12.2.0; macOS arm64; pinned package-lock.json; new disposable package without node_modules` | `npm exec --yes --package=npm@12.2.0 -- npm ci --ignore-scripts --min-release-age=7` | passed. Independent clean installation of the session-link/recording-option update succeeded with 116 packages and zero audit findings. No certificate setup or external browser workflow was run. |
+| Offline behavior tested | 2026-10-21 | `Node.js 24.19.0; npm 12.2.0; TypeScript 5.9.2; Stagehand 4.1.0; Browserbase SDK 2.18.0; macOS arm64` | `npm exec --yes --package=npm@12.2.0 -- npm run check` | passed. Typecheck and 44 offline tests passed in the independently installed package. Mocked local browser checks covered hosted collection, dashboard-link handoff before attach, automatic synthetic approval and terminal exit, sanitized pre-launch failure display, and desktop/390px layouts. No fresh live session, recording/replay, proxy swap, CA upload, HTTPS deployment or payment was validated for this update. |
 
 - Use reader-owned sandbox credentials and the public Visa fixture. Run npm run setup explicitly; copy its printed CA assignment into your private .env.
 - One invocation accepts one ciphertext handoff, starts at most one billable Browserbase session, submits one synthetic checkout, then confirms cleanup and exits. Ctrl+C/SIGTERM waits for acquired resources; it cannot undo an already-started submission.
 - The synthetic merchant receives plaintext public fixture values. This is not a production payment architecture or PCI-compliance claim.
 - Collection stays on localhost. Remote Browserbase requires reader-managed HTTPS exposure forwarding only GET /mock-merchant/checkout and POST /mock-merchant/authorize.
-- The one-shot implementation passed one live sandbox canary on 2026-10-21 at commit 427c50c: real hosted collection, synthetic approval, one session independently confirmed COMPLETED, and exit zero. The run reused an existing CA and a temporary route-limited HTTPS proxy; new CA upload and Caddy deployment remain unverified.
+- The authenticated Browserbase dashboard link appears on the local page and in the terminal after launch. Recording is off by default; explicit fixture-only opt-in can retain displayed temporary tokens. Keep runtime links and recordings private.
+- Current session-link, recording-option and diagnostic changes are offline-tested. Historical live canary and later failed attempt are scoped in the source README; neither validates these changes. New CA upload and Caddy deployment remain unverified.
 
 ## Provenance
 

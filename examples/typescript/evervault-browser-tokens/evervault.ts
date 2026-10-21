@@ -8,6 +8,7 @@ export type AppConfig = {
   caCertificateId: string;
   cardTargetHost: string;
   port: number;
+  recordSession: boolean;
 };
 
 function required(name: string, env: NodeJS.ProcessEnv): string {
@@ -32,12 +33,16 @@ export function exactHostname(value: string): string {
 
 export function loadConfig(
   env: NodeJS.ProcessEnv = process.env,
-  requireCertificate = false,
+  requireCertificate = true,
 ): AppConfig {
   const port = Number(env.PORT ?? "4173");
   if (!Number.isInteger(port) || port < 1 || port > 65535)
     throw new RecipeError("PORT must be an integer between 1 and 65535");
+  const recording = env.DEMO_RECORD_SESSION ?? "false";
+  if (!["true", "false"].includes(recording))
+    throw new RecipeError("DEMO_RECORD_SESSION must be true or false");
   return {
+    recordSession: recording === "true",
     evervaultTeamId: required("EVERVAULT_TEAM_ID", env),
     evervaultAppId: required("EVERVAULT_APP_ID", env),
     evervaultApiKey: required("EVERVAULT_API_KEY", env),
@@ -56,6 +61,14 @@ export function safeMessage(error: unknown): string {
     ? error.message
     : "Operation failed. Check configuration and provider access; private details are suppressed.";
 }
+export function atStep(step: string, error: unknown): RecipeError {
+  const status = Number((error as { status?: unknown })?.status);
+  const code =
+    Number.isInteger(status) && status >= 400 && status <= 599
+      ? `HTTP_${status}`
+      : "OPERATION_FAILED";
+  return new RecipeError(`[${step}/${code}] ${safeMessage(error)}`);
+}
 export function isEvervaultCiphertext(value: unknown): value is string {
   return typeof value === "string" && value.length <= 4096 && /^ev:\S{20,}$/.test(value);
 }
@@ -64,7 +77,7 @@ export type EncryptedCard = { number: string; cvc: string };
 export type CardBrowserTokens = {
   numberToken: string;
   cvcToken: string;
-  expiresAt: string;
+  expiresAt: number;
   proxy: { hostname: string; port: number; username: string; password: string };
 };
 
@@ -73,7 +86,7 @@ type RawTokens = {
   proxyConfiguration?: Partial<CardBrowserTokens["proxy"]>;
 };
 
-export function parseCardBrowserTokens(raw: RawTokens, expiresAt: string): CardBrowserTokens {
+export function parseCardBrowserTokens(raw: RawTokens, expiresAt: number): CardBrowserTokens {
   const numberToken = raw?.data?.find((item) => item.id === "demo-card-number")?.value;
   const cvcToken = raw?.data?.find((item) => item.id === "demo-card-cvc")?.value;
   const proxy = raw?.proxyConfiguration;
@@ -94,7 +107,7 @@ export function parseCardBrowserTokens(raw: RawTokens, expiresAt: string): CardB
   ) {
     throw new RecipeError("Evervault returned incomplete card tokens or proxy configuration");
   }
-  if (!Number.isFinite(Date.parse(expiresAt)) || Date.parse(expiresAt) <= Date.now()) {
+  if (!Number.isFinite(expiresAt) || expiresAt <= Date.now()) {
     throw new RecipeError("The card tokens have expired");
   }
   return { numberToken, cvcToken, expiresAt, proxy: proxy as CardBrowserTokens["proxy"] };
@@ -112,7 +125,7 @@ export async function createCardBrowserTokens(
   const target = exactHostname(targetHostname);
   if (target !== config.cardTargetHost)
     throw new RecipeError("The destination must match CARD_TARGET_HOST");
-  const expiresAt = new Date(Date.now() + 300_000).toISOString();
+  const expiresAt = Date.now() + 300_000;
   const response = await (options.fetch ?? fetch)("https://api.evervault.com/browser-tokens", {
     method: "POST",
     signal: AbortSignal.any([

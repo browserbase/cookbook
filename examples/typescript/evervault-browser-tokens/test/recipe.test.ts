@@ -9,6 +9,7 @@ import { join } from "node:path";
 import { checkout, main, type Runtime } from "../index.js";
 import { createFixture, startFixture } from "../local.js";
 import {
+  atStep,
   createCardBrowserTokens,
   loadConfig,
   parseCardBrowserTokens,
@@ -50,7 +51,10 @@ function deferred() {
 }
 test("configuration requires reader credentials, exact DNS host and valid local port", () => {
   assert.equal(config.cardTargetHost, "cards.example.com");
-  assert.equal(loadConfig({ ...env, BROWSERBASE_CA_CERTIFICATE_ID: "" }).caCertificateId, "");
+  assert.equal(
+    loadConfig({ ...env, BROWSERBASE_CA_CERTIFICATE_ID: "" }, false).caCertificateId,
+    "",
+  );
   for (const name of Object.keys(env).filter((name) => name !== "PORT")) {
     assert.throws(() => loadConfig({ ...env, [name]: "<placeholder>" }, true));
   }
@@ -68,6 +72,24 @@ test("configuration requires reader credentials, exact DNS host and valid local 
   }
   for (const port of ["0", "65536", "1.5", "invalid"])
     assert.throws(() => loadConfig({ ...env, PORT: port }));
+});
+test("recording is off by default and requires an explicit boolean opt-in", () => {
+  assert.equal(config.recordSession, false);
+  assert.equal(loadConfig({ ...env, DEMO_RECORD_SESSION: "true" }).recordSession, true);
+  assert.equal(loadConfig({ ...env, DEMO_RECORD_SESSION: "false" }).recordSession, false);
+  for (const value of ["1", "TRUE", "yes", "private-input"]) {
+    assert.throws(
+      () => loadConfig({ ...env, DEMO_RECORD_SESSION: value }),
+      /must be true or false/,
+    );
+  }
+});
+test("diagnostic codes reveal only the authored step and an HTTP status", () => {
+  const secret = "private-provider-detail";
+  const error = Object.assign(new Error(secret), { status: 429, code: secret, url: secret });
+  assert.match(safeMessage(atStep("SESSION_LAUNCH", error)), /^\[SESSION_LAUNCH\/HTTP_429\]/);
+  assert.ok(!safeMessage(atStep("SESSION_LAUNCH", error)).includes(secret));
+  assert.ok(!safeMessage(atStep("NAVIGATION", { status: secret })).includes(secret));
 });
 test("token request uses encrypted values, exact decrypt policy, TTL 300 and bounded abort signal", async () => {
   let calls = 0;
@@ -90,7 +112,7 @@ test("token request uses encrypted values, exact decrypt policy, TTL 300 and bou
     }) as typeof fetch,
   });
   assert.equal(calls, 1);
-  assert.ok(Date.parse(tokens.expiresAt) >= before + 300_000);
+  assert.ok(tokens.expiresAt >= before + 300_000);
 });
 test("invalid ciphertext, target, token response and upstream errors are rejected without disclosure", async () => {
   for (const values of [
@@ -131,7 +153,7 @@ test("invalid ciphertext, target, token response and upstream errors are rejecte
   );
   assert.equal(reads, 0);
   assert.ok(!safeMessage(new Error("private-provider-detail")).includes("private-provider-detail"));
-  assert.throws(() => parseCardBrowserTokens(rawTokens(), new Date(0).toISOString()), /expired/);
+  assert.throws(() => parseCardBrowserTokens(rawTokens(), 0), /expired/);
 });
 
 type Phase = "tokens" | "launch" | "attach" | "page" | "navigate" | "fill" | "submit";
@@ -148,7 +170,7 @@ function harness(
     entered = deferred();
   const abort = new AbortController();
   const values = card();
-  const tokens = parseCardBrowserTokens(rawTokens(), new Date(Date.now() + 300_000).toISOString());
+  const tokens = parseCardBrowserTokens(rawTokens(), Date.now() + 300_000);
   const launches: Parameters<Runtime["launch"]>[0][] = [],
     fills: string[] = [],
     released: string[] = [],
@@ -161,7 +183,7 @@ function harness(
       entered.resolve();
       await blocked.promise;
     }
-    if (options.expireAt === phase) tokens.expiresAt = new Date(0).toISOString();
+    if (options.expireAt === phase) tokens.expiresAt = 0;
     if (options.fail === phase) throw new Error("private-provider-detail");
   };
   const page = {
@@ -271,11 +293,52 @@ test("one proxied session submits tokens once, asserts approval and releases the
     h.tokens.numberToken,
     h.tokens.cvcToken,
     "fixture-proxy-value",
-    "fixture-session",
     env.BROWSERBASE_API_KEY,
   ])
     assert.ok(!h.logs.join(" ").includes(sensitive));
 });
+test("opt-in recording leaves network logging off and publishes the session link before attaching", async () => {
+  const h = harness();
+  let linked = false;
+  const attach = h.runtime.attach;
+  h.runtime.attach = ((options) => {
+    assert.equal(linked, true);
+    return attach(options);
+  }) as Runtime["attach"];
+  await checkout(
+    { ...config, recordSession: true },
+    card(),
+    h.abort.signal,
+    h.runtime,
+    () => {},
+    1,
+    (url) => {
+      assert.equal(url, "https://www.browserbase.com/sessions/fixture-session");
+      linked = true;
+    },
+  );
+  assert.equal(h.launches[0]?.browserSettings?.recordSession, true);
+  assert.equal(h.launches[0]?.browserSettings?.logSession, false);
+});
+for (const [fail, step] of [
+  ["tokens", "TOKEN_CREATION"],
+  ["launch", "SESSION_LAUNCH"],
+  ["attach", "STAGEHAND_ATTACH"],
+  ["page", "PAGE_ACCESS"],
+  ["navigate", "NAVIGATION"],
+  ["fill", "TOKEN_FILL"],
+  ["submit", "SUBMISSION"],
+] as const) {
+  test(`failure during ${fail} reports ${step} without provider details`, async () => {
+    const h = harness({ fail });
+    await assert.rejects(h.run(), (error: unknown) => {
+      const message = safeMessage(error);
+      assert.ok(message.includes(`[${step}/OPERATION_FAILED]`));
+      assert.ok(!message.includes("private-provider-detail"));
+      return true;
+    });
+  });
+}
 for (const phase of ["tokens", "launch", "attach", "page", "navigate", "fill"] as const) {
   test(`cancellation during ${phase} waits for acquisition and prevents submission`, async () => {
     const h = harness({ pause: phase });
@@ -335,7 +398,7 @@ test("cleanup failure takes precedence over cancellation", async () => {
   await h.entered;
   h.abort.abort();
   h.unblock();
-  await assert.rejects(pending, /Cleanup could not be confirmed/);
+  await assert.rejects(pending, /CLEANUP\/UNCONFIRMED/);
 });
 test("unexpected destination and nonapproval are failures", async () => {
   await assert.rejects(harness({ wrongUrl: true }).run(), /destination/);
@@ -413,10 +476,13 @@ test("ciphertext handoff is single-use, including concurrent submissions; malfor
       assert.equal(result.status, 400);
       assert.ok(!result.body.includes("private-input"));
     }
-    const result = await Promise.all([
+    const pending = Promise.all([
       call(f.port, "/api/collect", "POST", JSON.stringify(card())),
       call(f.port, "/api/collect", "POST", JSON.stringify(card())),
     ]);
+    assert.deepEqual(await f.card, card());
+    f.respond({ sessionUrl: "https://www.browserbase.com/sessions/fixture-session" });
+    const result = await pending;
     assert.deepEqual(result.map((r) => r.status).sort(), [202, 409]);
     assert.deepEqual(await f.card, card());
     assert.ok(!result.some((r) => r.body.includes(card().number)));
@@ -551,6 +617,9 @@ test("collection-to-terminal success keeps the merchant alive through cleanup, t
     host: `127.0.0.1:${port}`,
   });
   assert.equal(response.status, 202);
+  assert.deepEqual(JSON.parse(response.body), {
+    sessionUrl: "https://www.browserbase.com/sessions/fixture-session",
+  });
   assert.equal(await pending, 0);
   assert.equal(messages.at(-1), "Success: synthetic approval and cleanup confirmed.");
   await assert.rejects(fetch(`http://127.0.0.1:${port}`));
@@ -569,6 +638,22 @@ test("provider failure is sanitized in terminal output and exits nonzero", async
   assert.equal(await pending, 1);
   assert.ok(!messages.join(" ").includes("private-provider-detail"));
   assert.ok(!messages.join(" ").includes("Success:"));
+});
+test("failure before session creation returns a sanitized error to the waiting collection page", async () => {
+  const port = await freePort(),
+    ready = deferred();
+  const h = harness({ fail: "tokens" });
+  const pending = main({ ...config, port }, h.runtime, (message) => {
+    if (message.startsWith("Open")) ready.resolve();
+  });
+  await ready.promise;
+  const response = await call(port, "/api/collect", "POST", JSON.stringify(card()), {
+    host: `127.0.0.1:${port}`,
+  });
+  assert.equal(response.status, 503);
+  assert.match(JSON.parse(response.body).error, /^\[TOKEN_CREATION\/OPERATION_FAILED\]/);
+  assert.ok(!response.body.includes("private-provider-detail"));
+  assert.equal(await pending, 1);
 });
 test("CA setup reuses accessible certificates without downloading or writing .env", async () => {
   let calls = 0;

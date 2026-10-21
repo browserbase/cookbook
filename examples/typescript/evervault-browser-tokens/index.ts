@@ -1,9 +1,9 @@
 import { Browserbase } from "@browserbasehq/sdk";
 import { browserbase, Stagehand } from "@browserbasehq/stagehand";
-import { resolve } from "node:path";
-import { fileURLToPath } from "node:url";
+import { pathToFileURL } from "node:url";
 import { setTimeout as delay } from "node:timers/promises";
 import {
+  atStep,
   createCardBrowserTokens,
   loadConfig,
   RecipeError,
@@ -26,37 +26,35 @@ export async function checkout(
   runtime?: Runtime,
   log = console.info,
   cleanupMs = 30_000,
+  onSession?: (url: string) => void,
 ): Promise<void> {
-  const client = new Browserbase({
-    apiKey: config.browserbaseApiKey,
-    timeout: 10_000,
-    maxRetries: 0,
-  });
+  const bb = new Browserbase({ apiKey: config.browserbaseApiKey, timeout: 10_000, maxRetries: 0 });
   runtime ??= {
     tokens: createCardBrowserTokens,
     launch: (options) => browserbase.launch(options),
     attach: (options) => Stagehand.create(options),
-    release: (id) => client.sessions.update(id, { status: "REQUEST_RELEASE" }),
-    retrieve: (id) => client.sessions.retrieve(id),
+    release: (id) => bb.sessions.update(id, { status: "REQUEST_RELEASE" }),
+    retrieve: (id) => bb.sessions.retrieve(id),
   };
   let browser: Awaited<ReturnType<Runtime["launch"]>> | undefined;
   let stagehand: Awaited<ReturnType<Runtime["attach"]>> | undefined;
   let sessionId: string | undefined;
-  try {
+  let step = "TOKEN_CREATION";
+  const progress = (next: string) => {
     signal.throwIfAborted();
-    log("Creating five-minute Browser Tokens.");
+    step = next;
+    log(`Step: ${step}`);
+  };
+  try {
+    progress("TOKEN_CREATION");
     const tokens = await runtime.tokens(config, card, config.cardTargetHost, { signal });
     card.number = card.cvc = "";
     const fresh = (minimum = 15_000) => {
-      signal.throwIfAborted();
-      if (
-        !Number.isFinite(Date.parse(tokens.expiresAt)) ||
-        Date.parse(tokens.expiresAt) - Date.now() < minimum
-      )
+      if (!Number.isFinite(tokens.expiresAt) || tokens.expiresAt - Date.now() < minimum)
         throw new RecipeError("Tokens expired or are too close to expiry. Restart the recipe.");
     };
     fresh(60_000);
-    log("Launching one proxied Browserbase session.");
+    progress("SESSION_LAUNCH");
     browser = await runtime.launch({
       apiKey: config.browserbaseApiKey,
       api_timeout: 240,
@@ -65,7 +63,7 @@ export async function checkout(
       browserSettings: {
         allowedDomains: [config.cardTargetHost],
         ignoreCertificateErrors: false,
-        recordSession: false,
+        recordSession: config.recordSession,
         logSession: false,
         solveCaptchas: false,
         advancedStealth: false,
@@ -84,16 +82,20 @@ export async function checkout(
     });
     sessionId = browser.sessionId;
     if (!sessionId) throw new RecipeError("Session ID unavailable; cleanup cannot be confirmed.");
-    signal.throwIfAborted();
+    const sessionUrl = `https://www.browserbase.com/sessions/${encodeURIComponent(sessionId)}`;
+    log(`Browserbase session: ${sessionUrl}`);
+    onSession?.(sessionUrl);
+    progress("STAGEHAND_ATTACH");
     stagehand = await runtime.attach({ browser, logging: { level: "off" } });
-    signal.throwIfAborted();
+    progress("PAGE_ACCESS");
     const page = (await browser.context.activePage()) ?? (await browser.context.newPage());
-    signal.throwIfAborted();
+    progress("NAVIGATION");
     const target = `https://${config.cardTargetHost}/mock-merchant/`;
     await page.goto(`${target}checkout`, { waitUntil: "domcontentloaded", timeout: 15_000 });
     await page.waitForSelector("#mock-checkout", { state: "visible", timeout: 15_000 });
     if ((await page.url()) !== `${target}checkout`)
       throw new RecipeError("Unexpected checkout destination.");
+    progress("TOKEN_FILL");
     fresh();
     for (const [selector, value] of [
       ["#card-number", tokens.numberToken],
@@ -104,9 +106,9 @@ export async function checkout(
       await page.locator(selector!).fill(value!);
     }
     fresh();
-    log("Submitting the synthetic checkout once.");
+    progress("SUBMISSION");
     await page.locator('button[type="submit"]').click();
-    signal.throwIfAborted();
+    progress("APPROVAL");
     await page.waitForSelector('#authorization-result[data-outcome="approved"]', {
       state: "visible",
       timeout: 15_000,
@@ -114,6 +116,9 @@ export async function checkout(
     signal.throwIfAborted();
     if ((await page.url()) !== `${target}authorize`)
       throw new RecipeError("Unexpected authorization destination.");
+  } catch (error) {
+    if (signal.aborted && !(error instanceof RecipeError)) throw error;
+    throw atStep(step, error);
   } finally {
     card.number = card.cvc = "";
     log("Releasing acquired resources.");
@@ -142,24 +147,14 @@ export async function checkout(
         throw new RecipeError("Session release was not confirmed.");
       });
     } else if (browser) failed = true;
-    if (failed)
-      throw new RecipeError("Cleanup could not be confirmed. Check Browserbase before retrying.");
+    if (failed) throw new RecipeError("[CLEANUP/UNCONFIRMED] Check Browserbase before retrying.");
     log("Acquired resources released.");
   }
 }
-export async function main(
-  config = loadConfig(process.env, true),
-  runtime?: Runtime,
-  log = console.info,
-): Promise<number> {
+export async function main(config = loadConfig(), runtime?: Runtime, log = console.info) {
   const controller = new AbortController();
-  let cancelled = 0;
-  const stop = (signal: NodeJS.Signals) => {
-    cancelled = signal === "SIGINT" ? 130 : 143;
-    controller.abort();
-  };
-  const interrupt = () => stop("SIGINT"),
-    terminate = () => stop("SIGTERM");
+  const interrupt = () => controller.abort(130);
+  const terminate = () => controller.abort(143);
   process.on("SIGINT", interrupt);
   process.on("SIGTERM", terminate);
   let fixture: Awaited<ReturnType<typeof startFixture>> | undefined;
@@ -168,18 +163,23 @@ export async function main(
     fixture = await startFixture(config, controller.signal);
     log(`Open http://127.0.0.1:${config.port} and submit the public test card. Ctrl+C cancels.`);
     const card = await fixture.card;
-    await checkout(config, card, controller.signal, runtime, log);
+    await checkout(config, card, controller.signal, runtime, log, 30_000, (sessionUrl) =>
+      fixture?.respond({ sessionUrl }),
+    );
     controller.signal.throwIfAborted();
     result = 0;
   } catch (error) {
-    if (cancelled && !(error instanceof RecipeError)) {
+    if (controller.signal.aborted && !(error instanceof RecipeError)) {
       log("Cancelled.");
-      result = cancelled;
-    } else log(safeMessage(error));
+      result = controller.signal.reason;
+    } else {
+      const message = safeMessage(error);
+      fixture?.respond({ error: message });
+      log(message);
+    }
   } finally {
     try {
       await fixture?.close();
-      if (fixture) log("Local server closed.");
     } catch {
       log("Local server cleanup failed.");
       result = 1;
@@ -190,11 +190,9 @@ export async function main(
   if (result === 0) log("Success: synthetic approval and cleanup confirmed.");
   return result;
 }
-if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  try {
-    process.exitCode = await main();
-  } catch {
+if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) {
+  process.exitCode = await main().catch(() => {
     console.error("Startup failed. Check your private .env; private details are suppressed.");
-    process.exitCode = 1;
-  }
+    return 1;
+  });
 }

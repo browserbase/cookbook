@@ -1,17 +1,15 @@
 const status = document.getElementById("status");
 const button = document.getElementById("continue");
-let encrypted,
-  component,
-  submitted = false;
+let encrypted, component;
 async function request(path, body) {
   const response = await fetch(path, {
     method: body ? "POST" : "GET",
-    cache: "no-store",
     headers: { "x-demo-request": "1", "content-type": "application/json" },
     body: JSON.stringify(body),
   });
-  if (!response.ok) throw new Error("Local request failed");
-  return response.json();
+  const data = await response.json();
+  if (!response.ok) throw new Error(data.error || "Local request failed");
+  return data;
 }
 async function mount() {
   try {
@@ -24,7 +22,7 @@ async function mount() {
       redactCVC: true,
     });
     component.on("change", (state) => {
-      if (submitted) return;
+      if (!component) return;
       const card = component.values.card;
       encrypted = state.isComplete ? { number: card.number, cvc: card.cvc } : undefined;
       button.disabled = !encrypted;
@@ -41,18 +39,24 @@ async function mount() {
   }
 }
 button.addEventListener("click", async () => {
-  if (!encrypted || submitted) return;
-  submitted = true;
+  if (!encrypted) return;
   button.disabled = true;
   try {
-    await request("/api/collect", encrypted);
-    status.textContent = "Received encrypted card. See the terminal for progress and results.";
-  } catch {
-    status.textContent = "Receipt could not be confirmed. Check the terminal before restarting.";
-  } finally {
-    encrypted = undefined;
-    component = undefined;
+    status.textContent = "Starting the session…";
+    const pending = request("/api/collect", encrypted);
+    encrypted = component = undefined;
     document.getElementById("card-collection").replaceChildren();
+    const { sessionUrl } = await pending;
+    const link = document.getElementById("session");
+    link.href = sessionUrl;
+    link.hidden = false;
+    status.textContent =
+      "Session launched. Open Browserbase to watch; see the terminal for final results.";
+  } catch (error) {
+    status.textContent =
+      error instanceof TypeError
+        ? "Connection lost. Check the terminal before restarting."
+        : error.message;
   }
 });
 void mount();
