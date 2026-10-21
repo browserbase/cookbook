@@ -17,7 +17,7 @@ Collect an encrypted test card, create Evervault Browser Tokens, run one proxied
 - Frameworks: Stagehand, Browserbase SDK, Express, Evervault.
 - [Upstream setup and behavior](../../examples/typescript/evervault-browser-tokens/README.md).
 - [Dependency manifest `examples/typescript/evervault-browser-tokens/package.json`](../../examples/typescript/evervault-browser-tokens/package.json).
-- [Dependency manifest `examples/typescript/evervault-browser-tokens/package-lock.json`](../../examples/typescript/evervault-browser-tokens/package-lock.json).
+- [Dependency manifest `examples/typescript/evervault-browser-tokens/pnpm-lock.yaml`](../../examples/typescript/evervault-browser-tokens/pnpm-lock.yaml).
 - [Source `examples/typescript/evervault-browser-tokens/index.ts`](../../examples/typescript/evervault-browser-tokens/index.ts).
 - Original use-case taxonomy: code-reference, synthetic-card, network-boundary.
 
@@ -27,14 +27,14 @@ Run from this directory. Commands come from the package manifest, upstream setup
 
 ```sh
 cd examples/typescript/evervault-browser-tokens
-npm ci --ignore-scripts --min-release-age=7
+pnpm install --frozen-lockfile --ignore-scripts --config.minimum-release-age=10080
 test -f .env || cp .env.example .env
 ```
 
 Available launch commands are listed below. For applications with separate workers or servers, read the upstream guide for process order. A production `start` command may require a build first.
 
 ```sh
-npm start
+pnpm start
 ```
 
 ## Environment
@@ -82,15 +82,15 @@ Source and setup metadata were inspected. No passing authenticated live-workflow
 
 | Check | Date | Runtime | Command | Result and limits |
 | --- | --- | --- | --- | --- |
-| Clean install verified | 2026-10-21 | `Node.js 24.19.0; npm 12.2.0; macOS arm64; pinned package-lock.json; new disposable package without node_modules` | `npm exec --yes --package=npm@12.2.0 -- npm ci --ignore-scripts --min-release-age=7` | passed. Independent clean installation of the session-link/recording-option update succeeded with 116 packages and zero audit findings. No certificate setup or external browser workflow was run. |
-| Offline behavior tested | 2026-10-21 | `Node.js 24.19.0; npm 12.2.0; TypeScript 5.9.2; Stagehand 4.1.0; Browserbase SDK 2.18.0; macOS arm64` | `npm exec --yes --package=npm@12.2.0 -- npm run check` | passed. Typecheck and 44 offline tests passed in the independently installed package. Mocked local browser checks covered hosted collection, dashboard-link handoff before attach, automatic synthetic approval and terminal exit, sanitized pre-launch failure display, and desktop/390px layouts. No fresh live session, recording/replay, proxy swap, CA upload, HTTPS deployment or payment was validated for this update. |
+| Clean install verified | 2026-10-21 | `Node.js 24.19.0; pnpm 10.34.7; macOS arm64; pinned pnpm-lock.yaml; new disposable package and isolated pnpm store` | `pnpm install --frozen-lockfile --ignore-scripts --config.minimum-release-age=10080` | passed. Independent frozen installation passed with lifecycle scripts disabled and a seven-day minimum release age. The pnpm lockfile preserves the preceding npm lockfile dependency versions. No certificate setup or external browser workflow was run. |
+| Offline behavior tested | 2026-10-21 | `Node.js 24.19.0; pnpm 10.34.7; TypeScript 5.9.2; Stagehand 4.1.0; Browserbase SDK 2.18.0; macOS arm64` | `pnpm run check` | passed. Typecheck and 44 offline tests passed in the independently installed pnpm package, including complete mocked collection-to-terminal execution, cancellation, cleanup and HTTP isolation. Runtime and frontend source are unchanged from the prior mocked desktop/390px verification. No fresh live session, recording/replay, proxy swap, CA upload, HTTPS deployment or payment was validated for this package-manager update. |
 
-- Use reader-owned sandbox credentials and the public Visa fixture. Run npm run setup explicitly; copy its printed CA assignment into your private .env.
+- Use reader-owned sandbox credentials and the public Visa fixture. Run pnpm run setup explicitly; copy its printed CA assignment into your private .env.
 - One invocation accepts one ciphertext handoff, starts at most one billable Browserbase session, submits one synthetic checkout, then confirms cleanup and exits. Ctrl+C/SIGTERM waits for acquired resources; it cannot undo an already-started submission.
 - The synthetic merchant receives plaintext public fixture values. This is not a production payment architecture or PCI-compliance claim.
 - Collection stays on localhost. Remote Browserbase requires reader-managed HTTPS exposure forwarding only GET /mock-merchant/checkout and POST /mock-merchant/authorize.
 - The authenticated Browserbase dashboard link appears on the local page and in the terminal after launch. Recording is off by default; explicit fixture-only opt-in can retain displayed temporary tokens. Keep runtime links and recordings private.
-- Current session-link, recording-option and diagnostic changes are offline-tested. Historical live canary and later failed attempt are scoped in the source README; neither validates these changes. New CA upload and Caddy deployment remain unverified.
+- The current pnpm recipe is offline-tested; all locked dependency versions were preserved. Historical live canary and later failed attempt are scoped in the source README; neither validates these changes. New CA upload and Caddy deployment remain unverified.
 
 ## Provenance
 

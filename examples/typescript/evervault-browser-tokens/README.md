@@ -8,16 +8,18 @@ Use **your own sandbox credentials** and only the public Visa fixture: number **
 
 ## Setup
 
-Requirements: Node.js **24.x**, npm **12.2.0** (or a compatible version supporting `min-release-age`), your own Evervault sandbox with Browser Tokens access, and your own Browserbase API key with external-proxy/custom-CA support. The key scopes sessions and uploaded certificates to your project; no separate project ID is needed. You also need reader-managed HTTPS exposure for the synthetic merchant: a remote Browserbase session cannot reach localhost on your machine.
+Requirements: Node.js **24.x**, [pnpm **10.34.7**](https://pnpm.io/10.x/installation) (pinned in `packageManager`), your own Evervault sandbox with Browser Tokens access, and your own Browserbase API key with external-proxy/custom-CA support. The key scopes sessions and uploaded certificates to your project; no separate project ID is needed. You also need reader-managed HTTPS exposure for the synthetic merchant: a remote Browserbase session cannot reach localhost on your machine.
 
 From the cookbook root:
 
 ```sh
 cd examples/typescript/evervault-browser-tokens
-npm ci --ignore-scripts --min-release-age=7
+pnpm install --frozen-lockfile --ignore-scripts --config.minimum-release-age=10080
 test -f .env || cp .env.example .env
 chmod 600 .env
 ```
+
+The install command preserves the seven-day release-age policy (`10080` minutes) and disables lifecycle scripts. Use the pinned pnpm version; `--frozen-lockfile` prevents dependency resolution changes.
 
 Fill in your private `.env`:
 
@@ -27,7 +29,7 @@ Fill in your private `.env`:
 | `EVERVAULT_APP_ID`              | Your public sandbox App ID for collection and server authentication.                     |
 | `EVERVAULT_API_KEY`             | Server-only Evervault sandbox key.                                                       |
 | `BROWSERBASE_API_KEY`           | Server-only Browserbase key.                                                             |
-| `BROWSERBASE_CA_CERTIFICATE_ID` | Trusted Evervault CA ID; required by `npm start`. Run setup below to obtain it.          |
+| `BROWSERBASE_CA_CERTIFICATE_ID` | Trusted Evervault CA ID; required by `pnpm start`. Run setup below to obtain it.         |
 | `CARD_TARGET_HOST`              | Your exact public merchant hostname, without scheme, wildcard, port, IP, or path.        |
 | `PORT`                          | Loopback port; defaults to `4173`. Update the proxy target and local URL too if changed. |
 
@@ -38,7 +40,7 @@ If your Evervault app requires an origin allowlist, allow the local collection o
 ### Trust the Evervault CA
 
 ```sh
-npm run setup
+pnpm run setup
 ```
 
 The explicit setup helper reuses a configured certificate if it is accessible with your Browserbase key. Otherwise it downloads `https://ca.evervault.com`, validates that it is a currently valid CA, and uploads it to Browserbase. It prints `BROWSERBASE_CA_CERTIFICATE_ID=...`; **copy that assignment into `.env` yourself**. It does not rewrite files or launch sessions.
@@ -87,7 +89,7 @@ Preserve the public Host header. Do not expose `/`, `/api/*`, or the entire appl
 ## Run once
 
 ```sh
-npm start
+pnpm start
 ```
 
 Keep the process running. Open **`http://127.0.0.1:4173`** using that exact origin, enter the public number and CVC inside Evervault's hosted fields, then click **Continue** once. The local backend receives ciphertext. As soon as a session is created, the existing submission request returns an **Open in Browserbase** link. The same authenticated dashboard URL is printed in the terminal; it requires access to the session's Browserbase project and is not a bearer Live View or CDP connection URL. Open it to inspect the session and watch Live View while it is running. Short runs may finish before you open it; enable fixture-only recording beforehand if you need a replay. The page can show a sanitized pre-launch failure; final results and exit status remain in the terminal. There is no result page, polling API, or repeat-run control.
@@ -103,7 +105,7 @@ curl -i https://cards.example.com/             # must be 404
 
 The program requests tokens with a **300-second TTL** and `permissions: [{ action: "decrypt", target: CARD_TARGET_HOST }]`. This uses [Evervault's documented permission](https://docs.evervault.com/browser-tokens); the Browserbase quickstart currently shows `reveal`. It passes only tokens to deterministic Stagehand locators, with no model calls. `Stagehand.create()` attaches the browser context required by the pinned SDK.
 
-Evervault's proxy replaces the submitted tokens with the original fixture on the request to the permitted merchant. The merchant accepts only the fixture and returns a synthetic approval. After verifying approval at the exact expected HTTPS URL, the program closes Stagehand/browser resources, requests session release, waits for `COMPLETED`, closes the local server, prints **`Success: synthetic approval and cleanup confirmed.`**, and exits zero. Failures or unconfirmed cleanup exit nonzero with a sanitized step/code such as `[NAVIGATION/OPERATION_FAILED]` or `[SESSION_LAUNCH/HTTP_429]`. Raw provider responses, stacks, ciphertext, tokens and proxy credentials are suppressed. To try again, invoke `npm start` again.
+Evervault's proxy replaces the submitted tokens with the original fixture on the request to the permitted merchant. The merchant accepts only the fixture and returns a synthetic approval. After verifying approval at the exact expected HTTPS URL, the program closes Stagehand/browser resources, requests session release, waits for `COMPLETED`, closes the local server, prints **`Success: synthetic approval and cleanup confirmed.`**, and exits zero. Failures or unconfirmed cleanup exit nonzero with a sanitized step/code such as `[NAVIGATION/OPERATION_FAILED]` or `[SESSION_LAUNCH/HTTP_429]`. Raw provider responses, stacks, ciphertext, tokens and proxy credentials are suppressed. To try again, invoke `pnpm start` again.
 
 **Ctrl+C / SIGTERM** stops subsequent steps and waits for in-flight acquisition before releasing resources, including a session that finishes launching after cancellation. Cancellation cannot undo an already-started submission. A normal cancelled invocation exits `130` / `143` after cleanup; cleanup failure exits `1`. Do not force-kill the process if you want cleanup to run. Sessions also have `keepAlive: false` and a 240-second server timeout. If cleanup is unconfirmed, inspect Browserbase before retrying.
 
@@ -118,12 +120,12 @@ Evervault's proxy replaces the submitted tokens with the original fixture on the
 ## Verification
 
 ```sh
-npm run check
+pnpm run check
 ```
 
 Offline CA tests require `openssl` on PATH to generate disposable test certificates.
 
-**The current session-link, recording-option and step-diagnostic changes are offline-tested.** A clean Node.js 24.19.0/npm 12.2.0 install passed typechecking and 44 tests. Tests cover configuration, explicit recording opt-in with network logging still off, session-link handoff, sanitized step/HTTP codes, token policies, concurrency, expiry, cancellation, partial failures, cleanup confirmation, HTTP isolation, and CA setup. Mocked browser checks cover the authenticated dashboard link, pre-launch failure display, and desktop/narrow layouts. No fresh live recording or replay has been validated for these changes.
+**The current recipe is offline-tested.** A clean Node.js 24.19.0/pnpm 10.34.7 installation from `pnpm-lock.yaml` passed typechecking and 44 tests, including a complete mocked collection-to-terminal run. The pnpm lockfile was imported from the preceding npm lockfile and preserves all locked dependency versions. Tests cover configuration, explicit recording opt-in with network logging still off, session-link handoff, sanitized step/HTTP codes, token policies, concurrency, expiry, cancellation, partial failures, cleanup confirmation, HTTP isolation, and CA setup. The unchanged frontend was previously checked with mocked services on desktop/narrow layouts. No fresh live session, recording or replay has been validated for this package-manager update.
 
 Historical evidence: the earlier one-shot implementation at commit `427c50c` passed one real sandbox canary on October 21, 2026, using the public fixture and an existing CA: hosted collection, Browser Tokens, proxied approval, one session independently confirmed `COMPLETED`, and exit zero. A later user-driven run of that runtime failed before submission, with the session independently confirmed `COMPLETED`; its generic error did not establish a precise cause. These attempts do not validate the new observability changes or establish repeatability. New CA upload and Caddy deployment remain unverified. The earlier manual comparison canary at `c85deef` is separate historical evidence.
 

@@ -14566,7 +14566,7 @@
       ],
       "manifests": [
         "examples/typescript/evervault-browser-tokens/package.json",
-        "examples/typescript/evervault-browser-tokens/package-lock.json"
+        "examples/typescript/evervault-browser-tokens/pnpm-lock.yaml"
       ],
       "environment_template": "examples/typescript/evervault-browser-tokens/.env.example",
       "environment_setup_command": "test -f .env || cp .env.example .env",
@@ -14661,10 +14661,10 @@
         }
       ],
       "setup_commands": [
-        "npm ci --ignore-scripts --min-release-age=7"
+        "pnpm install --frozen-lockfile --ignore-scripts --config.minimum-release-age=10080"
       ],
       "run_commands": [
-        "npm start"
+        "pnpm start"
       ],
       "dependencies": {
         "@browserbasehq/sdk": "2.18.0",
@@ -14673,12 +14673,12 @@
         "express": "5.1.0"
       },
       "caveats": [
-        "Use reader-owned sandbox credentials and the public Visa fixture. Run npm run setup explicitly; copy its printed CA assignment into your private .env.",
+        "Use reader-owned sandbox credentials and the public Visa fixture. Run pnpm run setup explicitly; copy its printed CA assignment into your private .env.",
         "One invocation accepts one ciphertext handoff, starts at most one billable Browserbase session, submits one synthetic checkout, then confirms cleanup and exits. Ctrl+C/SIGTERM waits for acquired resources; it cannot undo an already-started submission.",
         "The synthetic merchant receives plaintext public fixture values. This is not a production payment architecture or PCI-compliance claim.",
         "Collection stays on localhost. Remote Browserbase requires reader-managed HTTPS exposure forwarding only GET /mock-merchant/checkout and POST /mock-merchant/authorize.",
         "The authenticated Browserbase dashboard link appears on the local page and in the terminal after launch. Recording is off by default; explicit fixture-only opt-in can retain displayed temporary tokens. Keep runtime links and recordings private.",
-        "Current session-link, recording-option and diagnostic changes are offline-tested. Historical live canary and later failed attempt are scoped in the source README; neither validates these changes. New CA upload and Caddy deployment remain unverified."
+        "The current pnpm recipe is offline-tested; all locked dependency versions were preserved. Historical live canary and later failed attempt are scoped in the source README; neither validates these changes. New CA upload and Caddy deployment remain unverified."
       ],
       "source": {
         "kind": "cookbook-authored",
@@ -14704,18 +14704,18 @@
         {
           "kind": "install-verified",
           "date": "2026-10-21",
-          "runtime": "Node.js 24.19.0; npm 12.2.0; macOS arm64; pinned package-lock.json; new disposable package without node_modules",
-          "command": "npm exec --yes --package=npm@12.2.0 -- npm ci --ignore-scripts --min-release-age=7",
+          "runtime": "Node.js 24.19.0; pnpm 10.34.7; macOS arm64; pinned pnpm-lock.yaml; new disposable package and isolated pnpm store",
+          "command": "pnpm install --frozen-lockfile --ignore-scripts --config.minimum-release-age=10080",
           "result": "passed",
-          "limits": "Independent clean installation of the session-link/recording-option update succeeded with 116 packages and zero audit findings. No certificate setup or external browser workflow was run."
+          "limits": "Independent frozen installation passed with lifecycle scripts disabled and a seven-day minimum release age. The pnpm lockfile preserves the preceding npm lockfile dependency versions. No certificate setup or external browser workflow was run."
         },
         {
           "kind": "offline-tested",
           "date": "2026-10-21",
-          "runtime": "Node.js 24.19.0; npm 12.2.0; TypeScript 5.9.2; Stagehand 4.1.0; Browserbase SDK 2.18.0; macOS arm64",
-          "command": "npm exec --yes --package=npm@12.2.0 -- npm run check",
+          "runtime": "Node.js 24.19.0; pnpm 10.34.7; TypeScript 5.9.2; Stagehand 4.1.0; Browserbase SDK 2.18.0; macOS arm64",
+          "command": "pnpm run check",
           "result": "passed",
-          "limits": "Typecheck and 44 offline tests passed in the independently installed package. Mocked local browser checks covered hosted collection, dashboard-link handoff before attach, automatic synthetic approval and terminal exit, sanitized pre-launch failure display, and desktop/390px layouts. No fresh live session, recording/replay, proxy swap, CA upload, HTTPS deployment or payment was validated for this update."
+          "limits": "Typecheck and 44 offline tests passed in the independently installed pnpm package, including complete mocked collection-to-terminal execution, cancellation, cleanup and HTTP isolation. Runtime and frontend source are unchanged from the prior mocked desktop/390px verification. No fresh live session, recording/replay, proxy swap, CA upload, HTTPS deployment or payment was validated for this package-manager update."
         }
       ],
       "llm_requirement": "not required"
