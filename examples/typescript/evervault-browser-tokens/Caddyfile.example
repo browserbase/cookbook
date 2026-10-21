@@ -1,0 +1,26 @@
+# Run Caddy on the same machine as the loopback demo. Point your own domain's
+# DNS here and allow inbound HTTPS. Replace cards.example.com; match CARD_TARGET_HOST.
+# If PORT changes, update 4173 below. Do not reverse_proxy the entire application.
+cards.example.com {
+  @merchant {
+    method GET
+    path /mock-merchant/checkout /merchant.css
+  }
+  handle @merchant {
+    reverse_proxy 127.0.0.1:4173 {
+      header_up Host {host}
+    }
+  }
+  @authorize {
+    method POST
+    path /mock-merchant/authorize
+  }
+  handle @authorize {
+    reverse_proxy 127.0.0.1:4173 {
+      header_up Host {host}
+    }
+  }
+  handle {
+    respond "Not found" 404
+  }
+}

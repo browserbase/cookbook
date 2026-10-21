@@ -4,11 +4,12 @@ Connect Browserbase to agent frameworks, services, and workflow engines.
 
 Paths below are relative to a local cookbook root, not to the installed skill directory. Locate the checkout first. Read the selected guide and source before adapting code. Historical source links identify the imported revision; they predate cookbook migrations and are not runnable fallbacks.
 
-This topic contains all 33 matching entries. Browse `docs/topics/integrations-and-orchestration.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
+This topic contains all 34 matching entries. Browse `docs/topics/integrations-and-orchestration.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
 
 | Recipe | Language | Local guide | Status | Historical source |
 | --- | --- | --- | --- | --- |
 | Hackernews (Go) | go | `docs/recipes/examples-go-hackernews.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/go/hackernews) |
+| Card entry with Evervault Browser Tokens | typescript | `docs/recipes/examples-typescript-evervault-browser-tokens.md` | current | cookbook-authored |
 | Gemini CUA (TypeScript) | typescript | `docs/recipes/examples-typescript-gemini-cua.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/gemini-cua) |
 | Microsoft CUA (TypeScript) | typescript | `docs/recipes/examples-typescript-microsoft-cua.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/microsoft-cua) |
 | Order lookup for AI support with Functions and Secrets (TypeScript) | typescript | `docs/recipes/examples-typescript-order-lookup-function.md` | current | cookbook-authored |

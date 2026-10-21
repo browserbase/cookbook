@@ -14536,6 +14536,177 @@
         }
       ],
       "working_directory": "examples/typescript/order-lookup-function"
+    },
+    {
+      "id": "examples-typescript-evervault-browser-tokens",
+      "title": "Card entry with Evervault Browser Tokens",
+      "summary": "Compare proxied and direct synthetic card checkouts using Evervault-hosted collection, short-lived Browser Tokens, Stagehand v4, and Browserbase.",
+      "collection": "examples",
+      "path": "examples/typescript/evervault-browser-tokens",
+      "working_directory": "examples/typescript/evervault-browser-tokens",
+      "readme": "docs/recipes/examples-typescript-evervault-browser-tokens.md",
+      "upstream_readme": "examples/typescript/evervault-browser-tokens/README.md",
+      "topics": [
+        "forms-and-transactions",
+        "browser-features",
+        "integrations-and-orchestration",
+        "testing-and-observability"
+      ],
+      "languages": [
+        "typescript"
+      ],
+      "frameworks": [
+        "Stagehand",
+        "Browserbase SDK",
+        "Express",
+        "Evervault"
+      ],
+      "entrypoints": [
+        "examples/typescript/evervault-browser-tokens/src/server.ts"
+      ],
+      "manifests": [
+        "examples/typescript/evervault-browser-tokens/package.json",
+        "examples/typescript/evervault-browser-tokens/package-lock.json"
+      ],
+      "environment_template": "examples/typescript/evervault-browser-tokens/.env.example",
+      "environment_setup_command": "test -f .env || cp .env.example .env",
+      "environment_variables": [
+        {
+          "name": "EVERVAULT_TEAM_ID",
+          "provider": "Evervault",
+          "purpose": "Public Team ID for hosted card collection.",
+          "secret": false,
+          "safe_example": "<your-team-id>",
+          "requirement": "required",
+          "default": null,
+          "setup_url": "https://docs.evervault.com/cards/card-collection",
+          "validation": "Must be set locally; placeholders are rejected"
+        },
+        {
+          "name": "EVERVAULT_APP_ID",
+          "provider": "Evervault",
+          "purpose": "Public sandbox App ID for collection and server authentication.",
+          "secret": false,
+          "safe_example": "<your-sandbox-app-id>",
+          "requirement": "required",
+          "default": null,
+          "setup_url": "https://docs.evervault.com/cards/card-collection",
+          "validation": "Must be set locally; placeholders are rejected"
+        },
+        {
+          "name": "EVERVAULT_API_KEY",
+          "provider": "Evervault",
+          "purpose": "Server-only sandbox key for short-lived Browser Tokens.",
+          "secret": true,
+          "safe_example": "<set-locally>",
+          "requirement": "required",
+          "default": null,
+          "setup_url": "https://docs.evervault.com/browser-tokens",
+          "validation": "Must be set locally; placeholders are rejected"
+        },
+        {
+          "name": "BROWSERBASE_API_KEY",
+          "provider": "Browserbase",
+          "purpose": "Server-only key for matched hosted browsers and CA setup.",
+          "secret": true,
+          "safe_example": "<set-locally>",
+          "requirement": "required",
+          "default": null,
+          "setup_url": "https://www.browserbase.com/settings",
+          "validation": "Must be set locally; placeholders are rejected"
+        },
+        {
+          "name": "BROWSERBASE_CA_CERTIFICATE_ID",
+          "provider": "Browserbase",
+          "purpose": "Trusted Evervault CA uploaded by the explicit setup command.",
+          "secret": false,
+          "safe_example": "<your-certificate-id>",
+          "requirement": "conditional",
+          "default": null,
+          "setup_url": "https://docs.browserbase.com/platform/identity/proxies",
+          "validation": "See recipe setup and configuration requirements"
+        },
+        {
+          "name": "CARD_TARGET_HOST",
+          "provider": "Reader infrastructure",
+          "purpose": "Exact public hostname exposing only the synthetic merchant routes.",
+          "secret": false,
+          "safe_example": "cards.example.com",
+          "requirement": "required",
+          "default": null,
+          "setup_url": null,
+          "validation": "Must be set locally; placeholders are rejected"
+        },
+        {
+          "name": "PORT",
+          "provider": "Local application",
+          "purpose": "Loopback-only presenter port; update the proxy upstream if changed.",
+          "secret": false,
+          "safe_example": "4173",
+          "requirement": "optional",
+          "default": "4173",
+          "setup_url": null,
+          "validation": "See recipe setup and configuration requirements"
+        }
+      ],
+      "setup_commands": [
+        "npm ci --ignore-scripts --min-release-age=7"
+      ],
+      "run_commands": [
+        "npm start"
+      ],
+      "dependencies": {
+        "@browserbasehq/sdk": "2.18.0",
+        "@browserbasehq/stagehand": "4.1.0",
+        "dotenv": "16.6.1",
+        "express": "5.1.0"
+      },
+      "caveats": [
+        "Before npm start, fill your private .env and run npm run setup explicitly to provision or verify the Evervault CA. Follow the source README for the route-limited HTTPS merchant setup.",
+        "Sandbox and public fixtures only; the synthetic merchant receives plaintext test data and is not a production PCI architecture.",
+        "Each live comparison creates two billable Browserbase sessions. Explicit certificate setup contacts services and may upload a CA.",
+        "The presenter remains on localhost; Browserbase requires a reader-controlled HTTPS endpoint exposing only the synthetic merchant routes.",
+        "Offline validation uses mocked services. No fresh live Browserbase or Evervault workflow has been run."
+      ],
+      "source": {
+        "kind": "cookbook-authored",
+        "path": "examples/typescript/evervault-browser-tokens"
+      },
+      "lifecycle": "current",
+      "access": "public",
+      "verification": "offline-tested",
+      "search_aliases": [
+        "evervault",
+        "browser tokens",
+        "cards",
+        "external proxy",
+        "custom CA",
+        "secure checkout"
+      ],
+      "tags": [
+        "reference-app",
+        "synthetic-card",
+        "network-boundary"
+      ],
+      "verification_evidence": [
+        {
+          "kind": "install-verified",
+          "date": "2026-10-20",
+          "runtime": "Node.js 24.19.0; npm 12.2.0; macOS arm64; recipe package-lock.json, no pre-existing node_modules",
+          "command": "npm exec --yes --package=npm@12.2.0 -- npm ci --ignore-scripts --min-release-age=7",
+          "result": "passed",
+          "limits": "Independent clean package installation succeeded with 116 packages and no audit findings. Installation alone does not validate any browser workflow."
+        },
+        {
+          "kind": "offline-tested",
+          "date": "2026-10-20",
+          "runtime": "Node.js 24.19.0; npm 12.2.0; TypeScript 5.9.2; Stagehand 4.1.0; Browserbase SDK 2.18.0; macOS arm64",
+          "command": "npm exec --yes --package=npm@12.2.0 -- npm run check",
+          "result": "passed",
+          "limits": "Typecheck and 27 tests passed in the independently installed package. All Browserbase and Evervault calls were mocked; no certificate upload, live session, proxy swap, or payment was executed."
+        }
+      ],
+      "llm_requirement": "not required"
     }
   ],
   "schema_version": 1

@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta name="color-scheme" content="light" />
+    <title>Evervault card tokens · Browserbase + Stagehand</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <script defer src="https://js.evervault.com/v2"></script>
+    <script defer src="/app.js"></script>
+  </head>
+  <body>
+    <header>
+      <p class="eyebrow">Browserbase / Stagehand / Evervault</p>
+      <h1>Same card tokens.<br />Different network paths.</h1>
+      <p>
+        Collect a test card securely, enter matching tokens in two browsers, and compare what
+        reaches the synthetic merchant.
+      </p>
+    </header>
+    <main>
+      <section class="controls" aria-labelledby="collect-title">
+        <div>
+          <p class="eyebrow">01 / Collect</p>
+          <h2 id="collect-title">Public test card only</h2>
+          <p>
+            Use <strong>4242 4242 4242 4242</strong>, CVC <strong>123</strong>. Expiry is fixed to
+            <strong>12/34</strong>.
+          </p>
+          <p>
+            Card number and CVC are entered inside Evervault’s hosted iframe. This page receives
+            ciphertext.
+          </p>
+          <div id="card-collection"></div>
+          <p id="collection-status" role="status">Loading secure collection…</p>
+        </div>
+        <div>
+          <p class="eyebrow">02 / Protect &amp; execute</p>
+          <h2>Move at your own pace</h2>
+          <p>
+            Each checkpoint expires after 45 seconds. The comparison uses two billable Browserbase
+            sessions.
+          </p>
+          <div class="buttons">
+            <button id="create" disabled>Create tokens &amp; launch</button
+            ><button id="enter" disabled>Enter tokens in both</button
+            ><button id="submit" disabled>Submit both checkouts</button
+            ><button id="stop" class="secondary" disabled>Stop &amp; release</button
+            ><button id="reset" class="secondary" hidden>New comparison</button>
+          </div>
+          <p id="status" role="status" aria-live="polite">Waiting for encrypted test-card values</p>
+          <p id="error" role="alert" hidden></p>
+          <p id="tokens" hidden>
+            Temporary PAN token: <code id="number-token"></code><br />CVC token:
+            <code id="cvc-token"></code>
+          </p>
+        </div>
+      </section>
+      <section aria-labelledby="compare-title">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">03 / Compare</p>
+            <h2 id="compare-title">One destination, two paths</h2>
+          </div>
+          <button id="focus" class="secondary" aria-pressed="false">Focus comparison</button>
+        </div>
+        <div id="comparison" class="comparison">
+          <article>
+            <div class="panel-title">
+              <h3>Through Evervault</h3>
+              <span id="proxied-result">Waiting</span
+              ><button class="secondary fullscreen" data-view="proxied" disabled>
+                Full screen
+              </button>
+            </div>
+            <p>Tokens are swapped over the network for the public fixture.</p>
+            <p id="proxied-placeholder" class="placeholder">Live View appears after launch</p>
+            <iframe
+              id="proxied-view"
+              title="Evervault proxied browser"
+              referrerpolicy="no-referrer"
+              allow="clipboard-write; fullscreen"
+              allowfullscreen
+              hidden
+            ></iframe>
+          </article>
+          <article>
+            <div class="panel-title">
+              <h3>Direct control</h3>
+              <span id="control-result">Waiting</span
+              ><button class="secondary fullscreen" data-view="control" disabled>
+                Full screen
+              </button>
+            </div>
+            <p>Unchanged tokens reach the same synthetic merchant.</p>
+            <p id="control-placeholder" class="placeholder">Live View appears after launch</p>
+            <iframe
+              id="control-view"
+              title="Direct control browser"
+              referrerpolicy="no-referrer"
+              allow="clipboard-write; fullscreen"
+              allowfullscreen
+              hidden
+            ></iframe>
+          </article>
+        </div>
+      </section>
+      <section class="boundary">
+        <p class="eyebrow">The boundary</p>
+        <p>
+          Stagehand fills token values. Evervault reveals the originals only to the configured
+          merchant hostname. The synthetic merchant is part of this demo and receives the public
+          fixture in plaintext. This is not a production payment service or a PCI certification.
+        </p>
+        <p>
+          Live Views and temporary tokens are private runtime data. Do not share them, use real
+          cards, or expose the presenter UI to the internet.
+        </p>
+      </section>
+      <details>
+        <summary>Run activity</summary>
+        <ol id="events"></ol>
+      </details>
+    </main>
+    <footer>Reference code · synthetic card authorization · no purchase</footer>
+  </body>
+</html>

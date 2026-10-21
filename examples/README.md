@@ -87,6 +87,7 @@ All entries below were inspected at their pinned source revision. Live website b
 | [Council events (TypeScript)](../docs/recipes/examples-typescript-council-events.md) | typescript | runnable example | current / public | examples |
 | [Download financial statements (TypeScript)](../docs/recipes/examples-typescript-download-financial-statements.md) | typescript | runnable example | current / public | examples |
 | [Dynamic form filling (TypeScript)](../docs/recipes/examples-typescript-dynamic-form-filling.md) | typescript | runnable example | current / public | examples |
+| [Card entry with Evervault Browser Tokens](../docs/recipes/examples-typescript-evervault-browser-tokens.md) | typescript | runnable example | current / public | examples |
 | [Exa Browserbase (TypeScript)](../docs/recipes/examples-typescript-exa-browserbase.md) | typescript | runnable example | current / public | examples |
 | [Extend Browserbase (TypeScript)](../docs/recipes/examples-typescript-extend-browserbase.md) | typescript | runnable example | current / public | examples |
 | [Form filling (TypeScript)](../docs/recipes/examples-typescript-form-filling.md) | typescript | runnable example | current / public | examples |

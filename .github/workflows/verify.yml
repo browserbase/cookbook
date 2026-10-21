@@ -90,6 +90,10 @@ jobs:
             runtime: node
             directory: examples/typescript/getting-started-with-browserbase
             command: npm install --ignore-scripts --package-lock=false && npm run typecheck
+          - name: Evervault card reference offline checks
+            runtime: node
+            directory: examples/typescript/evervault-browser-tokens
+            command: npm ci --ignore-scripts && npm run check
           - name: Order lookup install and typecheck
             runtime: node
             directory: examples/typescript/order-lookup-function

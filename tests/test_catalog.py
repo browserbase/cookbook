@@ -52,6 +52,13 @@ class CatalogTests(unittest.TestCase):
             with self.subTest(recipe=recipe["id"]):
                 self.assertNotIn(deprecated_name, names)
 
+    def test_deterministic_stagehand_can_declare_no_model_requirement(self):
+        recipe = next(r for r in self.recipes if r['id'] == 'examples-typescript-evervault-browser-tokens')
+        self.assertEqual(catalog.llm_requirement(recipe), 'not required')
+        self.assertIn(recipe['id'], [r['id'] for r in catalog.search(self.recipes, 'evervault without an llm', None, 5)])
+        with self.assertRaises(ValueError):
+            catalog.llm_requirement(dict(recipe, llm_requirement='sometimes'))
+
     def test_every_generated_recipe_has_demo_only_disclaimer(self):
         for recipe in self.recipes:
             with self.subTest(recipe=recipe['id']):

@@ -223,6 +223,11 @@ def recipe_type(recipe):
 
 
 def llm_requirement(recipe):
+    explicit = recipe.get('llm_requirement')
+    if explicit is not None:
+        if not isinstance(explicit, str) or explicit not in {'required', 'not required', 'unknown'}:
+            raise ValueError('Invalid LLM requirement: ' + recipe.get('id', '<unnamed>'))
+        return explicit
     material = tokens(' '.join([
         recipe.get('id', ''), recipe.get('title', ''), recipe.get('summary', ''),
         *recipe.get('frameworks', []),
