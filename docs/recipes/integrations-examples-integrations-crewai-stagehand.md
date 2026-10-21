@@ -63,6 +63,7 @@ Declared source dependencies.
 - `mcp>=1.30.0,<2`
 - `python-dotenv>=1.2.4,<2`
 - `stagehand==4.2.1`
+- `uv==0.13.4`
 
 ## Caveats and verification
 

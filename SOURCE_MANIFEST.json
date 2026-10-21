@@ -4688,8 +4688,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "sha256": "cc5daec0b6cb43cc06230a1be4d37e5412faa5e1a4d04d3b372b587a2c56c206",
-            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
+            "sha256": "3c2eed2f815be015ee089c0a0370e33039e4721c8ef83e665d2ac422f96f1883",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand. Apply remaining Socket security dependency upgrades for GRO-2506 after main dependency updates."
           },
           "path": "integrations/examples/integrations/crewai/stagehand/requirements.txt",
           "sha256": "663e22641f7d78fd724e8b94bd7ac5a8a536bae4a54a876494faafff5fd26f1b",
@@ -6241,8 +6241,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "sha256": "a91fccbec8b2a5c9065013aa1e06b1962252948f2ea678f960d8981b55f1a455",
-            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
+            "sha256": "3249e7d2e8d835eaf7c29d9dd1386396ae2318f3515a3512defbe8a35fdb7055",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand. Apply remaining Socket security dependency upgrades for GRO-2506 after main dependency updates."
           },
           "path": "integrations/examples/integrations/crewai/crewai-tutorial/poetry.lock",
           "sha256": "d270a42a6c8e16578d8edaaf98bdb6ddf88677151203a936a8d4f25971d9c691",
@@ -6857,8 +6857,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "sha256": "688a23a41666ed4b5c62b9e7ea7e4bda32eb7e0f3b6a53d397484bd2d7ff4d05",
-            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
+            "sha256": "ea765342207ef243026c5be9f2f2359c5e1842cb97ea8a14f435d9141372ee05",
+            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand. Apply remaining Socket security dependency upgrades for GRO-2506 after main dependency updates."
           },
           "path": "integrations/examples/integrations/crewai/crewai-tutorial/pyproject.toml",
           "sha256": "8f43c626a5af3d6e265a4e9bffe7dd47f50e01e67aecdc5bd2440d437b98f529",
