@@ -104,6 +104,8 @@ Open **`http://127.0.0.1:4173`** using that exact origin. The API requires the l
 4. Click **Submit both checkouts** within the next 45 seconds. The proxied request is swapped to the public fixture and approved. The direct request carries unchanged tokens and is declined.
 5. Inspect both Live Views. A successful comparison holds for 30 seconds, then closes both sessions and clears the displayed tokens and Live View URLs.
 
+Launching switches to a compact presenter view with the checkpoint buttons and run status pinned above the browsers. Advance both steps from that toolbar. Temporary values are available under **Inspect temporary tokens** below the comparison; they clear when the run ends. **New comparison** returns to card collection after cleanup.
+
 **Stop & release**, checkpoint timeout, startup failure, and normal process shutdown all attempt cleanup. Token freshness is checked again before filling and before submission; submissions are never blindly retried. Each session also has a 240-second server timeout and `keepAlive: false`. If cleanup cannot be confirmed, the UI reports failure; check the Browserbase dashboard before another run. Keep the presenter and server open until cleanup completes. A forced process kill cannot execute cleanup code; the server timeout is the fallback. Reloading the page loses local UI ownership of a run; its checkpoint/session timeouts still apply.
 
 The fixed merchant accepts only the published fixture and returns a constant approval/decline page. It never logs, persists, echoes, or places submitted values into URLs. Its public routes can be used by anyone who knows the hostname; they cannot launch sessions. Limit network exposure and remove the proxy when you finish.

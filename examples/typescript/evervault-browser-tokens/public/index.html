@@ -61,7 +61,7 @@
       </ol>
 
       <div class="workspace">
-        <aside class="controls" aria-label="Card collection and presenter controls">
+        <aside class="controls" aria-label="Card collection">
           <section class="control-card collection-card" aria-labelledby="collect-title">
             <div class="card-heading">
               <p class="eyebrow">01 / Collect</p>
@@ -103,12 +103,23 @@
             </p>
             <p class="test-notice">No purchase or real charge occurs. Never enter a real card.</p>
           </section>
+        </aside>
+
+        <section id="presenter" class="monitor" aria-labelledby="compare-title">
+          <div class="section-title">
+            <div>
+              <p class="eyebrow">03 / Compare</p>
+              <h2 id="compare-title">One destination. Two paths.</h2>
+            </div>
+            <button id="focus" class="secondary compact" aria-pressed="false">
+              Focus comparison
+            </button>
+          </div>
 
           <section class="control-card action-card" aria-labelledby="actions-title">
-            <p class="eyebrow">02 / Protect &amp; execute</p>
-            <h2 id="actions-title">Advance the comparison</h2>
+            <h2 id="actions-title">Presenter controls</h2>
             <p class="help-text">
-              Take it one step at a time. Each checkpoint waits up to 45 seconds.
+              Advance one step at a time. Each checkpoint waits up to 45 seconds.
             </p>
             <div class="buttons">
               <button id="create" class="step-action" disabled>
@@ -132,31 +143,14 @@
             <p class="usage-note">
               Each comparison uses 2 billable Browserbase sessions. Both close automatically.
             </p>
-            <div id="tokens" class="token-display" hidden>
-              <p class="eyebrow">Temporary tokens · 5-minute lifetime</p>
-              <label>Card-number token</label><code id="number-token"></code><label>CVC token</label
-              ><code id="cvc-token"></code>
-              <p>These exact values go into both browsers and clear when the run ends.</p>
+
+            <div class="run-status">
+              <span class="status-dot" aria-hidden="true"></span>
+              <p id="status" role="status" aria-live="polite">
+                Waiting for encrypted test-card values
+              </p>
             </div>
           </section>
-        </aside>
-
-        <section class="monitor" aria-labelledby="compare-title">
-          <div class="section-title">
-            <div>
-              <p class="eyebrow">03 / Compare</p>
-              <h2 id="compare-title">One destination. Two paths.</h2>
-            </div>
-            <button id="focus" class="secondary compact" aria-pressed="false">
-              Focus comparison
-            </button>
-          </div>
-          <div class="run-status">
-            <span class="status-dot" aria-hidden="true"></span>
-            <p id="status" role="status" aria-live="polite">
-              Waiting for encrypted test-card values
-            </p>
-          </div>
           <p id="error" class="error" role="alert" hidden></p>
           <div id="comparison" class="comparison">
             <article class="session-panel proxied-panel">
@@ -239,6 +233,12 @@
               Evervault proxy and trusted CA differ.
             </p>
           </div>
+          <details id="tokens" class="token-display" hidden>
+            <summary>Inspect temporary tokens · 5-minute lifetime</summary>
+            <label>Card-number token</label><code id="number-token"></code><label>CVC token</label
+            ><code id="cvc-token"></code>
+            <p>These exact values go into both browsers and clear when the run ends.</p>
+          </details>
         </section>
       </div>
 

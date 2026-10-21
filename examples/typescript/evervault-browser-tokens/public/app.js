@@ -169,6 +169,8 @@ $("create").addEventListener("click", async () => {
   $("error").hidden = true;
   const payload = { encryptedCard: { ...encryptedCard }, expiry: config.cardExpiry };
   destroyCollection();
+  document.body.classList.add("presenting");
+  $("presenter").scrollIntoView({ block: "start" });
   $("collection-status").textContent =
     "Secure frame removed; ciphertext sent only to the local backend";
   $("collection-status").dataset.ready = "false";

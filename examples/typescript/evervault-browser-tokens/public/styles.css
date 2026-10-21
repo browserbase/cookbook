@@ -322,7 +322,29 @@ p {
   margin: 14px 0 0;
 }
 .action-card h2 {
-  font-size: 21px;
+  font-size: 17px;
+}
+.action-card {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 14px;
+  margin-bottom: 16px;
+  border-color: var(--grey-500);
+}
+.action-card .help-text {
+  margin: 6px 0 12px;
+  font-size: 11px;
+}
+.action-card .buttons {
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+}
+.action-card .run-status {
+  margin: 10px 0 0;
+  padding: 8px 10px;
+}
+.action-card .usage-note {
+  margin-top: 8px;
 }
 .buttons {
   display: grid;
@@ -419,6 +441,10 @@ summary:focus-visible {
 .token-display p:last-child {
   font-size: 10px;
   margin: 12px 0 0;
+}
+.token-display summary {
+  font: 10px var(--mono-font);
+  cursor: pointer;
 }
 .monitor {
   min-width: 0;
@@ -718,12 +744,42 @@ body.focused .live-surface {
   height: 100vh;
   border: 0;
 }
+body.presenting .topbar,
+body.presenting .hero,
+body.presenting .journey,
+body.presenting .controls {
+  display: none;
+}
+body.presenting main {
+  padding-top: 12px;
+}
+body.presenting .workspace {
+  display: block;
+}
+body.presenting .monitor {
+  padding: 18px;
+}
+body.presenting .section-title {
+  margin-bottom: 12px;
+}
+body.presenting .section-title .eyebrow {
+  display: none;
+}
+body.presenting .section-title h2 {
+  font-size: 22px;
+}
+body.presenting .action-card .help-text {
+  display: none;
+}
+body.presenting .live-surface {
+  height: clamp(220px, calc(100dvh - 460px), 680px);
+}
 @media (max-width: 1180px) {
   .workspace {
     grid-template-columns: 1fr;
   }
   .controls {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     align-items: start;
   }
   .hero {
@@ -734,6 +790,23 @@ body.focused .live-surface {
   }
 }
 @media (max-width: 760px) {
+  .action-card .buttons {
+    grid-template-columns: 1fr 1fr;
+  }
+  .action-card .step-action {
+    gap: 6px;
+    font-size: 10px;
+  }
+  .action-card .action-arrow {
+    display: none;
+  }
+  .action-card .usage-note {
+    font-family: var(--body-font);
+    font-size: 9px;
+  }
+  body.presenting .live-surface {
+    height: 300px;
+  }
   .topbar {
     padding: 18px 20px;
     min-height: 64px;
