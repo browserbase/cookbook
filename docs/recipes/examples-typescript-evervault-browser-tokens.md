@@ -1,6 +1,6 @@
 # Card entry with Evervault Browser Tokens
 
-Automatically compare proxied and direct synthetic card checkouts with a minimal hosted-collection page, Evervault Browser Tokens, Stagehand v4, and Browserbase.
+Collect an encrypted test card, create Evervault Browser Tokens, run one proxied Browserbase checkout with Stagehand v4, then confirm cleanup and exit.
 
 > [!CAUTION]
 > Demo and reference code only. This recipe is not a vetted production implementation. Independently review it, obtain authorization, and validate security, privacy, compliance, cost, and site-term requirements before use. Use at your own risk.
@@ -18,8 +18,8 @@ Automatically compare proxied and direct synthetic card checkouts with a minimal
 - [Upstream setup and behavior](../../examples/typescript/evervault-browser-tokens/README.md).
 - [Dependency manifest `examples/typescript/evervault-browser-tokens/package.json`](../../examples/typescript/evervault-browser-tokens/package.json).
 - [Dependency manifest `examples/typescript/evervault-browser-tokens/package-lock.json`](../../examples/typescript/evervault-browser-tokens/package-lock.json).
-- [Source `examples/typescript/evervault-browser-tokens/src/server.ts`](../../examples/typescript/evervault-browser-tokens/src/server.ts).
-- Original use-case taxonomy: reference-app, synthetic-card, network-boundary.
+- [Source `examples/typescript/evervault-browser-tokens/index.ts`](../../examples/typescript/evervault-browser-tokens/index.ts).
+- Original use-case taxonomy: code-reference, synthetic-card, network-boundary.
 
 ## Setup and run
 
@@ -48,14 +48,14 @@ npm start
 | `EVERVAULT_TEAM_ID` | [Evervault](https://docs.evervault.com/cards/card-collection). Public Team ID for hosted card collection. Non-secret. | `<your-team-id>` | Must be set locally; placeholders are rejected. No default. |
 | `EVERVAULT_APP_ID` | [Evervault](https://docs.evervault.com/cards/card-collection). Public sandbox App ID for collection and server authentication. Non-secret. | `<your-sandbox-app-id>` | Must be set locally; placeholders are rejected. No default. |
 | `EVERVAULT_API_KEY` | [Evervault](https://docs.evervault.com/browser-tokens). Server-only sandbox key for short-lived Browser Tokens. Secret. | `<set-locally>` | Must be set locally; placeholders are rejected. No default. |
-| `BROWSERBASE_API_KEY` | [Browserbase](https://www.browserbase.com/settings). Server-only key for matched hosted browsers and CA setup. Secret. | `<set-locally>` | Must be set locally; placeholders are rejected. No default. |
+| `BROWSERBASE_API_KEY` | [Browserbase](https://www.browserbase.com/settings). Server-only key for one hosted browser and explicit CA setup. Secret. | `<set-locally>` | Must be set locally; placeholders are rejected. No default. |
 | `CARD_TARGET_HOST` | Reader infrastructure. Exact public hostname exposing only the synthetic merchant routes. Non-secret. | `cards.example.com` | Must be set locally; placeholders are rejected. No default. |
 
 ### Conditional
 
 | Variable | Provider and purpose | Safe example | Validation and default |
 | --- | --- | --- | --- |
-| `BROWSERBASE_CA_CERTIFICATE_ID` | [Browserbase](https://docs.browserbase.com/platform/identity/proxies). Trusted Evervault CA uploaded by the explicit setup command. Non-secret. | `<your-certificate-id>` | See recipe setup and configuration requirements. No default. |
+| `BROWSERBASE_CA_CERTIFICATE_ID` | [Browserbase](https://docs.browserbase.com/platform/identity/proxies). Trusted Evervault CA ID printed by setup; copy the assignment into your private .env. Non-secret. | `<your-certificate-id>` | See recipe setup and configuration requirements. No default. |
 
 ### Optional
 
@@ -81,14 +81,14 @@ Source and setup metadata were inspected. No passing authenticated live-workflow
 
 | Check | Date | Runtime | Command | Result and limits |
 | --- | --- | --- | --- | --- |
-| Clean install verified | 2026-10-21 | `Node.js 24.19.0; npm 12.2.0; macOS arm64; pinned package-lock.json; new disposable package with no node_modules` | `npm exec --yes --package=npm@12.2.0 -- npm ci --ignore-scripts --min-release-age=7` | passed. Independent clean installation of the automatic refactor succeeded with 116 packages and zero audit findings. No certificate setup or external browser workflow was run. |
-| Offline behavior tested | 2026-10-21 | `Node.js 24.19.0; npm 12.2.0; TypeScript 5.9.2; Stagehand 4.1.0; Browserbase SDK 2.18.0; macOS arm64` | `npm exec --yes --package=npm@12.2.0 -- npm run check` | passed. Typecheck and 36 offline tests passed in the independently installed automatic refactor. Browserbase/Evervault calls were mocked. Separate localhost fixture UI checks passed collection, visible tokens, automatic outcomes, Cancel, token clearing, and desktop/390px layout. No fresh live session, proxy swap, CA upload, or payment was executed. |
+| Clean install verified | 2026-10-21 | `Node.js 24.19.0; npm 12.2.0; macOS arm64; pinned package-lock.json; new disposable package without node_modules` | `npm exec --yes --package=npm@12.2.0 -- npm ci --ignore-scripts --min-release-age=7` | passed. Independent clean installation of the one-shot refactor succeeded with 116 packages and zero audit findings. No certificate setup or external browser workflow was run. |
+| Offline behavior tested | 2026-10-21 | `Node.js 24.19.0; npm 12.2.0; TypeScript 5.9.2; Stagehand 4.1.0; Browserbase SDK 2.18.0; macOS arm64` | `npm exec --yes --package=npm@12.2.0 -- npm run check` | passed. Typecheck and 33 offline tests passed in the independently installed one-shot refactor. Provider calls were mocked. Local browser checks used a fixture SDK/iframe and mocked provider workflow, verifying desktop/390px collection, receipt acknowledgement, synthetic merchant approval, terminal completion and exit. No fresh live session, proxy swap, CA upload, HTTPS deployment or payment was executed. |
 
-- Fill your private .env and run npm run setup explicitly to provision or verify the Evervault CA. Follow the source README for the route-limited HTTPS merchant setup.
-- Sandbox and public fixtures only; the synthetic merchant receives plaintext test data and is not a production PCI architecture.
-- Each live comparison automatically creates two billable Browserbase sessions and submits two synthetic checkouts. Explicit setup contacts services and may upload a CA.
-- The page and API remain on localhost; Browserbase requires a reader-controlled HTTPS endpoint exposing only the synthetic merchant routes.
-- The current automatic implementation is offline-tested only. The earlier manual implementation at c85deef had one live canary; that does not validate this refactor. Fresh live execution and Caddy deployment remain unverified.
+- Use reader-owned sandbox credentials and the public Visa fixture. Run npm run setup explicitly; copy its printed CA assignment into your private .env.
+- One invocation accepts one ciphertext handoff, starts at most one billable Browserbase session, submits one synthetic checkout, then confirms cleanup and exits. Ctrl+C/SIGTERM waits for acquired resources; it cannot undo an already-started submission.
+- The synthetic merchant receives plaintext public fixture values. This is not a production payment architecture or PCI-compliance claim.
+- Collection stays on localhost. Remote Browserbase requires reader-managed HTTPS exposure forwarding only GET /mock-merchant/checkout and POST /mock-merchant/authorize.
+- This one-shot implementation is offline-tested only. Historical canary evidence at c85deef applies to the earlier manual comparison, not this refactor. Fresh live execution, CA upload and Caddy deployment remain unverified.
 
 ## Provenance
 

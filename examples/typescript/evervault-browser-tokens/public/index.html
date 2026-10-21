@@ -2,83 +2,24 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <meta name="color-scheme" content="light" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Evervault + Browserbase card reference</title>
-    <link rel="stylesheet" href="/styles.css" />
-    <script defer src="https://js.evervault.com/v2"></script>
-    <script defer src="/app.js"></script>
+    <script src="https://js.evervault.com/v2" defer></script>
+    <script src="/collect.js" defer></script>
   </head>
   <body>
-    <main>
-      <h1>Evervault + Browserbase</h1>
-      <p>
-        Run the same card tokens through two browser sessions. Evervault’s proxy reveals the test
-        values to the synthetic merchant; the direct path submits unchanged tokens.
-      </p>
-      <p class="fixture">
-        <strong>Public Visa test card:</strong> 4242 4242 4242 4242<br /><strong>Dummy CVC:</strong>
-        123 · <strong>Expiry:</strong> 12/34 (automatic)
-      </p>
-      <p>Use only these public fixtures. No purchase or real charge occurs.</p>
-      <div id="card-collection" aria-label="Evervault-hosted card number and CVC fields"></div>
-      <p id="collection-status">Loading Evervault-hosted collection…</p>
-      <div class="actions">
-        <button id="run" disabled>Run comparison</button
-        ><button id="cancel" disabled>Cancel</button>
-      </div>
-      <p id="status" role="status" aria-live="polite">Enter the test card in the hosted fields.</p>
-      <p id="error" role="alert" hidden></p>
-      <section id="tokens" hidden aria-labelledby="tokens-title">
-        <h2 id="tokens-title">Returned Browser Tokens</h2>
-        <dl>
-          <dt>Test card → card-number token</dt>
-          <dd><span>4242 4242 4242 4242 → </span><code id="number-token"></code></dd>
-          <dt>Test CVC → CVC token</dt>
-          <dd><span>123 → </span><code id="cvc-token"></code></dd>
-        </dl>
-        <p>
-          Both browsers receive these tokens, not the original values. Five-minute lifetime; this
-          readout clears when cleanup finishes.
-        </p>
-      </section>
-      <section id="results" hidden aria-labelledby="results-title">
-        <h2 id="results-title">Comparison results</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Network path</th>
-              <th>Observed result</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Evervault proxy + CA</td>
-              <td id="proxied-result">Not confirmed</td>
-            </tr>
-            <tr>
-              <td>Direct control</td>
-              <td id="control-result">Not confirmed</td>
-            </tr>
-          </tbody>
-        </table>
-        <p id="cleanup-status"></p>
-      </section>
-      <p class="note">
-        Each comparison starts two billable Browserbase sessions and closes them automatically.
-        Cancel stops further workflow steps and waits for in-flight operations to settle before
-        cleanup. It cannot undo a submission already started.
-      </p>
-      <p class="note">
-        Card fields are hosted by Evervault; this page receives ciphertext. Keys and proxy
-        credentials stay on the server. The synthetic merchant receives the public test values in
-        plaintext. This reference is not a production payment service or PCI certification.
-      </p>
-      <p>
-        <a href="https://docs.browserbase.com/integrations/evervault/introduction"
-          >Integration documentation</a
-        >
-      </p>
-    </main>
+    <h1>Evervault + Browserbase card reference</h1>
+    <p>
+      Enter only the public Visa test number <strong>4242 4242 4242 4242</strong> and dummy CVC
+      <strong>123</strong> (the three-digit security code). Expiry is fixed to
+      <strong>12/34</strong>. Never enter a real card.
+    </p>
+    <p>
+      Evervault hosts and encrypts these fields. Continue sends ciphertext to the local program,
+      which runs one proxied synthetic checkout. No purchase or real charge occurs.
+    </p>
+    <div id="card-collection"></div>
+    <button id="continue" disabled>Continue</button>
+    <p id="status" role="status">Loading hosted collection…</p>
   </body>
 </html>
