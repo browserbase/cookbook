@@ -5,7 +5,7 @@ Compare proxied and direct synthetic card checkouts using Evervault-hosted colle
 > [!CAUTION]
 > Demo and reference code only. This recipe is not a vetted production implementation. Independently review it, obtain authorization, and validate security, privacy, compliance, cost, and site-term requirements before use. Use at your own risk.
 
-**Status:** current · public · offline behavior tested.
+**Status:** current · public · live workflow tested.
 
 **Recipe type:** runnable example.
 **LLM requirement:** not required (derived from the inspected framework and configuration metadata).
@@ -77,18 +77,19 @@ Declared runtime dependencies from [examples/typescript/evervault-browser-tokens
 
 ## Caveats and verification
 
-Source and setup metadata were inspected. No passing authenticated live-workflow check is recorded for this recipe. Websites, model access, paid services, permissions, costs, and operator-specific configuration remain unverified.
+Source and setup metadata were inspected. A scoped live workflow check is recorded below; only its stated command, date, result, and limits are verified. Other websites, accounts, permissions, costs, and configurations remain unverified.
 
 | Check | Date | Runtime | Command | Result and limits |
 | --- | --- | --- | --- | --- |
 | Clean install verified | 2026-10-20 | `Node.js 24.19.0; npm 12.2.0; macOS arm64; recipe package-lock.json, no pre-existing node_modules` | `npm exec --yes --package=npm@12.2.0 -- npm ci --ignore-scripts --min-release-age=7` | passed. Independent clean package installation succeeded with 116 packages and no audit findings. Installation alone does not validate any browser workflow. |
 | Offline behavior tested | 2026-10-20 | `Node.js 24.19.0; npm 12.2.0; TypeScript 5.9.2; Stagehand 4.1.0; Browserbase SDK 2.18.0; macOS arm64` | `npm exec --yes --package=npm@12.2.0 -- npm run check` | passed. Typecheck and 27 tests passed in the independently installed package. All Browserbase and Evervault calls were mocked; no certificate upload, live session, proxy swap, or payment was executed. |
+| Live workflow tested | 2026-10-20 | `Node.js 24.19.0; Stagehand 4.1.0; Browserbase SDK 2.18.0; real Evervault hosted Card Collection v2; local presenter at runtime commit c85deef` | `Manual UI: Create tokens & launch -> Enter tokens in both -> Submit both checkouts; Browserbase SDK: sessions.list({ limit: 50 })` | passed. One manual sandbox comparison using the public test card and a temporary route-limited HTTPS merchant endpoint. Proxied approval, direct decline, UI cleanup, and both matching sessions COMPLETED were verified. No real payment or new CA upload. The Caddy deployment and live cancellation paths were not exercised. Session IDs and runtime material remain private. |
 
 - Before npm start, fill your private .env and run npm run setup explicitly to provision or verify the Evervault CA. Follow the source README for the route-limited HTTPS merchant setup.
 - Sandbox and public fixtures only; the synthetic merchant receives plaintext test data and is not a production PCI architecture.
 - Each live comparison creates two billable Browserbase sessions. Explicit certificate setup contacts services and may upload a CA.
 - The presenter remains on localhost; Browserbase requires a reader-controlled HTTPS endpoint exposing only the synthetic merchant routes.
-- Offline validation uses mocked services. No fresh live Browserbase or Evervault workflow has been run.
+- Live evidence covers one manual public-fixture comparison only; production use, merchant coverage, Caddy deployment, and live cancellation remain unverified.
 
 ## Provenance
 

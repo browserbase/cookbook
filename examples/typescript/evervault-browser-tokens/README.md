@@ -119,6 +119,12 @@ The fixed merchant accepts only the published fixture and returns a constant app
 
 The Host/origin/header checks protect this local demonstration from accidental public exposure and drive-by browser requests. They are not multi-user authentication. Production use needs separate authentication, authorization, tenant isolation, rate limits, audit policy, secret management, and compliance review.
 
+## Live validation
+
+On October 20, 2026, one manual sandbox comparison ran against the real Evervault Card Collection and Browser Tokens API, with two real Browserbase sessions executing the Stagehand runner. The proxied checkout was approved and the direct control was declined. Automatic cleanup cleared the token and Live View displays; an independent Browserbase SDK check confirmed both matching sessions were `COMPLETED`.
+
+This canary used the public test card, an existing CA certificate, and a temporary HTTPS tunnel restricted to the three synthetic merchant routes. It did not upload a CA or make a real payment. The supplied Caddy deployment and live Stop/failure paths were not exercised; cancellation and failure coverage below remains offline. One successful fixture run does not establish production or arbitrary-merchant compatibility. Runtime screenshots, tokens, session IDs, and credentials are excluded from the repository.
+
 ## Offline checks
 
 ```sh

@@ -403,7 +403,7 @@
     },
     {
       "path": "examples/typescript/evervault-browser-tokens/README.md",
-      "sha256": "d56133993de28f8a2a79a16fdf33e574976c7452a0af1f21e38ef1378d02670d",
+      "sha256": "689668917044798ee447ab66d2fc0162544ec7f7d93631e56e7b19d824e653df",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
