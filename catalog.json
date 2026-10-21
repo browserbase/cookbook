@@ -14666,7 +14666,7 @@
         "One invocation accepts one ciphertext handoff, starts at most one billable Browserbase session, submits one synthetic checkout, then confirms cleanup and exits. Ctrl+C/SIGTERM waits for acquired resources; it cannot undo an already-started submission.",
         "The synthetic merchant receives plaintext public fixture values. This is not a production payment architecture or PCI-compliance claim.",
         "Collection stays on localhost. Remote Browserbase requires reader-managed HTTPS exposure forwarding only GET /mock-merchant/checkout and POST /mock-merchant/authorize.",
-        "This one-shot implementation is offline-tested only. Historical canary evidence at c85deef applies to the earlier manual comparison, not this refactor. Fresh live execution, CA upload and Caddy deployment remain unverified."
+        "The one-shot implementation passed one live sandbox canary on 2026-10-21 at commit 427c50c: real hosted collection, synthetic approval, one session independently confirmed COMPLETED, and exit zero. The run reused an existing CA and a temporary route-limited HTTPS proxy; new CA upload and Caddy deployment remain unverified."
       ],
       "source": {
         "kind": "cookbook-authored",
@@ -14674,7 +14674,7 @@
       },
       "lifecycle": "current",
       "access": "public",
-      "verification": "offline-tested",
+      "verification": "live-tested",
       "search_aliases": [
         "evervault",
         "browser tokens",
@@ -14704,6 +14704,14 @@
           "command": "npm exec --yes --package=npm@12.2.0 -- npm run check",
           "result": "passed",
           "limits": "Typecheck and 33 offline tests passed in the independently installed one-shot refactor. Provider calls were mocked. Local browser checks used a fixture SDK/iframe and mocked provider workflow, verifying desktop/390px collection, receipt acknowledgement, synthetic merchant approval, terminal completion and exit. No fresh live session, proxy swap, CA upload, HTTPS deployment or payment was executed."
+        },
+        {
+          "kind": "live-tested",
+          "date": "2026-10-21",
+          "runtime": "Node.js 24.19.0; npm 12.2.0; Stagehand 4.1.0; Browserbase SDK 2.18.0; macOS arm64; recipe commit 427c50c",
+          "command": "npm start",
+          "result": "passed",
+          "limits": "One successful live sandbox run with reader-owned credentials and the documented public Visa fixture. Real Evervault-hosted collection and Browser Tokens fed one proxied Browserbase session; the recipe verified approval at the exact expected HTTPS destination, confirmed release, closed its server, and exited zero. An independent Browserbase SDK inventory/retrieve check found exactly one new session and confirmed COMPLETED. The existing-CA setup reuse branch and route-limited HTTPS boundary were checked. No new CA upload, Caddy deployment, real purchase, or general reliability/merchant compatibility is established. Credentials, runtime values, public endpoint and session identifiers are excluded."
         }
       ],
       "llm_requirement": "not required"

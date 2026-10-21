@@ -113,7 +113,7 @@ Evervault's proxy replaces the submitted tokens with the original fixture on the
 - Local collection/API access requires the loopback Host, matching Origin when present, and a custom API header; cross-site requests are rejected. These checks are not multi-user authentication. Public merchant routes cannot start sessions and never log, persist, echo, or redirect with submitted values. Remove HTTPS forwarding when finished.
 - **The synthetic merchant receives the public fixture in plaintext.** This illustrates a network boundary and an immediate fixture response, not production readiness, PCI compliance, settlement, arbitrary merchant compatibility, or a production payment architecture. Real merchant/PSP separation, retention, 3DS, authentication, validation, and compliance need separate design and review.
 
-## Offline verification
+## Verification
 
 ```sh
 npm run check
@@ -121,9 +121,13 @@ npm run check
 
 Offline CA tests require `openssl` on PATH to generate disposable test certificates.
 
-**This one-shot implementation is offline-tested only.** Tests mock provider calls and cover configuration, `decrypt`/TTL policy, ciphertext handoff/concurrency, one-session execution, expiry, cancellation, late acquisition, partial failures, cleanup confirmation, redaction, HTTP isolation, and CA setup. Mocked browser checks cover hosted collection, receipt acknowledgement, terminal completion, and desktop/narrow layouts. No fresh live proxy swap, CA upload, Caddy deployment, or payment is claimed.
+Offline verification includes 33 tests covering configuration, `decrypt`/TTL policy, ciphertext handoff/concurrency, one-session execution, expiry, cancellation, late acquisition, partial failures, cleanup confirmation, redaction, HTTP isolation, and CA setup. Provider calls are mocked in these tests. Separate mocked browser checks cover collection, receipt acknowledgement, terminal completion, and desktop/narrow layouts.
 
-Historical evidence: the earlier manual comparison implementation at commit `c85deef` passed one real sandbox canary on October 20, 2026 (proxied approval, direct decline, both sessions completed). That does **not** validate this refactor. Fresh live validation requires a separate explicit run request. Runtime captures and identifiers are excluded from the repository.
+**Live sandbox canary passed on October 21, 2026**, using this one-shot implementation at commit `427c50c`, Node.js 24.19.0, npm 12.2.0, reader-owned credentials, and the documented public Visa fixture. The unmodified `npm start` workflow used real Evervault-hosted collection, created Browser Tokens, launched one proxied Browserbase session, verified synthetic approval at the exact expected HTTPS destination, confirmed release, closed the local server, and exited zero. An independent Browserbase SDK check found exactly one new session and confirmed `COMPLETED`.
+
+That run verified the setup helper's existing-CA reuse branch and used a temporary HTTPS proxy forwarding only the two merchant routes; public `/`, `/api/config`, and `/merchant.css` returned `404`. It did not test a new CA upload, deploy Caddy, make a real purchase, or establish general reliability or compatibility with other merchants. The temporary tunnel was stopped afterward. Credentials, endpoint/session identifiers, and runtime ciphertext/tokens are excluded from published evidence.
+
+Historical evidence: the earlier manual comparison implementation at commit `c85deef` passed one real sandbox canary on October 20, 2026 (proxied approval, direct decline, both sessions completed). That earlier result remains separate from the one-shot canary above. Additional live runs require an explicit run request. Runtime captures and identifiers are excluded from the repository.
 
 ## References
 
