@@ -1,10 +1,6 @@
 const $ = (id) => document.getElementById(id);
-let config;
-let component;
-let encryptedCard;
-let runId;
-let busy = false;
-let pollTimer;
+let config, component, encryptedCard, runId;
+let starting = false;
 
 async function api(path, body) {
   const response = await fetch(path, {
@@ -20,11 +16,15 @@ async function api(path, body) {
   if (!response.ok) throw new Error(data.error?.message || "The local request failed");
   return data;
 }
-
 function showError(message) {
   $("error").textContent = message;
   $("error").hidden = false;
 }
+function clearTokens() {
+  $("number-token").textContent = $("cvc-token").textContent = "";
+  $("tokens").hidden = true;
+}
+
 function isEncrypted(value) {
   return typeof value === "string" && /^ev:\S{20,}$/.test(value);
 }
@@ -53,18 +53,17 @@ async function mountCollection() {
     component = evervault.ui.card({
       fields: ["number", "cvc"],
       theme: evervault.ui.themes.clean(),
-      autoFocus: true,
+      autoFocus: false,
       redactCVC: true,
     });
     const accept = (payload) => {
-      if (busy || runId) return;
+      if (starting || runId) return;
       const card = payload?.card ?? payload?.values?.card ?? component?.values?.card;
       encryptedCard =
         isEncrypted(card?.number) && isEncrypted(card?.cvc)
           ? { number: card.number, cvc: card.cvc }
           : undefined;
-      $("create").disabled = !encryptedCard;
-      $("collection-status").dataset.ready = String(Boolean(encryptedCard));
+      $("run").disabled = !encryptedCard;
       $("collection-status").textContent = encryptedCard
         ? "Encrypted test-card values ready"
         : "Complete the hosted test-card fields";
@@ -76,169 +75,81 @@ async function mountCollection() {
     component.on("complete", accept);
     component.on("error", () => {
       encryptedCard = undefined;
-      $("create").disabled = true;
-      $("collection-status").dataset.ready = "false";
+      $("run").disabled = true;
       showError("The secure frame could not encrypt the test values.");
     });
     component.mount("#card-collection");
   } catch (error) {
     $("collection-status").textContent = "Secure collection unavailable";
-    showError(error.message);
+    showError("Secure collection unavailable. Check Evervault access and reload the page.");
   }
-}
-
-function setView(prefix, url) {
-  const frame = $(`${prefix}-view`);
-  // Only render Browserbase's HTTPS Live View. Never render arbitrary provider URLs.
-  let valid = false;
-  try {
-    const parsed = new URL(url);
-    valid = parsed.protocol === "https:" && parsed.hostname.endsWith(".browserbase.com");
-  } catch {
-    /* No active view. */
-  }
-  if (valid) {
-    if (frame.getAttribute("src") !== url) frame.src = url;
-  } else frame.removeAttribute("src");
-  frame.hidden = !valid;
-  $(`${prefix}-placeholder`).hidden = valid;
-  document.querySelector(`[data-view="${prefix}"]`).disabled = !valid;
-}
-
-function render(state) {
-  $("status").dataset.state = state.status;
-  $("enter").disabled = state.awaitingAction !== "enter_token" || busy;
-  $("submit").disabled = state.awaitingAction !== "submit_token" || busy;
-  $("stop").disabled = !runId || state.status === "stopping";
-  $("status").textContent =
-    state.awaitingAction === "enter_token"
-      ? "Ready: enter matching tokens in both browsers (45 seconds)"
-      : state.awaitingAction === "submit_token"
-        ? "Ready: submit both synthetic checkouts (45 seconds)"
-        : `Comparison: ${state.status} · cleanup: ${state.cleanupStatus}`;
-  setView("proxied", state.proxiedLiveViewUrl);
-  setView("control", state.controlLiveViewUrl);
-  $("tokens").hidden = !state.displayCardTokens;
-  $("number-token").textContent = state.displayCardTokens?.number ?? "";
-  $("cvc-token").textContent = state.displayCardTokens?.cvc ?? "";
-  $("proxied-result").textContent = state.proxiedOutcome ? "Approved" : "Waiting";
-  $("proxied-result").classList.toggle("approved", Boolean(state.proxiedOutcome));
-  $("control-result").textContent = state.controlOutcome ? "Declined as expected" : "Waiting";
-  $("control-result").classList.toggle("rejected", Boolean(state.controlOutcome));
-  $("events").replaceChildren(
-    ...state.events.map((event) => {
-      const li = document.createElement("li");
-      li.textContent = `${event.step}: ${event.detail}`;
-      return li;
-    }),
-  );
-  if (state.error) showError(state.error.message);
-  const terminal =
-    ["succeeded", "failed", "stopped"].includes(state.status) &&
-    ["completed", "failed"].includes(state.cleanupStatus);
-  if (terminal) {
-    runId = undefined;
-    $("stop").disabled = true;
-    $("reset").hidden = false;
-  }
-  return terminal;
 }
 
 async function poll() {
   if (!runId) return;
   try {
-    if (render(await api(`/api/runs/${runId}`))) return;
+    const state = await api(`/api/runs/${runId}`);
+    $("status").textContent = `${state.progress} · ${state.status}`;
+    $("cancel").disabled = state.status === "stopping";
+    $("tokens").hidden = !state.displayCardTokens;
+    $("number-token").textContent = state.displayCardTokens?.number ?? "";
+    $("cvc-token").textContent = state.displayCardTokens?.cvc ?? "";
+    $("results").hidden = false;
+    $("proxied-result").textContent = state.proxiedOutcome ? "Approved" : "Not confirmed";
+    $("control-result").textContent = state.controlOutcome
+      ? "Declined as expected"
+      : "Not confirmed";
+    $("cleanup-status").textContent = `Session cleanup: ${state.cleanupStatus}`;
+    if (state.error) showError(state.error.message);
+    if (["succeeded", "failed", "stopped"].includes(state.status)) {
+      clearTokens();
+      runId = undefined;
+      $("cancel").disabled = true;
+      if (state.cleanupStatus === "completed") await mountCollection();
+      return;
+    }
   } catch {
+    clearTokens();
     showError(
-      "Cannot read local run state. Keep this page open and try Stop. Sessions have a server-side timeout.",
+      "Cannot read run state. Keep this page open and try Cancel. Sessions also have a server timeout.",
     );
-    // Clear stale private display values, but keep runId and the Stop control.
-    $("number-token").textContent = "";
-    $("cvc-token").textContent = "";
-    $("tokens").hidden = true;
-    $("enter").disabled = true;
-    $("submit").disabled = true;
   }
-  pollTimer = window.setTimeout(poll, 500);
+  window.setTimeout(poll, 500);
 }
 
-$("create").addEventListener("click", async () => {
-  if (busy || runId || !encryptedCard) return;
-  busy = true;
-  $("create").disabled = true;
-  $("error").hidden = true;
+$("run").addEventListener("click", async () => {
+  if (starting || runId || !encryptedCard) return;
+  starting = true;
+  $("run").disabled = true;
+  $("error").hidden = $("results").hidden = true;
+  clearTokens();
   const payload = { encryptedCard: { ...encryptedCard }, expiry: config.cardExpiry };
   destroyCollection();
-  document.body.classList.add("presenting");
-  $("presenter").scrollIntoView({ block: "start" });
   $("collection-status").textContent =
-    "Secure frame removed; ciphertext sent only to the local backend";
-  $("collection-status").dataset.ready = "false";
+    "Hosted frame removed; only ciphertext was sent to the local server.";
+  $("status").textContent = "Starting comparison…";
   try {
     const started = await api("/api/card-runs", payload);
     runId = started.runId;
-    $("stop").disabled = false;
-    await poll();
+    $("cancel").disabled = false;
   } catch {
     showError(
-      "Could not start or confirm the comparison. Check local run state and Browserbase before retrying; a lost response may hide an active run.",
+      "Could not confirm startup. Check the local server and Browserbase before reloading; a lost response may hide an active comparison.",
     );
-    $("reset").hidden = false;
   } finally {
-    payload.encryptedCard.number = "";
-    payload.encryptedCard.cvc = "";
-    busy = false;
+    payload.encryptedCard.number = payload.encryptedCard.cvc = "";
+    starting = false;
   }
+  if (runId) await poll();
 });
-
-for (const [id, action] of [
-  ["enter", "enter_token"],
-  ["submit", "submit_token"],
-]) {
-  $(id).addEventListener("click", async () => {
-    if (busy || !runId) return;
-    busy = true;
-    $("enter").disabled = true;
-    $("submit").disabled = true;
-    try {
-      await api(`/api/runs/${runId}/advance`, { action });
-    } catch (error) {
-      showError(error.message);
-    } finally {
-      busy = false;
-    }
-  });
-}
-$("stop").addEventListener("click", async () => {
+$("cancel").addEventListener("click", async () => {
   if (!runId) return;
-  $("stop").disabled = true;
+  $("cancel").disabled = true;
   try {
     await api(`/api/runs/${runId}/stop`, {});
   } catch {
-    showError("Stop could not be confirmed. Check the local server and Browserbase dashboard.");
-    $("stop").disabled = false;
+    showError("Cancel could not be confirmed. Check the local server and Browserbase.");
+    $("cancel").disabled = false;
   }
 });
-$("reset").addEventListener("click", () => {
-  if (!runId && !busy) window.location.reload();
-});
-$("focus").addEventListener("click", () => {
-  const focused = document.body.classList.toggle("focused");
-  $("focus").textContent = focused ? "Exit comparison" : "Focus comparison";
-  $("focus").setAttribute("aria-pressed", String(focused));
-});
-document.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    document.body.classList.remove("focused");
-    $("focus").textContent = "Focus comparison";
-    $("focus").setAttribute("aria-pressed", "false");
-  }
-});
-document.querySelectorAll(".fullscreen").forEach((button) =>
-  button.addEventListener("click", () => {
-    void $(`${button.dataset.view}-view`)
-      .requestFullscreen()
-      .catch(() => showError("Full screen is unavailable in this browser."));
-  }),
-);
 void mountCollection();

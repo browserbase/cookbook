@@ -11,7 +11,7 @@ import {
   type AppConfig,
 } from "./config.js";
 import type { EncryptedCard } from "./evervault.js";
-import { RunStore, type RunExecutor } from "./run-store.js";
+import { CurrentRun, type RunExecutor } from "./run.js";
 import { DemoError, isEvervaultCiphertext, safeError } from "./sanitize.js";
 
 export function merchantPage(outcome?: "approved" | "declined"): string {
@@ -35,7 +35,7 @@ export function createApp(
   } = {},
 ) {
   const config = options.config ?? loadConfig(process.env, { requireCertificate: true });
-  const runs = new RunStore();
+  const runs = new CurrentRun();
   const app = express();
   const publicDir = join(dirname(fileURLToPath(import.meta.url)), "..", "public");
   const localHost = `127.0.0.1:${config.port}`;
@@ -45,7 +45,7 @@ export function createApp(
     response.setHeader("Cache-Control", "no-store");
     response.setHeader(
       "Content-Security-Policy",
-      "default-src 'self'; script-src 'self' https://js.evervault.com; connect-src 'self' https://*.evervault.com; frame-src https://*.browserbase.com https://ui-components.evervault.com; style-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'self'",
+      "default-src 'self'; script-src 'self' https://js.evervault.com; connect-src 'self' https://*.evervault.com; frame-src https://ui-components.evervault.com; style-src 'self'; img-src 'self' data:; font-src 'self'; base-uri 'none'; form-action 'self'; frame-ancestors 'self'",
     );
     response.setHeader("Referrer-Policy", "no-referrer");
     response.setHeader("X-Content-Type-Options", "nosniff");
@@ -83,7 +83,7 @@ export function createApp(
     response.sendFile(join(publicDir, "merchant.css")),
   );
 
-  // Defense in depth: deny the presenter/API even if a proxy forwards other paths.
+  // Defense in depth: deny the local page/API even if a proxy forwards other paths.
   // No forwarded header is trusted. The public proxy must preserve the public Host.
   app.use((request, response, next) => {
     const origin = request.get("origin");
@@ -95,7 +95,7 @@ export function createApp(
     ) {
       response
         .status(403)
-        .json({ error: { code: "LOCAL_ONLY", message: "Use the local presenter URL" } });
+        .json({ error: { code: "LOCAL_ONLY", message: "Use the local demo URL" } });
       return;
     }
     next();
@@ -106,7 +106,7 @@ export function createApp(
       if (request.get("x-demo-request") !== "1") {
         response
           .status(403)
-          .json({ error: { code: "LOCAL_ONLY", message: "Use the local presenter UI" } });
+          .json({ error: { code: "LOCAL_ONLY", message: "Use the local demo UI" } });
         return;
       }
       next();
@@ -152,25 +152,8 @@ export function createApp(
     }
     response.json(run);
   });
-  app.post("/api/runs/:runId/advance", (request, response) => {
-    const action = request.body?.action;
-    if (action !== "enter_token" && action !== "submit_token") {
-      response.status(400).json({ error: { message: "Invalid checkpoint action" } });
-      return;
-    }
-    try {
-      const run = runs.advance(request.params.runId, action);
-      if (!run) {
-        response.status(404).json({ error: { message: "Run not found" } });
-        return;
-      }
-      response.status(202).json({ runId: run.runId });
-    } catch (error) {
-      response.status(409).json({ error: safeError(error) });
-    }
-  });
   app.post("/api/runs/:runId/stop", async (request, response) => {
-    const run = await runs.stop(request.params.runId);
+    const run = runs.stop(request.params.runId);
     if (!run) {
       response.status(404).json({ error: { message: "Run not found" } });
       return;

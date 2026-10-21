@@ -34,3 +34,11 @@ export async function until(predicate: () => boolean): Promise<void> {
     await new Promise((resolve) => setTimeout(resolve, 1));
   }
 }
+
+export function deferred() {
+  let resolve!: () => void;
+  const promise = new Promise<void>((done) => {
+    resolve = done;
+  });
+  return { promise, resolve };
+}

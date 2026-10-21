@@ -1,42 +1,45 @@
 import { Browserbase } from "@browserbasehq/sdk";
 import { browserbase, Stagehand, type Page, type StagehandBrowser } from "@browserbasehq/stagehand";
-type StagehandInstance = Awaited<ReturnType<typeof Stagehand.create>>;
-import type { AppConfig } from "./config.js";
-import { CARD_AUTHORIZE_PATH, CARD_CHECKOUT_PATH, TEST_CARD_EXPIRY } from "./config.js";
+import {
+  CARD_AUTHORIZE_PATH,
+  CARD_CHECKOUT_PATH,
+  TEST_CARD_EXPIRY,
+  type AppConfig,
+} from "./config.js";
 import { createCardBrowserTokens, type EncryptedCard } from "./evervault.js";
-import type { RunContext } from "./run-store.js";
+import type { RunContext } from "./run.js";
 import { DemoError } from "./sanitize.js";
 
+type Session = {
+  id?: string;
+  browser?: StagehandBrowser;
+  stagehand?: Awaited<ReturnType<typeof Stagehand.create>>;
+};
 export type CardRuntime = {
   launch: typeof browserbase.launch;
   attach: typeof Stagehand.create;
   tokens: typeof createCardBrowserTokens;
-  debug(sessionId: string): Promise<{ debuggerFullscreenUrl: string }>;
   release(sessionId: string): Promise<unknown>;
   retrieve(sessionId: string): Promise<{ status: string }>;
 };
-export type CardRunOptions = {
-  holdMs?: number;
-  completionPollMs?: number;
-  gateMs?: number;
-  runtime?: CardRuntime;
-};
-
-const PRESENTER_GATE_MS = 45_000;
+export type CardRunOptions = { completionPollMs?: number; runtime?: CardRuntime };
 const TARGET_NAVIGATION_MS = 15_000;
 const RESULT_POLL_MS = 15_000;
 
-function targetUrl(config: AppConfig): string {
-  if (!config.cardTargetHost) {
-    throw new DemoError("CARD_TARGET_REQUIRED", "The synthetic merchant target is not configured");
-  }
-  return `https://${config.cardTargetHost}${CARD_CHECKOUT_PATH}`;
+// Wait for every in-flight operation before cleanup, including late resource acquisition.
+async function together<T>(operations: Promise<T>[]): Promise<T[]> {
+  const results = await Promise.allSettled(operations);
+  const failure = results.find((result) => result.status === "rejected");
+  if (failure?.status === "rejected") throw failure.reason;
+  return results.map((result) => (result as PromiseFulfilledResult<T>).value);
 }
 
 function isExpectedUrl(value: string, hostname: string, pathname: string): boolean {
   try {
     const url = new URL(value);
-    return url.protocol === "https:" && url.hostname === hostname && url.pathname === pathname;
+    return (
+      url.origin === `https://${hostname}` && url.pathname === pathname && !url.search && !url.hash
+    );
   } catch {
     return false;
   }
@@ -53,7 +56,7 @@ function isRecoverableGotoTimeout(error: unknown): boolean {
 async function navigateToCheckout(page: Page, config: AppConfig): Promise<void> {
   let recovered = false;
   try {
-    await page.goto(targetUrl(config), {
+    await page.goto(`https://${config.cardTargetHost}${CARD_CHECKOUT_PATH}`, {
       waitUntil: "domcontentloaded",
       timeout: TARGET_NAVIGATION_MS,
     });
@@ -95,9 +98,11 @@ export async function waitForCardOutcome(
   hostname: string,
   expected: "approved" | "declined",
   timeoutMs = RESULT_POLL_MS,
+  signal?: AbortSignal,
 ): Promise<{ finalUrl: string; outcome: string }> {
   const deadline = Date.now() + timeoutMs;
   do {
+    signal?.throwIfAborted();
     try {
       const snapshot = await bounded(
         page.evaluate(() => ({
@@ -189,8 +194,6 @@ export async function executeCardRun(
   context: RunContext,
   options: CardRunOptions = {},
 ): Promise<void> {
-  const holdMs = options.holdMs ?? 30_000;
-  const completionPollMs = options.completionPollMs ?? 30_000;
   const client = new Browserbase({
     apiKey: config.browserbaseApiKey,
     timeout: 10_000,
@@ -200,299 +203,181 @@ export async function executeCardRun(
     launch: (options) => browserbase.launch(options),
     attach: (options) => Stagehand.create(options),
     tokens: createCardBrowserTokens,
-    debug: (id) => client.sessions.debug(id),
-    release: (id) =>
-      client.sessions.update(id, {
-        status: "REQUEST_RELEASE",
-      }),
+    release: (id) => client.sessions.update(id, { status: "REQUEST_RELEASE" }),
     retrieve: (id) => client.sessions.retrieve(id),
   };
-  let proxiedBrowser: StagehandBrowser | undefined;
-  let controlBrowser: StagehandBrowser | undefined;
-  let proxiedStagehand: StagehandInstance | undefined;
-  let controlStagehand: StagehandInstance | undefined;
-  let proxiedSessionId: string | undefined;
-  let controlSessionId: string | undefined;
-  let cleanupError: unknown;
-
-  let closing: Promise<void> | undefined;
-  const closeBothSessions = (): Promise<void> => {
-    closing ??= closeResources();
-    return closing;
-  };
-  const closeResources = async () => {
-    const stagehands = [proxiedStagehand, controlStagehand].filter(
-      (value): value is StagehandInstance => Boolean(value),
-    );
-    proxiedStagehand = undefined;
-    controlStagehand = undefined;
-    const stagehandResults = await Promise.allSettled(
-      stagehands.map((stagehand) => stagehand.close()),
-    );
-    cleanupError ??= stagehandResults.find((result) => result.status === "rejected")?.reason;
-
-    const browsers = [proxiedBrowser, controlBrowser].filter((value): value is StagehandBrowser =>
-      Boolean(value && !value.closed),
-    );
-    proxiedBrowser = undefined;
-    controlBrowser = undefined;
-    const browserResults = await Promise.allSettled(browsers.map((browser) => browser.close()));
-    cleanupError ??= browserResults.find((result) => result.status === "rejected")?.reason;
-    // Also request release explicitly, including a partial launch or failed close.
-    const releases = await Promise.allSettled(
-      [proxiedSessionId, controlSessionId]
-        .filter((id): id is string => Boolean(id))
-        .map((id) => runtime.release(id)),
-    );
-    cleanupError ??= releases.find((result) => result.status === "rejected")?.reason;
-  };
-
-  context.setStopHook(closeBothSessions);
+  const sessions: Session[] = [{}, {}];
+  const checkCancelled = () => context.signal.throwIfAborted();
   try {
-    if (context.isStopRequested()) return;
-    context.update({ status: "running" });
-    context.event("protect", "Creating five-minute card tokens with one exact destination");
+    checkCancelled();
+    // 1. Tokenize ciphertext with a five-minute TTL and one exact reveal destination.
     const tokens = await runtime.tokens(config, encryptedCard, config.cardTargetHost, {
       signal: context.signal,
     });
-    encryptedCard.number = "";
-    encryptedCard.cvc = "";
-    const assertFresh = () => {
-      if (Date.parse(tokens.expiresAt) - Date.now() < 15_000) {
+    encryptedCard.number = encryptedCard.cvc = "";
+    const assertFresh = (minimumMs = 15_000) => {
+      if (
+        !Number.isFinite(Date.parse(tokens.expiresAt)) ||
+        Date.parse(tokens.expiresAt) - Date.now() < minimumMs
+      )
         throw new DemoError(
           "BROWSER_TOKEN_EXPIRED",
           "Card tokens expired or are too close to expiry. Start a new comparison.",
         );
-      }
     };
-    context.update({ displayCardTokens: { number: tokens.numberToken, cvc: tokens.cvcToken } });
-    if (Date.parse(tokens.expiresAt) - Date.now() < 60_000) {
-      throw new DemoError(
-        "BROWSER_TOKEN_TOO_SHORT",
-        "Browser Tokens have less than 60 seconds remaining",
-      );
-    }
-    if (context.isStopRequested()) {
-      context.update({ status: "stopped" });
-      return;
-    }
-
-    context.event(
-      "execute",
-      "Launching matched Browserbase sessions with and without Evervault's proxy",
-    );
-    const sharedBrowserSettings = {
-      allowedDomains: [config.cardTargetHost],
-      ignoreCertificateErrors: false,
-      recordSession: false,
-      logSession: false,
-      solveCaptchas: false,
-      advancedStealth: false,
-      verified: false,
-      viewport: { width: 1280, height: 900 },
-    };
-    const launchResults = await Promise.allSettled([
-      runtime.launch({
-        apiKey: config.browserbaseApiKey,
-        api_timeout: 240,
-        keepAlive: false,
-        region: "us-east-1",
-        proxies: [
-          {
-            type: "external",
-            server: `https://${tokens.proxy.hostname}:${tokens.proxy.port}`,
-            username: tokens.proxy.username,
-            password: tokens.proxy.password,
-          },
-        ],
-        proxySettings: { caCertificates: [config.caCertificateId] },
-        browserSettings: sharedBrowserSettings,
-        userMetadata: {
-          demo: "evervault-browser-tokens-card",
-          path: "evervault-proxy",
-          runId: context.runId,
-        },
-      }),
-      runtime.launch({
-        apiKey: config.browserbaseApiKey,
-        api_timeout: 240,
-        keepAlive: false,
-        region: "us-east-1",
-        browserSettings: sharedBrowserSettings,
-        userMetadata: {
-          demo: "evervault-browser-tokens-card",
-          path: "direct-control",
-          runId: context.runId,
-        },
-      }),
-    ]);
-    if (launchResults[0].status === "fulfilled") proxiedBrowser = launchResults[0].value;
-    if (launchResults[1].status === "fulfilled") controlBrowser = launchResults[1].value;
-    proxiedSessionId = proxiedBrowser?.sessionId;
-    controlSessionId = controlBrowser?.sessionId;
-    // Stop may arrive during launch. Close the resources that arrived afterward.
-    closing = undefined;
-    if (context.isStopRequested()) {
-      context.update({ status: "stopped" });
-      return;
-    }
-    if (!proxiedBrowser || !controlBrowser) {
-      throw new DemoError(
-        "SESSION_LAUNCH_FAILED",
-        "Both card comparison sessions could not be launched. Any active session will be released.",
-      );
-    }
-    proxiedSessionId = proxiedBrowser.sessionId;
-    controlSessionId = controlBrowser.sessionId;
-    if (!proxiedSessionId || !controlSessionId) {
-      throw new DemoError(
-        "SESSION_ID_MISSING",
-        "A Browserbase comparison session ID is unavailable",
-      );
-    }
-
-    const [proxiedLive, controlLive] = await Promise.all([
-      runtime.debug(proxiedSessionId),
-      runtime.debug(controlSessionId),
-    ]);
+    assertFresh(60_000);
+    checkCancelled();
     context.update({
-      proxiedLiveViewUrl: proxiedLive.debuggerFullscreenUrl,
-      controlLiveViewUrl: controlLive.debuggerFullscreenUrl,
+      displayCardTokens: { number: tokens.numberToken, cvc: tokens.cvcToken },
+      progress: "Launching matched sessions",
     });
 
-    if (context.isStopRequested()) {
-      context.update({ status: "stopped" });
-      return;
-    }
-    const stagehandResults = await Promise.allSettled([
-      runtime.attach({ browser: proxiedBrowser, logging: { level: "off" } }),
-      runtime.attach({ browser: controlBrowser, logging: { level: "off" } }),
-    ]);
-    if (stagehandResults[0].status === "fulfilled") proxiedStagehand = stagehandResults[0].value;
-    if (stagehandResults[1].status === "fulfilled") controlStagehand = stagehandResults[1].value;
-    closing = undefined;
-    if (!proxiedStagehand || !controlStagehand) {
-      throw new DemoError(
-        "STAGEHAND_ATTACH_FAILED",
-        "Both card comparison sessions could not be attached. Any active session will be released.",
-      );
-    }
-
-    // Stop can arrive during attachment; the finalizer must close late attachments.
-    closing = undefined;
-    if (context.isStopRequested()) {
-      context.update({ status: "stopped" });
-      return;
-    }
-
-    const [proxiedPage, controlPage] = await Promise.all([
-      proxiedBrowser.context.activePage().then((page) => page ?? proxiedBrowser!.context.newPage()),
-      controlBrowser.context.activePage().then((page) => page ?? controlBrowser!.context.newPage()),
-    ]);
-    await Promise.all([
-      navigateToCheckout(proxiedPage, config),
-      navigateToCheckout(controlPage, config),
-    ]);
-
-    context.event(
-      "execute",
-      "Both synthetic checkouts are ready; compare the same card tokens in each browser",
+    // 2. Launch the same browser settings; only the first path uses Evervault's proxy and CA.
+    const shared = {
+      apiKey: config.browserbaseApiKey,
+      api_timeout: 240,
+      keepAlive: false,
+      region: "us-east-1" as const,
+      browserSettings: {
+        allowedDomains: [config.cardTargetHost],
+        ignoreCertificateErrors: false,
+        recordSession: false,
+        logSession: false,
+        solveCaptchas: false,
+        advancedStealth: false,
+        verified: false,
+        viewport: { width: 1280, height: 900 },
+      },
+    };
+    await together(
+      [
+        {
+          ...shared,
+          proxies: [
+            {
+              type: "external" as const,
+              server: `https://${tokens.proxy.hostname}:${tokens.proxy.port}`,
+              username: tokens.proxy.username,
+              password: tokens.proxy.password,
+            },
+          ],
+          proxySettings: { caCertificates: [config.caCertificateId] },
+        },
+        shared,
+      ].map(async (settings, index) => {
+        sessions[index]!.browser = await runtime.launch(settings);
+        sessions[index]!.id = sessions[index]!.browser!.sessionId;
+        if (!sessions[index]!.id)
+          throw new DemoError("SESSION_ID_MISSING", "A comparison session ID is unavailable");
+      }),
     );
-    const enterResult = await context.waitForAdvance(
-      "enter_token",
-      options.gateMs ?? PRESENTER_GATE_MS,
+    checkCancelled();
+    await together(
+      sessions.map(async (session) => {
+        session.stagehand = await runtime.attach({
+          browser: session.browser!,
+          logging: { level: "off" },
+        });
+      }),
     );
-    if (enterResult !== "advanced") {
-      context.update({ status: "stopped" });
-      context.event(
-        "cleanup",
-        enterResult === "timed_out"
-          ? "Presenter checkpoint timed out; releasing both sessions safely"
-          : "Presenter stopped both sessions",
-      );
-      return;
-    }
+    checkCancelled();
+    const pages = await together(
+      sessions.map(
+        async (session) =>
+          (await session.browser!.context.activePage()) ??
+          (await session.browser!.context.newPage()),
+      ),
+    );
 
+    // 3. Navigate, fill identical tokens, and submit each synthetic checkout once.
+    checkCancelled();
+    context.update({ progress: "Opening synthetic checkouts" });
+    await together(pages.map((page) => navigateToCheckout(page, config)));
+    checkCancelled();
     assertFresh();
-    if (context.isStopRequested()) return;
-    await Promise.all([
-      showCardTokens(proxiedPage, tokens.numberToken, tokens.cvcToken),
-      showCardTokens(controlPage, tokens.numberToken, tokens.cvcToken),
-    ]);
-    context.event(
-      "execute",
-      "The same PAN and CVC tokens are visible in both browsers; submit both to compare network paths",
-    );
-    const submitResult = await context.waitForAdvance(
-      "submit_token",
-      options.gateMs ?? PRESENTER_GATE_MS,
-    );
-    if (submitResult !== "advanced") {
-      context.update({ status: "stopped" });
-      context.event(
-        "cleanup",
-        submitResult === "timed_out"
-          ? "Presenter checkpoint timed out; releasing both sessions safely"
-          : "Presenter stopped both sessions",
-      );
-      return;
-    }
-
+    context.update({ progress: "Entering matching tokens" });
+    await together(pages.map((page) => showCardTokens(page, tokens.numberToken, tokens.cvcToken)));
+    checkCancelled();
     assertFresh();
-    if (context.isStopRequested()) return;
-    context.event("execute", "Submitting the same verified card tokens through both network paths");
-    const submitted = await Promise.all([
-      submitCard(proxiedPage, tokens.numberToken, tokens.cvcToken),
-      submitCard(controlPage, tokens.numberToken, tokens.cvcToken),
-    ]);
-    if (submitted.some((value) => !value)) {
+    context.update({ progress: "Submitting synthetic checkouts" });
+    const submitted = await together(
+      pages.map((page) => submitCard(page, tokens.numberToken, tokens.cvcToken)),
+    );
+    if (submitted.some((value) => !value))
       throw new DemoError(
         "TOKEN_DOM_ASSERTION_FAILED",
-        "Both checkouts did not contain the expected card tokens",
+        "A checkout did not contain the expected tokens",
       );
-    }
-    await Promise.all([
-      waitForCardOutcome(proxiedPage, config.cardTargetHost, "approved"),
-      waitForCardOutcome(controlPage, config.cardTargetHost, "declined"),
+
+    // 4. Assert the exact destination and outcomes, never just a successful click.
+    checkCancelled();
+    context.update({ progress: "Verifying comparison results" });
+    await together([
+      waitForCardOutcome(
+        pages[0]!,
+        config.cardTargetHost,
+        "approved",
+        RESULT_POLL_MS,
+        context.signal,
+      ),
+      waitForCardOutcome(
+        pages[1]!,
+        config.cardTargetHost,
+        "declined",
+        RESULT_POLL_MS,
+        context.signal,
+      ),
     ]);
-    context.update({
-      proxiedOutcome: "approved",
-      controlOutcome: "rejected_as_expected",
-      status: "holding",
-    });
-    context.event(
-      "success",
-      `Same card tokens, different result: the proxied checkout was approved and the direct control was declined. Both close in ${Math.ceil(holdMs / 1000)} seconds`,
-    );
-    await context.wait(holdMs);
-    context.update({ status: context.isStopRequested() ? "stopped" : "succeeded" });
+    context.update({ proxiedOutcome: "approved", controlOutcome: "rejected_as_expected" });
   } finally {
-    encryptedCard.number = "";
-    encryptedCard.cvc = "";
-    context.update({ cleanupStatus: "releasing" });
-    context.event("cleanup", "Releasing both Browserbase sessions");
-    await closeBothSessions();
-    const completionResults = await Promise.allSettled([
-      ...(proxiedSessionId ? [pollCompleted(runtime, proxiedSessionId, completionPollMs)] : []),
-      ...(controlSessionId ? [pollCompleted(runtime, controlSessionId, completionPollMs)] : []),
-    ]);
-    cleanupError ??= completionResults.find((result) => result.status === "rejected")?.reason;
+    encryptedCard.number = encryptedCard.cvc = "";
+    context.update({ progress: "Releasing sessions", cleanupStatus: "releasing" });
+    // Close automation before browsers. Try every resource even if an earlier close fails.
+    const failures: unknown[] = [];
+    const attempt = async (operation: () => Promise<unknown>) => {
+      try {
+        await operation();
+      } catch (error) {
+        failures.push(error);
+      }
+    };
+    await Promise.all(
+      sessions.map((session) =>
+        attempt(async () => {
+          await session.stagehand?.close();
+        }),
+      ),
+    );
+    await Promise.all(
+      sessions.map((session) =>
+        attempt(async () => {
+          if (session.browser && !session.browser.closed) await session.browser.close();
+        }),
+      ),
+    );
+    await Promise.all(
+      sessions.map((session) =>
+        attempt(async () => {
+          if (session.id) await runtime.release(session.id);
+        }),
+      ),
+    );
+    await Promise.all(
+      sessions.map((session) =>
+        attempt(async () => {
+          if (session.id)
+            await pollCompleted(runtime, session.id, options.completionPollMs ?? 30_000);
+        }),
+      ),
+    );
     context.update({
-      cleanupStatus: cleanupError ? "failed" : "completed",
-      proxiedLiveViewUrl: undefined,
-      controlLiveViewUrl: undefined,
+      cleanupStatus: failures.length ? "failed" : "completed",
       displayCardTokens: undefined,
     });
-    context.event(
-      "cleanup",
-      cleanupError
-        ? "Session release could not be confirmed"
-        : "All launched Browserbase sessions are COMPLETED",
-    );
-    if (cleanupError)
+    if (failures.length)
       throw new DemoError(
         "BROWSERBASE_CLEANUP_FAILED",
-        "Session cleanup could not be confirmed. Check your Browserbase dashboard before starting another run.",
+        "Session cleanup could not be confirmed. Check Browserbase before starting another comparison.",
       );
   }
 }

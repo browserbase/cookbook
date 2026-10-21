@@ -5,7 +5,7 @@ import type { AddressInfo } from "node:net";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { createApp } from "../src/server.js";
-import { config, encryptedCard, until } from "./fixtures.js";
+import { config, encryptedCard, until, deferred } from "./fixtures.js";
 
 async function fixture(options: Parameters<typeof createApp>[0] = {}) {
   const { app, runs } = createApp({ config, ...options });
@@ -86,7 +86,7 @@ test("public merchant accepts only the synthetic fixture and never echoes submit
   }
 });
 
-test("presenter/API deny a public Host, hostile Origin, cross-site request, and missing custom header", async () => {
+test("local page/API deny a public Host, hostile Origin, cross-site request, and missing custom header", async () => {
   const f = await fixture();
   try {
     const blockedHeaders: Record<string, string>[] = [
@@ -153,11 +153,15 @@ test("malformed, plaintext, oversized, or wrong-expiry card requests never start
   }
 });
 
-test("local API runs the two explicit checkpoints and returns only safe results", async () => {
+test("local API exposes automatic progress, tokens, safe results, and rejects concurrent starts", async () => {
+  const blocked = deferred();
   const f = await fixture({
     executor: () => async (context) => {
-      assert.equal(await context.waitForAdvance("enter_token", 1000), "advanced");
-      assert.equal(await context.waitForAdvance("submit_token", 1000), "advanced");
+      context.update({
+        progress: "Opening synthetic checkouts",
+        displayCardTokens: { number: "4000000000000002", cvc: "987" },
+      });
+      await blocked.promise;
       context.update({
         cleanupStatus: "completed",
         proxiedOutcome: "approved",
@@ -172,11 +176,11 @@ test("local API runs the two explicit checkpoints and returns only safe results"
     );
     assert.equal(response.status, 202);
     const { runId } = await response.json();
-    await until(() => f.runs.get(runId)?.awaitingAction === "enter_token");
-    assert.equal(
-      (await f.request(`/api/runs/${runId}/advance`, json({ action: "submit_token" }))).status,
-      409,
-    );
+    await until(() => Boolean(f.runs.get(runId)?.displayCardTokens));
+    const active = await (await f.request(`/api/runs/${runId}`)).json();
+    assert.equal(active.displayCardTokens.number, "4000000000000002");
+    for (const excluded of ["events", "awaitingAction", "proxiedLiveViewUrl", "controlLiveViewUrl"])
+      assert.ok(!(excluded in active));
     assert.equal(
       (
         await f.request(
@@ -188,20 +192,50 @@ test("local API runs the two explicit checkpoints and returns only safe results"
     );
     assert.equal(
       (await f.request(`/api/runs/${runId}/advance`, json({ action: "enter_token" }))).status,
-      202,
+      404,
     );
-    await until(() => f.runs.get(runId)?.awaitingAction === "submit_token");
-    assert.equal(
-      (await f.request(`/api/runs/${runId}/advance`, json({ action: "submit_token" }))).status,
-      202,
-    );
+    blocked.resolve();
     await f.runs.settled(runId);
     const state = await (await f.request(`/api/runs/${runId}`)).json();
     assert.equal(state.status, "succeeded");
     assert.equal(state.proxiedOutcome, "approved");
+    assert.equal(state.displayCardTokens, undefined);
     assert.ok(!JSON.stringify(state).includes("ev:"));
     assert.equal((await f.request("/api/runs/missing")).status, 404);
   } finally {
+    blocked.resolve();
+    await f.close();
+  }
+});
+
+test("local Cancel route waits for in-flight work to settle before reporting cleanup", async () => {
+  const blocked = deferred();
+  let entered = false;
+  const f = await fixture({
+    executor: () => async (context) => {
+      entered = true;
+      await blocked.promise;
+      assert.equal(context.signal.aborted, true);
+      context.update({ cleanupStatus: "completed" });
+    },
+  });
+  try {
+    const { runId } = await (
+      await f.request(
+        "/api/card-runs",
+        json({ encryptedCard: encryptedCard(), expiry: { month: "12", year: "34" } }),
+      )
+    ).json();
+    await until(() => entered);
+    assert.equal((await f.request(`/api/runs/${runId}/stop`, json({}))).status, 202);
+    assert.equal(f.runs.get(runId)?.status, "stopping");
+    blocked.resolve();
+    await f.runs.settled(runId);
+    assert.equal(f.runs.get(runId)?.status, "stopped");
+    assert.equal(f.runs.get(runId)?.cleanupStatus, "completed");
+    assert.equal((await f.request("/api/runs/missing/stop", json({}))).status, 404);
+  } finally {
+    blocked.resolve();
     await f.close();
   }
 });
@@ -214,7 +248,10 @@ test("local UI assets load with a restrictive CSP, system fonts, and no captured
     assert.match(response.headers.get("content-security-policy")!, /frame-ancestors 'self'/);
     const html = await response.text();
     assert.match(html, /Evervault/);
-    assert.match(html, /Submit both checkouts/);
+    assert.match(html, /Run comparison/);
+    assert.match(html, /Returned Browser Tokens/);
+    assert.ok(!html.includes("fullscreen"));
+    assert.ok(!html.includes("proxied-view"));
     for (const path of ["/app.js", "/styles.css"])
       assert.equal((await f.request(path)).status, 200);
     const css = await (await f.request("/styles.css")).text();

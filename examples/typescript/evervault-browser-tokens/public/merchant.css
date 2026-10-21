@@ -1,71 +1,39 @@
 :root {
   color-scheme: light;
-  font-family:
-    "IBM Plex Sans",
-    ui-sans-serif,
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    sans-serif;
+  font-family: system-ui, sans-serif;
   color: #000;
-  background: #f8fafc;
+  background: #fff;
 }
 * {
   box-sizing: border-box;
 }
 body {
   margin: 0;
-  min-height: 100vh;
-  padding: 32px;
-  display: grid;
-  place-items: center;
+  padding: 24px;
 }
 .shell {
-  width: min(580px, 100%);
-  background: #fff;
-  border: 1px solid #e1e9f2;
-  padding: 36px;
-}
-.eyebrow,
-.tag,
-label,
-button {
-  font-family: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
-}
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-transform: uppercase;
-  font-size: 10px;
-  margin: 0 0 20px;
-  letter-spacing: 0.02em;
-}
-.eyebrow::before {
-  content: "";
-  width: 6px;
-  height: 6px;
-  background: #ff4500;
+  max-width: 580px;
+  margin: 30px auto;
 }
 h1 {
-  font-family: "Work Sans", system-ui, sans-serif;
-  font-size: clamp(28px, 4vw, 36px);
-  line-height: 1.1;
-  letter-spacing: -0.045em;
-  font-weight: 600;
-  margin: 0 0 16px;
+  font-size: 28px;
 }
 p {
-  font-size: 13px;
-  line-height: 1.65;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.eyebrow,
+label,
+button {
+  font-family: ui-monospace, monospace;
+}
+.eyebrow,
+.notice {
+  font-size: 12px;
 }
 .notice {
-  border-top: 1px solid #e1e9f2;
-  padding-top: 18px;
-  margin: 24px 0 0;
-  font-size: 11px;
-  color: #46639f;
+  border-top: 1px solid #c5d3e8;
+  padding-top: 16px;
 }
 .row {
   display: grid;
@@ -74,51 +42,40 @@ p {
 }
 label {
   display: block;
-  font-size: 10px;
-  margin-top: 20px;
+  font-size: 12px;
+  margin-top: 18px;
 }
 input {
   display: block;
   width: 100%;
-  height: 46px;
-  margin-top: 8px;
+  min-height: 44px;
+  margin-top: 6px;
   border: 1px solid #c5d3e8;
-  padding: 0 12px;
+  padding: 10px;
   font:
     16px ui-monospace,
-    SFMono-Regular,
-    Menlo,
     monospace;
-  color: #000;
   background: #fff;
-}
-input:focus {
-  outline: 2px solid #ff4500;
-  outline-offset: 2px;
+  color: #000;
 }
 button {
   width: 100%;
-  min-height: 46px;
+  padding: 12px;
   margin-top: 24px;
-  border: 1px solid #ff4500;
   background: #ff4500;
   color: #000;
-  font-size: 12px;
-  font-weight: 500;
+  border: 1px solid #ff4500;
   cursor: pointer;
 }
-button:hover {
-  border-color: #000;
-}
+input:focus-visible,
 button:focus-visible {
   outline: 2px solid #ff4500;
   outline-offset: 3px;
 }
 .tag {
   display: inline-block;
-  padding: 7px 10px;
-  font-size: 10px;
-  margin: 0 0 18px;
+  padding: 8px;
+  font-size: 12px;
 }
 .approved {
   background: #ff4500;
@@ -128,13 +85,7 @@ button:focus-visible {
   background: #46639f;
   color: #fff;
 }
-@media (max-width: 520px) {
-  body {
-    padding: 20px;
-  }
-  .shell {
-    padding: 24px;
-  }
+@media (max-width: 420px) {
   .row {
     grid-template-columns: 1fr;
     gap: 0;

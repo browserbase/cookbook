@@ -1,1 +1,0 @@
-Browserbase logo: unmodified copy of the public Browserbase media-kit artwork included in the cookbook at assets/brand/browserbase-logo-color.svg. Browserbase brand assets are not covered by the cookbook source-code MIT license; their inclusion does not grant trademark rights. See assets/brand/README.md at the cookbook root for provenance.

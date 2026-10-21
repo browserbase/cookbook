@@ -1,33 +1,17 @@
 # Card entry with Evervault Browser Tokens
 
-A runnable Stagehand v4 + Browserbase + Evervault reference that compares two network paths using the same short-lived card tokens. It keeps the hosted collection UI and presenter checkpoints small enough to inspect and copy.
+A code-first example of the [Browserbase + Evervault integration](https://docs.browserbase.com/integrations/evervault/introduction). A minimal local page collects an encrypted test card; a TypeScript workflow creates Browser Tokens and automatically compares proxied and direct checkouts using Stagehand v4.
 
-Use an **Evervault sandbox app and public test data only**: card `4242 4242 4242 4242`, CVC `123`, fixed expiry `12/34`. No purchase is made. Do not use real cards or customer data.
-
-## What it demonstrates
-
-```text
-Local presenter page
-  └─ Evervault-hosted iframe collects the test PAN/CVC
-       └─ ciphertext → local backend → Evervault Browser Tokens API
-            ├─ same tokens → Stagehand → Browserbase with Evervault proxy + CA
-            │    └─ network swap → synthetic merchant receives fixture → approved
-            └─ same tokens → Stagehand → direct Browserbase control
-                 └─ unchanged tokens → same merchant → declined
-```
-
-Both sessions use the same region, viewport, exact destination, timeout, browser settings, and token values. The intentional network differences are the Evervault external proxy and its trusted CA. No model is needed: Stagehand uses deterministic locators for the known fixture.
-
-The comparison proves the fixture's immediate response for that run. It does not prove settlement, compatibility with every checkout, or production reliability. Client-side validation, payment iframes, other destination hosts, and 3DS need separate integration work.
+Use **your own Evervault sandbox app and public fixtures only**: Visa test number `4242 4242 4242 4242`, dummy CVC `123`, fixed expiry `12/34`. No purchase or real charge occurs. Never enter real cards or customer data.
 
 ## Prerequisites
 
 - Node.js **24.x** and npm **12.2.0** (or a compatible npm release supporting `min-release-age`).
 - Your own Browserbase project/API key, with external-proxy and custom-CA support. The API key scopes certificate upload and browser sessions to your project; a separate project ID is not needed.
-- Your own Evervault **sandbox** Team ID, App ID, server API key, and Browser Tokens access. Configure Card Collection to accept your local presenter origin if your app requires an origin allowlist.
+- Your own Evervault **sandbox** Team ID, App ID, server API key, and Browser Tokens access. Configure Card Collection to accept your local page origin if your app requires an origin allowlist.
 - A domain you control with HTTPS access to this machine for the synthetic merchant. Remote Browserbase sessions cannot reach `127.0.0.1` on your computer.
 
-The local presenter stays at `http://127.0.0.1:4173`. Only three merchant routes are exposed over HTTPS. You can study and test the code without credentials; credentials are required for setup and live execution.
+The local page stays at `http://127.0.0.1:4173`. Only three merchant routes are exposed over HTTPS. You can study and test the code without credentials; credentials are required for setup and live execution.
 
 ## Install and configure
 
@@ -50,7 +34,7 @@ Fill in your own values in `.env`. Never paste keys into chat, client code, URLs
 | `BROWSERBASE_API_KEY`           | Server-only Browserbase key.                                                                                                               |
 | `BROWSERBASE_CA_CERTIFICATE_ID` | Uploaded Evervault CA ID, written by setup or supplied by you.                                                                             |
 | `CARD_TARGET_HOST`              | Exact public merchant hostname, such as `cards.example.com`; no scheme, path, port, wildcard, or IP. Replace the example with your domain. |
-| `PORT`                          | Local presenter port; defaults to `4173`. Update the proxy target too if changed.                                                          |
+| `PORT`                          | Local page/API port; defaults to `4173`. Update the proxy target too if changed.                                                           |
 
 Run certificate setup explicitly:
 
@@ -79,7 +63,7 @@ Do not enable request-body logging. The example exposes only:
 - `GET /merchant.css`
 - `POST /mock-merchant/authorize`
 
-Every other public path returns `404`. The proxy preserves the public Host header; the application also rejects that host for presenter and API routes. Do not expose the entire application through a tunnel, change its loopback bind address, rewrite Host to the local presenter host, or forward `/api/*`.
+Every other public path returns `404`. The proxy preserves the public Host header; the application also rejects that host for local page and API routes. Do not expose the entire application through a tunnel, change its loopback bind address, rewrite Host to the local page host, or forward `/api/*`.
 
 Check the boundary before running the demo (these calls do not create sessions):
 
@@ -90,59 +74,63 @@ curl -i https://cards.example.com/api/config   # must be 404
 curl -i https://cards.example.com/             # must be 404
 ```
 
-## Run the comparison
+## Run
 
 ```sh
 npm start
 ```
 
-Open **`http://127.0.0.1:4173`** using that exact origin. The API requires the local Host, same-origin requests, and a custom request header; it is not a public API.
+Open **`http://127.0.0.1:4173`** using that exact origin. Enter the public number and CVC inside Evervault's hosted fields, then click **Run comparison** once. The page sends only ciphertext to the local backend. Both browser paths run automatically; no model, manual checkpoints, or embedded Live Views are involved.
 
-1. Enter the public test PAN and CVC inside the Evervault-hosted iframe. The parent page receives only ciphertext; expiry is fixed separately.
-2. Click **Create tokens & launch**. The secure collection frame is removed and local ciphertext references are cleared. The backend requests five-minute tokens with `permissions: [{ action: "decrypt", target: CARD_TARGET_HOST }]`.
-3. Two **billable Browserbase sessions** open. Click **Enter tokens in both** within 45 seconds. Only token values enter their card fields.
-4. Click **Submit both checkouts** within the next 45 seconds. The proxied request is swapped to the public fixture and approved. The direct request carries unchanged tokens and is declined.
-5. Inspect both Live Views. A successful comparison holds for 30 seconds, then closes both sessions and clears the displayed tokens and Live View URLs.
+The returned tokens appear beside the original public fixtures while the workflow runs. Both browsers receive the same tokens. Expected results:
 
-Launching switches to a compact presenter view with the checkpoint buttons and run status pinned above the browsers. Advance both steps from that toolbar. The returned Browser Tokens appear beside the original public test values in that toolbar, making it clear that both browsers receive the same tokens. They clear when the run ends. **New comparison** returns to card collection after cleanup.
+| Network path                 | Merchant receives                                      | Result               |
+| ---------------------------- | ------------------------------------------------------ | -------------------- |
+| Evervault proxy + trusted CA | Original public test values, revealed over the network | Approved             |
+| Direct Browserbase control   | Unchanged Browser Tokens                               | Declined as expected |
 
-**Stop & release**, checkpoint timeout, startup failure, and normal process shutdown all attempt cleanup. Token freshness is checked again before filling and before submission; submissions are never blindly retried. Each session also has a 240-second server timeout and `keepAlive: false`. If cleanup cannot be confirmed, the UI reports failure; check the Browserbase dashboard before another run. Keep the presenter and server open until cleanup completes. A forced process kill cannot execute cleanup code; the server timeout is the fallback. Reloading the page loses local UI ownership of a run; its checkpoint/session timeouts still apply.
+Both sessions close immediately after verification. The page clears tokens, retains the result and cleanup status, and restores hosted collection for another comparison. Any unconfirmed outcome stays **Not confirmed**; it is never presented as success.
 
-The fixed merchant accepts only the published fixture and returns a constant approval/decline page. It never logs, persists, echoes, or places submitted values into URLs. Its public routes can be used by anyone who knows the hostname; they cannot launch sessions. Limit network exposure and remove the proxy when you finish.
+**Cancel** prevents further workflow steps, waits for in-flight operations to settle, and releases acquired resources, including sessions that finish launching after cancellation. It cannot undo a submission already started. Normal SIGINT/SIGTERM shutdown also waits for cleanup. Each session has a 240-second server timeout and `keepAlive: false`; a forced process kill cannot run cleanup code.
 
-## Security boundary
+Keep the server and page open until cleanup finishes. Closing or reloading the page loses its run controls and does not cancel the automatic workflow. If startup, Cancel, or cleanup cannot be confirmed, check the server and Browserbase dashboard before retrying. Starting another run while one is active returns `409`.
 
-- **Collection:** PAN/CVC are entered in Evervault's hosted iframe. Do not replace it with parent-page inputs or server-side plaintext collection. Ciphertext is sent only to the local backend, then Evervault.
-- **Token use:** Evervault returns format-preserving values and short-lived proxy credentials. Stagehand and Browserbase receive tokens. Proxy credentials and service keys remain server-side. This demo pins the returned proxy hostname to the `evervault.app` domain and fails closed for another domain.
-- **Reveal destination:** Only your exact synthetic merchant hostname is allowed. Wildcard reveal permissions and certificate-error bypasses are not used.
-- **Observability:** Browserbase recording/session logging and Stagehand logging are disabled. No raw provider errors, request bodies, CDP data, or proxy credentials are logged or returned. Temporary token values and private Live Views are intentionally visible only in the local presenter. Do not capture or share them.
-- **Storage:** Run state stays in process memory. Terminal token/Live View fields are cleared; completed metadata expires from the store after ten minutes on subsequent access. There is no serverless cache, database, Context persistence, or replay export.
-- **Plaintext destination:** The synthetic merchant runs in this same application and receives the known public fixture after the proxy swap. A production design must use a separately controlled merchant/PSP. This demo is not a PCI-compliance determination or a production payment service.
+## Read the integration code
 
-The Host/origin/header checks protect this local demonstration from accidental public exposure and drive-by browser requests. They are not multi-user authentication. Production use needs separate authentication, authorization, tenant isolation, rate limits, audit policy, secret management, and compliance review.
+Start with [src/card-run.ts](src/card-run.ts). Its sequence is:
 
-## Live validation
+1. Create five-minute tokens from ciphertext using `permissions: [{ action: "decrypt", target: CARD_TARGET_HOST }]`.
+2. Launch two matched Browserbase sessions. Only the proxied path adds the returned external proxy credentials and `proxySettings.caCertificates`.
+3. Attach Stagehand with logging off, navigate to the synthetic merchant, fill identical tokens, and submit once. Check expiry again before filling and submitting.
+4. Verify the exact HTTPS destination and approval/direct-decline outcomes.
+5. Close Stagehand, close browsers, request release, and confirm every acquired session is `COMPLETED`, including after partial failures.
 
-On October 20, 2026, one manual sandbox comparison ran against the real Evervault Card Collection and Browser Tokens API, with two real Browserbase sessions executing the Stagehand runner. The proxied checkout was approved and the direct control was declined. Automatic cleanup cleared the token and Live View displays; an independent Browserbase SDK check confirmed both matching sessions were `COMPLETED`.
+[src/evervault.ts](src/evervault.ts) contains the token request and response validation. [src/server.ts](src/server.ts) serves the minimal page, local API, and synthetic merchant. The small current-run controller holds one cancellation signal and sanitized status in memory; it retains only the latest result until another comparison starts.
 
-This canary used the public test card, an existing CA certificate, and a temporary HTTPS tunnel restricted to the three synthetic merchant routes. It did not upload a CA or make a real payment. The supplied Caddy deployment and live Stop/failure paths were not exercised; cancellation and failure coverage below remains offline. One successful fixture run does not establish production or arbitrary-merchant compatibility. Runtime screenshots, tokens, session IDs, and credentials are excluded from the repository.
+```text
+Evervault-hosted card fields → ciphertext → local server → Browser Tokens
+  ├─ same tokens → Stagehand / Browserbase + Evervault proxy → test values → approved
+  └─ same tokens → Stagehand / direct Browserbase           → tokens      → declined
+```
 
-## Offline checks
+## Costs, side effects, and boundaries
+
+- Each live comparison starts **two billable Browserbase sessions**. Explicit setup contacts Evervault and Browserbase and may upload a CA certificate; it starts no sessions. The HTTPS reverse proxy also requires reader-managed infrastructure.
+- API keys and proxy credentials stay server-side. Ciphertext is cleared after token creation; temporary token values are visible only in the local page and clear after cleanup. Do not log, record, screenshot, persist, or share runtime values.
+- Browserbase session recording/logging and Stagehand logging are disabled. Provider errors are redacted. The local API requires the loopback Host, same origin, and a custom header; it is not multi-user authentication. No request body or private session link is returned or logged.
+- Reveal permission and browser navigation are restricted to the exact configured merchant hostname. Wildcards and certificate-error bypasses are not used.
+- The synthetic merchant receives the public fixture in plaintext and accepts only that fixture. It never logs, persists, echoes, or redirects with submitted values. Anyone knowing its hostname can call its public routes, but those routes cannot start sessions. Remove the proxy when finished.
+- This demonstrates the fixture's immediate response, not settlement, arbitrary checkout compatibility, production readiness, or PCI compliance. Production collection, retention, merchant/PSP separation, client validation, payment iframes, 3DS, authentication, and compliance need their own design and review.
+
+## Verification
 
 ```sh
 npm run check
 ```
 
-Tests use synthetic responses and mock every Browserbase/Evervault call. They cover the proxy/CA settings, exact-host outcomes, checkpoints, cancellation during startup, partial launch and attachment cleanup, token expiry, error privacy, HTTP boundaries, synthetic merchant, and environment-file permissions. No certificate is uploaded and no Browserbase session is created. Passing these checks is **offline evidence**, not a claim that the adapted live workflow has been validated.
+**The current automatic implementation is offline-tested only.** Tests mock every Evervault and Browserbase call and cover configuration, token policies/expiry, matched sessions, outcomes, cancellation during automatic execution, partial failures, cleanup confirmation, redaction, concurrency, HTTP boundaries, and certificate setup. Mocked page checks cover collection, visible tokens, automatic results, Cancel, and token clearing. No current live proxy swap, new CA upload, payment, or Caddy deployment is claimed.
 
-Code map:
-
-- `src/evervault.ts`: ciphertext → token request and response validation.
-- `src/card-run.ts`: matched Stagehand sessions, deterministic card entry, result checks, and cleanup.
-- `src/run-store.ts`: in-memory state, presenter gates, and cancellation.
-- `src/server.ts`: local control API and synthetic merchant.
-- `public/`: hosted collection UI and local Live Views.
-- `scripts/setup.ts`: explicit certificate provisioning.
+Historical evidence: on October 20, 2026, the earlier manual-checkpoint implementation at commit `c85deef` passed one real sandbox comparison (proxied approval, direct decline, both sessions `COMPLETED`) using the public fixture, an existing CA, and a temporary route-limited HTTPS merchant endpoint. That result does **not** validate this automatic refactor. Fresh live validation requires a separate explicit run request. Runtime captures and identifiers are excluded from this repository.
 
 ## References
 
@@ -154,4 +142,4 @@ Code map:
 - [Stagehand v4 logging](https://docs.stagehand.dev/v4/configuration/logging)
 - [Caddy installation](https://caddyserver.com/docs/install)
 
-This recipe's code is distributed under the cookbook's MIT license. It contains no proprietary font files or private demo deployment assets. The unmodified Browserbase logo is public media-kit artwork; see [its asset notice](public/assets/NOTICE.txt) and the [cookbook artwork provenance](../../../assets/brand/README.md). Its inclusion does not grant trademark rights.
+This recipe is distributed under the cookbook's MIT license. It contains no proprietary fonts, private deployment assets, or captured runtime data.
