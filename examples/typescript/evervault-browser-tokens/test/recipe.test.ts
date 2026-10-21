@@ -526,6 +526,7 @@ test("cancelling collection closes even an unfinished HTTP request", async () =>
   });
   req.on("error", () => {});
   req.write("{");
+  await new Promise<void>((done) => req.once("socket", (socket) => socket.once("connect", done)));
   controller.abort();
   await assert.rejects(fixture.card);
   await fixture.close();

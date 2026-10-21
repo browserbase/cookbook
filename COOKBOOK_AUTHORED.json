@@ -443,7 +443,7 @@
     },
     {
       "path": "examples/typescript/evervault-browser-tokens/test/recipe.test.ts",
-      "sha256": "d6c697e5d3dfb905ab444c257ddf577116834344c45b1062b58d4db01f6484c3",
+      "sha256": "413ff5110aa7984b27fa6b0769a8ad87422a4c6a32979f0daafa2899079937f2",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
