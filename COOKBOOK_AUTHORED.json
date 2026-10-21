@@ -1463,7 +1463,7 @@
     },
     {
       "path": "projects/browsie/pnpm-lock.yaml",
-      "sha256": "1b59b20eb7e7f1b8c087a1771d05ed08481991348b5d7767f4df57b5735294f7",
+      "sha256": "8050008cbfe7a2c3adcc3944a6891d9441d42dbb5d17a1ca598ddcb7f751e739",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
