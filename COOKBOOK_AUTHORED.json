@@ -1153,7 +1153,7 @@
     },
     {
       "path": "projects/browsie/agent/instructions.md",
-      "sha256": "4e3ad10625bd9c5fc1045ef9b62bcf5e246e2a7ab16ba85a4b343a14291299f6",
+      "sha256": "b58c97d041be80b08b2fc129d0289da67091ba4c95339ec97663d995a721cf4c",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -1163,7 +1163,7 @@
     },
     {
       "path": "projects/browsie/agent/lib/browser-schema.ts",
-      "sha256": "87e0150cdc44da44ce1e6e49b05de6f3428f602277d52e31e47f5114767065a1",
+      "sha256": "487dc6e00d7a8baf645b9e4f7f5f55d7d216981d08182404ee06d3f33bc8276f",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -1183,12 +1183,12 @@
     },
     {
       "path": "projects/browsie/agent/skills/browser-basics/SKILL.md",
-      "sha256": "de6ce8d68cb95f380287f8da72a5fde3189aac859f6ed8ca47f48df56e899043",
+      "sha256": "98339969a1e9a1902ceb575b437c0d335866ecc2d0f412993180a1bda55c2ed9",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "projects/browsie/agent/skills/fill-form/SKILL.md",
-      "sha256": "3b0d7859b6e9e4c0cf8581eb16400f1c9b80b1ad080fe4dee2d1c06a5489592a",
+      "sha256": "5e7bb00a0b55b901bb8d85bb80c5d49e64c865b986fec5d5364df6db1fc3987c",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -1303,7 +1303,7 @@
     },
     {
       "path": "projects/browsie/app/api/tasks/route.ts",
-      "sha256": "e1626218327af2c407b3fccb205b676f6ec09c65a7b98d21c4bf24240bd39438",
+      "sha256": "f6c50cce5bdff73b738870bf6e9080dc9bc9f34ce6210b7bc4bd1d848a038357",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -1463,7 +1463,7 @@
     },
     {
       "path": "projects/browsie/server/prompt.ts",
-      "sha256": "1c5e997ccc6333f709c1beaf5cb26d6b97f69e0abdb63b10149b80a09ef69ba4",
+      "sha256": "8b752bb43a06d116efcd6d6981a7242a9d51530a885162cf55066a525e0389c2",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -1533,7 +1533,7 @@
     },
     {
       "path": "projects/browsie/src/App.tsx",
-      "sha256": "48ef763f490b7187b342d9f6875ef6659cfa707066d0ecab08e7794e0aa5aeb6",
+      "sha256": "f4e4cc5bfd7a5f76cda13a08ebb9fb1971459a7af6f7c15403e4ded38413bb0b",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -1653,7 +1653,7 @@
     },
     {
       "path": "projects/browsie/tests/prompt.test.ts",
-      "sha256": "4a9a08da4940414ce2eb483d7cb0df8ca82762cc52773af8eddc90b9c63a3519",
+      "sha256": "5b3143f32a412062176e8fb8b2d1986ff0faaca27fa03a31142c8877b078515f",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -1703,7 +1703,7 @@
     },
     {
       "path": "projects/browsie/tests/task-list.test.ts",
-      "sha256": "17385b51dcfa53076d49f30bd59c39d972d2e288360d9c816c6df83b23767f7a",
+      "sha256": "3224083c03a739a83be19f564d5ccfd553d6bda3e81b147ff8b67cf08a88d4a3",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
