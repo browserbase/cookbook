@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Evervault + Browserbase card reference</title>
+    <script src="https://js.evervault.com/v2" defer></script>
+    <script src="/collect.js" defer></script>
+  </head>
+  <body>
+    <h1>Evervault + Browserbase card reference</h1>
+    <p>
+      Enter only the public Visa test number <strong>4242 4242 4242 4242</strong> and dummy CVC
+      <strong>123</strong> (the three-digit security code). Expiry is fixed to
+      <strong>12/34</strong>. Never enter a real card.
+    </p>
+    <p>
+      Evervault hosts and encrypts these fields. Continue sends ciphertext to the local program,
+      which runs one proxied synthetic checkout. No purchase or real charge occurs.
+    </p>
+    <div id="card-collection"></div>
+    <button id="continue" disabled>Continue</button>
+    <p><a id="session" hidden target="_blank" rel="noopener noreferrer">Open in Browserbase</a></p>
+    <p id="status" role="status">Loading hosted collection…</p>
+  </body>
+</html>

@@ -17,6 +17,7 @@ Open a recipe guide for its working directory, commands, environment references,
 | [Amazon global price comparison (TypeScript)](../recipes/examples-typescript-amazon-global-price-comparison.md) | typescript | runnable example | current / public | examples |
 | [Basic caching (TypeScript)](../recipes/examples-typescript-basic-caching.md) | typescript | runnable example | current / public | examples |
 | [Basic CAPTCHA (TypeScript)](../recipes/examples-typescript-basic-captcha.md) | typescript | runnable example | current / public | examples |
+| [Card entry with Evervault Browser Tokens](../recipes/examples-typescript-evervault-browser-tokens.md) | typescript | runnable example | current / public | examples |
 | [Basic CAPTCHA (TypeScript)](../recipes/examples-typescript-playwright-basic-captcha.md) | typescript | runnable example | current / public | examples |
 | [Proxies (TypeScript)](../recipes/examples-typescript-proxies.md) | typescript | runnable example | current / public | examples |
 | [Proxies weather (TypeScript)](../recipes/examples-typescript-proxies-weather.md) | typescript | runnable example | current / public | examples |

@@ -14536,6 +14536,189 @@
         }
       ],
       "working_directory": "examples/typescript/order-lookup-function"
+    },
+    {
+      "id": "examples-typescript-evervault-browser-tokens",
+      "title": "Card entry with Evervault Browser Tokens",
+      "summary": "Collect an encrypted test card, create Evervault Browser Tokens, run one proxied Browserbase checkout with Stagehand v4, then confirm cleanup and exit.",
+      "collection": "examples",
+      "path": "examples/typescript/evervault-browser-tokens",
+      "working_directory": "examples/typescript/evervault-browser-tokens",
+      "readme": "docs/recipes/examples-typescript-evervault-browser-tokens.md",
+      "upstream_readme": "examples/typescript/evervault-browser-tokens/README.md",
+      "topics": [
+        "forms-and-transactions",
+        "browser-features",
+        "integrations-and-orchestration",
+        "testing-and-observability"
+      ],
+      "languages": [
+        "typescript"
+      ],
+      "frameworks": [
+        "Stagehand",
+        "Browserbase SDK",
+        "Express",
+        "Evervault"
+      ],
+      "entrypoints": [
+        "examples/typescript/evervault-browser-tokens/index.ts"
+      ],
+      "manifests": [
+        "examples/typescript/evervault-browser-tokens/package.json",
+        "examples/typescript/evervault-browser-tokens/pnpm-lock.yaml"
+      ],
+      "environment_template": "examples/typescript/evervault-browser-tokens/.env.example",
+      "environment_setup_command": "test -f .env || cp .env.example .env",
+      "environment_variables": [
+        {
+          "name": "EVERVAULT_TEAM_ID",
+          "provider": "Evervault",
+          "purpose": "Public Team ID for hosted card collection.",
+          "secret": false,
+          "safe_example": "<your-team-id>",
+          "requirement": "required",
+          "default": null,
+          "setup_url": "https://docs.evervault.com/cards/card-collection",
+          "validation": "Must be set locally; placeholders are rejected"
+        },
+        {
+          "name": "EVERVAULT_APP_ID",
+          "provider": "Evervault",
+          "purpose": "Public sandbox App ID for collection and server authentication.",
+          "secret": false,
+          "safe_example": "<your-sandbox-app-id>",
+          "requirement": "required",
+          "default": null,
+          "setup_url": "https://docs.evervault.com/cards/card-collection",
+          "validation": "Must be set locally; placeholders are rejected"
+        },
+        {
+          "name": "EVERVAULT_API_KEY",
+          "provider": "Evervault",
+          "purpose": "Server-only sandbox key for short-lived Browser Tokens.",
+          "secret": true,
+          "safe_example": "<set-locally>",
+          "requirement": "required",
+          "default": null,
+          "setup_url": "https://docs.evervault.com/browser-tokens",
+          "validation": "Must be set locally; placeholders are rejected"
+        },
+        {
+          "name": "BROWSERBASE_API_KEY",
+          "provider": "Browserbase",
+          "purpose": "Server-only key for one hosted browser and explicit CA setup.",
+          "secret": true,
+          "safe_example": "<set-locally>",
+          "requirement": "required",
+          "default": null,
+          "setup_url": "https://www.browserbase.com/settings",
+          "validation": "Must be set locally; placeholders are rejected"
+        },
+        {
+          "name": "BROWSERBASE_CA_CERTIFICATE_ID",
+          "provider": "Browserbase",
+          "purpose": "Trusted Evervault CA ID printed by setup; copy the assignment into your private .env.",
+          "secret": false,
+          "safe_example": "<your-certificate-id>",
+          "requirement": "conditional",
+          "default": null,
+          "setup_url": "https://docs.browserbase.com/platform/identity/proxies",
+          "validation": "See recipe setup and configuration requirements"
+        },
+        {
+          "name": "CARD_TARGET_HOST",
+          "provider": "Reader infrastructure",
+          "purpose": "Exact public hostname exposing only the synthetic merchant routes.",
+          "secret": false,
+          "safe_example": "cards.example.com",
+          "requirement": "required",
+          "default": null,
+          "setup_url": null,
+          "validation": "Must be set locally; placeholders are rejected"
+        },
+        {
+          "name": "PORT",
+          "provider": "Local application",
+          "purpose": "Loopback-only local page/API port; update the merchant proxy upstream if changed.",
+          "secret": false,
+          "safe_example": "4173",
+          "requirement": "optional",
+          "default": "4173",
+          "setup_url": null,
+          "validation": "See recipe setup and configuration requirements"
+        },
+        {
+          "name": "DEMO_RECORD_SESSION",
+          "provider": "Local application",
+          "purpose": "Explicit opt-in to Browserbase recording for public-fixture debugging; network logs stay disabled.",
+          "secret": false,
+          "safe_example": "false",
+          "requirement": "optional",
+          "default": "false",
+          "setup_url": "https://docs.browserbase.com/platform/browser/observability/session-replay",
+          "validation": "Accepts only true or false; never use with real cards or customer data"
+        }
+      ],
+      "setup_commands": [
+        "pnpm install --frozen-lockfile --ignore-scripts --config.minimum-release-age=10080"
+      ],
+      "run_commands": [
+        "pnpm start"
+      ],
+      "dependencies": {
+        "@browserbasehq/sdk": "2.18.0",
+        "@browserbasehq/stagehand": "4.1.0",
+        "dotenv": "16.6.1",
+        "express": "5.1.0"
+      },
+      "caveats": [
+        "Use reader-owned sandbox credentials and the public Visa fixture. Run pnpm run setup explicitly; copy its printed CA assignment into your private .env.",
+        "One invocation accepts one ciphertext handoff, starts at most one billable Browserbase session, submits one synthetic checkout, then confirms cleanup and exits. Ctrl+C/SIGTERM waits for acquired resources; it cannot undo an already-started submission.",
+        "The synthetic merchant receives plaintext public fixture values. This is not a production payment architecture or PCI-compliance claim.",
+        "Collection stays on localhost. Remote Browserbase requires reader-managed HTTPS exposure forwarding only GET /mock-merchant/checkout and POST /mock-merchant/authorize.",
+        "The authenticated Browserbase dashboard link appears on the local page and in the terminal after launch. Recording is off by default; explicit fixture-only opt-in can retain displayed temporary tokens. Keep runtime links and recordings private.",
+        "The current pnpm recipe is offline-tested; all locked dependency versions were preserved. Historical live canary and later failed attempt are scoped in the source README; neither validates these changes. New CA upload and Caddy deployment remain unverified."
+      ],
+      "source": {
+        "kind": "cookbook-authored",
+        "path": "examples/typescript/evervault-browser-tokens"
+      },
+      "lifecycle": "current",
+      "access": "public",
+      "verification": "offline-tested",
+      "search_aliases": [
+        "evervault",
+        "browser tokens",
+        "cards",
+        "external proxy",
+        "custom CA",
+        "secure checkout"
+      ],
+      "tags": [
+        "code-reference",
+        "synthetic-card",
+        "network-boundary"
+      ],
+      "verification_evidence": [
+        {
+          "kind": "install-verified",
+          "date": "2026-10-21",
+          "runtime": "Node.js 24.19.0; pnpm 10.34.7; macOS arm64; pinned pnpm-lock.yaml; new disposable package and isolated pnpm store",
+          "command": "pnpm install --frozen-lockfile --ignore-scripts --config.minimum-release-age=10080",
+          "result": "passed",
+          "limits": "Independent frozen installation passed with lifecycle scripts disabled and a seven-day minimum release age. The pnpm lockfile preserves the preceding npm lockfile dependency versions. No certificate setup or external browser workflow was run."
+        },
+        {
+          "kind": "offline-tested",
+          "date": "2026-10-21",
+          "runtime": "Node.js 24.19.0; pnpm 10.34.7; TypeScript 5.9.2; Stagehand 4.1.0; Browserbase SDK 2.18.0; macOS arm64",
+          "command": "pnpm run check",
+          "result": "passed",
+          "limits": "Typecheck and 44 offline tests passed in the independently installed pnpm package, including complete mocked collection-to-terminal execution, cancellation, cleanup and HTTP isolation. Runtime and frontend source are unchanged from the prior mocked desktop/390px verification. No fresh live session, recording/replay, proxy swap, CA upload, HTTPS deployment or payment was validated for this package-manager update."
+        }
+      ],
+      "llm_requirement": "not required"
     }
   ],
   "schema_version": 1

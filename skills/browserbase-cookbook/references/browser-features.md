@@ -4,7 +4,7 @@ Configure proxies, CAPTCHA handling, extensions, metadata, and caching.
 
 Paths below are relative to a local cookbook root, not to the installed skill directory. Locate the checkout first. Read the selected guide and source before adapting code. Historical source links identify the imported revision; they predate cookbook migrations and are not runnable fallbacks.
 
-This topic contains all 32 matching entries. Browse `docs/topics/browser-features.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
+This topic contains all 33 matching entries. Browse `docs/topics/browser-features.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
 
 | Recipe | Language | Local guide | Status | Historical source |
 | --- | --- | --- | --- | --- |
@@ -19,6 +19,7 @@ This topic contains all 32 matching entries. Browse `docs/topics/browser-feature
 | Amazon global price comparison (TypeScript) | typescript | `docs/recipes/examples-typescript-amazon-global-price-comparison.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/amazon-global-price-comparison) |
 | Basic caching (TypeScript) | typescript | `docs/recipes/examples-typescript-basic-caching.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/basic-caching) |
 | Basic CAPTCHA (TypeScript) | typescript | `docs/recipes/examples-typescript-basic-captcha.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript) |
+| Card entry with Evervault Browser Tokens | typescript | `docs/recipes/examples-typescript-evervault-browser-tokens.md` | current | cookbook-authored |
 | Basic CAPTCHA (TypeScript) | typescript | `docs/recipes/examples-typescript-playwright-basic-captcha.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript) |
 | Proxies (TypeScript) | typescript | `docs/recipes/examples-typescript-proxies.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/proxies) |
 | Proxies weather (TypeScript) | typescript | `docs/recipes/examples-typescript-proxies-weather.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/proxies-weather) |

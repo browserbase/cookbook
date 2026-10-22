@@ -18,6 +18,8 @@ python3 -B -m unittest discover -s tests
 
 Generated recipe guides and topic pages are committed. Edit their catalog fields and generator rather than editing generated Markdown directly.
 
+When framework inference misstates a recipe's model needs, set `llm_requirement` to `required`, `not required`, or `unknown`. For example, deterministic Stagehand locators do not require a model.
+
 By contributing, you agree that your contribution may be distributed under the
 repository's [MIT License](LICENSE), except where [NOTICE](NOTICE) or a
 nested license applies. Follow the [Code of Conduct](CODE_OF_CONDUCT.md)

@@ -90,6 +90,11 @@ jobs:
             runtime: node
             directory: examples/typescript/getting-started-with-browserbase
             command: npm install --ignore-scripts --package-lock=false && npm run typecheck
+          - name: Evervault card reference offline checks
+            runtime: node
+            directory: examples/typescript/evervault-browser-tokens
+            package_manager: pnpm
+            command: pnpm install --frozen-lockfile --ignore-scripts --config.minimum-release-age=10080 && pnpm run check
           - name: Order lookup install and typecheck
             runtime: node
             directory: examples/typescript/order-lookup-function
@@ -128,6 +133,10 @@ jobs:
       - name: Enforce npm package release-age policy
         if: matrix.runtime == 'node'
         run: npm config set min-release-age 7
+      - name: Install recipe-pinned pnpm
+        if: matrix.package_manager == 'pnpm'
+        working-directory: ${{ matrix.directory }}
+        run: npm install --global "$(node -p 'require("./package.json").packageManager')" --ignore-scripts
       - name: Run representative check
         working-directory: ${{ matrix.directory }}
         run: ${{ matrix.command }}

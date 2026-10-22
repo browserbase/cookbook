@@ -21,6 +21,7 @@ Open a recipe guide for its working directory, commands, environment references,
 | [Company value prop generator (TypeScript)](../recipes/examples-typescript-company-value-prop-generator.md) | typescript | runnable example | current / public | examples |
 | [Council events (TypeScript)](../recipes/examples-typescript-council-events.md) | typescript | runnable example | current / public | examples |
 | [Dynamic form filling (TypeScript)](../recipes/examples-typescript-dynamic-form-filling.md) | typescript | runnable example | current / public | examples |
+| [Card entry with Evervault Browser Tokens](../recipes/examples-typescript-evervault-browser-tokens.md) | typescript | runnable example | current / public | examples |
 | [Exa Browserbase (TypeScript)](../recipes/examples-typescript-exa-browserbase.md) | typescript | runnable example | current / public | examples |
 | [Form filling (TypeScript)](../recipes/examples-typescript-form-filling.md) | typescript | runnable example | current / public | examples |
 | [Gemini CUA (TypeScript)](../recipes/examples-typescript-gemini-cua.md) | typescript | runnable example | current / public | examples |
