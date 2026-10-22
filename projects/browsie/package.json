@@ -7,7 +7,7 @@
     "node": "24.x"
   },
   "scripts": {
-    "dev": "next dev -p 4318",
+    "dev": "exec node scripts/dev-local.mjs",
     "dev:eve": "eve dev",
     "dev:linq": "exec node scripts/linq-local.mjs",
     "build": "pnpm run build:eve && next build",
@@ -17,17 +17,26 @@
     "lint:fix": "eslint . --fix",
     "test": "vitest run",
     "test:linq-local": "node scripts/linq-local.mjs --self-test",
+    "test:dev-local": "node scripts/dev-local.mjs --self-test",
+    "desktop:build": "pnpm --filter browsie-desktop build",
+    "desktop:dev": "pnpm --filter browsie-desktop dev",
+    "desktop:test": "pnpm --filter browsie-desktop test",
+    "desktop:typecheck": "pnpm --filter browsie-desktop typecheck",
+    "desktop:dist:mac": "pnpm --filter browsie-desktop dist:mac",
     "typecheck": "tsc --noEmit -p tsconfig.json",
-    "build:eve": "eve build --skip-sandbox-prewarm"
+    "build:eve": "eve build --skip-sandbox-prewarm && node scripts/copy-stagehand-assets.mjs"
   },
   "dependencies": {
     "@1password/sdk": "0.5.0",
     "@ai-sdk/openai": "4.0.93",
     "@browserbasehq/sdk": "2.21.0",
     "@browserbasehq/stagehand": "4.2.1",
+    "@stripe/link-integrations-eve": "0.3.0",
+    "@stripe/link-sdk": "0.12.0",
     "ai": "7.0.139",
     "dotenv": "^17.4.2",
-    "eve": "0.47.7",
+    "eve": "0.66.3",
+    "hls.js": "^1.7.1",
     "lucide-react": "^1.60.0",
     "next": "16.4.0",
     "react": "^19.3.1",

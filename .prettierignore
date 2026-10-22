@@ -4,6 +4,13 @@ dist/
 build/
 coverage/
 .source-checkouts/
+**/node_modules/**
+**/.next/**
+**/.output/**
+**/.eve/**
+**/.browsie/**
+**/dist/**
+**/release/**
 
 # Imported collections retain their own package-level formatting rules.
 examples/**

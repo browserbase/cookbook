@@ -6,6 +6,7 @@ export default function HomePage() {
       browserbaseConfigured={Boolean(process.env.BROWSERBASE_API_KEY)}
       modelConfigured={Boolean(process.env.OPENAI_API_KEY)}
       contextConfigured={Boolean(process.env.BROWSERBASE_CONTEXT_ID)}
+      key="home"
     />
   );
 }

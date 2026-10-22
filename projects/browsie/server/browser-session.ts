@@ -7,11 +7,15 @@ import {
   type CookieParam,
   type StagehandBrowser,
 } from "@browserbasehq/stagehand";
+import type { Card } from "@stripe/link-sdk";
 
+import type { BrowserRefAction, BrowserRunInput } from "../agent/lib/browser-schema.js";
 import { parseBrowserbaseCaptchaEvent, safeCaptchaPage, type CaptchaSignal } from "../src/captcha";
 import { toEmbeddedBrowserbaseLiveViewUrl } from "../src/live-view.js";
+import { allowedLinkCheckoutHosts, formatLinkExpiry } from "./link-wallet.js";
+import { executeStagehandCode } from "./stagehand-run-code.js";
 import { addTrace } from "./trace.js";
-import type { BrowserProxyLocation, BrowserState, ConversationState, RunAction } from "./types.js";
+import type { BrowserProxyLocation, BrowserState, ConversationState } from "./types.js";
 
 export interface BrowserCaptchaTransition {
   id: string;
@@ -48,6 +52,8 @@ export class BrowsieBrowserSession {
   private closeRequested = false;
   private operationTail: Promise<void> = Promise.resolve();
   private xpathMap: Record<string, string> = {};
+  private snapshotUrl?: string;
+  private snapshotPageId?: string;
   private readonly visitedOrigins = new Set<string>();
   private readonly blockedOrigins = new Set<string>();
   private readonly liveSourceOrigins = new Set<string>();
@@ -120,6 +126,7 @@ export class BrowsieBrowserSession {
         contextStatus,
         proxyLocation: requested === "browserbase" ? this.options.proxyLocation : undefined,
         sessionId: this.remoteSessionId,
+        replaySessionId: undefined,
       };
       await this.refreshRemoteLiveUrl();
       await this.ensureCaptchaSubscriptions();
@@ -175,10 +182,13 @@ export class BrowsieBrowserSession {
           snapshot,
           url: await page.url(),
           title: await page.title(),
+          pageId: page.pageId,
         };
       });
       await this.gateCaptcha("after");
       this.xpathMap = result.snapshot.xpathMap;
+      this.snapshotUrl = result.url;
+      this.snapshotPageId = result.pageId;
       const url = result.url;
       this.updateBrowserState(result.url, result.title);
       await this.refreshRemoteLiveUrl();
@@ -225,73 +235,146 @@ export class BrowsieBrowserSession {
     }
   }
 
-  async run(actions: RunAction[]): Promise<{ completed: number; url: string }> {
+  async run(
+    input: BrowserRunInput,
+  ): Promise<
+    | { mode: "code"; value: unknown; url: string }
+    | { mode: "actions"; completed: number; url: string }
+  > {
     const release = await this.acquireOperation();
     try {
-      const localFixture = actions.some(
-        (item) =>
-          item.action === "goto" && /^http:\/\/(?:127\.0\.0\.1|localhost)(?::|\/)/.test(item.url),
-      );
+      const localFixture =
+        input.code !== undefined &&
+        /page\.goto\(\s*["'`]http:\/\/(?:127\.0\.0\.1|localhost)(?::|\/)/u.test(input.code);
       await this.start(localFixture);
       await this.gateCaptcha("before");
       const started = performance.now();
-      const resolvedActions = actions.map((item) =>
-        "target" in item && item.target
-          ? { ...item, target: this.resolveTarget(item.target) }
-          : item,
-      );
-      const result = await this.requireStagehand().experimentalBatch(
-        async ({ page }, batchActions) => {
-          for (const item of batchActions) {
-            switch (item.action) {
-              case "goto":
-                await page.goto(item.url);
-                await page.waitForLoadState("domcontentloaded", 15_000);
-                break;
-              case "click":
-                await page.locator(item.target).click();
-                break;
-              case "fill":
-                await page.locator(item.target).fill(item.value);
-                break;
-              case "type":
-                await page.locator(item.target).type(item.value);
-                break;
-              case "press":
-                if (item.target) await page.locator(item.target).click();
-                await page.keyPress(item.key);
-                break;
-              case "select":
-                await page.locator(item.target).selectOption(item.value);
-                break;
-              case "wait":
-                await page.waitForTimeout(Math.min(item.milliseconds, 10_000));
-                break;
+      const page =
+        (await this.browser!.context.activePage()) ?? (await this.browser!.context.newPage());
+      let response:
+        | { mode: "code"; value: unknown; url: string }
+        | { mode: "actions"; completed: number; url: string };
+      let title: string;
+      let activityCode: string;
+      let traceDetail: Record<string, unknown>;
+
+      if (input.code !== undefined) {
+        this.invalidateSnapshot();
+        const codeResult = await executeStagehandCode({
+          stagehand: this.requireStagehand(),
+          page,
+          code: input.code,
+          artifactRoot: process.env.BROWSIE_ARTIFACT_ROOT ?? ".browsie/run-artifacts",
+        });
+        if (codeResult.closeRequested) {
+          throw new Error(
+            "The run code requested browser.close(). Browsie owns this persistent browser; do not close it from run.",
+          );
+        }
+        const activePage = (await this.browser!.context.activePage()) ?? page;
+        const url = await activePage.url();
+        title = await activePage.title();
+        response = { mode: "code", value: codeResult.value, url };
+        activityCode = redactActivityCode(input.code);
+        traceDetail = {
+          mode: "code",
+          url,
+          batchRuntimeMs: Math.round(codeResult.batchRuntimeMs),
+          browserCalls: codeResult.telemetry.calls,
+          snapshotIdsInvalidated: true,
+        };
+      } else {
+        const actions = input.actions!;
+        const currentUrl = await page.url();
+        if (!this.snapshotUrl || !this.snapshotPageId || page.pageId !== this.snapshotPageId) {
+          throw new Error("No hydrated snapshot exists for this page. Call snapshot first.");
+        }
+        if (currentUrl !== this.snapshotUrl) {
+          this.invalidateSnapshot();
+          throw new Error("The page changed after its snapshot. Call snapshot again.");
+        }
+        const hydratedActions = actions.map((action) => ({
+          ...action,
+          selector: this.resolveSnapshotId(action.id),
+        }));
+        this.invalidateSnapshot();
+        const result = await this.requireStagehand().experimentalBatch(
+          async ({ page: batchPage }, batchActions) => {
+            let completed = 0;
+            for (const action of batchActions) {
+              const locator = batchPage.locator(action.selector);
+              switch (action.op) {
+                case "click":
+                  await locator.click();
+                  break;
+                case "hover":
+                  await locator.hover();
+                  break;
+                case "fill":
+                  await locator.fill(action.value);
+                  break;
+                case "type":
+                  await locator.type(
+                    action.text,
+                    action.delay === undefined ? undefined : { delay: action.delay },
+                  );
+                  break;
+                case "press":
+                  await locator.click();
+                  await batchPage.keyPress(action.key);
+                  break;
+                case "select":
+                  await locator.selectOption(action.values);
+                  break;
+              }
+              completed += 1;
             }
-          }
-          return { url: await page.url(), title: await page.title() };
-        },
-        resolvedActions,
-        { timeout: 60_000 },
-      );
+            return {
+              completed,
+              url: await batchPage.url(),
+              title: await batchPage.title(),
+            };
+          },
+          hydratedActions,
+          { page, timeout: 60_000 },
+        );
+        title = result.title;
+        response = {
+          mode: "actions",
+          completed: result.completed,
+          url: result.url,
+        };
+        activityCode = formatRunCode(
+          actions,
+          hydratedActions.map((action) => action.selector),
+        );
+        traceDetail = {
+          mode: "actions",
+          actions: redactActions(actions),
+          url: result.url,
+          snapshotIdsInvalidated: true,
+        };
+      }
 
       await this.gateCaptcha("after");
-      this.xpathMap = {};
-      this.updateBrowserState(result.url, result.title);
+      this.invalidateSnapshot();
+      this.updateBrowserState(response.url, title);
       await this.refreshRemoteLiveUrl();
-      const url = result.url;
+      const url = response.url;
       const origin = originOf(url);
       if (origin) this.visitedOrigins.add(origin);
       addTrace(
         this.state,
         "tool",
         "run",
-        `Completed ${actions.length} exact browser action${actions.length === 1 ? "" : "s"}.`,
-        { actions, url, snapshotIdsInvalidated: true },
+        response.mode === "code"
+          ? "Executed Stagehand browser code."
+          : `Completed ${response.completed} snapshot action${response.completed === 1 ? "" : "s"}.`,
+        traceDetail,
         Math.round(performance.now() - started),
-        formatRunCode(resolvedActions),
+        activityCode,
       );
-      return { completed: actions.length, url };
+      return response;
     } finally {
       release();
     }
@@ -302,6 +385,7 @@ export class BrowsieBrowserSession {
     username: string;
     password: string;
     usernameTarget: string;
+    usernameSubmitTarget?: string;
     passwordTarget: string;
     submitTarget: string;
     totp?: string;
@@ -313,26 +397,185 @@ export class BrowsieBrowserSession {
     status: "complete" | "waiting_for_user" | "unverified";
     host: string;
     url: string;
+    failureStage?: string;
   }> {
     const release = await this.acquireOperation();
     try {
       await this.start();
       await this.gateCaptcha("before");
       const started = performance.now();
+      const resolvedInput = {
+        allowedHosts: input.allowedHosts,
+        username: input.username,
+        password: input.password,
+        usernameTarget: this.resolveTarget(input.usernameTarget),
+        usernameSubmitTarget: input.usernameSubmitTarget
+          ? this.resolveTarget(input.usernameSubmitTarget)
+          : null,
+        passwordTarget: this.resolveTarget(input.passwordTarget),
+        submitTarget: this.resolveTarget(input.submitTarget),
+        totp: input.totp ?? null,
+        totpTarget: input.totpTarget ? this.resolveTarget(input.totpTarget) : null,
+        otpSubmitTarget: input.otpSubmitTarget ? this.resolveTarget(input.otpSubmitTarget) : null,
+        successTarget: input.successTarget ? this.resolveTarget(input.successTarget) : null,
+        totpAfterSubmit: input.totpAfterSubmit ?? false,
+      };
       const result = await this.requireStagehand().experimentalBatch(
         async ({ page }, values) => {
           const before = new URL(await page.url());
-          if (!values.allowedHosts.includes(before.hostname.toLowerCase()))
-            throw new Error("host mismatch");
-          await page.locator(values.usernameTarget).fill(values.username);
-          await page.locator(values.passwordTarget).fill(values.password);
-          if (values.totpTarget && values.totp && !values.totpAfterSubmit)
-            await page.locator(values.totpTarget).fill(values.totp);
-          await page.locator(values.submitTarget).click();
+          const hostAllowed = (hostname: string) =>
+            values.allowedHosts.some((allowedHost) => {
+              const allowed = allowedHost.toLowerCase();
+              const actual = hostname.toLowerCase();
+              return actual === allowed || actual.endsWith(`.${allowed}`);
+            });
+          const firstVisible = async (candidates: Array<string | null | undefined>) => {
+            const tried = new Set<string>();
+            for (const selector of candidates) {
+              if (!selector || tried.has(selector)) continue;
+              tried.add(selector);
+              const locator = page.locator(selector);
+              const count = Math.min(await locator.count(), 12);
+              for (let index = 0; index < count; index += 1) {
+                const candidate = locator.nth(index);
+                if (await candidate.isVisible()) return candidate;
+              }
+            }
+            return undefined;
+          };
+          const state = async (failureStage?: string, otpRequired = false) => ({
+            url: await page.url(),
+            title: await page.title(),
+            success: false,
+            failureStage: failureStage ?? null,
+            otpRequired,
+            bubblingClickFallbackUsed,
+          });
+          let bubblingClickFallbackUsed = false;
+          const isAmazonHost = (hostname: string) =>
+            hostname === "amazon.com" ||
+            hostname.startsWith("www.amazon.") ||
+            hostname.includes(".amazon.");
+          const amazonErrorVisible = async () =>
+            Boolean(
+              await firstVisible([
+                "#auth-error-message-box",
+                "#auth-warning-message-box",
+                ".a-alert-error",
+                '[role="alert"]',
+              ]),
+            );
+          const sendAmazonBubblingClickIfStalled = async (
+            locator: Awaited<ReturnType<typeof firstVisible>>,
+            beforeUrl: string,
+            fieldThatShouldLeave: Awaited<ReturnType<typeof firstVisible>>,
+          ) => {
+            if (!locator || !fieldThatShouldLeave) return;
+            const current = new URL(await page.url());
+            if (
+              !isAmazonHost(current.hostname) ||
+              current.href !== beforeUrl ||
+              !(await fieldThatShouldLeave.isVisible()) ||
+              (await amazonErrorVisible())
+            ) {
+              return;
+            }
+            await locator.sendClickEvent({
+              bubbles: true,
+              cancelable: true,
+              composed: true,
+              detail: 1,
+            });
+            bubblingClickFallbackUsed = true;
+            await page.waitForTimeout(1_000);
+          };
+          if (!hostAllowed(before.hostname)) return state("host");
+          const username = await firstVisible([
+            values.usernameTarget,
+            "#ap_email",
+            "#ap_email_login",
+            'input[autocomplete="username"]',
+            'input[type="email"]',
+            'input[type="tel"]',
+            'input[name="email"]',
+            'input:not([type="hidden"]):not([type="password"])',
+          ]);
+          if (!username) return state("username_field");
+          await username.fill(values.username);
+          if (values.usernameSubmitTarget) {
+            const usernameSubmit = await firstVisible([
+              values.usernameSubmitTarget,
+              "#continue",
+              'input[type="submit"]',
+              'button[type="submit"]',
+            ]);
+            if (!usernameSubmit) return state("username_submit");
+            await usernameSubmit.click();
+            let password;
+            for (let attempt = 0; attempt < 30; attempt += 1) {
+              password = await firstVisible([
+                values.passwordTarget,
+                "#ap_password",
+                'input[autocomplete="current-password"]',
+                'input[type="password"]',
+                'input[name="password"]',
+              ]);
+              if (password) break;
+              await page.waitForTimeout(500);
+            }
+            if (!password) return state("password_step");
+            const passwordPage = new URL(await page.url());
+            if (!hostAllowed(passwordPage.hostname)) return state("host");
+          }
+          const password = await firstVisible([
+            values.passwordTarget,
+            "#ap_password",
+            'input[autocomplete="current-password"]',
+            'input[type="password"]',
+            'input[name="password"]',
+          ]);
+          if (!password) return state("password_field");
+          await password.fill(values.password);
+          if (values.totpTarget && values.totp && !values.totpAfterSubmit) {
+            const sameFormOtp = await firstVisible([
+              values.totpTarget,
+              'input[autocomplete="one-time-code"]',
+              'input[name="otpCode"]',
+            ]);
+            if (!sameFormOtp) return state("otp_field");
+            await sameFormOtp.fill(values.totp);
+          }
+          const submit = await firstVisible([
+            values.submitTarget,
+            "#signInSubmit",
+            'input[type="submit"]',
+            'button[type="submit"]',
+          ]);
+          if (!submit) return state("password_submit");
+          const beforePasswordSubmit = await page.url();
+          await submit.click();
           await page.waitForTimeout(1_000);
-          if (values.totpTarget && values.totp && values.totpAfterSubmit) {
-            await page.locator(values.totpTarget).fill(values.totp);
-            if (values.otpSubmitTarget) await page.locator(values.otpSubmitTarget).click();
+          await sendAmazonBubblingClickIfStalled(submit, beforePasswordSubmit, password);
+          const otp =
+            values.totpTarget && values.totpAfterSubmit
+              ? await firstVisible([
+                  values.totpTarget,
+                  "#auth-mfa-otpcode",
+                  'input[autocomplete="one-time-code"]',
+                  'input[name="otpCode"]',
+                ])
+              : undefined;
+          if (otp && !values.totp) return state(undefined, true);
+          if (otp && values.totp) {
+            await otp.fill(values.totp);
+            const otpSubmit = await firstVisible([
+              values.otpSubmitTarget,
+              "#auth-signin-button",
+              'input[type="submit"]',
+              'button[type="submit"]',
+            ]);
+            if (!otpSubmit) return state("otp_submit", true);
+            await otpSubmit.click();
             await page.waitForTimeout(1_000);
           }
           const url = await page.url(),
@@ -340,21 +583,27 @@ export class BrowsieBrowserSession {
           const success = values.successTarget
             ? (await page.locator(values.successTarget).count()) > 0
             : false;
-          return { url, title, success };
+          return {
+            url,
+            title,
+            success,
+            failureStage: null,
+            otpRequired: false,
+            bubblingClickFallbackUsed,
+          };
         },
-        input,
+        resolvedInput,
         { timeout: 45_000 },
       );
       await this.gateCaptcha("after");
       this.updateBrowserState(result.url, result.title);
       await this.refreshRemoteLiveUrl();
       const host = new URL(result.url).hostname;
-      const status =
-        input.totpTarget && !input.totp
-          ? "waiting_for_user"
-          : result.success
-            ? "complete"
-            : "unverified";
+      const status = result.otpRequired
+        ? "waiting_for_user"
+        : result.success
+          ? "complete"
+          : "unverified";
       addTrace(
         this.state,
         "tool",
@@ -363,11 +612,25 @@ export class BrowsieBrowserSession {
           ? `Verified login state on ${host}.`
           : status === "waiting_for_user"
             ? `Login on ${host} is waiting for a human challenge.`
-            : `Filled the login on ${host}, but success is not verified yet.`,
-        { host, status, secretValuesRedacted: true },
+            : result.failureStage
+              ? `Secure login stopped at the ${result.failureStage.replaceAll("_", " ")} stage on ${host}.`
+              : `Filled the login on ${host}, but success is not verified yet.`,
+        {
+          host,
+          status,
+          failureStage: result.failureStage,
+          loginFlow: input.usernameSubmitTarget ? "staged" : "same_page",
+          bubblingClickFallbackUsed: result.bubblingClickFallbackUsed,
+          secretValuesRedacted: true,
+        },
         Math.round(performance.now() - started),
       );
-      return { status, host, url: result.url };
+      return {
+        status,
+        host,
+        url: result.url,
+        failureStage: result.failureStage ?? undefined,
+      };
     } catch {
       addTrace(
         this.state,
@@ -377,6 +640,131 @@ export class BrowsieBrowserSession {
       );
       throw new Error(
         "Secure login failed. Inspect the current page and field selectors, then retry.",
+      );
+    } finally {
+      release();
+    }
+  }
+
+  async secureLinkCheckout(input: {
+    merchantUrl: string;
+    card: Card;
+    cardNumberTarget: string;
+    cvcTarget: string;
+    expiryTarget?: string;
+    expiryMonthTarget?: string;
+    expiryYearTarget?: string;
+    expiryFormat: "MM/YY" | "MMYY" | "MM/YYYY";
+    cardholderNameTarget?: string;
+    postalCodeTarget?: string;
+    submitTarget: string;
+    successTarget: string;
+  }): Promise<{
+    status: "complete" | "unverified";
+    host: string;
+    url: string;
+  }> {
+    const release = await this.acquireOperation();
+    try {
+      await this.start();
+      await this.gateCaptcha("before");
+      const started = performance.now();
+      const allowedHosts = allowedLinkCheckoutHosts(input.merchantUrl);
+      const values = {
+        ...input,
+        allowedHosts,
+        expiryValue: formatLinkExpiry(
+          input.card.exp_month,
+          input.card.exp_year,
+          input.expiryFormat,
+        ),
+        cardNumberTarget: this.resolveTarget(input.cardNumberTarget),
+        cvcTarget: this.resolveTarget(input.cvcTarget),
+        expiryTarget: input.expiryTarget ? this.resolveTarget(input.expiryTarget) : undefined,
+        expiryMonthTarget: input.expiryMonthTarget
+          ? this.resolveTarget(input.expiryMonthTarget)
+          : undefined,
+        expiryYearTarget: input.expiryYearTarget
+          ? this.resolveTarget(input.expiryYearTarget)
+          : undefined,
+        cardholderNameTarget: input.cardholderNameTarget
+          ? this.resolveTarget(input.cardholderNameTarget)
+          : undefined,
+        postalCodeTarget: input.postalCodeTarget
+          ? this.resolveTarget(input.postalCodeTarget)
+          : undefined,
+        submitTarget: this.resolveTarget(input.submitTarget),
+        successTarget: this.resolveTarget(input.successTarget),
+      };
+      const result = await this.requireStagehand().experimentalBatch(
+        async ({ page }, payment) => {
+          const before = new URL(await page.url());
+          if (!payment.allowedHosts.includes(before.hostname.toLowerCase())) {
+            throw new Error("host mismatch");
+          }
+          await page.locator(payment.cardNumberTarget).fill(payment.card.number);
+          if (payment.expiryTarget) {
+            await page.locator(payment.expiryTarget).fill(payment.expiryValue);
+          } else {
+            await page
+              .locator(payment.expiryMonthTarget!)
+              .fill(String(payment.card.exp_month).padStart(2, "0"));
+            await page.locator(payment.expiryYearTarget!).fill(String(payment.card.exp_year));
+          }
+          if (!payment.card.cvc) throw new Error("missing CVC");
+          await page.locator(payment.cvcTarget).fill(payment.card.cvc);
+          if (payment.cardholderNameTarget) {
+            const name = payment.card.billing_address?.name;
+            if (!name) throw new Error("missing cardholder name");
+            await page.locator(payment.cardholderNameTarget).fill(name);
+          }
+          if (payment.postalCodeTarget) {
+            const postalCode = payment.card.billing_address?.postal_code;
+            if (!postalCode) throw new Error("missing billing postal code");
+            await page.locator(payment.postalCodeTarget).fill(postalCode);
+          }
+          await page.locator(payment.submitTarget).click();
+          await page.waitForTimeout(1_500);
+          const url = await page.url();
+          const title = await page.title();
+          const success = (await page.locator(payment.successTarget).count()) > 0;
+          return { url, title, success };
+        },
+        values,
+        { timeout: 60_000 },
+      );
+      await this.gateCaptcha("after");
+      this.xpathMap = {};
+      this.updateBrowserState(result.url, result.title);
+      await this.refreshRemoteLiveUrl();
+      const host = new URL(result.url).hostname;
+      const status = result.success ? "complete" : "unverified";
+      addTrace(
+        this.state,
+        "tool",
+        "link.checkout",
+        status === "complete"
+          ? `Verified the checkout success state on ${host}.`
+          : `Submitted the checkout on ${host}, but success is not verified yet.`,
+        {
+          host,
+          status,
+          provider: "Stripe Link",
+          oneTimeCredential: true,
+          secretValuesRedacted: true,
+        },
+        Math.round(performance.now() - started),
+      );
+      return { status, host, url: result.url };
+    } catch {
+      addTrace(
+        this.state,
+        "error",
+        "link.checkout",
+        "The secure Link checkout failed. Payment values were redacted.",
+      );
+      throw new Error(
+        "Secure Link checkout failed. Inspect the page and spend-request status before any retry.",
       );
     } finally {
       release();
@@ -499,6 +887,21 @@ export class BrowsieBrowserSession {
     }
     if (!xpath) return target;
     return xpath.startsWith("xpath=") ? xpath : `xpath=${xpath}`;
+  }
+
+  private resolveSnapshotId(id: string): string {
+    const xpath = this.xpathMap[id];
+    if (!xpath) {
+      throw new Error(`Snapshot ID "${id}" is stale or not actionable. Call snapshot again.`);
+    }
+    const elementXpath = xpath.replace(/\/text\(\)\[\d+\]$/u, "");
+    return elementXpath.startsWith("xpath=") ? elementXpath : `xpath=${elementXpath}`;
+  }
+
+  private invalidateSnapshot(): void {
+    this.xpathMap = {};
+    this.snapshotUrl = undefined;
+    this.snapshotPageId = undefined;
   }
 
   private requireStagehand(): Stagehand {
@@ -712,8 +1115,11 @@ export class BrowsieBrowserSession {
         snapshot: await page.snapshot({ includeIframes: true }),
         url: await page.url(),
         title: await page.title(),
+        pageId: page.pageId,
       }));
       this.xpathMap = result.snapshot.xpathMap;
+      this.snapshotUrl = result.url;
+      this.snapshotPageId = result.pageId;
       this.updateBrowserState(result.url, result.title);
       addTrace(
         this.state,
@@ -743,7 +1149,7 @@ export class BrowsieBrowserSession {
     await this.browserbase.sessions
       .update(sessionId, { status: "REQUEST_RELEASE" })
       .catch(() => undefined);
-    this.clearPersistedSessionId();
+    this.persistReplaySessionId(sessionId);
   }
 
   private loadPersistedSessionId(): string | undefined {
@@ -752,9 +1158,11 @@ export class BrowsieBrowserSession {
 
   private persistSessionId(sessionId: string): void {
     this.state.browser.sessionId = sessionId;
+    delete this.state.browser.replaySessionId;
   }
 
-  private clearPersistedSessionId(): void {
+  private persistReplaySessionId(sessionId: string): void {
+    this.state.browser.replaySessionId = sessionId;
     delete this.state.browser.sessionId;
   }
 
@@ -787,48 +1195,60 @@ export class BrowsieBrowserSession {
   }
 }
 
-export function formatRunCode(actions: RunAction[]): string {
+export function formatRunCode(actions: BrowserRefAction[], selectors: string[]): string {
   return actions
-    .flatMap((item) => {
-      switch (item.action) {
-        case "goto":
-          return [
-            `await page.goto(${JSON.stringify(safeActivityUrl(item.url))});`,
-            'await page.waitForLoadState("domcontentloaded", 15_000);',
-          ];
+    .flatMap((item, index) => {
+      const selector = selectors[index] ?? `[snapshot id ${item.id}]`;
+      switch (item.op) {
         case "click":
-          return `await page.locator(${JSON.stringify(item.target)}).click();`;
+          return `await page.locator(${JSON.stringify(selector)}).click();`;
+        case "hover":
+          return `await page.locator(${JSON.stringify(selector)}).hover();`;
         case "fill":
-          return `await page.locator(${JSON.stringify(item.target)}).fill("[value hidden]");`;
+          return `await page.locator(${JSON.stringify(selector)}).fill("[value hidden]");`;
         case "type":
-          return `await page.locator(${JSON.stringify(item.target)}).type("[value hidden]");`;
+          return `await page.locator(${JSON.stringify(selector)}).type("[value hidden]");`;
         case "press":
           return [
-            ...(item.target ? [`await page.locator(${JSON.stringify(item.target)}).click();`] : []),
+            `await page.locator(${JSON.stringify(selector)}).click();`,
             `await page.keyPress(${JSON.stringify(item.key)});`,
           ];
         case "select":
-          return `await page.locator(${JSON.stringify(item.target)}).selectOption("[value hidden]");`;
-        case "wait":
-          return `await page.waitForTimeout(${Math.min(item.milliseconds, 10_000)});`;
+          return `await page.locator(${JSON.stringify(selector)}).selectOption("[value hidden]");`;
       }
     })
     .join("\n");
 }
 
-function safeActivityUrl(value: string): string {
-  try {
-    const url = new URL(value);
-    url.username = "";
-    url.password = "";
-    for (const key of url.searchParams.keys()) {
-      if (/(?:auth|code|key|otp|password|secret|token)/i.test(key))
-        url.searchParams.set(key, "[REDACTED]");
+function redactActions(actions: BrowserRefAction[]): unknown[] {
+  return actions.map((action) => {
+    switch (action.op) {
+      case "fill":
+        return { ...action, value: "[value hidden]" };
+      case "type":
+        return { ...action, text: "[value hidden]" };
+      case "select":
+        return { ...action, values: "[value hidden]" };
+      default:
+        return action;
     }
-    return url.toString();
-  } catch {
-    return value;
-  }
+  });
+}
+
+export function redactActivityCode(code: string): string {
+  return code
+    .replace(
+      /(\.fill|\.type|\.selectOption)\(\s*(["'`])(?:\\.|(?!\2)[\s\S])*?\2\s*\)/gu,
+      '$1("[value hidden]")',
+    )
+    .replace(
+      /\b(password|passwd|secret|token|otp|apiKey|api_key)\b(\s*[:=]\s*)(["'`])(?:\\.|(?!\3)[\s\S])*?\3/giu,
+      '$1$2"[value hidden]"',
+    )
+    .replace(/([?&](?:auth|code|key|otp|password|secret|token)=)[^&\s"'`]+/giu, "$1[REDACTED]")
+    .replace(/\b(sk-[A-Za-z0-9_-]{6})[A-Za-z0-9_-]+/gu, "$1[redacted]")
+    .replace(/\b(bb_(?:live|test)_[A-Za-z0-9]{4})[A-Za-z0-9_-]+/gu, "$1[redacted]")
+    .replace(/\b(Bearer\s+)[A-Za-z0-9._~+/=-]{8,}/giu, "$1[redacted]");
 }
 
 function configuredCaptchaTimeoutMs(): number {

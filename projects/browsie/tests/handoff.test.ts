@@ -1,5 +1,6 @@
 import { afterEach, describe, expect, it } from "vitest";
 
+import { GET as renderHandoff } from "../app/handoff/[token]/route.js";
 import {
   BrowserHandoffError,
   issueBrowserHandoffToken,
@@ -80,6 +81,20 @@ describe("browser handoff", () => {
         getDebuggerUrl: async () => "https://example.com/not-a-live-view",
       }),
     ).rejects.toMatchObject({ code: "unavailable" });
+  });
+
+  it("redirects the handoff to the top-level live route", async () => {
+    process.env.BROWSIE_HANDOFF_SECRET = secret;
+    const token = issueBrowserHandoffToken(target, { secret });
+    const response = await renderHandoff(new Request(`https://browsie.example/handoff/${token}`), {
+      params: Promise.resolve({ token }),
+    });
+
+    expect(response.status).toBe(307);
+    expect(response.headers.get("location")).toBe(
+      `https://browsie.example/handoff/${encodeURIComponent(token)}/live`,
+    );
+    expect(await response.text()).toBe("");
   });
 
   it("requires a strong secret and an HTTPS public URL", () => {

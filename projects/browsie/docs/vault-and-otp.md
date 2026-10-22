@@ -8,4 +8,9 @@ For automated 1Password access, create a least-privilege service account, grant 
 
 The model can list only labels, host mappings, field availability, and opaque item/field references. `vault_login` resolves values server-side immediately before filling. Stagehand v4.0.2 does not expose the older `act(..., { variables })` API; Browsie therefore uses a browser-session-bound `experimentalBatch` adapter with Stagehand logging disabled and redacted results. A success selector is mandatory because filling and clicking alone do not prove authentication.
 
+`vault_login` supports both same-page login forms and staged forms. For a staged form, the model
+supplies a username submit selector. The server fills and submits the username, waits for the
+password field on an allowed host, and then fills and submits the password. Secret values remain
+inside the server-side `experimentalBatch` call for both stages.
+
 TOTP codes are generated server-side using RFC 6238 and are never stored. Challenges without a mapped TOTP secret must park the Eve task in `waiting_for_user`; the interactive Browserbase Live View remains the primary safe handoff.

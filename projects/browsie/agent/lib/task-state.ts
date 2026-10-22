@@ -47,6 +47,7 @@ export interface DurableTaskRecord {
   captcha?: DurableCaptchaRecord;
   browser: {
     sessionId?: string;
+    replaySessionId?: string;
     lifecycle: BrowserLifecycle;
     contextId?: string;
     contextStatus?: "draft" | "saved";
@@ -304,13 +305,16 @@ export function updateTaskBrowser(
         ? "active"
         : browser.status === "error"
           ? "error"
-          : browser.sessionId
+          : browser.sessionId || browser.replaySessionId
             ? "closed"
             : "not_started";
   return {
     ...record,
     browser: {
       sessionId: safeId(browser.sessionId),
+      replaySessionId:
+        safeId(browser.replaySessionId) ??
+        (browser.sessionId ? undefined : safeId(record.browser.replaySessionId)),
       lifecycle,
       contextId:
         safeId(browser.contextId) ??
@@ -345,6 +349,7 @@ export function setTaskBrowserContext(
       ...record.browser,
       contextId: safeContextId,
       contextStatus,
+      replaySessionId: safeId(record.browser.sessionId) ?? safeId(record.browser.replaySessionId),
       sessionId: undefined,
       lifecycle,
     },
@@ -389,6 +394,7 @@ export function closeTaskBrowser(record: DurableTaskRecord): DurableTaskRecord {
     ...record,
     browser: {
       ...record.browser,
+      replaySessionId: safeId(record.browser.sessionId) ?? safeId(record.browser.replaySessionId),
       sessionId: undefined,
       lifecycle: "closed",
     },

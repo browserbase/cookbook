@@ -51,7 +51,7 @@ describe("opt-in live Context save", () => {
         reader = new BrowsieBrowserSession(state("context-capture-reader"), {
           contextId: remote.id,
         });
-        await reader.run([{ action: "goto", url: "https://example.com/" }]);
+        await reader.run({ code: 'await page.goto("https://example.com/");' });
         const restored = await reader.exportCookies();
         expect(restored.some((cookie) => cookie.value === marker)).toBe(true);
       } finally {

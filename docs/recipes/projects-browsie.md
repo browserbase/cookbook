@@ -1,6 +1,6 @@
 # Browsie: consumer browser agent
 
-Build a durable consumer browser agent with Stagehand, Browserbase Contexts, Live View handoff, vaults, and a web workbench.
+Build a durable consumer browser agent with Stagehand code mode, Browserbase Contexts, Live View and replay, vaults, payments, a desktop app, MCP, and a web workbench.
 
 > [!CAUTION]
 > Demo and reference code only. This recipe is not a vetted production implementation. Independently review it, obtain authorization, and validate security, privacy, compliance, cost, and site-term requirements before use. Use at your own risk.
@@ -14,11 +14,14 @@ Build a durable consumer browser agent with Stagehand, Browserbase Contexts, Liv
 
 - Working directory from the cookbook root: `projects/browsie`.
 - Languages: typescript.
-- Frameworks: Stagehand, Browserbase SDK, Eve, Next.js.
+- Frameworks: Stagehand, Browserbase SDK, Eve, Next.js, Electron, MCP.
 - [Upstream setup and behavior](../../projects/browsie/README.md).
 - [Dependency manifest `projects/browsie/package.json`](../../projects/browsie/package.json).
+- [Dependency manifest `projects/browsie/desktop/package.json`](../../projects/browsie/desktop/package.json).
 - [Source `projects/browsie/app/page.tsx`](../../projects/browsie/app/page.tsx).
 - [Source `projects/browsie/agent/agent.ts`](../../projects/browsie/agent/agent.ts).
+- [Source `projects/browsie/desktop/electron/main.cjs`](../../projects/browsie/desktop/electron/main.cjs).
+- [Source `projects/browsie/desktop/mcp/server.ts`](../../projects/browsie/desktop/mcp/server.ts).
 - Original use-case taxonomy: reference-app.
 
 ## Setup and run
@@ -60,6 +63,7 @@ pnpm dev
 | --- | --- | --- | --- |
 | `STAGEHAND_BROWSER` | Browsie. Selects automatic, local, or Browserbase browser mode. Non-secret. | `browserbase` | Must be auto, local, or browserbase. Default: `auto`. |
 | `BROWSIE_MODEL` | [OpenAI](https://platform.openai.com/docs/models). Selects the model used by the Eve agent. Non-secret. | `gpt-5.6-sol` | Must be a model available to the configured OpenAI account. Default: `gpt-5.6-sol`. |
+| `LINK_ACCESS_TOKEN` | [Stripe Link](https://docs.stripe.com/agentic-commerce/link-agentic-commerce). Connects a server-side Link Agent Wallet for approved browser checkout. Secret. | `<set-locally>` | Must be a valid Link Agent Wallet access token. No default. |
 
 
 ## Dependencies
@@ -72,14 +76,28 @@ Declared runtime dependencies from [projects/browsie/package.json](../../project
 | `@ai-sdk/openai` | `4.0.93` |
 | `@browserbasehq/sdk` | `2.21.0` |
 | `@browserbasehq/stagehand` | `4.2.1` |
+| `@stripe/link-integrations-eve` | `0.3.0` |
+| `@stripe/link-sdk` | `0.12.0` |
 | `ai` | `7.0.139` |
 | `dotenv` | `^17.4.2` |
-| `eve` | `0.47.7` |
+| `eve` | `0.66.3` |
+| `hls.js` | `^1.7.1` |
 | `lucide-react` | `^1.60.0` |
 | `next` | `16.4.0` |
 | `react` | `^19.3.1` |
 | `react-dom` | `^19.3.1` |
 | `zod` | `4.4.3` |
+
+### Additional manifest: `projects/browsie/desktop/package.json`
+
+[Manifest](../../projects/browsie/desktop/package.json). Follow the documented setup path; these declarations are not merged with the primary manifest.
+
+| Package | Declared version |
+| --- | --- |
+| `@modelcontextprotocol/sdk` | `1.32.1` |
+| `dotenv` | `18.0.8` |
+| `eve` | `0.66.3` |
+| `zod` | `4.6.7` |
 
 ## Caveats and verification
 
@@ -87,7 +105,7 @@ Source and setup metadata were inspected. No passing authenticated live-workflow
 
 | Check | Date | Runtime | Command | Result and limits |
 | --- | --- | --- | --- | --- |
-| Offline behavior tested | 2026-09-30 | `Node.js 25.9.0 with pnpm 10.33.0 on macOS arm64; package target is Node.js 24.x` | `pnpm test && pnpm typecheck && pnpm build && pnpm test:linq-local` | passed. 84 unit tests passed and 7 credential-dependent live tests skipped; no live Browserbase, model, Linq, or 1Password call was made. |
+| Offline behavior tested | 2026-10-20 | `Node.js 25.9.0 with pnpm 10.33.0 on macOS arm64; package target is Node.js 24.x` | `pnpm test && pnpm typecheck && pnpm lint && pnpm build && pnpm desktop:test && pnpm desktop:typecheck && pnpm desktop:build` | passed. 98 unit tests and 2 desktop package tests passed; 8 credential-dependent live tests skipped. The Next.js and Eve production builds, Electron package build, packaged MCP command smoke test, and authenticated HTTP MCP smoke test passed. No live Browserbase, model, Linq, 1Password, or Link payment call was made. |
 
 - Local Context metadata and native-vault data use local files and need a durable database for a multi-instance deployment.
 - Handoff links expire but are not single-use links.

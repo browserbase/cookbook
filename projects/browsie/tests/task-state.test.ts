@@ -125,6 +125,7 @@ describe("durable Eve task state", () => {
       lifecycle: "closed",
     });
     expect(state.browser.sessionId).toBeUndefined();
+    expect(state.browser.replaySessionId).toBe("session_12345678");
   });
   it("records a draft Context without closing the active browser", () => {
     const state = recordTaskBrowserContext(
@@ -181,6 +182,7 @@ describe("durable Eve task state", () => {
       },
     });
     expect(state.browser.sessionId).toBeUndefined();
+    expect(state.browser.replaySessionId).toBe("session_12345678");
   });
   it("redacts secrets and signed Browserbase URLs", () => {
     const text = safeText(

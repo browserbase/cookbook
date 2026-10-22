@@ -4,7 +4,8 @@ export interface TaskHistoryItem {
   updatedAt: string;
 }
 
-export const TASK_HISTORY_KEY = "browsie:task-history:v1";
+export const LEGACY_TASK_HISTORY_KEY = "browsie:task-history:v1";
+export const TASK_HISTORY_KEY = "browsie:task-history:v2";
 
 export function parseTaskHistory(value: string | null): TaskHistoryItem[] {
   if (!value) return [];
@@ -24,6 +25,18 @@ export function upsertTaskHistory(
   limit = 30,
 ): TaskHistoryItem[] {
   return [item, ...items.filter((candidate) => candidate.sessionId !== item.sessionId)]
+    .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt))
+    .slice(0, limit);
+}
+
+export function mergeTaskHistory(
+  cached: TaskHistoryItem[],
+  durable: TaskHistoryItem[],
+  limit = 30,
+): TaskHistoryItem[] {
+  const items = new Map(cached.map((item) => [item.sessionId, item] as const));
+  for (const item of durable) items.set(item.sessionId, item);
+  return [...items.values()]
     .sort((left, right) => right.updatedAt.localeCompare(left.updatedAt))
     .slice(0, limit);
 }

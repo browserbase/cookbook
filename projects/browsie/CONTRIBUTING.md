@@ -7,7 +7,7 @@ clearer, more reliable, or easier to copy.
 
 1. Read [AGENTS.md](AGENTS.md).
 2. Read the document for the area you will change.
-3. Keep the change inside `projects/browsie` unless cookbook metadata must change.
+3. Keep the change inside Browsie.
 4. Do not commit credentials, `.env`, browser data, run traces, or customer data.
 
 For a new browser-agent capability, read
@@ -26,7 +26,7 @@ the skill is not required.
 
 ## Validation
 
-From `projects/browsie`, run:
+From this directory, run:
 
 ```bash
 pnpm test
@@ -34,6 +34,10 @@ pnpm typecheck
 pnpm lint
 pnpm build
 pnpm test:linq-local
+pnpm desktop:typecheck
+pnpm desktop:test
+pnpm desktop:build
+pnpm exec prettier . --check
 ```
 
 The live tests use real Browserbase, model, Linq, or 1Password resources. Run them only when the

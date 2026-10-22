@@ -50,16 +50,19 @@ function getRuntime(sessionId: string): BrowserRuntime {
   const saved = taskState.get();
   const durable = reconcileCaptchaAfterRestart(saved, new Date().toISOString());
   if (durable !== saved) taskState.update(() => durable);
+  const canReconnect = ["starting", "active", "disconnected"].includes(durable.browser.lifecycle);
+  const activeSessionId = canReconnect ? durable.browser.sessionId : undefined;
   const state: ConversationState = {
     id: sessionId,
     traces: [],
     browser: {
-      provider: durable.browser.sessionId ? "browserbase" : "not-started",
+      provider: activeSessionId || durable.browser.replaySessionId ? "browserbase" : "not-started",
       status: durable.browser.lifecycle === "active" ? "idle" : "idle",
       contextId: durable.browser.contextId,
       contextStatus: durable.browser.contextStatus,
       proxyLocation: durable.browser.proxyLocation,
-      sessionId: durable.browser.sessionId,
+      sessionId: activeSessionId,
+      replaySessionId: durable.browser.replaySessionId,
       url: durable.browser.url,
       title: durable.browser.title,
     },

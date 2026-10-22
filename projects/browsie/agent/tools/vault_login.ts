@@ -10,12 +10,13 @@ import { taskState } from "../lib/task-state";
 const selector = z.string().min(1).max(500);
 export default defineTool({
   description:
-    "Fill and submit a mapped Login without exposing credentials to the model. Navigate and snapshot first. Pass the opaque item handle plus exact selectors. A successTarget is required to prove login. If an OTP field exists but the item has no TOTP secret, this returns waiting_for_user; immediately call ask_question so the Eve task parks durably.",
+    "Fill and submit a mapped Login without exposing credentials to the model. Navigate and snapshot first. Pass the opaque item handle plus selectors or fresh snapshot target IDs. For a staged login such as Amazon, pass usernameSubmitTarget so the tool fills the username, submits it, waits for the password page, then fills and submits the password. The server may use safe visible-field fallbacks on the credential's allowed host. A successTarget is required to prove login. If the result is waiting_for_user or has a failureStage, call human_handoff instead of retrying selectors. Never ask the user to paste an OTP into chat.",
   inputSchema: z.object({
     provider: z.enum(["native", "onepassword"]),
     itemId: z.string().min(1),
     vaultId: z.string().optional(),
     usernameTarget: selector,
+    usernameSubmitTarget: selector.optional(),
     passwordTarget: selector,
     submitTarget: selector,
     successTarget: selector,
@@ -56,6 +57,7 @@ export default defineTool({
           username,
           password,
           usernameTarget: input.usernameTarget,
+          usernameSubmitTarget: input.usernameSubmitTarget,
           passwordTarget: input.passwordTarget,
           submitTarget: input.submitTarget,
           successTarget: input.successTarget,

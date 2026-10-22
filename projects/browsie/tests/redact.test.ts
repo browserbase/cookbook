@@ -4,11 +4,11 @@ import { redactText, redactValue } from "../server/redact.js";
 
 describe("trace redaction", () => {
   it("removes Browserbase and model keys", () => {
-    const text = redactText(
-      "BROWSERBASE_API_KEY=bb_live_abcdefghijkl OPENAI_API_KEY=sk-abcdefghijklmnop",
-    );
-    expect(text).not.toContain("bb_live_abcdefghijkl");
-    expect(text).not.toContain("sk-abcdefghijklmnop");
+    const browserbaseKey = ["bb", "live", "abcdefghijkl"].join("_");
+    const openaiKey = ["sk", "abcdefghijklmnop"].join("-");
+    const text = redactText(`BROWSERBASE_API_KEY=${browserbaseKey} OPENAI_API_KEY=${openaiKey}`);
+    expect(text).not.toContain(browserbaseKey);
+    expect(text).not.toContain(openaiKey);
   });
 
   it("redacts nested values", () => {

@@ -1,11 +1,16 @@
 "use client";
 
-import { ArrowLeft, KeyRound, LockKeyhole, ShieldCheck } from "lucide-react";
+import { ArrowLeft, KeyRound, LoaderCircle, LockKeyhole, ShieldCheck } from "lucide-react";
 import { FormEvent, useEffect, useState } from "react";
 
 import type { SafeLoginItem, VaultProviderStatus } from "../server/vault/types";
 
 type View = "home" | "native" | "onepassword";
+type OnePasswordData = {
+  status?: VaultProviderStatus;
+  items: SafeLoginItem[];
+  error?: string;
+};
 const blank = {
   label: "",
   hosts: "",
@@ -16,20 +21,46 @@ const blank = {
 };
 export default function VaultStudio() {
   const [view, setView] = useState<View>("home");
+  const [onePassword, setOnePassword] = useState<OnePasswordData>({
+    items: [],
+  });
+  useEffect(() => {
+    fetch("/api/vault/onepassword", { cache: "no-store" })
+      .then((response) => response.json())
+      .then((body) =>
+        setOnePassword({
+          status: body.status,
+          items: body.items ?? [],
+          error: body.error,
+        }),
+      );
+  }, []);
   return (
     <div className="vault-studio">
       {view === "home" ? (
         <div className="vault-provider-grid">
-          <button className="details-card" onClick={() => setView("native")}>
-            <LockKeyhole />
-            <span>
+          <button
+            type="button"
+            className="details-card vault-provider-card"
+            onClick={() => setView("native")}
+          >
+            <span className="vault-provider-icon">
+              <LockKeyhole size={20} />
+            </span>
+            <span className="vault-provider-copy">
               <strong>Native Vault</strong>
               <small>Encrypted local demo provider</small>
             </span>
           </button>
-          <button className="details-card" onClick={() => setView("onepassword")}>
-            <KeyRound />
-            <span>
+          <button
+            type="button"
+            className="details-card vault-provider-card"
+            onClick={() => setView("onepassword")}
+          >
+            <span className="vault-provider-icon">
+              <KeyRound size={20} />
+            </span>
+            <span className="vault-provider-copy">
               <strong>Connect 1Password</strong>
               <small>Server-side SDK integration</small>
             </span>
@@ -41,7 +72,7 @@ export default function VaultStudio() {
             <ArrowLeft size={16} />
             Providers
           </button>
-          {view === "native" ? <NativePanel /> : <OnePasswordPanel />}
+          {view === "native" ? <NativePanel /> : <OnePasswordPanel data={onePassword} />}
         </>
       )}
     </div>
@@ -214,25 +245,22 @@ function NativePanel() {
     </div>
   );
 }
-function OnePasswordPanel() {
-  const [status, setStatus] = useState<VaultProviderStatus>(),
-    [items, setItems] = useState<SafeLoginItem[]>([]),
-    [error, setError] = useState<string>();
-  useEffect(() => {
-    fetch("/api/vault/onepassword", { cache: "no-store" })
-      .then((r) => r.json())
-      .then((body) => {
-        setStatus(body.status);
-        setItems(body.items ?? []);
-        setError(body.error);
-      });
-  }, []);
+function OnePasswordPanel({ data }: { data: OnePasswordData }) {
+  const { status, items, error } = data;
   return (
     <div className="workspace-stack">
       <ProviderHead title="1Password" status={status} />
       {error && <p className="error-message">{error}</p>}
-      {!status?.configured ? (
-        <article className="details-card">
+      {!status && !error ? (
+        <article className="details-card vault-loading-card" aria-live="polite">
+          <LoaderCircle className="spin" size={20} />
+          <div>
+            <strong>Loading 1Password logins</strong>
+            <p>Checking the connected vaults and available Login items.</p>
+          </div>
+        </article>
+      ) : status && !status.configured ? (
+        <article className="details-card vault-setup-card">
           <div>
             <h2>Server setup</h2>
             <p>
@@ -257,11 +285,13 @@ function ProviderHead({ title, status }: { title: string; status?: VaultProvider
         <h2>{title}</h2>
         <p>{status?.message ?? "Checking provider…"}</p>
         <strong>
-          {status?.healthy
-            ? "Connected"
-            : status?.configured
-              ? "Needs attention"
-              : "Not configured"}{" "}
+          {!status
+            ? "Checking connection"
+            : status.healthy
+              ? "Connected"
+              : status.configured
+                ? "Needs attention"
+                : "Not configured"}{" "}
           · {status?.mode ?? "checking"}
         </strong>
       </div>
