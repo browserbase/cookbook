@@ -16,17 +16,21 @@ describe("opt-in real Browserbase CAPTCHA solve", () => {
         },
         session = new BrowsieBrowserSession(state);
       try {
-        await session.run([
-          { action: "goto", url: "https://google.com/recaptcha/api2/demo" },
-          { action: "wait", milliseconds: 2_000 },
-        ]);
+        await session.run({
+          code: `
+            await page.goto("https://google.com/recaptcha/api2/demo");
+            await page.waitForTimeout(2_000);
+          `,
+        });
         const transitions = session.drainCaptchaTransitions();
         expect(transitions.map((event) => event.type)).toEqual(["started", "finished"]);
 
-        await session.run([
-          { action: "click", target: "#recaptcha-demo-submit" },
-          { action: "wait", milliseconds: 1_000 },
-        ]);
+        await session.run({
+          code: `
+            await page.locator("#recaptcha-demo-submit").click();
+            await page.waitForTimeout(1_000);
+          `,
+        });
         const page = await session.snapshot();
         expect(page.tree).toContain("Verification Success");
 

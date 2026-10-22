@@ -38,12 +38,9 @@ describe("opt-in live 1Password login", () => {
         },
         session = new BrowsieBrowserSession(state);
       try {
-        await session.run([
-          {
-            action: "goto",
-            url: "https://authenticationtest.com/totpChallenge/",
-          },
-        ]);
+        await session.run({
+          code: 'await page.goto("https://authenticationtest.com/totpChallenge/");',
+        });
         const result = await session.secureLogin({
           allowedHosts: item.allowedHosts,
           username,

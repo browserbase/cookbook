@@ -23,7 +23,7 @@ describe("opt-in live proxy location", () => {
         },
       });
       try {
-        await browser.run([{ action: "goto", url: "https://ipinfo.io/json" }]);
+        await browser.run({ code: 'await page.goto("https://ipinfo.io/json");' });
         const page = await browser.snapshot();
         expect(page.pageStatus).toBe("live");
         expect(state.browser).toMatchObject({

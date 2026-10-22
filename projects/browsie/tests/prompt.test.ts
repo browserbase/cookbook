@@ -13,6 +13,8 @@ describe("Eve instructions", () => {
     expect(instructions).toContain("stop before Submit");
     expect(instructions).toContain("Do not stop at the first obstacle");
     expect(instructions).toContain("which is best?");
+    expect(instructions).toContain("exactly one `run` call or one batch");
+    expect(instructions).toContain("one `experimentalBatch` callback");
   });
 
   it("adds BrowseLearn memory to one Eve turn", () => {
