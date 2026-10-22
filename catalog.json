@@ -139,7 +139,7 @@
         "@browserbasehq/stagehand": "4.2.1",
         "ai": "7.0.139",
         "dotenv": "^17.4.2",
-        "eve": "0.47.7",
+        "eve": "0.69.0",
         "lucide-react": "^1.60.0",
         "next": "16.4.0",
         "react": "^19.3.1",
@@ -7580,7 +7580,8 @@
         "crewai==1.15.27",
         "mcp>=1.30.0,<2",
         "python-dotenv>=1.2.4,<2",
-        "stagehand==4.2.1"
+        "stagehand==4.2.1",
+        "uv==0.13.4"
       ],
       "entrypoints": [
         "integrations/examples/integrations/crewai/stagehand/main.py"

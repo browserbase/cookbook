@@ -30,7 +30,7 @@ black = "^26.3.1"
 flake8 = "^7.1.1"
 pylint = "^3.2.7"
 setuptools = ">=83.0.0"
-virtualenv = ">=20.36.1,<21.0.0"
+virtualenv = ">=20.36.1,<=21.14.9"
 
 [build-system]
 requires = ["poetry-core"]

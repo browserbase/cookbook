@@ -74,7 +74,7 @@ Declared runtime dependencies from [projects/browsie/package.json](../../project
 | `@browserbasehq/stagehand` | `4.2.1` |
 | `ai` | `7.0.139` |
 | `dotenv` | `^17.4.2` |
-| `eve` | `0.47.7` |
+| `eve` | `0.69.0` |
 | `lucide-react` | `^1.60.0` |
 | `next` | `16.4.0` |
 | `react` | `^19.3.1` |
