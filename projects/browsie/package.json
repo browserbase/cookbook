@@ -25,6 +25,8 @@
     "@ai-sdk/openai": "4.0.93",
     "@browserbasehq/sdk": "2.21.0",
     "@browserbasehq/stagehand": "4.2.1",
+    "@stripe/link-integrations-eve": "0.3.0",
+    "@stripe/link-sdk": "0.12.0",
     "ai": "7.0.139",
     "dotenv": "^17.4.2",
     "eve": "0.47.7",

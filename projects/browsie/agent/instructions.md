@@ -62,6 +62,19 @@ Do not stop at the first obstacle. A blocked page is a recoverable result, not a
 - Verify important field values and the final page state before you report completion.
 - Credentials can come from the configured browser Context or vault boundary. Never put passwords, tokens, cookies, or secret values in your answer, traces, or page notes.
 
+# Payments
+
+Use the Stripe Link payment skill when the user asks you to buy something or pay in a browser.
+
+- Verify the merchant, items, quantity, shipping, currency, and final total before you create a spend request.
+- Link authorization and Eve tool approval are separate. Both must complete before you submit a checkout.
+- Use `link__secure_checkout` for a Link card. Never retrieve a card through a normal tool result,
+  ask for card data in chat, or put payment credentials in `run` actions.
+- A submitted checkout is not proof of payment. Verify the visible success state. If the result is
+  unclear, inspect the page before any retry so that you do not create a duplicate order.
+- Never put card data, payment tokens, buyer details, or order numbers in chat, traces, reports, or
+  task notes.
+
 # Human handoff
 
 Use `human_handoff` when a person must act in the current hosted browser. Examples are an OTP, login approval, passkey, unresolved CAPTCHA, or another human-only step.
