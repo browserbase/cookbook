@@ -34,7 +34,7 @@ for (const format of ["raw", "markdown", "json", "expired", "disabled"]) {
       res.end(JSON.stringify({ statusCode: 200, content, headers: {}, contentType: "text/html", encoding: "utf-8" }));
     });
     await new Promise(resolve => server.listen(0, "127.0.0.1", resolve));
-    const cwd = await mkdtemp(join(tmpdir(), "fetch-context-test-"));
+    const cwd = await mkdtemp(join(tmpdir(), "authenticated-fetch-test-"));
     try {
       const execution = run(process.execPath, ["--import", loader, entry, ["expired", "disabled"].includes(format) ? "raw" : format], {
         cwd,

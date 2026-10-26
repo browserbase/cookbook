@@ -1,5 +1,5 @@
 {
-  "name": "fetch-with-contexts",
+  "name": "authenticated-fetch",
   "version": "1.0.0",
   "private": true,
   "type": "module",

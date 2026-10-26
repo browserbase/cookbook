@@ -1,8 +1,8 @@
-# Fetch with contexts
+# Authenticated Fetch
 
-Log in once in a Browserbase browser, save its cookies in a context, then fetch a protected page using `process.env.BROWSERBASE_CONTEXT_ID`. The login and Fetch scripts run separately.
+Log in once in a Browserbase browser, save its cookies in a context, then fetch a protected page using `process.env.BROWSERBASE_CONTEXT_ID`. The login and Fetch scripts run separately. See the [Authenticated Fetch documentation](https://docs.browserbase.com/platform/fetch/authenticated-fetch) for context setup, cookie behavior, and limitations.
 
-**Draft for the Fetch contexts launch.** Requires a project enabled for Fetch with contexts. The API/docs publication is gated on [core PR #12715](https://github.com/browserbase/core/pull/12715); this example does not establish general availability.
+**Draft for the Authenticated Fetch launch.** Requires a project enabled for Authenticated Fetch. The API/docs publication is gated on [core PR #12715](https://github.com/browserbase/core/pull/12715); this example does not establish general availability.
 
 ## Setup
 
@@ -11,7 +11,7 @@ Requires Node.js 22.18+, pnpm 10.24.0, and a Browserbase API key from [Settings]
 From the cookbook root:
 
 ```sh
-cd examples/typescript/fetch-with-contexts
+cd examples/typescript/authenticated-fetch
 pnpm install --config.minimumReleaseAge=10080
 cp .env.example .env
 ```
@@ -22,7 +22,7 @@ Set `BROWSERBASE_API_KEY` in `.env`, then:
 pnpm login
 ```
 
-`login.ts` creates a context (or reuses `BROWSERBASE_CONTEXT_ID` if set), opens a browser session with `persist: true`, and logs into [The Internet's public authentication demo](https://the-internet.herokuapp.com/login). The credentials in the script are the public credentials displayed on that page. It verifies the protected welcome text and Logout link, requests session release even on failure, waits for completion, and allows five seconds for context synchronization.
+Following the [saved-login workflow](https://docs.browserbase.com/platform/fetch/authenticated-fetch), `login.ts` creates a context (or reuses `BROWSERBASE_CONTEXT_ID` if set), opens a browser session with `persist: true`, and logs into [The Internet's public authentication demo](https://the-internet.herokuapp.com/login). The credentials in the script are the public credentials displayed on that page. It verifies the protected welcome text and Logout link, requests session release even on failure, waits for completion, and allows five seconds for context synchronization.
 
 Copy the printed `BROWSERBASE_CONTEXT_ID=...` line into your local `.env`. Use the same Browserbase project for both scripts.
 
@@ -32,7 +32,7 @@ pnpm start markdown  # Markdown -> .audit/page.md
 pnpm start json      # schema-based extraction -> .audit/page.json
 ```
 
-`index.ts` passes the context ID to `bb.fetchAPI.create`. It checks the raw response for the protected welcome text and logout link before saving anything. A 200 status alone is insufficient: an expired login can redirect to a login page that also returns 200. Markdown and JSON each make one additional Fetch request after this check. JSON uses a language model to extract the heading and welcome message; it is not independent proof of authentication. The script also checks the converted response before saving it.
+Using [Authenticated Fetch](https://docs.browserbase.com/platform/fetch/authenticated-fetch), `index.ts` passes the context ID to `bb.fetchAPI.create`. It checks the raw response for the protected welcome text and logout link before saving anything. A 200 status alone is insufficient: an expired login can redirect to a login page that also returns 200. Markdown and JSON each make one additional Fetch request after this check. JSON uses a language model to extract the heading and welcome message; it is not independent proof of authentication. The script also checks the converted response before saving it.
 
 Successful output reports the saved file, without printing page contents, cookies, API keys, or browser connection URLs. `.audit/` and `.env` are Git-ignored. The login script prints the context ID so you can configure Fetch; keep it local. Each login creates a billed browser session and, unless reusing an ID, a persistent context. Fetch calls are billed separately, including extraction for Markdown/JSON. The context remains available after the script exits.
 

@@ -14727,7 +14727,8 @@
         "Draft: requires a project enabled for launch-gated Fetch context support.",
         "Uses public demo credentials; adapt login and protected-content checks for your own site.",
         "Fetch uses saved cookies only; JavaScript-only authentication requires a browser.",
-        "Live login, persisted context reuse, and authenticated Fetch in all three formats verified on 2026-10-19 for the tested project."
+        "Live login, persisted context reuse, and authenticated Fetch in all three formats verified on 2026-10-19 for the tested project.",
+        "Documentation: [Authenticated Fetch](https://docs.browserbase.com/platform/fetch/authenticated-fetch)."
       ],
       "collection": "examples",
       "dependencies": {
@@ -14736,11 +14737,11 @@
         "playwright-core": "1.56.1"
       },
       "entrypoints": [
-        "examples/typescript/fetch-with-contexts/login.ts",
-        "examples/typescript/fetch-with-contexts/index.ts"
+        "examples/typescript/authenticated-fetch/login.ts",
+        "examples/typescript/authenticated-fetch/index.ts"
       ],
       "environment_setup_command": "test -f .env || cp .env.example .env",
-      "environment_template": "examples/typescript/fetch-with-contexts/.env.example",
+      "environment_template": "examples/typescript/authenticated-fetch/.env.example",
       "environment_variables": [
         {
           "default": null,
@@ -14769,16 +14770,16 @@
         "Browserbase SDK",
         "Playwright"
       ],
-      "id": "examples-typescript-fetch-with-contexts",
+      "id": "examples-typescript-authenticated-fetch",
       "languages": [
         "typescript"
       ],
       "lifecycle": "current",
       "manifests": [
-        "examples/typescript/fetch-with-contexts/package.json"
+        "examples/typescript/authenticated-fetch/package.json"
       ],
-      "path": "examples/typescript/fetch-with-contexts",
-      "readme": "docs/recipes/examples-typescript-fetch-with-contexts.md",
+      "path": "examples/typescript/authenticated-fetch",
+      "readme": "docs/recipes/examples-typescript-authenticated-fetch.md",
       "run_commands": [
         "pnpm login",
         "pnpm start",
@@ -14791,7 +14792,7 @@
       ],
       "source": {
         "kind": "cookbook-authored",
-        "path": "examples/typescript/fetch-with-contexts"
+        "path": "examples/typescript/authenticated-fetch"
       },
       "summary": "Save a browser login in a context, then fetch protected HTML, Markdown, or structured JSON with an environment-provided context ID.",
       "tags": [
@@ -14799,14 +14800,14 @@
         "contexts",
         "cookies"
       ],
-      "title": "Fetch with contexts (TypeScript)",
+      "title": "Authenticated Fetch (TypeScript)",
       "topics": [
         "authentication",
         "extraction-and-research"
       ],
-      "upstream_readme": "examples/typescript/fetch-with-contexts/README.md",
+      "upstream_readme": "examples/typescript/authenticated-fetch/README.md",
       "verification": "live-tested",
-      "working_directory": "examples/typescript/fetch-with-contexts",
+      "working_directory": "examples/typescript/authenticated-fetch",
       "verification_evidence": [
         {
           "kind": "typechecked",

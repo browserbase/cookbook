@@ -76,6 +76,7 @@ All entries below were inspected at their pinned source revision. Live website b
 | [Agent with human in loop (TypeScript)](../docs/recipes/examples-typescript-agent-with-human-in-loop.md) | typescript | runnable example | current / public | examples |
 | [Amazon global price comparison (TypeScript)](../docs/recipes/examples-typescript-amazon-global-price-comparison.md) | typescript | runnable example | current / public | examples |
 | [Amazon product scraping (TypeScript)](../docs/recipes/examples-typescript-amazon-product-scraping.md) | typescript | runnable example | current / public | examples |
+| [Authenticated Fetch (TypeScript)](../docs/recipes/examples-typescript-authenticated-fetch.md) | typescript | runnable example | current / public | examples |
 | [Basic caching (TypeScript)](../docs/recipes/examples-typescript-basic-caching.md) | typescript | runnable example | current / public | examples |
 | [Basic CAPTCHA (TypeScript)](../docs/recipes/examples-typescript-basic-captcha.md) | typescript | runnable example | current / public | examples |
 | [Browser agent demo (TypeScript)](../docs/recipes/examples-typescript-browser-agent-demo.md) | typescript | runnable example | current / public | examples |
@@ -90,7 +91,6 @@ All entries below were inspected at their pinned source revision. Live website b
 | [Card entry with Evervault Browser Tokens](../docs/recipes/examples-typescript-evervault-browser-tokens.md) | typescript | runnable example | current / public | examples |
 | [Exa Browserbase (TypeScript)](../docs/recipes/examples-typescript-exa-browserbase.md) | typescript | runnable example | current / public | examples |
 | [Extend Browserbase (TypeScript)](../docs/recipes/examples-typescript-extend-browserbase.md) | typescript | runnable example | current / public | examples |
-| [Fetch with contexts (TypeScript)](../docs/recipes/examples-typescript-fetch-with-contexts.md) | typescript | runnable example | current / public | examples |
 | [Form filling (TypeScript)](../docs/recipes/examples-typescript-form-filling.md) | typescript | runnable example | current / public | examples |
 | [Gemini 3 flash (TypeScript)](../docs/recipes/examples-typescript-gemini-3-flash.md) | typescript | runnable example | current / public | examples |
 | [Gemini CUA (TypeScript)](../docs/recipes/examples-typescript-gemini-cua.md) | typescript | runnable example | current / public | examples |

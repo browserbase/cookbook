@@ -68,6 +68,7 @@ Search locally with `python3 scripts/catalog.py search "persistent login" --lang
 | [Agent with human in loop (TypeScript)](recipes/examples-typescript-agent-with-human-in-loop.md) | typescript | runnable example | current / public | examples |
 | [Amazon global price comparison (TypeScript)](recipes/examples-typescript-amazon-global-price-comparison.md) | typescript | runnable example | current / public | examples |
 | [Amazon product scraping (TypeScript)](recipes/examples-typescript-amazon-product-scraping.md) | typescript | runnable example | current / public | examples |
+| [Authenticated Fetch (TypeScript)](recipes/examples-typescript-authenticated-fetch.md) | typescript | runnable example | current / public | examples |
 | [Basic caching (TypeScript)](recipes/examples-typescript-basic-caching.md) | typescript | runnable example | current / public | examples |
 | [Basic CAPTCHA (TypeScript)](recipes/examples-typescript-basic-captcha.md) | typescript | runnable example | current / public | examples |
 | [Browser agent demo (TypeScript)](recipes/examples-typescript-browser-agent-demo.md) | typescript | runnable example | current / public | examples |
@@ -82,7 +83,6 @@ Search locally with `python3 scripts/catalog.py search "persistent login" --lang
 | [Card entry with Evervault Browser Tokens](recipes/examples-typescript-evervault-browser-tokens.md) | typescript | runnable example | current / public | examples |
 | [Exa Browserbase (TypeScript)](recipes/examples-typescript-exa-browserbase.md) | typescript | runnable example | current / public | examples |
 | [Extend Browserbase (TypeScript)](recipes/examples-typescript-extend-browserbase.md) | typescript | runnable example | current / public | examples |
-| [Fetch with contexts (TypeScript)](recipes/examples-typescript-fetch-with-contexts.md) | typescript | runnable example | current / public | examples |
 | [Form filling (TypeScript)](recipes/examples-typescript-form-filling.md) | typescript | runnable example | current / public | examples |
 | [Gemini 3 flash (TypeScript)](recipes/examples-typescript-gemini-3-flash.md) | typescript | runnable example | current / public | examples |
 | [Gemini CUA (TypeScript)](recipes/examples-typescript-gemini-cua.md) | typescript | runnable example | current / public | examples |

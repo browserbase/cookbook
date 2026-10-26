@@ -11,6 +11,7 @@ async function main(): Promise<void> {
 
   // contextId is in the launch-gated API spec, ahead of the pinned SDK types.
   // A variable preserves the extra field when the SDK serializes this body.
+  // Authenticated Fetch: https://docs.browserbase.com/platform/fetch/authenticated-fetch
   const request = { url: secureUrl, contextId, allowRedirects: true, format: "raw" as const };
   const raw = await bb.fetchAPI.create(request);
   if (

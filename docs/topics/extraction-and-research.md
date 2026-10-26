@@ -29,6 +29,7 @@ Open a recipe guide for its working directory, commands, environment references,
 | [SEC filing research (Python)](../recipes/examples-python-sec-filing-research.md) | python | runnable example | current / public | examples |
 | [Quickstart Selenium (Python)](../recipes/examples-python-selenium-quickstart-selenium.md) | python | runnable example | current / public | examples |
 | [Amazon product scraping (TypeScript)](../recipes/examples-typescript-amazon-product-scraping.md) | typescript | runnable example | current / public | examples |
+| [Authenticated Fetch (TypeScript)](../recipes/examples-typescript-authenticated-fetch.md) | typescript | runnable example | current / public | examples |
 | [Browser agent demo (TypeScript)](../recipes/examples-typescript-browser-agent-demo.md) | typescript | runnable example | current / public | examples |
 | [Browserbase reducto (TypeScript)](../recipes/examples-typescript-browserbase-reducto.md) | typescript | runnable example | current / public | examples |
 | [Business lookup (TypeScript)](../recipes/examples-typescript-business-lookup.md) | typescript | runnable example | current / public | examples |
@@ -36,7 +37,6 @@ Open a recipe guide for its working directory, commands, environment references,
 | [Company value prop generator (TypeScript)](../recipes/examples-typescript-company-value-prop-generator.md) | typescript | runnable example | current / public | examples |
 | [Council events (TypeScript)](../recipes/examples-typescript-council-events.md) | typescript | runnable example | current / public | examples |
 | [Extend Browserbase (TypeScript)](../recipes/examples-typescript-extend-browserbase.md) | typescript | runnable example | current / public | examples |
-| [Fetch with contexts (TypeScript)](../recipes/examples-typescript-fetch-with-contexts.md) | typescript | runnable example | current / public | examples |
 | [Gemini 3 flash (TypeScript)](../recipes/examples-typescript-gemini-3-flash.md) | typescript | runnable example | current / public | examples |
 | [Raw Playwright Browserbase quickstart (TypeScript)](../recipes/examples-typescript-getting-started-with-browserbase.md) | typescript | runnable example | current / public | examples |
 | [Gift finder (TypeScript)](../recipes/examples-typescript-gift-finder.md) | typescript | runnable example | current / public | examples |

@@ -1,4 +1,4 @@
-# Fetch with contexts (TypeScript)
+# Authenticated Fetch (TypeScript)
 
 Save a browser login in a context, then fetch protected HTML, Markdown, or structured JSON with an environment-provided context ID.
 
@@ -12,13 +12,13 @@ Save a browser login in a context, then fetch protected HTML, Markdown, or struc
 
 ## Code and prerequisites
 
-- Working directory from the cookbook root: `examples/typescript/fetch-with-contexts`.
+- Working directory from the cookbook root: `examples/typescript/authenticated-fetch`.
 - Languages: typescript.
 - Frameworks: Browserbase SDK, Playwright.
-- [Upstream setup and behavior](../../examples/typescript/fetch-with-contexts/README.md).
-- [Dependency manifest `examples/typescript/fetch-with-contexts/package.json`](../../examples/typescript/fetch-with-contexts/package.json).
-- [Source `examples/typescript/fetch-with-contexts/login.ts`](../../examples/typescript/fetch-with-contexts/login.ts).
-- [Source `examples/typescript/fetch-with-contexts/index.ts`](../../examples/typescript/fetch-with-contexts/index.ts).
+- [Upstream setup and behavior](../../examples/typescript/authenticated-fetch/README.md).
+- [Dependency manifest `examples/typescript/authenticated-fetch/package.json`](../../examples/typescript/authenticated-fetch/package.json).
+- [Source `examples/typescript/authenticated-fetch/login.ts`](../../examples/typescript/authenticated-fetch/login.ts).
+- [Source `examples/typescript/authenticated-fetch/index.ts`](../../examples/typescript/authenticated-fetch/index.ts).
 - Original use-case taxonomy: fetch, contexts, cookies.
 
 ## Setup and run
@@ -26,7 +26,7 @@ Save a browser login in a context, then fetch protected HTML, Markdown, or struc
 Run from this directory. Commands come from the package manifest, upstream setup guide, or inspected entrypoint. Configure credentials before starting.
 
 ```sh
-cd examples/typescript/fetch-with-contexts
+cd examples/typescript/authenticated-fetch
 corepack enable
 pnpm install --config.minimumReleaseAge=10080
 test -f .env || cp .env.example .env
@@ -43,7 +43,7 @@ pnpm start json
 
 ## Environment
 
-[Environment template](../../examples/typescript/fetch-with-contexts/.env.example) lists example configuration. Fill in your own values locally.
+[Environment template](../../examples/typescript/authenticated-fetch/.env.example) lists example configuration. Fill in your own values locally.
 
 ### Required
 
@@ -60,7 +60,7 @@ pnpm start json
 
 ## Dependencies
 
-Declared runtime dependencies from [examples/typescript/fetch-with-contexts/package.json](../../examples/typescript/fetch-with-contexts/package.json). Alternate manifests may differ; use the documented setup path.
+Declared runtime dependencies from [examples/typescript/authenticated-fetch/package.json](../../examples/typescript/authenticated-fetch/package.json). Alternate manifests may differ; use the documented setup path.
 
 | Package | Declared version |
 | --- | --- |
@@ -82,6 +82,7 @@ Source and setup metadata were inspected. A scoped live workflow check is record
 - Uses public demo credentials; adapt login and protected-content checks for your own site.
 - Fetch uses saved cookies only; JavaScript-only authentication requires a browser.
 - Live login, persisted context reuse, and authenticated Fetch in all three formats verified on 2026-10-19 for the tested project.
+- Documentation: [Authenticated Fetch](https://docs.browserbase.com/platform/fetch/authenticated-fetch).
 
 ## Provenance
 

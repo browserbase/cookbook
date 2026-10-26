@@ -19,7 +19,7 @@ export function reportError(error: unknown): void {
   if (error instanceof Browserbase.APIError) {
     if (error.message.includes("Fetching with a context is not enabled for this project") ||
         error.message.includes("Fetching with a context is not supported for this project")) {
-      console.error("Fetch with contexts is not enabled for this Browserbase project. Contact Browserbase support to enable it, then retry.");
+      console.error("Authenticated Fetch is not enabled for this Browserbase project. Contact Browserbase support to enable it, then retry.");
       process.exitCode = 1;
       return;
     }
