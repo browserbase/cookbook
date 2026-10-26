@@ -14832,6 +14832,14 @@
           "command": "BROWSERBASE_CONTEXT_ID=<saved-context> node --import tsx index.ts raw; repeat with markdown and json",
           "result": "passed",
           "limits": "Reused the context from the verified browser login and completed session. All three formats passed protected-content checks and saved output. Applies to the tested project and public demo; does not establish general feature availability."
+        },
+        {
+          "kind": "live-tested",
+          "date": "2026-10-26",
+          "runtime": "Node.js; Browserbase SDK 2.19.1; playwright-core 1.56.1",
+          "command": "node --import tsx login.ts; BROWSERBASE_CONTEXT_ID=<new-context> node --import tsx index.ts raw (also markdown and json)",
+          "result": "passed",
+          "limits": "Fresh login and completed session followed by protected-content checks for HTML, Markdown, and JSON. Applies to the tested project and public demo."
         }
       ]
     }

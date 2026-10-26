@@ -318,22 +318,22 @@
     },
     {
       "path": "examples/typescript/authenticated-fetch/README.md",
-      "sha256": "a21699a13f6329567f993d3066d3889fe525c5d0ad87127fe62a0e50171498e0",
+      "sha256": "e49f5b04da31725711cb331854cfd0ab624c77bf5f56a2e0e8fc886f4a67da09",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "examples/typescript/authenticated-fetch/config.ts",
-      "sha256": "2cff0354245efed1b23aab3c2b01da9c27c23a2f7f751f1db441118055e38a76",
+      "sha256": "0d3aaa6cf0a610f3b37bbdf56d20042e795a1f851f36e1dd7750bcd553b9469b",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "examples/typescript/authenticated-fetch/index.ts",
-      "sha256": "150f3b11350e6fee58062ab5157696fe25ce0709b4c00c7b90abdfccb6a1f46f",
+      "sha256": "e23db63494cf9d702bd5e81679e699d04784fb9d165c3435c00ee76d69ce004e",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "examples/typescript/authenticated-fetch/login.ts",
-      "sha256": "678ea0fb33fe552e8415b72e3f49e46069c2fa9557670aec84352f38f66a0833",
+      "sha256": "1f154b1f27298e220bb97406e3aaffc71f0abbb25f91f8f897a62de0d6d5499d",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -348,7 +348,7 @@
     },
     {
       "path": "examples/typescript/authenticated-fetch/tests/fetch.test.mjs",
-      "sha256": "a43c73bbfdc04af5a72e5df2a4ddde301e4c7ef700e208662250758c2cb0f5be",
+      "sha256": "705d919adea6c80d99aa99cba6007bf4fe8a227781fe5b63da30d499e0160fc6",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {

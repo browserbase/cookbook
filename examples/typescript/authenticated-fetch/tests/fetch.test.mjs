@@ -41,7 +41,7 @@ for (const format of ["raw", "markdown", "json", "expired", "disabled"]) {
         env: { ...process.env, BROWSERBASE_API_KEY: "offline-test-key", BROWSERBASE_CONTEXT_ID: "offline-context", BROWSERBASE_BASE_URL: `http://127.0.0.1:${server.address().port}` },
       });
       if (format === "disabled") {
-        await assert.rejects(execution, error => error.code === 1 && error.stderr.includes("Contact Browserbase support to enable it"));
+        await assert.rejects(execution, error => error.code === 1 && error.stderr.includes("Browserbase request failed (HTTP 400)"));
         await assert.rejects(readFile(join(cwd, ".audit/page.html")), { code: "ENOENT" });
       } else if (format === "expired") {
         await assert.rejects(execution, error => error.code === 1 && error.stderr.includes("Protected content missing"));

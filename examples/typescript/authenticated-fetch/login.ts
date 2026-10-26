@@ -1,9 +1,8 @@
 import { setTimeout as delay } from "node:timers/promises";
 import { chromium, type Browser } from "playwright-core";
-import { client, protectedText, reportError, secureUrl } from "./config.js";
+import { bb, protectedText, reportError, secureUrl } from "./config.js";
 
 async function main(): Promise<void> {
-  const bb = client();
   const contextId = process.env.BROWSERBASE_CONTEXT_ID?.trim() ||
     (await bb.contexts.create({})).id;
   // Authenticated Fetch: https://docs.browserbase.com/platform/fetch/authenticated-fetch
@@ -44,4 +43,4 @@ async function main(): Promise<void> {
   console.log(`BROWSERBASE_CONTEXT_ID=${contextId}`);
 }
 
-main().catch(reportError);
+main().catch(() => reportError(new Error("Login failed. Check configuration and the browser session in the Browserbase dashboard.")));
