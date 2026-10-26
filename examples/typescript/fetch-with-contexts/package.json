@@ -1,0 +1,26 @@
+{
+  "name": "fetch-with-contexts",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "login": "tsx login.ts",
+    "start": "tsx index.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.mjs"
+  },
+  "dependencies": {
+    "@browserbasehq/sdk": "2.19.1",
+    "dotenv": "^16.4.5",
+    "playwright-core": "1.56.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.16.0",
+    "typescript": "7.0.2"
+  },
+  "engines": {
+    "node": ">=22.18.0"
+  },
+  "packageManager": "pnpm@10.24.0"
+}

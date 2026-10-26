@@ -90,6 +90,7 @@ All entries below were inspected at their pinned source revision. Live website b
 | [Card entry with Evervault Browser Tokens](../docs/recipes/examples-typescript-evervault-browser-tokens.md) | typescript | runnable example | current / public | examples |
 | [Exa Browserbase (TypeScript)](../docs/recipes/examples-typescript-exa-browserbase.md) | typescript | runnable example | current / public | examples |
 | [Extend Browserbase (TypeScript)](../docs/recipes/examples-typescript-extend-browserbase.md) | typescript | runnable example | current / public | examples |
+| [Fetch with contexts (TypeScript)](../docs/recipes/examples-typescript-fetch-with-contexts.md) | typescript | runnable example | current / public | examples |
 | [Form filling (TypeScript)](../docs/recipes/examples-typescript-form-filling.md) | typescript | runnable example | current / public | examples |
 | [Gemini 3 flash (TypeScript)](../docs/recipes/examples-typescript-gemini-3-flash.md) | typescript | runnable example | current / public | examples |
 | [Gemini CUA (TypeScript)](../docs/recipes/examples-typescript-gemini-cua.md) | typescript | runnable example | current / public | examples |

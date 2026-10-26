@@ -36,6 +36,7 @@ Open a recipe guide for its working directory, commands, environment references,
 | [Company value prop generator (TypeScript)](../recipes/examples-typescript-company-value-prop-generator.md) | typescript | runnable example | current / public | examples |
 | [Council events (TypeScript)](../recipes/examples-typescript-council-events.md) | typescript | runnable example | current / public | examples |
 | [Extend Browserbase (TypeScript)](../recipes/examples-typescript-extend-browserbase.md) | typescript | runnable example | current / public | examples |
+| [Fetch with contexts (TypeScript)](../recipes/examples-typescript-fetch-with-contexts.md) | typescript | runnable example | current / public | examples |
 | [Gemini 3 flash (TypeScript)](../recipes/examples-typescript-gemini-3-flash.md) | typescript | runnable example | current / public | examples |
 | [Raw Playwright Browserbase quickstart (TypeScript)](../recipes/examples-typescript-getting-started-with-browserbase.md) | typescript | runnable example | current / public | examples |
 | [Gift finder (TypeScript)](../recipes/examples-typescript-gift-finder.md) | typescript | runnable example | current / public | examples |

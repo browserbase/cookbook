@@ -7,10 +7,10 @@ Every entry is source-inspected at minimum. Recipes with stronger install, offli
 Search locally with `python3 scripts/catalog.py search "persistent login" --language python --limit 5`. Add `--json` for structured output.
 
 - [Getting started](topics/getting-started.md) (10). Create your first cloud browser and choose a browser SDK.
-- [Authentication and saved sessions](topics/authentication.md) (25). Reuse authenticated contexts, handle MFA, and connect login workflows.
+- [Authentication and saved sessions](topics/authentication.md) (26). Reuse authenticated contexts, handle MFA, and connect login workflows.
 - [Browser configuration](topics/browser-features.md) (33). Configure proxies, CAPTCHA handling, extensions, metadata, and caching.
 - [Files and documents](topics/downloads-and-documents.md) (21). Upload files, retrieve downloads, capture PDFs, and parse documents.
-- [Extraction and research](topics/extraction-and-research.md) (54). Find pages and extract structured information from them.
+- [Extraction and research](topics/extraction-and-research.md) (55). Find pages and extract structured information from them.
 - [Forms and transactions](topics/forms-and-transactions.md) (29). Fill forms and prepare application, booking, and payment workflows.
 - [Agents and human handoff](topics/agents-and-human-handoff.md) (27). Build browser agents and pause work for human input.
 - [Integrations and orchestration](topics/integrations-and-orchestration.md) (34). Connect Browserbase to agent frameworks, services, and workflow engines.
@@ -82,6 +82,7 @@ Search locally with `python3 scripts/catalog.py search "persistent login" --lang
 | [Card entry with Evervault Browser Tokens](recipes/examples-typescript-evervault-browser-tokens.md) | typescript | runnable example | current / public | examples |
 | [Exa Browserbase (TypeScript)](recipes/examples-typescript-exa-browserbase.md) | typescript | runnable example | current / public | examples |
 | [Extend Browserbase (TypeScript)](recipes/examples-typescript-extend-browserbase.md) | typescript | runnable example | current / public | examples |
+| [Fetch with contexts (TypeScript)](recipes/examples-typescript-fetch-with-contexts.md) | typescript | runnable example | current / public | examples |
 | [Form filling (TypeScript)](recipes/examples-typescript-form-filling.md) | typescript | runnable example | current / public | examples |
 | [Gemini 3 flash (TypeScript)](recipes/examples-typescript-gemini-3-flash.md) | typescript | runnable example | current / public | examples |
 | [Gemini CUA (TypeScript)](recipes/examples-typescript-gemini-cua.md) | typescript | runnable example | current / public | examples |

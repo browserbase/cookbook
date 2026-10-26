@@ -14720,6 +14720,119 @@
         }
       ],
       "llm_requirement": "not required"
+    },
+    {
+      "access": "public",
+      "caveats": [
+        "Draft: requires a project enabled for launch-gated Fetch context support.",
+        "Uses public demo credentials; adapt login and protected-content checks for your own site.",
+        "Fetch uses saved cookies only; JavaScript-only authentication requires a browser.",
+        "Live login, persisted context reuse, and authenticated Fetch in all three formats verified on 2026-10-19 for the tested project."
+      ],
+      "collection": "examples",
+      "dependencies": {
+        "@browserbasehq/sdk": "2.19.1",
+        "dotenv": "^16.4.5",
+        "playwright-core": "1.56.1"
+      },
+      "entrypoints": [
+        "examples/typescript/fetch-with-contexts/login.ts",
+        "examples/typescript/fetch-with-contexts/index.ts"
+      ],
+      "environment_setup_command": "test -f .env || cp .env.example .env",
+      "environment_template": "examples/typescript/fetch-with-contexts/.env.example",
+      "environment_variables": [
+        {
+          "default": null,
+          "name": "BROWSERBASE_API_KEY",
+          "provider": "Browserbase",
+          "purpose": "Authenticates requests to Browserbase.",
+          "requirement": "required",
+          "safe_example": "<set-locally>",
+          "secret": true,
+          "setup_url": "https://www.browserbase.com/settings",
+          "validation": "Must be non-empty when used"
+        },
+        {
+          "default": null,
+          "name": "BROWSERBASE_CONTEXT_ID",
+          "provider": "Browserbase",
+          "purpose": "Saved context ID printed by pnpm login; required for Fetch, optional for login.",
+          "requirement": "conditional",
+          "safe_example": "<set-locally>",
+          "secret": false,
+          "setup_url": "https://www.browserbase.com/settings",
+          "validation": "Must be non-empty when used"
+        }
+      ],
+      "frameworks": [
+        "Browserbase SDK",
+        "Playwright"
+      ],
+      "id": "examples-typescript-fetch-with-contexts",
+      "languages": [
+        "typescript"
+      ],
+      "lifecycle": "current",
+      "manifests": [
+        "examples/typescript/fetch-with-contexts/package.json"
+      ],
+      "path": "examples/typescript/fetch-with-contexts",
+      "readme": "docs/recipes/examples-typescript-fetch-with-contexts.md",
+      "run_commands": [
+        "pnpm login",
+        "pnpm start",
+        "pnpm start markdown",
+        "pnpm start json"
+      ],
+      "setup_commands": [
+        "corepack enable",
+        "pnpm install --config.minimumReleaseAge=10080"
+      ],
+      "source": {
+        "kind": "cookbook-authored",
+        "path": "examples/typescript/fetch-with-contexts"
+      },
+      "summary": "Save a browser login in a context, then fetch protected HTML, Markdown, or structured JSON with an environment-provided context ID.",
+      "tags": [
+        "fetch",
+        "contexts",
+        "cookies"
+      ],
+      "title": "Fetch with contexts (TypeScript)",
+      "topics": [
+        "authentication",
+        "extraction-and-research"
+      ],
+      "upstream_readme": "examples/typescript/fetch-with-contexts/README.md",
+      "verification": "live-tested",
+      "working_directory": "examples/typescript/fetch-with-contexts",
+      "verification_evidence": [
+        {
+          "kind": "typechecked",
+          "date": "2026-10-19",
+          "runtime": "Node.js 24.19.0; pnpm 10.24.0; TypeScript 7.0.2; Browserbase SDK 2.19.1; playwright-core 1.56.1",
+          "command": "pnpm typecheck",
+          "result": "passed",
+          "limits": "Local compilation only; authenticated browser and Fetch workflow not live-tested."
+        },
+        {
+          "kind": "live-tested",
+          "date": "2026-10-19",
+          "runtime": "Node.js 24.19.0; Browserbase SDK 2.19.1; playwright-core 1.56.1",
+          "command": "node --import tsx login.ts; BROWSERBASE_CONTEXT_ID=<saved-context> node --import tsx index.ts raw (also markdown and json)",
+          "result": "failed",
+          "limits": "Login and completed-session persistence verified in a second browser session without login. Anonymous Fetch returned a login page with HTTP 200. Context Fetch returned HTTP 400: not enabled for this project, before extraction. Full E2E remains blocked."
+        },
+        {
+          "kind": "live-tested",
+          "date": "2026-10-19",
+          "runtime": "Node.js 24.19.0; Browserbase SDK 2.19.1; playwright-core 1.56.1",
+          "command": "BROWSERBASE_CONTEXT_ID=<saved-context> node --import tsx index.ts raw; repeat with markdown and json",
+          "result": "passed",
+          "limits": "Reused the context from the verified browser login and completed session. All three formats passed protected-content checks and saved output. Applies to the tested project and public demo; does not establish general feature availability."
+        }
+      ]
     }
   ],
   "schema_version": 1

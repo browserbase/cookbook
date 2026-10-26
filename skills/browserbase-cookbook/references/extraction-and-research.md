@@ -4,7 +4,7 @@ Find pages and extract structured information from them.
 
 Paths below are relative to a local cookbook root, not to the installed skill directory. Locate the checkout first. Read the selected guide and source before adapting code. Historical source links identify the imported revision; they predate cookbook migrations and are not runnable fallbacks.
 
-This topic contains all 54 matching entries. Browse `docs/topics/extraction-and-research.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
+This topic contains all 55 matching entries. Browse `docs/topics/extraction-and-research.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
 
 | Recipe | Language | Local guide | Status | Historical source |
 | --- | --- | --- | --- | --- |
@@ -38,6 +38,7 @@ This topic contains all 54 matching entries. Browse `docs/topics/extraction-and-
 | Company value prop generator (TypeScript) | typescript | `docs/recipes/examples-typescript-company-value-prop-generator.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/company-value-prop-generator) |
 | Council events (TypeScript) | typescript | `docs/recipes/examples-typescript-council-events.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/council-events) |
 | Extend Browserbase (TypeScript) | typescript | `docs/recipes/examples-typescript-extend-browserbase.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/extend-browserbase) |
+| Fetch with contexts (TypeScript) | typescript | `docs/recipes/examples-typescript-fetch-with-contexts.md` | current | cookbook-authored |
 | Gemini 3 flash (TypeScript) | typescript | `docs/recipes/examples-typescript-gemini-3-flash.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/gemini-3-flash) |
 | Raw Playwright Browserbase quickstart (TypeScript) | typescript | `docs/recipes/examples-typescript-getting-started-with-browserbase.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/getting-started-with-browserbase) |
 | Gift finder (TypeScript) | typescript | `docs/recipes/examples-typescript-gift-finder.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/gift-finder) |

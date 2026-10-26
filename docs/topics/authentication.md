@@ -11,6 +11,7 @@ Open a recipe guide for its working directory, commands, environment references,
 | [MFA handling (Python)](../recipes/examples-python-mfa-handling.md) | python | runnable example | current / public | examples |
 | [Playwright MFA handling (Python)](../recipes/examples-python-playwright-mfa-handling.md) | python | runnable example | current / public | examples |
 | [Context (TypeScript)](../recipes/examples-typescript-context.md) | typescript | runnable example | current / public | examples |
+| [Fetch with contexts (TypeScript)](../recipes/examples-typescript-fetch-with-contexts.md) | typescript | runnable example | current / public | examples |
 | [Manual MFA with contexts (TypeScript)](../recipes/examples-typescript-manual-mfa-with-contexts.md) | typescript | runnable example | current / public | examples |
 | [MFA handling (TypeScript)](../recipes/examples-typescript-mfa-handling.md) | typescript | runnable example | current / public | examples |
 | [Order lookup for AI support with Functions and Secrets (TypeScript)](../recipes/examples-typescript-order-lookup-function.md) | typescript | runnable example | current / public | examples |

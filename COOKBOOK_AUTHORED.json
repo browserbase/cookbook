@@ -3,7 +3,7 @@
   "files": [
     {
       "path": "examples/README.md",
-      "sha256": "a4aa24e79a17e95980dfd73f958cdb260798db8313975963667324ed0c0bdfe8",
+      "sha256": "ebd3d30eec1670b9f9870f575255c97d61310899eb2fb8b25172fa5fa66c7c07",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -463,6 +463,51 @@
     },
     {
       "path": "examples/typescript/extend-browserbase/tsconfig.json",
+      "sha256": "c4fcd54c2e1b9946965ee4f87369f0b79e5b26026dfb3e5977d2babc6b191721",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/fetch-with-contexts/.env.example",
+      "sha256": "0b4850e42918955ec963b58940da79fe198e4de468e602254324c32dbfb76601",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/fetch-with-contexts/README.md",
+      "sha256": "bf43def4662843863188744acd9fd9ba5990f96723014639b30e8f5f26331a64",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/fetch-with-contexts/config.ts",
+      "sha256": "2dc7aa135f2818668097287edb0790b9774797e9d5dd2451437a8f5d1bb945a2",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/fetch-with-contexts/index.ts",
+      "sha256": "7484071a837f439cae83f518bff0667ad21f93b2879ef03a512bc0b417fde69d",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/fetch-with-contexts/login.ts",
+      "sha256": "c2d782105274e3e8f17925b2770ef14480a1d361825ba7b49f4f211f94677571",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/fetch-with-contexts/package.json",
+      "sha256": "563647b8da406d959e2cce213ea6b1b35121d733a6a31be1af87653e6a7ab082",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/fetch-with-contexts/pnpm-lock.yaml",
+      "sha256": "b8a2fe1906e46fbb5a7c3d400abda49a609d1822940e628bf232191888c17304",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/fetch-with-contexts/tests/fetch.test.mjs",
+      "sha256": "11854cc6847e8d3e6d1c1a586bcc6aebfd9025cafa075535be4ad0aa1c942119",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/fetch-with-contexts/tsconfig.json",
       "sha256": "c4fcd54c2e1b9946965ee4f87369f0b79e5b26026dfb3e5977d2babc6b191721",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
