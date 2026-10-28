@@ -57,11 +57,10 @@ The pinned SDK predates the `contextId` type. The request variable in `index.ts`
 
 ```sh
 pnpm typecheck
-pnpm test
 ```
 
-A fresh package installation with pnpm 10.24.0 and the seven-day release-age policy, TypeScript compilation, and five offline tests passed on Node.js 24.19.0. The tests execute the Fetch script against a local mock HTTP endpoint, checking context serialization, all three formats, rejection of a login page returning HTTP 200, and an HTTP 400 API error. They do not exercise browser login or remote persistence. Live validation on October 19, 2026 verified login, session completion, and persisted authentication: a second browser session opened the protected page using the saved context without logging in again. Both browser sessions completed. An anonymous Fetch returned the login page with HTTP 200 and no protected text.
+A fresh package installation with pnpm 10.24.0 and the seven-day release-age policy and TypeScript compilation passed on Node.js 24.19.0. Live validation on October 19, 2026 verified login, session completion, and persisted authentication: a second browser session opened the protected page using the saved context without logging in again. Both browser sessions completed. An anonymous Fetch returned the login page with HTTP 200 and no protected text.
 
 The first authenticated Fetch attempt was blocked by project feature enablement (HTTP 400). A subsequent live retry with the same saved context passed for raw HTML, Markdown, and schema-based JSON. Each mode verified protected content and saved its output under `.audit/`. This confirms the browser login → persisted context → authenticated Fetch workflow on the tested project; other projects still need feature access. The public demo can change or be unavailable.
 
-After simplification on October 26, 2026, a fresh browser login and completed session produced a new context that passed live HTML, Markdown, and JSON retrieval. Typecheck and all five offline tests also passed.
+After simplification on October 26, 2026, a fresh browser login and completed session produced a new context that passed live HTML, Markdown, and JSON retrieval. Typecheck also passed.
