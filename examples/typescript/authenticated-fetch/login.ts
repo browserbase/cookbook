@@ -1,5 +1,6 @@
+import assert from "node:assert/strict";
 import { setTimeout as delay } from "node:timers/promises";
-import { chromium, type Browser } from "playwright-core";
+import { browserbase } from "@browserbasehq/stagehand";
 import { bb, protectedText, reportError, secureUrl } from "./config.js";
 
 async function main(): Promise<void> {
@@ -11,18 +12,20 @@ async function main(): Promise<void> {
     browserSettings: { context: { id: contextId, persist: true } },
   });
 
-  let browser: Browser | undefined;
+  let browser: Awaited<ReturnType<typeof browserbase.connect>> | undefined;
   try {
-    browser = await chromium.connectOverCDP(session.connectUrl);
-    const page = browser.contexts()[0].pages()[0];
+    browser = await browserbase.connect({ apiKey: process.env.BROWSERBASE_API_KEY!, sessionId: session.id });
+    const page = await browser.context.activePage();
+    assert(page, "No active browser page.");
     await page.goto("https://the-internet.herokuapp.com/login");
     // Public demo credentials published on this test site's login page.
     await page.locator("#username").fill("tomsmith");
     await page.locator("#password").fill("SuperSecretPassword!");
-    await page.getByRole("button", { name: "Login" }).click();
-    await page.waitForURL(secureUrl);
-    await page.getByText(protectedText, { exact: false }).waitFor();
-    await page.getByRole("link", { name: "Logout" }).waitFor();
+    await page.locator('button[type="submit"]').click();
+    await page.waitForSelector('a[href="/logout"]');
+    assert(await page.url() === secureUrl &&
+      (await page.locator("body").innerText()).includes(protectedText),
+      "Protected content missing after login.");
     console.log("Protected content verified in the browser.");
   } finally {
     try {

@@ -5,16 +5,16 @@ Save a browser login in a context, then fetch protected HTML, Markdown, or struc
 > [!CAUTION]
 > Demo and reference code only. This recipe is not a vetted production implementation. Independently review it, obtain authorization, and validate security, privacy, compliance, cost, and site-term requirements before use. Use at your own risk.
 
-**Status:** current · public · live workflow tested.
+**Status:** current · public · typechecked.
 
 **Recipe type:** runnable example.
-**LLM requirement:** not required (derived from the inspected framework and configuration metadata).
+**LLM requirement:** required (derived from the inspected framework and configuration metadata).
 
 ## Code and prerequisites
 
 - Working directory from the cookbook root: `examples/typescript/authenticated-fetch`.
 - Languages: typescript.
-- Frameworks: Browserbase SDK, Playwright.
+- Frameworks: Browserbase SDK, Stagehand.
 - [Upstream setup and behavior](../../examples/typescript/authenticated-fetch/README.md).
 - [Dependency manifest `examples/typescript/authenticated-fetch/package.json`](../../examples/typescript/authenticated-fetch/package.json).
 - [Source `examples/typescript/authenticated-fetch/login.ts`](../../examples/typescript/authenticated-fetch/login.ts).
@@ -65,8 +65,8 @@ Declared runtime dependencies from [examples/typescript/authenticated-fetch/pack
 | Package | Declared version |
 | --- | --- |
 | `@browserbasehq/sdk` | `2.19.1` |
+| `@browserbasehq/stagehand` | `4.2.1` |
 | `dotenv` | `^16.4.5` |
-| `playwright-core` | `1.56.1` |
 
 ## Caveats and verification
 
@@ -78,12 +78,13 @@ Source and setup metadata were inspected. A scoped live workflow check is record
 | Live workflow tested | 2026-10-19 | `Node.js 24.19.0; Browserbase SDK 2.19.1; playwright-core 1.56.1` | `node --import tsx login.ts; BROWSERBASE_CONTEXT_ID=<saved-context> node --import tsx index.ts raw (also markdown and json)` | failed. Login and completed-session persistence verified in a second browser session without login. Anonymous Fetch returned a login page with HTTP 200. Context Fetch returned HTTP 400: not enabled for this project, before extraction. Full E2E remains blocked. |
 | Live workflow tested | 2026-10-19 | `Node.js 24.19.0; Browserbase SDK 2.19.1; playwright-core 1.56.1` | `BROWSERBASE_CONTEXT_ID=<saved-context> node --import tsx index.ts raw; repeat with markdown and json` | passed. Reused the context from the verified browser login and completed session. All three formats passed protected-content checks and saved output. Applies to the tested project and public demo; does not establish general feature availability. |
 | Live workflow tested | 2026-10-26 | `Node.js; Browserbase SDK 2.19.1; playwright-core 1.56.1` | `node --import tsx login.ts; BROWSERBASE_CONTEXT_ID=<new-context> node --import tsx index.ts raw (also markdown and json)` | passed. Fresh login and completed session followed by protected-content checks for HTML, Markdown, and JSON. Applies to the tested project and public demo. |
+| Typechecked | 2026-10-29 | `Node.js 26.0.0; TypeScript 7.0.2; Stagehand 4.2.1; Browserbase SDK 2.19.1` | `pnpm typecheck` | passed. Stagehand locator-based login compiles. Live run blocked by missing BROWSERBASE_API_KEY. No AI primitives used. |
 
 - Draft: requires a project enabled for launch-gated Fetch context support.
 - Uses public demo credentials; adapt login and protected-content checks for your own site.
 - Fetch uses saved cookies only; JavaScript-only authentication requires a browser.
-- Live login, persisted context reuse, and authenticated Fetch in all three formats verified on 2026-10-19 for the tested project.
 - Documentation: [Authenticated Fetch](https://docs.browserbase.com/platform/fetch/authenticated-fetch).
+- Stagehand login migration is typechecked; live validation is pending an available Browserbase API key. Earlier live evidence used Playwright.
 
 ## Provenance
 

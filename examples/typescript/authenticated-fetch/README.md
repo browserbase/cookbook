@@ -1,6 +1,6 @@
 # Authenticated Fetch
 
-Log in once in a Browserbase browser, save its cookies in a context, then fetch a protected page using `process.env.BROWSERBASE_CONTEXT_ID`. The login and Fetch scripts run separately. See the [Authenticated Fetch documentation](https://docs.browserbase.com/platform/fetch/authenticated-fetch) for context setup, cookie behavior, and limitations.
+Log in once in a Browserbase browser, save its cookies in a context, then fetch a protected page using `process.env.BROWSERBASE_CONTEXT_ID`. The login and Fetch scripts run separately. Login uses Stagehand’s Playwright-style page methods (`goto`, `locator`, `fill`, and `click`), without AI primitives or a model key. See the [Authenticated Fetch documentation](https://docs.browserbase.com/platform/fetch/authenticated-fetch) for context setup, cookie behavior, and limitations.
 
 **Draft for the Authenticated Fetch launch.** Requires a project enabled for Authenticated Fetch. The API/docs publication is gated on [core PR #12715](https://github.com/browserbase/core/pull/12715); this example does not establish general availability.
 
@@ -64,3 +64,5 @@ A fresh package installation with pnpm 10.24.0 and the seven-day release-age pol
 The first authenticated Fetch attempt was blocked by project feature enablement (HTTP 400). A subsequent live retry with the same saved context passed for raw HTML, Markdown, and schema-based JSON. Each mode verified protected content and saved its output under `.audit/`. This confirms the browser login → persisted context → authenticated Fetch workflow on the tested project; other projects still need feature access. The public demo can change or be unavailable.
 
 After simplification on October 26, 2026, a fresh browser login and completed session produced a new context that passed live HTML, Markdown, and JSON retrieval. Typecheck also passed.
+
+The October 29 migration to Stagehand 4.2.1 passed TypeScript compilation on Node.js 26.0.0. Live validation of this version is pending because the local environment did not have `BROWSERBASE_API_KEY`; the earlier live results above used Playwright.

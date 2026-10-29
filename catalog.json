@@ -14727,14 +14727,14 @@
         "Draft: requires a project enabled for launch-gated Fetch context support.",
         "Uses public demo credentials; adapt login and protected-content checks for your own site.",
         "Fetch uses saved cookies only; JavaScript-only authentication requires a browser.",
-        "Live login, persisted context reuse, and authenticated Fetch in all three formats verified on 2026-10-19 for the tested project.",
-        "Documentation: [Authenticated Fetch](https://docs.browserbase.com/platform/fetch/authenticated-fetch)."
+        "Documentation: [Authenticated Fetch](https://docs.browserbase.com/platform/fetch/authenticated-fetch).",
+        "Stagehand login migration is typechecked; live validation is pending an available Browserbase API key. Earlier live evidence used Playwright."
       ],
       "collection": "examples",
       "dependencies": {
         "@browserbasehq/sdk": "2.19.1",
         "dotenv": "^16.4.5",
-        "playwright-core": "1.56.1"
+        "@browserbasehq/stagehand": "4.2.1"
       },
       "entrypoints": [
         "examples/typescript/authenticated-fetch/login.ts",
@@ -14768,7 +14768,7 @@
       ],
       "frameworks": [
         "Browserbase SDK",
-        "Playwright"
+        "Stagehand"
       ],
       "id": "examples-typescript-authenticated-fetch",
       "languages": [
@@ -14806,7 +14806,7 @@
         "extraction-and-research"
       ],
       "upstream_readme": "examples/typescript/authenticated-fetch/README.md",
-      "verification": "live-tested",
+      "verification": "typechecked",
       "working_directory": "examples/typescript/authenticated-fetch",
       "verification_evidence": [
         {
@@ -14840,6 +14840,14 @@
           "command": "node --import tsx login.ts; BROWSERBASE_CONTEXT_ID=<new-context> node --import tsx index.ts raw (also markdown and json)",
           "result": "passed",
           "limits": "Fresh login and completed session followed by protected-content checks for HTML, Markdown, and JSON. Applies to the tested project and public demo."
+        },
+        {
+          "kind": "typechecked",
+          "date": "2026-10-29",
+          "runtime": "Node.js 26.0.0; TypeScript 7.0.2; Stagehand 4.2.1; Browserbase SDK 2.19.1",
+          "command": "pnpm typecheck",
+          "result": "passed",
+          "limits": "Stagehand locator-based login compiles. Live run blocked by missing BROWSERBASE_API_KEY. No AI primitives used."
         }
       ]
     }

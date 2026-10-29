@@ -318,7 +318,7 @@
     },
     {
       "path": "examples/typescript/authenticated-fetch/README.md",
-      "sha256": "cdfc0eeec136ac8410b310c85fc61fcca32b8988f000cf0a714d50909871aaae",
+      "sha256": "b75c02d087dd189186437e804e4cd0b94b0833a3b6c0651a99217f7d500d3f35",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -333,17 +333,17 @@
     },
     {
       "path": "examples/typescript/authenticated-fetch/login.ts",
-      "sha256": "1f154b1f27298e220bb97406e3aaffc71f0abbb25f91f8f897a62de0d6d5499d",
+      "sha256": "0de8c303f261a023b886679377a7bec843e5e69027bfd683957ed552e3978e65",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "examples/typescript/authenticated-fetch/package.json",
-      "sha256": "f7b3f832c69a147eb6d189a0cbc6f12a5c31414c9aedb4fe135b837ae76cdea2",
+      "sha256": "a82202525ade1f0b2b1630cf78490b4fe0b07124b2843d2ffcc767d965d18b76",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
       "path": "examples/typescript/authenticated-fetch/pnpm-lock.yaml",
-      "sha256": "b8a2fe1906e46fbb5a7c3d400abda49a609d1822940e628bf232191888c17304",
+      "sha256": "db103439b6cc786823d96cc151bafa88301a350619de41082e96591ae524b24e",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
