@@ -65,7 +65,7 @@ Declared runtime dependencies from [examples/typescript/authenticated-fetch/pack
 | Package | Declared version |
 | --- | --- |
 | `@browserbasehq/sdk` | `2.19.1` |
-| `@browserbasehq/stagehand` | `4.2.1` |
+| `@browserbasehq/stagehand` | `4.3.0` |
 | `dotenv` | `^16.4.5` |
 
 ## Caveats and verification
@@ -78,7 +78,7 @@ Source and setup metadata were inspected. A scoped live workflow check is record
 | Live workflow tested | 2026-10-19 | `Node.js 24.19.0; Browserbase SDK 2.19.1; playwright-core 1.56.1` | `node --import tsx login.ts; BROWSERBASE_CONTEXT_ID=<saved-context> node --import tsx index.ts raw (also markdown and json)` | failed. Login and completed-session persistence verified in a second browser session without login. Anonymous Fetch returned a login page with HTTP 200. Context Fetch returned HTTP 400: not enabled for this project, before extraction. Full E2E remains blocked. |
 | Live workflow tested | 2026-10-19 | `Node.js 24.19.0; Browserbase SDK 2.19.1; playwright-core 1.56.1` | `BROWSERBASE_CONTEXT_ID=<saved-context> node --import tsx index.ts raw; repeat with markdown and json` | passed. Reused the context from the verified browser login and completed session. All three formats passed protected-content checks and saved output. Applies to the tested project and public demo; does not establish general feature availability. |
 | Live workflow tested | 2026-10-26 | `Node.js; Browserbase SDK 2.19.1; playwright-core 1.56.1` | `node --import tsx login.ts; BROWSERBASE_CONTEXT_ID=<new-context> node --import tsx index.ts raw (also markdown and json)` | passed. Fresh login and completed session followed by protected-content checks for HTML, Markdown, and JSON. Applies to the tested project and public demo. |
-| Typechecked | 2026-10-29 | `Node.js 26.0.0; TypeScript 7.0.2; Stagehand 4.2.1; Browserbase SDK 2.19.1` | `pnpm typecheck` | passed. Stagehand locator-based login compiles. Live run blocked by missing BROWSERBASE_API_KEY. No AI primitives used. |
+| Typechecked | 2026-10-29 | `Node.js 26.0.0; TypeScript 7.0.2; Stagehand 4.3.0; Browserbase SDK 2.19.1` | `pnpm typecheck` | passed. Stagehand locator-based login compiles. Live run blocked by missing BROWSERBASE_API_KEY. No AI primitives used. |
 
 - Draft: requires a project enabled for launch-gated Fetch context support.
 - Uses public demo credentials; adapt login and protected-content checks for your own site.

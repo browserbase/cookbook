@@ -14734,7 +14734,7 @@
       "dependencies": {
         "@browserbasehq/sdk": "2.19.1",
         "dotenv": "^16.4.5",
-        "@browserbasehq/stagehand": "4.2.1"
+        "@browserbasehq/stagehand": "4.3.0"
       },
       "entrypoints": [
         "examples/typescript/authenticated-fetch/login.ts",
@@ -14844,7 +14844,7 @@
         {
           "kind": "typechecked",
           "date": "2026-10-29",
-          "runtime": "Node.js 26.0.0; TypeScript 7.0.2; Stagehand 4.2.1; Browserbase SDK 2.19.1",
+          "runtime": "Node.js 26.0.0; TypeScript 7.0.2; Stagehand 4.3.0; Browserbase SDK 2.19.1",
           "command": "pnpm typecheck",
           "result": "passed",
           "limits": "Stagehand locator-based login compiles. Live run blocked by missing BROWSERBASE_API_KEY. No AI primitives used."

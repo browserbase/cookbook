@@ -11,7 +11,7 @@
   "dependencies": {
     "@browserbasehq/sdk": "2.19.1",
     "dotenv": "^16.4.5",
-    "@browserbasehq/stagehand": "4.2.1"
+    "@browserbasehq/stagehand": "4.3.0"
   },
   "devDependencies": {
     "@types/node": "^22.0.0",

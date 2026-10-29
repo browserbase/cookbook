@@ -49,7 +49,7 @@ Fetch only sends saved cookies, scoped to the correct domain/path across redirec
 - **400 / `Context ID not found`:** check the context ID and project/API key pairing.
 - **400 / project not enabled or unsupported:** contact Browserbase support to enable Fetch context access for the project.
 - **400 / `context_storage_access_denied`:** for BYOS, check the configured role, trust policy, and S3 context read permissions.
-- **Login/session failure:** check configuration and the session in the Browserbase dashboard. A failed login never prints a success/context handoff. The session also has a three-minute timeout.
+- **Login/session failure:** check configuration and the session in the Browserbase dashboard. A failed login never prints a success/context handoff. The session uses the project’s default timeout.
 
 The pinned SDK predates the `contextId` type. The request variable in `index.ts` carries that documented API field without a type cast; the SDK serializes it into the JSON body. This does not bypass the server's launch gate.
 
@@ -65,4 +65,4 @@ The first authenticated Fetch attempt was blocked by project feature enablement 
 
 After simplification on October 26, 2026, a fresh browser login and completed session produced a new context that passed live HTML, Markdown, and JSON retrieval. Typecheck also passed.
 
-The October 29 migration to Stagehand 4.2.1 passed TypeScript compilation on Node.js 26.0.0. Live validation of this version is pending because the local environment did not have `BROWSERBASE_API_KEY`; the earlier live results above used Playwright.
+The October 29 migration to Stagehand 4.3.0 passed TypeScript compilation on Node.js 26.0.0. Live validation of this version is pending because the local environment did not have `BROWSERBASE_API_KEY`; the earlier live results above used Playwright.

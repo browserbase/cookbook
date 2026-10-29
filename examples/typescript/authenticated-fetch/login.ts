@@ -8,7 +8,6 @@ async function main(): Promise<void> {
     (await bb.contexts.create({})).id;
   // Authenticated Fetch: https://docs.browserbase.com/platform/fetch/authenticated-fetch
   const session = await bb.sessions.create({
-    api_timeout: 180,
     browserSettings: { context: { id: contextId, persist: true } },
   });
 
