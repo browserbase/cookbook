@@ -4,7 +4,7 @@ Find pages and extract structured information from them.
 
 Paths below are relative to a local cookbook root, not to the installed skill directory. Locate the checkout first. Read the selected guide and source before adapting code. Historical source links identify the imported revision; they predate cookbook migrations and are not runnable fallbacks.
 
-This topic contains all 54 matching entries. Browse `docs/topics/extraction-and-research.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
+This topic contains all 55 matching entries. Browse `docs/topics/extraction-and-research.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
 
 | Recipe | Language | Local guide | Status | Historical source |
 | --- | --- | --- | --- | --- |
@@ -31,6 +31,7 @@ This topic contains all 54 matching entries. Browse `docs/topics/extraction-and-
 | SEC filing research (Python) | python | `docs/recipes/examples-python-sec-filing-research.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python/sec-filing-research) |
 | Quickstart Selenium (Python) | python | `docs/recipes/examples-python-selenium-quickstart-selenium.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python/selenium/quickstart-selenium) |
 | Amazon product scraping (TypeScript) | typescript | `docs/recipes/examples-typescript-amazon-product-scraping.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/amazon-product-scraping) |
+| Authenticated Fetch (TypeScript) | typescript | `docs/recipes/examples-typescript-authenticated-fetch.md` | current | cookbook-authored |
 | Browser agent demo (TypeScript) | typescript | `docs/recipes/examples-typescript-browser-agent-demo.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/browser-agent-demo) |
 | Browserbase reducto (TypeScript) | typescript | `docs/recipes/examples-typescript-browserbase-reducto.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/browserbase-reducto) |
 | Business lookup (TypeScript) | typescript | `docs/recipes/examples-typescript-business-lookup.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/business-lookup) |

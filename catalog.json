@@ -14720,6 +14720,136 @@
         }
       ],
       "llm_requirement": "not required"
+    },
+    {
+      "access": "public",
+      "caveats": [
+        "Draft: requires a project enabled for launch-gated Fetch context support.",
+        "Uses public demo credentials; adapt login and protected-content checks for your own site.",
+        "Fetch uses saved cookies only; JavaScript-only authentication requires a browser.",
+        "Documentation: [Authenticated Fetch](https://docs.browserbase.com/platform/fetch/authenticated-fetch).",
+        "Stagehand login migration is typechecked; live validation is pending an available Browserbase API key. Earlier live evidence used Playwright."
+      ],
+      "collection": "examples",
+      "dependencies": {
+        "@browserbasehq/sdk": "2.19.1",
+        "dotenv": "^16.4.5",
+        "@browserbasehq/stagehand": "4.3.0"
+      },
+      "entrypoints": [
+        "examples/typescript/authenticated-fetch/login.ts",
+        "examples/typescript/authenticated-fetch/index.ts"
+      ],
+      "environment_setup_command": "test -f .env || cp .env.example .env",
+      "environment_template": "examples/typescript/authenticated-fetch/.env.example",
+      "environment_variables": [
+        {
+          "default": null,
+          "name": "BROWSERBASE_API_KEY",
+          "provider": "Browserbase",
+          "purpose": "Authenticates requests to Browserbase.",
+          "requirement": "required",
+          "safe_example": "<set-locally>",
+          "secret": true,
+          "setup_url": "https://www.browserbase.com/settings",
+          "validation": "Must be non-empty when used"
+        },
+        {
+          "default": null,
+          "name": "BROWSERBASE_CONTEXT_ID",
+          "provider": "Browserbase",
+          "purpose": "Saved context ID printed by pnpm login; required for Fetch, optional for login.",
+          "requirement": "conditional",
+          "safe_example": "<set-locally>",
+          "secret": false,
+          "setup_url": "https://www.browserbase.com/settings",
+          "validation": "Must be non-empty when used"
+        }
+      ],
+      "frameworks": [
+        "Browserbase SDK",
+        "Stagehand"
+      ],
+      "id": "examples-typescript-authenticated-fetch",
+      "languages": [
+        "typescript"
+      ],
+      "lifecycle": "current",
+      "manifests": [
+        "examples/typescript/authenticated-fetch/package.json"
+      ],
+      "path": "examples/typescript/authenticated-fetch",
+      "readme": "docs/recipes/examples-typescript-authenticated-fetch.md",
+      "run_commands": [
+        "pnpm login",
+        "pnpm start",
+        "pnpm start markdown",
+        "pnpm start json"
+      ],
+      "setup_commands": [
+        "corepack enable",
+        "pnpm install --config.minimumReleaseAge=10080"
+      ],
+      "source": {
+        "kind": "cookbook-authored",
+        "path": "examples/typescript/authenticated-fetch"
+      },
+      "summary": "Save a browser login in a context, then fetch protected HTML, Markdown, or structured JSON with an environment-provided context ID.",
+      "tags": [
+        "fetch",
+        "contexts",
+        "cookies"
+      ],
+      "title": "Authenticated Fetch (TypeScript)",
+      "topics": [
+        "authentication",
+        "extraction-and-research"
+      ],
+      "upstream_readme": "examples/typescript/authenticated-fetch/README.md",
+      "verification": "typechecked",
+      "working_directory": "examples/typescript/authenticated-fetch",
+      "verification_evidence": [
+        {
+          "kind": "typechecked",
+          "date": "2026-10-19",
+          "runtime": "Node.js 24.19.0; pnpm 10.24.0; TypeScript 7.0.2; Browserbase SDK 2.19.1; playwright-core 1.56.1",
+          "command": "pnpm typecheck",
+          "result": "passed",
+          "limits": "Local compilation only; authenticated browser and Fetch workflow not live-tested."
+        },
+        {
+          "kind": "live-tested",
+          "date": "2026-10-19",
+          "runtime": "Node.js 24.19.0; Browserbase SDK 2.19.1; playwright-core 1.56.1",
+          "command": "node --import tsx login.ts; BROWSERBASE_CONTEXT_ID=<saved-context> node --import tsx index.ts raw (also markdown and json)",
+          "result": "failed",
+          "limits": "Login and completed-session persistence verified in a second browser session without login. Anonymous Fetch returned a login page with HTTP 200. Context Fetch returned HTTP 400: not enabled for this project, before extraction. Full E2E remains blocked."
+        },
+        {
+          "kind": "live-tested",
+          "date": "2026-10-19",
+          "runtime": "Node.js 24.19.0; Browserbase SDK 2.19.1; playwright-core 1.56.1",
+          "command": "BROWSERBASE_CONTEXT_ID=<saved-context> node --import tsx index.ts raw; repeat with markdown and json",
+          "result": "passed",
+          "limits": "Reused the context from the verified browser login and completed session. All three formats passed protected-content checks and saved output. Applies to the tested project and public demo; does not establish general feature availability."
+        },
+        {
+          "kind": "live-tested",
+          "date": "2026-10-26",
+          "runtime": "Node.js; Browserbase SDK 2.19.1; playwright-core 1.56.1",
+          "command": "node --import tsx login.ts; BROWSERBASE_CONTEXT_ID=<new-context> node --import tsx index.ts raw (also markdown and json)",
+          "result": "passed",
+          "limits": "Fresh login and completed session followed by protected-content checks for HTML, Markdown, and JSON. Applies to the tested project and public demo."
+        },
+        {
+          "kind": "typechecked",
+          "date": "2026-10-29",
+          "runtime": "Node.js 26.0.0; TypeScript 7.0.2; Stagehand 4.3.0; Browserbase SDK 2.19.1",
+          "command": "pnpm typecheck",
+          "result": "passed",
+          "limits": "Stagehand locator-based login compiles. Live run blocked by missing BROWSERBASE_API_KEY. No AI primitives used."
+        }
+      ]
     }
   ],
   "schema_version": 1

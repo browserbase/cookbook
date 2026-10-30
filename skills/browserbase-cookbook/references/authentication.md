@@ -4,7 +4,7 @@ Reuse authenticated contexts, handle MFA, and connect login workflows.
 
 Paths below are relative to a local cookbook root, not to the installed skill directory. Locate the checkout first. Read the selected guide and source before adapting code. Historical source links identify the imported revision; they predate cookbook migrations and are not runnable fallbacks.
 
-This topic contains all 25 matching entries. Browse `docs/topics/authentication.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
+This topic contains all 26 matching entries. Browse `docs/topics/authentication.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
 
 | Recipe | Language | Local guide | Status | Historical source |
 | --- | --- | --- | --- | --- |
@@ -12,6 +12,7 @@ This topic contains all 25 matching entries. Browse `docs/topics/authentication.
 | Manual MFA with contexts (Python) | python | `docs/recipes/examples-python-manual-mfa-with-contexts.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python/manual-mfa-with-contexts) |
 | MFA handling (Python) | python | `docs/recipes/examples-python-mfa-handling.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python/mfa-handling) |
 | Playwright MFA handling (Python) | python | `docs/recipes/examples-python-playwright-mfa-handling.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/python/playwright-mfa-handling) |
+| Authenticated Fetch (TypeScript) | typescript | `docs/recipes/examples-typescript-authenticated-fetch.md` | current | cookbook-authored |
 | Context (TypeScript) | typescript | `docs/recipes/examples-typescript-context.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/context) |
 | Manual MFA with contexts (TypeScript) | typescript | `docs/recipes/examples-typescript-manual-mfa-with-contexts.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/manual-mfa-with-contexts) |
 | MFA handling (TypeScript) | typescript | `docs/recipes/examples-typescript-mfa-handling.md` | current | [pinned import](https://github.com/browserbase/templates/tree/088ff598518cf69b4edf1e1260dd57ff11ca55d8/typescript/mfa-handling) |

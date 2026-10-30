@@ -76,6 +76,7 @@ All entries below were inspected at their pinned source revision. Live website b
 | [Agent with human in loop (TypeScript)](../docs/recipes/examples-typescript-agent-with-human-in-loop.md) | typescript | runnable example | current / public | examples |
 | [Amazon global price comparison (TypeScript)](../docs/recipes/examples-typescript-amazon-global-price-comparison.md) | typescript | runnable example | current / public | examples |
 | [Amazon product scraping (TypeScript)](../docs/recipes/examples-typescript-amazon-product-scraping.md) | typescript | runnable example | current / public | examples |
+| [Authenticated Fetch (TypeScript)](../docs/recipes/examples-typescript-authenticated-fetch.md) | typescript | runnable example | current / public | examples |
 | [Basic caching (TypeScript)](../docs/recipes/examples-typescript-basic-caching.md) | typescript | runnable example | current / public | examples |
 | [Basic CAPTCHA (TypeScript)](../docs/recipes/examples-typescript-basic-captcha.md) | typescript | runnable example | current / public | examples |
 | [Browser agent demo (TypeScript)](../docs/recipes/examples-typescript-browser-agent-demo.md) | typescript | runnable example | current / public | examples |

@@ -7,10 +7,10 @@ Every entry is source-inspected at minimum. Recipes with stronger install, offli
 Search locally with `python3 scripts/catalog.py search "persistent login" --language python --limit 5`. Add `--json` for structured output.
 
 - [Getting started](topics/getting-started.md) (10). Create your first cloud browser and choose a browser SDK.
-- [Authentication and saved sessions](topics/authentication.md) (25). Reuse authenticated contexts, handle MFA, and connect login workflows.
+- [Authentication and saved sessions](topics/authentication.md) (26). Reuse authenticated contexts, handle MFA, and connect login workflows.
 - [Browser configuration](topics/browser-features.md) (33). Configure proxies, CAPTCHA handling, extensions, metadata, and caching.
 - [Files and documents](topics/downloads-and-documents.md) (21). Upload files, retrieve downloads, capture PDFs, and parse documents.
-- [Extraction and research](topics/extraction-and-research.md) (54). Find pages and extract structured information from them.
+- [Extraction and research](topics/extraction-and-research.md) (55). Find pages and extract structured information from them.
 - [Forms and transactions](topics/forms-and-transactions.md) (29). Fill forms and prepare application, booking, and payment workflows.
 - [Agents and human handoff](topics/agents-and-human-handoff.md) (27). Build browser agents and pause work for human input.
 - [Integrations and orchestration](topics/integrations-and-orchestration.md) (34). Connect Browserbase to agent frameworks, services, and workflow engines.
@@ -68,6 +68,7 @@ Search locally with `python3 scripts/catalog.py search "persistent login" --lang
 | [Agent with human in loop (TypeScript)](recipes/examples-typescript-agent-with-human-in-loop.md) | typescript | runnable example | current / public | examples |
 | [Amazon global price comparison (TypeScript)](recipes/examples-typescript-amazon-global-price-comparison.md) | typescript | runnable example | current / public | examples |
 | [Amazon product scraping (TypeScript)](recipes/examples-typescript-amazon-product-scraping.md) | typescript | runnable example | current / public | examples |
+| [Authenticated Fetch (TypeScript)](recipes/examples-typescript-authenticated-fetch.md) | typescript | runnable example | current / public | examples |
 | [Basic caching (TypeScript)](recipes/examples-typescript-basic-caching.md) | typescript | runnable example | current / public | examples |
 | [Basic CAPTCHA (TypeScript)](recipes/examples-typescript-basic-captcha.md) | typescript | runnable example | current / public | examples |
 | [Browser agent demo (TypeScript)](recipes/examples-typescript-browser-agent-demo.md) | typescript | runnable example | current / public | examples |

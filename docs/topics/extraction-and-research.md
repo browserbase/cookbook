@@ -29,6 +29,7 @@ Open a recipe guide for its working directory, commands, environment references,
 | [SEC filing research (Python)](../recipes/examples-python-sec-filing-research.md) | python | runnable example | current / public | examples |
 | [Quickstart Selenium (Python)](../recipes/examples-python-selenium-quickstart-selenium.md) | python | runnable example | current / public | examples |
 | [Amazon product scraping (TypeScript)](../recipes/examples-typescript-amazon-product-scraping.md) | typescript | runnable example | current / public | examples |
+| [Authenticated Fetch (TypeScript)](../recipes/examples-typescript-authenticated-fetch.md) | typescript | runnable example | current / public | examples |
 | [Browser agent demo (TypeScript)](../recipes/examples-typescript-browser-agent-demo.md) | typescript | runnable example | current / public | examples |
 | [Browserbase reducto (TypeScript)](../recipes/examples-typescript-browserbase-reducto.md) | typescript | runnable example | current / public | examples |
 | [Business lookup (TypeScript)](../recipes/examples-typescript-business-lookup.md) | typescript | runnable example | current / public | examples |
