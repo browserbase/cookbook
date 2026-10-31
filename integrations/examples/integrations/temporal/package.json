@@ -27,14 +27,14 @@
     "@temporalio/common": "1.24.0",
     "@temporalio/worker": "1.24.0",
     "@temporalio/workflow": "1.24.0",
-    "zod": "4.4.3",
-    "@browserbasehq/sdk": "2.21.0"
+    "zod": "4.6.7",
+    "@browserbasehq/sdk": "2.22.0"
   },
   "devDependencies": {
     "@tsconfig/node22": "22.0.6",
     "nodemon": "3.1.14",
-    "prettier": "2.8.8",
-    "typescript": "5.9.3",
+    "prettier": "3.9.10",
+    "typescript": "7.0.2",
     "tsx": "^4.23.15"
   }
 }
