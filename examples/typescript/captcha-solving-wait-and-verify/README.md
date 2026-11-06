@@ -1,55 +1,36 @@
 # Wait for CAPTCHA solving, then verify the page
 
-A solver finishing does not mean the site has granted access. These Playwright TypeScript and Stagehand v4 examples listen before navigation, pause while Browserbase solves, and require a visible application element before reporting success.
+A finished solve does not guarantee access. This single-file Stagehand v4 example waits for Browserbase's solver, checks for your application element, and revisits the original URL at most once in the same session.
 
 ## Run
 
-Use Node.js 22+ and a Browserbase API key. No model key or local browser installation is needed; the Stagehand example uses deterministic browser methods.
-
-From the repository root:
+Use Node.js 22+ and a Browserbase API key. No model key or local browser is needed.
 
 ```sh
 cd examples/typescript/captcha-solving-wait-and-verify
 npm ci
 cp .env.example .env
+# Fill in .env, then:
+npm start
 ```
 
-Fill in `BROWSERBASE_API_KEY`; the project is inferred from the key. Set `TARGET_URL` to an authorized target and `EXPECTED_SELECTOR` to a unique CSS selector for content accessible after the challenge (for example, the search form). Do not use the CAPTCHA widget, a generic page heading, or an element also visible on the blocked page. The supplied `example.com` / `h1` defaults are only a no-challenge smoke example.
+Set `BROWSERBASE_API_KEY`, `TARGET_URL`, and `EXPECTED_SELECTOR`. Choose a unique CSS selector for content accessible after the challenge, such as the search form—not the CAPTCHA widget. The `example.com` / `h1` defaults only demonstrate a page without a challenge.
 
-Run either implementation:
+The script creates a billed session, prints its dashboard link and solver events, and prints `Page ready` on success. It reports failure with exit code 1 and closes the session on either outcome. It does not submit forms.
 
-```sh
-npm run playwright
-npm run stagehand
-```
+## How it works
 
-Each command creates a separate billed Browserbase session, prints its dashboard link, visits the target, and closes the session in `finally`, including on failure. Neither submits forms. Expected output is a JSON outcome such as `{"status":"ready","renavigated":false}`. `blocked` and `solving-timeout` exit with status 1. Credentials and connection URLs are not logged.
+- Subscribe to console/CDP events before navigation. Pause while `browserbase-solving-started` is active.
+- After `browserbase-solving-finished`, check the expected element. If still missing after three seconds, revisit the target once in the same page and session, then keep checking.
+- After `browserbase-solving-errored`, watch for another challenge within the original 90-second deadline.
+- At the deadline, report failure. If a solve is active, report that state without handing control to a human.
 
-## Wait and verify
+This covers one page's navigation. Later actions and popups need their own readiness checks. A visible form does not prove a successful submission or an adequate reCAPTCHA v3 score.
 
-1. Register the listener before the first navigation. Playwright uses `page.on("console")` and `message.text()`; Stagehand v4 uses an awaited console subscription with the `Runtime.consoleAPICalled` CDP payload.
-2. On `browserbase-solving-started`, stop further page actions and readiness checks while solving is active.
-3. On `browserbase-solving-finished`, check the expected element. Allow three seconds for content to appear. If it remains missing, navigate to the original target URL **once in the same page and session**, preserving its cookies, then keep verifying. A second finish cannot cause another recovery navigation.
-4. On `browserbase-solving-errored`, continue checking readiness and watching for a new challenge within the original deadline. Do not immediately reload or hand off.
-5. At the deadline, report `solving-timeout` if a solve is active, or `blocked` otherwise. This example reports failure and closes the session; it does not implement human takeover. If you add takeover, retain the session and recheck that no solve is active before transferring control.
+## Solving, proxies, and Verified
 
-`CAPTCHA_TIMEOUT_MS` defaults to 90000 (allowed range: 1000–300000). The deadline covers initial navigation, solver retries, readiness checks, and the optional revisit; it does not reset on events. Session creation and cleanup are outside that budget. A deadline stops waiting, while `finally` closes the session to terminate pending browser operations.
+Plain solving is enough when the supported challenge completes and your readiness check passes. For persistent blocks, evaluate `USE_PROXIES=true` and `USE_VERIFIED=true` with Browserbase support. Proxies can improve success rates; Verified addresses browser identity and requires Scale plan access. Neither guarantees access or replaces the page check.
 
-Only proceed with application actions after `ready`. This is a gate for one page's navigation, not an automatic lock around a long-running agent. Register listeners before any later challenge-triggering action and gate subsequent actions too. Popups and other pages need their own listener and readiness predicate. A visible element is only as strong as the predicate you choose; it does not establish a successful form submission, accepted payment, or adequate reCAPTCHA v3 score. Use an application-specific result check for those workflows.
+See [CAPTCHA solving](https://docs.browserbase.com/platform/identity/captcha-solving) and [Verified](https://docs.browserbase.com/platform/identity/overview#verified).
 
-## Plain solving, proxies, and Verified
-
-Start with `solveCaptchas: true` (set explicitly here) for supported challenges when the standard browser can reach the site. Plain solving is sufficient when the challenge completes and the application readiness check passes. It does not guarantee every Cloudflare, hCaptcha, or reCAPTCHA flow will accept the session.
-
-For persistent access blocks, evaluate proxies and Verified with Browserbase support. `USE_PROXIES=true` enables proxies; `USE_VERIFIED=true` requests Verified. To test the combined configuration, enable both. Verified is a Scale plan feature requiring account access; it is not a prerequisite for plain solving. Proxies can improve success rates, while Verified addresses browser identity. Neither replaces the final page check or guarantees a reCAPTCHA v3 score.
-
-References: [CAPTCHA solving and events](https://docs.browserbase.com/platform/identity/captcha-solving), [Verified](https://docs.browserbase.com/platform/identity/overview#verified), and [Stagehand v4 browser configuration](https://docs.stagehand.dev/v4/configuration/browser).
-
-## Check locally
-
-```sh
-npm run typecheck
-npm test
-```
-
-The offline tests cover readiness without events, finished-but-blocked pages, a single revisit, error followed by retry, active-solve deadlines, stale readiness results, and stalled operations. They do not prove a live provider solve or a particular site's access policy. The package overrides Stagehand's transitive Zod dependency to 4.6.7 to include its constrained-collection validation security fix.
+`npm run typecheck` checks SDK signatures. No live CAPTCHA solve has been verified. The Zod override includes the transitive dependency's security fix.
