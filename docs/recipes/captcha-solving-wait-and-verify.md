@@ -17,7 +17,7 @@ Wait for CAPTCHA solving with Stagehand v4, verify application readiness, and re
 - Frameworks: Stagehand.
 - [Upstream setup and behavior](../../examples/typescript/captcha-solving-wait-and-verify/README.md).
 - [Dependency manifest `examples/typescript/captcha-solving-wait-and-verify/package.json`](../../examples/typescript/captcha-solving-wait-and-verify/package.json).
-- [Dependency manifest `examples/typescript/captcha-solving-wait-and-verify/package-lock.json`](../../examples/typescript/captcha-solving-wait-and-verify/package-lock.json).
+- [Dependency manifest `examples/typescript/captcha-solving-wait-and-verify/pnpm-lock.yaml`](../../examples/typescript/captcha-solving-wait-and-verify/pnpm-lock.yaml).
 - [Source `examples/typescript/captcha-solving-wait-and-verify/stagehand.ts`](../../examples/typescript/captcha-solving-wait-and-verify/stagehand.ts).
 - Original use-case taxonomy: stagehand-v4, captcha, readiness.
 
@@ -27,14 +27,14 @@ Run from this directory. Commands come from the package manifest, upstream setup
 
 ```sh
 cd examples/typescript/captcha-solving-wait-and-verify
-npm ci
+pnpm install --frozen-lockfile
 test -f .env || cp .env.example .env
 ```
 
 Available launch commands are listed below. For applications with separate workers or servers, read the upstream guide for process order. A production `start` command may require a build first.
 
 ```sh
-npm start
+pnpm start
 ```
 
 ## Environment
@@ -48,13 +48,6 @@ npm start
 | `BROWSERBASE_API_KEY` | [Browserbase](https://www.browserbase.com/settings). Authenticate Browserbase sessions Secret. | `<set-locally>` | Nonempty value. No default. |
 | `TARGET_URL` | Application. Authorized page to navigate to and revisit once Non-secret. | `<set-locally>` | Nonempty value. No default. |
 | `EXPECTED_SELECTOR` | Application. Unique CSS selector for post-challenge content Non-secret. | `<set-locally>` | Nonempty value. No default. |
-
-### Optional
-
-| Variable | Provider and purpose | Safe example | Validation and default |
-| --- | --- | --- | --- |
-| `USE_PROXIES` | Application. Enable Browserbase proxies Non-secret. | `false` | See source README for allowed values. Default: `false`. |
-| `USE_VERIFIED` | Application. Request Verified on an eligible account Non-secret. | `false` | See source README for allowed values. Default: `false`. |
 
 
 ## Dependencies
@@ -72,7 +65,7 @@ Source and setup metadata were inspected. No passing authenticated live-workflow
 
 | Check | Date | Runtime | Command | Result and limits |
 | --- | --- | --- | --- | --- |
-| Typechecked | 2026-11-06 | `Node.js 24.19.0; npm 11.17.0; Stagehand 4.2.1` | `npm run typecheck` | passed. TypeScript 6.0.3 signatures only; no live CAPTCHA or site verification. |
+| Typechecked | 2026-11-06 | `Node.js 24.19.0; pnpm 11.22.0; Stagehand 4.2.1` | `pnpm typecheck` | passed. TypeScript 6.0.3 signatures only; no live CAPTCHA or site verification. |
 
 - Typechecked only; no live CAPTCHA provider or target-site solve verified.
 - Creates billed sessions; proxies and Verified are optional, and Verified requires account access.

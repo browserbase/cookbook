@@ -18,7 +18,5 @@
     "tsx": "^4.21.0",
     "typescript": "6.0.3"
   },
-  "overrides": {
-    "zod": "4.6.7"
-  }
+  "packageManager": "pnpm@11.22.0"
 }

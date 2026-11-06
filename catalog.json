@@ -26,13 +26,13 @@
       ],
       "manifests": [
         "examples/typescript/captcha-solving-wait-and-verify/package.json",
-        "examples/typescript/captcha-solving-wait-and-verify/package-lock.json"
+        "examples/typescript/captcha-solving-wait-and-verify/pnpm-lock.yaml"
       ],
       "setup_commands": [
-        "npm ci"
+        "pnpm install --frozen-lockfile"
       ],
       "run_commands": [
-        "npm start"
+        "pnpm start"
       ],
       "environment_setup_command": "test -f .env || cp .env.example .env",
       "environment_template": "examples/typescript/captcha-solving-wait-and-verify/.env.example",
@@ -69,28 +69,6 @@
           "safe_example": "<set-locally>",
           "validation": "Nonempty value",
           "setup_url": null
-        },
-        {
-          "name": "USE_PROXIES",
-          "requirement": "optional",
-          "default": "false",
-          "purpose": "Enable Browserbase proxies",
-          "secret": false,
-          "provider": "Application",
-          "safe_example": "false",
-          "validation": "See source README for allowed values",
-          "setup_url": null
-        },
-        {
-          "name": "USE_VERIFIED",
-          "requirement": "optional",
-          "default": "false",
-          "purpose": "Request Verified on an eligible account",
-          "secret": false,
-          "provider": "Application",
-          "safe_example": "false",
-          "validation": "See source README for allowed values",
-          "setup_url": null
         }
       ],
       "dependencies": {
@@ -113,8 +91,8 @@
         {
           "kind": "typechecked",
           "date": "2026-11-06",
-          "runtime": "Node.js 24.19.0; npm 11.17.0; Stagehand 4.2.1",
-          "command": "npm run typecheck",
+          "runtime": "Node.js 24.19.0; pnpm 11.22.0; Stagehand 4.2.1",
+          "command": "pnpm typecheck",
           "result": "passed",
           "limits": "TypeScript 6.0.3 signatures only; no live CAPTCHA or site verification."
         }
