@@ -1,6 +1,171 @@
 {
   "recipes": [
     {
+      "id": "captcha-solving-wait-and-verify",
+      "title": "Wait for CAPTCHA solving and verify access",
+      "summary": "Pause Playwright or Stagehand v4 while solving, verify application readiness, and revisit the original URL at most once within a shared deadline",
+      "collection": "examples",
+      "path": "examples/typescript/captcha-solving-wait-and-verify",
+      "working_directory": "examples/typescript/captcha-solving-wait-and-verify",
+      "topics": [
+        "browser-features",
+        "agents-and-human-handoff",
+        "testing-and-observability"
+      ],
+      "languages": [
+        "typescript"
+      ],
+      "frameworks": [
+        "Playwright",
+        "Stagehand",
+        "Browserbase SDK"
+      ],
+      "llm_requirement": "not required",
+      "readme": "docs/recipes/captcha-solving-wait-and-verify.md",
+      "upstream_readme": "examples/typescript/captcha-solving-wait-and-verify/README.md",
+      "entrypoints": [
+        "examples/typescript/captcha-solving-wait-and-verify/playwright.ts",
+        "examples/typescript/captcha-solving-wait-and-verify/stagehand.ts"
+      ],
+      "manifests": [
+        "examples/typescript/captcha-solving-wait-and-verify/package.json",
+        "examples/typescript/captcha-solving-wait-and-verify/package-lock.json"
+      ],
+      "setup_commands": [
+        "npm ci"
+      ],
+      "run_commands": [
+        "npm run playwright",
+        "npm run stagehand"
+      ],
+      "environment_setup_command": "test -f .env || cp .env.example .env",
+      "environment_template": "examples/typescript/captcha-solving-wait-and-verify/.env.example",
+      "environment_variables": [
+        {
+          "name": "BROWSERBASE_API_KEY",
+          "requirement": "required",
+          "default": null,
+          "purpose": "Authenticate Browserbase sessions",
+          "secret": true,
+          "provider": "Browserbase",
+          "safe_example": "<set-locally>",
+          "validation": "Nonempty value",
+          "setup_url": "https://www.browserbase.com/settings"
+        },
+        {
+          "name": "TARGET_URL",
+          "requirement": "required",
+          "default": null,
+          "purpose": "Authorized page to navigate to and revisit once",
+          "secret": false,
+          "provider": "Application",
+          "safe_example": "<set-locally>",
+          "validation": "Nonempty value",
+          "setup_url": null
+        },
+        {
+          "name": "EXPECTED_SELECTOR",
+          "requirement": "required",
+          "default": null,
+          "purpose": "Unique CSS selector for post-challenge content",
+          "secret": false,
+          "provider": "Application",
+          "safe_example": "<set-locally>",
+          "validation": "Nonempty value",
+          "setup_url": null
+        },
+        {
+          "name": "CAPTCHA_TIMEOUT_MS",
+          "requirement": "optional",
+          "default": "90000",
+          "purpose": "Overall navigation and readiness deadline in milliseconds",
+          "secret": false,
+          "provider": "Application",
+          "safe_example": "90000",
+          "validation": "See source README for allowed values",
+          "setup_url": null
+        },
+        {
+          "name": "USE_PROXIES",
+          "requirement": "optional",
+          "default": "false",
+          "purpose": "Enable Browserbase proxies",
+          "secret": false,
+          "provider": "Application",
+          "safe_example": "false",
+          "validation": "See source README for allowed values",
+          "setup_url": null
+        },
+        {
+          "name": "USE_VERIFIED",
+          "requirement": "optional",
+          "default": "false",
+          "purpose": "Request Verified on an eligible account",
+          "secret": false,
+          "provider": "Application",
+          "safe_example": "false",
+          "validation": "See source README for allowed values",
+          "setup_url": null
+        }
+      ],
+      "dependencies": {
+        "@browserbasehq/sdk": "2.21.0",
+        "@browserbasehq/stagehand": "4.2.1",
+        "dotenv": "^17.4.2",
+        "playwright-core": "^1.58.2"
+      },
+      "caveats": [
+        "Offline-tested only; no live CAPTCHA provider or target-site solve verified.",
+        "Creates billed sessions; proxies and Verified are optional, and Verified requires account access.",
+        "One-page navigation gate; readiness must be tailored to the application. Reports failure rather than implementing human takeover."
+      ],
+      "source": {
+        "kind": "cookbook-authored",
+        "path": "examples/typescript/captcha-solving-wait-and-verify"
+      },
+      "lifecycle": "current",
+      "access": "public",
+      "verification": "offline-tested",
+      "verification_evidence": [
+        {
+          "kind": "offline-tested",
+          "date": "2026-11-06",
+          "runtime": "Node.js 24.19.0; npm 11.17.0; Stagehand 4.2.1",
+          "command": "npm test",
+          "result": "passed",
+          "limits": "10 synthetic tests; no browser or live CAPTCHA solving. Run from examples/typescript/captcha-solving-wait-and-verify."
+        },
+        {
+          "kind": "install-verified",
+          "date": "2026-11-06",
+          "runtime": "Node.js 24.19.0; npm 11.17.0; Stagehand 4.2.1",
+          "command": "npm ci",
+          "result": "passed",
+          "limits": "Fresh disposable package directory using the committed lockfile; no browser session."
+        },
+        {
+          "kind": "typechecked",
+          "date": "2026-11-06",
+          "runtime": "Node.js 24.19.0; npm 11.17.0; Stagehand 4.2.1",
+          "command": "npm run typecheck",
+          "result": "passed",
+          "limits": "TypeScript 6.0.3 signatures only; no live CAPTCHA or site verification."
+        }
+      ],
+      "search_aliases": [
+        "captcha",
+        "Cloudflare",
+        "hCaptcha",
+        "reCAPTCHA",
+        "solving-finished"
+      ],
+      "tags": [
+        "stagehand-v4",
+        "captcha",
+        "readiness"
+      ]
+    },
+    {
       "access": "public",
       "caveats": [
         "Registry research only; does not issue a KYB approval or risk-policy verdict.",

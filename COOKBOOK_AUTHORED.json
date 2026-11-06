@@ -3,7 +3,7 @@
   "files": [
     {
       "path": "examples/README.md",
-      "sha256": "b8a3372ca4ee3c488fe439d25d6e5719d4d6cb9d72f6978fd90ade983183031a",
+      "sha256": "27eb5d9ca2f0039cc96b590c71a595639592e607ecbaf039e4c3a7be397cd3e2",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -374,6 +374,56 @@
     {
       "path": "examples/typescript/business-lookup/tsconfig.json",
       "sha256": "c4fcd54c2e1b9946965ee4f87369f0b79e5b26026dfb3e5977d2babc6b191721",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/captcha-solving-wait-and-verify/.env.example",
+      "sha256": "578ad0d5b5903b0906c82e58c4a684255887b235c291aa0c7c457cff6df8a961",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/captcha-solving-wait-and-verify/README.md",
+      "sha256": "82ebe85ba22c505f7a9fb46a7d928288583ef1d11947251207f786138a3ca8bb",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/captcha-solving-wait-and-verify/config.ts",
+      "sha256": "67e86db3e7153053b7c0536c513d52748156eed3a6e913dcfbcd91c686a958ba",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/captcha-solving-wait-and-verify/package-lock.json",
+      "sha256": "dd16f1316314aea22f7199eb818ca60b8e22840b09d415b668851ee9391754c7",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/captcha-solving-wait-and-verify/package.json",
+      "sha256": "688926efb28b151b6cf06605ba746813dedb89b047fabab874f77e4269e0c95f",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/captcha-solving-wait-and-verify/playwright.ts",
+      "sha256": "12c4c509385ca19a6baaa63f28a375c09ddf4bf03f649cb4e0487c3bdfe6cfcc",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/captcha-solving-wait-and-verify/stagehand.ts",
+      "sha256": "027a28073e28988e2d8209a9f9faf14d873d4937856de9e68bf7ddbeb241e5d5",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/captcha-solving-wait-and-verify/tsconfig.json",
+      "sha256": "1cb7c5c17c81f47e4e7d014e82d165e88c37e30bbb8e445693bae49fd327772b",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/captcha-solving-wait-and-verify/wait-and-verify.test.ts",
+      "sha256": "11eedacb53e3dde0a8db35526fbe37b3101ddf366ab62cfdc3055d3bd696d040",
+      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
+    },
+    {
+      "path": "examples/typescript/captcha-solving-wait-and-verify/wait-and-verify.ts",
+      "sha256": "e1dacd4c687b62b6281f7a539c93299ab4915dd879293d5776f85219bbb86e3d",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {

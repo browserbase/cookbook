@@ -30,6 +30,7 @@ All entries below were inspected at their pinned source revision. Live website b
 
 | Recipe | Language | Type | Status | Collection |
 | --- | --- | --- | --- | --- |
+| [Wait for CAPTCHA solving and verify access](../docs/recipes/captcha-solving-wait-and-verify.md) | typescript | runnable example | current / public | examples |
 | [Hackernews (Go)](../docs/recipes/examples-go-hackernews.md) | go | runnable example | current / public | examples |
 | [Agentic KYB registry research (Python, Stagehand v4)](../docs/recipes/examples-python-agentic-kyb.md) | python | runnable example | current / public | examples |
 | [Amazon global price comparison (Python)](../docs/recipes/examples-python-amazon-global-price-comparison.md) | python | runnable example | current / public | examples |
