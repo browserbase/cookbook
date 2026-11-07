@@ -72,8 +72,7 @@
         }
       ],
       "dependencies": {
-        "@browserbasehq/stagehand": "4.2.1",
-        "dotenv": "^17.4.2"
+        "@browserbasehq/stagehand": "4.2.1"
       },
       "caveats": [
         "Typechecked only; no live CAPTCHA provider or target-site solve verified.",

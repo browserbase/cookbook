@@ -1,4 +1,3 @@
-import "dotenv/config";
 import { setTimeout as sleep } from "node:timers/promises";
 import { browserbase } from "@browserbasehq/stagehand";
 
@@ -6,8 +5,7 @@ const target = process.env.TARGET_URL!;
 const selector = process.env.EXPECTED_SELECTOR!;
 const browser = await browserbase.launch({
   apiKey: process.env.BROWSERBASE_API_KEY!,
-  proxies: false,
-  browserSettings: { solveCaptchas: true, verified: false },
+  browserSettings: { solveCaptchas: true },
 });
 
 try {
@@ -39,7 +37,7 @@ try {
       const before = revision;
       const visible = await page.locator(selector).isVisible({ timeout: remaining() });
       if (performance.now() >= deadline) break;
-      if (before === revision && !solving) {
+      if (before === revision) {
         if (visible) {
           ready = true;
           break;

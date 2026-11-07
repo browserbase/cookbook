@@ -57,7 +57,6 @@ Declared runtime dependencies from [examples/typescript/captcha-solving-wait-and
 | Package | Declared version |
 | --- | --- |
 | `@browserbasehq/stagehand` | `4.2.1` |
-| `dotenv` | `^17.4.2` |
 
 ## Caveats and verification
 

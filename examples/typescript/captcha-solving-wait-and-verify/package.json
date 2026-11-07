@@ -6,12 +6,11 @@
     "node": ">=22"
   },
   "scripts": {
-    "start": "tsx stagehand.ts",
+    "start": "tsx --env-file=.env stagehand.ts",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@browserbasehq/stagehand": "4.2.1",
-    "dotenv": "^17.4.2"
+    "@browserbasehq/stagehand": "4.2.1"
   },
   "devDependencies": {
     "@types/node": "^24.19.2",

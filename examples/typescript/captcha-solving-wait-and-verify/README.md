@@ -14,6 +14,6 @@ Use a unique CSS selector for post-challenge content, such as the search form. T
 
 The script listens before navigation, pauses while solving, and checks the element after `browserbase-solving-finished`. If missing, it revisits the original URL once in the same session. After `browserbase-solving-errored`, it keeps watching until the 90-second deadline. It prints `Page ready` or throws an error, then closes the billed session. No forms are submitted or human handoff attempted.
 
-Plain solving is enough when the readiness check passes. For persistent blocks, try `proxies: true` and `verified: true` in the script; Verified requires Scale plan access. Neither guarantees access or a reCAPTCHA v3 score. See [CAPTCHA solving](https://docs.browserbase.com/platform/identity/captcha-solving) and [Verified](https://docs.browserbase.com/platform/identity/overview#verified).
+Plain solving is enough when the readiness check passes. For persistent blocks, add `proxies: true` to the launch options and `verified: true` inside `browserSettings`; Verified requires Scale plan access. Neither guarantees access or a reCAPTCHA v3 score. See [CAPTCHA solving](https://docs.browserbase.com/platform/identity/captcha-solving) and [Verified](https://docs.browserbase.com/platform/identity/overview#verified).
 
 `pnpm typecheck` checks SDK signatures. Live CAPTCHA solving has not been verified.
