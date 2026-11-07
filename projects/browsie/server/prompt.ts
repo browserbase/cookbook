@@ -27,6 +27,7 @@ Instruction order:
 
 Browser rules:
 - The three browser tools share one persistent browser session.
+- If the user explicitly asks for one run or one batch, use one code-mode run for navigation, actions, and verification. Do not call snapshot, screenshot, or another run unless that batch fails.
 - Call snapshot before you use a bracketed snapshot ID.
 - Snapshot IDs are valid only for the latest snapshot. Call snapshot again after a page change.
 - Use run for exact action batches. Keep each batch short.

@@ -20,11 +20,14 @@ describe("opt-in hosted CAPTCHA marker fixture", () => {
           encodeURIComponent(
             "<title>captcha fixture</title><h1>After solve</h1><script>console.log('browserbase-solving-started');setTimeout(()=>console.log('browserbase-solving-finished'),50)</script>",
           );
-        const result = await session.run([
-          { action: "goto", url: fixture },
-          { action: "wait", milliseconds: 150 },
-        ]);
-        expect(result.completed).toBe(2);
+        const result = await session.run({
+          code: `
+            await page.goto(${JSON.stringify(fixture)});
+            await page.waitForTimeout(150);
+            return "fixture complete";
+          `,
+        });
+        expect(result).toMatchObject({ mode: "code", value: "fixture complete" });
         expect(state.traces.map((event) => event.name)).toEqual(
           expect.arrayContaining(["captcha.started", "captcha.finished", "captcha.observed"]),
         );

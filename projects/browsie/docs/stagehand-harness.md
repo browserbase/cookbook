@@ -42,20 +42,26 @@ The tool result contains two projections. The model sees only the compact browse
 event keeps full workbench data, such as traces and the screenshot. This keeps large UI data out of
 the model context while the chat can still explain how the task ran.
 
-## Exact action mode
+## Official `run` contract
 
-Browsie supports these typed actions:
+Browsie implements the shared Stagehand v4 agent-framework contract. `run` accepts exactly one of:
 
-- `goto`
-- `click`
-- `fill`
-- `type`
-- `press`
-- `select`
-- `wait`
+- `code`: JavaScript with Playwright-shaped `page`, `context`, and `browser` objects in scope.
+- `actions`: snapshot-ID operations for `click`, `hover`, `fill`, `type`, `press`, and `select`.
 
-It does not run model-written JavaScript in the Eve process. Snapshot IDs expire after page state
-changes, and the next action must use a new snapshot.
+Use code for navigation, multi-step logic, waits, and extraction. Use actions for simple operations
+on elements in the latest snapshot. Each action uses `op` and `id`. Snapshot IDs expire after the
+page changes, and the next action must use a new snapshot.
+
+The model-authored JavaScript does not run in the Eve or Next.js process. Browsie uses Stagehand's
+callback batch and the official Playwright compatibility runtime, so the code runs in the
+Stagehand browser extension service worker. The browser session is still privileged: code can
+reach any data that is available in that session. Browserbase is the isolation boundary.
+
+The compatibility runtime is vendored from
+`browserbase/stagehand/packages/integrations/core/src/facade/runtime.ts` because the shared
+integration core is not a public package export. The source revision is recorded at the top of
+`server/stagehand-facade-runtime.ts` so a maintainer can compare and update it.
 
 ## Hosted session settings
 

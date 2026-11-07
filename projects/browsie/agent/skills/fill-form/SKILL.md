@@ -5,6 +5,10 @@ description: Use when the user asks to fill a form in small steps while the fina
 
 # Fill a form
 
+If the user explicitly requests one `run` call or one batch, use one code-mode `run` for the full
+form workflow. Use stable labels, roles, or known selectors, and verify all final values inside that
+same code call. Do not call `snapshot` or `screenshot` unless the single batch fails.
+
 1. Read the form with `snapshot`.
 2. Match user data to visible field labels. Do not invent sensitive data.
 3. Fill one form step with `run`.

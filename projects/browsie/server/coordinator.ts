@@ -70,23 +70,25 @@ async function runFormDemo(
     skillId: skill?.id ?? "fill-form",
   });
 
-  await input.browser.run([{ action: "goto", url: input.fixtureUrl }]);
+  await input.browser.run({
+    code: `await page.goto(${JSON.stringify(input.fixtureUrl)}, { waitUntil: "domcontentloaded" });`,
+  });
   await input.browser.snapshot();
-  await input.browser.run([
-    { action: "fill", target: "#full-name", value: "Avery Browser" },
-    { action: "fill", target: "#email", value: "avery@example.com" },
-    { action: "click", target: "#next-step" },
-  ]);
+  await input.browser.run({
+    code: `
+      await page.locator("#full-name").fill("Avery Browser");
+      await page.locator("#email").fill("avery@example.com");
+      await page.locator("#next-step").click();
+    `,
+  });
   await input.browser.snapshot();
-  await input.browser.run([
-    { action: "fill", target: "#company", value: "Town" },
-    { action: "select", target: "#role", value: "Operations" },
-    {
-      action: "fill",
-      target: "#notes",
-      value: "Browsie filled this form with a Stagehand v4 skill.",
-    },
-  ]);
+  await input.browser.run({
+    code: `
+      await page.locator("#company").fill("Town");
+      await page.locator("#role").selectOption("Operations");
+      await page.locator("#notes").fill("Browsie filled this form with a Stagehand v4 skill.");
+    `,
+  });
   await input.browser.snapshot();
   await input.browser.screenshot();
 
