@@ -8,13 +8,13 @@ Search locally with `python3 scripts/catalog.py search "persistent login" --lang
 
 - [Getting started](topics/getting-started.md) (10). Create your first cloud browser and choose a browser SDK.
 - [Authentication and saved sessions](topics/authentication.md) (26). Reuse authenticated contexts, handle MFA, and connect login workflows.
-- [Browser configuration](topics/browser-features.md) (33). Configure proxies, CAPTCHA handling, extensions, metadata, and caching.
+- [Browser configuration](topics/browser-features.md) (34). Configure proxies, CAPTCHA handling, extensions, metadata, and caching.
 - [Files and documents](topics/downloads-and-documents.md) (21). Upload files, retrieve downloads, capture PDFs, and parse documents.
 - [Extraction and research](topics/extraction-and-research.md) (55). Find pages and extract structured information from them.
 - [Forms and transactions](topics/forms-and-transactions.md) (29). Fill forms and prepare application, booking, and payment workflows.
-- [Agents and human handoff](topics/agents-and-human-handoff.md) (27). Build browser agents and pause work for human input.
+- [Agents and human handoff](topics/agents-and-human-handoff.md) (28). Build browser agents and pause work for human input.
 - [Integrations and orchestration](topics/integrations-and-orchestration.md) (34). Connect Browserbase to agent frameworks, services, and workflow engines.
-- [Testing and observability](topics/testing-and-observability.md) (8). Test sites and inspect browser behavior, reliability, and performance.
+- [Testing and observability](topics/testing-and-observability.md) (9). Test sites and inspect browser behavior, reliability, and performance.
 - [Commerce and travel](topics/commerce-and-travel.md) (14). Compare products, research travel, and inspect booking workflows.
 - [Business operations](topics/business-operations.md) (12). Automate research and operations across business domains.
 
@@ -22,6 +22,7 @@ Search locally with `python3 scripts/catalog.py search "persistent login" --lang
 
 | Recipe | Language | Type | Status | Collection |
 | --- | --- | --- | --- | --- |
+| [Wait for CAPTCHA solving and verify access](recipes/captcha-solving-wait-and-verify.md) | typescript | runnable example | current / public | examples |
 | [Hackernews (Go)](recipes/examples-go-hackernews.md) | go | runnable example | current / public | examples |
 | [Agentic KYB registry research (Python, Stagehand v4)](recipes/examples-python-agentic-kyb.md) | python | runnable example | current / public | examples |
 | [Amazon global price comparison (Python)](recipes/examples-python-amazon-global-price-comparison.md) | python | runnable example | current / public | examples |

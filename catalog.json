@@ -1,6 +1,115 @@
 {
   "recipes": [
     {
+      "id": "captcha-solving-wait-and-verify",
+      "title": "Wait for CAPTCHA solving and verify access",
+      "summary": "Wait for CAPTCHA solving with Stagehand v4, verify application readiness, and revisit the original URL at most once",
+      "collection": "examples",
+      "path": "examples/typescript/captcha-solving-wait-and-verify",
+      "working_directory": "examples/typescript/captcha-solving-wait-and-verify",
+      "topics": [
+        "browser-features",
+        "agents-and-human-handoff",
+        "testing-and-observability"
+      ],
+      "languages": [
+        "typescript"
+      ],
+      "frameworks": [
+        "Stagehand"
+      ],
+      "llm_requirement": "not required",
+      "readme": "docs/recipes/captcha-solving-wait-and-verify.md",
+      "upstream_readme": "examples/typescript/captcha-solving-wait-and-verify/README.md",
+      "entrypoints": [
+        "examples/typescript/captcha-solving-wait-and-verify/stagehand.ts"
+      ],
+      "manifests": [
+        "examples/typescript/captcha-solving-wait-and-verify/package.json",
+        "examples/typescript/captcha-solving-wait-and-verify/pnpm-lock.yaml"
+      ],
+      "setup_commands": [
+        "pnpm install --frozen-lockfile"
+      ],
+      "run_commands": [
+        "pnpm start"
+      ],
+      "environment_setup_command": "test -f .env || cp .env.example .env",
+      "environment_template": "examples/typescript/captcha-solving-wait-and-verify/.env.example",
+      "environment_variables": [
+        {
+          "name": "BROWSERBASE_API_KEY",
+          "requirement": "required",
+          "default": null,
+          "purpose": "Authenticate Browserbase sessions",
+          "secret": true,
+          "provider": "Browserbase",
+          "safe_example": "<set-locally>",
+          "validation": "Nonempty value",
+          "setup_url": "https://www.browserbase.com/settings"
+        },
+        {
+          "name": "TARGET_URL",
+          "requirement": "required",
+          "default": null,
+          "purpose": "Authorized page to navigate to and revisit once",
+          "secret": false,
+          "provider": "Application",
+          "safe_example": "<set-locally>",
+          "validation": "Nonempty value",
+          "setup_url": null
+        },
+        {
+          "name": "EXPECTED_SELECTOR",
+          "requirement": "required",
+          "default": null,
+          "purpose": "Unique CSS selector for post-challenge content",
+          "secret": false,
+          "provider": "Application",
+          "safe_example": "<set-locally>",
+          "validation": "Nonempty value",
+          "setup_url": null
+        }
+      ],
+      "dependencies": {
+        "@browserbasehq/stagehand": "4.2.1"
+      },
+      "caveats": [
+        "Typechecked only; no live CAPTCHA provider or target-site solve verified.",
+        "Creates billed sessions; proxies and Verified are optional, and Verified requires account access.",
+        "One-page navigation gate; readiness must be tailored to the application. Reports failure rather than implementing human takeover."
+      ],
+      "source": {
+        "kind": "cookbook-authored",
+        "path": "examples/typescript/captcha-solving-wait-and-verify"
+      },
+      "lifecycle": "current",
+      "access": "public",
+      "verification": "typechecked",
+      "verification_evidence": [
+        {
+          "kind": "typechecked",
+          "date": "2026-11-06",
+          "runtime": "Node.js 24.19.0; pnpm 11.22.0; Stagehand 4.2.1",
+          "command": "pnpm typecheck",
+          "result": "passed",
+          "limits": "TypeScript 6.0.3 signatures only; no live CAPTCHA or site verification."
+        }
+      ],
+      "search_aliases": [
+        "captcha",
+        "Cloudflare",
+        "hCaptcha",
+        "reCAPTCHA",
+        "solving-finished"
+      ],
+      "tags": [
+        "stagehand-v4",
+        "captcha",
+        "readiness"
+      ]
+    },
+    {
       "access": "public",
       "caveats": [
         "Registry research only; does not issue a KYB approval or risk-policy verdict.",

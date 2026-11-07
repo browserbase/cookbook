@@ -6,6 +6,7 @@ Open a recipe guide for its working directory, commands, environment references,
 
 | Recipe | Language | Type | Status | Collection |
 | --- | --- | --- | --- | --- |
+| [Wait for CAPTCHA solving and verify access](../recipes/captcha-solving-wait-and-verify.md) | typescript | runnable example | current / public | examples |
 | [Anthropic Claude browser agent (Python)](../recipes/examples-python-anthropic-cua.md) | python | runnable example | current / public | examples |
 | [Business lookup (Python)](../recipes/examples-python-business-lookup.md) | python | runnable example | current / public | examples |
 | [Cartesia form filling (Python)](../recipes/examples-python-cartesia-form-filling.md) | python | runnable example | current / public | examples |
