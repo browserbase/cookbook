@@ -6,7 +6,7 @@ Build with Browserbase in the tools your team already uses. This directory is th
 
 ## Find an integration
 
-There are no community integrations in the collection yet. Browse the [official framework examples](../integrations/) or the full [integrations catalog](../../README.md#frameworks-and-packages) for AgentKit, Agno, Box, Browser Use, CrewAI, LangChain, Mastra, Temporal, Vercel, and more.
+There are no community integrations in the collection yet. Browse the [official framework examples](../integrations/) or the full [integrations catalog](../../README.md#frameworks-and-packages) for AgentKit, Agno, Box, CrewAI, LangChain, Mastra, Temporal, Vercel, and more.
 
 You can also ask the cookbook routing skill to find the closest recipe for a task:
 

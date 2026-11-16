@@ -49,6 +49,31 @@ class ImportSourceTests(unittest.TestCase):
                 all(record["visibility"] == "public" for record in manifest["sources"])
             )
 
+    def test_public_import_excludes_retired_browser_use(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source, destination = root / "source", root / "destination"
+            source.mkdir()
+            destination.mkdir()
+            for name in ("templates", "playbook", "integrations"):
+                self.make_repo(source, name)
+            repo = source / "integrations"
+            retired = repo / "examples/integrations/browser-use"
+            retired.mkdir(parents=True)
+            (retired / "main.py").write_text("from browser_use import Agent\n")
+            (repo / "README.md").write_text("# Integrations\n- browser-use/\n- stagehand/\n")
+            subprocess.run(["git", "add", "."], cwd=repo, check=True)
+            subprocess.run(["git", "commit", "-qm", "add integration fixtures"], cwd=repo, check=True)
+            self.assertEqual(self.run_import(source, destination, "--scope", "public"), 0)
+            self.assertFalse((destination / "integrations/examples/integrations/browser-use").exists())
+            self.assertEqual((destination / "integrations/UPSTREAM_README.md").read_text(), "# Integrations\n- stagehand/\n")
+            manifest = json.loads((destination / "SOURCE_MANIFEST.json").read_text())
+            record = next(item for source_record in manifest["sources"]
+                          for item in source_record["files"]
+                          if item["path"] == "integrations/examples/integrations/browser-use/main.py")
+            self.assertEqual(record["action"], "excluded")
+            self.assertTrue((destination / "integrations/fixture.txt").is_file())
+
     def test_refresh_preserves_recorded_adaptation_without_explicit_retirement(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

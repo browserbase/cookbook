@@ -4,7 +4,7 @@ Connect Browserbase to agent frameworks, services, and workflow engines.
 
 Paths below are relative to a local cookbook root, not to the installed skill directory. Locate the checkout first. Read the selected guide and source before adapting code. Historical source links identify the imported revision; they predate cookbook migrations and are not runnable fallbacks.
 
-This topic contains all 34 matching entries. Browse `docs/topics/integrations-and-orchestration.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
+This topic contains all 33 matching entries. Browse `docs/topics/integrations-and-orchestration.md` or run `python3 scripts/catalog.py search "<task>" --language python --limit 5` from the cookbook root for other languages or frameworks.
 
 | Recipe | Language | Local guide | Status | Historical source |
 | --- | --- | --- | --- | --- |
@@ -19,7 +19,6 @@ This topic contains all 34 matching entries. Browse `docs/topics/integrations-an
 | Box · agent | typescript | `docs/recipes/integrations-examples-integrations-box-agent.md` | current | [pinned import](https://github.com/browserbase/integrations/tree/b7bc81c6fd4e089ab0c0df2b82529b200739e458/examples/integrations/box/agent) |
 | Box · Stagehand | typescript | `docs/recipes/integrations-examples-integrations-box-stagehand.md` | current | [pinned import](https://github.com/browserbase/integrations/tree/b7bc81c6fd4e089ab0c0df2b82529b200739e458/examples/integrations/box/stagehand) |
 | Braintrust | typescript | `docs/recipes/integrations-examples-integrations-braintrust.md` | current | [pinned import](https://github.com/browserbase/integrations/tree/b7bc81c6fd4e089ab0c0df2b82529b200739e458/examples/integrations/braintrust) |
-| Browser use | python | `docs/recipes/integrations-examples-integrations-browser-use.md` | current | [pinned import](https://github.com/browserbase/integrations/tree/b7bc81c6fd4e089ab0c0df2b82529b200739e458/examples/integrations/browser-use) |
 | Cartesia | python | `docs/recipes/integrations-examples-integrations-cartesia.md` | current | [pinned import](https://github.com/browserbase/integrations/tree/b7bc81c6fd4e089ab0c0df2b82529b200739e458/examples/integrations/cartesia) |
 | CrewAI · CrewAI tutorial | python | `docs/recipes/integrations-examples-integrations-crewai-crewai-tutorial.md` | current | [pinned import](https://github.com/browserbase/integrations/tree/b7bc81c6fd4e089ab0c0df2b82529b200739e458/examples/integrations/crewai/crewai-tutorial) |
 | CrewAI · quickstart | python | `docs/recipes/integrations-examples-integrations-crewai-quickstart.md` | current | [pinned import](https://github.com/browserbase/integrations/tree/b7bc81c6fd4e089ab0c0df2b82529b200739e458/examples/integrations/crewai/quickstart) |

@@ -17,7 +17,6 @@ Open a recipe guide for its working directory, commands, environment references,
 | [Box · agent](../recipes/integrations-examples-integrations-box-agent.md) | typescript | runnable example | current / public | integrations |
 | [Box · Stagehand](../recipes/integrations-examples-integrations-box-stagehand.md) | typescript | runnable example | current / public | integrations |
 | [Braintrust](../recipes/integrations-examples-integrations-braintrust.md) | typescript | integration package | current / public | integrations |
-| [Browser use](../recipes/integrations-examples-integrations-browser-use.md) | python | runnable example | current / public | integrations |
 | [Cartesia](../recipes/integrations-examples-integrations-cartesia.md) | python | runnable example | current / public | integrations |
 | [CrewAI · CrewAI tutorial](../recipes/integrations-examples-integrations-crewai-crewai-tutorial.md) | python | runnable example | current / public | integrations |
 | [CrewAI · quickstart](../recipes/integrations-examples-integrations-crewai-quickstart.md) | python | runnable example | current / public | integrations |

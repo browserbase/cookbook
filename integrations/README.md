@@ -43,7 +43,6 @@ The [MIT license](LICENSE), [source notice](NOTICE), and
 | [Box · agent](../docs/recipes/integrations-examples-integrations-box-agent.md) | typescript | runnable example | current / public | integrations |
 | [Box · Stagehand](../docs/recipes/integrations-examples-integrations-box-stagehand.md) | typescript | runnable example | current / public | integrations |
 | [Braintrust](../docs/recipes/integrations-examples-integrations-braintrust.md) | typescript | integration package | current / public | integrations |
-| [Browser use](../docs/recipes/integrations-examples-integrations-browser-use.md) | python | runnable example | current / public | integrations |
 | [Cartesia](../docs/recipes/integrations-examples-integrations-cartesia.md) | python | runnable example | current / public | integrations |
 | [CrewAI · CrewAI tutorial](../docs/recipes/integrations-examples-integrations-crewai-crewai-tutorial.md) | python | runnable example | current / public | integrations |
 | [CrewAI · quickstart](../docs/recipes/integrations-examples-integrations-crewai-quickstart.md) | python | runnable example | current / public | integrations |

@@ -21,19 +21,19 @@ Paths in topic references are relative to the cookbook root, not the skill direc
 
 Read only the reference that matches the request. Read a second reference when the task crosses topics.
 
-| User intent                                                                                                                                                          | Reference                                                                      |
-| -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
-| First session, Search, Fetch, raw Playwright, Puppeteer, Selenium, or Go                                                                                             | [Getting started](references/getting-started.md)                               |
-| Login, saved cookies, contexts, MFA, or authentication                                                                                                               | [Authentication](references/authentication.md)                                 |
-| Proxies, caching, CAPTCHA, session options, or browser configuration                                                                                                 | [Browser features](references/browser-features.md)                             |
-| Download, upload, PDF, financial statements, or document parsing                                                                                                     | [Downloads and documents](references/downloads-and-documents.md)               |
-| Scrape, extract, research, search, or collect structured data                                                                                                        | [Extraction and research](references/extraction-and-research.md)               |
-| Fill a form, prepare an application, or adapt a transaction flow                                                                                                     | [Forms and transactions](references/forms-and-transactions.md)                 |
-| Computer use, agents, tools, or pause for a human                                                                                                                    | [Agents and human handoff](references/agents-and-human-handoff.md)             |
-| Convex, Eve, OpenClaw, AgentKit, Agno, Box, Braintrust, Browser Use, Cartesia, CrewAI, Inngest, LangChain, Mastra, MongoDB, Stripe, Temporal, Trigger.dev, or Vercel | [Integrations and orchestration](references/integrations-and-orchestration.md) |
-| Link checks, traces, evaluation, or observability                                                                                                                    | [Testing and observability](references/testing-and-observability.md)           |
-| Prices, products, flights, shopping, or travel                                                                                                                       | [Commerce and travel](references/commerce-and-travel.md)                       |
-| Finance, healthcare, public records, support, or another business workflow                                                                                           | [Business operations](references/business-operations.md)                       |
+| User intent                                                                                                                                             | Reference                                                                      |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ |
+| First session, Search, Fetch, raw Playwright, Puppeteer, Selenium, or Go                                                                                | [Getting started](references/getting-started.md)                               |
+| Login, saved cookies, contexts, MFA, or authentication                                                                                                  | [Authentication](references/authentication.md)                                 |
+| Proxies, caching, CAPTCHA, session options, or browser configuration                                                                                    | [Browser features](references/browser-features.md)                             |
+| Download, upload, PDF, financial statements, or document parsing                                                                                        | [Downloads and documents](references/downloads-and-documents.md)               |
+| Scrape, extract, research, search, or collect structured data                                                                                           | [Extraction and research](references/extraction-and-research.md)               |
+| Fill a form, prepare an application, or adapt a transaction flow                                                                                        | [Forms and transactions](references/forms-and-transactions.md)                 |
+| Computer use, agents, tools, or pause for a human                                                                                                       | [Agents and human handoff](references/agents-and-human-handoff.md)             |
+| Convex, Eve, OpenClaw, AgentKit, Agno, Box, Braintrust, Cartesia, CrewAI, Inngest, LangChain, Mastra, MongoDB, Stripe, Temporal, Trigger.dev, or Vercel | [Integrations and orchestration](references/integrations-and-orchestration.md) |
+| Link checks, traces, evaluation, or observability                                                                                                       | [Testing and observability](references/testing-and-observability.md)           |
+| Prices, products, flights, shopping, or travel                                                                                                          | [Commerce and travel](references/commerce-and-travel.md)                       |
+| Finance, healthcare, public records, support, or another business workflow                                                                              | [Business operations](references/business-operations.md)                       |
 
 ## Select and inspect
 
