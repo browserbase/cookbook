@@ -13,7 +13,7 @@ Search locally with `python3 scripts/catalog.py search "persistent login" --lang
 - [Extraction and research](topics/extraction-and-research.md) (55). Find pages and extract structured information from them.
 - [Forms and transactions](topics/forms-and-transactions.md) (29). Fill forms and prepare application, booking, and payment workflows.
 - [Agents and human handoff](topics/agents-and-human-handoff.md) (28). Build browser agents and pause work for human input.
-- [Integrations and orchestration](topics/integrations-and-orchestration.md) (34). Connect Browserbase to agent frameworks, services, and workflow engines.
+- [Integrations and orchestration](topics/integrations-and-orchestration.md) (33). Connect Browserbase to agent frameworks, services, and workflow engines.
 - [Testing and observability](topics/testing-and-observability.md) (9). Test sites and inspect browser behavior, reliability, and performance.
 - [Commerce and travel](topics/commerce-and-travel.md) (14). Compare products, research travel, and inspect booking workflows.
 - [Business operations](topics/business-operations.md) (12). Automate research and operations across business domains.
@@ -116,7 +116,6 @@ Search locally with `python3 scripts/catalog.py search "persistent login" --lang
 | [Box · agent](recipes/integrations-examples-integrations-box-agent.md) | typescript | runnable example | current / public | integrations |
 | [Box · Stagehand](recipes/integrations-examples-integrations-box-stagehand.md) | typescript | runnable example | current / public | integrations |
 | [Braintrust](recipes/integrations-examples-integrations-braintrust.md) | typescript | integration package | current / public | integrations |
-| [Browser use](recipes/integrations-examples-integrations-browser-use.md) | python | runnable example | current / public | integrations |
 | [Cartesia](recipes/integrations-examples-integrations-cartesia.md) | python | runnable example | current / public | integrations |
 | [CrewAI · CrewAI tutorial](recipes/integrations-examples-integrations-crewai-crewai-tutorial.md) | python | runnable example | current / public | integrations |
 | [CrewAI · quickstart](recipes/integrations-examples-integrations-crewai-quickstart.md) | python | runnable example | current / public | integrations |

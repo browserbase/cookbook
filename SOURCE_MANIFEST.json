@@ -4304,15 +4304,12 @@
           "source_sha256": "d9c983a4f483165d102e36d31f4b22c2aa65c529a2bca88f2eefd85f6379ee42"
         },
         {
-          "action": "imported",
-          "adaptation": {
-            "reason": "Reviewed Browserbase configuration migration: remove BROWSERBASE_PROJECT_ID as a recipe prerequisite, use API-key-scoped defaults, and preserve explicit project scope only where the feature itself requires it.",
-            "sha256": "b4eb10263b4e9abfcb7817a5ca46d42eea40748f5505381e18154c676ae8e534"
-          },
+          "action": "excluded",
           "path": "integrations/examples/integrations/browser-use/README.md",
           "sha256": "5547abc128a531e2f85d73280cad81b0075fc37d49d81c1d9cae517081b099b6",
           "source_path": "examples/integrations/browser-use/README.md",
-          "source_sha256": "5547abc128a531e2f85d73280cad81b0075fc37d49d81c1d9cae517081b099b6"
+          "source_sha256": "5547abc128a531e2f85d73280cad81b0075fc37d49d81c1d9cae517081b099b6",
+          "reason": "Retired browser-use integration"
         },
         {
           "action": "imported",
@@ -4612,8 +4609,8 @@
         {
           "action": "imported",
           "adaptation": {
-            "reason": "Reviewed Browserbase configuration migration: remove BROWSERBASE_PROJECT_ID as a recipe prerequisite, use API-key-scoped defaults, and preserve explicit project scope only where the feature itself requires it.",
-            "sha256": "a629dcd37120ad11a5a38da50b2c5cd90958fd332af542f2a8e5f8effe348453"
+            "sha256": "0d63caf861ba5fa77c60811902964008cdbd91e9eb2fc8952380a3b9c277a65f",
+            "reason": "Reviewed Browserbase configuration migration: remove BROWSERBASE_PROJECT_ID as a recipe prerequisite, use API-key-scoped defaults, and preserve explicit project scope only where the feature itself requires it. Remove retired browser-use integration from framework list."
           },
           "path": "integrations/examples/community/README.md",
           "sha256": "40cd10d8f58d63388812fba05e6f5f2f82a51e935387725b07de6f71555c358b",
@@ -5234,7 +5231,11 @@
           "reason": "Preserve source overview as UPSTREAM_README.md",
           "sha256": "f1e0757ff489742c454504cbedffa9722029977d6469e54b4b7cc8406828d1ec",
           "source_path": "README.md",
-          "source_sha256": "f1e0757ff489742c454504cbedffa9722029977d6469e54b4b7cc8406828d1ec"
+          "source_sha256": "f1e0757ff489742c454504cbedffa9722029977d6469e54b4b7cc8406828d1ec",
+          "adaptation": {
+            "sha256": "c5e19825557ed2c4b65b05c30d978de3621499cc870cc4228d43fdfd48e437eb",
+            "reason": "Remove retired browser-use integration from source overview."
+          }
         },
         {
           "action": "imported",
@@ -5406,14 +5407,10 @@
           "source_sha256": "078a335f87f19a650d40cc037932bbb88e9e0b0c081f3688efd765fd4414a2cb"
         },
         {
-          "action": "transformed",
-          "adaptation": {
-            "reason": "Reviewed Browserbase configuration migration: remove BROWSERBASE_PROJECT_ID as a recipe prerequisite, use API-key-scoped defaults, and preserve explicit project scope only where the feature itself requires it.",
-            "sha256": "309207c6a067a9ad9d2230fbb712385f2aaa3a4c9df33c9fb863f17b97e88d8a"
-          },
+          "action": "excluded",
           "path": "integrations/examples/integrations/browser-use/.env.example",
-          "reason": "Blank secret-like environment template assignments",
-          "sha256": "15db82f000e88ec049574c1d4c1c12f7b973084a65b9368af504565131c8d893",
+          "reason": "Retired browser-use integration",
+          "sha256": "5cb1a7f447c4fb8ea1e3f2885a3bcf4149191f6a352e2d9641056b0d160f700c",
           "source_path": "examples/integrations/browser-use/.env.example",
           "source_sha256": "5cb1a7f447c4fb8ea1e3f2885a3bcf4149191f6a352e2d9641056b0d160f700c"
         },
@@ -5915,15 +5912,12 @@
           "source_sha256": "31efce29b6f6ffcffad2df9f4d47c2d015c46afb6f945550e7f599c431175595"
         },
         {
-          "action": "imported",
-          "adaptation": {
-            "reason": "Reviewed Browserbase configuration migration: remove BROWSERBASE_PROJECT_ID as a recipe prerequisite, use API-key-scoped defaults, and preserve explicit project scope only where the feature itself requires it.",
-            "sha256": "3a36d4ae57897f7b83039a5dcd725029fc702c9186c5c6e0974f433cd34f8859"
-          },
+          "action": "excluded",
           "path": "integrations/examples/integrations/browser-use/main.py",
           "sha256": "205006bbd2435caa882b502ee734322a14c357df25ce20dd4d7b543f5050a8b5",
           "source_path": "examples/integrations/browser-use/main.py",
-          "source_sha256": "205006bbd2435caa882b502ee734322a14c357df25ce20dd4d7b543f5050a8b5"
+          "source_sha256": "205006bbd2435caa882b502ee734322a14c357df25ce20dd4d7b543f5050a8b5",
+          "reason": "Retired browser-use integration"
         },
         {
           "action": "imported",
@@ -6775,15 +6769,12 @@
           "source_sha256": "376ec17c78bf521b86094fe1659c9ecbfdfd42ae1797852c46d8e9d1bb00f5a7"
         },
         {
-          "action": "imported",
-          "adaptation": {
-            "sha256": "3a5bfff295a0954a2f5ac246042a3f587cd64cda176d614b4684e0fa22105d19",
-            "reason": "Refresh dependencies using public registries; preserve compatible release lines and align Zod with Stagehand."
-          },
+          "action": "excluded",
           "path": "integrations/examples/integrations/browser-use/requirements.txt",
           "sha256": "839b4edb46522bb901c0222f17c273bd7696cfbdc96b95fe1a83203e11a11a13",
           "source_path": "examples/integrations/browser-use/requirements.txt",
-          "source_sha256": "839b4edb46522bb901c0222f17c273bd7696cfbdc96b95fe1a83203e11a11a13"
+          "source_sha256": "839b4edb46522bb901c0222f17c273bd7696cfbdc96b95fe1a83203e11a11a13",
+          "reason": "Retired browser-use integration"
         },
         {
           "action": "imported",

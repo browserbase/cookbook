@@ -763,7 +763,7 @@
     },
     {
       "path": "integrations/README.md",
-      "sha256": "c196cd88a144dd9e256358f0c8fb20a351c9a052568278d986d8de56a7414be2",
+      "sha256": "5b767bcf2af404437f78855dfc3228b5872f08363891fde60ad63e979983602e",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {
@@ -809,16 +809,6 @@
     {
       "path": "integrations/examples/integrations/braintrust/tests/browser-lifecycle.test.cjs",
       "sha256": "cf73c294362c8da56b53417e8908a37c6a0225e0456c6ab9283ed209f2f966c4",
-      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
-    },
-    {
-      "path": "integrations/examples/integrations/browser-use/fixture.html",
-      "sha256": "1cdfd2c24bd0917b817e44f9ce3e26e1f3640fe54454993312670f58d3de2844",
-      "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
-    },
-    {
-      "path": "integrations/examples/integrations/browser-use/tests/test_main.py",
-      "sha256": "d30631c8b6992ac0703bf33e0ce4b51acc3ee11ba0d4e40d5ce760ac23305107",
       "reason": "Cookbook-authored migration, test, configuration, or collection metadata outside the pinned upstream tree."
     },
     {

@@ -46,6 +46,8 @@ def env_template(path):
 
 def exclusion(path, source):
     parts = path.parts
+    if source == "integrations" and path.is_relative_to("examples/integrations/browser-use"):
+        return "Retired browser-use integration"
     if source == "playbook" and (path.as_posix().startswith("node/playwright/_tools/download/files/") or path.as_posix() == "guides/1password/1pass_new.zip"):
         return "Generated browser download or packaged local extension archive"
     if any(part in ADMIN for part in parts):
@@ -74,6 +76,9 @@ def sanitize(data):
 
 
 def adapt_source(source, path, data):
+    if source == "integrations" and path.as_posix() == "README.md":
+        updated = b"".join(line for line in data.splitlines(keepends=True) if b"browser-use/" not in line)
+        return updated, "Remove retired browser-use integration from source overview" if updated != data else None
     if source != "templates" or path.as_posix() != "typescript/getting-started-with-browserbase/index.ts":
         return data, None
     expected = b'  const response = await bb.fetchAPI.create({ url: targetUrl, allowRedirects: true });\n'
