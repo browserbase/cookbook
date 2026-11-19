@@ -34,11 +34,13 @@ describe("opt-in Browserbase restart recovery", () => {
           </form>
           <p id="result">Waiting for OTP</p>
         `)}`;
-      await session.run([
-        { action: "goto", url: page },
-        { action: "fill", target: "#username", value: "public-test-user" },
-        { action: "fill", target: "#password", value: "public-test-password" },
-      ]);
+      await session.run({
+        code: `
+          await page.goto(${JSON.stringify(page)});
+          await page.locator("#username").fill("public-test-user");
+          await page.locator("#password").fill("public-test-password");
+        `,
+      });
       if (!state.browser.sessionId) throw new Error("Browserbase did not return a session ID.");
       writeFileSync(
         stateFile,
@@ -67,10 +69,12 @@ describe("opt-in Browserbase restart recovery", () => {
       const saved = JSON.parse(readFileSync(stateFile, "utf8")) as ConversationState,
         session = new BrowsieBrowserSession(saved);
       try {
-        await session.run([
-          { action: "fill", target: "#otp", value: "123456" },
-          { action: "click", target: "#submit" },
-        ]);
+        await session.run({
+          code: `
+            await page.locator("#otp").fill("123456");
+            await page.locator("#submit").click();
+          `,
+        });
         const page = await session.snapshot();
         expect(page.tree).toContain("OTP accepted after restart");
         expect(saved.traces.some((event) => event.name === "browser.reattach")).toBe(true);

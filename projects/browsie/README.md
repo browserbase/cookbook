@@ -11,7 +11,8 @@ human handoff, credentials, messaging, and an inspectable web interface.
 ## What you can study
 
 - A durable Eve conversation with one persistent Stagehand browser runtime.
-- Three basic browser tools: `run`, `snapshot`, and `screenshot`.
+- Three basic browser tools: `run`, `snapshot`, and `screenshot`. `run` supports the official
+  Stagehand v4 `code` and snapshot `actions` modes.
 - Browserbase sessions with managed proxies, Verified Browsers, and optional proxy location.
 - A draft Browserbase Context for every hosted task. A user can later name and save that same
   Context, then use it in another task.
@@ -159,6 +160,8 @@ rotation and deletion procedures.
 - [`docs/vault-and-otp.md`](docs/vault-and-otp.md): vault login and human handoff.
 - [`docs/stagehand-v4-doc-map.md`](docs/stagehand-v4-doc-map.md): links to official Stagehand and
   Browserbase documentation.
+- [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md): source and license notice for the vendored
+  Stagehand Playwright compatibility runtime.
 - [`CONTRIBUTING.md`](CONTRIBUTING.md): development and validation rules.
 
 Browsie is licensed under the MIT License. See [`LICENSE`](LICENSE).
